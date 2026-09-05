@@ -1,0 +1,5 @@
+(:package @genseam/asl-web-search
+ :version "0.3.0"
+ :entry "src/engine.asl"
+ :description "Agentic web discovery, search indexing, and synthesis engine"
+ :dependencies [])
