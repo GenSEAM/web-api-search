@@ -1,4 +1,4 @@
-(module asl-web-search/ecosystems
+(module asl-web-api-search/ecosystems
   :d "Package ecosystem search, code library intelligence, and deep link traversal in ASL Nano."
   :x [PackageInfo PackageEcosystem DeepLinkTarget build-ecosystem-url build-package-curl-cmd format-package-markdown format-ecosystem-rag create-deep-targets]
   :i [(engine :a eng)])

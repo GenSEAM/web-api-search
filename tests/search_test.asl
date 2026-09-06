@@ -1,5 +1,5 @@
-(module asl-web-search/test
-  :d "Unit tests for multi-engine metasearch aggregator and ecosystem intelligence in ASL"
+(module asl-web-api-search/tests/search-test
+  :d "Unit tests for multi-engine API search aggregator and ecosystem intelligence in ASL"
   :x [run-tests]
   :i [(engine :a eng)
       (ecosystems :a eco)])
