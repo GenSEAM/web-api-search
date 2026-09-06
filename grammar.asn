@@ -1,0 +1,64 @@
+;; Package Grammar & Exported Symbol Registry (ASN)
+;; @genseam/asl-web-search
+(:grammar
+  :package @genseam/asl-web-search
+  :version "0.1.0"
+  :tokens-baseline 1
+  :symbols [
+    ;; 1-Token Symbols (Baseline)
+    (:sym :name "ProxyState" :kind :type :tokens 1)
+    (:sym :name "ProxyNode" :kind :type :tokens 1)
+    (:sym :name "SearchEngine" :kind :type :tokens 1)
+    (:sym :name "SearchQuery" :kind :type :tokens 1)
+    (:sym :name "SearchResult" :kind :type :tokens 1)
+    (:sym :name "CurlCommand" :kind :type :tokens 1)
+    (:sym :name "EcosystemTarget" :kind :type :tokens 1)
+    (:sym :name "EcosystemQuery" :kind :type :tokens 1)
+    (:sym :name "PackageInfo" :kind :type :tokens 1)
+    (:sym :name "PackageEcosystem" :kind :type :tokens 1)
+    (:sym :name "DeepLinkTarget" :kind :type :tokens 1)
+
+    ;; 2-Token Symbols (with :rationale)
+    (:sym :name "clean-url" :kind :fn :tokens 2
+          :rationale "Strips tracking parameters (utm, ref, gclid) from target URL")
+    (:sym :name "eco-github" :kind :fn :tokens 2
+          :rationale "Constructor for GitHub ecosystem target")
+    (:sym :name "eco-npm" :kind :fn :tokens 2
+          :rationale "Constructor for npm ecosystem target")
+    (:sym :name "eco-pypi" :kind :fn :tokens 2
+          :rationale "Constructor for PyPI ecosystem target")
+    (:sym :name "eco-crates" :kind :fn :tokens 2
+          :rationale "Constructor for Crates.io Rust ecosystem target")
+    (:sym :name "eco-go" :kind :fn :tokens 2
+          :rationale "Constructor for Go packages ecosystem target")
+    (:sym :name "run-tests" :kind :fn :tokens 2
+          :rationale "Standard test suite runner entrypoint")
+
+    ;; >2 Token Symbols (with :rationale)
+    (:sym :name "is-proxy-healthy" :kind :fn :tokens 3
+          :rationale "Evaluates proxy node health based on latency and success rate thresholds")
+    (:sym :name "select-healthy-proxies" :kind :fn :tokens 3
+          :rationale "Filters active proxy pool returning only nodes meeting SLA criteria")
+    (:sym :name "build-search-url" :kind :fn :tokens 3
+          :rationale "Generates provider-specific target query URL endpoint")
+    (:sym :name "make-curl-command" :kind :fn :tokens 3
+          :rationale "Constructs typed CurlCommand structure with executable path and flags")
+    (:sym :name "merge-search-results" :kind :fn :tokens 3
+          :rationale "Deduplicates and merges search results across multiple provider queries")
+    (:sym :name "format-result-markdown" :kind :fn :tokens 3
+          :rationale "Formats single search result item as markdown link with snippet")
+    (:sym :name "format-rag-context" :kind :fn :tokens 3
+          :rationale "Serializes merged search results into dense prompt context block")
+    (:sym :name "build-ecosystem-url" :kind :fn :tokens 3
+          :rationale "Generates package registry search URL for target language ecosystem")
+    (:sym :name "filter-ecosystem-results" :kind :fn :tokens 3
+          :rationale "Filters search results for ecosystem-specific code and package artifacts")
+    (:sym :name "create-deep-targets" :kind :fn :tokens 3
+          :rationale "Generates deep link crawling targets from search result URLs")
+    (:sym :name "build-package-curl-cmd" :kind :fn :tokens 4
+          :rationale "Constructs curl command for package registry manifest discovery")
+    (:sym :name "format-package-markdown" :kind :fn :tokens 3
+          :rationale "Formats discovered package metadata into compact markdown summary")
+    (:sym :name "format-ecosystem-rag" :kind :fn :tokens 3
+          :rationale "Compiles ecosystem package search results into prompt context")
+  ])
