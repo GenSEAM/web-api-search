@@ -43,6 +43,8 @@
           :rationale "Generates provider-specific target query URL endpoint")
     (:sym :name "make-curl-command" :kind :fn :tokens 3
           :rationale "Constructs typed CurlCommand structure with executable path and flags")
+    (:sym :name "build-provider-curl-cmd" :kind :fn :tokens 4
+          :rationale "Constructs curl command with provider authentication headers for API search")
     (:sym :name "merge-search-results" :kind :fn :tokens 3
           :rationale "Deduplicates and merges search results across multiple provider queries")
     (:sym :name "format-result-markdown" :kind :fn :tokens 3

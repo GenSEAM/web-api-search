@@ -1,6 +1,6 @@
 (module asl-web-api-search/engine
   :d "Decentralized multi-engine API search aggregator, URL deduplicator, and RAG context compressor in ASL."
-  :x [ProxyState ProxyNode SearchEngine SearchQuery SearchResult CurlCommand is-proxy-healthy select-healthy-proxies build-search-url make-curl-command clean-url merge-search-results format-result-markdown format-rag-context])
+  :x [ProxyState ProxyNode SearchEngine SearchQuery SearchResult CurlCommand is-proxy-healthy select-healthy-proxies build-search-url make-curl-command build-provider-curl-cmd clean-url merge-search-results format-result-markdown format-rag-context])
 
 (dfe ProxyState
   (:c active [] "active proxy")
@@ -63,6 +63,14 @@
        (str "https://hn.algolia.com/api/v1/search?query=" clean-q "&tags=story&hitsPerPage=" lim-str))
       ((= engine "hn")
        (str "https://hn.algolia.com/api/v1/search?query=" clean-q "&tags=story&hitsPerPage=" lim-str))
+      ((= engine "tavily")
+       (str "https://api.tavily.com/search?query=" clean-q "&max_results=" lim-str))
+      ((= engine "searxng")
+       (str "https://searx.be/search?q=" clean-q "&format=json"))
+      ((= engine "serper")
+       (str "https://google.serper.dev/search?q=" clean-q "&num=" lim-str))
+      ((= engine "brave")
+       (str "https://api.search.brave.com/res/v1/web/search?q=" clean-q "&count=" lim-str))
       (:else
        (str "https://html.duckduckgo.com/html/?q=" clean-q)))))
 
@@ -72,6 +80,23 @@
     :bin "curl"
     :args (list "-s" "--max-time" (string-from-int64 timeout-sec) "-H" (str "User-Agent: " user-agent) url)
     :url url))
+
+(df build-provider-curl-cmd [(engine Str) (url Str) (api-key Str) (timeout-sec I64)] -> CurlCommand
+  :d "Builds authenticated curl command for target search API provider."
+  (let [(auth-header (cond
+                       ((= engine "tavily") (str "Authorization: Bearer " api-key))
+                       ((= engine "serper") (str "X-API-KEY: " api-key))
+                       ((= engine "brave") (str "X-Subscription-Token: " api-key))
+                       ((= engine "github") (str "Authorization: token " api-key))
+                       (:else (str "X-API-Key: " api-key))))
+        (args (list "-s" "--max-time" (string-from-int64 timeout-sec)
+                    "-H" "Accept: application/json"
+                    "-H" auth-header
+                    url))]
+    (CurlCommand
+      :bin "curl"
+      :args args
+      :url url)))
 
 (df is-tracking-param? [(param Str)] -> Bool
   :d "Checks if query parameter is a tracking tag."

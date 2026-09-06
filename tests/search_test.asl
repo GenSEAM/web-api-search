@@ -8,8 +8,17 @@
   :d "Verifies query endpoint generation for search providers."
   (and (= (eng/build-search-url "github" "agent script" 5)
           "https://api.github.com/search/repositories?q=agent+script&per_page=5")
-       (= (eng/build-search-url "ddg" "agent script" 5)
-          "https://html.duckduckgo.com/html/?q=agent+script")))
+       (and (= (eng/build-search-url "ddg" "agent script" 5)
+               "https://html.duckduckgo.com/html/?q=agent+script")
+            (and (string-contains? (eng/build-search-url "tavily" "ai agents" 3) "api.tavily.com")
+                 (string-contains? (eng/build-search-url "searxng" "agents" 5) "searx.be")))))
+
+(df test-provider-curl-cmds [] -> Bool
+  :d "Verifies authenticated curl commands for search APIs."
+  (let [(cmd-tavily (eng/build-provider-curl-cmd "tavily" "https://api.tavily.com/search" "tvly-secret" 10))
+        (cmd-serper (eng/build-provider-curl-cmd "serper" "https://google.serper.dev/search" "serper-secret" 5))]
+    (and (list-contains? (.-args cmd-tavily) "Authorization: Bearer tvly-secret")
+         (list-contains? (.-args cmd-serper) "X-API-KEY: serper-secret"))))
 
 (df test-url-cleaning [] -> Bool
   :d "Verifies tracking parameter removal from URLs."
@@ -61,10 +70,11 @@
 (df run-tests [] -> Bool
   :d "Runs all asl-search unit tests."
   (and (test-url-builders)
-       (and (test-url-cleaning)
-            (and (test-proxy-health)
-                 (and (test-result-merge)
-                      (and (test-rag-formatting)
-                           (test-ecosystems)))))))
+       (and (test-provider-curl-cmds)
+            (and (test-url-cleaning)
+                 (and (test-proxy-health)
+                      (and (test-result-merge)
+                           (and (test-rag-formatting)
+                                (test-ecosystems))))))))
 
 
