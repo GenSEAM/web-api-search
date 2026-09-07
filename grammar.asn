@@ -18,6 +18,13 @@
     (:sym :name "PackageEcosystem" :kind :type :tokens 1)
     (:sym :name "DeepLinkTarget" :kind :type :tokens 1)
     (:sym :name "BipolarQuery" :kind :type :tokens 1)
+    (:sym :name "SearchConfig" :kind :type :tokens 1)
+    (:sym :name "RuntimeKind" :kind :type :tokens 1)
+    (:sym :name "TransportStrategy" :kind :type :tokens 1)
+    (:sym :name "EngineQuota" :kind :type :tokens 1)
+    (:sym :name "QuotaTier" :kind :type :tokens 1)
+    (:sym :name "QuotaTracker" :kind :type :tokens 1)
+    (:sym :name "SearchRoutingDecision" :kind :type :tokens 1)
 
 
     ;; 2-Token Symbols (with :rationale)
@@ -33,6 +40,8 @@
           :rationale "Constructs ecosystem descriptor for querying Rust packages on Crates.io")
     (:sym :name "eco-go" :kind :fn :tokens 2
           :rationale "Constructs ecosystem descriptor for querying Go modules on the official package proxy")
+    (:sym :name "track-request" :kind :fn :tokens 2
+          :rationale "Updates engine quota telemetry and records request consumption")
     (:sym :name "run-tests" :kind :fn :tokens 2
           :rationale "Standard test suite runner entrypoint")
 
@@ -67,4 +76,42 @@
           :rationale "Compiles ecosystem package search results into prompt context")
     (:sym :name "generate-bipolar-query" :kind :fn :tokens 3
           :rationale "Generates dialectical confirmation and falsification queries to counteract confirmation bias")
+    (:sym :name "resolve-search-config" :kind :fn :tokens 3
+          :rationale "Resolves search engine credentials from environment variables and config")
+    (:sym :name "get-engine-key" :kind :fn :tokens 3
+          :rationale "Extracts API key for specified engine from SearchConfig record")
+    (:sym :name "make-default-search-config" :kind :fn :tokens 4
+          :rationale "Constructs baseline search configuration with open-first default policy")
+    (:sym :name "is-engine-configured?" :kind :fn :tokens 3
+          :rationale "Evaluates whether target search engine has valid active credentials configured")
+    (:sym :name "resolve-runtime-strategy" :kind :fn :tokens 3
+          :rationale "Selects network transport strategy matching host or browser runtime context")
+    (:sym :name "build-transport-fetch-cmd" :kind :fn :tokens 4
+          :rationale "Builds executable fetch command vector for selected network transport strategy")
+    (:sym :name "is-cors-restricted?" :kind :fn :tokens 3
+          :rationale "Evaluates whether target runtime is subject to browser CORS origin limitations")
+    (:sym :name "is-offline-transport?" :kind :fn :tokens 3
+          :rationale "Evaluates whether network transport strategy is restricted to offline local memory cache")
+    (:sym :name "inspect-engine-quota" :kind :fn :tokens 3
+          :rationale "Evaluates remaining search engine quota and tier availability status")
+    (:sym :name "parse-quota-headers" :kind :fn :tokens 3
+          :rationale "Extracts rate limit remaining count from HTTP response header strings")
+    (:sym :name "is-quota-available?" :kind :fn :tokens 3
+          :rationale "Checks if target search engine quota has not been exhausted")
+    (:sym :name "make-quota-tracker" :kind :fn :tokens 3
+          :rationale "Constructs baseline quota tracker initialized with engine quotas")
+    (:sym :name "is-open-engine?" :kind :fn :tokens 3
+          :rationale "Checks if search engine belongs to free public open access tier")
+    (:sym :name "select-engine-cascade" :kind :fn :tokens 3
+          :rationale "Builds prioritized failover list of search engines according to policy")
+    (:sym :name "route-search-query" :kind :fn :tokens 3
+          :rationale "Computes deterministic search engine and transport routing decision")
+    (:sym :name "calculate-rrf-score" :kind :fn :tokens 3
+          :rationale "Computes Reciprocal Rank Fusion component score for SERP item")
+    (:sym :name "deduplicate-serp-results" :kind :fn :tokens 3
+          :rationale "Removes duplicate search results across multiple engines based on cleaned URL")
+    (:sym :name "merge-serp-streams" :kind :fn :tokens 3
+          :rationale "Blends multiple SERP result streams using reciprocal rank fusion")
+    (:sym :name "rank-serp-results" :kind :fn :tokens 3
+          :rationale "Orders merged SERP results descending by relevance or fused RRF score")
   ])
