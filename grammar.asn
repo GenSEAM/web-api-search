@@ -22,15 +22,15 @@
     (:sym :name "clean-url" :kind :fn :tokens 2
           :rationale "Strips tracking parameters (utm, ref, gclid) from target URL")
     (:sym :name "eco-github" :kind :fn :tokens 2
-          :rationale "Constructor for GitHub ecosystem target")
+          :rationale "Constructs ecosystem descriptor for searching GitHub code repositories and issues")
     (:sym :name "eco-npm" :kind :fn :tokens 2
-          :rationale "Constructor for npm ecosystem target")
+          :rationale "Constructs ecosystem descriptor for querying npm registry packages and metadata")
     (:sym :name "eco-pypi" :kind :fn :tokens 2
-          :rationale "Constructor for PyPI ecosystem target")
+          :rationale "Constructs ecosystem descriptor for searching Python packages on the PyPI index")
     (:sym :name "eco-crates" :kind :fn :tokens 2
-          :rationale "Constructor for Crates.io Rust ecosystem target")
+          :rationale "Constructs ecosystem descriptor for querying Rust packages on Crates.io")
     (:sym :name "eco-go" :kind :fn :tokens 2
-          :rationale "Constructor for Go packages ecosystem target")
+          :rationale "Constructs ecosystem descriptor for querying Go modules on the official package proxy")
     (:sym :name "run-tests" :kind :fn :tokens 2
           :rationale "Standard test suite runner entrypoint")
 
