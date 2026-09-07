@@ -17,6 +17,8 @@
     (:sym :name "PackageInfo" :kind :type :tokens 1)
     (:sym :name "PackageEcosystem" :kind :type :tokens 1)
     (:sym :name "DeepLinkTarget" :kind :type :tokens 1)
+    (:sym :name "BipolarQuery" :kind :type :tokens 1)
+
 
     ;; 2-Token Symbols (with :rationale)
     (:sym :name "clean-url" :kind :fn :tokens 2
@@ -63,4 +65,6 @@
           :rationale "Formats discovered package metadata into compact markdown summary")
     (:sym :name "format-ecosystem-rag" :kind :fn :tokens 3
           :rationale "Compiles ecosystem package search results into prompt context")
+    (:sym :name "generate-bipolar-query" :kind :fn :tokens 3
+          :rationale "Generates dialectical confirmation and falsification queries to counteract confirmation bias")
   ])

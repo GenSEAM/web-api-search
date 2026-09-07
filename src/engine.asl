@@ -1,6 +1,6 @@
 (module asl-web-api-search/engine
   :d "Decentralized multi-engine API search aggregator, URL deduplicator, and RAG context compressor in ASL."
-  :x [ProxyState ProxyNode SearchEngine SearchQuery SearchResult CurlCommand is-proxy-healthy select-healthy-proxies build-search-url make-curl-command build-provider-curl-cmd clean-url merge-search-results format-result-markdown format-rag-context])
+  :x [ProxyState ProxyNode SearchEngine SearchQuery SearchResult CurlCommand BipolarQuery is-proxy-healthy select-healthy-proxies build-search-url make-curl-command build-provider-curl-cmd clean-url merge-search-results format-result-markdown format-rag-context generate-bipolar-query])
 
 (dfe ProxyState
   (:c active [] "active proxy")
@@ -158,11 +158,39 @@
   :d "Formats a single search result as markdown for LLM injection."
   (str (string-from-int64 index) ". **[" (.-title res) "](" (.-url res) ")**  `[" (.-engine res) "]`\n   " (.-snippet res) "\n"))
 
+(df format-results-rag-helper [(items (List SearchResult)) (idx I64)] -> (List Str)
+  (if (list-empty? items)
+      (list)
+      (let [(h (option-or (list-head items) (SearchResult :title "" :url "" :snippet "" :engine "" :score 0.0)))
+            (rest (option-or (list-tail items) (list)))]
+        (list-cons (format-result-markdown idx h) (format-results-rag-helper rest (+ idx 1))))))
+
 (df format-rag-context [(query Str) (items (List SearchResult))] -> Str
   :d "Formats full search results as token-efficient markdown context for LLM prompt injection."
   (let [(header (str "## Search Results for: '" query "' (" (string-from-int64 (list-length items)) " items)\n\n"))
-        (indexed (zip (range 1 (+ (list-length items) 1)) items))
-        (formatted-items (map (fn [(p (Pair I64 SearchResult))] -> Str
-                                (format-result-markdown (.-first p) (.-second p)))
-                              indexed))]
+        (formatted-items (format-results-rag-helper items 1))]
     (str header (string-join formatted-items "\n"))))
+
+(dfs BipolarQuery
+  (:f positive-query Str "Confirmation query seeking supporting evidence")
+  (:f negative-query Str "Falsification query seeking counter-evidence, failure modes, or criticisms")
+  (:f domain Str "Domain category e.g. architecture, legal, security"))
+
+(df generate-bipolar-query [(claim Str) (domain Str)] -> BipolarQuery
+  :d "Generates dialectical confirmation and falsification queries to counteract confirmation bias."
+  (let [(d (string-lower domain))
+        (c (string-trim claim))
+        (pos-suffix (cond
+                      ((= d "architecture") "architecture design advantages performance verified")
+                      ((= d "legal") "statute authority ruling precedent compliant")
+                      ((= d "security") "audit security certified hardened protection")
+                      (:else "evidence proof benefits advantages verified")))
+        (neg-suffix (cond
+                      ((= d "architecture") "bottleneck failure overhead drawbacks anti-pattern -hype")
+                      ((= d "legal") "violation exception liability penalty repealed -opinion")
+                      ((= d "security") "exploit cve vulnerability bypass flaw -marketing")
+                      (:else "failure flaws criticism disadvantages limitations -promo")))]
+    (BipolarQuery
+      :positive-query (str c " " pos-suffix)
+      :negative-query (str c " " neg-suffix)
+      :domain domain)))
