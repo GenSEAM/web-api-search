@@ -1,4 +1,4 @@
-(:package @genseam/asl-web-api-search
+(:package asl-web-api-search
  :version "0.1.0"
  :entry "src/engine.asl"
  :description "Agentic web search APIs discovery and multi-engine metasearch aggregator"
