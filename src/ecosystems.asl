@@ -61,7 +61,7 @@
 
 (df format-package-markdown [(pkg PackageInfo)] -> Str
   :d "Formats single package record as markdown citation."
-  (str "**[" (.-name pkg) "](" (.-repo-url pkg) ")**  `[" (.-ecosystem pkg) " · v" (.-version pkg) "]` (★/dl: " (string-from-int64 (.-popularity pkg)) ")\n   "
+  (str "**[" (.-name pkg) "](" (.-repo-url pkg) ")**  `[" (.-ecosystem pkg) " - v" (.-version pkg) "]` (stars/dl: " (string-from-int64 (.-popularity pkg)) ")\n   "
        (.-description pkg) "\n"))
 
 (df format-ecosystem-rag [(query Str) (packages (List PackageInfo))] -> Str
