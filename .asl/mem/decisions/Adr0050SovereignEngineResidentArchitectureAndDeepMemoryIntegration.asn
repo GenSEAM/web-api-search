@@ -1,0 +1,24 @@
+(:adr
+  :id "ADR-0050"
+  :shortcode "d50"
+  :title "Sovereign Engine Resident Architecture, Daemon Entity Elimination, and Deep In-Memory Search Substrate"
+  :status :active
+  :date "2026-09-09"
+  :cluster "core-engine"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "The ecosystem previously maintained a confusing conceptual dualism between 'daemon' and 'engine', while the resident engine under-leveraged rich algorithms implemented in asl-mem (BM25 lexical ranking, SimHash structural clone detection, and isolated VFS branching overlays)."
+  :drivers [
+    "Conceptual Monism: A single Sovereign Engine with dual operating modes (ephemeral on-demand CLI vs resident socket server)"
+    "Elimination of Daemon Redundancy: Deprecate 'daemon' as an independent entity, treating it as engine resident mode"
+    "Deep In-Memory Search Integration: Resident BM25 inverted index and 64-bit SimHash hamming distance calculation for sub-0.5ms queries"
+    "Isolated VFS Sandboxing: In-memory branching overlays (:vfs-fork, :vfs-merge, :vfsDiscard) for safe multi-agent execution"
+    "Pure ASN Grammar and Zero-Comment Invariant (c1, c2, c5)"
+  ]
+  :decision "Unify all background execution under Sovereign Engine resident mode (--serve / --resident), eliminate independent daemon references in favor of transparent backward-compatible aliases, integrate in-memory BM25 lexical ranking and SimHash deduplication directly into SovereignEngine, and provide isolated VFS overlays for multi-agent execution."
+  :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d35" "d39" "d42"]
+  :consequences [
+    (:pos "Eliminates cognitive overhead and architectural debt from daemon vs engine dualism")
+    (:pos "Delivers sub-0.5ms resident BM25 search across monorepo AST without disk grep overhead")
+    (:pos "Enables isolated in-memory VFS sandboxing for parallel agents preventing dirty state leakage")
+    (:neg "Requires resident memory to hold inverted term index and token vectors")
+  ])

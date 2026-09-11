@@ -1,0 +1,31 @@
+(:adr
+  :id "ADR-0080"
+  :shortcode "D80"
+  :title "Context-Aware Hierarchical Workspace and Worktree Visibility Topology"
+  :status :active
+  :date "2026-09-11"
+  :cluster "architecture/workspace-governance"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "In multi-project orchestrations and federated monorepo environments, autonomous agents and developer tooling suffer from cross-workspace cognitive sprawl and context contamination. When viewing tasks, worktrees, or git statuses, agents routinely absorb signals from unrelated repositories (e.g. datahub-react, datahub-core, pcp), degrading attention SNR and inducing hallucinations. Furthermore, unanchored floating terminals risk leaking arbitrary workspace state, while whole-system oversight lacks a strict physical location boundary."
+  :drivers [
+    "Isolated Standalone Sessions: An unanchored agent session outside recognized workspaces sees strictly its own session and zero external worktrees or projects"
+    "Hierarchical Workspace Lineage: An agent anchored in a workspace sees its own workspace and all derived child worktrees and submodules, with unrelated peer projects strictly masked"
+    "Sovereign Panopticon Location Gate: Full system visibility across all repositories, worktrees, and sessions is unlocked exclusively when navigating to the folder containing the global .asl store directory"
+    "Mathematical Determinism: Pure algorithmic resolution implemented in asl-mem/visibility-scope with zero private ad-hoc heuristics across package boundaries"
+    "Cognitive SNR Optimization: Eliminating cross-project prompt bloat and preventing accidental cross-repository mutations"
+  ]
+  :decision "Adopt ADR-0080 (D80) establishing the Context-Aware Hierarchical Workspace and Worktree Visibility Topology Standard. Implement the 3-tier visibility model (tier-isolated-session, tier-workspace-lineage, tier-sovereign-system) in asl-mem/visibility-scope. Gate panoptic system discovery strictly on physical location at the global .asl anchor directory, isolate unanchored sessions, and confine workspace operations to the active repository lineage."
+  :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D68" "D71" "D80"]
+  :tasks [
+    "Task43501"
+    "Task43502"
+    "Task43503"
+    "Task43504"
+  ]
+  :consequences [
+    (:pos "Eliminates cross-project context pollution and prompt bloat in multi-repository workspaces")
+    (:pos "Prevents accidental cross-repository git mutations and task desynchronization")
+    (:pos "Provides an explicit, physically gated panoptic overview only from the sovereign global anchor")
+    (:pos "Enforces mathematical visibility resolution through canonical pure ASL primitives in mem/")
+    (:neg "Requires agents to explicitly navigate to the sovereign anchor directory to inspect multi-project health")
+  ])

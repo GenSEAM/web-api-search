@@ -1,0 +1,26 @@
+{
+  "folders": [
+    { "name": "ASL (Language & Compiler)", "path": "asl" },
+    { "name": "Harness (Agent Runtime & CDP)", "path": "harness" },
+    { "name": "Agent (Autonomous Coding Agent & Swarm)", "path": "agent" },
+    { "name": "Agent Core (Middleware & FSM)", "path": "agent-core" },
+    { "name": "Agent Bus (IPC & Mesh)", "path": "agent-bus" },
+    { "name": "Mem (Wasm Vector DB & Knowledge)", "path": "mem" },
+    { "name": "Intel (Code Intelligence & AST)", "path": "intel" },
+    { "name": "Search (Web API & RAG)", "path": "web-api-search" },
+    { "name": "VDOM (Dual Perception UI)", "path": "vdom" },
+    { "name": "Voice (PCM Streaming)", "path": "voice" },
+    { "name": "Pack (Packaging & Distribution)", "path": "pack" },
+    { "name": "Crawler (Autonomous Web Crawler)", "path": "crawler" },
+    { "name": "Browser Plugin (WASI in-tab)", "path": "browser-plugin" },
+    { "name": "ASL Arduino (Embedded Runtime)", "path": "asl-arduino" },
+    { "name": "ASL Contracts (Formal Verification)", "path": "asl-contracts" },
+    { "name": "ASL Quantum (Circuit Simulation)", "path": "asl-quantum" },
+    { "name": "ASL Gateway (L7 Proxy & Verification)", "path": "asl-gateway" },
+    { "name": "Editorial Matrix (Strategy)", "path": "editorial-matrix" },
+    { "name": "Skills (Agent Hub)", "path": "asl/skills" }
+  ],
+  "settings": {
+    "git.autoRepositoryDetection": "subFolders"
+  }
+}

@@ -1,0 +1,13 @@
+(:adr
+  :id "ADR-0042"
+  :shortcode "d42"
+  :title "Unified Engine Global Daemon, Dual-Tier Topology and Process Supervision"
+  :status :active
+  :date "2026-09-09"
+  :cluster "core"
+  :deciders ["Autonomous Agents and Core Architects"]
+  :problem "Autonomous AI agents encounter severe systemic bottlenecks when managing background or long-running processes."
+  :drivers ["Thread-Safe ProcessRegistry" "Two-Tier Spool" "User-Scoped Socket" "Closed RPC Interface"]
+  :decision "Implement resident ProcessRegistry, Quota-Capped TwoTierSpool, user-scoped socket /tmp/asl_${USER}_global.sock, and :proc-* RPC ops."
+  :invariants ["c1" "c3" "d34"]
+  :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])

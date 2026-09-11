@@ -1,0 +1,13 @@
+(:adr
+  :id "ADR-0017"
+  :shortcode "D17"
+  :title "Semantic Checker and Nominal Type System Invariants"
+  :status :active
+  :date "2026-09-08"
+  :cluster "checker"
+  :deciders ["Semantic Analysis Architects"]
+  :problem "Type inference and semantic analysis in pure AgentScript must provide rigorous safety guarantees without imposing heavy type annotation overhead on AI agents."
+  :drivers ["Nominal Type Identity" "Strict Typing with Local Inference" "Orderable Map Keys"]
+  :decision "Enforce nominal type identity keyed by defining module and symbol name, and Hindley-Milner bidirectional inference."
+  :invariants ["c1" "c3"]
+  :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])

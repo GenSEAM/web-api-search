@@ -1,0 +1,31 @@
+(:adr
+  :id "ADR-0073"
+  :shortcode "D73"
+  :title "Voice-In Action-Out Pipeline, Parakeet-TDT ASR Ingestion, Hanes Model Gallery, and Task Rendering Presets"
+  :status :active
+  :date "2026-09-10"
+  :cluster "architecture/voice-and-browser-gallery"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "Voice interaction in browser agent environments requires instant interruptibility, low-latency audio capture without audio synthesis overhead, 1-pass intent routing between chat search and autonomous action execution, and zero-friction 1-click model provisioning. Traditional setups overburden users with manual configuration knobs, unoptimized multi-tool prompts, and heavy TTS overhead, while failing to expose empirical hardware calibration metrics (VRAM, TTFT, TPS)."
+  :drivers [
+    "Dual-Mode Audio Capture & Instant Abort: Support click-to-toggle and hold-to-talk state machines (250ms threshold) wired directly to active AbortController tokens interrupting running agent tasks"
+    "Raw ASR Ingestion & Zero-TTS Architecture: Stream raw uncorrected Parakeet-TDT-v3 transcripts directly into Hanes SLMs without text-to-speech overhead or pre-processing pipeline bloat"
+    "1-Pass Intent Routing & Task Rendering Presets: Route transcripts to either Informational Chat with Live Google Search or Direct Agent CDP Action, rendering into specialized UI presets (:fast-search, :agent-action, :deep-synthesis, :codePatch)"
+    "Zero-Friction Model Gallery & Calibration Stand: Provide 1-click model downloading via in-browser Cache API, automated hardware benchmark stand (VRAM, TTFT, TPS), and flagship Qwen 2.5 3B showcase with sane default parameters"
+  ]
+  :decision "Adopt ADR-0073 (D73) establishing the Voice-In Action-Out Pipeline, Parakeet-TDT ASR Ingestion, Hanes Model Gallery, and Task Rendering Presets Standard. Enforce zero-configuration sane defaults with a 3-tier model selector (Nano 100M, Small 1.1GB, Smart 2.2GB), codify the dual-mode audio state machine with abort controller, implement 1-pass intent routing, and deliver the automated hardware calibration stand."
+  :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D71" "D72" "D73"]
+  :tasks [
+    "T427AudioCaptureStateMachineAndAbortController"
+    "T427HanesVoiceGatewayAndParakeetIntegration"
+    "T427TaskRenderingPresetsAndIntentRouter"
+    "T427ModelGalleryCalibrationAndShowcase"
+    "T427Settle"
+  ]
+  :consequences [
+    (:pos "Enables instantaneous sub-second voice-to-action dispatch without text-to-speech latency or VRAM footprint")
+    (:pos "Provides immediate task cancellation when recording terminates via synchronous AbortController propagation")
+    (:pos "Eliminates configuration fatigue by applying pre-calibrated sane defaults to the 3-tier model selector")
+    (:pos "Delivers 1-pass intent routing to specialized UI rendering presets across search and agent actions")
+    (:neg "Requires WebGPU and local audio capture microphone permissions in client browser")
+  ])

@@ -1,0 +1,13 @@
+(:adr
+  :id "ADR-0012"
+  :shortcode "d12"
+  :title "Six Agent Superpowers, Grammar-Constrained Decoding and The SFT/DPO Self-Feeding Flywheel"
+  :status :active
+  :date "2026-09-08"
+  :cluster "agent-intelligence"
+  :deciders ["architect" "orchestrator" "system-invariant-keeper"]
+  :problem "Traditional LLM agent frameworks suffer from compounding failure modes: text syntax hallucinations, line-number drift in unified diffs, conversational apology loops that pollute context windows with error tokens, and lack of local learning."
+  :drivers ["Zero-Syntax Hallucination" "Robust AST Mutations" "Compounding Local Intelligence" "Epistemic Time-Travel" "Instant Macro Audio Triggering"]
+  :decision "Deploy grammar-constrained decoding, homoiconic AST mutations, epistemic rollback, and automated SFT/DPO trace extraction."
+  :invariants ["c1" "c3"]
+  :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])

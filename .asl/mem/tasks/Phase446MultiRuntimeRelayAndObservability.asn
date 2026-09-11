@@ -1,0 +1,244 @@
+(:taskCollection
+  :id "Phase446MultiRuntimeRelayAndObservability"
+  :createdAt 1789142392680
+  :status "planned"
+  :priorityOrder 10
+  :summary "Multi-Runtime Relay and Observability: one wire contract and one causal trace across in-browser, local, server and relay runtimes, with ownership partitioned at the relay so parallel development cannot lose work, and camelCase enforced on every emitter before the surfaces multiply."
+  :phase "Phase446MultiRuntimeRelayAndObservability"
+  :baseline "2026-09-11: agent-bus holds 2030 lines across fourteen modules with browser, sse, http and wasm references and fourteen test files, yet has zero inbound references from the CLI; browser-plugin and asl-bridge are currently listed for removal by Task43807; no wasm artifact exists; the boundary policy is native-only; ASN property keys are 48.5 percent camelCase with machine emitters unmigrated; this session lost work twice to unleased concurrent writers on a single machine."
+  :tasks [
+    (:task
+      :id "Task44601"
+      :parentId ""
+      :phase "phase-446"
+      :title "Reclassify the relay surfaces from removal candidates to runtime targets"
+      :kind :protocol
+      :lane "topology"
+      :state :planned
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789142392680
+      :updatedAt 1789142392680
+      :motivation "Task43807 lists browser-plugin and asl-bridge among packages to delete because they have zero inbound references, which was the correct read when the goal was pruning. The stated goal is now cross-runtime operation across in-browser, local machine, server and agent relay, and those two packages plus agent-bus are exactly those surfaces: agent-bus alone is 2030 lines across fourteen modules (bus, mesh, cluster, presence, transport, wire, gateway, browser-bridge, tool_plane, mvcc_bus, nd_asn, proc_telemetry) with fourteen test files and declared browser, sse, http and wasm transports. Zero inbound references means unreachable, not worthless."
+      :purpose "Amend Task43807 to retain agent-bus, browser-plugin, asl-bridge, asl-gateway and vdom as runtime targets with declared entry points, and record which of the thirteen packages remain removal candidates. A package is retained only when this phase gives it a reachable entry point and a gate; otherwise it returns to the removal list rather than lingering as an exception."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Retained set declared with entry points" "Removal set reduced and re-justified" "No package retained without a gate in this phase"]
+      :owns [".asl/mem/tasks/Phase438LanguageOptimizationAndPortableCore.asn" ".asl/mem/components.asn"]
+      :targetSymbols ["run_gate_1"]
+      :relatedSymbols ["foreign" "concepts" "ssot"]
+      :invariants ["D34" "D51" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task43807"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44601"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task44601.asl"]
+      :verificationCases ["A retained package without an entry point and a gate by the end of this phase fails; a removal-set package that gains an inbound reference is reported." "The component registry and the task list agree on the disposition of every one of the thirteen."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44601" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Verifier fixes the retained and removal sets." "Amend Task43807." "Declare entry points per retained package." "Register components." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task44602"
+      :parentId ""
+      :phase "phase-446"
+      :title "One wire contract across runtimes: ASN frames over stdio, unix socket, http and sse"
+      :kind :protocol
+      :lane "transport"
+      :state :planned
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789142392680
+      :updatedAt 1789142392680
+      :motivation "The bus declares four transports and the engine speaks a fifth shape on stdout; nothing states that a frame means the same thing on each. Cross-runtime communication whose framing differs per transport reproduces, at the protocol layer, the same class of silent divergence the audits found in the gate layer."
+      :purpose "One frame schema in asl/grammar/wire.asn with camelCase keys, carried identically over stdio, unix socket, http and sse: identity, sessionId, causality, payload and digest. Each transport is a codec over that schema and nothing else. A frame that fails schema validation is rejected at ingress with a typed error rather than partially processed."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Single frame schema with camelCase keys" "Four transports as codecs over it" "Ingress validation with typed rejection" "Conformance vectors shared across transports"]
+      :owns ["asl/grammar/wire.asn" "agent-bus/src/wire.asl" "agent-bus/src/transport.asl" "asl/tools/asl.c"]
+      :targetSymbols ["execute_single_step"]
+      :relatedSymbols ["output" "tools" "names"]
+      :invariants ["D34" "D51" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task44601" "Task43803"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44602"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task44602.asl"]
+      :verificationCases ["The same frame round-trips identically over all four transports; a frame valid on one and invalid on another fails the conformance vectors." "A malformed frame is rejected at ingress and never partially applied."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44602" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Verifier freezes frame vectors valid and invalid." "Define the schema." "Implement each transport as a codec." "Reject invalid frames at ingress." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task44603"
+      :parentId ""
+      :phase "phase-446"
+      :title "Cross-runtime observability: one trace spanning browser, local, server and relay"
+      :kind :protocol
+      :lane "observability"
+      :state :planned
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789142392680
+      :updatedAt 1789142392680
+      :motivation "The session trace in Task44207 is per process. With work distributed across an in-browser runtime, a local engine, a server and a relay, a per-process trace cannot answer what happened, which is the question every stage of the loop depends on. Causality across runtimes is the part that cannot be reconstructed afterwards."
+      :purpose "Every frame carries sessionId, parent frame digest and a monotonic sequence, so traces from separate runtimes merge into one causal order; (:trace :scope :mesh) returns the merged view; a gap in the sequence is reported as a gap rather than silently closed. Clock skew is handled by causal order, not timestamps."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Causal identity on every frame" "Merged mesh-scope trace" "Sequence gaps reported explicitly" "Clock skew does not reorder"]
+      :owns ["agent-bus/src/mesh.asl" "agent-bus/src/presence.asl" "asl/tools/asl.c" ".asl/mem/telemetry"]
+      :targetSymbols ["execute_single_step"]
+      :relatedSymbols ["anchor" "output" "grading"]
+      :invariants ["D34" "D51" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task44207" "Task44602"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44603"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task44603.asl"]
+      :verificationCases ["Two runtimes producing interleaved work merge into one order that respects causality regardless of clock skew; a dropped frame appears as a reported gap, never as a silent renumbering." "The merged trace is readable by asl reflect without runtime-specific handling."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44603" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Verifier fixes a two-runtime scenario with a dropped frame." "Add causal identity to frames." "Merge traces by causal order." "Report gaps." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task44604"
+      :parentId ""
+      :phase "phase-446"
+      :title "Parallel development across runtimes: partitioned ownership and conflict resolution at the relay"
+      :kind :protocol
+      :lane "parallel"
+      :state :planned
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789142392680
+      :updatedAt 1789142392680
+      :motivation "File leases in Task44203 are local to one filesystem. Parallel development across runtimes needs the partition to hold when two agents on different machines touch the same logical artifact, and this session twice lost work to an unleased concurrent writer on a single machine."
+      :purpose "The relay holds the authoritative lease table keyed by logical path and sessionId; a claim is granted by the relay, not by the local engine; a write whose lease is not current is rejected with ERR_STALE_LEASE at the relay before it reaches a filesystem; releasing is explicit and expiry fails closed. Partitions are declared per task :owns so the DAG determines who may write what."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Relay-held lease table" "Claim and release across runtimes" "ERR_STALE_LEASE at the relay" "Partitions derived from task :owns"]
+      :owns ["agent-bus/src/cluster.asl" "agent-bus/src/gateway.asl" "asl/tools/asl.c"]
+      :targetSymbols ["execute_single_step"]
+      :relatedSymbols ["parallel" "oneStep" "hiddenTests"]
+      :invariants ["D34" "D51" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task44203" "Task44602"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44604"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task44604.asl"]
+      :verificationCases ["The second claimant is refused and its write never reaches a filesystem; an expired lease fails closed rather than being renewed implicitly." "Two agents working disjoint partitions proceed without contention."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44604" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Verifier fixes two runtimes claiming one path." "Implement the relay lease table." "Reject stale writes at the relay." "Derive partitions from :owns." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task44605"
+      :parentId ""
+      :phase "phase-446"
+      :title "In-browser runtime: wasm engine with OPFS-backed workspace and the same boundary policy"
+      :kind :protocol
+      :lane "browser"
+      :state :planned
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789142392680
+      :updatedAt 1789142392680
+      :motivation "browser-plugin and asl-bus/browser-bridge declare a browser surface and the bus counts fifty-nine browser references, but there is no wasm artifact and the boundary policy is a native path check. A browser runtime with a different boundary model would be a second security policy to keep in sync."
+      :purpose "The wasm engine from Task43803 runs in the browser over an OPFS-backed workspace; the boundary policy from Task43809 applies unchanged with OPFS roots taking the place of filesystem roots; capabilities absent in the browser are reported through the capability registry rather than silently degraded."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["wasm engine in-browser over OPFS" "One boundary policy across native and browser" "Browser capability gaps reported through the registry"]
+      :owns ["browser-plugin/src" "agent-bus/src/browser-bridge.asl" "asl/tools/asl.c"]
+      :targetSymbols ["is_safe_path" "run_doctor"]
+      :relatedSymbols ["capabilities" "foreign" "bounded"]
+      :invariants ["D34" "D51" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task43803" "Task43809" "Task44210"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44605"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task44605.asl"]
+      :verificationCases ["A path escaping the OPFS workspace is rejected by the same policy that rejects it natively; a capability unavailable in the browser reports absent with a fallback rather than failing opaquely." "The browser runtime emits frames that merge into the mesh trace."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44605" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Verifier fixes boundary cases under OPFS." "Run the wasm engine in-browser." "Map OPFS roots into the boundary policy." "Report capability gaps." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task44606"
+      :parentId ""
+      :phase "phase-446"
+      :title "camelCase across the wire and the ledgers, enforced not asserted"
+      :kind :protocol
+      :lane "naming"
+      :state :planned
+      :priority :medium
+      :ownerRole "implementer"
+      :createdAt 1789142392680
+      :updatedAt 1789142392680
+      :motivation "Measured: ASN property keys are 48.5 percent camelCase, with the hand-authored D52 task schema converged and the machine emitters (exit-code 388 occurrences, latency-ms 225, stdout-len 169, tokens-out 150) never migrated. Those emitters are exactly the telemetry and wire surfaces this phase multiplies across four runtimes, so the divergence would be replicated rather than fixed."
+      :purpose "Every emitter writing ASN uses camelCase keys: telemetry, receipts, trace frames, wire frames and bus payloads; the D51 checker from Task44503 covers emitted output as well as source, so a new emitter cannot introduce kebab-case keys."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["All emitters produce camelCase keys" "Checker covers emitted output, not only source" "Existing kebab-case telemetry keys migrated with a recorded mapping"]
+      :owns ["agent-bus/src" "harness/src" "asl/tools/asl.c" ".asl/mem/telemetry"]
+      :targetSymbols ["run_gate_6"]
+      :relatedSymbols ["names" "output" "ssot"]
+      :invariants ["D34" "D51" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task44503" "Task44602"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44606"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task44606.asl"]
+      :verificationCases ["An emitter producing a kebab-case key fails the checker; the recorded mapping lets an older consumer read migrated telemetry." "Wire frames and ledger records use the same key style."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44606" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Verifier fixes emitters producing both styles." "Migrate emitter keys with a recorded mapping." "Extend the checker to emitted output." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+  ])

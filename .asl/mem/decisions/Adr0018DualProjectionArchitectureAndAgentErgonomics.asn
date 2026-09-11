@@ -1,0 +1,13 @@
+(:adr
+  :id "ADR-0018"
+  :shortcode "D18"
+  :title "Dual-Projection Architecture and Agent-Centric Ergonomics"
+  :status :active
+  :date "2026-09-08"
+  :cluster "architecture"
+  :deciders ["System Architects"]
+  :problem "Human developers expect visual showcases, formatting conveniences, and rich documentation, while autonomous agents require minimal token payloads and unambiguous machine schemas."
+  :drivers ["Dual-Projection Architecture" "Transparent Data Boundaries" "WebAssembly as Convergence Target" "WASI Capability-Based Mounting"]
+  :decision "Compact ASN S-expressions serve as the wire protocol and storage format for machines, while rich markdown views are projected on-demand for human inspection."
+  :invariants ["C1" "C3"]
+  :consequences [(:pos "70 percent token savings across all agent interactions without compromising human inspectability.") (:neg "Requires adhering to strict verification gates")])

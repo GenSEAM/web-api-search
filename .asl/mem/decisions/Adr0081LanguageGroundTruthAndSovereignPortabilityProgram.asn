@@ -1,0 +1,51 @@
+(:adr
+  :id "ADR-0081"
+  :shortcode "D81"
+  :title "Owned ASL Semantics, Portable Native/WASM Tooling and Autonomous Self-Hosting"
+  :status :active
+  :planStatus :approved
+  :date "2026-09-11"
+  :cluster "architecture/language-runtime-governance"
+  :deciders ["user" "planner" "independentVerifier"]
+  :review ".asl/mem/reviews/D81ConceptReview.asn"
+  :settlement ".asl/mem/reviews/D81PlanSettlement.asn"
+  :problem "The original conceptual audit found unsupported efficacy claims, weak gate contracts and an incomplete foreign-binary independence definition. Historical numerical diagnostics remain in the review; they are not newly measured facts or current completion receipts."
+  :drivers ["Semantics first: independently specified values, errors and effects precede portable/self-hosted replacement; compatibility may be broken to simplify the owned language." "Optimize observed cost per correct task; stable reusable base, relevant retrieval and measured compression are complementary, provider-scoped choices." "Use bounded progressive retrieval with global batch budgets and versioned continuation; preserve semantic evidence through recoverable references." "Separate format reversibility from lossy output omission; no universal token-compression accuracy penalty or zero-escaping claim." "Portability includes explicit Darwin/Linux/Windows native adapters and WASM host capabilities; POSIX or a WASM file alone does not prove it." "Keep the chosen CLI product boundary and optional local pooling host; no required MCP or third-party runtime for the deployed native tool." "Generate truthful supported-client/tier projections from canonical rules; preserve host permission authority and separate payload/session budgets." "Separate implementation author and final verifier mechanically; public development tests remain useful while held-out acceptance and runner configuration are protected." "Autonomous ASL compiler/evaluator rebuild closure and owned native deployed artifacts are the self-hosting end state; stage0 seed, own OS adapter and independent WASM validation host are explicitly separate dependencies."]
+  :paradigmRevisions [
+    (:paradigm :n 1 :verdict :amend :by "Optimize measured cost per correct task; cache stability and precision complement density rather than making it universally third-order." :tasks ["Task43902" "Task44106"])
+    (:paradigm :n 2 :verdict :amend :by "Choose ASL on engineering grounds; validate syntax and semantic round trips; no guaranteed parse validity or invented measured ASL penalty." :tasks ["Task43801" "Task43806" "Task44001"])
+    (:paradigm :n 3 :verdict :amend :by "Retire universal one-to-two-token primitive claims; use conventional meaningful names and contextual tokenizer evidence." :tasks ["Task43806" "Task43807"])
+    (:paradigm :n 4 :verdict :amend :by "Withdraw universal 72-percent/64.7-percent ceiling/zero-escaping claims; regenerate scoped codec metrics with typed round-trip evidence." :tasks ["Task43806" "Task43903"])
+    (:paradigm :n 5 :verdict :amend :by "Remove unconditional zero-comment performance/reliability invariant; concise useful rationale is allowed; generated documentation has one source and consistency checks." :tasks ["Task43707" "Task43806"])
+    (:paradigm :n 6 :verdict :amend :by "Mechanical writer/verifier boundaries and justified profiles; no universal persona-zero or exact-role-count optimum." :tasks ["Task44105" "Task44110"])
+    (:paradigm :n 7 :verdict :confirm :by "Remove unsupported numerical SNR invariant; retain qualitative relevance; token counts alone do not define semantic signal." :tasks ["Task43707" "Task43806"])
+    (:paradigm :n 8 :verdict :amend :by "Keep chosen CLI integration boundary and supported-client contracts; MCP removal is a product choice, not experimentally compelled." :tasks ["Task43701" "Task43703"])
+    (:paradigm :n 9 :verdict :amend :by "Separate payload/session/tier budgets, measure pinned tokenizer and preserve mandatory semantics; budgets are engineering targets." :tasks ["Task43702" "Task43704" "Task44109"])
+    (:paradigm :n 10 :verdict :confirm :by "Keep progressive retrieval and batches with truthful capabilities, bounds and recoverable evidence; no blanket superiority claim." :tasks ["Task43804" "Task43808" "Task43809" "Task44201" "Task44202" "Task44203" "Task44204" "Task44205" "Task44206" "Task44207" "Task44208" "Task44209" "Task44210" "Task44401" "Task44402" "Task44403" "Task44404" "Task44405" "Task44406" "Task44501" "Task44502" "Task44503" "Task44504" "Task44601" "Task44602" "Task44603" "Task44604" "Task44605" "Task44606" "Task44701" "Task44702" "Task44703" "Task44704" "Task44301" "Task44302" "Task44303" "Task44304" "Task44305" "Task44306" "Task44307" "Task44103"])
+    (:paradigm :n 11 :verdict :amend :by "Keep intended-failure gates; production fault sensitivity and independent expected behavior replace output labels as evidence." :tasks ["Task43605" "Task43901"])
+  ]
+  :decision "Settle six ordered phases: Phase436 semantics and honest verification; Phase437 canonical rule/client projections; Phase438 observable portable native/WASM core and truthful batches; Phase439 independent production-fault, cost and claim evidence; Phase440 autonomous ASL native compiler/evaluator stage2 rebuild and all tooling; Phase441 attention/session isolation and measured compression. Task dependency edges govern scheduling; serialize overlapping writers. Existing tasks are amended rather than duplicated; runtime implementation and behavioral baselines remain pending."
+  :invariants ["C2" "C3" "C5" "D34" "D46" "D51" "D52" "D56" "D81"]
+  :retiredUnconditionalInvariants [(:id C1 :reason "No unconditional comment-performance/reliability claim; useful concise rationale permitted by settled source policy.") (:id C4 :reason "No measured semantic signal definition for a numerical SNR threshold.")]
+  :tasks ["Task43601" "Task43602" "Task43603" "Task43604" "Task43605" "Task43606" "Task43607" "Task43701" "Task43702" "Task43703" "Task43704" "Task43705" "Task43706" "Task43707" "Task43801" "Task43802" "Task43803" "Task43804" "Task43805" "Task43806" "Task43807" "Task43808" "Task43901" "Task43902" "Task43903" "Task43904" "Task44001" "Task44002" "Task44003" "Task44004" "Task44005" "Task44101" "Task44102" "Task44103" "Task44104" "Task44105" "Task44106" "Task44107" "Task44108" "Task44109" "Task44110"]
+  :dependencyClasses [
+    (:class :seed :policy "Record owned C stage0 source, build tools and digests; seed is allowed only to create the first native ASL compiler/evaluator.")
+    (:class :build :policy "Stage1 and stage2 ASL native tool compile compiler/evaluator to native artifacts and WASM; stage2 rebuild does not invoke seed or a third-party compiler/runtime.")
+    (:class :deployed :policy "Native check/test/RPC and optional local pooling require no wasmtime, JSC, Node or system compiler; an own statically linked OS/ABI adapter is allowed and declared.")
+    (:class :validation :policy "An independent conforming WASM runtime may validate artifacts but is never required by the deployed CLI.")
+    (:class :substrate :policy "Machine, OS/ABI and declared WASM imports are explicit boundaries; independence does not mean no execution substrate.")
+  ]
+  :settledChoices [
+    (:choice :id compatibility :value "Breaking changes permitted; canonical semantic contracts determine correctness.")
+    (:choice :id nativeArtifact :value "ASL compiler emits native executable images (ELF/Mach-O/PE), ABI/linking support and WASM; the autonomous chain regenerates owned OS adapters from source, never a carried precompiled blob. Owned C is a valid declared source boundary only where the self-hosted chain can rebuild it; otherwise use ASL-owned low-level adapter source.")
+    (:choice :id pooling :value "Keep optional local serve using the identical one-shot CAS/session contract; never required for correctness.")
+    (:choice :id dormantPackages :value "Retain as experimental/no acceptance weight; asl-lint remains required; no unrequested broad package/artifact deletion.")
+    (:choice :id ruleSource :value "All eighteen rule dispositions and eleven revisions flow through canonical rules/document sources and generated projections in Task43707/Task43806.")
+  ]
+  :consequences [
+    (:pos "Honest semantic failure and independently bound evidence replace output labels and assertion-count parity.")
+    (:pos "Owned native tooling closes its rebuild chain while retaining a portable WASM backend and explicit Windows contract.")
+    (:pos "Payload, session and tier budgets are measured engineering targets with semantic preservation, not universal efficacy claims.")
+    (:neg "ASL native code generation and explicit OS adapters are substantial work; architecture is settled but their behavioral acceptance remains unestablished.")
+    (:neg "Read-only conceptual findings do not imply current runtime completion; each verifier must first establish its intended baseline failure.")
+  ])

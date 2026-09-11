@@ -1,0 +1,32 @@
+;; Machine-Native Observations & Technical Notes Ledger
+(:notesLedger
+  :version "1.0.0"
+  :package asl-mem
+  :updatedAt 1773140000000
+  :notes [
+    (:note
+      :id "n1"
+      :topic "token-economy"
+      :author "auditor"
+      :session "sess-tb4-calibration"
+      :date "2026-09-09"
+      :status "active"
+      :scope ["asl/asl" "harness/paradigm.asn"]
+      :tags [:tokens :density :prefixes]
+      :fact "BPE tokenizers penalize hyphenated shortcodes; prefix plus number (d1..d45) is 2 tokens."
+      :evidence "Empirical tiktoken run on cl100k and o200k."
+      :consequence "Adopt 2-token compact shortcode convention across all agent prompts.")
+    (:note
+      :id "n2"
+      :topic "session-recovery"
+      :author "implementer"
+      :session "sess-tb4-calibration"
+      :date "2026-09-09"
+      :status "active"
+      :scope ["mem/src/tasks.asl" ".asl/mem/tasks/InFlight.asn"]
+      :tags [:tasks :sessions :recovery]
+      :fact "In-flight tasks persist in InFlight.asn with step-index, session leases, and handoff-context."
+      :evidence "Verified by tests/test_task_protocol_e2e.sh and mem/tests/tasks_test.asl."
+      :consequence "Enables crash recovery without context degradation or lost work items.")
+  ]
+)

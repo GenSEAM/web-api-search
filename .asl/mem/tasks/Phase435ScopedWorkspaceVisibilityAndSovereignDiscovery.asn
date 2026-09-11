@@ -1,0 +1,171 @@
+(:taskCollection
+  :id "Phase435ScopedWorkspaceVisibilityAndSovereignDiscovery"
+  :createdAt 1774100000000
+  :status "settled"
+  :summary "Context-Aware Hierarchical Workspace and Worktree Visibility Topology Standard"
+  :phase "Phase435ScopedWorkspaceVisibilityAndSovereignDiscovery"
+  :tasks [
+    (:task
+      :id "Task43501"
+      :parentId ""
+      :phase "Phase435ScopedWorkspaceVisibilityAndSovereignDiscovery"
+      :title "ADR-0080 Architecture Decision Record & Intent Ledger Settle"
+      :kind :architecture
+      :lane "governance"
+      :state :completed
+      :priority :critical
+      :ownerRole "architect"
+      :createdAt 1774100000000
+      :updatedAt 1774100000000
+      :startedAt 1774100000000
+      :completedAt 1774100500000
+      :motivation "Formalize the 3-tier visibility standard (isolated session, workspace lineage, sovereign panopticon) to eliminate cross-project context pollution"
+      :purpose "Codify ADR-0080 (D80) and establish bidirectional task-ADR-intent grounding across ledgers"
+      :context "Inspects .asl/mem/decisions/Adr0080*, intent.asn, decisions.asn, roadmap.asn"
+      :outcomes [
+        "ADR-0080 authored in .asl/mem/decisions/Adr0080HierarchicalWorkspaceVisibilityAndSovereignDiscoveryTopology.asn"
+        "D80 registered in .asl/mem/decisions/decisions.asn, .asl/mem/decisions.asn, and .asl/mem/intent.asn"
+        "100% bidirectional ADR <-> Task grounding verified"
+      ]
+      :owns [
+        ".asl/mem/decisions/Adr0080HierarchicalWorkspaceVisibilityAndSovereignDiscoveryTopology.asn"
+        ".asl/mem/decisions/decisions.asn"
+        ".asl/mem/decisions.asn"
+        ".asl/mem/intent.asn"
+      ]
+      :targetSymbols ["ADR-0080" "D80"]
+      :relatedSymbols ["D68" "D71" "D52" "D51" "C1" "C2" "C3" "C4" "C5"]
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D68" "D71" "D80"]
+      :variations ["Flat unrestricted workspace discovery vs 3-tier context-aware hierarchical isolation (chosen: 3-tier context-aware hierarchical isolation)"]
+      :failureModes ["Dangling ADR references if shortcodes mismatch; verified by asl audit consistency"]
+      :adr "ADR-0080"
+      :decision "D80"
+      :why "Physical location gating and workspace lineage isolation prevent prompt bloat and cross-repo confusion"
+      :spec "Author ADR-0080, register D80 in decision registries, and verify bidirectional linkages."
+      :acceptanceCriteria ["ADR-0080 exists" "D80 registered" "asl audit consistency passes"]
+      :stepIndex 0
+      :actionDag ["Author ADR-0080" "Register in decisions.asn" "Register in intent.asn" "Run consistency audit"]
+      :gate "test -f .asl/mem/decisions/Adr0080HierarchicalWorkspaceVisibilityAndSovereignDiscoveryTopology.asn && asl audit consistency")
+
+    (:task
+      :id "Task43502"
+      :parentId ""
+      :phase "Phase435ScopedWorkspaceVisibilityAndSovereignDiscovery"
+      :title "Core 3-Tier Visibility Scoping Primitives in asl-mem/visibility-scope"
+      :kind :implementation
+      :lane "memory"
+      :state :completed
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1774100000000
+      :updatedAt 1774100000000
+      :startedAt 1774100000000
+      :completedAt 1774100500000
+      :motivation "Implement deterministic mathematical resolution for isolated sessions, workspace lineage, and sovereign panopticon"
+      :purpose "Author mem/src/visibility_scope.asl implementing pure typestates and filter functions"
+      :context "Inspects mem/src/visibility_scope.asl, mem/manifest.asn, mem/grammar.asn"
+      :outcomes [
+        "VisibilityTier and VisibilityContext typestates codified in mem/src/visibility_scope.asl"
+        "is-global-asl-anchor? and resolve-visibility-tier pure functions exported"
+        "filter-visible-worktrees, filter-visible-sessions, and filter-visible-repos implemented"
+        "Registered in mem/manifest.asn and mem/grammar.asn"
+      ]
+      :owns [
+        "mem/src/visibility_scope.asl"
+        "mem/manifest.asn"
+        "mem/grammar.asn"
+      ]
+      :targetSymbols ["VisibilityTier" "VisibilityContext" "resolve-visibility-tier" "is-global-asl-anchor?"]
+      :relatedSymbols ["filter-visible-worktrees" "filter-visible-sessions" "filter-visible-repos"]
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D80"]
+      :variations ["Ad-hoc checks in shell scripts vs pure ASL foundational module in mem (chosen: pure ASL module in mem)"]
+      :failureModes ["Incorrect anchor path matching if trailing slashes differ; normalized via string-ends-with?"]
+      :adr "ADR-0080"
+      :decision "D80"
+      :why "Mathematical determinism in core memory package prevents divergence across runtime tools"
+      :spec "Codify VisibilityTier and filter functions in pure AgentScript conforming to C1-C5."
+      :acceptanceCriteria ["mem/src/visibility_scope.asl exists" "asl check passes" "grammar registry updated"]
+      :stepIndex 1
+      :actionDag ["Write visibility_scope.asl" "Update manifest.asn" "Update grammar.asn" "Run asl check"]
+      :gate "asl check mem/src/visibility_scope.asl && asl check mem/manifest.asn && asl check mem/grammar.asn")
+
+    (:task
+      :id "Task43503"
+      :parentId ""
+      :phase "Phase435ScopedWorkspaceVisibilityAndSovereignDiscovery"
+      :title "Falsifiable Verification Suite & Boundary Invariant Enforcement"
+      :kind :testing
+      :lane "quality"
+      :state :completed
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1774100000000
+      :updatedAt 1774100000000
+      :startedAt 1774100000000
+      :completedAt 1774100500000
+      :motivation "Verify with non-vacuous assertions that each of the 3 visibility tiers behaves as mathematically required"
+      :purpose "Author mem/tests/visibility_scope_test.asl and execute under --strict-falsify"
+      :context "Executes mem/tests/visibility_scope_test.asl"
+      :outcomes [
+        "TestIsolatedSessionScope verifies unanchored sessions see zero worktrees and only own session"
+        "TestWorkspaceLineageScope verifies workspace sessions see only active workspace and child worktrees"
+        "TestSovereignSystemScope verifies navigating to global anchor unlocks whole-system panopticon"
+        "TestGlobalAnchorPredicate verifies exact parent folder matching"
+      ]
+      :owns [
+        "mem/tests/visibility_scope_test.asl"
+      ]
+      :targetSymbols ["TestIsolatedSessionScope" "TestWorkspaceLineageScope" "TestSovereignSystemScope" "TestGlobalAnchorPredicate"]
+      :relatedSymbols ["run-tests"]
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D80"]
+      :variations ["Testing only positive cases vs testing boundary exclusions (chosen: dual-polarity assertion testing)"]
+      :failureModes ["Vacuous assertions if test returns true unconditionally; audited by strict-falsify"]
+      :adr "ADR-0080"
+      :decision "D80"
+      :why "Falsifiable tests ensure regression prevention across future CLI and Orca bridge iterations"
+      :spec "Author comprehensive test suite covering all 3 tiers and edge cases."
+      :acceptanceCriteria ["mem/tests/visibility_scope_test.asl passes under --strict-falsify"]
+      :stepIndex 2
+      :actionDag ["Write visibility_scope_test.asl" "Run asl check" "Run asl test --strict-falsify"]
+      :gate "asl test --strict-falsify mem/tests/visibility_scope_test.asl")
+
+    (:task
+      :id "Task43504"
+      :parentId ""
+      :phase "Phase435ScopedWorkspaceVisibilityAndSovereignDiscovery"
+      :title "Roadmap Ledger, Grammar Registry, and Master Gate Settle"
+      :kind :architecture
+      :lane "governance"
+      :state :completed
+      :priority :critical
+      :ownerRole "auditor"
+      :createdAt 1774100000000
+      :updatedAt 1774100000000
+      :startedAt 1774100000000
+      :completedAt 1774100500000
+      :motivation "Settle Phase 435 in roadmap ledger and execute master 7-gate verification"
+      :purpose "Register Phase435 in .asl/mem/roadmap.asn and verify 100% green system gate"
+      :context "Inspects .asl/mem/roadmap.asn, full 7-tier verification gate"
+      :outcomes [
+        "Phase 435 registered in .asl/mem/roadmap.asn under Wave 87"
+        "5D consistency audit passes cleanly with 0 defects"
+        "Full 7-tier verification gate passes cleanly"
+      ]
+      :owns [
+        ".asl/mem/roadmap.asn"
+        ".asl/mem/tasks/Phase435ScopedWorkspaceVisibilityAndSovereignDiscovery.asn"
+      ]
+      :targetSymbols ["Phase435ScopedWorkspaceVisibilityAndSovereignDiscovery"]
+      :relatedSymbols ["Wave 87" "D80"]
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D68" "D71" "D80"]
+      :variations ["Leaving phase informal vs formalizing as Wave 87 sovereign milestone (chosen: Wave 87 sovereign milestone)"]
+      :failureModes ["Roadmap gate syntax errors; audited by asl check and asl audit consistency"]
+      :adr "ADR-0080"
+      :decision "D80"
+      :why "Roadmap ledger settlement ensures continuous traceability and unblocks subsequent waves"
+      :spec "Update roadmap.asn, verify consistency, and execute asl gate."
+      :acceptanceCriteria ["roadmap.asn updated" "asl audit consistency passes" "asl gate passes"]
+      :stepIndex 3
+      :actionDag ["Update roadmap.asn" "Run consistency audit" "Run asl gate"]
+      :gate "asl check .asl/mem/tasks/Phase435ScopedWorkspaceVisibilityAndSovereignDiscovery.asn && asl audit consistency && asl gate")
+  ])

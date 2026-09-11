@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# bin/package-harness: Deterministic In-Container ASL Harness Distribution Packager
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+cd "${ROOT_DIR}"
+
+DIST_DIR="${ROOT_DIR}/dist"
+mkdir -p "${DIST_DIR}"
+
+TAR_GZ="${DIST_DIR}/asl-harness-dist.tar.gz"
+B64_FILE="${DIST_DIR}/asl-harness-dist.b64"
+
+STAGE_DIR="$(mktemp -d /tmp/asl-harness-stage.XXXXXX)"
+trap 'rm -rf "${STAGE_DIR}"' EXIT
+
+mkdir -p "${STAGE_DIR}/bin" "${STAGE_DIR}/grammar" "${STAGE_DIR}/harness/src"
+
+if [ -f "asl/bin/asl-engine" ]; then
+  cp "asl/bin/asl-engine" "${STAGE_DIR}/bin/asl-engine"
+elif [ -f "bin/asl-engine" ]; then
+  cp "bin/asl-engine" "${STAGE_DIR}/bin/asl-engine"
+else
+  echo "✗ Error: asl-engine not found" >&2
+  exit 1
+fi
+chmod +x "${STAGE_DIR}/bin/asl-engine"
+
+if [ -f "asl/asl" ]; then
+  cp "asl/asl" "${STAGE_DIR}/asl"
+elif [ -f "bin/asl" ]; then
+  cp "bin/asl" "${STAGE_DIR}/asl"
+else
+  echo "✗ Error: asl executable not found" >&2
+  exit 1
+fi
+chmod +x "${STAGE_DIR}/asl"
+
+if [ -f "asl/grammar/rpc.asn" ]; then
+  cp "asl/grammar/rpc.asn" "${STAGE_DIR}/grammar/rpc.asn"
+fi
+
+if [ -d "harness/src" ]; then
+  cp harness/src/*.asl "${STAGE_DIR}/harness/src/"
+fi
+if [ -f "harness/manifest.asn" ]; then
+  cp "harness/manifest.asn" "${STAGE_DIR}/harness/manifest.asn"
+fi
+
+tar -czf "${TAR_GZ}" -C "${STAGE_DIR}" .
+base64 < "${TAR_GZ}" | tr -d '\r\n' > "${B64_FILE}"
+
+SIZE_TAR=$(wc -c < "${TAR_GZ}" | tr -d ' ')
+SIZE_B64=$(wc -c < "${B64_FILE}" | tr -d ' ')
+
+echo "✓ Packaged canonical ASL distribution: ${TAR_GZ} (${SIZE_TAR} bytes)"
+echo "✓ Pre-encoded container payload:       ${B64_FILE} (${SIZE_B64} bytes)"

@@ -1,0 +1,204 @@
+(:taskCollection
+  :id "Phase425ComposableObservabilityAndWorktreeLifecycleTracking"
+  :createdAt 1773500000000
+  :status "settled"
+  :summary "Composable Observability Layer, Per-Project Tool Metrics, and ESL Worktree Lifecycle Telemetry"
+  :phase "Phase425ComposableObservabilityAndWorktreeLifecycleTracking"
+  :tasks [
+    (:task
+      :id "T425WebSearchPerProjectMetrics"
+      :parentId ""
+      :phase "Phase425ComposableObservabilityAndWorktreeLifecycleTracking"
+      :title "Implement Per-Project WebSearch Usage Metrics with Git-Ignored Storage"
+      :kind :feature
+      :lane "harness"
+      :state :completed
+      :priority :critical
+      :ownerRole "architect"
+      :createdAt 1773500000000
+      :updatedAt 1773500000000
+      :startedAt 0
+      :completedAt 1773500100000
+      :motivation "Web search consumption across multiple projects and engines lacks granular visibility, risking unexpected rate limits and unoptimized engine routing"
+      :purpose "Establish per-project WebSearch metric schema, recording queries, engine provider status, response times, and quota exhaustion in git-ignored .asl/metrics/webSearch.asn"
+      :context "Extends web-api-search telemetry with isolated metric recording"
+      :outcomes [
+        "Established .asl/metrics/webSearch.asn in git-ignored location"
+        "Captured provider-specific metrics across 6 search backends"
+        "Configured 1:10 routine sampling ratio and 1:1 error retention"
+      ]
+      :owns [".asl/metrics/webSearch.asn"]
+      :targetSymbols ["WebSearchMetrics" "PerProjectMetrics" "ProviderTelemetry"]
+      :relatedSymbols ["D52" "D70" "D71" "C1" "C4"]
+      :dependsOn []
+      :gate "test -f .asl/metrics/webSearch.asn && asl check .asl/metrics/webSearch.asn"
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71"]
+      :variations ["Central database vs decentralized git-ignored file stores (chosen: git-ignored file stores)"]
+      :failureModes ["Git history pollution with transient metric files (mitigated: added to .aslignore and .asl.config.asn)"]
+      :adr "ADR-0071"
+      :decision "D71"
+      :why "Provide actionable search telemetry without repository churn"
+      :spec "Create .asl/metrics/webSearch.asn with complete provider metrics schema."
+      :acceptanceCriteria ["File exists" "Syntax check passes" "Provider metrics recorded"]
+      :stepIndex 1
+      :actionDag ["Define web search metrics schema" "Persist initial telemetry state" "Verify syntax with asl check"])
+    (:task
+      :id "T425WorktreeLifecycleESL"
+      :parentId ""
+      :phase "Phase425ComposableObservabilityAndWorktreeLifecycleTracking"
+      :title "Integrate Worktree Lifecycle Telemetry and Source-Branch Sync into ESL"
+      :kind :feature
+      :lane "runtime"
+      :state :completed
+      :priority :high
+      :ownerRole "architect"
+      :createdAt 1773500000000
+      :updatedAt 1773500000000
+      :startedAt 0
+      :completedAt 1773500200000
+      :motivation "Ephemeral git worktrees created during concurrent multi-agent branches leave orphan states without traceable branch lineage"
+      :purpose "Integrate worktree creation, cleanup, and source-branch annotated metric sync into ESL and .asl/metrics/worktrees.asn"
+      :context "Connects git engine worktrees with Epistemic Supervision Layer"
+      :outcomes [
+        "Created .asl/metrics/worktrees.asn tracking active rosters and lifecycle history"
+        "Recorded source-branch annotations on worktree creation and cleanup"
+        "Enabled direct synchronization of worktree receipts to main branch"
+      ]
+      :owns [".asl/metrics/worktrees.asn"]
+      :targetSymbols ["WorktreeLifecycle" "SourceBranchAnnotation" "EslWorktreeTracking"]
+      :relatedSymbols ["D71" "D65" "C1" "C4"]
+      :dependsOn ["T425WebSearchPerProjectMetrics"]
+      :gate "test -f .asl/metrics/worktrees.asn && asl check .asl/metrics/worktrees.asn"
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71"]
+      :variations ["Ephemeral untracked worktrees vs ledgered lifecycle records (chosen: ledgered lifecycle records)"]
+      :failureModes ["Dangling worktree tombstones (mitigated: 30-day tombstone TTL)"]
+      :adr "ADR-0071"
+      :decision "D71"
+      :why "Maintain strict branch lineage and worktree hygiene across multi-agent sessions"
+      :spec "Create .asl/metrics/worktrees.asn with active roster and lifecycle history."
+      :acceptanceCriteria ["File exists" "Syntax check passes" "Active worktree registered"]
+      :stepIndex 2
+      :actionDag ["Design worktree lifecycle schema" "Populate active worktree entry" "Verify with asl check"])
+    (:task
+      :id "T425ToolLimitationTelemetry"
+      :parentId ""
+      :phase "Phase425ComposableObservabilityAndWorktreeLifecycleTracking"
+      :title "Establish Tool Usage & Limitation Telemetry with Adaptive Retention Ratios"
+      :kind :feature
+      :lane "runtime"
+      :state :completed
+      :priority :high
+      :ownerRole "architect"
+      :createdAt 1773500000000
+      :updatedAt 1773500000000
+      :startedAt 0
+      :completedAt 1773500300000
+      :motivation "Verbose execution logging causes context window exhaustion, while lack of limitation detection prevents agent runtime tuning"
+      :purpose "Record tool usage, latency profiles, and boundary limitations in .asl/metrics/tools.asn with 1:10 routine sampling vs 1:1 error retention and 256KB compaction caps"
+      :context "Defines tool telemetry contracts across batch RPC, exec, and gates"
+      :outcomes [
+        "Codified .asl/metrics/tools.asn with 6 primary tool profiles"
+        "Implemented p50 and p95 latency tracking and tuning recommendations"
+        "Established limitation detection records for process ceilings"
+      ]
+      :owns [".asl/metrics/tools.asn"]
+      :targetSymbols ["ToolUsageTelemetry" "LimitationDetection" "AdaptiveRetention"]
+      :relatedSymbols ["D71" "D42" "C1" "C4"]
+      :dependsOn ["T425WebSearchPerProjectMetrics"]
+      :gate "test -f .asl/metrics/tools.asn && asl check .asl/metrics/tools.asn"
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71"]
+      :variations ["Lossless infinite logging vs adaptive retention downsampling (chosen: adaptive retention downsampling)"]
+      :failureModes ["Log bloat exhausting disk space (mitigated: 256KB compaction ceiling)"]
+      :adr "ADR-0071"
+      :decision "D71"
+      :why "Keep telemetry high-SNR and actionable for tool tuning without token waste"
+      :spec "Create .asl/metrics/tools.asn with tool profiles and limitation records."
+      :acceptanceCriteria ["File exists" "Syntax check passes" "Tool profiles cataloged"]
+      :stepIndex 3
+      :actionDag ["Design tool telemetry schema" "Record profiles and tuning flags" "Verify with asl check"])
+    (:task
+      :id "T425ComposableObservabilityAggregator"
+      :parentId ""
+      :phase "Phase425ComposableObservabilityAndWorktreeLifecycleTracking"
+      :title "Implement Composable Observability Aggregator CLI and Resident RPC"
+      :kind :feature
+      :lane "runtime"
+      :state :completed
+      :priority :critical
+      :ownerRole "architect"
+      :createdAt 1773500000000
+      :updatedAt 1773500000000
+      :startedAt 0
+      :completedAt 1773500400000
+      :motivation "Isolated metric stores must be composable on demand without cross-component contamination or coupling"
+      :purpose "Author 'asl metrics' CLI tool to synthesize unified observability views across WebSearch, worktrees, and tools on demand"
+      :context "Extends asl/asl with composable metrics aggregation command"
+      :outcomes [
+        "Implemented run_composable_metrics in asl/asl"
+        "Composed isolated WebSearch, worktree, and toolplane views on demand"
+        "Enforced strict component boundary isolation during aggregation"
+      ]
+      :owns ["asl/asl"]
+      :targetSymbols ["RunComposableMetrics" "MetricsCommand" "ComposableObservabilityAggregator"]
+      :relatedSymbols ["D71" "C1" "C4"]
+      :dependsOn [
+        "T425WebSearchPerProjectMetrics"
+        "T425WorktreeLifecycleESL"
+        "T425ToolLimitationTelemetry"
+      ]
+      :gate "asl metrics"
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71"]
+      :variations ["Tightly coupled daemon state vs on-demand composition from isolated stores (chosen: on-demand composition)"]
+      :failureModes ["Missing component metric files (mitigated: graceful fallback per component)"]
+      :adr "ADR-0071"
+      :decision "D71"
+      :why "Provide holistic multi-dimensional visibility while maintaining strict architectural boundaries"
+      :spec "Implement run_composable_metrics in asl/asl and connect to CLI dispatcher."
+      :acceptanceCriteria ["asl metrics runs cleanly" "Displays all 3 component dimensions" "Exits 0"]
+      :stepIndex 4
+      :actionDag ["Author run_composable_metrics function" "Wire to asl metrics CLI" "Verify with bash -n and test execution"])
+    (:task
+      :id "T425Settle"
+      :parentId ""
+      :phase "Phase425ComposableObservabilityAndWorktreeLifecycleTracking"
+      :title "Settle Composable Observability and Worktree Telemetry Phase with 5D Consistency"
+      :kind :chore
+      :lane "governance"
+      :state :completed
+      :priority :critical
+      :ownerRole "architect"
+      :createdAt 1773500000000
+      :updatedAt 1773500000000
+      :startedAt 0
+      :completedAt 1773500500000
+      :motivation "Epistemic integrity requires all roadmap phases, ADRs, intent records, and execution receipts to reconcile with zero divergence"
+      :purpose "Synchronize decisions.asn, intent.asn, roadmap.asn, record receipt rc-gap-050, and verify all 7 gates and 5 consistency dimensions pass cleanly"
+      :context "Closes Phase 425 and settles Wave 77"
+      :outcomes [
+        "Synchronized ADR-0071 across decisions.asn, intent.asn, and roadmap.asn"
+        "Recorded execution receipt rc-gap-050 in .asl/mem/receipts.asn"
+        "Verified 100 percent 5D consistency under asl audit consistency"
+        "Verified all 7 verification gates under asl gate"
+      ]
+      :owns [
+        ".asl/mem/decisions.asn"
+        ".asl/mem/intent.asn"
+        ".asl/mem/roadmap.asn"
+        ".asl/mem/receipts.asn"
+      ]
+      :targetSymbols ["SettlePhase425" "ConsistencyAudit5D" "ReceiptRcGap050"]
+      :relatedSymbols ["D52" "D70" "D71" "C1" "C2" "C3" "C4" "C5"]
+      :dependsOn ["T425ComposableObservabilityAggregator"]
+      :gate "asl audit consistency && asl gate"
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71"]
+      :variations ["Manual settlement vs automated consistency gate (chosen: automated consistency gate)"]
+      :failureModes ["Broken bidirectional links (mitigated: verified with asl audit consistency)"]
+      :adr "ADR-0071"
+      :decision "D71"
+      :why "Guarantee full epistemic consistency and unbreakable truth across memory files"
+      :spec "Update all memory ledgers, verify with asl audit consistency and asl gate."
+      :acceptanceCriteria ["asl audit consistency passes" "asl gate passes" "Phase settled"]
+      :stepIndex 5
+      :actionDag ["Update decisions.asn" "Update intent.asn" "Update roadmap.asn" "Verify with consistency audit"])
+  ]
+)

@@ -1,0 +1,156 @@
+(:spec
+  :title "LayerStratificationSpec"
+  :format "asn"
+  :source-file "LAYER_STRATIFICATION_SPEC.md"
+  :body "# 4-Tier Architectural Stratification Specification
+
+> **Status**: Canonical System Architecture Specification  
+> **Ecosystem**: AgentScript (ASL / ASN)  
+> **Enforcement**: In-Engine Static Analysis (`intel/src/health.asl`), Batch RPC (`:boundary-check`), CLI (`asl audit boundary-check`, legacy: `asl intel boundary-check`)  
+
+---
+
+## 1. Executive Summary & Architectural Motivation
+
+The AgentScript ecosystem is organized as an acyclic, 4-tier stratified hierarchy. Each tier represents a distinct conceptual abstraction boundary with strict downward-only dependency invariants:
+
+1. **Layer 0 (Language Kernel)** / **Layer 0: Language Kernel**: Pure syntax, AST, HM type inference, parser, compiler, checker, lint, codecs, and core evaluation semantics.
+2. **Layer 1 (Identity & Topology)**: Agent identity primitives (`scout`, `coder`, `reviewer`), agent bus messaging, mesh network routing, sessions, TaskContracts, and execution receipts.
+3. **Layer 2 (Configuration & Data Layout)**: Declarative ASN configuration (`.asl.config.asn`), package manifests, typed schemas, and persistent intent memory ledgers.
+4. **Layer 3 (Plugins & Host Extensions)**: Dynamic plugin registry, capability hooks, foreign function interfaces (FFI), Node/daemon host bridges, and CLI projection wrappers.
+
+This specification guarantees **Zero Inward Abstraction Leakage**: the foundational language kernel (Layer 0) remains completely agnostic of agent personas, prompt constructs, mesh networking, and host execution runtimes.
+
+---
+
+## 2. Formal Layer Definitions & Package Classifications
+
+```
++-------------------------------------------------------------------------+
+| Layer 3 (Plugins & Host Extensions)                                     |
+| Packages: asl-bridge, asl-plugin, asl-sh, asl/bridges/node/, bin/      |
++-------------------------------------------------------------------------+
+                                     │ (depends downward)
+                                     ▼
++-------------------------------------------------------------------------+
+| Layer 2 (Configuration & Data Layout)                                   |
+| Packages: mem, crawler, web-api-search, asl-registry, .asl/mem/         |
++-------------------------------------------------------------------------+
+                                     │ (depends downward)
+                                     ▼
++-------------------------------------------------------------------------+
+| Layer 1 (Identity & Topology)                                           |
+| Packages: agent-bus, agent-core, harness, asl-contracts                 |
++-------------------------------------------------------------------------+
+                                     │ (depends downward)
+                                     ▼
++-------------------------------------------------------------------------+
+| Layer 0 (Language Kernel)                                               |
+| Packages: asl-parser, asl-codec, asl-compiler, asl-checker, asl-lint,   |
+|           asl-codegen, asl/grammar, intel                               |
++-------------------------------------------------------------------------+
+```
+
+### 2.1 Layer 0 (Language Kernel)
+- **Role**: Foundational computing engine, grammar specification, and pure symbolic evaluation.
+- **Components & Packages**:
+  - `asl/packages/asl-parser`: S-expression scanner, AST node definitions, and token parsers.
+  - `asl/packages/asl-codec`: Universal ASN <-> JSON/YAML/VDOM transcoders and serializers.
+  - `asl/packages/asl-compiler`: ASL bytecode / intermediate representation compilation pipeline.
+  - `asl/packages/asl-checker`: Hindley-Milner type inference, symbol graph resolution, type validation.
+  - `asl/packages/asl-lint`: AST-level invariant linters and anti-pattern detectors.
+  - `asl/packages/asl-codegen`: Backend emission targets and ASM code generators.
+  - `asl/grammar`: Pure ASN grammar registries and symbol table definitions.
+  - `intel`: Code intelligence, AST outlines, call-graph analysis, and structural health matrices.
+- **Invariants**:
+  - **Zero Agent Identity**: Must never reference agent identity symbols (`scout`, `coder`, `reviewer`, `:agent:<name>`).
+  - **Zero Model Binding**: Completely independent of LLM model IDs, provider endpoints, or prompt context windows.
+  - **Zero Mesh Wire Awareness**: No awareness of network transport protocols, sockets, or distributed RPC routing.
+  - **Zero Host Hooks**: Must never call host daemon bindings directly.
+
+### 2.2 Layer 1 (Identity & Topology)
+- **Role**: Multi-agent identity management, communication fabric, routing, and task lifecycle coordination.
+- **Components & Packages**:
+  - `agent-bus`: IPC and mesh message router, pub/sub topics, broadcast channels.
+  - `agent-core`: Agent lifecycle primitives, capability manifests, actor dispatchers.
+  - `harness`: Execution test harness, benchmark evaluation loops, hallucination normalization.
+  - `asl-contracts`: Formally verifiable TaskContracts, work order envelopes, and cryptographically sound receipts.
+- **Invariants**:
+  - May depend on Layer 0 for AST manipulation, codecs, and type checking.
+  - Must never import or depend on Layer 3 host bridges or dynamic plugins.
+  - Preserves platform independence across different host environments.
+
+### 2.3 Layer 2 (Configuration & Data Layout)
+- **Role**: Persistent configuration management, manifest validation, indexing, and memory stores.
+- **Components & Packages**:
+  - `.asl.config.asn`: Root hierarchical repository configuration and policy settings.
+  - `.asl/mem/`: Persistent intent ledgers, decision records, and semantic memory vectors.
+  - `mem`: Vector memory engine, perceptual pointer resolution, chunk indexers.
+  - `crawler`: Workspace file system indexing, repository scrapers, and document discovery.
+  - `web-api-search`: Semantic search connectors and knowledge base query layers.
+  - `asl/packages/asl-registry`: Package manifest schemas and package dependency graphs.
+- **Invariants**:
+  - May depend on Layer 1 (for agent-specific memory partitioning) and Layer 0 (for schemas and encoding).
+  - Must not leak host runtime process handles into persistent data schemas.
+
+### 2.4 Layer 3 (Plugins & Host Extensions)
+- **Role**: Dynamic capability extensions, OS environment bridges, CLI drivers, and FFI projections.
+- **Components & Packages**:
+  - `asl/packages/asl-bridge`: Foreign function interface (FFI) bindings for host runtimes (Node, POSIX).
+  - `asl/packages/asl-plugin`: Dynamic plugin registry, lifecycle hooks, and capability interfaces.
+  - `asl/packages/asl-sh`: Subprocess spawning, POSIX shell execution, and stream piping.
+  - `asl/bridges/node/`: Legal host projections (e.g., `asl-daemon-host.mjs`, `asl-eval.mjs`).
+  - `bin/`, `asl/asl`: Host CLI executable entrypoints and daemon runners.
+- **Invariants**:
+  - Allowed to depend on all lower tiers (Layers 2, 1, and 0).
+  - Must never be depended upon by Layer 0, Layer 1, or Layer 2.
+
+---
+
+## 3. Structural Invariants & Boundary Rules
+
+### 3.1 Downward-Only Dependency Rule
+For any dependency relationship $e = (u \\to v)$ where module $u$ references or imports module $v$:
+$$\\text{Layer}(u) \\ge \\text{Layer}(v)$$
+Any dependency where $\\text{Layer}(u) < \\text{Layer}(v)$ constitutes an **Illegal Upward Dependency** and is flagged as a blocker anomaly (`anomaly-layer-leakage`).
+
+### 3.2 Inward Abstraction Leakage Prohibition
+Layer 0 is the foundational kernel. It is forbidden from embedding:
+1. **Agent ID literals**: References matching `^:agent:([a-zA-Z0-9_\\-]+)$` (e.g. `:agent:scout`, `:agent:coder`, `:agent:reviewer`) or bare persona identifiers in Layer 0.
+2. **Host Bridge Hooks**: Direct calls to `asl-bridge`, `asl-plugin`, or daemon socket dispatchers.
+3. **Execution Network Topologies**: Direct wire transport framing or mesh address parsing.
+
+### 3.3 Transitive Stratification Preservation
+If package $A$ (Layer 1) depends on package $B$ (Layer 0), and package $C$ (Layer 3) depends on package $A$, the interface exposed by $B$ must not re-export or implicitly leak Layer 1 or Layer 3 types back into Layer 0 consumers.
+
+---
+
+## 4. Automated Enforcement & Audit Protocol
+
+Layer boundaries are continuously audited across three verification gates:
+
+1. **In-Engine Static Health Analysis (`intel/src/health.asl`)**:
+   - The `detect-layer-leakage` engine evaluates the compiled `SymbolGraph`.
+   - Traverses all import edges and flags violations with `HealthAnomalyKind` = `anomaly-layer-leakage`.
+   - Integrated directly into `build-health-matrix`.
+
+2. **Command-Line Interface (`asl audit boundary-check` / `asl intel boundary-check`)**:
+   - Scans all packages and AST modules across the workspace.
+   - Audits inward and upward dependencies.
+   - Emits canonical audit report:
+     ```text
+     === [Architectural Layer Boundary Audit: 4-Tier Stratification] ===
+     Scope:        .
+     Tiers:        Layer 0 (Kernel) | Layer 1 (ID/Mesh) | Layer 2 (Config) | Layer 3 (Plugins/Host)
+     Status:       STRATIFIED (CLEAN)
+     Leakages:     0
+      Clean architectural layer separation verified. Zero inward abstraction leakage.
+     ```
+   - Exits code `0` when clean, `1` when leakages are detected.
+
+3. **In-Memory Batch RPC (`asl rpc '(:batch (:boundary-check))'`)**:
+   - Provides sub-50ms audit verification over resident daemon socket:
+     ```lisp
+     (:step :id 1 :op \"boundary-check\" :status \"ok\" :scope \".\" :stratified true :leakages 0 :layers 4 :healthy true)
+     ```
+")

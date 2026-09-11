@@ -1,0 +1,155 @@
+#!/usr/bin/env bash
+# bin/modal-tbench: Unified Terminal-Bench 4.0 Modal Cloud Orchestrator & Submission Pipeline
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+cd "${ROOT_DIR}"
+
+MODE="smoke"
+CONCURRENCY=4
+MODEL="gemma-4-31b-it"
+CUSTOM_TASK=""
+PACKAGE_ONLY=0
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --smoke)
+      MODE="smoke"
+      CONCURRENCY=1
+      shift
+      ;;
+    --full)
+      MODE="full"
+      shift
+      ;;
+    --concurrency|-n)
+      CONCURRENCY="$2"
+      shift 2
+      ;;
+    --task|-t)
+      CUSTOM_TASK="$2"
+      MODE="custom"
+      shift 2
+      ;;
+    --model|-m)
+      MODEL="$2"
+      shift 2
+      ;;
+    --package-only)
+      PACKAGE_ONLY=1
+      shift
+      ;;
+    *)
+      echo "Unknown argument: $1" >&2
+      echo "Usage: bin/modal-tbench [--smoke | --full | -t <task>] [-n <concurrency>] [--model <model>] [--package-only]" >&2
+      exit 1
+      ;;
+  esac
+done
+
+if [ "$PACKAGE_ONLY" -eq 1 ]; then
+  echo "--> Running submission packager on latest job..."
+  exec python3 scratch/package_submission.py
+fi
+
+# 1. Validate Modal configuration
+if [ ! -f "$HOME/.modal.toml" ]; then
+  echo "✗ Error: Modal credentials not found at $HOME/.modal.toml" >&2
+  echo "  Run 'modal token set --token-id <ID> --token-secret <SECRET>' first." >&2
+  exit 1
+fi
+
+# 2. Resolve Harbor executable
+HARBOR_EXEC=""
+if command -v harbor >/dev/null 2>&1; then
+  HARBOR_EXEC="harbor"
+elif [ -x "$HOME/.local/share/uv/tools/harbor/bin/harbor" ]; then
+  HARBOR_EXEC="$HOME/.local/share/uv/tools/harbor/bin/harbor"
+elif command -v uv >/dev/null 2>&1; then
+  HARBOR_EXEC="uv tool run harbor"
+else
+  echo "✗ Error: harbor CLI not found in PATH or ~/.local/share/uv/tools/harbor/bin/harbor" >&2
+  exit 1
+fi
+
+# 3. Resolve API Gateway Credentials
+GATEWAY_URL="${OPENAI_BASE_URL:-https://api.llmgateway.io/v1}"
+GATEWAY_KEY="${OPENAI_API_KEY:-${ADDIE_GATEWAY_KEY:-${EDDIE_GATEWAY_KEY:-}}}"
+
+if [ -z "$GATEWAY_KEY" ]; then
+  for cfg in "${ROOT_DIR}/.addie/config.asn" "${ROOT_DIR}/.eddie/config.asn" "$HOME/.addie/config.asn" "$HOME/.eddie/config.asn"; do
+    if [ -f "$cfg" ]; then
+      KEY_MATCH=$(sed -n -E 's/.*:api-key[[:space:]]+"([^"]+)".*/\1/p' "$cfg" | head -n 1 || true)
+      if [ -n "$KEY_MATCH" ]; then
+        GATEWAY_KEY="$KEY_MATCH"
+        break
+      fi
+    fi
+  done
+fi
+
+echo "================================================================================"
+echo "  TERMINAL-BENCH 4.0 MODAL RUNNER (Addie / ASL Cognitive Harness)               "
+echo "================================================================================"
+echo "  Platform    : Modal MicroVM Container Cloud                                   "
+echo "  Mode        : ${MODE}                                                         "
+echo "  Model       : ${MODEL}                                                        "
+echo "  Concurrency : ${CONCURRENCY}                                                  "
+echo "  Harbor      : ${HARBOR_EXEC}                                                  "
+echo "  Auth Status : $([ -n "$GATEWAY_KEY" ] && echo 'Configured' || echo 'Missing') "
+echo "================================================================================"
+
+export PYTHONPATH="${ROOT_DIR}:${ROOT_DIR}/scratch:${PYTHONPATH:-}"
+export OPENAI_BASE_URL="${GATEWAY_URL}"
+export OPENAI_API_KEY="${GATEWAY_KEY}"
+export ADDIE_GATEWAY_KEY="${GATEWAY_KEY}"
+export ADDIE_MODEL="${MODEL}"
+export EDDIE_GATEWAY_KEY="${GATEWAY_KEY}"
+export EDDIE_MODEL="${MODEL}"
+export ASL_AIRGAP=1
+export ASL_OFFLINE=1
+
+if [ ! -f "dist/asl-harness-dist.b64" ]; then
+  echo "--> Packaging canonical in-container ASL distribution..."
+  bin/package-harness
+fi
+
+HARBOR_ARGS=(
+  "run"
+  "-e" "modal"
+  "-a" "scratch.eddie_harbor:EddieAgent"
+  "-m" "${MODEL}"
+  "-k" "1"
+  "-n" "${CONCURRENCY}"
+)
+
+if [ "$MODE" = "smoke" ]; then
+  echo "--> Disagreeing with speculation: running single-task smoke test (html-js-filter)..."
+  HARBOR_ARGS+=("-t" "terminal-bench/html-js-filter")
+elif [ "$MODE" = "custom" ]; then
+  echo "--> Running single task: ${CUSTOM_TASK}..."
+  HARBOR_ARGS+=("-t" "${CUSTOM_TASK}")
+elif [ "$MODE" = "full" ]; then
+  echo "--> Running full Terminal-Bench 4.0 suite (66 core tasks) across Modal microVMs..."
+  HARBOR_ARGS+=("-d" "terminal-bench/terminal-bench@4.0.0")
+fi
+
+echo "--> Command: ${HARBOR_EXEC} ${HARBOR_ARGS[*]}"
+${HARBOR_EXEC} "${HARBOR_ARGS[@]}"
+RUN_RC=$?
+
+if [ $RUN_RC -ne 0 ]; then
+  echo "✗ Harbor run exited with return code: ${RUN_RC}" >&2
+fi
+
+if [ "$MODE" = "full" ] || [ "$PACKAGE_ONLY" -eq 1 ]; then
+  echo ""
+  echo "--> Compiling official submission package from job..."
+  python3 scratch/package_submission.py || true
+else
+  echo ""
+  echo "--> Smoke/Custom run complete. Preserving official full 66-task submission package."
+fi
+
+exit $RUN_RC

@@ -1,0 +1,267 @@
+(:dependencyRegistry
+  :version "0.1.0"
+  :policy (
+    :strictJustification true
+    :zeroForeignCore true
+    :reassessmentCycleDays 90
+    :lastAudit "2026-09-10"
+    :nextAudit "2026-12-10"
+  )
+  :clusters [
+    (:cluster
+      :id "runtime-substrate"
+      :purpose "Core execution environment for AgentScript compiler, daemon, and batch RPC"
+      :stability :critical
+      :isolation :strict)
+    (:cluster
+      :id "web-ui-showcase"
+      :purpose "Browser-based interactive demonstration and documentation showcase"
+      :stability :peripheral
+      :isolation :sandboxed)
+    (:cluster
+      :id "domain-extensions"
+      :purpose "Specialized hardware, quantum, and crawler domain packages"
+      :stability :experimental
+      :isolation :modular)
+  ]
+  :dependencies [
+    (:dependency
+      :name "python3"
+      :type :binary
+      :version ">=3.10"
+      :cluster "runtime-substrate"
+      :license "PSF-2.0"
+      :rationale "Underpinned legacy AST engine and header generators; now completely eradicated and replaced with native C and POSIX tooling"
+      :risk :none
+      :interconnectedWith ["bash" "git"]
+      :functionalOverhead :none
+      :actionPlan :purged
+      :replacementCandidate "asl/tools/asl.c and xxd"
+      :lastReviewed "2026-09-11"
+      :nextReview "2026-12-11")
+    (:dependency
+      :name "git"
+      :type :binary
+      :version ">=2.30"
+      :cluster "runtime-substrate"
+      :license "GPL-2.0"
+      :rationale "Authoritative textual state management, CAS content addressing, git-native intent ledger, and worktree isolation"
+      :risk :low
+      :interconnectedWith ["bash"]
+      :functionalOverhead :low
+      :actionPlan :retain
+      :replacementCandidate "none"
+      :lastReviewed "2026-09-10"
+      :nextReview "2026-12-10")
+    (:dependency
+      :name "bash"
+      :type :binary
+      :version ">=4.0"
+      :cluster "runtime-substrate"
+      :license "GPL-3.0"
+      :rationale "Ubiquitous POSIX bootstrapping and minimal CLI entrypoint for asl/asl without intermediate foreign runtimes"
+      :risk :low
+      :interconnectedWith ["git"]
+      :functionalOverhead :low
+      :actionPlan :retain
+      :replacementCandidate "none"
+      :lastReviewed "2026-09-10"
+      :nextReview "2026-12-10")
+    (:dependency
+      :name "node"
+      :type :binary
+      :version ">=20.0.0"
+      :cluster "web-ui-showcase"
+      :license "MIT"
+      :rationale "Execution environment for Vite bundler, React showcase compilation, and frontend asset building"
+      :risk :medium
+      :interconnectedWith ["pnpm" "vite" "react"]
+      :functionalOverhead :medium
+      :actionPlan :isolate
+      :replacementCandidate "asl-wasm-aot"
+      :lastReviewed "2026-09-10"
+      :nextReview "2026-12-10")
+    (:dependency
+      :name "pnpm"
+      :type :binary
+      :version "^11.25.0"
+      :cluster "web-ui-showcase"
+      :license "MIT"
+      :rationale "Deterministic content-addressable package manager for peripheral web showcase dependencies"
+      :risk :low
+      :interconnectedWith ["node" "vite"]
+      :functionalOverhead :low
+      :actionPlan :retain
+      :replacementCandidate "none"
+      :lastReviewed "2026-09-10"
+      :nextReview "2026-12-10")
+    (:dependency
+      :name "react"
+      :type :libraryProd
+      :version "^19.0.0"
+      :cluster "web-ui-showcase"
+      :license "MIT"
+      :rationale "Declarative component runtime for interactive web showcase demo and documentation explorer"
+      :risk :medium
+      :interconnectedWith ["react-dom" "lucide-react" "vitejs-plugin-react" "vite"]
+      :functionalOverhead :medium
+      :actionPlan :replace
+      :replacementCandidate "asl-vdom"
+      :lastReviewed "2026-09-10"
+      :nextReview "2026-12-10")
+    (:dependency
+      :name "react-dom"
+      :type :libraryProd
+      :version "^19.0.0"
+      :cluster "web-ui-showcase"
+      :license "MIT"
+      :rationale "Browser DOM renderer bound to React 19 component tree for web showcase"
+      :risk :medium
+      :interconnectedWith ["react" "vitejs-plugin-react" "vite"]
+      :functionalOverhead :medium
+      :actionPlan :replace
+      :replacementCandidate "asl-vdom"
+      :lastReviewed "2026-09-10"
+      :nextReview "2026-12-10")
+    (:dependency
+      :name "lucide-react"
+      :type :libraryProd
+      :version "^1.16.0"
+      :cluster "web-ui-showcase"
+      :license "ISC"
+      :rationale "Iconography set for web showcase UI panels and navigation controls"
+      :risk :low
+      :interconnectedWith ["react" "react-dom"]
+      :functionalOverhead :medium
+      :actionPlan :replace
+      :replacementCandidate "asl-svg"
+      :lastReviewed "2026-09-10"
+      :nextReview "2026-12-10")
+    (:dependency
+      :name "vite"
+      :type :libraryDev
+      :version "^6.0.3"
+      :cluster "web-ui-showcase"
+      :license "MIT"
+      :rationale "ESM dev server with rapid HMR and production Rollup-based asset bundler for web showcase"
+      :risk :low
+      :interconnectedWith ["node" "vitejs-plugin-react" "tailwindcss" "postcss"]
+      :functionalOverhead :medium
+      :actionPlan :isolate
+      :replacementCandidate "asl-build"
+      :lastReviewed "2026-09-10"
+      :nextReview "2026-12-10")
+    (:dependency
+      :name "vitejs-plugin-react"
+      :type :libraryDev
+      :version "^4.3.4"
+      :cluster "web-ui-showcase"
+      :license "MIT"
+      :rationale "Babel Fast Refresh and JSX compiler plugin integrating React with Vite"
+      :risk :low
+      :interconnectedWith ["vite" "react"]
+      :functionalOverhead :low
+      :actionPlan :replace
+      :replacementCandidate "asl-codegen"
+      :lastReviewed "2026-09-10"
+      :nextReview "2026-12-10")
+    (:dependency
+      :name "tailwindcss"
+      :type :libraryDev
+      :version "^3.4.17"
+      :cluster "web-ui-showcase"
+      :license "MIT"
+      :rationale "Utility-first CSS generation for rapid styling of web showcase UI components"
+      :risk :low
+      :interconnectedWith ["postcss" "autoprefixer" "vite"]
+      :functionalOverhead :medium
+      :actionPlan :replace
+      :replacementCandidate "asl-css-projections"
+      :lastReviewed "2026-09-10"
+      :nextReview "2026-12-10")
+    (:dependency
+      :name "postcss"
+      :type :libraryDev
+      :version "^8.4.49"
+      :cluster "web-ui-showcase"
+      :license "MIT"
+      :rationale "Tool for transforming styles with JS plugins, required by Tailwind CSS pipeline"
+      :risk :low
+      :interconnectedWith ["tailwindcss" "autoprefixer" "vite"]
+      :functionalOverhead :low
+      :actionPlan :isolate
+      :replacementCandidate "asl-css-projections"
+      :lastReviewed "2026-09-10"
+      :nextReview "2026-12-10")
+    (:dependency
+      :name "autoprefixer"
+      :type :libraryDev
+      :version "^10.4.20"
+      :cluster "web-ui-showcase"
+      :license "MIT"
+      :rationale "PostCSS plugin to parse CSS and add vendor prefixes using values from Can I Use"
+      :risk :low
+      :interconnectedWith ["postcss" "tailwindcss"]
+      :functionalOverhead :low
+      :actionPlan :isolate
+      :replacementCandidate "asl-css-projections"
+      :lastReviewed "2026-09-10"
+      :nextReview "2026-12-10")
+    (:dependency
+      :name "asl-vdom"
+      :type :internalPackage
+      :version "0.1.0"
+      :cluster "runtime-substrate"
+      :license "MIT"
+      :rationale "Pure AgentScript reactive virtual DOM engine and AXTree downsampler with zero external dependencies"
+      :risk :low
+      :interconnectedWith ["asl-engine" "mem"]
+      :functionalOverhead :low
+      :actionPlan :retain
+      :replacementCandidate "none"
+      :lastReviewed "2026-09-10"
+      :nextReview "2026-12-10")
+    (:dependency
+      :name "asl-arduino"
+      :type :internalPackage
+      :version "0.1.0"
+      :cluster "domain-extensions"
+      :license "MIT"
+      :rationale "AgentScript embedded hardware and GPIO driver conceptual schema for microcontrollers"
+      :risk :low
+      :interconnectedWith []
+      :functionalOverhead :low
+      :actionPlan :retain
+      :replacementCandidate "none"
+      :lastReviewed "2026-09-10"
+      :nextReview "2026-12-10")
+    (:dependency
+      :name "asl-quantum"
+      :type :internalPackage
+      :version "0.1.0"
+      :cluster "domain-extensions"
+      :license "MIT"
+      :rationale "AgentScript quantum circuit simulation and qubit state manipulation conceptual schema"
+      :risk :low
+      :interconnectedWith []
+      :functionalOverhead :low
+      :actionPlan :retain
+      :replacementCandidate "none"
+      :lastReviewed "2026-09-10"
+      :nextReview "2026-12-10")
+    (:dependency
+      :name "crawler"
+      :type :internalPackage
+      :version "0.1.0"
+      :cluster "domain-extensions"
+      :license "MIT"
+      :rationale "Pure AgentScript web crawler schema and declarative URL traversal protocols"
+      :risk :low
+      :interconnectedWith ["agent-bus"]
+      :functionalOverhead :low
+      :actionPlan :retain
+      :replacementCandidate "none"
+      :lastReviewed "2026-09-10"
+      :nextReview "2026-12-10")
+  ]
+)

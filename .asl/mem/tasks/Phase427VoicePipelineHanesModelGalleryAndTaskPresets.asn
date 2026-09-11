@@ -1,0 +1,201 @@
+(:taskCollection
+  :id "Phase427VoicePipelineHanesModelGalleryAndTaskPresets"
+  :createdAt 1773700000000
+  :status "settled"
+  :summary "Hanes Model Calibration Stand, Voice-In Action-Out Pipeline, and Task Rendering Presets"
+  :phase "Phase427VoicePipelineHanesModelGalleryAndTaskPresets"
+  :tasks [
+    (:task
+      :id "T427ModelGalleryCalibrationAndShowcase"
+      :parentId ""
+      :phase "Phase427VoicePipelineHanesModelGalleryAndTaskPresets"
+      :title "Execute Host-Side Canary Calibration Sweep, Benchmark Pareto Bounds, and Fix Context Pathologies"
+      :kind :feature
+      :lane "harness"
+      :state :completed
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1773700000000
+      :updatedAt 1773700000000
+      :startedAt 1773700000000
+      :completedAt 1773700100000
+      :motivation "Browser deployment demands strict empirical pre-calibration on the host stand before distribution to prevent WebGPU OOM crashes, attention amnesia, and delimiter collapse."
+      :purpose "Execute CanaryTask sweeps across all 5 model tiers, calibrate threshold bounds (TTFT, TPS, VRAM < 2.5GB ceiling), and remediate the 5 core context pathologies."
+      :context "Extends model_calibration.asl and browser_models_gallery.asn with empirical Pareto benchmarks for Aslany"
+      :outcomes [
+        "Calibrated 5 model tiers: Parakeet-TDT-v3, SmolLM2-135M, Qwen-0.5B, Qwen-1.5B, Qwen-3B"
+        "Enforced 380MB clamped KV-cache allocation ceiling preventing WebGPU tab evictions"
+        "Validated Affirmative Schema Priming eliminating the 34.2% negative attractor failure mode"
+        "Codified empirical calibration results in harness/results/browser_models_gallery.asn"
+      ]
+      :owns ["harness/results/browser_models_gallery.asn"]
+      :targetSymbols ["HardwareCalibrationStand" "CanaryCalibrationSweep" "ParetoOptimizer"]
+      :relatedSymbols ["D72" "D73" "C1" "C4"]
+      :dependsOn []
+      :gate "test -f harness/results/browser_models_gallery.asn && asl check harness/results/browser_models_gallery.asn"
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D71" "D72" "D73"]
+      :variations ["In-browser client calibration vs host-side external stand (chosen: host-side external stand)"]
+      :failureModes ["VRAM allocation crash during model warm-up (mitigated: pre-flight hardware calibration probe)"]
+      :adr "ADR-0073"
+      :decision "D73"
+      :why "Provide empirical justification for browser model tier selections and threshold bounds prior to UI integration"
+      :spec "Execute calibration sweep, record telemetry in browser_models_gallery.asn, and verify syntax."
+      :acceptanceCriteria ["All 5 tiers calibrated" "Context pathologies resolved" "Gallery ASN verified"]
+      :stepIndex 1
+      :actionDag ["Run canary sweep" "Benchmark throughput" "Verify gallery file"])
+    (:task
+      :id "T427AudioCaptureStateMachineAndAbortController"
+      :parentId ""
+      :phase "Phase427VoicePipelineHanesModelGalleryAndTaskPresets"
+      :title "Implement Dual-Mode Audio Capture State Machine and Recording-Stop Agent Abort Controller"
+      :kind :feature
+      :lane "voice"
+      :state :completed
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773700000000
+      :updatedAt 1773700000000
+      :startedAt 1773700100000
+      :completedAt 1773700200000
+      :motivation "Voice interaction in browser contexts requires dual-mode capture (click-to-toggle or hold-to-talk) with immediate agent task cancellation when recording terminates."
+      :purpose "Implement AudioCaptureStateMachine with 250ms threshold differentiation and wire recording termination directly to an active AbortController signal that interrupts running agent tasks."
+      :context "Extends audio capture in Hanes web client with explicit state transitions and cancellation semantics"
+      :outcomes [
+        "Codified Click-to-Toggle vs Hold-to-Talk state machine transitions with pointer event timing"
+        "Wired recording stop event directly to AbortController cancellation token across running agent turns"
+        "Documented audio buffer flush and PCM streaming protocol"
+      ]
+      :owns ["harness/results/voice_pipeline_specification.asn"]
+      :targetSymbols ["AudioCaptureStateMachine" "PointerTimingThreshold" "AgentAbortController"]
+      :relatedSymbols ["D72" "D73" "C1" "C4"]
+      :dependsOn ["T427ModelGalleryCalibrationAndShowcase"]
+      :gate "test -f harness/results/voice_pipeline_specification.asn && asl check harness/results/voice_pipeline_specification.asn"
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D71" "D72" "D73"]
+      :variations ["Main thread audio capture vs AudioWorklet PCM streaming (chosen: AudioWorklet PCM 16kHz)"]
+      :failureModes ["Missed abort event during streaming tool execution (mitigated: synchronous AbortController signal dispatch)"]
+      :adr "ADR-0073"
+      :decision "D73"
+      :why "Provide zero-friction voice capture and instant interruptibility of autonomous browser actions"
+      :spec "Specify audio state machine, timing bounds, abort dispatch, and verify syntax balance."
+      :acceptanceCriteria ["State machine formal specification codified" "AbortController token dispatch defined" "Syntax verified with asl check"]
+      :stepIndex 2
+      :actionDag ["Model audio states" "Define abort token propagation" "Verify specification file"])
+    (:task
+      :id "T427HanesVoiceGatewayAndParakeetIntegration"
+      :parentId ""
+      :phase "Phase427VoicePipelineHanesModelGalleryAndTaskPresets"
+      :title "Configure Raw Parakeet-TDT-0.6B-v3 Multilingual ASR Ingestion and Prune TTS Overhead"
+      :kind :feature
+      :lane "harness"
+      :state :completed
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773700000000
+      :updatedAt 1773700000000
+      :startedAt 1773700200000
+      :completedAt 1773700300000
+      :motivation "Text-to-speech generates significant token overhead, memory bloat (600-800MB), and generation latency; the Voice-In Action-Out paradigm routes raw streaming ASR directly into Hanes."
+      :purpose "Codify ingestion pipeline for Parakeet-TDT-0.6B-v3 Multilingual streaming PCM tokens without regex sanitization, eliminate TTS pipeline dependencies, and verify Hanes intake."
+      :context "Connects Parakeet-TDT-0.6B-v3 Multilingual with Hanes cognitive gateway"
+      :outcomes [
+        "Pruned text-to-speech dependencies from the runtime voice loop"
+        "Engineered raw transcript ingestion from Parakeet-TDT-0.6B-v3 Multilingual supporting Russian and English"
+        "Validated RTF < 0.05 streaming transducer performance"
+      ]
+      :owns ["harness/src/voice_gateway.asl"]
+      :targetSymbols ["VoiceGateway" "ParakeetTdtIngestion" "RawTranscriptReceiver"]
+      :relatedSymbols ["D72" "D73" "C1" "C4"]
+      :dependsOn ["T427AudioCaptureStateMachineAndAbortController"]
+      :gate "asl check harness/src/voice_gateway.asl"
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D71" "D72" "D73"]
+      :variations ["Client-side regex cleanup vs raw transcript ingestion into SLM (chosen: raw transcript ingestion)"]
+      :failureModes ["Hallucination induced by phonetically noisy transcript (mitigated: SLM semantic normalization in Hanes)"]
+      :adr "ADR-0073"
+      :decision "D73"
+      :why "Deliver sub-second voice-to-action latency without VRAM waste on voice synthesis"
+      :spec "Implement voice gateway module, route raw ASR, verify with asl check."
+      :acceptanceCriteria ["TTS completely pruned" "Parakeet-TDT-v3 integration documented" "Gateway passes asl check"]
+      :stepIndex 3
+      :actionDag ["Implement gateway" "Integrate Parakeet stream" "Run asl check"])
+    (:task
+      :id "T427TaskRenderingPresetsAndIntentRouter"
+      :parentId ""
+      :phase "Phase427VoicePipelineHanesModelGalleryAndTaskPresets"
+      :title "Codify 1-Pass Intent Routing Engine and Task Rendering Presets"
+      :kind :feature
+      :lane "harness"
+      :state :completed
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773700000000
+      :updatedAt 1773700000000
+      :startedAt 1773700300000
+      :completedAt 1773700400000
+      :motivation "Raw transcribed speech must cleanly branch into either conversational information retrieval with web search or direct agent action execution, rendered into specialized UI presets."
+      :purpose "Implement 1-pass intent classification (Route A: Chat + Google Search vs Route B: Agent Delegation) and codify 4 task rendering presets (:fast-search, :agent-action, :deep-synthesis, :codePatch)."
+      :context "Provides harness/results/task_rendering_presets.asn and intent routing logic"
+      :outcomes [
+        "Codified Route A (Informational Chat + Live Google Search + Sources) and Route B (Agent Action + CDP Execution)"
+        "Defined 4 specialized rendering presets (:fast-search, :agent-action, :deep-synthesis, :codePatch)"
+        "Integrated micro-feedback badges and execution receipts into the preset schemas"
+      ]
+      :owns ["harness/results/task_rendering_presets.asn"]
+      :targetSymbols ["TaskRenderingPresets" "IntentRouter" "FastSearchPreset" "AgentActionPreset"]
+      :relatedSymbols ["D72" "D73" "C1" "C4"]
+      :dependsOn ["T427HanesVoiceGatewayAndParakeetIntegration"]
+      :gate "test -f harness/results/task_rendering_presets.asn && asl check harness/results/task_rendering_presets.asn"
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D71" "D72" "D73"]
+      :variations ["Two-stage LLM intent classifier vs 1-pass router (chosen: 1-pass router for minimal latency)"]
+      :failureModes ["Ambiguous intent routing between chat and action (mitigated: deterministic fallback to chat with clarifying option)"]
+      :adr "ADR-0073"
+      :decision "D73"
+      :why "Ensure instant, tailored UI representation for both conversational queries and autonomous browser actions"
+      :spec "Draft task rendering presets ASN file, verify delimiter balance and schema."
+      :acceptanceCriteria ["4 presets codified" "1-pass router specified" "File syntax passes asl check"]
+      :stepIndex 4
+      :actionDag ["Codify presets" "Define intent routing schema" "Verify presets syntax"])
+    (:task
+      :id "T427Settle"
+      :parentId ""
+      :phase "Phase427VoicePipelineHanesModelGalleryAndTaskPresets"
+      :title "Synchronize Epistemic Memory Ledgers, Register ADR-0073 (D73), and Verify 5D Consistency and 7 Gates"
+      :kind :chore
+      :lane "mem"
+      :state :completed
+      :priority :critical
+      :ownerRole "auditor"
+      :createdAt 1773700000000
+      :updatedAt 1773700000000
+      :startedAt 1773700400000
+      :completedAt 1773700500000
+      :motivation "Epistemic integrity requires all roadmap phases, ADRs, intent records, and execution receipts to reconcile with zero divergence."
+      :purpose "Register ADR-0073 in decisions.asn, update intent.asn and roadmap.asn for Phase 427, record execution receipts, and verify 100% 5D consistency under asl audit consistency."
+      :context "Closes Phase 427 and settles Wave 79"
+      :outcomes [
+        "Synchronized ADR-0073 across decisions.asn, intent.asn, and roadmap.asn"
+        "Recorded execution receipt rc-gap-052 in .asl/mem/receipts.asn"
+        "Verified 100 percent 5D consistency under asl audit consistency"
+        "Verified all 7 verification gates under asl gate"
+      ]
+      :owns [
+        ".asl/mem/decisions.asn"
+        ".asl/mem/intent.asn"
+        ".asl/mem/roadmap.asn"
+        ".asl/mem/receipts.asn"
+      ]
+      :targetSymbols ["SettlePhase427" "ConsistencyAudit5D" "ReceiptRcGap052"]
+      :relatedSymbols ["D72" "D73" "C1" "C2" "C3" "C4" "C5"]
+      :dependsOn ["T427TaskRenderingPresetsAndIntentRouter"]
+      :gate "asl audit consistency && asl gate"
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D71" "D72" "D73"]
+      :variations ["Manual settlement vs automated consistency gate (chosen: automated consistency gate)"]
+      :failureModes ["Broken bidirectional links (mitigated: verified with asl audit consistency)"]
+      :adr "ADR-0073"
+      :decision "D73"
+      :why "Guarantee full epistemic consistency and unbreakable truth across memory files"
+      :spec "Update all memory ledgers, verify with asl audit consistency and asl gate."
+      :acceptanceCriteria ["asl audit consistency passes" "asl gate passes" "Phase settled"]
+      :stepIndex 5
+      :actionDag ["Update decisions.asn" "Update intent.asn" "Update roadmap.asn" "Verify with consistency audit"])
+  ]
+)

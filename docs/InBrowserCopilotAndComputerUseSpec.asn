@@ -1,0 +1,192 @@
+(:spec
+  :title "InBrowserCopilotAndComputerUseSpec"
+  :format "asn"
+  :source-file "IN_BROWSER_COPILOT_AND_COMPUTER_USE_SPEC.md"
+  :body "# In-Browser Copilot, Page Mutation & Computer Use Specification
+
+> **Subsystem**: `asl/web` • `harness` • `voice` • `vdom`  
+> **Target View**: [PlaygroundView.asl](file:///Users/purplelephant/projects/asex/asl/web/src/views/PlaygroundView.asl) & Global Web Showcase  
+> **Engine Substrate**: [InBrowserAddie.asl](file:///Users/purplelephant/projects/asex/asl/web/asl-src/components/InBrowserAddie.asl) (WebGPU SLM) + [browser_cdp.asl](file:///Users/purplelephant/projects/asex/harness/src/browser_cdp.asl)  
+> **Status**: Technical Specification & Architecture Blueprint (Phase 429 Candidate)
+
+---
+
+## 1. Executive Concept & Vision
+
+The **In-Browser Addie Copilot** transforms the static Playground into an autonomous, interactive AI lab. Embedded as a sleek, collapsible floating window in the browser, Addie acts concurrently as:
+1. **An Empathetic Evaluator & Critic**: Watches what the user generates (SVG, Website, Canvas Game), analyzes visual quality and game physics, and offers proactive, actionable feedback.
+2. **An In-Place Page Mutation Coding Agent**: Directly patches the active in-memory VFS buffer and DOM (e.g. *\"Draw a green dinosaur in the bottom right corner\"*, *\"Make buttons cyberpunk neon\"*, *\"Add a high-score table\"*).
+3. **A Computer Use Navigator**: Interprets intent to navigate the application, inspect code, switch modes, and interact with page elements (e.g. *\"Take me to the homepage\"*, *\"Find the latest article\"*, *\"Open the VFS editor\"*).
+4. **A Contextual Action Presets Hub**: Provides dynamically changing action chips tailored to the active artifact.
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│              IN-BROWSER COPILOT & COMPUTER USE PLAYGROUND HUD               │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+   ┌───────────────────────────────────────────────────────────────────────┐
+   │                       PLAYGROUND SANDBOX VIEWPORT                     │
+   │                                                                       │
+   │    [ Active 2D Canvas Game / Interactive Website / Scalable SVG ]     │
+   │                                                                       │
+   │                                                                       │
+   │                                          ┌─────────────────────────┐  │
+   │                                          │  Dinosaur Mascot      │  │
+   │                                          │ (Injected by Copilot)   │  │
+   │                                          └─────────────────────────┘  │
+   └───────────────────────────────────────────────────────────────────────┘
+
+                                     ┌─────────────────────────────────────┐
+                                     │   ADDIE IN-BROWSER COPILOT (HUD)  │
+                                     ├─────────────────────────────────────┤
+                                     │ Mode: Games • Model: Qwen-1.5B (GPU)│
+                                     ├─────────────────────────────────────┤
+                                     │ \"Great retro physics! Damping is a  │
+                                     │  bit loose (0.95). Want me to tune  │
+                                     │  it or draw a mascot in the corner?\"│
+                                     ├─────────────────────────────────────┤
+                                     │  Presets (Click to Execute):      │
+                                     │ [ Rate Physics] [ Add Dinosaur]  │
+                                     │ [ Latest Article] [ Go to Home] │
+                                     ├─────────────────────────────────────┤
+                                     │ [ Ask Addie anything...       ] [▶] │
+                                     └─────────────────────────────────────┘
+```
+
+---
+
+## 2. UI/UX Architecture: Floating Collapsible Window
+
+### 2.1. Minimized State (Floating Action Badge - FAB)
+- Located in the bottom-right corner of the browser viewport (`fixed bottom-6 right-6 z-40`).
+- Glassmorphic rounded pill with obsidian dark background (`bg-surface/90 backdrop-blur-xl border border-line`).
+- Visual Attention Indicator:
+  - Cyan pulsing beacon (`bg-signal animate-pulse`).
+  - Active suggestion counter badge: `2 suggestions`.
+  - Hover tooltip: `Addie Copilot (Click to expand)`.
+
+### 2.2. Expanded HUD State (Floating Copilot Window)
+- Geometry: `w-96 max-h-[580px] rounded-2xl shadow-2xl border border-line bg-surface/95 backdrop-blur-2xl flex flex-col overflow-hidden`.
+- **Header**:
+  - Mascot avatar + Title: `Addie Copilot`.
+  - Active model indicator: `:mini (1.5B WebGPU)` / `:micro (0.5B)` / `:fast-heuristic`.
+  - Window controls: Minimize (`_`), Fullscreen expand, and Clear history.
+- **Context Pill Bar**:
+  - Live inspection banner: `Inspecting: [2D Micro Drift Racer] • 60 FPS • Canvas 640x360`.
+- **Dialogue & Action Stepper**:
+  - Scrollable chat message stream showing user prompts, Addie's evaluation scorecards, and step-by-step action execution timelines.
+- **Contextual Presets Bar (Smart Chips)**:
+  - Horizontally scrollable chips that update dynamically based on the current mode and rendered artifact.
+- **Free-Form Input Box**:
+  - Multi-line textarea or single-line input with enter-to-send and quick microphone button (linked to the [Voice Pipeline](file:///Users/purplelephant/projects/asex/voice/src/audio_capture.asl)).
+
+---
+
+## 3. The 4 Functional Capabilities
+
+### Capability 1: Autonomous Artifact Evaluation & Quality Critique
+When an artifact is generated (or upon clicking `[Evaluate Artifact]`), Addie inspects the canvas/DOM and emits a structured **Quality Scorecard**:
+1. **For Canvas Games**:
+   - Measures frame rate stability, canvas pixel dimensions, keydown event listeners, and collision logic.
+   - Emits structured ratings: *Playability (92/100)*, *Physics Smoothness (84/100)*, *Aesthetic Harmony (90/100)*.
+   - Concrete suggestion: *\"The car acceleration curve is exponential; adding linear drag dampening (0.92) will make drifting tighter. Click [Tune Physics] to apply.\"*
+2. **For Interactive Websites**:
+   - Inspects typography scale, button touch targets, WCAG color contrast, and layout overflow.
+   - Emits critique: *\"The secondary call-to-action button has low contrast against the obsidian background. Click [Enhance Contrast] to patch.\"*
+3. **For Vector SVGs**:
+   - Inspects node complexity, redundant `<path>` elements, viewBox alignment, and color palette.
+   - Emits critique: *\"12 redundant bezier control points detected. Click [Simplify Geometry] to reduce token size by 35%.\"*
+
+---
+
+### Capability 2: In-Place Page Mutation & Live Coding Agent
+The Copilot acts as a live, client-side coding agent capable of mutating both the active preview sandbox and the surrounding application page:
+
+1. **Selective In-Canvas & In-DOM Injections**:
+   - *\"Нарисуй динозавра в углу\"* (Draw a dinosaur in the corner):
+     - Addie synthesizes a compact vector sprite or canvas drawing routine:
+       ```javascript
+       // Injected by Addie In-Browser Copilot
+       function drawCornerDinosaur(ctx) {
+         ctx.save();
+         ctx.fillStyle = '#10b981';
+         // Procedural cute T-Rex silhouette in bottom-right corner
+         ctx.fillRect(580, 310, 30, 30); // Body
+         ctx.fillRect(595, 295, 25, 20); // Head
+         ctx.fillStyle = '#ffffff';
+         ctx.fillRect(610, 300, 5, 5);   // Eye
+         ctx.restore();
+       }
+       ```
+     - Injects it directly into the active animation loop without restarting the game!
+2. **VFS In-Memory Patching**:
+   - Modifies `/vfs/generated/` buffers via [InBrowserAddie.asl](file:///Users/purplelephant/projects/asex/asl/web/asl-src/components/InBrowserAddie.asl) action firewall.
+   - Triggers `window.applyInMemoryEdits()` with zero page reload.
+3. **Page-Level Styling & Theme Tweaks**:
+   - *\"Сделай страницу неоновой\"* -> Modifies root CSS variables (`--color-signal: #00f0ff; --color-line: #ff005544;`).
+
+---
+
+### Capability 3: In-Browser Computer Use & Autonomous Navigation
+Using the accessibility tree principles from [browser_cdp.asl](file:///Users/purplelephant/projects/asex/harness/src/browser_cdp.asl), Addie executes in-tab navigation and control without requiring an external OS-level Chrome process:
+
+1. **Target Identification**:
+   - Traverses the page DOM, assigning virtual accessibility indices `@e1`..`@eN` to interactive targets (Navbar links, buttons, theme toggles, article cards).
+2. **Navigation Presets**:
+   - `[ Go to Homepage]`: Smoothly scrolls to the top hero section (`#hero`) and updates the route hash.
+   - `[ Find Latest Article]`: Navigates to the Editorial section (`#editorial`), finds the newest article card, and pulses a highlight ring around it.
+   - `[ Inspect Code]`: Programmatically triggers `window.toggleCodeEditor()`, opening the in-memory VFS editor with line numbers.
+   - `[ Fullscreen Sandbox]`: Calls `window.openFullscreenSandbox()` for distraction-free canvas interaction.
+
+---
+
+### Capability 4: Dynamic Contextual Presets (Smart Action Chips)
+
+The preset chips automatically shift depending on the active mode:
+
+| Active Mode | Contextual Action Chips (1-Click Execution) |
+|---|---|
+| **Games (`games`)** | `[ Evaluate Gameplay]` `[ Add Corner Dinosaur]` `[ Boost Game Speed]` `[ Add Sound Beeps]` `[ Reset Simulation]` |
+| **Websites (`websites`)** | `[ Test Mobile Layout]` `[ Switch to Cyberpunk]` `[ Find Latest Article]` `[ Check Accessibility]` `[ Go to Homepage]` |
+| **SVGs (`svgs`)** | `[ Add Neon Glow]` `[ Simplify Path Geometry]` `[ Holographic Gradient]` `[ Export ASN S-Expr]` |
+
+---
+
+## 4. Execution Substrate & Safety Architecture
+
+```mermaid
+flowchart LR
+    UserPrompt[\"User Prompt or Preset Click\"] --> IntentRouter[\"Intent Router (Regex / Heuristic / SLM)\"]
+
+    IntentRouter -->|Navigation / UI Control| CompUse[\"Computer Use Engine (DOM Dispatch & Scroll)\"]
+    IntentRouter -->|Page Mutation / Code Patch| CodeAgent[\"In-Browser Coding Agent (VFS Mutation)\"]
+    IntentRouter -->|Artifact Critique| Evaluator[\"Heuristic Quality Evaluator\"]
+
+    CodeAgent --> Firewall[\"validate-action-firewall (InBrowserAddie.asl)\"]
+    Firewall -->|Pristine Code| VFS[\"In-Memory VFS Buffer (/vfs/generated/)\"]
+    VFS --> LiveSandbox[\"Active Sandbox (Iframe / Canvas)\"]
+
+    CompUse --> PageDOM[\"Host Page DOM (Navigation & Highlights)\"]
+    Evaluator --> CopilotHUD[\"Copilot Chat HUD (Scorecard & Suggestions)\"]
+```
+
+1. **Two-Tier Engine Dispatch**:
+   - **Tier 0 (<10ms)**: Rule-based fast dispatcher for instant navigation (`#hero`, `#editorial`), preset mutations, and DOM highlights. Zero model invocation overhead.
+   - **Tier 1 (WebGPU SLM)**: For free-form creative queries (*\"Draw a dinosaur in the corner\"*), dispatches to the in-browser WebWorker running Qwen 2.5 Coder 0.5B/1.5B via WebGPU.
+2. **Security & Sandbox Firewall**:
+   - All generated code passes through `validate-action-firewall` in [InBrowserAddie.asl](file:///Users/purplelephant/projects/asex/asl/web/asl-src/components/InBrowserAddie.asl#L60).
+   - Blocks any attempt to touch `document.cookie`, `localStorage`, or external network endpoints.
+   - Canvas animations run inside bounded `requestAnimationFrame` loops with frame drop protection.
+
+---
+
+## 5. Phase Planning: Integration into Roadmap
+
+1. **Phase 428 (Current Wave 80 - Master Audit)**:
+   - Audit the foundational components in Task `T428AuditHarnessRuntimeSlmCalibrationAndLlmProtocol` ([`model_calibration.asl`](file:///Users/purplelephant/projects/asex/harness/src/model_calibration.asl)) and Task `T428AuditVdomAndDualPerceptionUiEngine` ([`vdom.asl`](file:///Users/purplelephant/projects/asex/vdom/src/vdom.asl)).
+   - Include the In-Browser Copilot as the flagship expansion opportunity in Task `T428GrandAuditorSynthesisAndOptimizationBlueprint`.
+2. **Phase 429 (Wave 81 - Implementation)**:
+   - Deliver `PlaygroundCopilot.asl` (floating UI widget).
+   - Implement the Computer Use DOM navigator (`navigate-to-anchor`, `highlight-element`).
+   - Wire dynamic preset chips and the corner mascot injector.
+")

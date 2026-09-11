@@ -1,0 +1,236 @@
+(:taskCollection
+  :id "Phase400TokenEfficiencyFormatDocumentation"
+  :createdAt 1773280000000
+  :status "done"
+  :summary "Complete Integration of Token Efficiency Format Documentation Across Monorepo Standard Channels"
+  :phase "Phase400TokenEfficiencyFormatDocumentation"
+  :tasks [
+    (:task
+      :id "Task40001"
+      :parentId ""
+      :phase "phase-400"
+      :title "Architecture Decision Record ADR-0051 & Decision Registry Settle"
+      :kind :architecture
+      :lane "governance"
+      :state :done
+      :priority :high
+      :ownerRole "architect"
+      :createdAt 1773280000000
+      :updatedAt 1773280000000
+      :startedAt 1773280000000
+      :completedAt 1773280100000
+            :motivation "Codify Token Efficiency Format, CamelCase conventions, and rationality flags in immutable ADR registry"
+      :purpose "Formulate ADR-0051, register in decisions.asn and intent.asn with zero emojis and bare alphanumeric shortcodes."
+      :context "Architecture Decision Record ADR-0051 & Decision Registry Settle within system lifecycle"
+      :outcomes [
+        "exit-code 0"
+        "all files balanced"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0051"
+      :decision "d51"
+:owns [
+        ".asl/mem/decisions/Adr0051TokenEfficiencyFormatAndCamelcaseConventions.asn"
+        ".asl/mem/decisions/decisions.asn"
+        ".asl/mem/decisions.asn"
+        ".asl/mem/intent.asn"
+      ]
+      :targetSymbols ["ADR-0051" "d51"]
+      :relatedSymbols ["d46" "d47" "d48" "d50"]
+      :dependsOn []
+      :gate "test -f .asl/mem/decisions/Adr0051TokenEfficiencyFormatAndCamelcaseConventions.asn && asl check .asl/mem/decisions/Adr0051TokenEfficiencyFormatAndCamelcaseConventions.asn .asl/mem/decisions/decisions.asn .asl/mem/decisions.asn .asl/mem/intent.asn"
+      :why "Codify Token Efficiency Format, CamelCase conventions, and rationality flags in immutable ADR registry"
+      :spec "Formulate ADR-0051, register in decisions.asn and intent.asn with zero emojis and bare alphanumeric shortcodes."
+      :acceptanceCriteria ["exit-code 0" "all files balanced"]
+      :stepIndex 1
+      :actionDag ["Draft ADR-0051" "Register in decisions.asn" "Register in intent.asn" "Verify syntax balance"]
+      :handoffContext ""
+      :receipts ["rc-gap-028"])
+
+    (:task
+      :id "Task40002"
+      :parentId ""
+      :phase "phase-400"
+      :title "Canonical Token Conventions Specification (TOKEN_CONVENTIONS.md)"
+      :kind :documentation
+      :lane "documentation"
+      :state :done
+      :priority :high
+      :ownerRole "architect"
+      :createdAt 1773280000000
+      :updatedAt 1773280000000
+      :startedAt 1773280100000
+      :completedAt 1773280200000
+            :motivation "Provide high-SNR canonical reference for agents and human developers on token economics"
+      :purpose "Author TOKEN_CONVENTIONS.md documenting BPE tokenizer dynamics, the 4 pillars, and verification tools."
+      :context "Canonical Token Conventions Specification (TOKEN_CONVENTIONS.md) within system lifecycle"
+      :outcomes [
+        "exit-code 0"
+        "all sections present"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0051"
+      :decision "d51"
+:owns ["TOKEN_CONVENTIONS.md"]
+      :targetSymbols ["TOKEN_CONVENTIONS"]
+      :relatedSymbols ["ADR-0051"]
+      :dependsOn ["Task40001"]
+      :gate "test -f TOKEN_CONVENTIONS.md && grep -q 'Capital Alphanumeric Markers' TOKEN_CONVENTIONS.md && grep -q 'CamelCase for Composite Constructs' TOKEN_CONVENTIONS.md"
+      :why "Provide high-SNR canonical reference for agents and human developers on token economics"
+      :spec "Author TOKEN_CONVENTIONS.md documenting BPE tokenizer dynamics, the 4 pillars, and verification tools."
+      :acceptanceCriteria ["exit-code 0" "all sections present"]
+      :stepIndex 2
+      :actionDag ["Draft TOKEN_CONVENTIONS.md" "Document 4 pillars" "Verify references"]
+      :handoffContext ""
+      :receipts ["rc-gap-029"])
+
+    (:task
+      :id "Task40003"
+      :parentId ""
+      :phase "phase-400"
+      :title "System Epistemic Mandates Update (AGENTS.md & CLAUDE.md)"
+      :kind :governance
+      :lane "governance"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773280000000
+      :updatedAt 1773280000000
+      :startedAt 1773280200000
+      :completedAt 1773280300000
+            :motivation "Ensure all agents receive binding instructions in prompt context on capital markers and CamelCase"
+      :purpose "Update AGENTS.md and CLAUDE.md to incorporate D51 rules, contrastive examples, and capital shortcodes."
+      :context "System Epistemic Mandates Update (AGENTS.md & CLAUDE.md) within system lifecycle"
+      :outcomes [
+        "exit-code 0"
+        "zero legacy dash-zero markers"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0051"
+      :decision "d51"
+:owns ["AGENTS.md" "CLAUDE.md"]
+      :targetSymbols ["LexicalDensity" "D51" "C1" "C2" "C5"]
+      :relatedSymbols ["D46" "D48"]
+      :dependsOn ["Task40002"]
+      :gate "grep -q 'D51' AGENTS.md && grep -q 'D51' CLAUDE.md && ! grep -q 'c-0001' AGENTS.md && ! grep -q 'd-0034' AGENTS.md"
+      :why "Ensure all agents receive binding instructions in prompt context on capital markers and CamelCase"
+      :spec "Update AGENTS.md and CLAUDE.md to incorporate D51 rules, contrastive examples, and capital shortcodes."
+      :acceptanceCriteria ["exit-code 0" "zero legacy dash-zero markers"]
+      :stepIndex 3
+      :actionDag ["Update AGENTS.md" "Update CLAUDE.md" "Verify consistency"]
+      :handoffContext ""
+      :receipts ["rc-gap-030"])
+
+    (:task
+      :id "Task40004"
+      :parentId ""
+      :phase "phase-400"
+      :title "Agent Dynamic Skills & Frontmatter Settle (asl-toolbelt, asl-plan, asl-native)"
+      :kind :feature
+      :lane "skills"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773280000000
+      :updatedAt 1773280000000
+      :startedAt 1773280300000
+      :completedAt 1773280400000
+            :motivation "Provide on-demand dynamic skill guidance on token efficiency and CamelCase to agents"
+      :purpose "Update skill.asn and compiled SKILL.md files for asl-toolbelt, asl-plan, and asl-native."
+      :context "Agent Dynamic Skills & Frontmatter Settle (asl-toolbelt, asl-plan, asl-native) within system lifecycle"
+      :outcomes [
+        "exit-code 0"
+        "skills verified"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0051"
+      :decision "d51"
+:owns [
+        "asl/.agents/skills/asl-toolbelt/skill.asn"
+        "asl/.agents/skills/asl-toolbelt/SKILL.md"
+        "asl/.agents/skills/asl-plan/skill.asn"
+        "asl/.agents/skills/asl-plan/SKILL.md"
+        "asl/.agents/skills/asl-native/skill.asn"
+        "asl/.agents/skills/asl-native/SKILL.md"
+        "asl/.agents/skills/asl-epistemic/skill.asn"
+        "asl/.agents/skills/asl-epistemic/SKILL.md"
+      ]
+      :targetSymbols ["asl-toolbelt" "asl-plan" "asl-native"]
+      :relatedSymbols ["asl-audit-tokens"]
+      :dependsOn ["Task40003"]
+      :gate "asl check asl/.agents/skills/asl-toolbelt/skill.asn asl/.agents/skills/asl-plan/skill.asn asl/.agents/skills/asl-native/skill.asn && grep -q 'asl-audit-tokens' asl/.agents/skills/asl-toolbelt/skill.asn"
+      :why "Provide on-demand dynamic skill guidance on token efficiency and CamelCase to agents"
+      :spec "Update skill.asn and compiled SKILL.md files for asl-toolbelt, asl-plan, and asl-native."
+      :acceptanceCriteria ["exit-code 0" "skills verified"]
+      :stepIndex 4
+      :actionDag ["Update skill.asn files" "Compile SKILL.md files" "Verify balance"]
+      :handoffContext ""
+      :receipts ["rc-gap-031"])
+
+    (:task
+      :id "Task40005"
+      :parentId ""
+      :phase "phase-400"
+      :title "End-to-End Falsifiable Verification Gate & Physical Settle"
+      :kind :verification
+      :lane "qa"
+      :state :done
+      :priority :high
+      :ownerRole "auditor"
+      :createdAt 1773280000000
+      :updatedAt 1773280000000
+      :startedAt 1773280400000
+      :completedAt 1773280500000
+            :motivation "Falsifiably verify complete integration across all monorepo channels with physical receipts"
+      :purpose "Execute comprehensive E2E test, run token audit, and verify all 7 gates pass cleanly."
+      :context "End-to-End Falsifiable Verification Gate & Physical Settle within system lifecycle"
+      :outcomes [
+        "exit-code 0"
+        "all gates green"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0051"
+      :decision "d51"
+:owns ["tests/test_token_efficiency_format_e2e.sh"]
+      :targetSymbols ["test_token_efficiency_format_e2e"]
+      :relatedSymbols ["asl-audit-tokens" "asl-gate"]
+      :dependsOn ["Task40001" "Task40002" "Task40003" "Task40004"]
+      :gate "bash tests/test_token_efficiency_format_e2e.sh && asl audit tokens && asl gate"
+      :why "Falsifiably verify complete integration across all monorepo channels with physical receipts"
+      :spec "Execute comprehensive E2E test, run token audit, and verify all 7 gates pass cleanly."
+      :acceptanceCriteria ["exit-code 0" "all gates green"]
+      :stepIndex 5
+      :actionDag ["Author E2E test" "Execute E2E test" "Execute asl audit tokens" "Execute asl gate"]
+      :handoffContext ""
+      :receipts ["rc-gap-032"])
+  ])

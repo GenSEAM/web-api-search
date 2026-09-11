@@ -1,0 +1,27 @@
+# Build & caches
+.tokensave/
+.DS_Store
+node_modules/
+dist/
+build/
+__pycache__/
+*.pyc
+.venv/
+search
+bin/claude-standalone
+.agents/
+scratch/
+jobs/
+benchmarks/
+*.local.asn
+*.local.config.asn
+.asl.local.config.asn
+.eddie/*.local.asn
+.addie/*.local.asn
+.wrangler/
+.asl/mem/sessions/
+.asl/log/
+.asl/metrics/
+**/.asl/metrics/
+
+.pnpm-store/

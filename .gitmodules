@@ -1,0 +1,54 @@
+[submodule "asl"]
+	path = asl
+	url = git@github.com:GenSEAM/asl.git
+[submodule "harness"]
+	path = harness
+	url = git@github.com:GenSEAM/harness.git
+[submodule "agent-core"]
+	path = agent-core
+	url = git@github.com:GenSEAM/agent-core.git
+[submodule "mem"]
+	path = mem
+	url = git@github.com:GenSEAM/mem.git
+[submodule "web-api-search"]
+	path = web-api-search
+	url = git@github.com:GenSEAM/web-api-search.git
+[submodule "agent-bus"]
+	path = agent-bus
+	url = git@github.com:GenSEAM/agent-bus.git
+[submodule "browser-plugin"]
+	path = browser-plugin
+	url = git@github.com:GenSEAM/browser-plugin.git
+[submodule "agent"]
+	path = agent
+	url = git@github.com:GenSEAM/agent.git
+[submodule "vdom"]
+	path = vdom
+	url = git@github.com:GenSEAM/vdom.git
+[submodule "voice"]
+	path = voice
+	url = git@github.com:GenSEAM/voice.git
+[submodule "editorial-matrix"]
+	path = editorial-matrix
+	url = git@github.com:GenSEAM/editorial-matrix.git
+[submodule "pack"]
+	path = pack
+	url = git@github.com:GenSEAM/pack.git
+[submodule "intel"]
+	path = intel
+	url = git@github.com:GenSEAM/intel.git
+[submodule "crawler"]
+	path = crawler
+	url = git@github.com:GenSEAM/crawler.git
+[submodule "asl-arduino"]
+	path = asl-arduino
+	url = git@github.com:GenSEAM/asl-arduino.git
+[submodule "asl-contracts"]
+	path = asl-contracts
+	url = git@github.com:GenSEAM/asl-contracts.git
+[submodule "asl-quantum"]
+	path = asl-quantum
+	url = git@github.com:GenSEAM/asl-quantum.git
+[submodule "asl-gateway"]
+	path = asl-gateway
+	url = git@github.com:GenSEAM/asl-gateway.git

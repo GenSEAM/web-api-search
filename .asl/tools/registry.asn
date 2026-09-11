@@ -1,0 +1,72 @@
+(:tool-registry
+  :version "1.0.0"
+  :domains [
+    (:domain :git
+      :doc "Git version control operations and branch inspection"
+      :tools [
+        (:tool :name "status" :params [] :returns :git-status :doc "Get workspace working tree and staging status")
+        (:tool :name "diff" :params [(:param :name "path" :type :str :opt true) (:param :name "staged" :type :bool :opt true)] :returns :str :doc "Show file or repository diff")
+        (:tool :name "commit" :params [(:param :name "message" :type :str) (:param :name "paths" :type (:list :str) :opt true)] :returns :git-receipt :doc "Commit staged changes")
+        (:tool :name "log" :params [(:param :name "limit" :type :int :opt true) (:param :name "path" :type :str :opt true)] :returns (:list :git-commit) :doc "View commit history")
+      ])
+    (:domain :intel
+      :doc "Dense code intelligence, call graph analysis, outline extraction, and impact graph"
+      :graph-schema (:graph (Node > Target1:edge Target2:edge))
+      :tools [
+        (:tool :name "callers"
+          :params [(:param :name "sym" :type :str) (:param :name "format" :type :str :opt true)]
+          :returns (:graph :callers)
+          :schema "(:graph (Caller > Target:call Line:int))"
+          :doc "Enumerate call sites using compact Adjacency DSL")
+        (:tool :name "impact"
+          :params [(:param :name "sym" :type :str) (:param :name "depth" :type :int :opt true)]
+          :returns (:graph :blast-radius)
+          :schema "(:graph (Origin > Dependent:imports Direct:calls))"
+          :doc "Compute blast radius graph of symbol modifications using Adjacency DSL")
+        (:tool :name "outline"
+          :params [(:param :name "file" :type :str)]
+          :returns (:list :outline-node)
+          :doc "Extract lexical AST symbol outline")
+        (:tool :name "lookup"
+          :params [(:param :name "sym" :type :str) (:param :name "scope" :type :str :opt true)]
+          :returns (:option :symbol-def)
+          :doc "Locate symbol definition and declaration coordinates")
+      ])
+    (:domain :crawler
+      :doc "Headless web crawling, DOM extraction, and accessibility snapshotting"
+      :tools [
+        (:tool :name "fetch" :params [(:param :name "url" :type :str) (:param :name "headers" :type (:map :str :str) :opt true)] :returns :html-doc :doc "Fetch remote HTTP/HTTPS document")
+        (:tool :name "snapshot" :params [(:param :name "url" :type :str) (:param :name "viewport" :type :str :opt true)] :returns :vdom-tree :doc "Take accessibility tree snapshot with compact ref IDs")
+        (:tool :name "interact" :params [(:param :name "action" :type :str) (:param :name "selector" :type :str) (:param :name "value" :type :str :opt true)] :returns :action-receipt :doc "Execute browser interaction")
+      ])
+    (:domain :fs
+      :doc "Workspace filesystem navigation, buffer reads, writes, and unified diff editing"
+      :tools [
+        (:tool :name "read" :params [(:param :name "path" :type :str) (:param :name "start" :type :int :opt true) (:param :name "end" :type :int :opt true)] :returns :str :doc "Read file or slice")
+        (:tool :name "write" :params [(:param :name "path" :type :str) (:param :name "content" :type :str) (:param :name "create-parents" :type :bool :opt true)] :returns :fs-receipt :doc "Write file buffer")
+        (:tool :name "edit" :params [(:param :name "path" :type :str) (:param :name "old" :type :str) (:param :name "new" :type :str)] :returns :fs-receipt :doc "Atomic single-occurrence replacement")
+        (:tool :name "list" :params [(:param :name "dir" :type :str :opt true) (:param :name "pattern" :type :str :opt true)] :returns (:list :str) :doc "List files matching pattern")
+      ])
+    (:domain :compiler
+      :doc "AgentScript bytecode compilation, Wasm generation, and syntax checking"
+      :tools [
+        (:tool :name "compile" :params [(:param :name "entry" :type :str) (:param :name "target" :type :str :opt true)] :returns :bytecode-binary :doc "Compile ASL source to bytecode target")
+        (:tool :name "typecheck" :params [(:param :name "package" :type :str)] :returns :typecheck-report :doc "Perform formal type inference and type consistency checking")
+        (:tool :name "eval" :params [(:param :name "expr" :type :str) (:param :name "timeout-ms" :type :int :opt true)] :returns :eval-value :doc "Execute pure ASL expression in sandbox VM")
+      ])
+    (:domain :mesh
+      :doc "Distributed agent cluster coordination, lease locks, and peer communication"
+      :tools [
+        (:tool :name "peers" :params [] :returns (:list :peer-info) :doc "List active daemon mesh peers")
+        (:tool :name "lease" :params [(:param :name "key" :type :str) (:param :name "ttl-ms" :type :int :opt true)] :returns :lease-token :doc "Acquire distributed advisory lock")
+        (:tool :name "release" :params [(:param :name "key" :type :str) (:param :name "token" :type :str)] :returns :release-receipt :doc "Release distributed advisory lock")
+        (:tool :name "broadcast" :params [(:param :name "topic" :type :str) (:param :name "payload" :type :str)] :returns :broadcast-receipt :doc "Broadcast event across active cluster mesh")
+      ])
+    (:domain :bench
+      :doc "Benchmark evaluation harness, claim verification, and token telemetry"
+      :tools [
+        (:tool :name "run" :params [(:param :name "suite" :type :str) (:param :name "iterations" :type :int :opt true)] :returns :bench-result :doc "Run deterministic benchmark suite")
+        (:tool :name "verify-claims" :params [(:param :name "claims-file" :type :str :opt true)] :returns :claims-audit :doc "Ground published claims against local benchmark runs")
+        (:tool :name "telemetry" :params [(:param :name "metric" :type :str :opt true)] :returns :telemetry-report :doc "Collect turn latency and token consumption metrics")
+      ])
+  ])

@@ -1,0 +1,169 @@
+(:taskCollection
+  :id "AslCodecUniversalTranspilerSuite"
+  :createdAt 1788906000
+  :status :completed
+  :summary "Universal ASL Codec Transpiler Suite: Universal HTML5/VDOM, Indentation-Aware YAML, RFC 4180 CSV/TSV Row-Groups, and TOML"
+  :phase "phase-356-asl-codec-universal-transpiler-suite"
+  :tasks [
+    (:task
+      :id "TaskCodec001"
+      :phase "phase-356"
+      :title "Universal HTML5 / VDOM <-> ASN Transpiler & Generic Tag Tree"
+      :state :completed
+      :priority :high
+      :lane "html-vdom"
+      :ownerRole "implementer"
+            :motivation "Provide universal bidirectional HTML5/VDOM transpilations for agent UI ergonomics per d-1eed"
+      :purpose "Replace hardcoded 6-tag stub with recursive HTML5 parser supporting arbitrary tags, attributes, void elements, boolean attributes, mixed text content, and valid HTML5 serialization. Include positive tests (forms, tables, nested UI) and negative tests (empty, malformed, unclosed tags)."
+      :context "Universal HTML5 / VDOM <-> ASN Transpiler & Generic Tag Tree within system lifecycle"
+      :outcomes [
+        "Deterministic execution verified"
+        "Gate assertions passed cleanly"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0034"
+      :decision "d34"
+      :actionDag [
+        "Execute task work items"
+        "Verify gate assertions"
+      ]
+:owns ["asl/packages/asl-codec/src/transpile.asl" "asl/packages/asl-codec/tests/transpile-test.asl"]
+      :gate "asl test --strict-falsify asl/packages/asl-codec/tests/transpile-test.asl"
+      :why "Provide universal bidirectional HTML5/VDOM transpilations for agent UI ergonomics per d-1eed"
+      :spec "Replace hardcoded 6-tag stub with recursive HTML5 parser supporting arbitrary tags, attributes, void elements, boolean attributes, mixed text content, and valid HTML5 serialization. Include positive tests (forms, tables, nested UI) and negative tests (empty, malformed, unclosed tags).")
+    (:task
+      :id "TaskCodec002"
+      :phase "phase-356"
+      :title "Indentation-Aware YAML <-> ASN Codec"
+      :state :completed
+      :priority :high
+      :lane "yaml-codec"
+      :ownerRole "implementer"
+            :motivation "Enable lossless YAML config projection and roundtripping without foreign parser dependencies per c3"
+      :purpose "Implement multi-level indentation-aware YAML parser supporting key-value mappings, sequence lists (- item), nested hierarchies, comments, and clean indented YAML serialization. Include positive tests (Kubernetes-style configs, lists of maps) and negative tests (inconsistent indentation, empty, malformed)."
+      :context "Indentation-Aware YAML <-> ASN Codec within system lifecycle"
+      :outcomes [
+        "Deterministic execution verified"
+        "Gate assertions passed cleanly"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0034"
+      :decision "d34"
+      :actionDag [
+        "Execute task work items"
+        "Verify gate assertions"
+      ]
+:owns ["asl/packages/asl-codec/src/yaml-transpile.asl" "asl/packages/asl-codec/tests/yaml-transpile-test.asl"]
+      :gate "asl test --strict-falsify asl/packages/asl-codec/tests/yaml-transpile-test.asl"
+      :why "Enable lossless YAML config projection and roundtripping without foreign parser dependencies per c3"
+      :spec "Implement multi-level indentation-aware YAML parser supporting key-value mappings, sequence lists (- item), nested hierarchies, comments, and clean indented YAML serialization. Include positive tests (Kubernetes-style configs, lists of maps) and negative tests (inconsistent indentation, empty, malformed).")
+    (:task
+      :id "TaskCodec003"
+      :phase "phase-356"
+      :title "RFC 4180 Tabular Data CSV / TSV <-> ASN Row-Groups & Tables"
+      :state :completed
+      :priority :high
+      :lane "csv-codec"
+      :ownerRole "implementer"
+            :motivation "Compact tabular data into schema-grouped rows delivering >= 40% token savings per c4"
+      :purpose "Implement RFC 4180 CSV and TSV scanner and serializer converting tabular data into compact schema-grouped rows (Name [v1 v2]) and ASN tables ([:col1 :col2] [[v1 v2]]) delivering >= 40% token compaction. Include positive tests (quoted fields with commas, TSV tabs, numeric cells) and negative tests (empty, mismatched column counts)."
+      :context "RFC 4180 Tabular Data CSV / TSV <-> ASN Row-Groups & Tables within system lifecycle"
+      :outcomes [
+        "Deterministic execution verified"
+        "Gate assertions passed cleanly"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0034"
+      :decision "d34"
+      :actionDag [
+        "Execute task work items"
+        "Verify gate assertions"
+      ]
+:owns ["asl/packages/asl-codec/src/csv-transpile.asl" "asl/packages/asl-codec/tests/csv-transpile-test.asl"]
+      :gate "asl test --strict-falsify asl/packages/asl-codec/tests/csv-transpile-test.asl"
+      :why "Compact tabular data into schema-grouped rows delivering >= 40% token savings per c4"
+      :spec "Implement RFC 4180 CSV and TSV scanner and serializer converting tabular data into compact schema-grouped rows (Name [v1 v2]) and ASN tables ([:col1 :col2] [[v1 v2]]) delivering >= 40% token compaction. Include positive tests (quoted fields with commas, TSV tabs, numeric cells) and negative tests (empty, mismatched column counts).")
+    (:task
+      :id "TaskCodec004"
+      :phase "phase-356"
+      :title "TOML Configuration <-> ASN Codec"
+      :state :completed
+      :priority :high
+      :lane "toml-codec"
+      :ownerRole "implementer"
+            :motivation "Support Cargo and pyproject configuration files in pure ASL without external dependencies per c3"
+      :purpose "Implement TOML parser and serializer for Cargo.toml / pyproject.toml manifests supporting [section] tables, [[table]] arrays of tables, key-value scalar bindings, and inline arrays. Include positive tests (multi-section configs) and negative tests (empty, malformed syntax)."
+      :context "TOML Configuration <-> ASN Codec within system lifecycle"
+      :outcomes [
+        "Deterministic execution verified"
+        "Gate assertions passed cleanly"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0034"
+      :decision "d34"
+      :actionDag [
+        "Execute task work items"
+        "Verify gate assertions"
+      ]
+:owns ["asl/packages/asl-codec/src/toml-transpile.asl" "asl/packages/asl-codec/tests/toml-transpile-test.asl"]
+      :gate "asl test --strict-falsify asl/packages/asl-codec/tests/toml-transpile-test.asl"
+      :why "Support Cargo and pyproject configuration files in pure ASL without external dependencies per c3"
+      :spec "Implement TOML parser and serializer for Cargo.toml / pyproject.toml manifests supporting [section] tables, [[table]] arrays of tables, key-value scalar bindings, and inline arrays. Include positive tests (multi-section configs) and negative tests (empty, malformed syntax).")
+    (:task
+      :id "TaskCodec005"
+      :phase "phase-356"
+      :title "Ecosystem Grammar Registration, Facade Integration & Full Gate Verification"
+      :state :completed
+      :priority :high
+      :lane "qa-gate"
+      :ownerRole "auditor"
+            :motivation "Verify 100% test pass, zero comments c1, and grammar symbol token density across all 35 packages"
+      :purpose "Register all new exported symbols in grammar.asn with verified token counts and rationales. Ensure transpile.asl exports unified facade. Run full 7-tier verification gate (manifests, pure ASL syntax, zero comments c1, zero emojis c2, 100% test pass, symbol density)."
+      :context "Ecosystem Grammar Registration, Facade Integration & Full Gate Verification within system lifecycle"
+      :outcomes [
+        "Deterministic execution verified"
+        "Gate assertions passed cleanly"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0034"
+      :decision "d34"
+      :actionDag [
+        "Execute task work items"
+        "Verify gate assertions"
+      ]
+:owns ["asl/packages/asl-codec/grammar.asn" "asl/packages/asl-codec/src/transpile.asl" "asl/packages/asl-codec/manifest.asn"]
+      :gate "asl gate"
+      :why "Verify 100% test pass, zero comments c1, and grammar symbol token density across all 35 packages"
+      :spec "Register all new exported symbols in grammar.asn with verified token counts and rationales. Ensure transpile.asl exports unified facade. Run full 7-tier verification gate (manifests, pure ASL syntax, zero comments c1, zero emojis c2, 100% test pass, symbol density).")
+  ]
+)

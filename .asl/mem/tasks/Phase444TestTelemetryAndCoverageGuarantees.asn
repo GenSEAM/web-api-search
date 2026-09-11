@@ -1,0 +1,247 @@
+(:taskCollection
+  :id "Phase444TestTelemetryAndCoverageGuarantees"
+  :createdAt 1789141670724
+  :status "planned"
+  :priorityOrder 8
+  :summary "Test Telemetry and Coverage Guarantees: collect what the runtime already knows, turn it into three decidable guarantees plus one measured quality metric, and drive case authorship from surviving mutants rather than from intuition."
+  :phase "Phase444TestTelemetryAndCoverageGuarantees"
+  :baseline ".asl/mem/telemetry/TestExecution20260911.asn, measured 2026-09-11 across all 313 suites in 42479 ms: 4448 of 8791 declared assertions execute (50.6 percent), 159 suites execute none, 155 hit ERR_UNBOUND_SYMBOL, the deficit is 46 distinct missing builtins and 35 unresolved module aliases, and one suite consumes 9358 ms of the total."
+  :scopeNote "Full path coverage is undecidable and is not promised. Three guarantees are decidable and are gated: executing test per exported symbol, executed equals declared or an explicit unreached list, required case kinds per area. Mutation score is the quality metric and is reported separately, never as coverage."
+  :methods "Static analysis supplies the map of what is uncovered and which case kinds are absent; dynamic tracing supplies what actually executed, how long it took and what varied between runs; an LLM supplies candidate cases for symbols whose mutants survived and is never the oracle."
+  :catalog "docs/TEST_CASE_CATALOG.md"
+  :tasks [
+    (:task
+      :id "Task44401"
+      :parentId ""
+      :phase "phase-444"
+      :title "Test telemetry record: per-assertion identity, timing and unbound deficit into the trace"
+      :kind :verification
+      :lane "telemetry"
+      :state :planned
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789141670724
+      :updatedAt 1789141670724
+      :motivation "Measured 2026-09-11 by running all 313 suites in 42 seconds: 4448 of 8791 declared assertions execute (50.6 percent), 159 suites execute none, and 155 hit ERR_UNBOUND_SYMBOL. The evaluator already counts executed assertions, already prints them, already accepts a --metrics flag and already emits a DEBUG_UNBOUND diagnostic naming the missing symbol; none of it is collected, so the gate reports a substring count instead of the number the runtime already knows."
+      :purpose "The runner emits one ASN telemetry record per suite into the session trace: file, declared and executed assertion identities (file, function, ordinal) rather than counts, per-assertion and per-suite duration, exit status, and every unbound symbol with the function that needed it. asl test --metrics is the carrier and gate 5 reads it instead of grepping the source."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Per-assertion identity, not counts" "Unbound symbol and requesting function recorded" "Duration per suite and per assertion" "Gate 5 consumes the record"]
+      :owns ["asl/tools/engine_js.h" "asl/tools/asl.c" ".asl/mem/telemetry"]
+      :targetSymbols ["assertionCount" "evalNode" "run_gate_5"]
+      :relatedSymbols ["gates" "semantics" "anchor"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task43601" "Task43605" "Task44207"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44401"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task44401.asl"]
+      :verificationCases ["A suite whose body is abandoned reports executed 0 with the blocking symbol named, never a declared count." "Assertion identities are stable across runs so a newly unreached assertion is detectable as a regression."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44401" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Verifier fixes suites with known executed and unreached assertions." "Emit identities and durations from the existing counter." "Record unbound symbols with their requesting function." "Point gate 5 at the record." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task44402"
+      :parentId ""
+      :phase "phase-444"
+      :title "Three decidable coverage guarantees, gated; mutation score as the quality metric"
+      :kind :verification
+      :lane "coverage"
+      :state :planned
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789141670724
+      :updatedAt 1789141670724
+      :motivation "Full path coverage is not decidable and must not be promised; what is decidable is whether every exported symbol has an executing test, whether every declared assertion executed, and whether each area carries its required case kinds. Today none of the three is checked and the only published figure was a substring count."
+      :purpose "Gate 7 enforces three guarantees per package: every exported symbol named by at least one executing test; declared assertions equal executed assertions or each gap is listed with a reason; the required case kinds declared in Phase443 are present. Mutation score is reported separately as the quality metric and is never called coverage."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Symbol coverage guarantee per package" "Executed equals declared or an explicit unreached list" "Required case kinds enforced" "Mutation score reported apart from coverage"]
+      :owns ["asl/tools/asl.c" "docs/TEST_CASE_CATALOG.md"]
+      :targetSymbols ["run_gate_7"]
+      :relatedSymbols ["gates" "concepts" "grading"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task44208" "Task44401" "Task43901"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44402"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task44402.asl"]
+      :verificationCases ["An uncovered exported symbol, an unreached assertion without a reason, and a missing required case kind each fail their own guarantee with a distinct message." "A package passing all three still reports its mutation score, and a low score does not silently pass as covered."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44402" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Verifier fixes packages violating each guarantee separately." "Implement the three checks." "Keep mutation score in a distinct field." "Wire thresholds per package." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task44403"
+      :parentId ""
+      :phase "phase-444"
+      :title "Close the measured evaluator deficit: 46 missing builtins and 35 unresolved aliases"
+      :kind :verification
+      :lane "runtime"
+      :state :planned
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789141670724
+      :updatedAt 1789141670724
+      :motivation "Measured 2026-09-11: the blocked symbols are concentrated and split into two different defects. 46 distinct missing builtins (ty 7 suites, list-take 7, list-fold 5, foldl 5, option-none? 4, list-filter 4, fst 4, case 4, snd 3, pair-first 3, option-some? 3, list-last 3, get 3, string-trim 2) and 35 unresolved module aliases (esc/escape-asn-str 7, rd/make-atom 4, bal/is-delimiter-balanced? 4). Missing builtins are a vocabulary gap, not an import-resolution gap, and are cheaper to close."
+      :purpose "Close the deficit in ranked order of suites unblocked, taking builtins first since they need no module machinery: implement or alias each missing builtin against the closed vocabulary, then resolve module aliases via Task43601. After each batch re-run the telemetry and record executed-assertion delta as the receipt."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Ranked deficit list regenerated from telemetry" "Builtins closed before aliases" "Executed-assertion delta recorded per batch" "Executed reaches at least 95 percent of declared or each gap has a reason"]
+      :owns ["asl/tools/engine_js.h" "asl/grammar"]
+      :targetSymbols ["evalNode" "loadModuleImports"]
+      :relatedSymbols ["semantics" "gates"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task44401" "Task43601"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44403"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task44403.asl"]
+      :verificationCases ["Each closed builtin raises the executed count by at least the assertions it blocked, verified by a telemetry diff, not by inspection." "No builtin is added outside the declared closed vocabulary without a grammar entry and rationale."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44403" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Regenerate the ranked deficit from telemetry." "Implement missing builtins in vocabulary order." "Resolve module aliases." "Re-run telemetry and record the delta." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task44404"
+      :parentId ""
+      :phase "phase-444"
+      :title "Mutation strategy under a budget: selection, equivalence and incrementality"
+      :kind :verification
+      :lane "mutation"
+      :state :planned
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789141670724
+      :updatedAt 1789141670724
+      :motivation "Inverting 8791 assertions naively costs one full run each; the corpus already takes 42 seconds for a single pass and asl audit gates takes 14.7 seconds, so an unbudgeted mutation campaign is unrunnable. A score computed on an arbitrary subset is also meaningless unless the selection rule is declared."
+      :purpose "Declare and implement a selection rule: all assertions in core-tier packages, plus assertions touching symbols changed since the last receipt, plus a fixed random sample elsewhere with a recorded seed. Surviving mutants are triaged into killed, equivalent with justification, and genuinely surviving. Results are incremental against the previous run rather than recomputed."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Declared selection rule with a recorded seed" "Equivalent-mutant triage with written justification" "Incremental results keyed by source digest" "Wall-clock budget honoured"]
+      :owns ["asl/tools/asl.c" "asl/bench"]
+      :targetSymbols ["run_gate_5"]
+      :relatedSymbols ["gates" "budget" "concepts"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task43901" "Task44401"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44404"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task44404.asl"]
+      :verificationCases ["The same seed reproduces the same selection; a known equivalent mutant is classified as equivalent with a justification, not silently counted as a survivor." "A second run after no source change completes from cache and reports the same score."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44404" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Verifier fixes a corpus with a known killable and a known equivalent mutant." "Implement selection with a seed." "Triage survivors." "Cache by digest for incrementality." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task44405"
+      :parentId ""
+      :phase "phase-444"
+      :title "Flakiness, bottlenecks and regression detection from repeated runs"
+      :kind :verification
+      :lane "telemetry"
+      :state :planned
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789141670724
+      :updatedAt 1789141670724
+      :motivation "Measured 2026-09-11: one suite consumes 9358 ms of a 42479 ms corpus run and asl audit gates takes 14659 ms, so the cost is concentrated and currently invisible. Nothing detects a test whose outcome varies between runs, which is the failure mode that erodes trust in a green gate faster than any other."
+      :purpose "Repeat the suite corpus N times with a recorded seed and report per suite: outcome stability across runs, duration distribution rather than a single sample, and the executed-assertion set diffed against the previous receipt so a newly unreached assertion is flagged as a regression. Bottlenecks are ranked by share of total wall clock."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Stability across N runs per suite" "Duration distribution and ranked bottlenecks" "Executed-set regression diff against the previous receipt"]
+      :owns ["asl/bench" ".asl/mem/telemetry"]
+      :targetSymbols ["run_gate_5"]
+      :relatedSymbols ["gates" "budget" "anchor"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task44401" "Task44202"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44405"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task44405.asl"]
+      :verificationCases ["A suite that passes and fails across runs is reported unstable and does not count toward any guarantee." "An assertion that executed in the previous receipt and does not now is reported as a regression with both receipts named."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44405" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Verifier plants a deliberately unstable suite." "Run the corpus N times and aggregate." "Diff executed sets against the previous receipt." "Rank bottlenecks by wall-clock share." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task44406"
+      :parentId ""
+      :phase "phase-444"
+      :title "LLM case proposal inside a mutation-feedback loop, never as the oracle"
+      :kind :verification
+      :lane "llm"
+      :state :planned
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789141670724
+      :updatedAt 1789141670724
+      :motivation "Static analysis finds the uncovered symbol but not the input that breaks it, and an implementer inattentive to detail writes happy-path cases. Published evidence: vanilla LLM test generation plateaus around a 53 percent mutation score across four iterations while mutation feedback reaches 89.5 percent, so the model is useful as a proposer inside a loop and unreliable as the judge."
+      :purpose "The loop proposes cases for symbols whose mutants survived, runs them, keeps only those that kill a previously surviving mutant, and discards the rest; every kept case must also pass the non-vacuity check by assertion inversion. The model never decides pass or fail, never edits an existing assertion, and never writes to grader-owned acceptance paths."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Proposal loop keyed to surviving mutants" "Kept only if it kills a mutant and is non-vacuous" "Model cannot edit existing assertions or grader paths" "Budget per package with a recorded cost"]
+      :owns ["asl/bench" "tests/conformance"]
+      :targetSymbols ["run_gate_5"]
+      :relatedSymbols ["grading" "gates" "hiddenTests" "concepts"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task44404" "Task44402" "Task44105"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44406"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task44406.asl"]
+      :verificationCases ["A proposed case that passes without killing any mutant is discarded; a proposed case that duplicates an existing one is discarded." "An attempt to modify an existing assertion or a grader-owned path is refused by ownership enforcement, not by prompt."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44406" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Verifier fixes a symbol with a known surviving mutant and a known killing input." "Generate candidates for surviving mutants only." "Keep on mutant kill plus non-vacuity." "Enforce path and edit restrictions." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+  ])

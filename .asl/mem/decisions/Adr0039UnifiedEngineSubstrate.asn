@@ -1,0 +1,13 @@
+(:adr
+  :id "ADR-0039"
+  :shortcode "d39"
+  :title "Unified Multi-Tier Engine Substrate for Base Harness"
+  :status :active
+  :date "2026-09-09"
+  :cluster "architecture/engine"
+  :deciders ["Architect" "Planner" "Implementer" "Auditor"]
+  :problem "Information retrieval and search within the AgentScript ecosystem historically fragmented across three separate packages (mem, intel, web-api-search)."
+  :drivers ["Tier 0 AST Code Intelligence" "Tier 1 Resident Memory" "Tier 2 External Web Search"]
+  :decision "Unify all search, memory, and code intelligence under a single coherent Engine Substrate (asl-engine) in Base Harness."
+  :invariants ["c1" "d34"]
+  :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])

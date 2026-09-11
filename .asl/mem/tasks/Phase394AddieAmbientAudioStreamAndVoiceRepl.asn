@@ -1,0 +1,190 @@
+(:taskCollection
+  :id "Phase394AddieAmbientAudioStreamAndVoiceRepl"
+  :createdAt 1773194000000
+  :status "completed"
+  :summary "Ambient Audio Stream Ingestion, Voice Activity Detection, and Interactive Voice REPL"
+  :phase "Phase394AddieAmbientAudioStreamAndVoiceRepl"
+  :tasks [
+    (:task
+      :id "Task39401"
+      :parentId ""
+      :phase "phase-394"
+      :title "Voice Audio Stream Ingestion & Circular PCM Buffer"
+      :kind :feature
+      :lane "voice"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773194000000
+      :updatedAt 1773194500000
+      :startedAt 1773194100000
+      :completedAt 1773194500000
+            :motivation "Provide in-memory ring-buffer for ambient microphone capture without writing raw audio frames to disk"
+      :purpose "Implement circular PCM buffer in pure ASL with bounded window size and overflow protection."
+      :context "Voice Audio Stream Ingestion & Circular PCM Buffer within system lifecycle"
+      :outcomes [
+        "dual-case >= 2 asserts"
+        "exit-code 0"
+        "zero comments c1"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0038"
+      :decision "d38"
+:owns ["voice/src/audio_stream.asl" "voice/tests/audio_stream_test.asl"]
+      :targetSymbols ["make-audio-stream" "stream-write-pcm" "stream-read-window"]
+      :relatedSymbols []
+      :dependsOn []
+      :gate "asl test --strict-falsify voice/tests/audio_stream_test.asl"
+      :why "Provide in-memory ring-buffer for ambient microphone capture without writing raw audio frames to disk"
+      :spec "Implement circular PCM buffer in pure ASL with bounded window size and overflow protection."
+      :acceptanceCriteria ["dual-case >= 2 asserts" "exit-code 0" "zero comments c1"]
+      :stepIndex 3
+      :actionDag ["Author audio_stream.asl" "Author unit test in audio_stream_test.asl" "Verify ring buffer bounds"]
+      :handoffContext ""
+      :receipts [
+        (:receipt :gate "asl test --strict-falsify voice/tests/audio_stream_test.asl" :exitCode 0 :asserts 25 :claims false)
+      ])
+
+    (:task
+      :id "Task39402"
+      :parentId ""
+      :phase "phase-394"
+      :title "Voice Activity Detection (VAD) & Utterance Boundary Slicer"
+      :kind :feature
+      :lane "voice"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773194000000
+      :updatedAt 1773194500000
+      :startedAt 1773194200000
+      :completedAt 1773194500000
+            :motivation "Distinguish speech energy from ambient background noise to trigger deterministic intent transcription slices"
+      :purpose "Implement pure ASL energy and zero-crossing rate calculation with silence threshold hysteresis."
+      :context "Voice Activity Detection (VAD) & Utterance Boundary Slicer within system lifecycle"
+      :outcomes [
+        "dual-case >= 2 asserts"
+        "exit-code 0"
+        "zero comments c1"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0038"
+      :decision "d38"
+:owns ["voice/src/vad.asl" "voice/tests/vad_test.asl"]
+      :targetSymbols ["detect-voice-activity" "slice-utterance-frames" "is-speech-frame?"]
+      :relatedSymbols ["make-audio-stream"]
+      :dependsOn ["Task39401"]
+      :gate "asl test --strict-falsify voice/tests/vad_test.asl"
+      :why "Distinguish speech energy from ambient background noise to trigger deterministic intent transcription slices"
+      :spec "Implement pure ASL energy and zero-crossing rate calculation with silence threshold hysteresis."
+      :acceptanceCriteria ["dual-case >= 2 asserts" "exit-code 0" "zero comments c1"]
+      :stepIndex 3
+      :actionDag ["Author vad.asl" "Author unit test in vad_test.asl" "Verify speech boundary slicing"]
+      :handoffContext ""
+      :receipts [
+        (:receipt :gate "asl test --strict-falsify voice/tests/vad_test.asl" :exitCode 0 :asserts 22 :claims false)
+      ])
+
+    (:task
+      :id "Task39403"
+      :parentId ""
+      :phase "phase-394"
+      :title "Speech-to-Intent Pipeline Dispatcher & Transliterator Integration"
+      :kind :feature
+      :lane "voice-intelligence"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773194000000
+      :updatedAt 1773194500000
+      :startedAt 1773194300000
+      :completedAt 1773194500000
+            :motivation "Connect speech utterances through context-primed transliterator directly into Tier 3 In-Flight Action DAG"
+      :purpose "Route detected speech slices to transliterator engine and queue resulting actions into InFlight.asn."
+      :context "Speech-to-Intent Pipeline Dispatcher & Transliterator Integration within system lifecycle"
+      :outcomes [
+        "dual-case >= 2 asserts"
+        "exit-code 0"
+        "zero comments c1"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0038"
+      :decision "d38"
+:owns ["voice/src/voice_intent.asl" "voice/tests/voice_intent_test.asl"]
+      :targetSymbols ["dispatch-speech-utterance" "bind-intent-to-inflight"]
+      :relatedSymbols ["detect-voice-activity" "transliterate-voice-prompt"]
+      :dependsOn ["Task39402"]
+      :gate "asl test --strict-falsify voice/tests/voice_intent_test.asl"
+      :why "Connect speech utterances through context-primed transliterator directly into Tier 3 In-Flight Action DAG"
+      :spec "Route detected speech slices to transliterator engine and queue resulting actions into InFlight.asn."
+      :acceptanceCriteria ["dual-case >= 2 asserts" "exit-code 0" "zero comments c1"]
+      :stepIndex 3
+      :actionDag ["Author voice_intent.asl" "Author unit test in voice_intent_test.asl" "Verify in-flight action queuing"]
+      :handoffContext ""
+      :receipts [
+        (:receipt :gate "asl test --strict-falsify voice/tests/voice_intent_test.asl" :exitCode 0 :asserts 29 :claims false)
+      ])
+
+    (:task
+      :id "Task39404"
+      :parentId ""
+      :phase "phase-394"
+      :title "Interactive Terminal Voice REPL & CLI Subcommand Integration"
+      :kind :integration
+      :lane "tooling"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773194000000
+      :updatedAt 1773194500000
+      :startedAt 1773194400000
+      :completedAt 1773194500000
+            :motivation "Empower developers with terminal-native hands-free coding supervisor and ambient pair-programming"
+      :purpose "Wire CLI dispatcher for 'asl voice listen' and 'asl voice repl', with mockable audio pipeline for automated E2E tests."
+      :context "Interactive Terminal Voice REPL & CLI Subcommand Integration within system lifecycle"
+      :outcomes [
+        "exit-code 0"
+        "physical assertions >= 8"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0038"
+      :decision "d38"
+:owns ["asl/asl" "tests/test_voice_repl_e2e.sh"]
+      :targetSymbols ["asl-voice-listen" "asl-voice-repl"]
+      :relatedSymbols ["dispatch-speech-utterance"]
+      :dependsOn ["Task39403"]
+      :gate "bash tests/test_voice_repl_e2e.sh"
+      :why "Empower developers with terminal-native hands-free coding supervisor and ambient pair-programming"
+      :spec "Wire CLI dispatcher for 'asl voice listen' and 'asl voice repl', with mockable audio pipeline for automated E2E tests."
+      :acceptanceCriteria ["exit-code 0" "physical assertions >= 8"]
+      :stepIndex 3
+      :actionDag ["Add voice subcommand to asl/asl" "Author test_voice_repl_e2e.sh" "Verify full gate"]
+      :handoffContext ""
+      :receipts [
+        (:receipt :gate "bash tests/test_voice_repl_e2e.sh" :exitCode 0 :asserts 23 :claims false)
+      ])
+  ])

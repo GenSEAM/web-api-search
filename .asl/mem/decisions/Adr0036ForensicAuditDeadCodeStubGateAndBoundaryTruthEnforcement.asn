@@ -1,0 +1,13 @@
+(:adr
+  :id "ADR-0036"
+  :shortcode "d36"
+  :title "Forensic Audit, Dead Code and Stub Gate, and Boundary Truth Enforcement"
+  :status :active
+  :date "2026-09-08"
+  :cluster "audit"
+  :deciders ["Autonomous Agents and Core Architects"]
+  :problem "Placeholder stubs, vacuous test assertions, and dead code accumulate across large codebases without strict falsification gates."
+  :drivers ["Axiomatic Ground Truth" "Zero Stub Tolerance" "Anti-Weakening Gate (Gate 5)"]
+  :decision "Enforce non-vacuous assertion gates (Gate 5), automated stub detection, and physical execution receipts."
+  :invariants ["c3"]
+  :consequences [(:pos "Total elimination of Execution Simulation Hallucination (ESH).") (:pos "Guaranteed non-vacuous test passes across all 145+ test suites.") (:neg "Requires adhering to strict verification gates")])

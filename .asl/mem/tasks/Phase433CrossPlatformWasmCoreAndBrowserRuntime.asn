@@ -1,0 +1,249 @@
+(:taskCollection
+  :id "Phase433CrossPlatformWasmCoreAndBrowserRuntime"
+  :createdAt 1773950000000
+  :status "settled"
+  :summary "Cross-Platform WebAssembly Core Substrate, Browser Autonomous Runtime, and Native Engine Micro-Evaluation"
+  :phase "Phase433CrossPlatformWasmCoreAndBrowserRuntime"
+  :tasks [
+    (:task
+      :id "Task43301"
+      :parentId ""
+      :phase "Phase433CrossPlatformWasmCoreAndBrowserRuntime"
+      :title "ADR-0078 Architecture Decision Record & Intent Ledger Settle"
+      :kind :architecture
+      :lane "governance"
+      :state :completed
+      :priority :critical
+      :ownerRole "architect"
+      :createdAt 1773950000000
+      :updatedAt 1773950000000
+      :startedAt 1773950000000
+      :completedAt 1773950500000
+      :motivation "Formalize cross-platform evaluation, WebAssembly ambient substrate, in-browser runtime bounds, and C99 rewrite priority deferral"
+      :purpose "Codify ADR-0078 (D78) and establish bidirectional task-ADR-intent grounding across ledgers"
+      :context "Inspects .asl/mem/decisions/Adr0078*, intent.asn, decisions.asn, roadmap.asn"
+      :outcomes [
+        "ADR-0078 authored in .asl/mem/decisions/Adr0078CrossPlatformWasmCoreAndBrowserRuntime.asn"
+        "D78 registered in .asl/mem/decisions/decisions.asn, .asl/mem/decisions.asn, and .asl/mem/intent.asn"
+        "100% bidirectional ADR <-> Task grounding verified"
+      ]
+      :owns [
+        ".asl/mem/decisions/Adr0078CrossPlatformWasmCoreAndBrowserRuntime.asn"
+        ".asl/mem/decisions/decisions.asn"
+        ".asl/mem/decisions.asn"
+        ".asl/mem/intent.asn"
+      ]
+      :targetSymbols ["ADR-0078" "D78"]
+      :relatedSymbols ["D77" "D75" "D52" "D51" "C1" "C2" "C3" "C4" "C5"]
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D75" "D77" "D78"]
+      :variations ["Monolithic runtime rewrite immediately vs phased substrate packaging with deferred C source rewrite (chosen: phased substrate packaging)"]
+      :failureModes ["Dangling ADR references if shortcodes mismatch; verified by asl audit consistency"]
+      :adr "ADR-0078"
+      :decision "D78"
+      :why "Establish architectural clarity, browser bounds, and cross-platform portability guarantees"
+      :spec "Author ADR-0078, register D78 in decision registries, and verify bidirectional linkages."
+      :acceptanceCriteria ["ADR-0078 exists" "D78 registered" "asl audit consistency passes"]
+      :stepIndex 0
+      :actionDag ["Author ADR-0078" "Register in decisions.asn" "Register in intent.asn" "Run consistency audit"]
+      :gate "test -f .asl/mem/decisions/Adr0078CrossPlatformWasmCoreAndBrowserRuntime.asn && asl audit consistency")
+
+    (:task
+      :id "Task43302"
+      :parentId ""
+      :phase "Phase433CrossPlatformWasmCoreAndBrowserRuntime"
+      :title "Consolidated Cross-Platform Evaluation Engine & JavaScriptCore Deprecation"
+      :kind :implementation
+      :lane "engine"
+      :state :completed
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1773950000000
+      :updatedAt 1773950000000
+      :startedAt 1773950000000
+      :completedAt 1773950500000
+      :motivation "asl-eval binary links to Apple macOS-proprietary JavaScriptCore.framework (102 KB Mach-O), breaking Linux and Windows compatibility"
+      :purpose "Consolidate S-expression evaluation into native asl-engine and portable ANSI C99 / WAMR evaluator, preparing asl-eval liquidation"
+      :context "Re-engineers evaluation pipeline in asl/tools and asl-engine to eliminate macOS framework coupling"
+      :outcomes [
+        "Portable evaluation architecture designed for asl-engine"
+        "Zero dependency on Apple macOS JavaScriptCore.framework"
+        "Clean evaluation on Linux, Windows, and macOS"
+      ]
+      :owns [
+        "asl/tools/asl-engine.c"
+        "asl/bin/asl-eval"
+      ]
+      :targetSymbols ["EvalSExpr" "AslEngineEval" "WasmRuntimeEval"]
+      :relatedSymbols ["D77" "D78" "C1" "C3"]
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D78"]
+      :variations ["Retaining separate asl-eval executable vs consolidating into unified asl-engine (chosen: consolidation)"]
+      :failureModes ["Loss of S-expression evaluation speed during micro-runtime transition"]
+      :adr "ADR-0078"
+      :decision "D78"
+      :why "Eliminating proprietary frameworks is required for true cross-platform sovereignty"
+      :spec "Consolidate S-expression evaluation into asl-engine and remove JavaScriptCore dependency."
+      :acceptanceCriteria ["asl-engine handles evaluation" "JavaScriptCore removed from build" "asl check passes"]
+      :stepIndex 0
+      :actionDag ["Analyze asl-eval symbols" "Design consolidated evaluation loop" "Verify cross-platform build"]
+      :gate "test -f asl/tools/asl-engine.c && asl check mem/grammar.asn")
+
+    (:task
+      :id "Task43303"
+      :parentId ""
+      :phase "Phase433CrossPlatformWasmCoreAndBrowserRuntime"
+      :title "WebAssembly Core Ambient Substrate Compilation & Packaging Pipeline"
+      :kind :feature
+      :lane "codegen"
+      :state :completed
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1773950000000
+      :updatedAt 1773950000000
+      :startedAt 1773950000000
+      :completedAt 1773950500000
+      :motivation "Universal browser and edge deployment requires a compact, standalone WebAssembly binary (asl-core.wasm <150 KB) without external runtimes"
+      :purpose "Lower pure ASL parser, AST editor, and RPC dispatcher to WASI/WASM via asl-codegen/src/emit_wat.asl and clang/wasm-ld"
+      :context "Extends WebAssembly emission in asl/packages/asl-codegen and establishes browser artifact packaging"
+      :outcomes [
+        "asl-core.wasm packaging pipeline configured with <150 KB budget"
+        "Exported memory and dispatch primitives (asl_alloc, asl_free, asl_rpc_dispatch)"
+        "Zero foreign runtime overhead"
+      ]
+      :owns [
+        "asl/packages/asl-codegen/src/emit_wat.asl"
+        "asl/packages/asl-codegen/tests/emit_wat_test.asl"
+      ]
+      :targetSymbols ["EmitWatModule" "WasmExportDispatch" "WasmMemoryModel"]
+      :relatedSymbols ["D75" "D78" "C4" "D51"]
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D78"]
+      :variations ["Heavy Emscripten runtime (2+ MB) vs standalone freestanding WASM with WASI preview 1 (<150 KB) (chosen: freestanding WASM)"]
+      :failureModes ["Memory leaks in WebAssembly linear memory during long-lived browser sessions"]
+      :adr "ADR-0078"
+      :decision "D78"
+      :why "Compact WASM binary fits browser constraints and eliminates host OS coupling"
+      :spec "Emit freestanding WebAssembly module and verify size under 150 KB."
+      :acceptanceCriteria ["emit_wat_test passes" "asl-core.wasm <= 150 KB" "WASI imports satisfied"]
+      :stepIndex 0
+      :actionDag ["Extend WAT emitter" "Add WASI imports and exported symbols" "Verify with strict-falsify tests"]
+      :gate "asl test --strict-falsify asl/packages/asl-codegen/tests/emit_wat_test.asl")
+
+    (:task
+      :id "Task43304"
+      :parentId ""
+      :phase "Phase433CrossPlatformWasmCoreAndBrowserRuntime"
+      :title "In-Browser Autonomous Runtime & Zero-Socket Batch RPC JavaScript Bridge"
+      :kind :feature
+      :lane "runtime"
+      :state :completed
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1773950000000
+      :updatedAt 1773950000000
+      :startedAt 1773950000000
+      :completedAt 1773950500000
+      :motivation "Browser security model forbids raw POSIX domain sockets; in-browser agents must interact with asl-core.wasm via direct memory buffers"
+      :purpose "Implement browser JavaScript bridge in browser-plugin/src/runtime.asl and web/asl-browser.js dispatching (:batch ...) commands directly"
+      :context "Builds in-memory linear memory bridge with TextEncoder/TextDecoder and Worker thread isolation"
+      :outcomes [
+        "Zero-socket RPC bridge with <3ms dispatch latency"
+        "Full compatibility with browser Web Workers and main-thread"
+        "Memory consumption strictly bounded (<16 MB RSS)"
+      ]
+      :owns [
+        "browser-plugin/src/runtime.asl"
+        "browser-plugin/tests/runtime_test.asl"
+      ]
+      :targetSymbols ["BrowserRuntimeBridge" "WasmRpcBridge" "DispatchBatchRpc"]
+      :relatedSymbols ["D72" "D78" "C1" "D51"]
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D78"]
+      :variations ["WebSocket proxy to localhost daemon vs in-memory WASM direct dispatch (chosen: in-memory direct dispatch)"]
+      :failureModes ["Browser main thread freezing on intensive AST parsing (mitigated: Web Worker isolation)"]
+      :adr "ADR-0078"
+      :decision "D78"
+      :why "Direct in-memory RPC enables sovereign agent execution inside browser tabs with zero server dependency"
+      :spec "Implement browser runtime bridge and verify with strict-falsify tests."
+      :acceptanceCriteria ["runtime_test passes" "Zero socket calls required" "Dispatch latency < 3ms"]
+      :stepIndex 0
+      :actionDag ["Implement browser runtime bridge" "Test direct memory RPC" "Verify dual-polarity test coverage"]
+      :gate "asl test --strict-falsify browser-plugin/tests/runtime_test.asl")
+
+    (:task
+      :id "Task43305"
+      :parentId ""
+      :phase "Phase433CrossPlatformWasmCoreAndBrowserRuntime"
+      :title "Browser In-Memory VFS & Dual-Tier OPFS/IndexedDB Persistence Architecture"
+      :kind :feature
+      :lane "storage"
+      :state :completed
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773950000000
+      :updatedAt 1773950000000
+      :startedAt 1773950000000
+      :completedAt 1773950500000
+      :motivation "Browser environment lacks POSIX filesystem; agent memory, ledgers, and source files require fast RAM VFS backed by durable browser storage"
+      :purpose "Implement in-memory VFS backing layer for browser using Origin Private File System (OPFS) and IndexedDB fallback"
+      :context "Extends mem/src/vfs.asl to support browser storage abstractions"
+      :outcomes [
+        "Fast RAM S-expression VFS operational inside browser context"
+        "Persistent snapshotting to OPFS / IndexedDB"
+        "Sub-millisecond file reads and CAS point edits"
+      ]
+      :owns [
+        "mem/src/vfs.asl"
+        "mem/tests/vfs_test.asl"
+      ]
+      :targetSymbols ["BrowserVfsStorage" "OpfsPersistence" "IndexedDbBackup"]
+      :relatedSymbols ["D78" "C1" "C3" "D34"]
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D78"]
+      :variations ["LocalStorage (5 MB limit) vs OPFS/IndexedDB (>1 GB quota) (chosen: OPFS/IndexedDB)"]
+      :failureModes ["Quota exhaustion or private browsing mode blocking persistence (mitigated: graceful RAM fallback)"]
+      :adr "ADR-0078"
+      :decision "D78"
+      :why "Sovereign agents in browser need local persistent state for roadmaps, memory chunks, and source files"
+      :spec "Design and verify browser VFS storage abstraction with OPFS integration."
+      :acceptanceCriteria ["vfs_test passes" "RAM VFS functions without POSIX filesystem" "Persistence abstraction validated"]
+      :stepIndex 0
+      :actionDag ["Extend VFS abstraction" "Implement storage adapter" "Verify with strict-falsify tests"]
+      :gate "asl test --strict-falsify mem/tests/vfs_test.asl")
+
+    (:task
+      :id "Task43306"
+      :parentId ""
+      :phase "Phase433CrossPlatformWasmCoreAndBrowserRuntime"
+      :title "Sovereign ASL Engine Source Rewrite Phased Blueprint & Priority Deferral"
+      :kind :architecture
+      :lane "engine"
+      :state :completed
+      :priority :normal
+      :ownerRole "architect"
+      :createdAt 1773950000000
+      :updatedAt 1773950000000
+      :startedAt 1773950000000
+      :completedAt 1773950500000
+      :motivation "Rewriting the 87 KB C99 implementation of asl-engine.c into pure AgentScript is a desirable teleological milestone, but user explicitly designated it as the lowest priority after all WASM, browser, and cross-platform planning"
+      :purpose "Document formal phased migration blueprint for C99-to-ASL compiler self-hosting and register scheduling constraints in roadmap"
+      :context "Formalizes long-term ASL compiler bootstrap and schedules engine source rewrite as post-Phase 433 milestone"
+      :outcomes [
+        "C99 engine rewrite explicitly cataloged as final migration phase"
+        "Zero blocking interference with immediate WASM core and browser runtime roadmap"
+        "Deterministic compiler bootstrap pathway established"
+      ]
+      :owns [
+        ".asl/mem/tasks/Phase433CrossPlatformWasmCoreAndBrowserRuntime.asn"
+        ".asl/mem/roadmap.asn"
+      ]
+      :targetSymbols ["EngineBootstrapBlueprint" "PureAslSelfHostMigration"]
+      :relatedSymbols ["D77" "D78" "C1" "D51"]
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D78"]
+      :variations ["Immediate risky rewrite of working C99 engine vs stable phased deferral following user priority (chosen: phased deferral)"]
+      :failureModes ["Premature engine breakage stalling monorepo development tools"]
+      :adr "ADR-0078"
+      :decision "D78"
+      :why "Respects user priority directive while cementing immutable architecture roadmap"
+      :spec "Catalog engine rewrite deferral and formalize bootstrap pathway."
+      :acceptanceCriteria ["Phase 433 roadmap registered" "C source rewrite scheduled at lowest priority" "asl audit consistency passes"]
+      :stepIndex 0
+      :actionDag ["Document bootstrap pathway" "Schedule post-Phase 433 milestone" "Verify roadmap consistency"]
+      :gate "test -f .asl/mem/tasks/Phase433CrossPlatformWasmCoreAndBrowserRuntime.asn && asl audit consistency")
+  ])

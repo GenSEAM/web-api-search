@@ -1,0 +1,30 @@
+(:adr
+  :id "ADR-0069"
+  :shortcode "D69"
+  :title "Paradigm Institutionalization of Audit Discoveries, Static Binary Anomaly Detection, and Strict Whitelisting"
+  :status :active
+  :date "2026-09-10"
+  :cluster "architecture/governance"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "When technical audits uncover architectural incongruities or foreign binary crutches (such as netcat, hidden Node.js fallbacks, or ghost watchdogs), treating them as isolated bugfixes allows identical defects to recur in downstream modules. Furthermore, without static verification of binary provenance, unregistered third-party tools silently contaminate developer workflows, scripts, and production environments."
+  :drivers [
+    "Paradigm Institutionalization: Every uncovered audit anomaly must be codified into the system paradigm (harness/paradigm.asn) and audit rubric (harness/audit-protocols.asn) as an immutable negative rule"
+    "Static Binary Anomaly Detection: Automated static analysis scanning shell launchers and execution dispatchers to detect unregistered CLI binary invocations before runtime"
+    "Strict Binary Whitelist (.asl.config.asn): Explicit declaration of all permitted host binaries (python3, git, bash); all undeclared binaries are rejected statically"
+    "Zero-Foreign Provenance: Complete boundary protection ensuring downstream projects and packages cannot introduce hidden toolchain dependencies"
+  ]
+  :decision "Adopt ADR-0069 (D69) establishing the Paradigm Institutionalization of Audit Discoveries, Static Binary Anomaly Detection, and Strict Whitelisting Standard. Codify audit-institutionalization and strict-binary-whitelist axioms in harness/paradigm.asn, add the unregistered-binary-anomaly category to harness/audit-protocols.asn, define the canonical binary-whitelist in .asl.config.asn, and enforce static whitelist verification under monorepo gates."
+  :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69"]
+  :tasks [
+    "T423ParadigmCodification"
+    "T423AuditTaxonomyExtension"
+    "T423BinaryWhitelistConfig"
+    "T423StaticWhitelistLinter"
+    "T423Settle"
+  ]
+  :consequences [
+    (:pos "Mathematically prevents regression of past audit issues by turning findings into permanent paradigm axioms")
+    (:pos "Statically eliminates rogue third-party binaries from appearing in downstream projects or shell scripts")
+    (:pos "Provides 100 percent dependency provenance across all toolplane layers")
+    (:neg "Requires explicit registration in .asl.config.asn for any new external host tool")
+  ])

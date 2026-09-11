@@ -1,0 +1,156 @@
+(:taskCollection
+  :id "Phase395AutomatedTokenShrinkingAstRefactorPass"
+  :createdAt 1773195000000
+  :status "completed"
+  :summary "Automated Token Shrinking AST Refactor Pass and CAS Diff Validation"
+  :phase "Phase395AutomatedTokenShrinkingAstRefactorPass"
+  :tasks [
+    (:task
+      :id "Task39501"
+      :parentId ""
+      :phase "phase-395"
+      :title "AST Token Alias Replacement Rules & Pure ASL Rewriter Pass"
+      :kind :feature
+      :lane "compiler"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773195000000
+      :updatedAt 1773195600000
+      :startedAt 1773195000000
+      :completedAt 1773195600000
+            :motivation "Transform high-token-weight AST call sites into 1-to-2 token modular aliases with zero semantic change per d47"
+      :purpose "Implement AST traversal pass mapping verbose identifiers (string-starts-with?, vfs-normalize-path) to modular forms."
+      :context "AST Token Alias Replacement Rules & Pure ASL Rewriter Pass within system lifecycle"
+      :outcomes [
+        "dual-case >= 2 asserts"
+        "exit-code 0"
+        "zero comments c1"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0047"
+      :decision "d47"
+:owns ["asl/packages/asl-compiler/src/compact_rewrite.asl" "asl/packages/asl-compiler/tests/compact_rewrite_test.asl"]
+      :targetSymbols ["rewrite-ast-tokens" "is-compaction-target?" "make-compaction-rule"]
+      :relatedSymbols []
+      :dependsOn []
+      :gate "asl test --strict-falsify asl/packages/asl-compiler/tests/compact_rewrite_test.asl"
+      :why "Transform high-token-weight AST call sites into 1-to-2 token modular aliases with zero semantic change per d47"
+      :spec "Implement AST traversal pass mapping verbose identifiers (string-starts-with?, vfs-normalize-path) to modular forms."
+      :acceptanceCriteria ["dual-case >= 2 asserts" "exit-code 0" "zero comments c1"]
+      :stepIndex 3
+      :actionDag ["Author compact_rewrite.asl" "Author unit test in compact_rewrite_test.asl" "Verify AST rewrite accuracy"]
+      :handoffContext ""
+      :receipts [
+        (:receipt
+          :gate "asl test --strict-falsify asl/packages/asl-compiler/tests/compact_rewrite_test.asl"
+          :exitCode 0
+          :assertions 28
+          :status :passed)
+      ])
+
+    (:task
+      :id "Task39502"
+      :parentId ""
+      :phase "phase-395"
+      :title "VFS In-Memory Staged Refactoring Engine with CAS Diff Review"
+      :kind :feature
+      :lane "mem-vfs"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773195000000
+      :updatedAt 1773195600000
+      :startedAt 1773195000000
+      :completedAt 1773195600000
+            :motivation "Ensure all automated AST rewrites are inspected in memory RAM VFS before touching physical disk files"
+      :purpose "Provide atomic staged diff calculation, token savings telemetry, and safe rollback mechanisms."
+      :context "VFS In-Memory Staged Refactoring Engine with CAS Diff Review within system lifecycle"
+      :outcomes [
+        "dual-case >= 2 asserts"
+        "exit-code 0"
+        "zero comments c1"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0047"
+      :decision "d47"
+:owns ["mem/src/refactor_vfs.asl" "mem/tests/refactor_vfs_test.asl"]
+      :targetSymbols ["stage-refactor-diff" "preview-token-savings" "commit-staged-refactor"]
+      :relatedSymbols ["rewrite-ast-tokens"]
+      :dependsOn ["Task39501"]
+      :gate "asl test --strict-falsify mem/tests/refactor_vfs_test.asl"
+      :why "Ensure all automated AST rewrites are inspected in memory RAM VFS before touching physical disk files"
+      :spec "Provide atomic staged diff calculation, token savings telemetry, and safe rollback mechanisms."
+      :acceptanceCriteria ["dual-case >= 2 asserts" "exit-code 0" "zero comments c1"]
+      :stepIndex 3
+      :actionDag ["Author refactor_vfs.asl" "Author unit test in refactor_vfs_test.asl" "Verify rollback and commit"]
+      :handoffContext ""
+      :receipts [
+        (:receipt
+          :gate "asl test --strict-falsify mem/tests/refactor_vfs_test.asl"
+          :exitCode 0
+          :assertions 25
+          :status :passed)
+      ])
+
+    (:task
+      :id "Task39503"
+      :parentId ""
+      :phase "phase-395"
+      :title "CLI Compactor Subcommand & Monorepo Safe Verification Gate"
+      :kind :integration
+      :lane "tooling"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773195000000
+      :updatedAt 1773195600000
+      :startedAt 1773195000000
+      :completedAt 1773195600000
+            :motivation "Allow agents and developers to run dry-run compaction sweeps and verify measurable token reduction per d47"
+      :purpose "Wire CLI dispatcher for 'asl refactor compact [--dry-run]' and author E2E test verifying compaction safety."
+      :context "CLI Compactor Subcommand & Monorepo Safe Verification Gate within system lifecycle"
+      :outcomes [
+        "exit-code 0"
+        "physical assertions >= 10"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0047"
+      :decision "d47"
+:owns ["asl/asl" "tests/test_ast_compactor_e2e.sh"]
+      :targetSymbols ["asl-refactor-compact"]
+      :relatedSymbols ["stage-refactor-diff"]
+      :dependsOn ["Task39502"]
+      :gate "bash tests/test_ast_compactor_e2e.sh"
+      :why "Allow agents and developers to run dry-run compaction sweeps and verify measurable token reduction per d47"
+      :spec "Wire CLI dispatcher for 'asl refactor compact [--dry-run]' and author E2E test verifying compaction safety."
+      :acceptanceCriteria ["exit-code 0" "physical assertions >= 10"]
+      :stepIndex 3
+      :actionDag ["Add refactor compact to asl/asl" "Author test_ast_compactor_e2e.sh" "Verify full gate green"]
+      :handoffContext ""
+      :receipts [
+        (:receipt
+          :gate "bash tests/test_ast_compactor_e2e.sh"
+          :exitCode 0
+          :assertions 19
+          :status :passed)
+      ])
+  ])

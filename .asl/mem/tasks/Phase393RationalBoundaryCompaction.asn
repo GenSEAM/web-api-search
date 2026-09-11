@@ -1,0 +1,138 @@
+(:taskCollection
+  :id "phase-393-rational-boundary-compaction-and-modular-aliases"
+  :createdAt 1773193000000
+  :status "completed"
+  :summary "Rational Boundary Compaction Standard & 1-to-2 Token Modular Aliases Foundation"
+  :phase "phase-393-rational-boundary-compaction-and-modular-aliases"
+  :tasks [
+    (:task
+      :id "Task39301"
+      :parentId ""
+      :phase "phase-393"
+      :title "Canonical Modular Aliases for asl-text (txt/*) and mem/vfs (v/*)"
+      :kind :codeMutation
+      :lane "core-packages"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773193000000
+      :updatedAt 1773193600000
+      :startedAt 1773193000000
+      :completedAt 1773193600000
+            :motivation "Achieve 20-30 percent token savings across highest frequency string and filesystem primitives while retaining backward compatibility per d47"
+      :purpose "Export 1-to-2 token modular aliases in asl-text and mem/vfs, verifying identical semantics and non-breaking dual-polarity tests."
+      :context "Canonical Modular Aliases for asl-text (txt/*) and mem/vfs (v/*) within system lifecycle"
+      :outcomes [
+        "dual-case >= 2 asserts"
+        "exit-code 0"
+        "zero comments c1"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0046"
+      :decision "d46"
+:owns ["asl/packages/asl-text/src/string.asl" "mem/src/vfs.asl" "asl/packages/asl-text/tests/modular_aliases_test.asl"]
+      :targetSymbols ["txt/starts?" "txt/ends?" "txt/has?" "txt/split" "v/norm" "v/resolve" "v/read" "v/write"]
+      :relatedSymbols []
+      :dependsOn []
+      :gate "asl test --strict-falsify asl/packages/asl-text/tests/modular_aliases_test.asl"
+      :why "Achieve 20-30 percent token savings across highest frequency string and filesystem primitives while retaining backward compatibility per d47"
+      :spec "Export 1-to-2 token modular aliases in asl-text and mem/vfs, verifying identical semantics and non-breaking dual-polarity tests."
+      :acceptanceCriteria ["dual-case >= 2 asserts" "exit-code 0" "zero comments c1"]
+      :stepIndex 3
+      :actionDag ["Export txt/* in asl-text" "Export v/* in mem/vfs" "Author modular_aliases_test.asl"]
+      :handoffContext ""
+      :receipts [(:receipt :exitCode 0 :asserts 26 :gate "asl test --strict-falsify asl/packages/asl-text/tests/modular_aliases_test.asl")])
+
+    (:task
+      :id "Task39302"
+      :parentId ""
+      :phase "phase-393"
+      :title "Canonical Modular Aliases for mem/tasks (task/*) and asl-sh (proc/*)"
+      :kind :codeMutation
+      :lane "core-packages"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773193000000
+      :updatedAt 1773193700000
+      :startedAt 1773193600000
+      :completedAt 1773193700000
+            :motivation "Compress agent task loop and process supervision primitives into strict 1-to-2 token basis per d47"
+      :purpose "Export compact task/* and proc/* modular aliases with dual-polarity test validation."
+      :context "Canonical Modular Aliases for mem/tasks (task/*) and asl-sh (proc/*) within system lifecycle"
+      :outcomes [
+        "dual-case >= 2 asserts"
+        "exit-code 0"
+        "zero comments c1"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0046"
+      :decision "d46"
+:owns ["mem/src/tasks.asl" "asl/packages/asl-sh/src/process.asl" "mem/tests/task_modular_test.asl"]
+      :targetSymbols ["task/claim" "task/state" "task/settle" "proc/status" "proc/list"]
+      :relatedSymbols []
+      :dependsOn ["Task39301"]
+      :gate "asl test --strict-falsify mem/tests/task_modular_test.asl"
+      :why "Compress agent task loop and process supervision primitives into strict 1-to-2 token basis per d47"
+      :spec "Export compact task/* and proc/* modular aliases with dual-polarity test validation."
+      :acceptanceCriteria ["dual-case >= 2 asserts" "exit-code 0" "zero comments c1"]
+      :stepIndex 3
+      :actionDag ["Export task/* in mem/tasks" "Export proc/* in asl-sh" "Author task_modular_test.asl"]
+      :handoffContext ""
+      :receipts [(:receipt :exitCode 0 :asserts 19 :gate "asl test --strict-falsify mem/tests/task_modular_test.asl")])
+
+    (:task
+      :id "Task39303"
+      :parentId ""
+      :phase "phase-393"
+      :title "Boundary Compaction Governance Gate & E2E Validation"
+      :kind :integration
+      :lane "governance"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773193000000
+      :updatedAt 1773193800000
+      :startedAt 1773193700000
+      :completedAt 1773193800000
+            :motivation "Verify physical token count reduction and zero regression on full 7-tier monorepo gate per d47"
+      :purpose "Author E2E test verifying that modular aliases reduce token footprints by >= 20 percent on benchmark suites and all gates remain green."
+      :context "Boundary Compaction Governance Gate & E2E Validation within system lifecycle"
+      :outcomes [
+        "exit-code 0"
+        "physical assertions >= 8"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0046"
+      :decision "d46"
+:owns ["tests/test_modular_aliases_e2e.sh"]
+      :targetSymbols ["verify-token-compaction-ratio"]
+      :relatedSymbols []
+      :dependsOn ["Task39302"]
+      :gate "bash tests/test_modular_aliases_e2e.sh"
+      :why "Verify physical token count reduction and zero regression on full 7-tier monorepo gate per d47"
+      :spec "Author E2E test verifying that modular aliases reduce token footprints by >= 20 percent on benchmark suites and all gates remain green."
+      :acceptanceCriteria ["exit-code 0" "physical assertions >= 8"]
+      :stepIndex 3
+      :actionDag ["Author test_modular_aliases_e2e.sh" "Run full monorepo gate" "Record TaskReceipt"]
+      :handoffContext ""
+      :receipts [(:receipt :exitCode 0 :asserts 13 :gate "bash tests/test_modular_aliases_e2e.sh")])
+  ])

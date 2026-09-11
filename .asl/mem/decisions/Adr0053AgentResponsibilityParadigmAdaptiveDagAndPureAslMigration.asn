@@ -1,0 +1,43 @@
+(:adr
+  :id "ADR-0053"
+  :shortcode "D53"
+  :title "Agent Responsibility Paradigm, Operational Epistemic Primitives, Adaptive Action DAG, and Pure ASL Toolchain Migration"
+  :status :active
+  :date "2026-09-09"
+  :cluster "agent-epistemology/runtime"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "Autonomous agents governed exclusively by negative bounding constraints lack intrinsic motivation, frequently succumbing to minimal/vacuous execution, premature task settlement, or surrogate optimization (loosening test assertions, inserting stubs, swallowing exceptions). Crucial epistemic disciplines—anti-hallucination grounding, context budget management, adversarial reflection, and reality reconciliation—are relegated to informal prompt advice rather than enforced as discrete, typed operational steps in an execution DAG. When unexpected errors occur, rigid linear plans fail without dynamic recovery. Additionally, maintaining a 6,166-line legacy Bash host runner (./asl/asl) directly breaches the Zero-Foreign File Policy (Gate 4) and causes severe cognitive context divergence across multi-agent swarms."
+  :drivers [
+    "Responsibility as the Core Paradigm Unit: Replacing anthropomorphic roleplay with a teleological responsibility vector (User-Centric Intent Fidelity) where true user problem resolution takes absolute precedence over mechanical green checks."
+    "Discrete Epistemic Steps: Codifying GroundFact, ContextBudget, AdversarialReflect, and ReconcileReality as first-class typed operational steps within the agent Action DAG."
+    "Adaptive Action DAG & Closed Refixing Loop: Enabling agents to halt upon intermediate gate failures, execute RAM VFS rollback (:discard), diagnose root causes, and dynamically recalculate recovery DAGs under a bounded retry budget (<= 3)."
+    "Model-Native Paradigm Language: Defining an immutable Core Kernel of axioms (C1-C5, D34, D51) paired with modular, composable paradigm slices (:slice :scout, :slice :implementer, :slice :auditor, :slice :transliterator)."
+    "Pure ASL Toolchain & 100% Bash Eradication: Porting all verification gates, runners, and CLI routers from ./asl/asl into pure AgentScript modules (packages/asl-gates, packages/asl-cli, packages/asl-sh), reducing the launcher to a 5-line POSIX shim."
+    "Co-located ASN Skills & Third-Party Projection: Storing skills as canonical native ASN specifications co-located with packages, projected build-time into Markdown SKILL.md micro-protocols for external agents (Claude Code, Cursor, Factory Droid, Windsurf, OpenHands) with deterministic 1-line ASN receipts, explicit external refixing directives, and automated export drift reconciliation."
+    "Dual-Tier Task Ledger & Observability: Bounding git-tracked global intent/backlogs and ephemeral local agent session folders (.asl/mem/sessions/<session-id>/) with queue positioning, lifecycle timestamps (:created-at, :queuedAt), and automated session action cleanup."
+  ]
+  :decision "Adopt Responsibility and User-Centric Intent Fidelity as the foundational paradigm unit in harness/paradigm.asn; elevate anti-hallucination grounding, context budget throttling, adversarial reflection, and reality reconciliation into discrete, executable steps in the Action DAG; implement dynamic adaptive replanning and closed refixing with RAM VFS rollback triggered by gate failures; standardize the Core Kernel plus Modular Slices paradigm language; execute the comprehensive migration of the 6,166-line Bash toolbelt into pure AgentScript modules across asl-gates, asl-cli, and asl-sh; project canonical ASN skills into Markdown micro-protocols with deterministic receipts and refixing protocols for third-party agents; and establish the Dual-Tier Task Ledger with session isolation, queue timestamps, and automated ephemeral cleanup."
+  :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+  :tasks [
+    "Task40201"
+    "Task40202"
+    "Task40203"
+    "Task40204"
+    "Task40205"
+    "Task40206"
+  ]
+  :outcomes [
+    "Eliminates surrogate gaming and gate-loosening by aligning agent motivation with genuine user problem resolution"
+    "Guarantees that hallucination prevention and reflection execute as physical, verifiable DAG steps rather than prompt hopes"
+    "Enables self-healing agents capable of autonomous recovery via adaptive dynamic replanning"
+    "Achieves complete self-hosted purity by eradicating 6,166 lines of Bash and unifying the toolchain under 100% pure AgentScript"
+    "Guarantees seamless integration of external third-party agents via projected canonical skills and batch RPC"
+    "Prevents git history bloat and multi-agent file collisions through dual-tier task storage, session leases, and automated ephemeral cleanup"
+  ]
+  :consequences [
+    (:pos "Transforms agent execution from fragile linear scripts into resilient, self-correcting epistemic workflows")
+    (:pos "Eliminates multi-language cognitive load by making all tools, gates, and compiler pipelines pure ASL")
+    (:pos "Ensures all skills remain synchronized with canonical ASN specifications without manual markdown upkeep")
+    (:pos "Enables safe multi-agent concurrency with clean git history and automated session cleanup")
+    (:neg "Requires agents to allocate dedicated DAG steps for pre-mutation grounding and adversarial reflection")
+  ])

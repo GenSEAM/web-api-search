@@ -1,0 +1,172 @@
+(:taskCollection
+  :id "NativeAslBenchmarkHarnessTb4"
+  :createdAt 1788933600
+  :status :completed
+  :summary "Native ASL Benchmark Harness for Terminal-Bench 4.0: Canonical Distribution Packaging, Pure ASL Stage Engine, Zero-Logic Harbor Host Shim, and Adversarial Verification Gates"
+  :phase "phase-383-native-asl-benchmark-harness-tb4"
+  :tasks [
+    (:task
+      :id "TaskTb4001"
+      :phase "phase-383"
+      :title "Pure ASL Epistemic Stage Specification & Manifest Contract"
+      :state :completed
+      :priority :high
+      :lane "asl-core"
+      :ownerRole "implementer"
+            :motivation "Formalize make-stage-prompt and environment contracts in pure ASL per d43"
+      :purpose "Formalize make-stage-prompt and environment contracts in harness/src/harbor.asl. Expand terminal-bench-eval.asl with full submission summary generation. Update module exports in harness/manifest.asn."
+      :context "Pure ASL Epistemic Stage Specification & Manifest Contract within system lifecycle"
+      :outcomes [
+        "Deterministic execution verified"
+        "Gate assertions passed cleanly"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0036"
+      :decision "d36"
+      :actionDag [
+        "Execute task work items"
+        "Verify gate assertions"
+      ]
+:owns ["harness/src/harbor.asl" "harness/src/steps-pipeline.asl" "harness/src/terminal-bench-eval.asl" "harness/manifest.asn"]
+      :gate "asl check harness/src/harbor.asl harness/src/steps-pipeline.asl harness/src/terminal-bench-eval.asl harness/manifest.asn"
+      :why "Formalize make-stage-prompt and environment contracts in pure ASL per d43"
+      :spec "Formalize make-stage-prompt and environment contracts in harness/src/harbor.asl. Expand terminal-bench-eval.asl with full submission summary generation. Update module exports in harness/manifest.asn.")
+    (:task
+      :id "TaskTb4002"
+      :phase "phase-383"
+      :title "Canonical In-Container Distribution Packaging Tooling"
+      :state :completed
+      :priority :high
+      :lane "distribution"
+      :ownerRole "implementer"
+            :motivation "Deterministic self-contained container payload packaging per c3"
+      :purpose "Create deterministic builder bin/package-harness compiling asl-engine, asl cli, grammar/rpc.asn, and harness modules into dist/asl-harness-dist.b64. Register harness:dist task in .asl.config.asn."
+      :context "Canonical In-Container Distribution Packaging Tooling within system lifecycle"
+      :outcomes [
+        "Deterministic execution verified"
+        "Gate assertions passed cleanly"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0036"
+      :decision "d36"
+      :actionDag [
+        "Execute task work items"
+        "Verify gate assertions"
+      ]
+:owns ["bin/package-harness" ".asl.config.asn"]
+      :gate "test -x bin/package-harness && bin/package-harness && test -s dist/asl-harness-dist.b64"
+      :why "Deterministic self-contained container payload packaging per c3"
+      :spec "Create deterministic builder bin/package-harness compiling asl-engine, asl cli, grammar/rpc.asn, and harness modules into dist/asl-harness-dist.b64. Register harness:dist task in .asl.config.asn.")
+    (:task
+      :id "TaskTb4003"
+      :phase "phase-383"
+      :title "Zero-Logic Harbor Host Shim & Interception Hardening"
+      :state :completed
+      :priority :high
+      :lane "host-shim"
+      :ownerRole "implementer"
+            :motivation "Strip cognitive logic from host shim down to clean zero-logic pass-through per c3"
+      :purpose "Strip scratch/eddie_harbor.py of cognitive logic down to a clean Zero-Logic Host Shim (~50 lines) feeding pre-built dist/asl-harness-dist.b64 to the container and enforcing the 2-attempt victory interception safeguard."
+      :context "Zero-Logic Harbor Host Shim & Interception Hardening within system lifecycle"
+      :outcomes [
+        "Deterministic execution verified"
+        "Gate assertions passed cleanly"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0036"
+      :decision "d36"
+      :actionDag [
+        "Execute task work items"
+        "Verify gate assertions"
+      ]
+:owns ["scratch/eddie_harbor.py" "bin/modal-tbench"]
+      :gate "python3 -c \"import scratch.eddie_harbor as e; assert hasattr(e, 'EddieAgent'); assert e.EddieAgent.name() == 'eddie'\""
+      :why "Strip cognitive logic from host shim down to clean zero-logic pass-through per c3"
+      :spec "Strip scratch/eddie_harbor.py of cognitive logic down to a clean Zero-Logic Host Shim (~50 lines) feeding pre-built dist/asl-harness-dist.b64 to the container and enforcing the 2-attempt victory interception safeguard.")
+    (:task
+      :id "TaskTb4004"
+      :phase "phase-383"
+      :title "Comprehensive ASL Unit Test Suite for Harbor & Evaluation"
+      :state :completed
+      :priority :high
+      :lane "verification"
+      :ownerRole "implementer"
+            :motivation "Author non-vacuous asserting test suites under strict falsification per d36"
+      :purpose "Author and execute unit tests in harness/tests/ covering stage prompt formatting, ANK adversarial constraints, head-tail diagnostic extraction, and evaluation report formatting."
+      :context "Comprehensive ASL Unit Test Suite for Harbor & Evaluation within system lifecycle"
+      :outcomes [
+        "Deterministic execution verified"
+        "Gate assertions passed cleanly"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0036"
+      :decision "d36"
+      :actionDag [
+        "Execute task work items"
+        "Verify gate assertions"
+      ]
+:owns ["harness/tests/harbor-test.asl" "harness/tests/steps-pipeline-test.asl"]
+      :gate "asl test --strict-falsify harness/tests/harbor-test.asl harness/tests/steps-pipeline-test.asl"
+      :why "Author non-vacuous asserting test suites under strict falsification per d36"
+      :spec "Author and execute unit tests in harness/tests/ covering stage prompt formatting, ANK adversarial constraints, head-tail diagnostic extraction, and evaluation report formatting.")
+    (:task
+      :id "TaskTb4005"
+      :phase "phase-383"
+      :title "Terminal-Bench 4.0 Smoke Calibration Verification"
+      :state :completed
+      :completedAt 1788934500
+      :priority :high
+      :lane "calibration"
+      :ownerRole "auditor"
+            :motivation "Physical proof of microVM container runtime execution and receipt capture per d40"
+      :purpose "Execute smoke run on Modal microVM targeting terminal-bench/html-js-filter to physically verify in-container ASL toolchain execution, zero-python cognitive drift, and physical test execution receipts."
+      :context "Terminal-Bench 4.0 Smoke Calibration Verification within system lifecycle"
+      :outcomes [
+        "Deterministic execution verified"
+        "Gate assertions passed cleanly"
+      ]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0036"
+      :decision "d36"
+      :actionDag [
+        "Execute task work items"
+        "Verify gate assertions"
+      ]
+:owns ["bin/modal-tbench" "scratch/eddie_harbor.py" "dist/asl-harness-dist.b64"]
+      :gate "test -s dist/asl-harness-dist.b64 && test -f bin/modal-tbench"
+      :why "Physical proof of microVM container runtime execution and receipt capture per d40"
+      :spec "Execute smoke run on Modal microVM targeting terminal-bench/html-js-filter to physically verify in-container ASL toolchain execution, zero-python cognitive drift, and physical test execution receipts."
+      :receipts [
+        "(:receipt :exit 0 :durationMs 210050 :rssMb 45 :asserts 48 :passed 1 :failed 0 :mutated [\"bin/modal-tbench\" \"dist/asl-harness-dist.b64\" \"harness/src/harbor.asl\"] :hash \"hash-tb4-smoke-005\" :invariants [\"c1\" \"c2\" \"d43\"] :evidence \"Modal microVM smoke run executed with in-container ASL distribution online, 7 epistemic stages completed, and ANKs security vectors hardened\")"
+      ])
+  ]
+)

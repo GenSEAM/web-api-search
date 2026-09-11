@@ -1,0 +1,4 @@
+#!/bin/sh
+# Sovereign In-Memory Engine Forwarder
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+exec "$ROOT/asl/bin/asl-engine" "$@"

@@ -1,0 +1,193 @@
+(:taskCollection
+  :id "Phase399SovereignEngineResidentArchitectureAndDeepMemory"
+  :createdAt 1773270000000
+  :status "done"
+  :summary "Unified Sovereign Engine Resident Architecture, Daemon Entity Elimination, and Deep In-Memory Search Substrate"
+  :phase "Phase399SovereignEngineResidentArchitectureAndDeepMemory"
+  :tasks [
+    (:task
+      :id "Task39901"
+      :parentId ""
+      :phase "phase-399"
+      :title "Architecture Decision Record ADR-0050 & Epistemic Specification"
+      :kind :architecture
+      :lane "governance"
+      :state :done
+      :priority :high
+      :ownerRole "architect"
+      :createdAt 1773270000000
+      :updatedAt 1773270000000
+      :startedAt 1773270000000
+      :completedAt 1773270100000
+            :motivation "Codify Sovereign Engine resident architecture and deprecate daemon dualism"
+      :purpose "Formulate ADR-0050, register in decisions.asn and intent.asn with zero emojis and bare alphanumeric shortcodes."
+      :context "Architecture Decision Record ADR-0050 & Epistemic Specification within system lifecycle"
+      :outcomes [
+        "exit-code 0"
+        "all files balanced"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0050"
+      :decision "d50"
+:owns [
+        ".asl/mem/decisions/Adr0050SovereignEngineResidentArchitectureAndDeepMemoryIntegration.asn"
+        ".asl/mem/decisions/decisions.asn"
+        ".asl/mem/intent.asn"
+      ]
+      :targetSymbols ["ADR-0050" "d50"]
+      :relatedSymbols ["d35" "d39" "d42"]
+      :dependsOn []
+      :gate "test -f .asl/mem/decisions/Adr0050SovereignEngineResidentArchitectureAndDeepMemoryIntegration.asn && asl check .asl/mem/decisions/Adr0050SovereignEngineResidentArchitectureAndDeepMemoryIntegration.asn .asl/mem/decisions/decisions.asn .asl/mem/intent.asn"
+      :why "Codify Sovereign Engine resident architecture and deprecate daemon dualism"
+      :spec "Formulate ADR-0050, register in decisions.asn and intent.asn with zero emojis and bare alphanumeric shortcodes."
+      :acceptanceCriteria ["exit-code 0" "all files balanced"]
+      :stepIndex 1
+      :actionDag ["Draft ADR-0050" "Register in decisions.asn" "Register in intent.asn" "Verify syntax balance"]
+      :handoffContext ""
+      :receipts ["rc-gap-027"])
+
+    (:task
+      :id "Task39902"
+      :parentId ""
+      :phase "phase-399"
+      :title "In-Memory BM25 Lexical Indexer, SimHash Deduplicator & RRF Integration in SovereignEngine"
+      :kind :feature
+      :lane "engine"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773270000000
+      :updatedAt 1773270000000
+      :startedAt 1773270100000
+      :completedAt 1773270200000
+            :motivation "Integrate pure ASL mem search algorithms into resident SovereignEngine for sub-0.5ms queries"
+      :purpose "Add in-memory inverted index for BM25 and 64-bit SimHash calculator in SovereignEngine, handling :bm25, :simhash, and upgrading :search tier-1-mem to real relevance scoring."
+      :context "In-Memory BM25 Lexical Indexer, SimHash Deduplicator & RRF Integration in SovereignEngine within system lifecycle"
+      :outcomes [
+        "exit-code 0"
+        "bm25 results returned"
+        "simhash computed"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0050"
+      :decision "d50"
+:owns [
+        "asl/bin/asl-engine"
+        "bin/asl-engine"
+      ]
+      :targetSymbols ["BM25Index" "simhash64" "hamming_distance"]
+      :relatedSymbols ["handle_payload" "MemoryVFS"]
+      :dependsOn ["Task39901"]
+      :gate "asl rpc '(:bm25 :query \"StorageEngine\")' | grep -q 'results' && asl rpc '(:simhash :text \"(module foo)\")' | grep -q 'hash'"
+      :why "Integrate pure ASL mem search algorithms into resident SovereignEngine for sub-0.5ms queries"
+      :spec "Add in-memory inverted index for BM25 and 64-bit SimHash calculator in SovereignEngine, handling :bm25, :simhash, and upgrading :search tier-1-mem to real relevance scoring."
+      :acceptanceCriteria ["exit-code 0" "bm25 results returned" "simhash computed"]
+      :stepIndex 1
+      :actionDag ["Implement BM25 indexer in SovereignEngine" "Implement SimHash in SovereignEngine" "Wire :bm25 and :simhash RPC ops" "Upgrade :search tier-1-mem"]
+      :handoffContext ""
+      :receipts ["rc-gap-027"])
+
+    (:task
+      :id "Task39903"
+      :parentId ""
+      :phase "phase-399"
+      :title "Session-Scoped In-Memory VFS Branching Overlays (:vfs-fork, :vfs-merge, :vfsDiscard)"
+      :kind :feature
+      :lane "engine"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773270000000
+      :updatedAt 1773270000000
+      :startedAt 1773270200000
+      :completedAt 1773270300000
+            :motivation "Enable isolated in-memory VFS sandboxes for parallel agents preventing dirty state leakage"
+      :purpose "Implement fork overlays in MemoryVFS allowing agents to modify files in an isolated overlay and either merge or discard."
+      :context "Session-Scoped In-Memory VFS Branching Overlays (:vfs-fork, :vfs-merge, :vfsDiscard) within system lifecycle"
+      :outcomes [
+        "exit-code 0"
+        "fork created and discarded"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0050"
+      :decision "d50"
+:owns [
+        "asl/bin/asl-engine"
+        "bin/asl-engine"
+      ]
+      :targetSymbols ["vfs_fork" "vfs_merge" "vfs_discard"]
+      :relatedSymbols ["MemoryVFS"]
+      :dependsOn ["Task39902"]
+      :gate "asl rpc '(:vfsFork :forkId \"test-sandbox\")' | grep -q 'created' && asl rpc '(:vfsDiscard :forkId \"test-sandbox\")' | grep -q 'discarded'"
+      :why "Enable isolated in-memory VFS sandboxes for parallel agents preventing dirty state leakage"
+      :spec "Implement fork overlays in MemoryVFS allowing agents to modify files in an isolated overlay and either merge or discard."
+      :acceptanceCriteria ["exit-code 0" "fork created and discarded"]
+      :stepIndex 1
+      :actionDag ["Add overlays dict in MemoryVFS" "Implement :vfs-fork" "Implement :vfs-merge" "Implement :vfs-discard"]
+      :handoffContext ""
+      :receipts ["rc-gap-027"])
+
+    (:task
+      :id "Task39904"
+      :parentId ""
+      :phase "phase-399"
+      :title "Unified CLI Dispatch Stand & E2E Validation Suite"
+      :kind :test
+      :lane "engine"
+      :state :done
+      :priority :high
+      :ownerRole "auditor"
+      :createdAt 1773270000000
+      :updatedAt 1773270000000
+      :startedAt 1773270300000
+      :completedAt 1773270400000
+            :motivation "Validate Sovereign Engine resident mode, BM25/SimHash retrieval, VFS overlays, and zero regressions"
+      :purpose "Add asl engine CLI command with transparent daemon forwarding, and author comprehensive E2E test verifying all capabilities."
+      :context "Unified CLI Dispatch Stand & E2E Validation Suite within system lifecycle"
+      :outcomes [
+        "exit-code 0"
+        ">= 12 physical assertions pass"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations [
+        "Standard deterministic execution within phase boundaries"
+      ]
+      :failureModes [
+        "Assertion failure or syntax delimiter imbalance in owned files"
+      ]
+      :adr "ADR-0050"
+      :decision "d50"
+:owns [
+        "asl/asl"
+        "tests/test_engine_substrate_e2e.sh"
+      ]
+      :targetSymbols ["asl engine"]
+      :relatedSymbols ["asl daemon"]
+      :dependsOn ["Task39903"]
+      :gate "bash tests/test_engine_substrate_e2e.sh"
+      :why "Validate Sovereign Engine resident mode, BM25/SimHash retrieval, VFS overlays, and zero regressions"
+      :spec "Add asl engine CLI command with transparent daemon forwarding, and author comprehensive E2E test verifying all capabilities."
+      :acceptanceCriteria ["exit-code 0" ">= 12 physical assertions pass"]
+      :stepIndex 1
+      :actionDag ["Update asl CLI for engine command" "Write tests/test_engine_substrate_e2e.sh" "Run strict falsification" "Verify zero regressions"]
+      :handoffContext ""
+      :receipts ["rc-gap-027"])
+  ])

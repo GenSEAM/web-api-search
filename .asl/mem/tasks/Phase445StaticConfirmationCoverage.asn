@@ -1,0 +1,166 @@
+(:taskCollection
+  :id "Phase445StaticConfirmationCoverage"
+  :createdAt 1789142321056
+  :status "planned"
+  :priorityOrder 9
+  :summary "Static Confirmation Coverage: a working checker for every constraint that admits one, an explicit runtime-only declaration for the few that do not, and a coverage figure over the constraints themselves so the ratio cannot silently worsen."
+  :phase "Phase445StaticConfirmationCoverage"
+  :baseline "2026-09-11: of nineteen rules, four have meaningful checker presence and eleven have none; C1 C2 C5 are genuinely checked in asl.c at lines 512, 564, 591, 2259 and 2503; C3 has no checker while 111 symbols are defined in more than one package; C4 is suspended; D51 has no checker while test-function convergence sits at 80 of 1673."
+  :tasks [
+    (:task
+      :id "Task44501"
+      :parentId ""
+      :phase "phase-445"
+      :title "Every rule names its checker; an unchecked rule is visibly advisory"
+      :kind :governance
+      :lane "static"
+      :state :planned
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789142321056
+      :updatedAt 1789142321056
+      :motivation "Measured 2026-09-11 across asl/tools/asl.c and asl/packages/asl-gates: of nineteen rules only gates, foreign, edge and tools have meaningful checker presence, and eleven have none at all (output, semantics, grading, concepts, anchor, oneStep, budget, hiddenTests, bounded, ssot, capabilities). C1, C2 and C5 do have real checkers at asl.c:512, 564, 591, 2259 and 2503, while C3 has none. A rule the model cannot distinguish from an enforced one is a rule it will quietly ignore under load."
+      :purpose "Every rule in asl/grammar/rules.asn carries a :check field naming its checker command or :none; asl doctor verifies that each named checker exists and returns a verdict on a known-answer fixture; the rendered payload shows enforced and advisory rules distinctly so the model knows which are mechanically held. A :check that names a missing or non-failing checker fails gate 7."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Every rule carries :check" "Advisory rules are marked as such in the rendered payload" "doctor verifies each checker exists and can fail" "Gate 7 rejects a phantom checker"]
+      :owns ["asl/grammar/rules.asn" "asl/tools/asl.c" "scripts/install.sh"]
+      :targetSymbols ["run_doctor" "run_gate_7"]
+      :relatedSymbols ["ssot" "capabilities" "concepts"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task44201" "Task44210" "Task43707"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44501"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task44501.asl"]
+      :verificationCases ["A rule naming a checker that does not exist fails gate 7; a rule naming a checker that passes on a planted violation also fails." "The rendered payload marks an advisory rule as advisory, and the count of enforced rules matches the doctor map."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44501" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Verifier fixes rules with a real, a missing and a non-failing checker." "Add :check to every rule." "Verify existence and falsifiability in doctor." "Render the enforced and advisory split." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task44502"
+      :parentId ""
+      :phase "phase-445"
+      :title "Static checkers for the eleven unconfirmed rules"
+      :kind :gate
+      :lane "static"
+      :state :planned
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789142321056
+      :updatedAt 1789142321056
+      :motivation "Eleven rules carry no confirmation at all, and each has a statically decidable core: an alias used but not declared, an author owning a grader path, a number in a rule with no cited source, two in-flight tasks sharing an owned path, a read call site without a bound, a rendered surface diverging from its source, a declared capability contradicting its measured lock."
+      :purpose "Implement one checker per rule with a decidable core: semantics checks every used alias is declared and every called symbol resolves; grading checks ownerRole differs from verificationRole and author paths are disjoint from grader paths; concepts checks every numeric claim in a rule cites a source file that exists; oneStep and parallel check :owns disjointness across in-flight tasks; hiddenTests checks implementer :owns excludes grader test paths; bounded checks documented read call sites carry :limit; output checks emitted receipts retain path and line; ssot and capabilities reuse the existing checks. budget and edge are runtime-only and are declared :none with a reason."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["One checker per decidable rule" "budget and edge declared runtime-only with a reason" "All checkers reachable from asl doctor and gate 7"]
+      :owns ["asl/tools/asl.c" "asl/packages/asl-gates/src"]
+      :targetSymbols ["run_gate_7" "run_doctor"]
+      :relatedSymbols ["grading" "concepts" "hiddenTests" "bounded" "oneStep"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task44501"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44502"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task44502.asl"]
+      :verificationCases ["Each of the nine implemented checkers catches its own planted violation and passes a clean tree." "A rule declared runtime-only states why it cannot be checked statically, rather than being silently skipped."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44502" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Verifier plants one violation per rule." "Implement each decidable checker." "Declare the two runtime-only rules with a reason." "Wire into doctor and gate 7." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task44503"
+      :parentId ""
+      :phase "phase-445"
+      :title "C3 duplicate capability checker and the camelCase convergence checker"
+      :kind :gate
+      :lane "static"
+      :state :planned
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789142321056
+      :updatedAt 1789142321056
+      :motivation "C3 is named in AGENTS.md as a forbidden-duplication invariant and has no checker: 111 symbol names are defined in more than one package, six of them implementations of token estimation. D51 has no checker either: structs reached 890 of 890 CamelCase while test functions sit at 80 of 1673 and ASN property keys at 48.5 percent, and Phase415 was marked complete against a gate that cannot run."
+      :purpose "Two checkers. The C3 checker reports any symbol defined in more than one package outside a declared allowlist (main, run-tests), and any capability with more than one implementation where a canonical home is declared. The D51 checker enforces CamelCase for struct names, composite identifiers over two words and test function names, and camelCase for ASN property keys, reporting convergence per package and failing when a package regresses below its recorded baseline."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["C3 duplicate report with canonical-home awareness" "D51 convergence per package with a regression floor" "Both wired into gate 6 or 7" "Phase415 state corrected from the measurement"]
+      :owns ["asl/tools/asl.c" "asl/packages/asl-gates/src" ".asl/mem/tasks/Phase415LargeScaleTypestateRefactorAndCamelCaseConvergence.asn"]
+      :targetSymbols ["run_gate_6" "run_gate_7"]
+      :relatedSymbols ["names" "concepts" "ssot"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task44502" "Task43806"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44503"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task44503.asl"]
+      :verificationCases ["A second implementation of a capability with a declared canonical home is reported with both paths; an allowlisted name such as run-tests is not." "Adding a kebab-case test function to a converged package fails; a package below its floor cannot regress further without failing."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44503" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Verifier fixes a duplicated capability and a kebab-case test function." "Implement the duplication report." "Implement the convergence checker with a per-package floor." "Correct the Phase415 state from measurement." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task44504"
+      :parentId ""
+      :phase "phase-445"
+      :title "Concept-to-checker coverage report"
+      :kind :gate
+      :lane "static"
+      :state :planned
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789142321056
+      :updatedAt 1789142321056
+      :motivation "The system accumulated paradigm claims faster than confirmations: nineteen rules, five invariants, fifty-six decisions and thirty-six capabilities, against roughly a third with any mechanical check. Without a coverage figure over the constraints themselves, the ratio silently worsens with every new concept."
+      :purpose "asl doctor emits a confirmation-coverage row per constraint class: rules with :check, invariants with a checker, decisions with a falsifiable gate, capabilities with a measured status. The report names every unconfirmed constraint. Gate 7 fails when a newly added rule, invariant or capability arrives without a :check field, which makes the admission rule in the concepts rule mechanical rather than aspirational."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Confirmation-coverage report per constraint class" "Unconfirmed constraints listed by name" "New constraint without :check fails gate 7"]
+      :owns ["asl/tools/asl.c"]
+      :targetSymbols ["run_doctor" "run_gate_7"]
+      :relatedSymbols ["concepts" "capabilities" "ssot"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task44501" "Task44503"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44504"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task44504.asl"]
+      :verificationCases ["A newly added rule without :check fails gate 7 and is named; the coverage figure moves when a checker is added or removed." "The report distinguishes unchecked from declared runtime-only."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44504" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Verifier adds a constraint without a checker." "Emit coverage per class." "List unconfirmed constraints." "Fail on a new unchecked constraint." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+  ])

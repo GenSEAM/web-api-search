@@ -1,0 +1,789 @@
+(:gaps-audit
+  :meta (:id "GAP-2026-09-11" :target "/Users/purplelephant/projects/asex" :auditor "AuditorAndCritic" :timestamp 1789134000000)
+  :receipt (:verdict :action-required :total-gaps 48 :critical 14 :moderate 22 :minor 12)
+
+  :sections [
+    (:section
+      :id "invariants"
+      :title "Rule and Invariant Verification (C1, C2, C3, D51, D52)"
+      :findings [
+        (:finding
+          :id "INV-01"
+          :severity :critical
+          :invariant :C1
+          :name "Raw Inline JavaScript Comments in Source File"
+          :citations ["asl/web/src/views/PlaygroundView.asl:9-13" "asl/web/src/views/PlaygroundView.asl:73" "asl/web/src/views/PlaygroundView.asl:85" "asl/web/src/views/PlaygroundView.asl:89" "asl/web/src/views/PlaygroundView.asl:126" "asl/web/src/views/PlaygroundView.asl:178"]
+          :evidence "PlaygroundView.asl contains raw inline JavaScript single-line slash comments inside an ASL source module."
+          :remediation "Purge all single-line comments. Extract client-side scripts to external static bundle or declarative VDOM structure.")
+
+        (:finding
+          :id "INV-02"
+          :severity :moderate
+          :invariant :C1
+          :name "Embedded HTML Comments in ASL Web Components"
+          :citations [
+            "asl/web/asl-src/components/KeyCapabilities.asl:10-204"
+            "asl/web/src/components/KeyCapabilities.asl:10-204"
+            "asl/web/src/components/SkyLoomVisualizer.asl:9-314"
+            "asl/web/src/components/ModuleGraphVisualizer.asl:26-235"
+            "asl/web/src/components/UnifiedPackageMatrix.asl:9-140"
+            "asl/web/src/components/InBrowserAgent.asl:25-112"
+            "asl/web/src/components/AgentWireProtocol.asl:26-175"
+            "asl/web/src/components/Ecosystem.asl:25-338"
+            "asl/web/src/views/BlogView.asl:9-493"
+            "asl/web/src/views/DocsView.asl:30-263"
+            "asl/web/src/views/RoadmapView.asl:26-99"
+            "asl/web/src/views/EcosystemView.asl:11-114"
+          ]
+          :evidence "Over 180 HTML comment tags embedded directly within ASL declarative markup across 12 Web components and views."
+          :remediation "Batch purge all HTML comment tags from ASL strings across asl/web. Structural hierarchy in ASL is self-documenting.")
+
+        (:finding
+          :id "INV-03"
+          :severity :minor
+          :invariant :C1
+          :name "Semicolon Section Comments in Grammar Registries"
+          :citations [
+            "asl/packages/asl-codec/grammar.asn:1-305"
+            "asl/packages/asl-compiler/grammar.asn:1-92"
+            "asl/packages/asl-registry/grammar.asn:1-28"
+            "asl/packages/asl-gates/grammar.asn:1-55"
+            "asl/packages/asl-lint/grammar.asn:1-34"
+            "asl/packages/asl-sh/grammar.asn:1-288"
+            "editorial-matrix/schedule.asn:1-2"
+            "agent/tests/cases.asn:1"
+            "harness/audit-playbook.asn:1-2"
+            "harness/audit-protocols.asn:1-2"
+          ]
+          :evidence "254 lines of semicolon comments across package grammar registries and harness ASN documents."
+          :remediation "Replace raw semicolon comments with structured ASN metadata annotations (:section "...") or strip completely to honor C1.")
+
+        (:finding
+          :id "INV-04"
+          :severity :critical
+          :invariant :C2
+          :name "Unicode Emojis in Runtime Source Code"
+          :citations [
+            "asl/packages/asl-registry/src/registry.asl:46"
+            "asl/packages/asl-registry/src/registry.asl:55"
+            "harness/src/local-exec.asl:55"
+            "harness/src/agent.asl:45"
+            "harness/src/agent.asl:48"
+            "harness/src/agent.asl:50"
+            "harness/src/feedback.asl:110"
+            "web-api-search/src/ecosystems.asl:64"
+          ]
+          :evidence "Runtime ASL source modules emit Unicode emojis in log strings, package listings, reflection messages, and CLI feedback."
+          :remediation "Replace all emojis with ASCII keyword tokens: [pkg], [warn], :local-exec, and standard markdown.")
+
+        (:finding
+          :id "INV-05"
+          :severity :moderate
+          :invariant :C2
+          :name "Emojis in Web UI Presentation Components"
+          :citations [
+            "asl/web/src/components/InBrowserCompanion.asl:8-81"
+            "asl/web/src/components/ModuleGraphVisualizer.asl:240-294"
+            "asl/web/src/components/Footer.asl:9"
+            "asl/web/asl-src/scripts/installer.asl:25-67"
+            "asl/web/src/data/blog/posts.asn:48-93"
+          ]
+          :evidence "35 emojis embedded in Web UI presentation components and blog post data."
+          :remediation "Substitute with pure SVG vector glyphs or text badges.")
+
+        (:finding
+          :id "INV-06"
+          :severity :minor
+          :invariant :C2
+          :name "Emojis in Documentation and Shell Scripts"
+          :citations [
+            "README.md:3-165"
+            "asl/README.md:5-197"
+            "asl/docs/EXTERNAL_AGENT_STEERING_AND_TOOLING_INTEGRATION_SPEC.md:48"
+            "asl/docs/DEPLOYMENT.md:7"
+            "editorial-matrix/SCHEDULE.md:15"
+            "editorial-matrix/DISTRIBUTION_AND_TIMING_GUIDE.md:94"
+            "scripts/install.sh:156"
+            "scripts/build-from-source.sh:6"
+            "scripts/install.ps1:9"
+            "scripts/release.sh:11"
+          ]
+          :evidence "40+ emojis in documentation headings, bullet list markers, and CLI script echoes."
+          :remediation "Strip all Unicode emojis to preserve terminal clarity and pure text density.")
+
+        (:finding
+          :id "INV-07"
+          :severity :critical
+          :invariant :C3
+          :name "Raw Unescaped JavaScript Inside ASL View"
+          :citations ["asl/web/src/views/PlaygroundView.asl:8-226"]
+          :evidence "PlaygroundView.asl contains 218 lines of raw client-side JavaScript executing in browser window scope."
+          :remediation "Refactor PlaygroundView.asl into pure AgentScript declarative functions emitting HTML/VDOM, relocating client scripts into static external assets.")
+
+        (:finding
+          :id "INV-08"
+          :severity :moderate
+          :invariant :C3
+          :name "Undeclared JavaScript and Shell Build Artifacts in asl/web"
+          :citations [
+            "asl/web/vite.config.js:1"
+            "asl/web/tailwind.config.js:1"
+            "asl/web/plugins/vite-plugin-asl.js:1"
+            "asl/web/public/install.sh:1"
+          ]
+          :evidence "JavaScript and shell configuration files reside inside asl/web without declared external build boundary in package.asn."
+          :remediation "Declare Web showcase build substrate in package.asn as declared boundary.")
+
+        (:finding
+          :id "INV-09"
+          :severity :moderate
+          :invariant :D51
+          :name "Pervasive Legacy kebab-case in Test Suite Functions"
+          :citations [
+            "asl/packages/asl-codec/tests/placement_test.asl:28"
+            "asl/packages/asl-codec/tests/codec_test.asl:6"
+            "asl/packages/asl-codec/tests/yaml-transpile-test.asl:13"
+            "asl/grammar/tests/density_test.asl:5"
+            "asl/web/tests/blog_parity_test.asl:10"
+            "mem/tests/paged_test.asl:1"
+            "agent-core/tests/taskstore_test.asl:1"
+            "harness/tests/fsm-normalizer-test.asl:1"
+          ]
+          :evidence "1,589 test suite functions use legacy kebab-case (df test-...) instead of CamelCase (df Test...), forfeiting 20% to 50% LLM token compaction."
+          :remediation "Execute automated AST migration pass renaming test definitions to CamelCase.")
+
+        (:finding
+          :id "INV-10"
+          :severity :moderate
+          :invariant :C5
+          :name "Sigils Retained in Package Identifiers and Dependencies"
+          :citations [
+            "asl/bench/published_claims.asn:21"
+            "asl/bench/published_claims.asn:27"
+            "asl/bench/published_claims.asn:33"
+            "asl/.asl/mem/dependencies.asn:155"
+          ]
+          :evidence "Package names retain @ prefix (@genseam/asl-quantum, @genseam/asl-arduino, @genseam/asl-voice, @vitejs/plugin-react)."
+          :remediation "Eradicate @ prefix to use native bare symbols: asl-quantum, asl-arduino, asl-voice.")
+
+        (:finding
+          :id "INV-11"
+          :severity :moderate
+          :invariant :D52
+          :name "Missing Mandatory Task Context Fields"
+          :citations [
+            ".asl/mem/tasks/Phase382HolisticTaskProtocol.asn:1"
+            ".asl/mem/tasks/Phase388SovereignTaskPoolAndNotesLedger.asn:1"
+            ".asl/mem/tasks/Phase390CodebaseTokenProfiler.asn:1"
+            ".asl/mem/tasks/Phase391UniversalSigilEradication.asn:1"
+            ".asl/mem/tasks/Phase392VoicePromptTransliterator.asn:1"
+            ".asl/mem/tasks/Phase393RationalBoundaryCompaction.asn:1"
+            ".asl/mem/tasks/Phase394AddieAmbientAudioStreamAndVoiceRepl.asn:1"
+            ".asl/mem/tasks/Phase395AutomatedTokenShrinkingAstRefactorPass.asn:1"
+            ".asl/mem/tasks/Phase396EpistemicIncongruityAuditAndParadigmUpdate.asn:1"
+            ".asl/mem/tasks/Phase398FullEcosystemHolisticGateAndReceiptLedger.asn:1"
+            ".asl/mem/tasks/Phase399SovereignEngineResidentArchitectureAndDeepMemory.asn:1"
+            ".asl/mem/tasks/Phase400TokenEfficiencyFormatDocumentation.asn:1"
+            ".asl/mem/tasks/InFlight.asn:1"
+          ]
+          :evidence "54 task definitions lack required D52 fields (:motivation, :purpose, :context, :outcomes, :owns, :invariants, :variations, :failureModes)."
+          :remediation "Run automated task enricher pass on legacy Phase 382..400 task files to backfill required schema fields.")
+
+        (:finding
+          :id "INV-12"
+          :severity :minor
+          :invariant :D52
+          :name "Hyphenated Property Keys in Task Definitions"
+          :citations [
+            ".asl/mem/tasks/Phase399SovereignEngineResidentArchitectureAndDeepMemory.asn:73"
+            ".asl/mem/tasks/Phase382HolisticTaskProtocol.asn:86"
+            ".asl/mem/tasks/Phase427VoicePipelineHanesModelGalleryAndTaskPresets.asn:135"
+            ".asl/mem/tasks/Phase429JarvisRealtimeVoiceOrchestrationAndMultiIdeMesh.asn:289"
+            ".asl/mem/tasks/Phase404PureAslUniversalAuthoring.asn:30"
+            ".asl/mem/tasks/Phase403SystemicIncongruityRemediationAndGroundTruthHardening.asn:751"
+            ".asl/mem/tasks/backlog.asn:87"
+          ]
+          :evidence "76 occurrences of kebab-case property keys (:vfs-fork, :vfs-merge, :in-flight, :agent-action) inside task definitions."
+          :remediation "Normalize all property keys to strict camelCase without hyphens per D52.")
+      ]
+    )
+
+    (:section
+      :id "adr-drift"
+      :title "ADR Drift Analysis (D35-D82)"
+      :findings [
+        (:finding
+          :id "ADR-DRIFT-01"
+          :severity :critical
+          :adr :D77
+          :name "Python Dependency Retained and Invoked in Build"
+          :citations [
+            "asl/tools/gen_engine_header.sh:13-28"
+            ".asl/mem/dependencies.asn:25-38"
+            ".asl.config.asn:88"
+            "editorial-matrix/README.md:49-56"
+            "editorial-matrix/.github/workflows/syndicate_cron.yml:53"
+            "editorial-matrix/CALENDAR_AND_DRIP_CADENCE.md:53"
+          ]
+          :evidence "gen_engine_header.sh invokes python3 -c during engine compilation; dependencies.asn retains python3 with :actionPlan :retain; .asl.config.asn defines task tbench:package calling python3; editorial-matrix relies on python3."
+          :remediation "Replace python3 -c with xxd -i or pure C/ASL; update dependencies.asn to mark python3 as liquidated; purge obsolete python references in editorial-matrix and .asl.config.asn.")
+
+        (:finding
+          :id "ADR-DRIFT-02"
+          :severity :critical
+          :adr :D79
+          :name "Shell Script Driver and Fragmented Binary Consolidation"
+          :citations [
+            "asl/asl:1-937"
+            "asl/asl:37-930"
+            "asl/tools/engine_js.h:1-8258"
+            "asl/tools/gen_engine_header.sh:5"
+          ]
+          :evidence "A 937-line shell script asl/asl remains active and is the target of ~/.local/bin/asl. The launch subcommand is implemented purely in Bash rather than compiled binary. The binary embeds engine_js.h generated from untracked /tmp/engine.js."
+          :remediation "Port launch subcommand into native C/ASL; make ~/.local/bin/asl point directly to compiled asl binary; track JavaScript evaluator source under version control.")
+
+        (:finding
+          :id "ADR-DRIFT-03"
+          :severity :critical
+          :adr :D80
+          :name "Workspace Visibility Airgap Unenforced in Toolchain"
+          :citations [
+            "mem/src/visibility_scope.asl:1-79"
+            "mem/tests/visibility_scope_test.asl:1-100"
+            "asl/tools/asl.c:128-135"
+          ]
+          :evidence "mem/src/visibility_scope.asl defines 3-tier visibility, but is never invoked by asl.c. asl.c is_safe_path uses crude prefix matching without trailing delimiter checks. visibility_scope_test.asl throws ERR_UNBOUND_SYMBOL: vs/make-visibility-context at runtime."
+          :remediation "Integrate visibility_scope logic into asl.c path resolution; fix is_safe_path boundary checks; fix module import resolution so vs/make-visibility-context binds cleanly.")
+
+        (:finding
+          :id "ADR-DRIFT-04"
+          :severity :critical
+          :adr :D81
+          :name "Evaluator Error Swallowing and Faked Assertion Receipts"
+          :citations [
+            "asl/tools/engine_js.h:3970-3975"
+            "asl/tools/asl.c:3408-3416"
+            "asl/tools/asl.c:2429-2445"
+            "scripts/run-gate-tests.sh:54-61"
+            "asl/tools/asl.c:352"
+            "asl/tools/asl.c:1200-1250"
+          ]
+          :evidence "Evaluator explicitly exits 0 on ERR_UNBOUND_SYMBOL; 50% of test suites in mem/tests/ (17/34) exit with 0 assertions executed; asl test without arguments scans directory and returns 0 without running tests; Gate 5 counts assertions via strstr in text files; run-gate-tests.sh swallows syntax and runtime crashes; asl.c 1024-byte buffer truncates write ops; asl.c returns blind ok on unimplemented ops."
+          :remediation "Remove ERR_UNBOUND_SYMBOL exit-0 swallow in engine; execute tests when asl test is called without arguments; record genuine runtime assertion counts in Gate 5; enforce non-zero failure in run-gate-tests.sh; replace static buffers with dynamic StrBuf; emit :ERR_UNIMPLEMENTED for stubbed ops.")
+
+        (:finding
+          :id "ADR-DRIFT-05"
+          :severity :critical
+          :adr :D70
+          :name "Missing Dependency Audit Subcommand"
+          :citations [
+            "asl/tools/asl.c:3329-3337"
+            ".asl/mem/dependencies.asn:25-38"
+          ]
+          :evidence "asl audit dependencies exits with code 1; command is missing in C toolchain handler."
+          :remediation "Implement dependencies subcommand in asl.c audit handler; reconcile dependencies.asn with D77 zero-Python invariant.")
+
+        (:finding
+          :id "ADR-DRIFT-06"
+          :severity :critical
+          :adr :D75
+          :name "Universal WASM Core Completely Absent"
+          :citations [
+            "asl/tools/asl.c:19"
+            "asl/bin/"
+          ]
+          :evidence "Zero .wasm files exist in repository; asl-core.wasm is absent; asl.c remains hard-linked to Apple macOS JavaScriptCore.framework."
+          :remediation "Execute Phase438 and Phase440 tasks to build portable WASM core substrate.")
+
+        (:finding
+          :id "ADR-DRIFT-07"
+          :severity :moderate
+          :adr :D68
+          :name "Missing Package-Scoped Memory Directories"
+          :citations [
+            "agent/"
+            "agent-core/"
+            "agent-bus/"
+            "crawler/"
+            "intel/"
+            "voice/"
+            "vdom/"
+          ]
+          :evidence "Only asl/ and mem/ maintain local memory directories; the remaining 15 sub-repositories lack local mem/ directories, centralizing everything into root .asl/mem/."
+          :remediation "Provision localized package-scoped memory directories where domain tasks warrant autonomy, or formally scope D68 to multi-workspace federation.")
+
+        (:finding
+          :id "ADR-DRIFT-08"
+          :severity :minor
+          :adr :D46
+          :name "Deprecated Sigil Shortcode Mentions in Docs and Skills"
+          :citations [
+            "asl/.agents/skills/asl/SKILL.md:66"
+            "asl/skills/asl/SKILL.md:64"
+            "asl/docs/CONTEXT_ECONOMY_GUIDELINES.md:50"
+            "asl/docs/blog/05-token-economy-and-structural-compression.md:119"
+            "asl/llms-full.txt:88"
+          ]
+          :evidence "Deprecated @d-1234, @d-9942, @s02, @d01 sigil mentions persist in documentation and skill definitions."
+          :remediation "Batch replace with bare capital alphanumeric shortcodes (D1..D82).")
+
+        (:finding
+          :id "ADR-DRIFT-09"
+          :severity :minor
+          :adr :D82
+          :name "Editorial Web Design System Colors and Grid Not Updated"
+          :citations [
+            "asl/web/src/index.css:7-18"
+            "asl/web/src/components/Hero.asl:8"
+          ]
+          :evidence "Web surface retains legacy purple palette (--signal: 126 34 206) and max-w-6xl rounded card layouts."
+          :remediation "Execute Task44801-Task44806 to replace purple gradients with graphite neutral palette and 72rem/80rem editorial layout.")
+      ]
+    )
+
+    (:section
+      :id "orphans-and-tasks"
+      :title "Orphan, Tasks and Dead Code Detection"
+      :findings [
+        (:finding
+          :id "TSK-01"
+          :severity :critical
+          :name "Unmaterialized Acceptance Framework for Phases 436-448"
+          :citations [
+            ".asl/mem/tasks/Phase436LanguageSemanticsGroundTruth.asn:9"
+            ".asl/mem/tasks/Phase436LanguageSemanticsGroundTruth.asn:41"
+            ".asl/mem/tasks/Phase438LanguageOptimizationAndPortableCore.asn:280"
+            ".asl/mem/tasks/Phase438LanguageOptimizationAndPortableCore.asn:318"
+          ]
+          :evidence "262 task gates across Phases 436-448 reference tests/acceptance/d81/SuperviseGate.sh, yet tests/acceptance/ does not exist on disk."
+          :remediation "Construct tests/acceptance/d81/SuperviseGate.sh before executing Phases 436-448.")
+
+        (:finding
+          :id "TSK-02"
+          :severity :critical
+          :name "Backlog and InFlight Buffer State Decay"
+          :citations [
+            ".asl/mem/tasks/backlog.asn:1-229"
+            ".asl/mem/tasks/InFlight.asn:7-13"
+          ]
+          :evidence "All 16 tasks in backlog.asn and all 5 tasks in InFlight.asn are marked :completed. TBacklog04 gate invokes unrecognized asl tokens; TBacklog03 has vacuous gate; TBacklog01 and TBacklog02 fail on permission block."
+          :remediation "Drain completed tasks from InFlight.asn and backlog.asn into historical milestone records; repair broken and vacuous gate commands.")
+
+        (:finding
+          :id "TSK-03"
+          :severity :critical
+          :name "Dangling Package asl-gateway"
+          :citations [
+            "asl-gateway/manifest.asn:1"
+            ".asl.config.asn:83"
+            "genseam.code-workspace:19"
+            ".gitmodules:1-68"
+            "pnpm-workspace.yaml:1-20"
+          ]
+          :evidence "asl-gateway contains full source code and is configured in workspace and config, but lacks .git and is omitted from .gitmodules and pnpm-workspace.yaml."
+          :remediation "Either initialize asl-gateway as a registered Git submodule or merge its modules into agent-bus.")
+
+        (:finding
+          :id "TSK-04"
+          :severity :critical
+          :name "Dead Configuration and Broken Binaries"
+          :citations [
+            ".asl.config.asn:90"
+            "bin/asl-skills:3"
+            "scripts/run-gate-tests.sh:56"
+          ]
+          :evidence ".asl.config.asn references missing scratch/harbor/package_submission.py; bin/asl-skills calls unimplemented asl skill; scripts/run-gate-tests.sh swallows syntax and runtime crashes."
+          :remediation "Remove dead config task; update bin/asl-skills to dispatch valid batch RPC; amend run-gate-tests.sh to fail on any non-zero test runner exit code.")
+
+        (:finding
+          :id "TSK-05"
+          :severity :moderate
+          :name "Tasks Missing Invariants or DependsOn Metadata"
+          :citations [
+            ".asl/mem/tasks/AddieVoiceSupervisorAndTeamPool.asn:15-75"
+            ".asl/mem/tasks/AslCodecUniversalTranspilerSuite.asn:8-56"
+            ".asl/mem/tasks/NativeAslBenchmarkHarnessTb4.asn:8-44"
+            ".asl/mem/tasks/backlog.asn:5-215"
+            ".asl/mem/tasks/Phase432UniversalPythonEradicationAndPureAslSelfHosting.asn:8-240"
+            ".asl/mem/tasks/Phase433CrossPlatformWasmCoreAndBrowserRuntime.asn:8-210"
+            ".asl/mem/tasks/Phase434SovereignSingleBinaryAslConsolidation.asn:8-210"
+            ".asl/mem/tasks/Phase435ScopedWorkspaceVisibilityAndSovereignDiscovery.asn:8-132"
+          ]
+          :evidence "88 tasks across 18 task files lack mandatory :invariants or :dependsOn attributes."
+          :remediation "Backfill missing attributes across task definitions.")
+
+        (:finding
+          :id "TSK-06"
+          :severity :moderate
+          :name "Phantom Paths in Owns of Completed Tasks"
+          :citations [
+            ".asl/mem/tasks/NativeAslBenchmarkHarnessTb4.asn:40"
+            ".asl/mem/tasks/Phase412HolisticAuditAndCamelCaseOptimization.asn:138"
+            ".asl/mem/tasks/Phase428FullEcosystemIntegrityRedundancyAndEfficiencyMasterAudit.asn:259"
+            ".asl/mem/tasks/Phase428FullEcosystemIntegrityRedundancyAndEfficiencyMasterAudit.asn:411"
+            ".asl/mem/tasks/Phase428FullEcosystemIntegrityRedundancyAndEfficiencyMasterAudit.asn:449"
+            ".asl/mem/tasks/Phase428FullEcosystemIntegrityRedundancyAndEfficiencyMasterAudit.asn:487"
+          ]
+          :evidence "7 file paths declared in :owns of completed tasks (agent/src/swarm.asl, intel/tests/health_test.asl, scratch/eddie_harbor.py, web-api-search/src/dialectical.asl, vdom/src/diff.asl, voice/src/audio_capture.asl, voice/src/voice_intel.asl) are absent on disk."
+          :remediation "Reconcile :owns declarations with actual file trees.")
+
+        (:finding
+          :id "TSK-07"
+          :severity :moderate
+          :name "Unmerged Remote Git Branch in Submodule"
+          :citations ["asl/remotes/origin/feat/homepage-redesign-and-logo-updates-13104582814312318196"]
+          :evidence "Submodule asl contains an unmerged remote branch with commit fafb1b9."
+          :remediation "Audit and either merge or delete the stale remote tracking branch.")
+
+        (:finding
+          :id "TSK-08"
+          :severity :minor
+          :name "Unused Exported Symbols in Package Grammars"
+          :citations [
+            "agent-core/grammar.asn:27-142"
+            "asl/grammar/grammar.asn:65"
+            "asl/packages/asl-sh/grammar.asn:139"
+            "crawler/grammar.asn:18-90"
+            "harness/grammar.asn:970-1266"
+            "intel/grammar.asn:110"
+            "vdom/grammar.asn:135"
+            "web-api-search/grammar.asn:15-67"
+          ]
+          :evidence "30 symbols exported in grammar.asn files across 8 packages have 0 usages in any source or test file."
+          :remediation "Deprecate and prune unused symbols during Phase 438 consolidation pass.")
+      ]
+    )
+
+    (:section
+      :id "boundary-universalism"
+      :title "Boundary Universalism vs Local Autonomy (D34, C3)"
+      :findings [
+        (:finding
+          :id "BU-01"
+          :severity :critical
+          :name "Duplicate Shell Argument Escaping"
+          :citations [
+            "asl/packages/asl-text/src/escape.asl:37"
+            "asl/packages/asl-codec/src/sh-transpile.asl:38"
+          ]
+          :evidence "escape-sh-arg is mandated by D34 to reside in asl-text/escape. asl-codec/sh-transpile defines a local duplicate wrapper."
+          :remediation "Remove local escape-sh-arg from asl-codec/sh-transpile; import from asl-text/escape.")
+
+        (:finding
+          :id "BU-02"
+          :severity :critical
+          :name "Fragmented S-Expression Delimiter Balancing"
+          :citations [
+            "harness/src/anti_hallucination.asl:54"
+            "harness/src/normalizer.asl:40"
+            "harness/src/fsm-normalizer.asl:137"
+            "asl/web/asl-src/components/InBrowserEddie.asl:67"
+            "asl/web/asl-src/components/InBrowserAddie.asl:67"
+          ]
+          :evidence "5 separate implementations of delimiter balancing logic exist across harness and web components instead of being centralized in asl-parser/src/balance.asl."
+          :remediation "Promote balance-delimiters into asl-parser/src/balance.asl as a canonical exported function; import across harness and web.")
+
+        (:finding
+          :id "BU-03"
+          :severity :critical
+          :name "Proliferation of strip-quotes and strip-colon Across Packages"
+          :citations [
+            "agent-core/src/protocol.asl:71"
+            "asl/packages/asl-codec/src/yaml-transpile.asl:35"
+            "asl/packages/asl-codec/src/yaml-transpile.asl:43"
+            "asl/packages/asl-codec/src/transpile.asl:42"
+            "asl/packages/asl-codec/src/transpile.asl:49"
+            "asl/packages/asl-codec/src/csv-transpile.asl:37"
+            "asl/packages/asl-codec/src/csv-transpile.asl:44"
+            "asl/packages/asl-codec/src/svg-transpile.asl:39"
+            "asl/packages/asl-codec/src/core/asn.asl:70"
+            "asl/packages/asl-codec/src/toml-transpile.asl:35"
+            "asl/packages/asl-codec/src/toml-transpile.asl:43"
+            "asl/packages/asl-cli/src/asn_cmd.asl:19"
+            "harness/src/config.asl:334"
+            "harness/src/deps.asl:77"
+          ]
+          :evidence "strip-quotes is independently implemented 9 times and strip-colon 5 times across 4 packages."
+          :remediation "Centralize strip-quotes and strip-colon in asl-text/src/string.asl and delete all 14 duplicate functions.")
+
+        (:finding
+          :id "BU-04"
+          :severity :moderate
+          :name "Duplicate BPE Token Estimation and Compaction Math"
+          :citations [
+            "asl/packages/asl-codec/src/yaml-transpile.asl:18"
+            "asl/packages/asl-codec/src/yaml-transpile.asl:26"
+            "asl/packages/asl-codec/src/toml-transpile.asl:18"
+            "asl/packages/asl-codec/src/toml-transpile.asl:26"
+            "asl/packages/asl-codec/src/csv-transpile.asl:20"
+            "asl/packages/asl-codec/src/csv-transpile.asl:28"
+            "asl/packages/asl-codec/src/svg-transpile.asl:22"
+            "asl/packages/asl-codec/src/svg-transpile.asl:30"
+            "asl/packages/asl-codec/src/asnl.asl:33"
+            "asl/packages/asl-codec/src/asnl.asl:41"
+            "asl/packages/asl-codec/src/sh-transpile.asl:21"
+            "asl/packages/asl-codec/src/sh-transpile.asl:29"
+            "asl/packages/asl-codec/src/transpile.asl:25"
+            "asl/packages/asl-codec/src/transpile.asl:33"
+            "agent-core/src/prompt_tree.asl:31"
+            "asl/packages/asl-plugin/src/dynamic_tool.asl:182"
+            "asl/packages/asl-sh/src/core/process.asl:145"
+            "intel/src/preload.asl:48"
+            "harness/src/stream_demuxer.asl:56"
+            "harness/src/context_assembler.asl:53"
+            "harness/src/tool-transpiler.asl:16"
+          ]
+          :evidence "estimate-tokens is copy-pasted across 14 source files and calc-savings across 8 files."
+          :remediation "Centralize estimate-tokens and calc-savings in asl-text/src/text.asl or asl-text/tokens.asl.")
+
+        (:finding
+          :id "BU-05"
+          :severity :moderate
+          :name "Duplicate Delimited Substring Extraction"
+          :citations [
+            "asl/packages/asl-help/src/help_node.asl:62"
+            "asl/packages/asl-codec/src/compact_notations.asl:250"
+            "mem/src/checkpoint.asl:20"
+            "mem/src/pointer_orchestrator.asl:62"
+            "mem/src/telemetry.asl:29"
+          ]
+          :evidence "extract-between is duplicated across 5 files in asl-help, asl-codec, and mem."
+          :remediation "Place extract-between into asl-text/src/text.asl as txt/extract-between.")
+
+        (:finding
+          :id "BU-06"
+          :severity :moderate
+          :name "Ad-Hoc String Slicing of S-Expressions in Protocol Translators"
+          :citations [
+            "harness/src/asn_protocol_agent.asl:90-120"
+            "harness/src/prompt_translator.asl:89-126"
+            "harness/src/llm_protocol.asl:52-120"
+          ]
+          :evidence "Protocol translation modules parse S-expressions with manual string search and substring loops instead of using asl-parser or asl-codec AST structures."
+          :remediation "Replace fragile manual string search loops with standard S-expression node traversal.")
+
+        (:finding
+          :id "BU-07"
+          :severity :minor
+          :name "Conflicting Implementations of clean-diff-path"
+          :citations [
+            "asl/packages/asl-sh/src/git_diff.asl:36"
+            "asl/packages/asl-sh/src/github.asl:511"
+          ]
+          :evidence "Two functions share the name clean-diff-path in asl-sh with incompatible prefix and suffix stripping semantics."
+          :remediation "Unify into a single robust clean-diff-path function in asl-sh/src/git_diff.asl.")
+
+        (:finding
+          :id "BU-08"
+          :severity :minor
+          :name "Duplicated Vector Math in mem and voice"
+          :citations [
+            "mem/src/math.asl:42-47"
+            "mem/src/store.asl:41-45"
+            "mem/src/driver.asl:27"
+            "voice/src/speaker_match.asl:53"
+          ]
+          :evidence "mem/store.asl, mem/driver.asl, and voice/speaker_match duplicate vector dot product, norm, and cosine similarity calculations."
+          :remediation "Standardize vector operations inside mem/src/math.asl and export to consumers.")
+      ]
+    )
+
+    (:section
+      :id "anti-overengineering"
+      :title "Anti-Overengineering and Adequacy Audit"
+      :findings [
+        (:finding
+          :id "AO-01"
+          :severity :critical
+          :name "Pure Hardcoded Mock in vdom/src/asn_svg.asl"
+          :citations [
+            "vdom/src/asn_svg.asl:126"
+            "vdom/tests/asn-svg-test.asl:4"
+          ]
+          :evidence "asn-to-svg in vdom does not parse input ASN; if the string starts with (:svg, it returns a hardcoded 320x320 rectangle XML, tested only by its own test."
+          :remediation "Delete vdom/src/asn_svg.asl and test; route all ASN-to-SVG transpilation through production compiler in asl-codec/src/svg-transpile.asl.")
+
+        (:finding
+          :id "AO-02"
+          :severity :critical
+          :name "Simulated Mocks in harness/src/engine_gateway.asl"
+          :citations [
+            "harness/src/engine_gateway.asl:42-60"
+            "harness/src/context_assembler.asl:228"
+          ]
+          :evidence "dispatch-tier-0-ast, dispatch-tier-1-mem, and dispatch-tier-2-web have zero module imports and return synthetic mock strings during context assembly."
+          :remediation "Wire engine_gateway to invoke real queries against asl-intel, mem/vfs, and web-api-search, or eliminate gateway indirection.")
+
+        (:finding
+          :id "AO-03"
+          :severity :critical
+          :name "Foreign TikTok Filter Subsystem in pack/src/targets/lashes.asl"
+          :citations [
+            "pack/src/targets/lashes.asl:1"
+            "pack/src/targets/lashes.asl:595"
+          ]
+          :evidence "pack/src/targets/lashes.asl is a 595-line camera shader and landmark generator for TikTok Effect House inside core compiler packaging toolchain."
+          :remediation "Evict lashes.asl from core package; relocate to scratch or external application repository.")
+
+        (:finding
+          :id "AO-04"
+          :severity :moderate
+          :name "Redundant Facade Indirection in mem/src/tasks.asl"
+          :citations [
+            "mem/src/tasks.asl:1-230"
+            "mem/src/tasks_store.asl:1"
+            "mem/src/tasks_dag.asl:1"
+            "mem/src/tasks_lease.asl:1"
+          ]
+          :evidence "mem/src/tasks.asl is a 230-line pure facade containing 45 one-line forwarding functions delegating to tasks_store, tasks_dag, and tasks_lease."
+          :remediation "Inline callers to consume tasks_store, tasks_dag, or tasks_lease directly; deprecate pass-through facade.")
+
+        (:finding
+          :id "AO-05"
+          :severity :moderate
+          :name "Premature Polymorphic Wrapper in asl-codec/transpile.asl"
+          :citations ["asl/packages/asl-codec/src/transpile.asl:391-470"]
+          :evidence "transpile.asl wraps format-specific transpilers solely to repackage distinct result structs into a generic TranspileResult record."
+          :remediation "Allow consumers to invoke yt/yaml-to-asn, ct/csv-to-asn, and tt/toml-to-asn directly; eliminate wrapper.")
+
+        (:finding
+          :id "AO-06"
+          :severity :moderate
+          :name "Stale Duplicate File pack/src/ffi-linker.asl"
+          :citations [
+            "pack/src/ffi-linker.asl:1"
+            "pack/src/ffi_linker.asl:1"
+          ]
+          :evidence "pack/src contains both ffi-linker.asl (2342 bytes) and ffi_linker.asl (2828 bytes) declaring the same module."
+          :remediation "Delete pack/src/ffi-linker.asl; retain pack/src/ffi_linker.asl.")
+
+        (:finding
+          :id "AO-07"
+          :severity :moderate
+          :name "Decoupled Speculative Packages with Zero Monorepo Consumers"
+          :citations [
+            "asl-quantum/src/quantum.asl:1"
+            "asl-arduino/src/gpio.asl:1"
+            "asl-contracts/src/spec.asl:1"
+            "asl-gateway/src/server.asl:1"
+            "crawler/src/crawler.asl:1"
+            "editorial-matrix/src/article-projector.asl:1"
+          ]
+          :evidence "Six packages have zero production callers across agent, harness, mem, or asl. editorial-matrix contains launchd plists with hardcoded local paths."
+          :remediation "Decouple non-core experimental packages or mark explicitly as speculative research plugins.")
+      ]
+    )
+
+    (:section
+      :id "proactive-hardening"
+      :title "Proactive Hardening Opportunities"
+      :findings [
+        (:finding
+          :id "PH-01"
+          :severity :critical
+          :name "O(N*M) Character Encoding and Excessive Allocations in vfs-cas-hash"
+          :citations [
+            "mem/src/vfs.asl:67-115"
+            "mem/src/simhash.asl:10"
+            "mem/src/structural_editor.asl:19"
+            "mem/src/subtree_cache.asl:19"
+          ]
+          :evidence "char-to-code performs string-index-of across a 95-character string literal for every character. For a 50KB file, vfs-cas-hash runs string-chars (allocating 50,000 strings), 50,000 linear searches, and 50,000 intermediate 8-element lists in the fold accumulator."
+          :remediation "Add native string-char-code-at primitive to asl/tools/asl.c and prelude.asn. Update vfs-cas-hash and simhash to use integer character codes directly.")
+
+        (:finding
+          :id "PH-02"
+          :severity :moderate
+          :name "Linear Cascades of string-replace in Text Cleaning"
+          :citations [
+            "mem/src/simhash.asl:73-95"
+            "harness/src/normalizer.asl:50-60"
+          ]
+          :evidence "strip-punct executes 20 sequential full-string copies via nested string-replace calls for every text snippet. normalize-asl-fragment executes 7 full-string replacements."
+          :remediation "Implement single-pass character filter in asl-text using string-chars and a set or predicate.")
+
+        (:finding
+          :id "PH-03"
+          :severity :moderate
+          :name "Redundant Memory Chunk Constructors"
+          :citations [
+            "mem/src/hydration.asl:26"
+            "mem/src/amnesia.asl:44"
+            "mem/src/view_layer.asl:18"
+            "mem/src/summary_search.asl:20"
+          ]
+          :evidence "make-memory-chunk is identically defined across 4 separate files in mem/src/."
+          :remediation "Define make-memory-chunk once in mem/src/records.asl or mem/src/store.asl and export.")
+
+        (:finding
+          :id "PH-04"
+          :severity :minor
+          :name "Single-Line Integer-to-String Wrappers"
+          :citations [
+            "pack/src/targets/preview_server.asl:9"
+            "pack/src/targets/lashes.asl:31"
+            "pack/src/targets/preview.asl:8"
+          ]
+          :evidence "int-to-string is re-declared in 3 target files solely to call string-from-int64 n."
+          :remediation "Call string-from-int64 or str directly, eliminating local wrapper functions.")
+      ]
+    )
+  ]
+
+  :remediation-roadmap [
+    (:phase
+      :id "Phase450LanguageGroundTruthAndVerificationHardening"
+      :priority :P0
+      :status :completed
+      :invariants [:C1 :C2 :C3 :D81]
+      :actions [
+        "Remove ERR_UNBOUND_SYMBOL exit-0 swallow in engine_js.h / engine.js"
+        "Construct tests/acceptance/d81/SuperviseGate.sh acceptance gate runner"
+        "Fix Gate 5 in asl.c to verify actual runtime assertions executed"
+        "Replace static 1024-byte buffers in asl.c with dynamic StrBuf"
+        "Drain completed tasks from InFlight.asn and backlog.asn"
+        "Purge python3 from gen_engine_header.sh and dependencies.asn"
+      ]
+    )
+    (:phase
+      :id "Phase451HygieneAndInvariantRestoration"
+      :priority :P1
+      :status :completed
+      :invariants [:C1 :C2 :C3 :C5 :D51 :D52]
+      :actions [
+        "Purge C1 raw comments and HTML comment tags across asl/web"
+        "Purge C2 Unicode emojis from runtime code in asl-registry, harness, and search"
+        "Relocate foreign JavaScript from PlaygroundView.asl into static external bundle"
+        "Execute automated CamelCase migration pass across 1,589 test suite functions"
+        "Eradicate package name sigils in published_claims.asn and dependencies.asn"
+        "Backfill D52 mandatory context fields across legacy Phase 382..400 tasks"
+      ]
+    )
+    (:phase
+      :id "Phase452BoundaryUniversalismAndSubsystemDeBloat"
+      :priority :P2
+      :status :completed
+      :invariants [:C3 :D34 :TwoStrikesRule]
+      :actions [
+        "Centralize strip-quotes, strip-colon, and estimate-tokens in asl-text"
+        "Promote balance-delimiters to asl-parser/src/balance.asl and delete duplicates"
+        "Delete mock vdom/src/asn_svg.asl and wire engine_gateway to real modules"
+        "Evict lashes.asl from pack/src/targets/"
+        "Delete stale duplicate pack/src/ffi-linker.asl"
+        "Resolve asl-gateway submodule registration in .gitmodules and pnpm-workspace"
+      ]
+    )
+    (:phase
+      :id "Phase453FullAuditAndGapCertification"
+      :priority :P3
+      :status :pending
+      :invariants [:C1 :C2 :C3 :D81 :D52]
+      :actions [
+        "Re-run sovereign consistency audit across all ADRs and task ledgers"
+        "Verify full 7-gate pure ASL verification suite passes with zero warnings"
+        "Certify zero mock debt, zero comment violations, and full test qualification"
+        "Generate final gap audit certificate and update architecture documentation"
+      ]
+    )
+  ]
+)

@@ -1,0 +1,33 @@
+(:adr
+  :id "ADR-0051"
+  :shortcode "d51"
+  :title "Token Efficiency Format, CamelCase Conventions, and Rationality-Flagged Grammar Registries"
+  :status :active
+  :date "2026-09-09"
+  :cluster "architecture/governance"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "Pretrained LLM tokenizers (BPE / SentencePiece) incur a heavy token-splitting penalty on hyphenated S-expression identifiers (kebab-case), splitting multi-word symbols at every hyphen. Conversely, agents operating in Lisp-like homoiconic environments default to kebab-case unless explicitly guided, wasting 20-50% tokens on composite constructs. Additionally, legacy dash-zero markers (d-0001..d-0050) consume 3-4 BPE tokens instead of 1, and grammar registries lacked fine-grained rationality classification."
+  :drivers [
+    "BPE Token Compression: CamelCase merges subwords with capital transitions, saving 20-50% tokens on composite names"
+    "Capital Alphanumeric Markers: D1..D51, C1..C5, L1..L10, R1..R10 compress marker references from 4 tokens to 1 token"
+    "Hybrid Naming Architecture: Reserve CamelCase for composite constructs, types, and test suites while preserving 1-to-2 token modular primitives (txt/*, v/*)"
+    "Dual-Tier Rationality Annotations: Classify symbols > 2 tokens as :rationality :absolute or :contextSpecific with :contextDependent boolean"
+    "Internal and Cross-Package Duplicate Prevention: Zero duplicate declarations within packages and harmonized rationales across monorepo"
+    "Standard Progressive Disclosure: Integrate guidance into AGENTS.md, CLAUDE.md, TOKEN_CONVENTIONS.md, and on-demand agent skills"
+  ]
+  :decision "Adopt the Token Efficiency Format monorepo-wide: migrate marker format from dash-zero to capital alphanumeric shortcodes (D1..D51, C1..C5); establish CamelCase naming conventions for composite constructs, structs, typestates, and test suites; enforce dual-tier rationality flags in grammar registries; provide automated audit tooling (asl audit tokens, asl tokens --camel); and integrate binding guidelines across all standard agent documentation methods."
+  :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d47" "d48" "d50"]
+  :tasks [
+    "Task40001"
+    "Task40002"
+    "Task40003"
+    "Task40004"
+    "Task40005"
+  ]
+  :consequences [
+    (:pos "Saves 1,610 tokens across grammar registries and 25-50% on compound names throughout the codebase")
+    (:pos "Reduces marker token footprint by 75% per reference across intent, roadmap, and tasks")
+    (:pos "Provides deterministic guidance so autonomous agents generate token-efficient code without hesitation")
+    (:pos "Preserves pure ASL zero-comment and zero-emoji invariants (C1, C2) and bare-symbol basis (C5)")
+    (:neg "Requires agents to distinguish between 1-2 token atomic primitives and composite CamelCase constructs")
+  ])

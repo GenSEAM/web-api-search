@@ -1,0 +1,38 @@
+(:adr
+  :id "ADR-0052"
+  :shortcode "D52"
+  :title "Enriched Task Context Standard, Bidirectional ADR-Task-Intent Linkage, and Holistic Consistency Audit Engine"
+  :status :active
+  :date "2026-09-09"
+  :cluster "architecture/governance"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "In multi-agent autonomous engineering across backlogs, active phase plans, and in-flight session buffers, decomposing goals into atomic tasks frequently causes critical architectural context to evaporate. Motivation, usage context, expected outcomes, alternative design variations, and failure scenarios are omitted or decoupled from ADRs. Consequently, ADRs become static records lacking traceable implementation tasks, while tasks execute without explicit grounding in governing decisions. Additionally, records drift without periodic consistency verification."
+  :drivers [
+    "Context Preservation Invariant: Zero context loss when planning, breaking down, or triaging tasks across all 3 storage tiers"
+    "Enriched Task Metadata: Standardizing motivation, purpose, usage context, expected outcomes, invariants, variations, and failure scenarios"
+    "Bidirectional Traceability: Tasks declare governing ADRs (:adr, :decision); ADRs declare implementing tasks (:tasks); Intent ledger binds both"
+    "Multi-Tier Consistency: Continuous alignment between Tier 1 backlog, Tier 2 phase DAG, Tier 3 in-flight session buffer, and intent"
+    "Periodic Consistency Audit Engine: Self-hosted 'asl audit consistency' command verifying zero orphan records, broken links, or context voids"
+    "Standard Progressive Disclosure: Codifying task templates in planning skills (asl-plan, steps-plan, asl-toolbelt) and AGENTS.md"
+  ]
+  :decision "Standardize the Enriched Task Context format across all monorepo task collections, backlogs, and in-flight buffers; enforce bidirectional linkage between ADRs, tasks, and intent; require all newly generated plans to capture motivation, purpose, context, outcomes, invariants, variations, and failure scenarios; and deploy the Holistic Consistency Audit Engine (asl audit consistency) to verify record synchronization deterministically."
+  :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51"]
+  :tasks [
+    "Task40101"
+    "Task40102"
+    "Task40103"
+    "Task40104"
+    "Task40105"
+    "Task40106"
+  ]
+  :outcomes [
+    "Eliminates context decay across multi-agent task lifecycles"
+    "Guarantees 100% bidirectional traceability between architectural decisions and executable work items"
+    "Provides automated 'asl audit consistency' tool to prevent documentation and ledger drift"
+  ]
+  :consequences [
+    (:pos "Ensures all autonomous agents operate with complete epistemic context during implementation and recovery")
+    (:pos "Unifies backlog, active phase, and in-flight schemas under a single coherent specification")
+    (:pos "Catches broken ADR references, orphan tasks, and missing metadata via automated consistency audit")
+    (:neg "Requires planners to provide richer metadata upfront when formulating work items")
+  ])

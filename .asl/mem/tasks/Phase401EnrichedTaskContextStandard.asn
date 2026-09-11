@@ -1,0 +1,279 @@
+(:taskCollection
+  :id "Phase401EnrichedTaskContextStandard"
+  :createdAt 1773285000000
+  :status "done"
+  :summary "Enriched Task Context Standard, Bidirectional ADR Linkage, and Holistic Consistency Audit Engine"
+  :phase "Phase401EnrichedTaskContextStandard"
+  :tasks [
+    (:task
+      :id "Task40101"
+      :parentId ""
+      :phase "phase-401"
+      :title "Architecture Decision Record ADR-0052 & Decision Registry Settle"
+      :kind :architecture
+      :lane "governance"
+      :state :done
+      :priority :high
+      :ownerRole "architect"
+      :createdAt 1773285000000
+      :updatedAt 1773285000000
+      :startedAt 1773285000000
+      :completedAt 1773285100000
+      :motivation "Address context decay in multi-agent workflows where task breakdown decouples decisions from tasks"
+      :purpose "Codify Enriched Task Context Standard and Bidirectional ADR-Task-Intent Linkage into immutable ADR-0052"
+      :context "Foundational architectural baseline for task lifecycle governance across all 3 tiers"
+      :outcomes [
+        "ADR-0052 authored in .asl/mem/decisions/Adr0052EnrichedTaskContextAndHolisticConsistencyAudit.asn"
+        "D52 registered in .asl/mem/decisions/decisions.asn, .asl/mem/decisions.asn, and .asl/mem/intent.asn"
+        "Bidirectional :tasks declared in ADR-0052 and ADR-0051"
+      ]
+      :owns [
+        ".asl/mem/decisions/Adr0052EnrichedTaskContextAndHolisticConsistencyAudit.asn"
+        ".asl/mem/decisions/decisions.asn"
+        ".asl/mem/decisions.asn"
+        ".asl/mem/intent.asn"
+      ]
+      :targetSymbols ["ADR-0052" "d52"]
+      :relatedSymbols ["d51" "d46" "d34"]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations ["Unidirectional link rejected as insufficient to prevent documentation drift"]
+      :failureModes ["Dangling ADR references if tasks or shortcodes are mistyped; mitigated by asl audit consistency"]
+      :additionalRequirements ["0 emojis" "0 comments" "Bare capital shortcode D52"]
+      :adr "ADR-0052"
+      :decision "d52"
+      :dependsOn []
+      :gate "test -f .asl/mem/decisions/Adr0052EnrichedTaskContextAndHolisticConsistencyAudit.asn && asl check .asl/mem/decisions/Adr0052EnrichedTaskContextAndHolisticConsistencyAudit.asn .asl/mem/decisions/decisions.asn .asl/mem/decisions.asn .asl/mem/intent.asn"
+      :actionDag [
+        "Draft ADR-0052 with bidirectional :tasks"
+        "Register D52 in decisions.asn"
+        "Register D52 in intent.asn with :tasks"
+        "Verify ASN delimiter balance"
+      ]
+      :acceptanceCriteria ["exit-code 0" "all files balanced"]
+      :stepIndex 1
+      :receipts ["rc-adr-0052"])
+
+    (:task
+      :id "Task40102"
+      :parentId ""
+      :phase "phase-401"
+      :title "Agent Skills Standardization for Enriched Task Context & Consistency Audit"
+      :kind :documentation
+      :lane "skills"
+      :state :done
+      :priority :high
+      :ownerRole "planner"
+      :createdAt 1773285000000
+      :updatedAt 1773285000000
+      :startedAt 1773285100000
+      :completedAt 1773285200000
+      :motivation "Ensure all autonomous agents understand and generate the enriched task schema during planning"
+      :purpose "Enhance asl-plan, steps-plan, and asl-toolbelt skills with schema rules and audit command tooling"
+      :context "Invoked by agents during step-planning, task breakdown, and reflection stages"
+      :outcomes [
+        "asl-plan updated with task-schema and adr-linkage rules"
+        "asl-toolbelt updated with consistency-audit rule and asl-audit-consistency tool"
+        "steps-plan updated with D52 schema standard and verification gate"
+      ]
+      :owns [
+        "asl/.agents/skills/asl-plan/skill.asn"
+        "asl/.agents/skills/asl-plan/SKILL.md"
+        "asl/.agents/skills/asl-toolbelt/skill.asn"
+        "asl/.agents/skills/asl-toolbelt/SKILL.md"
+      ]
+      :targetSymbols ["asl-plan" "asl-toolbelt" "steps-plan"]
+      :relatedSymbols ["ADR-0052"]
+      :invariants ["c1" "c2" "c5" "d52"]
+      :variations ["Markdown-only vs dual ASN/Markdown skills; retained dual projection for agent versatility"]
+      :failureModes ["Agents using stale skill caches; mitigated by updating both local repo and global config skills"]
+      :additionalRequirements ["Token density preservation"]
+      :adr "ADR-0052"
+      :decision "d52"
+      :dependsOn ["Task40101"]
+      :gate "grep -q 'ENRICHED TASK CONTEXT SCHEMA' asl/.agents/skills/asl-plan/skill.asn && grep -q 'HOLISTIC CONSISTENCY AUDIT' asl/.agents/skills/asl-toolbelt/skill.asn"
+      :actionDag [
+        "Update asl-plan skill.asn and SKILL.md"
+        "Update asl-toolbelt skill.asn and SKILL.md"
+        "Update steps-plan SKILL.md"
+        "Verify skill delimiter balance"
+      ]
+      :acceptanceCriteria ["rules present in skill definitions" "asl check passes"]
+      :stepIndex 1
+      :receipts ["rc-skill-052"])
+
+    (:task
+      :id "Task40103"
+      :parentId ""
+      :phase "phase-401"
+      :title "System Epistemic Contract Codification in AGENTS.md & CLAUDE.md"
+      :kind :governance
+      :lane "governance"
+      :state :done
+      :priority :high
+      :ownerRole "architect"
+      :createdAt 1773285000000
+      :updatedAt 1773285000000
+      :startedAt 1773285200000
+      :completedAt 1773285300000
+      :motivation "Establish immutable repository-level mandate for enriched task context and periodic consistency verification"
+      :purpose "Codify Enriched Task Context Standard and Bidirectional ADR Linkage in AGENTS.md and CLAUDE.md"
+      :context "Loaded on every session start and agent system prompt injection"
+      :outcomes [
+        "AGENTS.md section 7 added with complete Enriched Task Context specification"
+        "CLAUDE.md symlink reflection verified"
+        "Shortcode D52 integrated across lexical density rules"
+      ]
+      :owns [
+        "AGENTS.md"
+        "CLAUDE.md"
+      ]
+      :targetSymbols ["AGENTS.md" "CLAUDE.md"]
+      :relatedSymbols ["d52" "d51" "d46"]
+      :invariants ["c1" "c2" "c5" "d46" "d51" "d52"]
+      :variations ["Standalone document vs AGENTS.md; integrated directly to ensure immediate enforcement without context bloat"]
+      :failureModes ["Symlink break between CLAUDE.md and AGENTS.md; verified symlink integrity"]
+      :additionalRequirements ["High lexical density SNR >= 0.75"]
+      :adr "ADR-0052"
+      :decision "d52"
+      :dependsOn ["Task40101"]
+      :gate "grep -q 'Enriched Task Context Standard & Bidirectional ADR Linkage' AGENTS.md && grep -q 'D52' CLAUDE.md"
+      :actionDag [
+        "Update AGENTS.md with section 7 specification"
+        "Verify CLAUDE.md symlink reflection"
+        "Run gate check"
+      ]
+      :acceptanceCriteria ["section 7 present in AGENTS.md and CLAUDE.md" "gate exit 0"]
+      :stepIndex 1
+      :receipts ["rc-agents-052"])
+
+    (:task
+      :id "Task40104"
+      :parentId ""
+      :phase "phase-401"
+      :title "Holistic Consistency Audit Engine Implementation in asl/asl"
+      :kind :feature
+      :lane "engine"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1773285000000
+      :updatedAt 1773285000000
+      :startedAt 1773285300000
+      :completedAt 1773285400000
+      :motivation "Need automated, deterministic tool to detect broken ADR links, orphan tasks, and context decay"
+      :purpose "Implement run_consistency_audit() in asl/asl covering all 5 consistency dimensions with CLI dispatch"
+      :context "Dispatched via 'asl audit consistency' or 'asl consistency' in CI, pre-commit, and agent reflection"
+      :outcomes [
+        "run_consistency_audit function added to asl/asl"
+        "CLI dispatch for 'asl audit consistency' and 'asl consistency' wired"
+        "Help text and diagnostics documented"
+      ]
+      :owns ["asl/asl"]
+      :targetSymbols ["run_consistency_audit"]
+      :relatedSymbols ["run_token_efficiency_audit" "asl-audit"]
+      :invariants ["c1" "c2" "c5" "d52"]
+      :variations ["External script rejected to maintain single extensionless binary invariant"]
+      :failureModes ["Slow filesystem traversal on large monorepos; optimized with targeted glob and regex scanning (<100ms)"]
+      :additionalRequirements ["Zero dependencies beyond python3" "Exit code 0 on pass, 1 on failure"]
+      :adr "ADR-0052"
+      :decision "d52"
+      :dependsOn ["Task40101"]
+      :gate "asl audit consistency && asl consistency"
+      :actionDag [
+        "Implement run_consistency_audit in asl/asl"
+        "Wire CLI dispatch under audit and top-level"
+        "Add help options"
+        "Verify execution and exit codes"
+      ]
+      :acceptanceCriteria ["asl audit consistency exits 0" "all 5 dimensions verified"]
+      :stepIndex 1
+      :receipts ["rc-engine-052"])
+
+    (:task
+      :id "Task40105"
+      :parentId ""
+      :phase "phase-401"
+      :title "Phase-401 Task Ledger & Wave 53 Roadmap Settle"
+      :kind :governance
+      :lane "governance"
+      :state :done
+      :priority :high
+      :ownerRole "planner"
+      :createdAt 1773285000000
+      :updatedAt 1773285000000
+      :startedAt 1773285400000
+      :completedAt 1773285500000
+      :motivation "Establish canonical living exemplar of Enriched Task Context Schema in phase-401 task collection"
+      :purpose "Author Phase401EnrichedTaskContextStandard.asn and register Wave 53 in roadmap.asn"
+      :context "Active wave execution and historical reference for subsequent phase generation"
+      :outcomes [
+        "Phase401EnrichedTaskContextStandard.asn authored with all 6 enriched tasks"
+        "roadmap.asn updated with Wave 53"
+      ]
+      :owns [
+        ".asl/mem/tasks/Phase401EnrichedTaskContextStandard.asn"
+        ".asl/mem/roadmap.asn"
+      ]
+      :targetSymbols ["phase-401" "Wave 53"]
+      :relatedSymbols ["ADR-0052"]
+      :invariants ["c1" "c2" "c5" "d46" "d51" "d52"]
+      :variations ["Backlog vs Phase file; created as active phase file per 3-tier task architecture"]
+      :failureModes ["Roadmap wave count mismatch; verified sequential wave numbering"]
+      :additionalRequirements ["Delimiters balanced" "Valid gate command"]
+      :adr "ADR-0052"
+      :decision "d52"
+      :dependsOn ["Task40101" "Task40102" "Task40103" "Task40104"]
+      :gate "asl check .asl/mem/tasks/Phase401EnrichedTaskContextStandard.asn .asl/mem/roadmap.asn && grep -q 'Wave 53' .asl/mem/roadmap.asn"
+      :actionDag [
+        "Author phase-401 ASN with enriched context fields"
+        "Register Wave 53 in roadmap.asn"
+        "Verify syntax balance"
+      ]
+      :acceptanceCriteria ["phase-401 and roadmap balanced" "Wave 53 registered"]
+      :stepIndex 1
+      :receipts ["rc-phase-401"])
+
+    (:task
+      :id "Task40106"
+      :parentId ""
+      :phase "phase-401"
+      :title "End-to-End Test Suite & Full Ecosystem Verification Gate"
+      :kind :qa
+      :lane "qa"
+      :state :done
+      :priority :high
+      :ownerRole "auditor"
+      :createdAt 1773285000000
+      :updatedAt 1773285000000
+      :startedAt 1773285500000
+      :completedAt 1773285600000
+      :motivation "Provide empirical, falsifiable proof that enriched task schema and consistency audit work end-to-end"
+      :purpose "Author tests/test_enriched_task_context_e2e.sh and execute full 7-tier verification gate (asl gate)"
+      :context "CI and release qualification test"
+      :outcomes [
+        "tests/test_enriched_task_context_e2e.sh authored and passing"
+        "asl audit consistency exits 0"
+        "asl gate exits 0 across all 7 verification tiers"
+      ]
+      :owns ["tests/test_enriched_task_context_e2e.sh"]
+      :targetSymbols ["test_enriched_task_context_e2e.sh"]
+      :relatedSymbols ["ADR-0052" "phase-401"]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations ["Unit test vs End-to-End script; implemented comprehensive e2e test script validating negative and positive cases"]
+      :failureModes ["Silent passing or vacuous assertions; verified strict non-zero assertions and failure rejection"]
+      :additionalRequirements ["Exit code 0" "Executable bit set"]
+      :adr "ADR-0052"
+      :decision "d52"
+      :dependsOn ["Task40105"]
+      :gate "bash tests/test_enriched_task_context_e2e.sh && asl audit consistency && asl gate"
+      :actionDag [
+        "Author tests/test_enriched_task_context_e2e.sh"
+        "Set executable permission"
+        "Run e2e test suite"
+        "Execute asl audit consistency"
+        "Execute asl gate"
+      ]
+      :acceptanceCriteria ["e2e test passes" "consistency audit passes" "asl gate 7/7 passes"]
+      :stepIndex 1
+      :receipts ["rc-e2e-052"])
+  ])

@@ -1,0 +1,165 @@
+(:practicesLedger
+  :version "1.0.0"
+  :package asl-mem
+  :updatedAt 1773286000000
+  :practices [
+    (:practice
+      :id "PRAC-001"
+      :shortcode "p1"
+      :topic "task-decomposition"
+      :title "Atomic Task Decomposition & Bounded Turn Budgeting"
+      :status :active
+      :scope ["mem/tasks" "harness/planner"]
+      :summary "Decompose work items to fit within <= 5 turns, <= 2 owned files, and <= 100 LOC diff to prevent attention decay and context flooding"
+      :protocol [
+        "Planner audits coupling via AST callers and impact before decomposition"
+        "Assign maximum 1-2 tightly coupled files per task under :owns"
+        "Target 2-5 execution turns per implementer session"
+        "Anchor completion on single exact falsifiable gate command"
+      ]
+      :consequence "Eliminates lost-in-the-middle context saturation and prevents compounding divergence across multi-turn sessions")
+
+    (:practice
+      :id "PRAC-002"
+      :shortcode "p2"
+      :topic "reconciliation"
+      :title "Dedicated Reconciliation Bridges for Coupled Tasks"
+      :status :active
+      :scope ["mem/tasks" "agent-bus"]
+      :summary "Insert explicit reconciliation tasks between coupled interface updates instead of forcing implementers to bridge both sides concurrently"
+      :protocol [
+        "Identify upstream tasks modifying shared contracts or type exports"
+        "Schedule dedicated :kind :reconciliation task downstream"
+        "Reconciler does not write business logic, focusing strictly on types and tests"
+        "Execute consistency audit and end-to-end integration gates before unblocking next wave"
+      ]
+      :consequence "Isolates interface alignment from feature logic, preventing creeping contract drift and compilation breakage")
+
+    (:practice
+      :id "PRAC-003"
+      :shortcode "p3"
+      :topic "stigmergy"
+      :title "Stigmergic Clean-Context Handoffs via Physical Receipts"
+      :status :active
+      :scope ["mem/receipts" "harness/worker"]
+      :summary "Pass execution state across agents strictly through disk artifacts and TaskReceipts rather than accumulating unbounded chat history"
+      :protocol [
+        "Completed task records TaskReceipt with exit-code 0 and evaluated assert count"
+        "Subsequent agent is launched in fresh, clean context window"
+        "Prompt receives only enriched task schema, receipt pointers, and target files"
+        "Intermediate scratch files and trial-and-error logs are purged from working context"
+      ]
+      :consequence "Preserves 100% attention fidelity for every subagent turn and eliminates token waste from multi-turn conversational bloat")
+
+    (:practice
+      :id "PRAC-004"
+      :shortcode "p4"
+      :topic "model-routing"
+      :title "Asymmetric Model Capability Routing"
+      :status :active
+      :scope ["harness/supervisor" "harness/model_calibration"]
+      :summary "Route roles to calibrated model tiers: Frontier for planning and audit, Flash for atomic implementation, SLM for bounded formatting"
+      :protocol [
+        "Planner role assigned to deep reasoning models (Claude Sonnet / Gemini Pro)"
+        "Implementer role assigned to fast high-throughput models (Gemini Flash / Claude Haiku)"
+        "Micro-patches, SVG transpilation, and formatting assigned to local SLMs (2B-8B)"
+        "Auditor role assigned to independent clean-context reasoning models"
+      ]
+      :consequence "Optimizes token expenditure, inference latency, and reasoning depth across heterogeneous agent fleets")
+
+    (:practice
+      :id "PRAC-005"
+      :shortcode "p5"
+      :topic "vector-graphics"
+      :title "Safe Vector Art & Pure ASN-to-SVG Transpilation"
+      :status :active
+      :scope ["asl-codec" "asl-svg"]
+      :summary "Generate visual assets using native ASN vector S-expressions (:rc, :circ, :p, :ln, :g, :v) to achieve 50% token compaction and zero XML syntax errors"
+      :protocol [
+        "Always define root viewBox (:v) or width and height (:w, :h)"
+        "Use compact vector primitives rather than verbose XML markup"
+        "Transpile to valid SVG XML via asl codec transpile or svg-transpile module"
+        "Verify bounding box containment and delimiter balance before emission"
+      ]
+      :consequence "Eliminates unclosed XML tags, broken viewBox scaling, and token bloat in UI vector generation")
+
+    (:practice
+      :id "PRAC-006"
+      :shortcode "p6"
+      :topic "attention-budget"
+      :title "Dynamic Attention Budgeting & Context Amnesia Cascades"
+      :status :active
+      :scope ["harness/budget" "mem/amnesia"]
+      :summary "Monitor accumulated prompt tokens and trigger deterministic compaction at 60% of model attention degradation threshold"
+      :protocol [
+        "Track turn count and prompt token volume on every turn via BudgetTracker"
+        "Trigger deterministic compactor when token volume approaches attention cliff"
+        "Offload intermediate scratch state to .asl/mem/tasks/InFlight.asn"
+        "Extract scalar facts and perceptual pointers instead of retaining raw file dumps"
+      ]
+      :consequence "Prevents sudden out-of-context crashes and maintains high instruction following accuracy throughout execution")
+
+    (:practice
+      :id "PRAC-007"
+      :shortcode "p7"
+      :topic "ground-truth"
+      :title "Empirical Ground Truth & Anti-Vacuity Verification"
+      :status :active
+      :scope ["asl-gates" "harness/verifier"]
+      :summary "Enforce strict falsifiability: tests must have the power to fail on baseline, pass with exit 0, and evaluate non-zero assertions"
+      :protocol [
+        "Baseline gate command must fail prior to implementation (:mustFail true)"
+        "Verify process exit code 0 on completion with evaluated assertion count > 0"
+        "Reject tautological assertions like (assert true) or (assert (= 1 1))"
+        "Auditor reviews diff independently with an adversarial stance"
+      ]
+      :consequence "Completely eliminates phantom test coverage, simulated passes, and silent functional regressions")
+
+    (:practice
+      :id "PRAC-008"
+      :shortcode "p8"
+      :topic "boundary-universalism"
+      :title "Boundary Universalism & The Two-Strikes Rule"
+      :status :active
+      :scope ["asl-text" "asl-parser" "mem/vfs"]
+      :summary "Mandate canonical shared helpers for wire and syntax boundaries while protecting local domain autonomy from premature polymorphic abstraction"
+      :protocol [
+        "Escaping, delimiter balancing, and path normalization reside strictly in root packages"
+        "Private duplicate helpers across packages are strictly prohibited (C3)"
+        "Domain-specific typestates and performance loops retain local autonomy"
+        "Extract abstractions only upon observing two or more concrete identical instances"
+      ]
+      :consequence "Prevents helper duplication across 35 packages without introducing brittle monolithic generic frameworks")
+
+    (:practice
+      :id "PRAC-009"
+      :shortcode "p9"
+      :topic "token-economy"
+      :title "Token Efficiency Format & CamelCase Conventions"
+      :status :active
+      :scope ["grammar" "intel"]
+      :summary "Apply CamelCase naming for composite constructs (>2 words) and bare capital markers (C1..C5, D1..D54, P1..P10) to reduce BPE token overhead by 25-50%"
+      :protocol [
+        "Use CamelCase for struct names, composite function symbols, and test suites"
+        "Use bare alphanumeric shortcodes without hyphens or colons for references"
+        "Eradicate @ and # sigils completely across all packages and identifiers (C5)"
+        "Annotate grammar symbols > 2 tokens with explicit :rationale"
+      ]
+      :consequence "Minimizes token consumption across all models and improves tokenization efficiency by up to 50%")
+
+    (:practice
+      :id "PRAC-010"
+      :shortcode "p10"
+      :topic "task-context"
+      :title "Enriched Task Context Standard & Bidirectional Traceability"
+      :status :active
+      :scope ["mem/tasks" "mem/decisions"]
+      :summary "Encapsulate full context within task definitions across all tiers to eliminate context evaporation across boundaries"
+      :protocol [
+        "Task definitions include :motivation, :purpose, :context, :outcomes, and :invariants"
+        "Declare explicit failure modes and alternative variations considered"
+        "Maintain bidirectional references between ADRs and tasks"
+        "Verify cross-reference consistency deterministically via asl audit consistency"
+      ]
+      :consequence "Guarantees complete documentation integrity and prevents tasks from decoupling from architectural decisions")
+  ])

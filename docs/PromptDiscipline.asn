@@ -1,0 +1,150 @@
+(:spec
+  :title "PromptDiscipline"
+  :format "asn"
+  :source-file "PROMPT_DISCIPLINE.md"
+  :body "# Agent-Centric Prompt Engineering Guide: Functional & Actionable Instructions
+
+> **Target Audience**: AI Agent Developers, Harness Architects, Skill Authors, and Open-Source Contributors  
+> **Source of Truth**: ASL & Addie Sovereign Cognitive Architecture  
+> **Status**: Permanent Engineering Recommendation  
+
+---
+
+## 1. Conceptual Framework over Procedural Micromanagement
+
+Large Language Models (LLMs) operate with maximal reasoning effectiveness when provided with a clear **conceptual mental model** rather than an exhaustive procedural checklist:
+
+- **Operational Paradigm (Observe  Act  Verify)**: Frame the interaction around empirical observation, purposeful action, and verifiable confirmation.
+- **State Invariants & Interfaces, Not Obvious Steps**: Provide explicit syntax schemas and tool signatures. Avoid micromanaging trivial sequences (e.g. \"if you need to edit a file, edit it\"); the model's natural intelligence determines how to compose the steps.
+- **Adaptive Autonomy**: Explicitly state that the objective dictates the method. This liberates the model to take the simplest direct path rather than hallucinating rigid compliance requirements.
+
+---
+
+## 2. Core Recommendations for Agent Harnesses & Prompts
+
+### 1. Direct Operational Specifications
+Provide operational parameters directly:
+```text
+Task: <goal, file paths, and acceptance criteria>
+
+Operational Model:
+- Observe: inspect environment, code, and feedback directly.
+- Act: apply the most direct modification, script, or command required.
+- Verify: confirm correctness with concrete evidence before concluding.
+
+Interfaces:
+- Shell: ```bash <command> ```
+- Batch RPC: asl rpc '(:batch ...)'
+
+Core Principles:
+- The objective dictates the method: choose the simplest working approach.
+- Rely on empirical observation and test results rather than assumptions.
+- Conclude upon verified completion.
+```
+
+### 2. Natural Action-Observation Loops
+- Allow the agent to operate in an unconstrained action-observation loop: execute a command, inspect the resulting output and return code, adapt, and iterate.
+- Provide sufficient turn budgets (e.g. 35+ turns) so the agent can complete multi-step tasks naturally without artificial stage barriers or forced sub-loops.
+- Let the agent conclude autonomously when its verification checks confirm that the deliverable satisfies the task requirements.
+
+### 3. Session State Persistence
+- Maintain environment continuity: ensure directory navigation (`cd`) and environment variables (`export`) persist across execution turns.
+- Use non-interactive command execution with standard input redirection (`< /dev/null`) to prevent unintended hangs.
+- Distinguish between normal process completion, non-zero return codes, and execution timeouts (`rc == -1`), so the agent receives clear diagnostic signals.
+- Preserve both the start (invocation context) and end (diagnostics and tracebacks) of command output streams.
+
+### 4. Grounded Verification & Metrics
+- Ground all task completions in real, executed test commands and exit codes.
+- Structure evaluations around objective post-run verifiers that inspect the environment after the agent finishes.
+- Derive all reported telemetry and benchmark scores directly from verified execution logs.
+
+---
+
+## 3. Canonical Conceptual Agent Prompt Template
+
+```text
+You operate in an execution environment with shell and tool access to achieve the requested goal.
+
+Operational Model:
+- Observe: inspect environment, code, and feedback directly.
+- Act: apply the most direct modification, script, or command required.
+- Verify: confirm correctness with concrete evidence before concluding.
+
+Interfaces:
+1. Shell:
+```bash
+<command>
+```
+
+2. Exclusive ASL Batch RPC:
+Execute compound operations through `asl rpc '(:batch ...)'` in a single roundtrip:
+```bash
+asl rpc '(:batch
+  (:out \"<file>\")
+  (:sym \"<symbol>\")
+  (:read \"<file>\" <start> <end>)
+  (:edit \"<file>\" \"<old>\" \"<new>\")
+  (:diff)
+  (:flush)
+  (:chk)
+)'
+```
+Available operations:
+- Explore: (:out \"<file>\") (:sym \"<name>\") (:callers \"<name>\") (:impact \"<name>\")
+- Read & Search: (:read \"<file>\" <start> <end>) (:sec \"<file>\" \"<title>\") (:find \"<pattern>\") (:q \"<query>\")
+- Modify & Commit: (:edit \"<file>\" \"<old>\" \"<new>\") (:repl \"<match>\" \"<replace>\") (:diff) (:flush) (:discard)
+- Verify: (:chk) or asl gate
+
+Core Principles:
+- The objective dictates the method: choose the simplest working approach.
+- Rely on empirical observation and test results rather than assumptions.
+- When the goal is met and verified, conclude with: echo \"TASK_FINISHED_SUCCESS\"
+```
+
+### 3.1 Failure Protocol & Error Recovery Discipline
+
+When executing batch operations via `asl rpc '(:batch ...)'`, adhere to the following deterministic error recovery workflow:
+
+1. **Step Status Inspection**:
+   - Inspect `:status` across each step result (`\"ok\"`, `\"rejected\"`, `\"failed\"`, `\"aborted\"`).
+   - In default atomic mode (`:atomic true`), any failing step aborts subsequent steps in the transaction. Inspect `:error-code` and `:reason` for the exact failure root cause.
+
+2. **Edit Failure Recovery (Never Blind-Retry)**:
+   - On `ERR_STRING_NOT_FOUND`, never resubmit the exact same `:edit` pattern.
+   - Run `(:read \"<file>\" <start> <end>)` to inspect the exact line content, indentation, and spacing around the target site.
+   - Update the replacement string to match the true buffer state before resubmitting.
+
+3. **Dirty Buffer Resolution**:
+   - Inspect staged modifications with `(:diff)`.
+   - If in-memory edits are erroneous or corrupt, discard dirty buffers with `(:discard)` before attempting new operations.
+   - Never call `(:flush)` while buffers contain broken or failing edits.
+
+4. **Search Fallback**:
+   - When `(:sym \"<name>\")` or `(:q \"<query>\")` yields `:not-found` or empty results:
+     1. Fall back to exact in-memory text grep: `(:find \"<pattern>\")`.
+     2. Inspect file outline with `(:out \"<file>\")` or directory listing with `(:ls \"<dir>\")`.
+
+5. **Gate Failure Isolation**:
+   - When verification `(:chk)` or `asl gate` fails, identify the failing gate index and compiler/test diagnostics.
+   - Address the root defect directly without loosening assertions, widening globs, or skipping gates.
+
+
+---
+
+## 4. Skill & Capability Authoring Standards
+
+When authoring Agent Skills (e.g. in `.agents/skills/<name>/SKILL.md` or `skill.asn`):
+
+1. **Explicit Triggers**: State the exact context, file extensions, or tool requirements that trigger the skill.
+2. **Dense, Compact Reference**: Favor structured tables, code snippets, and parameter lists over explanatory narrative.
+3. **Actionable Verification**: Include verification commands to confirm that changes made via the skill pass all project invariants.
+
+---
+
+## 5. Pragmatic Adaptation & Autonomy (Preventing Over-Constraint)
+
+- **Guidelines as Enablers, Not Dogmas**: Tool descriptions, frameworks, and conventions exist to assist and structure work, not to restrict common sense or force ceremonial compliance.
+- **Simplest Direct Path**: When a targeted edit or single command achieves the objective, execute it directly. Avoid unnecessary multi-phase bureaucracy or artificial ceremony when a simpler solution suffices.
+- **Context-Aware Problem Solving**: Adapt strategy to the concrete environment and feedback. Prioritize verifiable correctness, simplicity, and empirical results over rigid procedural adherence.
+
+")
