@@ -87,8 +87,8 @@ export SEARXNG_URL="https://search.internal.corp/search"
 (use asl-web-api-search/engine [clean-url merge-search-results])
 
 ;; Strips tracking tags
-(let [(clean (clean-url "https://github.com/GenSEAM/asex?utm_source=twitter&ref=newsletter&fbclid=xyz"))]
-  ;; => "https://github.com/GenSEAM/asex"
+(let [(clean (clean-url "https://github.com/GenSEAM/asl?utm_source=twitter&ref=newsletter&fbclid=xyz"))]
+  ;; => "https://github.com/GenSEAM/asl"
 )
 ```
 
