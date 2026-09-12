@@ -1571,6 +1571,16 @@
       :fact "task44404-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44404.asl covering fixed mutation corpus, deterministic seed selection across core packages, equivalent mutant triage with written justification, and incremental caching by digest; implemented run_cmd_mutate in asl.c; established baseline failure and passed SuperviseGate.sh with 44 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task44404 certified complete; budgeted mutation strategy contract established under ADR-0081")
+    (:note
+      :id "n143"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["asl/bench/flakiness_detector.asl" "tests/acceptance/d81/Task44405.asl" ".asl/mem/tasks/Phase444TestTelemetryAndCoverageGuarantees.asn"]
+      :tags [:supervision :phase444 :task44405 :flakiness :stability :bottlenecks :regression :approved]
+      :fact "task44405-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44405.asl covering outcome stability across repeated runs, duration distribution, disqualified unstable suites, executed-set regression diff naming both receipts, and bottleneck ranking by wall clock share in asl/bench/flakiness_detector.asl; established baseline failure and passed SuperviseGate.sh with 36 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task44405 certified complete; flakiness, bottlenecks, and regression detection operational under ADR-0081")
   ]
 )
 

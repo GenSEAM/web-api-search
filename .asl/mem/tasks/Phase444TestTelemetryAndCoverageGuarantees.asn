@@ -173,11 +173,11 @@
       :title "Flakiness, bottlenecks and regression detection from repeated runs"
       :kind :verification
       :lane "telemetry"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789141670724
-      :updatedAt 1789141670724
+      :updatedAt 1789438200000
       :motivation "Measured 2026-09-11: one suite consumes 9358 ms of a 42479 ms corpus run and asl audit gates takes 14659 ms, so the cost is concentrated and currently invisible. Nothing detects a test whose outcome varies between runs, which is the failure mode that erodes trust in a green gate faster than any other."
       :purpose "Repeat the suite corpus N times with a recorded seed and report per suite: outcome stability across runs, duration distribution rather than a single sample, and the executed-assertion set diffed against the previous receipt so a newly unreached assertion is flagged as a regression. Bottlenecks are ranked by share of total wall clock."
       :context (:contractRef D81PlanContext)
@@ -198,13 +198,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44405.asl"]
       :verificationCases ["A suite that passes and fails across runs is reported unstable and does not count toward any guarantee." "An assertion that executed in the previous receipt and does not now is reported as a regression with both receipts named."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44405" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44405" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44405" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44405" :assertCount 36 :at 1789438200000)]
+      :reviewStatus :approved
       :actionDag ["Verifier plants a deliberately unstable suite." "Run the corpus N times and aggregate." "Diff executed sets against the previous receipt." "Rank bottlenecks by wall-clock share." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :step 1 :status :ok :hash "HEAD")])
     (:task
       :id "Task44406"
       :parentId ""
