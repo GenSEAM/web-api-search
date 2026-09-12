@@ -287,11 +287,11 @@
       :title "Coverage and case-diversity map over the corpus"
       :kind :gate
       :lane "observability"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789139870800
-      :updatedAt 1789139870800
+      :updatedAt 1789404200000
       :motivation "Measured 2026-09-11: no coverage tooling exists in the engine; whether an exported symbol has any test is unknown, and the only quality signal is a substring count of the token (assert. The corpus does contain 1029 negative assertions, so diversity is uneven rather than absent, and nobody can say where. An implementer cannot be asked to raise coverage without a map of what is uncovered."
       :purpose "asl coverage emits an ASN map keyed by package and exported symbol: whether any test references it, which of the twelve case kinds from docs/TEST_CASE_CATALOG.md are detectable in those tests, and once the evaluator resolves imports, whether those tests executed. Kind detection is static and pattern-based, declared as approximate. Gate 7 fails when a package declared covered has symbols with no referencing test."
       :context (:contractRef D81PlanContext)
@@ -312,13 +312,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44208.asl"]
       :verificationCases ["A symbol with no referencing test is reported uncovered; a suite containing only happy-path cases is reported as one kind; a package whose tests execute zero assertions is reported executed 0 regardless of declared count." "The map is stable across runs and its kind detection is labelled approximate, never presented as proof of quality."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44208" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44208" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44208" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44208" :assertCount 15 :at 1789404200000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes packages with known covered and uncovered symbols." "Implement symbol to test reference mapping." "Detect case kinds by pattern." "Join with executed counts." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44209"
       :parentId ""
