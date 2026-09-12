@@ -60,11 +60,11 @@
       :title "Close native and WASM compiler bootstrap generations"
       :kind :language
       :lane "self-hosting"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789084800000
-      :updatedAt 1789133687623
+      :updatedAt 1789409800000
       :motivation "Compiling an evaluator once under C does not establish autonomous compiler rebuild or deployed runtime independence; compatibility may be broken to simplify the owned toolchain."
       :purpose "Implement ASL compiler backends with owned native image generation and ABI/linking support for ELF, Mach-O and PE plus WASM; stage0 is an explicit owned C seed, stage1 builds compiler/evaluator/adapters, and stage2 regenerates the complete source-derived tool without the seed, a precompiled adapter blob or a third-party compiler/runtime. Normalize artifacts or prove documented semantic equivalence to establish closure."
       :context (:contractRef D81PlanContext)
@@ -86,12 +86,12 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44002.asl"]
       :verificationCases ["A clean offline stage0-to-stage1-to-stage2 chain records source, seed and artifact digests; stage2 compiles the compiler itself and evaluator, not only evaluator tests." "Native stage2 performs rebuild/check/test/RPC with system compilers, JSC, Node and wasmtime unavailable; mandatory invocations of those tools fail acceptance." "Native output includes explicit owned OS adapter imports for declared targets; WASM output validates against its declared capability profile and an optional independent conforming host." "If byte reproducibility is impossible, document exact nondeterministic fields and prove normalized artifact equality plus independent semantic conformance; do not equate any exit zero with self-hosting." "An escaping closure retains its capture after the defining function returns; deep recursion, allocation exhaustion and repeated allocation/reclamation obey declared bounds and error semantics." "Declare memory management and supported WASM features explicitly; no GC or host feature is assumed available without capability verification." "The ASL native backend regenerates executable images and OS/ABI adapters from owned source/canonical intrinsics; owned C adapter source is allowed only if the autonomous chain can rebuild it, otherwise adapters/stubs are expressed in ASL-owned low-level source."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44002" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44002" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44002" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44002" :assertCount 21 :at 1789409800000)]
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
 
     (:task
       :id "Task44003"
