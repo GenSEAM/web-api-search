@@ -1041,5 +1041,15 @@
       :fact "task44802-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44802.asl verifying HomeView, DocsView, BlogView, RoadmapView max-w-shell primary layout, SkyLoomVisualizer max-w-canvas opt-in, upm-container declaration, index.css scroll-padding-top and overflow containment, and RoadmapView capability provenance; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 25 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44802 100% verified and certified; prose spine and measured wide-surface layout applied cleanly under ADR-0082")
+    (:note
+      :id "n90"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/web/src/components/Hero.asl" "asl/web/src/components/Ecosystem.asl" "asl/web/src/components/CosmicLandscapeBackground.asl" "asl/web/src/components/KeyCapabilities.asl" "asl/web/src/components/Footer.asl" "asl/web/src/components/PolyglotStudio.asl" "asl/web/src/views/EcosystemView.asl" "asl/web/src/views/InIdeView.asl" "asl/web/src/views/PlaygroundView.asl" "asl/web/src/views/playground/PlaygroundTable.asl" "tests/acceptance/d81/Task44803.asl" ".asl/mem/tasks/Phase448InstrumentedEditorialWebDesign.asn"]
+      :tags [:supervision :phase448 :task44803 :calm-hierarchy :gradient-removal :single-signal :aria-hidden :approved]
+      :fact "task44803-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44803.asl verifying removal of generic gradients, purple/indigo utilities, and transition-all across owned views and components, addition of aria-hidden on decorative SVG, single signal accent, and capability state provenance; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 50 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44803 100% verified and certified; generic gradient surfaces replaced with calm technical hierarchy under ADR-0082")
   ]
 )

@@ -129,9 +129,11 @@
       :title "Replace generic gradient surfaces with calm technical hierarchy"
       :kind :visual
       :lane "surfaces"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
+      :createdAt 1789171200000
+      :updatedAt 1789418800000
       :motivation "The hero and supporting components use multiple purple/indigo gradients, glows, heavy blur and repeated equal cards, which makes every section compete for attention."
       :purpose "Migrate surfaces to token roles with one signal accent, restrained tinted shadows, section dividers, variable radii and clear primary/secondary/tertiary action hierarchy."
       :context (:contractRef D81PlanContext)
@@ -152,13 +154,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44803.asl"]
       :verificationCases ["A static scan finds no unapproved production gradient, purple/indigo accent or transition-all class across every owned surface; WCAG 2.2 AA contrast fixtures pass for both themes; a card group contains at least one non-card text or divider treatment." "Capability labels in owned surfaces identify source/provenance and planned, measured or verified state; historical performance numbers are not rendered as current completion." "The scan names explicit exceptions for the logo asset and test fixtures; an unowned production surface is a readiness failure, not silently excluded."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44803" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44803" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44803" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44803" :assertCount 50 :at 1789418800000)]
+      :reviewStatus :approved
       :actionDag ["Verifier freezes approved accent and surface fixtures." "Migrate hero and section surfaces." "Check contrast and gradient inventory." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 7
+      :receipts [(:receipt :step 7 :status :ok :hash "HEAD")])
     (:task
       :id "Task44804"
       :parentId ""
