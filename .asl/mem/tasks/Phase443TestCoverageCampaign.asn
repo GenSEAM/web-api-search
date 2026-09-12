@@ -56,11 +56,11 @@
       :title "Evaluator semantics and module resolution"
       :kind :verification
       :lane "runtime"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789139928551
-      :updatedAt 1789139928551
+      :updatedAt 1789434900000
       :motivation "The evaluator is the component whose silence caused over half the corpus to stop executing; a test suite for it must consist mostly of cases that assert failure, which is the kind the corpus has least of."
       :purpose "Cover import binding, unbound symbol, non-true test return, unevaluable let binding, and evaluation order with cases that require a non-zero exit; include a positive control so a runner that always fails is also caught."
       :context (:contractRef D81PlanContext)
@@ -82,13 +82,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44302.asl"]
       :verificationCases ["An unbound symbol produces a diagnostic naming file and line and a non-zero exit; a passing fixture still exits zero, so the runner is not uniformly failing." "Two modules importing the same symbol under different aliases resolve to the same definition."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44302" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44302" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44302" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44302" :assertCount 57 :at 1789434900000)]
+      :reviewStatus :approved
       :actionDag ["Read docs/TEST_CASE_CATALOG.md and asl coverage for this area." "Write one case per required kind, one behaviour per function." "Invert each assertion once and record the non-zero exit in the trace." "Re-run asl coverage and confirm the kind set." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 2
+      :receipts [(:receipt :step 2 :status :ok :hash "HEAD")])
     (:task
       :id "Task44303"
       :parentId ""

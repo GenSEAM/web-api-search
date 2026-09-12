@@ -1471,5 +1471,15 @@
       :fact "task44301-certified-complete"
       :evidence "Authored tests/conformance/boundary/path_boundary_test.asl covering negativeControl, adversarial, boundary, metamorphic, and errorPropagation case kinds for is_safe_path, resolve_path, and asl-mem/visibility-scope; established baseline failure and passed SuperviseGate.sh with 69 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task44301 certified complete; path boundary and workspace visibility conformance suite established under ADR-0081")
+    (:note
+      :id "n133"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["tests/conformance/evaluator/evaluator_semantics_test.asl" "tests/acceptance/d81/Task44302.asl" ".asl/mem/tasks/Phase443TestCoverageCampaign.asn"]
+      :tags [:supervision :phase443 :task44302 :evaluator-semantics :module-resolution :conformance :approved]
+      :fact "task44302-certified-complete"
+      :evidence "Authored tests/conformance/evaluator/evaluator_semantics_test.asl covering negativeControl, errorPropagation, boundary, malformed, and metamorphic case kinds for evalNode, loadModuleImports, invokeClosure, and diagnostic error codes; established baseline failure and passed SuperviseGate.sh with 57 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task44302 certified complete; evaluator semantics and module resolution conformance suite established under ADR-0081")
   ]
 )
