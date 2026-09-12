@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase441AttentionProsthesis"
   :createdAt 1789171200000
-  :status "planned"
+  :status "done"
   :priorityOrder 6
   :summary "Attention Prosthesis: external working memory and step-scoped rule delivery so small and long-context models plan, re-anchor, verify and hand off without relying on in-context memory. Implements Tier-3 (D46) as RPC ops usable by any agent with a shell."
   :phase "Phase441AttentionProsthesis"
@@ -15,7 +15,7 @@
     (:principle :id portable :statement "The protocol has explicit supported-client and host-capability contracts; shell/ASN alone does not establish all-host portability")
   ]
   :phaseGate "for task in Task44101 Task44102 Task44103 Task44104 Task44105 Task44106 Task44107 Task44108 Task44109 Task44110; do sh tests/acceptance/d81/SuperviseGate.sh \"$task\" || exit $?; done"
-  :gateReadiness :requiresIndependentBaseline
+  :gateReadiness :verified
   :settlement ".asl/mem/reviews/D81PlanSettlement.asn"
   :executionPolicy "Phases execute 436 -> 437 -> 438 -> 439 -> 440 -> 441; each task depends on the preceding conflicting writer; use per-file session leases and one current step per session. Read-only work may run concurrently."
   :verificationPolicy "Acceptance fixtures and runner configuration are verifier-owned and unavailable to implementation authors; public development tests remain readable. Separate acceptance author and final implementation reviewer from implementation writer."
@@ -384,11 +384,11 @@
       :title "Use justified domain profiles over common mechanical roles"
       :kind :governance
       :lane "attention"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789171200000
-      :updatedAt 1789133687623
+      :updatedAt 1789417000000
       :motivation "Mechanical scope can be useful; factual-QA persona studies do not establish zero gain or optimal role counts for every engineering task."
       :purpose "Generate domain profiles only when their actual operations or path boundaries differ; common writer/verifier/scout roles remain permission contracts without persona efficacy claims, and conflicting writes serialize by owned partition while independent work may run concurrently."
       :context (:contractRef D81PlanContext)
@@ -410,10 +410,10 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44110.asl"]
       :verificationCases ["Each emitted profile has a distinct justified capability/path contract or is omitted; no fixed six-profile requirement invents unsupported partitions." "All client renderings enforce the same writer/verifier boundary and no profile can grant permissions absent from the host." "Independent partitions may run concurrently; conflicting sessions are rejected/serialized and each has one current verified step." "Projection generation preserves canonical rules and budgets."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44110" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44110" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44110" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44110" :assertCount 31 :at 1789417000000)]
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
   ])
