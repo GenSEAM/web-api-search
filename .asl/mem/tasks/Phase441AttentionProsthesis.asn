@@ -187,11 +187,11 @@
       :title "Protect hidden acceptance across every tool path"
       :kind :governance
       :lane "attention"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789171200000
-      :updatedAt 1789133687623
+      :updatedAt 1789414200000
       :motivation "Edit-only ownership does not hide tests; protected evaluation and readable development tests serve distinct purposes."
       :purpose "Separate author-owned public development tests from verifier-owned hidden acceptance; enforce read/write/execute capabilities in the execution boundary for RPC, host shell, search, errors and generated projections, with isolated mounts where clients cannot enforce equivalent restrictions."
       :context (:contractRef D81PlanContext)
@@ -213,12 +213,12 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44105.asl"]
       :verificationCases ["Implementer can read public regression tests and write owned development fixtures but cannot read/edit hidden acceptance via RPC, shell, symlinks, search, archive or diagnostic output." "Grader cannot write implementation source; an author cannot alter runner configuration or the acceptance gate." "Codex/Claude/Antigravity profiles use the same effective isolation contract; if a host lacks enforcement, execution refuses the hidden-evaluation claim rather than relying on prose." "Legitimate task success is measured alongside isolation; do not claim hidden tests are the sole universally effective strategy."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44105" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44105" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44105" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44105" :assertCount 36 :at 1789414200000)]
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
 
     (:task
       :id "Task44106"

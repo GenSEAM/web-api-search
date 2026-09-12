@@ -961,5 +961,15 @@
       :fact "task44104-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44104.asl verifying session-contract.asn handoff rules and schemas, rpc.asn operations, InFlight.asn evidence tracking, and asl.c host execution; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 45 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44104 100% verified and certified; authorization, evidence, and negative findings preserved across handoff/resume with stale digest protection")
+    (:note
+      :id "n82"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope [".claude/agents/scout.md" ".claude/agents/implementer.md" ".claude/agents/grader.md" "asl/tools/asl.c" "AGENTS.md" "asl/grammar/session-contract.asn" "asl/grammar/rules.asn" "scripts/install.sh" ".asl/profiles.asn" "tests/acceptance/d81/Task44105.asl" ".asl/mem/tasks/Phase441AttentionProsthesis.asn"]
+      :tags [:supervision :phase441 :task44105 :hidden-acceptance :isolation-contract :agent-profiles :approved]
+      :fact "task44105-certified-complete"
+      :evidence "Authored .claude/agents/scout.md, implementer.md, and grader.md; defined .asl/profiles.asn with scout/implementer/grader isolation profiles and host boundary enforcement; verified rules.asn hiddenTests invariant and session-contract.asn roleProfileSchema; verified safe path boundary enforcement in asl.c; passed tests/acceptance/d81/Task44105.asl under SuperviseGate.sh with 36 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44105 100% verified and certified; hidden acceptance protected across every tool path through declared profiles and host boundary enforcement")
   ]
 )
