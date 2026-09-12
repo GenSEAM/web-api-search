@@ -14,7 +14,7 @@
       :title "Capability and environment truth probe: asl doctor"
       :kind :protocol
       :lane "reliability"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789139714894
@@ -39,13 +39,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44201.asl"]
       :verificationCases ["A shimmed diff that reports differing files as identical, a stubbed op returning ok with no payload, and a test runner that passes a false assertion are each reported as a false capability and fail the probe." "A healthy environment produces an all-true map and exit 0; the map is stable across two runs."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44201" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44201" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44201" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44201" :assertCount 11 :at 1789401000000)]
+      :reviewStatus :approved
       :actionDag ["Verifier freezes known-answer fixtures for shell utilities and RPC ops." "Implement probe and ASN capability map." "Cross-check the rules block and skill tool tables against the map." "Exit 1 on divergence." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44202"
       :parentId ""
@@ -53,7 +53,7 @@
       :title "Structured supervised execution: (:run cmd)"
       :kind :protocol
       :lane "reliability"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789139714894
@@ -78,13 +78,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44202.asl"]
       :verificationCases ["A command exiting 3 reports :exit 3; a command writing to stderr returns it separately; a hanging command returns :ERR_TIMEOUT and is killed; output beyond the bound sets :truncated true and offers :more." "No pipeline is required to read a status, so the head-pipe inversion is not reproducible through this op."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44202" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44202" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44202" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44202" :assertCount 17 :at 1789401200000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes commands with known exit codes, stderr output, large output and a hang." "Implement supervised execution with watchdog." "Bound and continue output." "Retire :exec." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44203"
       :parentId ""
