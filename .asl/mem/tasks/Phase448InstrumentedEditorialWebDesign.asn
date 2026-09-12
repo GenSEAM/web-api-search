@@ -51,9 +51,11 @@
       :title "Freeze the Instrumented Editorial frame and token contract"
       :kind :designSystem
       :lane "foundations"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
+      :createdAt 1789171200000
+      :updatedAt 1789417600000
       :motivation "The current palette and decorative helpers are purple-gradient led, while prose, data and controls share no explicit visual contract."
       :purpose "Define the frame, color roles, typography roles, spacing scale, radius tiers, elevation policy, content measures and wide-surface opt-in in styles.asn and the generated CSS/Tailwind contract."
       :context (:contractRef D81PlanContext)
@@ -74,13 +76,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44801.asl"]
       :verificationCases ["A token registry with two accents or a global width above 72rem fails; one signal, explicit wide-surface opt-in and matching generated CSS pass." "Light and dark roles preserve contrast and no gradient helper is emitted."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44801" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44801" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44801" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44801" :assertCount 33 :at 1789417600000)]
+      :reviewStatus :approved
       :actionDag ["Verifier freezes token and width fixtures." "Implement styles.asn and projections." "Run static accent, width and projection checks." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44802"
       :parentId ""

@@ -1021,5 +1021,15 @@
       :fact "task44110-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44110.asl verifying .asl/profiles.asn justified profile definitions, .claude/agents profiles consistency with strict hidden test protection, install.sh agent_match and asl.c profiles handling, and rules.asn grading and parallel partition concurrency; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 31 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44110 100% verified and certified; Phase 441 Attention Prosthesis tasks 10/10 completely certified and sealed")
+    (:note
+      :id "n88"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/web/styles.asn" "asl/web/src/index.css" "asl/web/tailwind.config.js" "tests/acceptance/d81/Task44801.asl" ".asl/mem/tasks/Phase448InstrumentedEditorialWebDesign.asn"]
+      :tags [:supervision :phase448 :task44801 :editorial-design :token-contract :width-policy :approved]
+      :fact "task44801-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44801.asl verifying styles.asn single signal token and light/dark roles, widthPolicy 72rem primary shell and 80rem canvas, tailwind.config.js maxWidth alignment, index.css shell classes, and ADR-0082 settled choices; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 33 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44801 100% verified and certified; instrumented editorial frame and token contract frozen without duplicate accents or unconstrained widths")
   ]
 )
