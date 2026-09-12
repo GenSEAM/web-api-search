@@ -53,11 +53,11 @@
       :title "Static checkers for the eleven unconfirmed rules"
       :kind :gate
       :lane "static"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789142321056
-      :updatedAt 1789142321056
+      :updatedAt 1789433600000
       :motivation "Eleven rules carry no confirmation at all, and each has a statically decidable core: an alias used but not declared, an author owning a grader path, a number in a rule with no cited source, two in-flight tasks sharing an owned path, a read call site without a bound, a rendered surface diverging from its source, a declared capability contradicting its measured lock."
       :purpose "Implement one checker per rule with a decidable core: semantics checks every used alias is declared and every called symbol resolves; grading checks ownerRole differs from verificationRole and author paths are disjoint from grader paths; concepts checks every numeric claim in a rule cites a source file that exists; oneStep and parallel check :owns disjointness across in-flight tasks; hiddenTests checks implementer :owns excludes grader test paths; bounded checks documented read call sites carry :limit; output checks emitted receipts retain path and line; ssot and capabilities reuse the existing checks. budget and edge are runtime-only and are declared :none with a reason."
       :context (:contractRef D81PlanContext)
@@ -78,13 +78,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44502.asl"]
       :verificationCases ["Each of the nine implemented checkers catches its own planted violation and passes a clean tree." "A rule declared runtime-only states why it cannot be checked statically, rather than being silently skipped."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44502" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44502" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44502" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44502" :assertCount 45 :at 1789433600000)]
+      :reviewStatus :approved
       :actionDag ["Verifier plants one violation per rule." "Implement each decidable checker." "Declare the two runtime-only rules with a reason." "Wire into doctor and gate 7." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 2
+      :receipts [(:receipt :step 2 :status :ok :hash "HEAD")])
     (:task
       :id "Task44503"
       :parentId ""

@@ -479,6 +479,7 @@ install_agent_skills() {
   (:rule :id edge :force :orientation :tier [:orientation :full] :when [:all]
     :do "when no plan step covers the situation: if the action is unauthorized or cannot be safely contained, escalate at once; otherwise recognize ((:where) has no matching step), preserve optionality (read before write, stage before flush, branch before merge, ask before delete), contain (smallest diff inside :owns), refute (run the cheapest thing that would prove you wrong), escalate ((:escalate :seen :tried :fork :resolves) to the principal)"
     :check :none
+    :runtimeOnlyReason "Dynamic unplanned contingency escalation and edge case recognition require live runtime decision branching"
     :bias "declared: reversibility over optimality, evidence over confidence, stated intent over inferred intent"
     :why "no rule set matches edge-case variety; models fill gaps fluently instead of noticing them; the loop ends in a receipt to someone else because self-correction without external signal degrades")
   (:rule :id stake :force :orientation :when [:all] :tier [:orientation :full]
@@ -512,6 +513,7 @@ install_agent_skills() {
   (:rule :id budget :force :heuristic :tier [:heuristic :full] :when [:all]
     :do "run a gate after a provisional six tool calls without one; when (:budget) says :compact true, prefer recoverable observation masking, then (:handoff) and reset; thresholds are set by Task44106"
     :check :none
+    :runtimeOnlyReason "Tool call budget and observation compaction depend on dynamic runtime execution trace length and cannot be statically evaluated"
     :defeat "lightweight exploratory loops where checkpoint overhead exceeds context savings"
     :why "instruction-load effects are model-dependent (IFScale); compaction at task boundaries and observation masking both reduced context without measured accuracy loss in their studies")
   (:rule :id bounded :force :heuristic :tier [:scout :implement]
@@ -637,6 +639,7 @@ description: >-
   (:rule :id edge :force :orientation :tier [:orientation :full] :when [:all]
     :do "when no plan step covers the situation: if the action is unauthorized or cannot be safely contained, escalate at once; otherwise recognize ((:where) has no matching step), preserve optionality (read before write, stage before flush, branch before merge, ask before delete), contain (smallest diff inside :owns), refute (run the cheapest thing that would prove you wrong), escalate ((:escalate :seen :tried :fork :resolves) to the principal)"
     :check :none
+    :runtimeOnlyReason "Dynamic unplanned contingency escalation and edge case recognition require live runtime decision branching"
     :bias "declared: reversibility over optimality, evidence over confidence, stated intent over inferred intent"
     :why "no rule set matches edge-case variety; models fill gaps fluently instead of noticing them; the loop ends in a receipt to someone else because self-correction without external signal degrades")
   (:rule :id stake :force :orientation :when [:all] :tier [:orientation :full]
@@ -670,6 +673,7 @@ description: >-
   (:rule :id budget :force :heuristic :tier [:heuristic :full] :when [:all]
     :do "run a gate after a provisional six tool calls without one; when (:budget) says :compact true, prefer recoverable observation masking, then (:handoff) and reset; thresholds are set by Task44106"
     :check :none
+    :runtimeOnlyReason "Tool call budget and observation compaction depend on dynamic runtime execution trace length and cannot be statically evaluated"
     :defeat "lightweight exploratory loops where checkpoint overhead exceeds context savings"
     :why "instruction-load effects are model-dependent (IFScale); compaction at task boundaries and observation masking both reduced context without measured accuracy loss in their studies")
   (:rule :id bounded :force :heuristic :tier [:scout :implement]
