@@ -67,7 +67,7 @@
     :strict-polarity false
     :discount-zero-asserts true
     :core-desired 100.0
-    :core-packages ["agent-core" "asl/asl-compiler" "asl/asl-parser" "crawler" "browser-plugin" "web-api-search"]
+    :core-packages ["agent-core" "asl/packages/asl-compiler" "asl/packages/asl-parser" "crawler" "browser-plugin" "web-api-search"]
     :exclude ["asl/examples/**" "asl-arduino/**" "asl-quantum/**"]
   )
   :tasks [
@@ -88,48 +88,6 @@
     (:task :name "tbench:package" :cmd "python3 scratch/harbor/package_submission.py" :doc "Package latest Harbor job to official submission tarball")
   ]
   :gateway (:endpoint "http://127.0.0.1:8765/v1" :port 8765 :quarantine-cot true :intercept-esh true)
-  :tool-plane (:version "2.0"
-    :dynamic-mounting true
-    :registry ".asl/tools/registry.asn"
-    :base-meta-tools ["eval" "batch" "tool-load" "tool-unload"]
-    :token-budget 200
-    :domains [":git" ":intel" ":crawler" ":fs" ":compiler" ":mesh" ":bench"]
-    :scopes ["asl" "crawler" "agent-bus" "editorial-matrix" "*"]
-    :tools [
-      (:tool :id "agent-browser"
-        :name "Agent Browser Automation CLI"
-        :scope ["*"]
-        :agents ["implementer" "reviewer" "explorer"]
-        :safety :safe
-        :doc "Fast in-browser automation, layout inspection, and snapshot interaction"
-        :guidance "Use for web tasks, form filling, in-browser evaluation, and taking screenshots"
-        :cmd "agent-browser"
-        :args []
-        :env [(:bind "AGENT_BROWSER_COLOR_SCHEME" "dark")]
-        :secrets [(:secret :key "AI_GATEWAY_API_KEY" :source "env" :ref "AI_GATEWAY_API_KEY" :default "")])
-      (:tool :id "asl-cli"
-        :name "AgentScript CLI Toolchain"
-        :scope ["*"]
-        :agents ["*"]
-        :safety :safe
-        :doc "Pure ASL compilation, checking, running, and verification gates"
-        :guidance "Use for checking syntax, running test suites, executing Wasm MicroVM, and gate checks"
-        :cmd "asl"
-        :args []
-        :env []
-        :secrets [])
-      (:tool :id "asl-gateway"
-        :name "L7 Cognitive Gateway Service"
-        :scope ["*"]
-        :agents ["*"]
-        :safety :safe
-        :doc "Universal L7 Cognitive Gateway: CoT reasoning quarantine, verbal ESH interception, and structured tool translation"
-        :guidance "Mandatory LLM inference nexus listening on http://127.0.0.1:8765/v1"
-        :cmd "bin/asl-gateway"
-        :args []
-        :env [(:bind "PORT" "8765")]
-        :secrets [])
-    ])
   :reflection-stages [
     (:stage :id "s1-ingest" :enabled true :ablation-group "core")
     (:stage :id "s2-reformulate" :enabled true :ablation-group "reformulation")

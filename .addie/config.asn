@@ -1,12 +1,11 @@
-;; .addie/config.asn: Hierarchical Declarative Configuration for Addie Cognitive Harness
 (:addie-config
   :model "gemma-4-31b-it"
-  :pipeline "full"                     ;; "full" | "adaptive" | "standard" | "fast"
-  :environment "modal"                 ;; "modal" | "local" | "docker"
-  :entropy-threshold :auto             ;; Automatically route tasks by complexity
-  :airgap true                         ;; Block all outbound web search and external internet egress
-  :asl-first true                      ;; Use compact ASN tool calls and telemetry
-  :scout-polyglot true                 ;; Inspect full polyglot toolchain (python, node, gcc, rust)
+  :pipeline "full"
+  :environment "modal"
+  :entropy-threshold :auto
+  :airgap true
+  :asl-first true
+  :scout-polyglot true
   :stages [
     (:stage :name :scout :timeout-sec 30)
     (:stage :name :plan-and-gap-audit :timeout-sec 45)

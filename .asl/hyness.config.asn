@@ -1,6 +1,6 @@
 (:hyness-config
   :version "1.0.0"
-  :profile-name "purplelephant-workstation"
+  :profile-name "hyness-workstation"
   :locale-policy (:primary "en" :secondary "ru" :mixed-mode true)
   :acoustic-devices [
     (:device :kind :input :name "Default Microphone" :sample-rate 16000 :channels 1)
@@ -10,8 +10,9 @@
     (:speaker :id "primary-operator" :profile-path "~/.asl/hyness/speaker_voiceprint.onnx" :strict-threshold 0.82)
   ]
   :local-lexicon [
-    (:alias :spoken "асекс" :maps-to "asex")
-    (:alias :spoken "хайнесс" :maps-to "hyness")
+    (:alias :spoken "асекс" :maps-to "genseam")
+    (:alias :spoken "хайнесс" :maps-to "harness")
+    (:alias :spoken "ханес" :maps-to "harness")
     (:alias :spoken "шроуди" :maps-to "shrody")
     (:alias :spoken "датахаб" :maps-to "datahub")
     (:alias :spoken "пцп" :maps-to "pcp")
