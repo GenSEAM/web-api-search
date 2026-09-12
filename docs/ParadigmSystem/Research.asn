@@ -1,0 +1,45 @@
+(:research :id ParadigmResearch :status :scopedReview :date "2026-09-12"
+  :localScope ["harness/paradigm.asn" "harness/audit-protocols.asn" "harness/paradigms/human_resonance.asn" "harness/paradigms/reflexive_control.asn" "harness/paradigms/business_modeling.asn" ".asl/mem/principles.asn" ".asl/mem/practices.asn" "D43" "D53" "D60" "D62" "D64" "D67" "D69" "D81" "Phase466"]
+  :scopeLimit "Coverage means traceable disposition of this finite source set. It does not establish completeness of all disciplines, all historical documents, or all possible tasks."
+  :terminology (:phrase "пол Ханеса" :workingMeaning "harness concept pool" :evidence ".asl/mem/tasks/Phase447CanonicalLexiconCrossClient.asn:8" :status :provisional)
+  :sources [
+    (:source :id SelfCorrectionLimits :url "https://arxiv.org/abs/2310.01798" :kind :empirical
+      :finding "In the studied reasoning settings, revision without external feedback was unreliable and sometimes reduced accuracy."
+      :supports "Separate internal consistency review from new evidence and independently checked outcomes."
+      :limit "This does not establish impossibility of self-correction for every model, task or prompting method.")
+    (:source :id SelfCorrectionCounterpoint :url "https://arxiv.org/abs/2406.15673" :kind :researchCounterpoint
+      :finding "Research also reports intrinsic self-correction ability under its evaluated conditions."
+      :supports "Treat the effectiveness of a reflection procedure as an empirical question."
+      :limit "Neither this title nor the earlier negative result guarantees the proposed ASN flow improves performance.")
+    (:source :id ContextMasking :url "https://arxiv.org/abs/2508.21433" :kind :empirical
+      :finding "In the evaluated software-agent configurations, simple observation masking matched or sometimes exceeded summarization solve rates at lower cost than raw histories."
+      :supports "Compare recoverable omission, retrieval and summarization; keep a simple baseline."
+      :limit "No direct evidence for a 1000-token model, ASN, or arbitrary task domains.")
+    (:source :id ContextPosition :url "https://arxiv.org/abs/2307.03172" :kind :empirical
+      :finding "The studied models used relevant information unevenly across long-context positions."
+      :supports "Measure position, distractor and omission effects rather than treating window size as usable understanding."
+      :limit "Historical tested models and tasks do not imply the same effect size for current models.")
+    (:source :id FormatTradeoffs :url "https://arxiv.org/abs/2605.29676" :kind :empirical
+      :finding "Alternative tool formats showed model-dependent token and accuracy tradeoffs, including multi-turn parsing failures."
+      :supports "Evaluate input comprehension and output generation separately, then measure complete task outcomes."
+      :limit "TOON and TRON were evaluated; ASL and ASN were not.")
+    (:source :id ExecutableActions :url "https://arxiv.org/abs/2402.01030" :kind :empirical
+      :finding "Executable code actions improved agent results in the studied settings."
+      :supports "Make action composition and external execution available through a small explicit interface."
+      :limit "The evaluated Python action system does not prove a novel language or conceptual framework is superior.")
+    (:source :id MemoryPaging :url "https://arxiv.org/abs/2310.08560" :kind :researchArchitecture
+      :finding "MemGPT explores managing memory tiers around a limited model context."
+      :supports "External storage and explicit paging are a relevant precedent for effective long-history access."
+      :limit "This does not provide an unlimited active attention window or prove the proposed context engine.")
+    (:source :id EventEnvelopes :url "https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md" :kind :protocolReference
+      :finding "CloudEvents separates event context, payload, serialization and transport bindings."
+      :supports "Separate ASN event semantics from transport and model-facing projection."
+      :limit "The proposed ASN envelope is not declared CloudEvents-conformant; no SDK or new dependency is required.")
+    (:source :id DeliverySemantics :url "https://docs.nats.io/concepts/jetstream" :kind :protocolReference
+      :finding "JetStream documents persistence, acknowledgement and redelivery semantics."
+      :supports "Treat delivery acknowledgement, processing and externally visible effects as distinct contracts."
+      :limit "NATS is a reference, not a selected dependency; transport deduplication alone cannot certify arbitrary external effects.")
+    (:source :id ProgramAidedReasoning :url "https://arxiv.org/abs/2211.10435" :kind :empirical
+      :finding "Delegating program execution to an interpreter improved results on the evaluated reasoning tasks."
+      :supports "Distinguish a proposed explanation from an executed computation."
+      :limit "This supports the mechanism, not a claim about the model's internal thought format.")])

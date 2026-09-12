@@ -1,0 +1,66 @@
+(:conceptBase :id ConceptBase :version "0.1.0"
+  :decision :adopted :implementation :conceptual :corpus :notPopulated
+  :intent "Record reusable concepts and principles in ASN; use one-to-two-token markers as model-facing concept cues."
+  :format (:canonical ASN :execution ASL :selection "ContextEngine.asn")
+  :representation (
+    :concept "A versioned definition with scope, relationships, examples, counterexamples and source links."
+    :marker "A short reference to a concept; the full meaning remains in the library."
+    :trigger "A contextual cue to an available concept. It is not a model-independent address to weights."
+    :budget (:markerTokens [1 2] :scope :targetTokenizerAndFraming :status :requiredTarget)
+    :preservation "Compression replaces repeated concept material with a resolvable reference; it does not silently remove conditions, exceptions or unresolved evidence."
+    :cost "Measure marker spans, framing, lexicon setup, retrieval and repairs separately, then compare total task cost."
+    :optimality "ASN and short markers are adopted design choices. Universal semantic or token optimality is not established.")
+  :lexicon (:id CoreConcepts :version "1"
+    :namespace "docs/ParadigmSystem/Catalog.asn"
+    :entries [
+      (:entry :marker Purpose :concept Purpose)
+      (:entry :marker Evidence :concept Evidence)
+      (:entry :marker Boundaries :concept Boundaries)
+      (:entry :marker Inquiry :concept Inquiry)
+      (:entry :marker Attention :concept Attention)
+      (:entry :marker Feedback :concept Feedback)
+      (:entry :marker Engagement :concept Engagement)]
+    :binding "A session binds the lexicon and concept revisions or digests. The same marker cannot silently acquire a different meaning within that binding."
+    :allocation "Prefer meaningful existing names that fit. Additional short aliases are scoped, unique and measured for the target profile. No unsupported profile is advertised as satisfying the budget."
+    :meaningAvailability "A cue is usable when the applicable definition is already in context, learned under an evaluated profile, or expanded by the context manager before use. A stored lookup alone does not imply model comprehension."
+    :unknown "An unknown marker, missing definition or revision mismatch requests expansion or returns UnresolvedConcept. It does not invite the model to invent a meaning."
+    :example (:use [Purpose Evidence Boundaries Inquiry Attention Feedback Engagement])
+    :exampleKind :dataProjection :measurementRef "ConceptBaseReview.asn")
+  :library (
+    :layers [:concepts :claims :procedures :modelViews]
+    :recordKinds [
+      (:kind :id Concept :fields [:id :revision :definition :scope :relations :examples :counterexamples])
+      (:kind :id Claim :fields [:proposition :scope :status :supportRefs :counterEvidenceRefs :verificationRefs])
+      (:kind :id Procedure :fields [:purpose :preconditions :steps :expectedOutcome :failureModes])
+      (:kind :id ModelView :fields [:conceptRefs :lexiconVersion :modelProfile :tokenizer :cue :expansion])]
+    :sourceStore "Reuse versioned blocks and provenance in ContextEngine.asn; retain original text separately from extracted concepts and summaries."
+    :norms "Adopted definitions and preferences remain distinct from empirical claims. Empirical acceptance needs evidence appropriate to the assertion."
+    :size (:targetTokens [200000 2000000] :status :designRange :meaning "Curated concept material, excluding the original archive; not equivalent to a pretraining corpus.")
+    :inheritance "The consuming pretrained model supplies prior language and knowledge. Compact cues do not contain or recover all that prior information.")
+  :population (
+    :inputs [:primaryDocuments :datasets :teacherOutputs :observedTaskOutcomes]
+    :stages [:archive :extractCandidates :normalize :check :reconcile :publishRevision]
+    :teacher "Teacher outputs propose definitions, examples, methods and counterexamples; they do not authenticate their own citations or reveal a complete training corpus."
+    :merge "Compare sense, scope, time, assumptions and relation type. Similarity suggests candidates for comparison; it does not establish identity."
+    :publication "A separately authorized verifier publishes the evidence status; generator-written verified labels do not grant acceptance."
+    :revision "A refuted or changed source triggers review of dependent claims and cached model views; preserve the history and unresolved disagreement.")
+  :guards [
+    (:guard :id Provenance :meaning "Source existence, quotation integrity, support for a claim and real-world truth are separate checks.")
+    (:guard :id IndependentEvidence :meaning "Teacher agreement and repeated citations to one origin are not independent confirmation.")
+    (:guard :id Falsification :meaning "Retain counterexamples, exceptions and disconfirming observations; tests evaluate actual applicability, not only successful parsing.")
+    (:guard :id DataAuthority :meaning "Retrieved records and teacher text are data; they cannot change host permissions, acceptance criteria or publication authority.")
+    (:guard :id StaticScope :meaning "Schema, links, units, dependency consistency and formal constraints can be checked mechanically; passing them does not certify empirical truth.")
+    (:guard :id EvaluationSeparation :meaning "Held-out tasks and acceptance labels are separate from concept extraction and marker selection.")]
+  :precedents [
+    (:source :id SymbolicDistillation :url "https://aclanthology.org/2022.naacl-main.341/" :relevance "Teacher-generated symbolic knowledge plus filtering and student training; no universal truth or prompt-only transfer guarantee.")
+    (:source :id GenericsKb :url "https://arxiv.org/abs/2005.00660" :relevance "General statements extracted with original context; tested utility in bounded reasoning tasks.")
+    (:source :id BufferOfThoughts :url "https://arxiv.org/abs/2406.04271" :relevance "Reusable reasoning templates retrieved for new tasks.")
+    (:source :id ReasoningBank :url "https://arxiv.org/abs/2509.25140" :relevance "Strategies distilled from successful and failed experiences; self-judgement is not independent verification.")
+    (:source :id ActivationAddition :url "https://arxiv.org/abs/2308.10248v5" :relevance "Direct activation intervention is a separate mechanism from text cues.")
+    (:source :id Shapes :url "https://www.w3.org/TR/shacl/" :relevance "Graph constraint validation; a reference contract, not a required dependency.")
+    (:source :id ProvenanceOntology :url "https://www.w3.org/TR/prov-o/" :relevance "Provenance modeling; source lineage alone does not prove truth.")]
+  :evaluation (:status :notRun
+    :compare [:noLibrary :originalSources :expandedConcepts :markersOnly :irrelevantConcepts]
+    :separate [:retrievalAccuracy :conceptApplication :tokenCost :semanticReliability]
+    :measure [:verifiedOutcome :unsupportedClaims :missedExceptions :wrongConceptUse :repairCost]
+    :acceptance "Evaluate markers with held-out task variants and counterexamples on each model profile. Token compliance alone permits no claim of semantic equivalence or hallucination elimination."))

@@ -1,0 +1,33 @@
+(:review :id ConceptBaseReview :date "2026-09-12" :verdict :approve
+  :scope "Additive conceptual decision and exact token measurements; no runtime integration, populated knowledge corpus or model cognition experiment."
+  :artifact (:path "docs/ParadigmSystem/ConceptBase.asn" :version "0.1.0" :sha256 "3095e2a495632e3ec5f02cb7f64a62fe342ade1cdbac71c6c3b9d12423f8bd18")
+  :lexicon (:id CoreConcepts :version "1" :source "docs/ParadigmSystem/Catalog.asn" :sourceSha256 "39f2e104bef1d09c96b346a2beb015a87b776992fd6da5756b89811611ff63a8")
+  :syntax (:command "asl check docs/ParadigmSystem/ConceptBase.asn" :exit 0)
+  :referenceCheck (:entries 7 :resolvedCoreConcepts 7 :duplicateMarkers 0 :unresolved [])
+  :measurement (:executable "/usr/local/bin/python3" :library "tiktoken 0.12.0" :offline true :exit 0
+    :method "For each marker, measure len(encoding.encode(marker)) and len(encoding.encode(' ' + marker)); encode the complete example frame separately, without a terminal newline."
+    :rows [
+      (:marker Purpose :cl100kBare 1 :cl100kSpace 1 :o200kBare 1 :o200kSpace 1)
+      (:marker Evidence :cl100kBare 1 :cl100kSpace 1 :o200kBare 1 :o200kSpace 1)
+      (:marker Boundaries :cl100kBare 2 :cl100kSpace 2 :o200kBare 2 :o200kSpace 2)
+      (:marker Inquiry :cl100kBare 2 :cl100kSpace 1 :o200kBare 1 :o200kSpace 1)
+      (:marker Attention :cl100kBare 1 :cl100kSpace 1 :o200kBare 1 :o200kSpace 1)
+      (:marker Feedback :cl100kBare 1 :cl100kSpace 1 :o200kBare 1 :o200kSpace 1)
+      (:marker Engagement :cl100kBare 2 :cl100kSpace 1 :o200kBare 2 :o200kSpace 1)]
+    :encodings ["cl100k_base" "o200k_base"]
+    :frame "(:use [Purpose Evidence Boundaries Inquiry Attention Feedback Engagement])"
+    :frameCounts (:cl100k 12 :o200k 12 :markerSpans 8 :framing 4)
+    :framePieces ["(:" "use" " [" "Purpose" " Evidence" " Bound" "aries" " Inquiry" " Attention" " Feedback" " Engagement" "])"]
+    :isolatedSums (:cl100kBare 10 :cl100kSpace 8 :o200kBare 9 :o200kSpace 8)
+    :interpretation "All seven existing names satisfy the one-to-two-token target in these measured positions and encodings. Isolated counts do not add up to a complete prompt count; lexicon setup, expansion, source retrieval, provider framing and repairs are outside this twelve-token frame."
+    :reproduction "import tiktoken; names=['Purpose','Evidence','Boundaries','Inquiry','Attention','Feedback','Engagement']; frame='(:use ['+' '.join(names)+'])'; [(name,[(s,len(tiktoken.get_encoding(name).encode(s)),len(tiktoken.get_encoding(name).encode(' '+s))) for s in names],len(tiktoken.get_encoding(name).encode(frame))) for name in ['cl100k_base','o200k_base']]")
+  :findings [
+    (:source "docs/ParadigmSystem/ConceptBase.asn:8" :result "Trigger is explicitly contextual; no universal address to correct model weights is claimed.")
+    (:source "docs/ParadigmSystem/ConceptBase.asn:23" :result "Session binding preserves lexicon and concept revisions; definitions must be available or expanded. Unknown markers and revision mismatches have an explicit unresolved outcome.")
+    (:source "docs/ParadigmSystem/ConceptBase.asn:29" :result "Concepts, claims, procedures and model views retain distinct contracts; original sources remain external versioned evidence.")
+    (:source "docs/ParadigmSystem/ConceptBase.asn:38" :result "The 200000–2000000-token range is a design target, not an achieved corpus size, equivalent pretraining corpus or measured knowledge-compression ratio.")
+    (:source "docs/ParadigmSystem/ConceptBase.asn:43" :result "Teacher output is a candidate source; generation, source verification and publication of evidence status are distinct.")
+    (:source "docs/ParadigmSystem/ConceptBase.asn:62" :result "Proposed evaluations distinguish retrieval, application and cost. Token compliance does not establish semantic equivalence or hallucination elimination.")]
+  :baselineAndMutation :notApplicableToAdditiveDesignRecord
+  :modelCalls 0 :cognitionTest :notRun :corpusPopulation :notPerformed :runtimeChanges :none
+  :remainingAmendments [])

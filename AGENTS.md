@@ -1,140 +1,119 @@
 <!-- ASL_RULES_START -->
-(:rules :v 7 :src ADR-0081 :when [:scout :plan :implement :grade :all]
-  (:rule :id tools :when [:scout :implement]
-    :do "prefer asl rpc (:batch (:sym x) (:out f) (:read f a b) (:sec f h) (:ls d) (:callers x) (:impact x)) in one roundtrip; use host tools for content search and file edits until :grep and staged :edit ship; :edit reports immediate mode and staging ops (:diff :flush :discard) reject under :ERR_UNSUPPORTED"
-    :not "treat :status ok as success; :find is a filename glob; :q is unimplemented; assume staging exists before Phase438; :edit writes disk immediately and :diff :discard do not stage")
-  (:rule :id context :when [:all]
-    :do "load by symbol and slice, not by file; keep the invariant prefix byte-stable and append step-scoped context after it; never change tool definitions mid-session"
-    :why "retrieval beat full-context in AutoExperiment (41.7 vs 36.1; AST retrieval 33.3); cached prefix reads are discounted at model-specific rates; a tool-definition change invalidates the cached prefix")
-  (:rule :id output :when [:all]
+(:rules :v 7 :src ADR-0081 :tiers [:essential :hot :affordance :orientation :heuristic :pack :full] :when [:scout :plan :implement :grade :all]
+  (:rule :id semantics :force :invariant :tier [:essential :full] :when [:implement :grade]
+    :do "imports bind; an unknown symbol is an error; a test returning non-true fails"
+    :gate "./bin/asl audit gates"
+    :now "the evaluator abandons a body at exit 0 on unknown symbols until Phase436 (prior audit: about half of declared assertions never ran); treat green as unverified and confirm asserts executed")
+  (:rule :id gates :force :invariant :tier [:essential :full] :when [:plan :implement :grade]
+    :do "every change carries a gate that fails before and passes after, and the baseline failure must be the intended semantic failure, not a missing command or a grep label; report exit code and executed asserts; assertion inversion measures reachability, production-code mutation measures fault detection, report both"
+    :gate "./bin/asl audit gates"
+    :not "weaken, skip, loosen, mock, or stub to reach green; exit 0 is not non-vacuity; a printed label is not a result")
+  (:rule :id grading :force :invariant :tier [:essential :full] :when [:grade]
+    :do "the writer never grades its own work; a reviewer runs the gates in a clean context and verification rests on reproducible evidence, not on role labels; scouts are read-only and parallel"
+    :gate "sh tests/acceptance/d81/SuperviseGate.sh"
+    :why "self-correction without external feedback tends to degrade results; self-preference bias in self-evaluation; persona prompts showed no overall benefit on factual QA")
+  (:rule :id concepts :force :invariant :tier [:essential :full] :when [:plan]
+    :do "a normative principle may be adopted explicitly without measurement, but every number in a rule needs source, scope and uncertainty; an empirical claim enters only with a measurable definition and a baseline-failing gate"
+    :gate "./bin/asl audit consistency"
+    :why "SNR 0.75, sovereignty, homeostasis and 72% compaction were stated as measurements without sources and failed audit")
+  (:rule :id foreign :force :invariant :tier [:essential :full] :when [:implement]
+    :do "pure ASL inside packages; the C host at asl/tools is declared, not hidden; no MCP; seed compiler, build tools and independent test hosts are declared boundaries and the deployed runtime must not require them; no new ecosystem dependency beyond those boundaries"
+    :gate "./bin/asl audit foreign"
+    :now "core is C plus an embedded JS evaluator on JavaScriptCore, macOS only, until Phase438")
+  (:rule :id oneStep :force :invariant :tier [:essential :full] :when [:implement]
+    :do "a step is a transaction with an owned write set and a closing gate; batch independent edits inside it; advance only with a runner-issued receipt bound to session, step, gate and source digest"
+    :gate "./bin/asl audit steps"
+    :not "batch several steps then verify; claim progress with a caller-supplied exit code")
+  (:rule :id hiddenTests :force :invariant :tier [:essential :full] :when [:implement :grade]
+    :do "the implementer cannot modify grader-owned acceptance tests; read-only public regression tests and author-owned development tests are allowed; enforced by :owns in the engine and tool allowlists, not by prompt"
+    :gate "./bin/asl test tests/acceptance/d81/Task46601.asl"
+    :why "protected hidden evaluation reduced test exploitation (ImpossibleBench); prompting effects were model and task dependent")
+  (:rule :id tools :force :affordance :tier [:affordance :full] :when [:scout :implement]
+    :do "use ordinary asl invocation with ASN notation as the primary surface; embed scripts, program forms, executable descriptors, code, and tool calls in one validated ASN script; batch independent forms inside that script when useful; RPC is a deprecated compatibility adapter only"
+    :not "treat RPC as the primary interface; treat :status ok as success without checking the typed receipt; execute unvalidated shell text or expose direct command descriptions to agents")
+  (:rule :id note :force :affordance :tier [:affordance :full] :when [:all]
+    :do "record working memory via asl note write when holding volatile context, architectural discoveries, or empirical findings that would otherwise be lost across steps; query active observations via asl note query or asl note list to prevent duplicate investigation"
+    :why "working memory reduces context loss and redundant re-reads; grounded findings are promoted at scope close to tasks or ADRs while transient step notes are retired")
+  (:rule :id ssot :force :affordance :tier [:affordance :full] :when [:all]
+    :do "rules live in one tracked source, asl/grammar/rules.asn; every exported surface is rendered from it by scripts/install.sh --render-rules and checked by --check-rules; per-client or per-tier editions are checked against their deterministic rendering; editing a rendered surface by hand is a defect"
+    :why "the same rules existed in seven places and drifted; hand-synchronising them is the maintenance mode that fails")
+  (:rule :id capabilities :force :affordance :tier [:affordance :full] :when [:all]
+    :do "know what you can do before you try: asl/grammar/capabilities.asn keys every capability by situation (orient find read understand plan change verify recover handoff observe) with a measured :status and a named :fallback; (:where) delivers the slice for the current step; when a capability is :absent or :lies, take its fallback and say so, never present the fallback result as the capability"
+    :not "assume an op works because it is declared, or because it returned :status ok; 22 of 36 capabilities are :absent or :lies today"
+    :why "measured, not declared: :status is written by asl doctor into capabilities.lock, and a hand-edited status that contradicts measurement fails gate 7")
+  (:rule :id output :force :orientation :tier [:orientation :full] :when [:all]
     :do "return typed receipts as ASN with path and line; reversible formatting and deduplication are fine; never drop evidence or constraints to save tokens; compare end-to-end success and total cost before adopting a compact representation"
     :why "compact tool-result notations lost accuracy on several model and benchmark pairs (Notation Matters, up to 9-14pp); the effect is not uniform, so measure, do not assume")
-  (:rule :id names :when [:implement]
-    :do "CamelCase for composite identifiers, structs and tests; precise conventional names; do not shorten a name only to save tokens; domain aliases are allowed when they carry meaning"
-    :why "CamelCase measured cheaper than kebab-case on cl100k for the documented identifiers, pending reproduction in Task43806; alias costs in the lock are context-dependent; semantic names carry meaning the model uses")
-  (:rule :id semantics :when [:implement :grade]
-    :do "imports bind; an unknown symbol is an error; a test returning non-true fails"
-    :now "the evaluator abandons a body at exit 0 on unknown symbols until Phase436 (prior audit: about half of declared assertions never ran); treat green as unverified and confirm asserts executed")
-  (:rule :id gates :when [:plan :implement :grade]
-    :do "every change carries a gate that fails before and passes after, and the baseline failure must be the intended semantic failure, not a missing command or a grep label; report exit code and executed asserts; assertion inversion measures reachability, production-code mutation measures fault detection, report both"
-    :not "weaken, skip, loosen, mock, or stub to reach green; exit 0 is not non-vacuity; a printed label is not a result")
-  (:rule :id grading :when [:grade]
-    :do "the writer never grades its own work; a reviewer runs the gates in a clean context and verification rests on reproducible evidence, not on role labels; scouts are read-only and parallel"
-    :why "self-correction without external feedback tends to degrade results; self-preference bias in self-evaluation; persona prompts showed no overall benefit on factual QA")
-  (:rule :id concepts :when [:plan]
-    :do "a normative principle may be adopted explicitly without measurement, but every number in a rule needs source, scope and uncertainty; an empirical claim enters only with a measurable definition and a baseline-failing gate"
-    :why "SNR 0.75, sovereignty, homeostasis and 72% compaction were stated as measurements without sources and failed audit")
-  (:rule :id foreign :when [:implement]
-    :do "pure ASL inside packages; the C host at asl/tools is declared, not hidden; no MCP; seed compiler, build tools and independent test hosts are declared boundaries and the deployed runtime must not require them; no new ecosystem dependency beyond those boundaries"
-    :now "core is C plus an embedded JS evaluator on JavaScriptCore, macOS only, until Phase438")
-  (:rule :id git :when [:implement]
-    :do "concise commits; verify base, diff and log before merge; intended changes only"
-    :coAuthor (:claude :host :agy false))
-  (:rule :id parallel :when [:plan]
-    :do "independent reads and scouts in one wave; one writer per owned partition and serialized conflicting commits; subagents soft 4 hard 6 are defaults, not optima")
-  (:rule :id anchor :when [:all]
-    :do "the plan lives in the ledger, not in memory: (:plan) once, (:where) before every mutation and after every gate, act from what it returns; until the ledger ops exist keep the plan in the task file and re-read it"
+  (:rule :id anchor :force :orientation :tier [:orientation :full] :when [:all]
+    :do "the plan lives in the ledger, not in memory: (:plan) once, (:where) before every mutation and after every gate, act from what it returns"
     :why "compliance odds declined per generated function within a session (OR 0.944, exploratory, 2605.10039); whether re-anchoring restores it is the Task44106 hypothesis")
-  (:rule :id oneStep :when [:implement]
-    :do "a step is a transaction with an owned write set and a closing gate; batch independent edits inside it; advance only with a runner-issued receipt bound to session, step, gate and source digest"
-    :not "batch several steps then verify; claim progress with a caller-supplied exit code")
-  (:rule :id budget :when [:all]
-    :do "run a gate after a provisional six tool calls without one; when (:budget) says :compact true, prefer recoverable observation masking, then (:handoff) and reset; thresholds are set by Task44106"
-    :why "instruction-load effects are model-dependent (IFScale); compaction at task boundaries and observation masking both reduced context without measured accuracy loss in their studies")
-  (:rule :id hiddenTests :when [:implement :grade]
-    :do "the implementer cannot modify grader-owned acceptance tests; read-only public regression tests and author-owned development tests are allowed; enforced by :owns in the engine and tool allowlists, not by prompt"
-    :why "protected hidden evaluation reduced test exploitation (ImpossibleBench); prompting effects were model and task dependent")
-  (:rule :id bounded :when [:scout :implement]
-    :do "every read carries :limit and continues with :more; bound the output, not file completeness: a small relevant file may fit the bound"
-    :why "degradation with context length is nonuniform and distractor-sensitive across 18 models (Chroma)")
-  (:rule :id edge :when [:all]
+  (:rule :id edge :force :orientation :tier [:orientation :full] :when [:all]
     :do "when no plan step covers the situation: if the action is unauthorized or cannot be safely contained, escalate at once; otherwise recognize ((:where) has no matching step), preserve optionality (read before write, stage before flush, branch before merge, ask before delete), contain (smallest diff inside :owns), refute (run the cheapest thing that would prove you wrong), escalate ((:escalate :seen :tried :fork :resolves) to the principal)"
     :bias "declared: reversibility over optimality, evidence over confidence, stated intent over inferred intent"
     :why "no rule set matches edge-case variety; models fill gaps fluently instead of noticing them; the loop ends in a receipt to someone else because self-correction without external signal degrades")
-  (:rule :id ssot :when [:all]
-    :do "rules live in one tracked source, asl/grammar/rules.asn; every exported surface is rendered from it by scripts/install.sh --render-rules and checked by --check-rules; per-client or per-tier editions are checked against their deterministic rendering; editing a rendered surface by hand is a defect"
-    :why "the same rules existed in seven places and drifted; hand-synchronising them is the maintenance mode that fails")
-  (:rule :id capabilities :when [:all]
-    :do "know what you can do before you try: asl/grammar/capabilities.asn keys every capability by situation (orient find read understand plan change verify recover handoff observe) with a measured :status and a named :fallback; (:where) delivers the slice for the current step; when a capability is :absent or :lies, take its fallback and say so, never present the fallback result as the capability"
-    :not "assume an op works because it is declared, or because it returned :status ok; 22 of 36 capabilities are :absent or :lies today"
-    :why "measured, not declared: :status is written by asl doctor into capabilities.lock, and a hand-edited status that contradicts measurement fails gate 7"))
+  (:rule :id stake :force :orientation :when [:all] :tier [:orientation :full]
+    :do "judge work by whether it holds, not by whether it was instructed; report an off-assignment defect rather than stepping over it; responsibility is to system integrity rather than prompt compliance")
+  (:rule :id adaptive :force :orientation :when [:all] :tier [:orientation :full]
+    :do "abandon an approach that is not working rather than pressing harder; the trigger to pivot is the absence of new empirical evidence; stop repeating failed operations with superficial edits")
+  (:rule :id problemSolving :force :orientation :when [:all] :tier [:orientation :full]
+    :do "when no plan step covers the situation, reduce the uncertainty to the cheapest check that would prove you wrong and run that first; probe reality before generating speculative implementations")
+  (:rule :id context :force :heuristic :tier [:heuristic :full] :when [:all]
+    :do "load by symbol and slice, not by file; keep the invariant prefix byte-stable and append step-scoped context after it; never change tool definitions mid-session"
+    :defeat "single-prompt workflows or models with unpenalized full-context caching"
+    :why "retrieval beat full-context in AutoExperiment (41.7 vs 36.1; AST retrieval 33.3); cached prefix reads are discounted at model-specific rates; a tool-definition change invalidates the cached prefix")
+  (:rule :id names :force :heuristic :tier [:heuristic :full] :when [:implement]
+    :do "CamelCase for composite identifiers, structs and tests; precise conventional names; do not shorten a name only to save tokens; domain aliases are allowed when they carry meaning"
+    :defeat "domain aliases or external foreign interfaces require exact naming"
+    :why "CamelCase measured cheaper than kebab-case on cl100k for the documented identifiers, pending reproduction in Task43806; alias costs in the lock are context-dependent; semantic names carry meaning the model uses")
+  (:rule :id git :force :heuristic :tier [:heuristic :full] :when [:implement]
+    :do "concise commits; verify base, diff and log before merge; intended changes only"
+    :defeat "atomic bulk initialization or machine-generated lockfile updates"
+    :coAuthor (:claude :host :agy false))
+  (:rule :id parallel :force :heuristic :tier [:heuristic :full] :when [:plan]
+    :do "independent reads and scouts in one wave; one writer per owned partition and serialized conflicting commits; subagents soft 4 hard 6 are defaults, not optima"
+    :defeat "tightly coupled sequential mutations across identical files")
+  (:rule :id budget :force :heuristic :tier [:heuristic :full] :when [:all]
+    :do "run a gate after a provisional six tool calls without one; when (:budget) says :compact true, prefer recoverable observation masking, then (:handoff) and reset; thresholds are set by Task44106"
+    :defeat "lightweight exploratory loops where checkpoint overhead exceeds context savings"
+    :why "instruction-load effects are model-dependent (IFScale); compaction at task boundaries and observation masking both reduced context without measured accuracy loss in their studies")
+  (:rule :id bounded :force :heuristic :tier [:heuristic :full] :when [:scout :implement]
+    :do "every read carries :limit and continues with :more; bound the output, not file completeness: a small relevant file may fit the bound"
+    :defeat "complete whole-file AST analysis or small schema generation"
+    :why "degradation with context length is nonuniform and distractor-sensitive across 18 models (Chroma)")
+  (:rule :id reconstructibility :force :affordance :tier [:affordance :full] :when [:all]
+    :do "anything reconstructible from code, git history, or a command is not written to durable memory; reconstructible records are refused and the refusal names the command that reports it; rejected alternatives are accepted because no command reports what was not chosen"
+    :not "write durable records that duplicate git tree status or command output without meeting the reconstructibility test"
+    :why "restating command outputs creates drift and bloats context; durable records exist only for what cannot be reconstructed from the tree")
+  (:pack :id design :tier [:pack :full]
+    :outcomes ["high visual signal to noise ratio" "typography hierarchy" "responsive layout boundaries" "compact VDOM token density"]
+    :failureModes ["decorative gratuitous complexity" "unbounded layout shift" "unresponsive component containers"]
+    :affordances ["vdom rendering" "asn vector graphics" "color tokens" "spacing scales"])
+  (:pack :id development :tier [:pack :full]
+    :outcomes ["monorepo invariant compliance" "delimiter balance" "pure ASL packaging" "atomic git transactions" "AST mutation defense"]
+    :failureModes ["accidental foreign dependencies" "unbalanced S-expressions" "staged mutation leakage"]
+    :affordances ["asl check" "asl lint" "asl rpc batch" "git transaction boundary"])
+  (:pack :id research :tier [:pack :full]
+    :outcomes ["grounded measurements with method scope and date" "refutation of proxy metrics" "epistemic uncertainty markers" "empirical ledger tracking"]
+    :failureModes ["unsourced numeric claims" "evaluating self-preference" "confusing normative principles with empirical findings"]
+    :affordances ["bench telemetry" "token profiling" "direct tokenizer evaluation" "principles ledger"])
+  (:pack :id audit :tier [:pack :full]
+    :outcomes ["independent verification in clean contexts" "falsifiable gates shown to fail on baseline" "structural gap analysis" "rejection of vacuous test suites"]
+    :failureModes ["self-grading by author" "loosened test assertions to reach green" "unreachability masking"]
+    :affordances ["supervise gate" "asl audit gates" "strict falsify harness" "receipt validation"]))
 <!-- ASL_RULES_END -->
 
-<!-- ASL_TOOLBELT_START -->
-Activate and use the asl-toolbelt skill in priority; asl is available in PATH.
-(:rule :tools
-  :forbid [:view_file :replace_file_content :write_to_file :find_by_name :list_dir :View :Edit :Write :Grep :Glob :LS]
-  :require [(:asl :binary "asl" :batch true)]
-  :orchestrator (:require [:invoke_subagent :Agent] :forbid [:monolithic-root-execution]))
-<!-- ASL_TOOLBELT_END -->
 
-<!-- ASL_LOADER: consultative mode active during asl launch; runtime toolbelt injected via channel -->
 
-<!-- PARALLEL_START -->
-(:rule :parallel :batch :wave :scope [:search :scout :audit :patch :git])
-<!-- PARALLEL_END -->
+<!-- ASL_LAUNCH_SESSION_START -->
+(:launch-session :client "agy" :channel "global" :orchestrator-mode true)
+<!-- ASL_LAUNCH_SESSION_END -->
 
-<!-- GROUND_TRUTH_START -->
-(:rule :ground-truth
-  :falsify  (:must-fail true :exit 0)
-  :strict   (:forbid [:stub :todo :mock :swallow :co-author] :require [:bounds :errors])
-  :critic   (:self false :stance :adversary)
-  :receipt  (:format :asn :asserts (> 0) :claims false))
-<!-- GROUND_TRUTH_END -->
-
-<!-- GIT_START -->
-(:rule :git
-  :co-author false
-  :commit    (:concise true)
-  :branch    (:base :target :verify true)
-  :merge     (:verify [:base :diff :log]
-              :strict (:require [:intended-only :safe-merge]
-                       :forbid  [:unrelated-commits :wrong-base])))
-<!-- GIT_END -->
-
-<!-- ORCHESTRATOR_START -->
-(:launch-session
-  :client "agy"
-  :permission-tier "dangerous-rescue"
-  :auto-flags ["--dangerously-skip-permissions"]
-  :channel "<RULE[user_global]>"
-  :orchestrator-mode true
-  :supervisory-model "gemini-3.8-flash"
-  :reasoning-level "high"
-  :orchestration-target "sub-agents"
-  :separate-agents-feature-flag false
-  :minimal-orchestrator true
-  :soft-limit 4
-  :hard-limit 6
-  :max-subagents 6
-  :scaling-condition "Single project -> max 4 agents (soft limit); burst scaling up to 6 agents (hard limit) triggered exclusively when multiple Workspace projects are actively engaged concurrently."
-  :multi-project-orchestration true
-  :code-execution true
-  :subagent-tiers (:research "flash" :planning "astro-high" :execution "inherit")
-  :role-assignments (:scout "asl" :planner "codex" :implementer "agy" :auditor "codex")
-  :upgrade-path "gemini-next"
-  :mandates [
-    "Baseline delegation: Use sub-agents (invoke_subagent in Antigravity, Agent in Claude Code) as the primary execution model."
-    "Role-to-agent mesh: Scout (asl) for high-SNR discovery, Planner (codex) for DAG and failing gates, Implementer (agy) for atomic code execution, Auditor (codex) for independent falsifiable review."
-    "Claude Code permission mandate: Never use dangerous permissions (--dangerously-skip-permissions) with Claude Code. Guide execution strictly via system instructions (--append-system-prompt)."
-    "Antigravity permission mandate: Antigravity must always execute in dangerous rescue mode (--dangerously-skip-permissions) for unconstrained self-healing."
-    "Context hygiene: Keep orchestrator context minimal by offloading search, exploration, and edits into sub-agent conversation branches; ingest only scalar task receipts."
-    "Lean supervisor rule: If sub-agent overhead exceeds task complexity, execute directly via compact batch RPC rather than spawning unneeded sub-agents."
-    "Feature flag extension: Separate OS-level agent orchestration is decoupled under --separate-agents for future cross-process scaling."
-    "Never execute complex multi-part tasks directly; decompose and spawn specialized subagents (invoke_subagent in Antigravity, Agent in Claude Code)."
-    "Supervised code execution: Run build, tests, and gate verification commands in isolated subagents, strictly requiring exit code 0."
-    "Utilize asl rpc (:batch ...) in priority for workspace-aware symbol navigation, callers, and impact analysis."
-  ]
-  :rules [:asl-toolbelt :ground-truth :git :orchestrator])
-<!-- ORCHESTRATOR_END -->
-
-<!-- ASL_LOADER: consultative mode active during asl launch; runtime toolbelt injected via channel -->
 
 # Agent Teleology & Epistemic Mandates
 
 In this repository, autonomous agents operate under explicit non-anthropomorphic **Teleological Mandates**. Agents are defined not by superficial role titles or emotional personas, but by their fundamental purpose (**"Смысл жизни"**), strict **Zones of Responsibility (Epistemic Boundaries)**, and immutable **Priority Values ("Что первостепенно")**.
 
-Mechanical constraints belong to deterministic tools (`asl rpc '(:batch ...)'`, `asl check`, `asl test --strict-falsify`) and command pipelines (`steps`). Agents embody teleological posture and value trade-offs.
+Mechanical constraints belong to deterministic tools (`asl rpc '(:batch ...)'`, `asl check`, `asl lint`, `asl test --strict-falsify`, `asl audit`, `asl doctor`, `asl gate`) and command pipelines (`steps`). Agents embody teleological posture and value trade-offs.
 
 ---
 
@@ -274,14 +253,14 @@ All autonomous agents and LLM execution pipelines enforce **high lexical density
 5. **Three-Tier Task Storage & Execution Flow (`D46`)**:
    - **Tier 1 (Backlog Pool)**: `.asl/mem/tasks/backlog.asn` — Parked ideas, unassigned candidates, dormant tasks (0 tokens in active prompt). Includes strictly on-demand calibration (`t-backlog-01`) and benchmarking (`t-backlog-02`) with zero recurring background jobs.
    - **Tier 2 (Active Wave Roadmap)**: `.asl/mem/tasks/phase_XXX.asn` & `.asl/mem/roadmap.asn` — Active implementation DAG with strict failing gates and file boundaries (`:owns [...]`).
-   - **Tier 3 (In-Flight Agent Working Session / Local Todolist)**: `.asl/mem/tasks/InFlight.asn` — Dynamic subtasks (`asl task spawn`), session leases (`:sessionId`), step-by-step local queue (`:actionDag`, `:stepIndex`), and checkpointed state (`handoffContext`) for deterministic crash recovery (`asl task recover`).
+   - **Tier 3 (In-Flight Agent Working Session / Local Todolist)**: `.asl/mem/tasks/InFlight.asn` — Dynamic subtasks (`:task :spawn`), session leases (`:sessionId`), step-by-step local queue (`:actionDag`, `:stepIndex`), and checkpointed state (`handoffContext`) for deterministic crash recovery (`:task :recover`).
    - **Canonical 6-Stage Task Lifecycle Flow**:
      1. *Triage Backlog*: Extract candidate from Tier 1 backlog (`:op :triage`).
      2. *Plan Wave DAG*: Decompose into Tier 2 phase with failing gates and `:owns` boundaries (`:op :plan`).
-     3. *Claim Session Lease*: Assign active agent lease via `asl task claim` or recover interrupted session via `asl task recover`.
+     3. *Claim Session Lease*: Assign active agent lease via `:task :claim` or recover interrupted session via `:task :recover`.
      4. *Queue Steps & Execute*: Decompose task into local session action DAG (`:actionDag`, `:stepIndex`), executing item-by-item without skipping.
      5. *Verify Gate & Physical Receipt*: Physically execute acceptance gate (`exit 0`), verify non-vacuous assertions, and record `TaskReceipt`.
-     6. *Settle*: Finalize state via `asl task settle`, update roadmap, and unblock dependents.
+     6. *Settle*: Finalize state via `:task :settle`, update roadmap, and unblock dependents.
    - **Operational Invariant on Calibration & Benchmarking**: Zero recurring or automated jobs. Calibration and benchmarking are strictly on-demand (`:trigger :onDemand`), with Calibration taking strict priority over Benchmarking.
 6. **Agent Communication & Output Density**:
    - Avoid conversational bloat, preambles, and regurgitating unmodified code.

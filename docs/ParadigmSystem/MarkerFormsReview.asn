@@ -1,0 +1,66 @@
+(:id :marker-forms-review :version "0.1.0" :date "2026-09-12" :verdict :approve
+ :scope "Offline measurement and explicit manual derivation from the declared ASN grammar; no model-quality experiment or runtime integration."
+ :artifact (:path "docs/ParadigmSystem/MarkerForms.asn" :sha256 "a81ec4a7ac7a0153196d986fad0d61c41c6145d33775855694b30efca6c4b31d")
+ :grammar-source (:path "asl/grammar/asn.lark" :sha256 "dbba98fa5dd8669c07aa327a6ab487339d758d8419c1ec603556ff26d656b271"
+  :rules ["24: a document is exactly one value" "40-46: scalar includes keywords and strings, excludes bare TYPE_NAME" "50: vector contains values" "65: record contains keyword/value pairs" "78-80: PascalCase constructor fields require keyword/value pairs"]
+  :method :manual-derivation :executed-lark-parser false
+  :limitation "Lark is unavailable in both /usr/local/bin/python3 and the default python3; the grammar-referenced asl/grammar/validate_asn.py is absent. No dependency was installed. This is not an executed normative parser result.")
+ :delimiter-check (:command "asl check docs/ParadigmSystem/MarkerForms.asn" :exit 0
+  :scope "Delimiter balance only; not proof of normative grammar or application-schema conformance.")
+ :measurement (:executable "/usr/local/bin/python3" :library "tiktoken 0.12.0" :offline true :exit 0
+  :encodings ["cl100k_base" "o200k_base"]
+  :method "Every count pair below follows the encoding order above. Encode each exact string without a newline, then encode one leading ASCII space plus that entire string. Singleton uses Purpose or :purpose as shown."
+  :reproduction "For each encoding and stored text: len(tiktoken.get_encoding(encoding).encode(text)); repeat with ' ' + text and with singleton. No model inference is involved.")
+ :forms [
+  (:id :use-vector :text "(:use [Purpose Evidence Boundaries Inquiry Attention Feedback Engagement])" :tokens [12 12] :space-prefix-tokens [12 12]
+   :singleton "(:use [Purpose])" :singleton-tokens [5 5] :singleton-space-prefix-tokens [5 5]
+   :grammar :reject :singleton-grammar :reject :derivation "Bare PascalCase names are not scalar values.")
+  (:id :keyword-list :text "(:purpose :evidence :boundaries :inquiry :attention :feedback :engagement)" :tokens [19 19] :space-prefix-tokens [19 19]
+   :singleton "(:purpose)" :singleton-tokens [3 3] :singleton-space-prefix-tokens [3 3]
+   :grammar :reject :singleton-grammar :reject :derivation "Seven keywords leave an unmatched record key; a singleton also lacks its value.")
+  (:id :symbol-vector :text "[Purpose Evidence Boundaries Inquiry Attention Feedback Engagement]" :tokens [10 10] :space-prefix-tokens [10 10]
+   :singleton "[Purpose]" :singleton-tokens [3 3] :singleton-space-prefix-tokens [3 3]
+   :grammar :reject :singleton-grammar :reject :derivation "Vectors accept values, and bare PascalCase names are not scalar values.")
+  (:id :keyword-vector :text "[:purpose :evidence :boundaries :inquiry :attention :feedback :engagement]" :tokens [19 19] :space-prefix-tokens [19 19]
+   :singleton "[:purpose]" :singleton-tokens [3 3] :singleton-space-prefix-tokens [3 3]
+   :grammar :accept :singleton-grammar :accept :derivation "Vector of keyword scalar values.")
+  (:id :symbol-list :text "(Purpose Evidence Boundaries Inquiry Attention Feedback Engagement)" :tokens [10 10] :space-prefix-tokens [10 10]
+   :singleton "(Purpose)" :singleton-tokens [3 3] :singleton-space-prefix-tokens [3 3]
+   :grammar :reject :singleton-grammar :accept-constructor :derivation "A constructor permits keyword/value fields, not arbitrary PascalCase arguments; singleton is a zero-field constructor, not a symbol collection.")
+  (:id :bare-sequence :text "Purpose Evidence Boundaries Inquiry Attention Feedback Engagement" :tokens [8 8] :space-prefix-tokens [8 8]
+   :singleton "Purpose" :singleton-tokens [1 1] :singleton-space-prefix-tokens [1 1]
+   :grammar :reject :singleton-grammar :reject :derivation "Document requires one value; bare PascalCase name is not a value.")
+  (:id :use-keyword-vector :text "(:use [:purpose :evidence :boundaries :inquiry :attention :feedback :engagement])" :tokens [21 21] :space-prefix-tokens [21 21]
+   :singleton "(:use [:purpose])" :singleton-tokens [5 5] :singleton-space-prefix-tokens [5 5]
+   :grammar :accept :singleton-grammar :accept :derivation "One record field whose value is a keyword vector; application meaning requires a contract.")
+  (:id :use-arguments :text "(:use Purpose Evidence Boundaries Inquiry Attention Feedback Engagement)" :tokens [11 11] :space-prefix-tokens [11 11]
+   :singleton "(:use Purpose)" :singleton-tokens [4 4] :singleton-space-prefix-tokens [4 4]
+   :grammar :reject :singleton-grammar :reject :derivation "The use field has no admissible scalar value after its key.")
+  (:id :concepts-keyword-vector :text "(:concepts [:purpose :evidence :boundaries :inquiry :attention :feedback :engagement])" :tokens [22 22] :space-prefix-tokens [22 22]
+   :singleton "(:concepts [:purpose])" :singleton-tokens [6 6] :singleton-space-prefix-tokens [6 6]
+   :grammar :accept :singleton-grammar :accept :derivation "One record field whose value is a keyword vector.")
+  (:id :string-vector :text "[\"Purpose\" \"Evidence\" \"Boundaries\" \"Inquiry\" \"Attention\" \"Feedback\" \"Engagement\"]" :tokens [24 23] :space-prefix-tokens [24 23]
+   :singleton "[\"Purpose\"]" :singleton-tokens [3 3] :singleton-space-prefix-tokens [3 3]
+   :grammar :accept :singleton-grammar :accept :derivation "Vector of string scalar values.")]
+ :keyword-costs [
+  (:marker ":purpose" :bare [2 2] :space-prefixed [2 2])
+  (:marker ":evidence" :bare [2 2] :space-prefixed [3 3])
+  (:marker ":boundaries" :bare [3 3] :space-prefixed [3 3])
+  (:marker ":inquiry" :bare [3 3] :space-prefixed [3 3])
+  (:marker ":attention" :bare [2 2] :space-prefixed [2 2])
+  (:marker ":feedback" :bare [2 2] :space-prefixed [2 2])
+  (:marker ":engagement" :bare [3 3] :space-prefixed [3 3])]
+ :pair-semantics [
+  (:text "(:purpose :evidence)" :grammar :accept :meaning "One field: purpose has keyword value evidence; not two selected concepts." :tokens [6 6])
+  (:text "(:purpose :evidence :boundaries :inquiry)" :grammar :accept :meaning "Two fields: purpose maps to evidence, boundaries maps to inquiry." :tokens [12 12])]
+ :findings [
+  (:source "docs/ParadigmSystem/MarkerForms.asn:3" :result "Explicitly corrects the previous bare-symbol sample as non-normative ASN. Historical tokenizer counts remain valid measurements of that exact string.")
+  (:source "docs/ParadigmSystem/MarkerForms.asn:7" :result "Keyword vector, role-bearing record and actual-valued fields are distinguished; versioned concept binding and unknown-marker resolution remain required.")
+  (:source "docs/ParadigmSystem/MarkerForms.asn:9" :status :resolved :result "Author replaced the overescaped inner example string with an actual nested record; its values now follow the declared grammar.")
+  (:source "docs/ParadigmSystem/MarkerForms.asn:23" :result "Costs include serialized sigils or quotes. Three standalone keywords exceed two tokens; four exceed two when individually space-prefixed. The one-to-two-token goal is not achieved by all current keyword spellings.")
+  (:source "docs/ParadigmSystem/MarkerForms.asn:25" :result "Representation remains provisional pending semantic evaluation; the cheapest tested spelling is not declared the best language.")]
+ :author-record-grammar (:method :manual-derivation :result :conforms
+  :basis "Root and nested records alternate lowercase KEYWORD keys with admissible values; scalar values are keywords, strings or integers; vectors contain admissible values. The corrected fields example is an actual nested record."
+  :limitation "Human-style source derivation by the reviewer, not execution of the unavailable full parser.")
+ :claims (:universal-optimum :not-established :model-comprehension :not-measured :weight-addressing :not-supported :model-calls 0)
+ :remaining-amendments [])

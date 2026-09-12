@@ -15,6 +15,8 @@
 
 ---
 
+Current work: [architecture and research plan](.asl/mem/tasks/SystemArchitectureReview.asn), with [concept decisions, documentation ownership, and code navigation](.asl/mem/decisions/SystemArchitecture.asn). These are reviewed proposals; implementation readiness and measured capabilities are recorded separately from intended behavior.
+
 ## 📜 Manifesto & Architectural Philosophy
 
 > **"Code is for agents. Architecture, intent, and verifiable proofs are for humans."**  
@@ -139,6 +141,9 @@ asl mem flush
 ```bash
 # Run 100% pure AgentScript 7-gate audit in ~75ms
 asl gate
+
+# Measure engine capabilities against reality and generate capabilities.lock
+asl doctor
 
 # Output dense ASN summary for LLM context injection
 asl gate --asn

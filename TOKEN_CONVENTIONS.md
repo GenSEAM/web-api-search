@@ -53,9 +53,9 @@ Markers reference immutable invariants, architectural decisions, deferred tracks
 
 | Context | Legacy (Dash-Zero) | Modern (Alphanumeric) | Token Delta |
 | :--- | :--- | :--- | :--- |
-| Invariant Citation | `c-0001`, `c-0003` | `C1`, `C3` | 4 tokens -> 1 token (**-75%**) |
-| Decision Reference | `d-0034`, `d-0046` | `D34`, `D46` | 4 tokens -> 1 token (**-75%**) |
-| Task Property | `(:invariants [c-0001 c-0002])` | `(:invariants [C1 C2])` | 8 tokens -> 2 tokens (**-75%**) |
+| Invariant Citation | `C0001`, `C0003` | `C1`, `C3` | 4 tokens -> 1 token (**-75%**) |
+| Decision Reference | `D0034`, `D0046` | `D34`, `D46` | 4 tokens -> 1 token (**-75%**) |
+| Task Property | `(:invariants [C0001 C0002])` | `(:invariants [C1 C2])` | 8 tokens -> 2 tokens (**-75%**) |
 
 ### Pillar II: PascalCase for Composite Constructs & Types (`D51`)
 When an identifier defines a **type, struct, typestate, phase, or test suite**, PascalCase MUST be used to eliminate punctuation splitting:
@@ -119,22 +119,19 @@ Every exported symbol with more than 2 BPE tokens declared in `grammar.asn` MUST
 
 ## 4. Verification & Diagnostic Toolchain
 
-The monorepo provides self-hosted CLI commands to audit token efficiency deterministically:
+The monorepo provides self-hosted CLI commands to audit efficiency and consistency deterministically:
 
 ```bash
-# 1. Run full 5-tier token efficiency audit
-asl audit tokens
+# 1. Run consistency audit across memory and tasks
+asl audit consistency
 
-# 2. View CamelCase token savings analysis matrix
-asl tokens --camel
+# 2. Run pure ASL verification gates
+asl audit gates
 
-# 3. Display Token Economics Playbook & Guidelines
-asl tokens --paradigm
+# 3. Run unit tests
+asl test
 
-# 4. List all multi-token identifiers requiring optimization
-asl tokens --efficiency
-
-# 5. Run full 7-tier verification gate (includes token density check)
+# 4. Run full 7-tier verification gate (includes token density check)
 asl gate
 ```
 
@@ -166,5 +163,21 @@ To prevent context bloat, agents encounter token efficiency guidance across stan
    The full reference specification (this document).
 4. **On-Demand Agent Skills (`asl/.agents/skills/`)**:
    Practical micro-protocols for `asl-toolbelt`, `asl-plan`, and `asl-native`.
-5. **Deterministic Gates (`asl audit tokens` / `asl gate`)**:
+5. **Deterministic Gates (`asl audit gates` / `asl gate`)**:
    Automated enforcement verifying 100% compliance before merge.
+
+---
+
+## 6. The Four Forces & Grammatical Authority (`ADR-0081`)
+
+To prevent defeasible heuristics from being treated with the same perceived authority as non-negotiable correctness conditions, rules in `asl/grammar/rules.asn` declare an explicit grammatical force (`:force`):
+
+1. **Invariant (`:force :invariant`)**:
+   Defines what makes work invalid. Bounded to $\le 7$ rules. Every invariant MUST declare a falsifiable verification gate (`:gate`) pointing to an executable check. Invariants are never dropped under context pressure.
+2. **Orientation (`:force :orientation`)**:
+   Explains how to read a situation, evaluate posture, and resolve high-entropy dead ends. Orientations MUST NOT carry compliance tests or assertion gates.
+3. **Affordance (`:force :affordance`)**:
+   States what can actually be done and which tools are operational in the environment.
+4. **Heuristic (`:force :heuristic`)**:
+   Defines practices that usually work. Every heuristic MUST declare its explicit defeat condition (`:defeat`) naming when the rule does not apply.
+

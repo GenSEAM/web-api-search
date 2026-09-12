@@ -1,0 +1,28 @@
+(:id :marker-forms :version "0.1.0" :status :provisional
+ :intent "Select a marker representation by meaning, parser compatibility and measured end-to-end model performance."
+ :supersedes (:source "ConceptBase.asn:27" :scope "The bare-symbol :use example is not a normative ASN encoding. Its tokenizer measurements remain historical measurements of that exact string."
+  :limit "Other design files remain conceptual S-expression notation; this record does not certify their conformance to asn.lark.")
+ :decision (:canonical :semantic-contract :universal-surface :unestablished
+  :meaning "A selection references versioned concepts. A marker is neither the full definition nor a guaranteed address to learned weights."
+  :default "[:purpose :evidence]"
+  :envelope "(:concepts [:purpose :evidence])"
+  :fields (:purpose "desired outcome" :evidence ["source reference"])
+  :scope "Use the vector when the receiving field or channel already declares concept selection. Use the envelope when that role must travel with the payload. Use fields for actual values of purpose and evidence."
+  :binding "Resolve keyword spellings to versioned concept IDs, for example :purpose to Purpose and :evidence to Evidence in Catalog.asn. These are proposed bindings, not implemented runtime aliases."
+  :order "The selection contract assigns no priority to vector order; preserve submitted order for reproducibility. Test order sensitivity in model evaluations."
+  :unknown "Unknown spellings, absent definitions and revision mismatches require resolution or expansion. Do not silently reinterpret :evedence as a new concept."
+  :alternative "String-name vectors are another valid projection. A profile may prefer them after token and semantic evaluation; changing projection must preserve the same concept bindings.")
+ :grammar (:source "asl/grammar/asn.lark:40"
+  :record "Line 65 defines a parenthesized record as keyword/value pairs. (:purpose :evidence) has one field; it does not enumerate two concepts."
+  :odd "A parenthesized run of seven keywords cannot complete the record's key/value pairs."
+  :vector "Line 50 admits keyword or string values in vectors. Bare Purpose is not a scalar; PascalCase constructors require their own constructor syntax."
+  :check "Delimiter checking alone does not establish normative ASN grammar or application schema conformance.")
+ :models (:status :not-evaluated
+  :hypothesis "Conventional semantic names may cue relevant associations; delimiters and explicit role labels may clarify structure. Neither guarantees the intended definition or better task outcomes."
+  :meaning "A consumer needs the applicable definition in context, an evaluated learned binding, or retrieval and expansion before relying on the marker."
+  :cost "The one-to-two-token goal applies to the measured serialized marker in its target framing, including its sigil or quotes. Report payload and envelope costs separately. A longer meaningful marker may outperform an opaque shorter alias."
+  :objective "Select a Pareto-efficient profile for task success, semantic fidelity, total tokens and latency. Include lexicon setup, retrieval, output and repair costs. No global optimum is established."
+  :study "Compare keyword and string vectors, role-bearing envelopes, natural-language labels and expanded definitions with identical concept meanings, tasks, evidence and model settings. Include unfamiliar markers, spelling errors, composition, reordered cues and limited context."
+  :criteria "Measure blinded task correctness, concept misuse, unsupported claims, valid parsing, expansion frequency and total cost on held-out tasks across the target models. Syntax and token counts alone cannot select the semantic winner.")
+ :evidence (:receipt "MarkerFormsReview.asn" :model-runs 0
+  :scope "Offline token measurements and independent grammar inspection; runtime integration and model-quality experiments are not performed."))

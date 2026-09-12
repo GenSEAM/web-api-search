@@ -9,8 +9,8 @@
 - **Test Assertion Coverage**: 1802 evaluated assertions across 183 test suites under `--strict-falsify` (audited with zero vacuous passes).
 - **Grammar Token Density**: 2993 exported symbols audited across grammar registries, with all 1760 symbols > 2 tokens carrying verified `:rationale`.
 - **Modular Skills Suite**: 29 modular skills audited under Gate 7 with zero deprecated tool contamination.
-- **Pure ASL Invariant**: 100% pure AgentScript (.asl/.asn), zero inline comments in code (`c-0001`), zero foreign code in package boundaries.
-- **Master Decision Record**: Registered `d-0009` in `.asl/mem/intent.asn`.
+- **Pure ASL Invariant**: 100% pure AgentScript (.asl/.asn), zero inline comments in code (`C0001`), zero foreign code in package boundaries.
+- **Master Decision Record**: Registered `D0009` in `.asl/mem/intent.asn`.
 
 ---
 
@@ -74,7 +74,7 @@
 
 15. **Autonomous Multi-Session Implementer Loop** (`phase-298`):
     - Headless continuous autonomous worker daemon in pure ASL (`harness/src/worker.asl`).
-    - Compact ProcessReceipts (<80 tokens, ADR d-0005), pre-commit blast-radius guarding via `asl intel`, CLI `asl harness run [--continuous]`.
+    - Compact ProcessReceipts (<80 tokens, ADR D0005), pre-commit blast-radius guarding via `asl intel`, CLI `asl harness run [--continuous]`.
 
 ---
 
@@ -115,5 +115,5 @@
 ---
 
 ### Archived Iterations
-- `iter-2026-09-08-spark-orchestration-mesh-and-adaptive-harness` (Phases 270–282): 100% verified across 173 test suites (885 assertions), all 7 gates green (`asl gate`). ADR `d-0008`.
+- `iter-2026-09-08-spark-orchestration-mesh-and-adaptive-harness` (Phases 270–282): 100% verified across 173 test suites (885 assertions), all 7 gates green (`asl gate`). ADR `D0008`.
 - `iter-2026-09-07-full-system-audit-and-aep-core` (Phases 250–266): 100% verified across 165 test suites (517 assertions), all 7 gates green (`asl gate`). Manifest archived at `.plans/archive/2026-09-07-235000-full-system-audit-and-aep-core/ARCHIVE_MANIFEST.md`.

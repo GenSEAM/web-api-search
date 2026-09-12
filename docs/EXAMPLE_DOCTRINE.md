@@ -191,3 +191,14 @@ hypothesis, not the finding, and note keeping costs tool calls that a single-pas
 Task46506 runs the same fixed task set with the memory surface available and withheld, counting
 unsupported claims, dropped steps, files re-read, and tasks completed. A null result is a valid
 outcome and is recorded as one.
+
+## Scenario Matrix Doctrine (Task46702, ADR-0081)
+
+Happy-path tests are insufficient to guarantee tool reliability; silent degradations occur when edge conditions are never tested. Core tools must be subjected to a systematic scenario matrix covering:
+
+1. **Absent / Non-Existent Target Files (`test-missing-file`)**: Must fail cleanly with explicit error code (`:ERR_FILE_NOT_FOUND`) rather than returning empty success or crashing.
+2. **Directory Traversal Refusal (`test-path-traversal`)**: Paths attempting to escape the workspace boundary via parent segments or foreign roots must be detected and rejected with `:ERR_BOUNDARY_VIOLATION`.
+3. **Empty Query / Pattern String (`test-empty-pattern`)**: Empty queries must either reject cleanly with `:ERR_MISSING_ARG` or produce an empty match set without unbounded allocation.
+4. **Bounded Output Truncation (`test-bounded-output`)**: Tools producing stream or process output must enforce hard upper limits (`spool-truncate` via `RingBuffer` and `DiskSpool`) and explicitly report truncation status.
+5. **Normal Case Verification (`test-normal-search`)**: Verify standard operational accuracy on valid inputs against ground truth files.
+

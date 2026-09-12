@@ -1,0 +1,129 @@
+(:conceptCatalog
+  :id ParadigmSystem
+  :version "0.1.0"
+  :status :proposal
+  :consumer "LLM agents producing and exchanging explicit ASN state and ASL actions. Internal model reasoning is not inspected or certified."
+  :essential (:path "docs/ParadigmSystem/Essential.asn" :targetTokens [150 220] :measurement (:method "tiktoken 0.12.0 direct encoding of the complete UTF-8 file" :date "2026-09-12" :cl100kTokens 166 :o200kTokens 163 :utf8Bytes 920 :scope "This serialization only; excludes host instructions, task, tools, evidence and output reserve.") :role "Conceptual orientation; host policy and task context remain separately budgeted.")
+  :axes
+    (:depth [:essential :brief :full]
+      :force [:orientation :definition :heuristic :norm :affordance]
+      :specialization [:general :research :development :design :audit :coordination :product]
+      :evidenceStatus [:adopted :proposed :observed :supported :contested :unknown])
+  :semantics
+    (:depth "Essential preserves each core distinction; brief adds discriminators; full adds applications, boundaries and counterexamples. Depth is independent of normative force and specialty."
+      :force "Orientations suggest a lens; definitions establish local meanings; heuristics are defeasible; norms declare adopted values within scope; affordances describe observed available actions."
+      :evidenceStatus "Evidence status describes a claim, not a whole model or a compliance score. A proposed mechanism is not an observed benefit."
+      :composition "Core modules have no specialty dependencies. Specialties depend on core modules and may share references without copying definitions. No fixed tier must be loaded before a requested specialty."
+      :projection "A renderer selects a depth per module, resolves dependencies and measures the actual serialization for the target tokenizer. Unknown cost is not zero cost."
+      :contextInterface "The context manager selects concept IDs and depth with a task snapshot, observed capabilities, unresolved questions and a measured budget. Projection does not change permissions or certify understanding."
+      :agentInterface "Agent roles select relevant specialties and communicate task state, evidence and scoped outcomes; an event or role label does not create an additional universal concept."
+      :full "Full is addressable reference material, not a recommendation to inject everything into every model."
+      :limits "Conceptual framing supports interpretation but cannot replace explicit task requirements, authorization, executable checks or missing model capability.")
+  :modules [
+    (:module :id Purpose :force :orientation :evidenceStatus :proposed :dependsOn []
+      :essential "Work is oriented by the intended outcome, beneficiary, scope and completion condition."
+      :brief "A requested artifact, its intended use and the evidence of success can differ; identifying their relationship prevents completion of the wrong task."
+      :full (:distinctions [Intent Outcome Artifact Constraint Completion Stakeholder]
+        :application "Compare the proposed result with the user's actual use; preserve unresolved ambiguity when it affects the outcome."
+        :boundary "An inferred purpose does not authorize broader action or override an explicit constraint."
+        :counterexample "A passing implementation that solves a different problem has not met the task."))
+    (:module :id Evidence :force :orientation :evidenceStatus :proposed :dependsOn []
+      :essential "Reality, observations, interpretations and claims are different; evidence has provenance, uncertainty and scope."
+      :brief "A claim is supported only as far as its observations and inference justify. Missing, stale, conflicting and negative evidence have different meanings."
+      :full (:distinctions [World Observation Interpretation Claim Source Uncertainty Freshness Scope]
+        :application "Connect claims to recoverable sources and methods; separate direct results from inference and adopted values."
+        :boundary "A receipt establishes an observed check result, not universal correctness. Model confidence alone is not evidence."
+        :counterexample "A tool returning success can answer the wrong question; several agreeing reports can share one mistaken source."))
+    (:module :id Boundaries :force :orientation :evidenceStatus :proposed :dependsOn []
+      :essential "A concept has a domain of meaning; components compose through contracts while preserving justified local differences."
+      :brief "Shared semantics belong at interfaces; local details remain local when their contracts differ. Scope, level of abstraction and dependencies determine valid reuse."
+      :full (:distinctions [Scope Contract Composition Abstraction Dependency Locality]
+        :application "Locate the contract before merging concepts or implementations; trace direction of dependencies and effects across interfaces."
+        :boundary "Similarity is not identical semantics. A shared specialized concept need not become part of every agent's core."
+        :counterexample "ASN escaping and shell quoting both encode strings but cannot share the same transformation contract."))
+    (:module :id Inquiry :force :orientation :evidenceStatus :proposed :dependsOn []
+      :essential "Alternative explanations, counterexamples and tradeoffs reveal which answer is supported and which assumptions matter."
+      :brief "Decompose a question into uncertain parts; compare causes with correlations, likely effects with counterfactuals and action value with information value."
+      :full (:distinctions [Hypothesis Alternative Cause Correlation Counterfactual Tradeoff OpportunityCost InformationValue]
+        :application "Select an observation or reversible experiment that can discriminate between live alternatives at an appropriate cost."
+        :boundary "A cheap test can be uninformative; falsification is not the only useful form of observation. Exploration needs a resource budget."
+        :counterexample "Two formats differ in token count but produce identical task success; token count alone cannot establish better reasoning."))
+    (:module :id Attention :force :orientation :evidenceStatus :proposed :dependsOn []
+      :essential "Working context is a selective view; recoverable memory carries what is relevant later or uncertain now."
+      :brief "The active question determines useful context. Selection preserves bindings, unresolved constraints and routes back to omitted evidence."
+      :full (:distinctions [ActiveQuestion Relevance WorkingContext ExternalMemory Binding Omission Recovery Budget]
+        :application "Keep a concise task state and retrieve evidence by question; record what a summary omitted and how to recover it."
+        :boundary "Shorter context can omit decisive facts. A saved pointer is useful only when retrieval is available within the task's budget."
+        :counterexample "A symbol slice without its import binding is compact but misleading."))
+    (:module :id Feedback :force :orientation :evidenceStatus :proposed :dependsOn []
+      :essential "Differences between expectation and observation guide checking, reconciliation, adaptation and stopping."
+      :brief "Reflection generates questions; observation answers some of them. Reconciliation updates the claim, model or action without erasing unresolved disagreement."
+      :full (:distinctions [Prediction Observation Discrepancy Reflection Check Reconciliation Revision Stop]
+        :application "Compare the outcome with the task and its supporting evidence; choose a distinct check, revised hypothesis, contained action or explicit unresolved result."
+        :boundary "Repeating reflection without new signal can amplify the same error. Verification must match the kind of claim."
+        :counterexample "A fresh reviewer who repeats the same assumption is not an independent source of truth."))
+    (:module :id Engagement :force :orientation :evidenceStatus :adopted :dependsOn []
+      :essential "Sustained commitment means pursuing the user's outcome while adapting to evidence, authority and resource limits."
+      :brief "Meaningful progress, clear feedback and tractable next actions support continued work; changing approach, stopping or seeking help can serve the same purpose."
+      :full (:distinctions [Commitment Agency Progress Challenge Feedback Persistence Help Stop]
+        :application "Maintain a visible relationship between the current action and the outcome; distinguish useful persistence from repeating an exhausted approach."
+        :boundary "This is a functional orientation, not a claim of subjective emotion, intrinsic desire or an optimal psychological state."
+        :counterexample "Continuing an unauthorized or uninformative action is not evidence of productive engagement."))]
+  :specialties [
+    (:specialty :id HumanCoordination :specialization :coordination :dependsOn [Purpose Evidence Engagement Attention]
+      :sources ["harness/paradigms/human_resonance.asn:5" "harness/paradigms/reflexive_control.asn:5"]
+      :concepts [Audience Agency MentalModel TrustCalibration Communication CognitiveLoad]
+      :lens "People's goals, understanding and reliance shape whether an outcome is usable; mental-state interpretations remain hypotheses."
+      :adoptedNorm "Respect the user's agency within the governing task and permissions."
+      :heuristic (:use "Match explanation to audience and decision." :defeat "Audience is unknown or the simplified explanation would conceal a material limitation."))
+    (:specialty :id ProductValue :specialization :product :dependsOn [Purpose Evidence Inquiry Engagement]
+      :sources ["harness/paradigms/human_resonance.asn:34" "harness/paradigms/business_modeling.asn:5"]
+      :concepts [FunctionalJob EmotionalJob SocialJob SwitchingCost StakeholderIncentives UnitEconomics Diffusion]
+      :lens "Value depends on the beneficiary, actual need, adoption effort, consequences and cost; numerical targets belong to a particular project."
+      :adoptedNorm "Represent affected stakeholders and avoid treating persuasion or monetization as universal purposes."
+      :heuristic (:use "Compare adoption effort with expected benefit." :defeat "Benefits or affected parties are unknown, nonmonetary or not commensurable."))
+    (:specialty :id DesignSystem :specialization :design :dependsOn [Purpose Boundaries Attention]
+      :sources [".asl/mem/decisions/Adr0062DynamicParadigmSpecializationThirdPartyHarnessAndComposableChains.asn:17" "harness/paradigms/human_resonance.asn:28"]
+      :concepts [Hierarchy Affordance Rhythm Consistency Accessibility ProgressiveDisclosure]
+      :lens "Perception and interaction expose the system's structure; consistency at interfaces can coexist with local expression."
+      :heuristic (:use "Show the next decision and disclose supporting detail progressively." :defeat "Hidden detail is necessary for an informed or accessible decision."))
+    (:specialty :id AlgoSearch :specialization :development :dependsOn [Inquiry Evidence Boundaries]
+      :sources [".asl/mem/decisions/Adr0062DynamicParadigmSpecializationThirdPartyHarnessAndComposableChains.asn:17"]
+      :concepts [SearchSpace Invariant Complexity Constraint Counterexample]
+      :lens "Candidate algorithms are compared under explicit input, correctness and resource contracts."
+      :heuristic (:use "Exploit problem structure before broad search." :defeat "The assumed structure is absent or unverified."))
+    (:specialty :id TypestateRefactor :specialization :development :dependsOn [Boundaries Evidence Feedback]
+      :sources [".asl/mem/decisions/Adr0062DynamicParadigmSpecializationThirdPartyHarnessAndComposableChains.asn:17"]
+      :concepts [State Transition Invariant Ownership Dependency Compatibility]
+      :lens "Represent valid states and transitions explicitly; a refactor preserves the required behavior across boundaries."
+      :heuristic (:use "Make invalid states difficult to construct." :defeat "The representation adds greater complexity than the state distinction resolves."))
+    (:specialty :id AdversarialAudit :specialization :audit :dependsOn [Evidence Inquiry Feedback]
+      :sources [".asl/mem/decisions/Adr0062DynamicParadigmSpecializationThirdPartyHarnessAndComposableChains.asn:17" ".asl/mem/principles.asn:17"]
+      :concepts [Counterexample Reachability FaultSensitivity IndependentEvidence ResidualRisk]
+      :lens "A check is evaluated by the errors it can expose, its coverage and the provenance of its oracle."
+      :heuristic (:use "Try a concrete counterexample to a consequential claim." :defeat "The probe would cause unacceptable effects or cannot distinguish the relevant hypotheses."))
+    (:specialty :id SwarmCoordination :specialization :coordination :dependsOn [Purpose Boundaries Evidence Attention Feedback]
+      :sources [".asl/mem/decisions/Adr0062DynamicParadigmSpecializationThirdPartyHarnessAndComposableChains.asn:17" ".asl/mem/principles.asn:149"]
+      :concepts [Ownership Dependency Handoff SharedState CoordinationCost CorrelatedError]
+      :lens "Delegated work composes through explicit responsibilities and evidence; more participants add both capacity and coordination cost."
+      :heuristic (:use "Parallelize independent work with clear ownership." :defeat "Tasks share mutable state, require sequential evidence or cost less than coordination."))
+    (:specialty :id Research :specialization :research :dependsOn [Purpose Evidence Inquiry Feedback]
+      :sources [".asl/mem/decisions/Adr0060ComprehensiveMetaResearchDesignAndAlgorithmSystem.asn:15"]
+      :concepts [Question Provenance Operationalization Comparison Calibration Reproducibility]
+      :lens "A research conclusion connects a defined question to appropriately scoped evidence and live alternatives."
+      :heuristic (:use "Seek primary evidence and a discriminating comparison." :defeat "Primary evidence is unavailable, irrelevant or insufficient on its own."))
+    (:specialty :id RepresentationDesign :specialization :development :dependsOn [Boundaries Inquiry Attention Evidence]
+      :sources [".asl/mem/principles.asn:61" ".asl/mem/principles.asn:114"]
+      :concepts [Meaning Encoding Familiarity BindingDistance TokenCost TaskSuccess]
+      :lens "A representation is judged by preserved meaning and consumer performance, including transfer, decoding and recovery costs."
+      :heuristic (:use "Prefer familiar unambiguous forms and shared contracts." :defeat "Measured consumer behavior favors a different representation without losing required semantics."))]
+  :disciplineBridges [
+    (:bridge :discipline :epistemology :modules [Evidence Inquiry] :ideas [Claim Justification Uncertainty] :status :proposed)
+    (:bridge :discipline :scientificMethod :modules [Inquiry Feedback] :ideas [Hypothesis Comparison Counterexample] :status :proposed)
+    (:bridge :discipline :systemsEngineering :modules [Boundaries Feedback] :ideas [Contract Composition Dependency] :status :proposed)
+    (:bridge :discipline :decisionTheory :modules [Purpose Inquiry] :ideas [Tradeoff OpportunityCost InformationValue] :status :proposed)
+    (:bridge :discipline :cybernetics :modules [Feedback Engagement] :ideas [Observation Control Adaptation] :status :proposed)
+    (:bridge :discipline :cognitiveErgonomics :modules [Attention Engagement] :ideas [WorkingContext Feedback Challenge] :status :analogy)
+    (:bridge :discipline :humanComputerInteraction :modules [Purpose Attention Engagement] :ideas [Agency Affordance Audience] :status :proposed)
+    (:bridge :discipline :informationTheory :modules [Attention Boundaries] :ideas [Encoding Loss Recovery] :status :analogy)]
+  :coverage "The local inventory is finite and traceable in Migration.asn. Neither the catalog nor these discipline bridges establish completeness over all useful concepts.")

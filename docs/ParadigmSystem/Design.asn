@@ -1,0 +1,114 @@
+(:design :id ParadigmSystem :version "0.1.0" :status :candidate :deployment :notIntegrated
+  :intent "A modular conceptual lens for interpreting a task, selecting useful actions and revising beliefs from outcomes."
+  :consumer "LLM agents; ASN represents observable working state and communication, ASL computes explicit transitions."
+  :success "More verified useful outcomes per total cost, within task-specific error and resource limits."
+  :notEstablished ["Universal conceptual completeness" "Optimality across every model" "Improved hidden attention" "Internal reasoning necessarily occurs in ASN" "Any model can solve any task with 1000 tokens"]
+  :artifacts (:catalog "Catalog.asn" :essential "Essential.asn" :migration "Migration.asn" :flow "Flow.asl" :flowTests "FlowTest.asl" :contextEngine "ContextEngine.asn" :agentProtocol "AgentProtocol.asn" :research "Research.asn" :review "Review.asn")
+  :scopeClarification "The user is assembling the system conceptually. This package specifies architecture and future checks; it does not deploy context management, agent transport or script execution."
+  :decisions [
+    (:decision :id ConceptBeforeCommand :kind :normative
+      :value "Concepts explain relations, scope and consequences. Task instructions and host-enforced permissions remain separately identifiable."
+      :reason "A model can apply a relation in a new situation; a list of imperatives only names previously anticipated actions."
+      :limit "A prompt still conditions a model; semantic comprehension and generalization must be measured.")
+    (:decision :id OrthogonalClassification :kind :normative
+      :value "Content force, conceptual dependency, specialization, presentation depth and context budget are independent axes."
+      :forceRef "Catalog.asn:axes.force"
+      :enforcement "A scoped norm may carry a host-enforced invariant; enforcement and normative authority are not reduced with presentation depth."
+      :depth [:essential :brief :full]
+      :reason "A brief specialist does not need every general heuristic or every other domain pack first."
+      :composition "Dependency closure and semantic compatibility precede budget selection; shared specialty dependencies do not automatically become universal essential."
+      :preservation "Reducing depth or budget cannot weaken authority, remove mandatory preconditions or turn unknown into supported.")
+    (:decision :id LimitedKernel :kind :normative
+      :value "Essential holds the smallest task-independent distinctions. Each specialty supplies only the distinctions relevant to its question."
+      :reason "The catalog is an external addressable resource, not a compulsory prompt."
+      :limit "Large context permits full projection when requested and measured to fit; it does not make full projection the default.")
+    (:decision :id HumanReadableSemantics :kind :normative
+      :value "ASN uses meaningful keys and concise explanatory strings; ASL supplies executable computation."
+      :reason "Ordinary words inside structured records preserve the model's learned semantic associations."
+      :limit "Readable and compact views must be compared by observed errors and total cost; shortest spelling is not the objective.")
+    (:decision :id GroundingKinds :kind :normative
+      :value "Observed, inferred, assumed and preferred are different epistemic roles."
+      :reason "Source existence, quotation accuracy, support for a proposition and truth of that proposition are distinct checks."
+      :limit "Sources and instruments may be wrong; repeated citations to one origin are not independent evidence.")
+    (:decision :id ProductiveEngagement :kind :normative
+      :value "Engagement is durable orientation to the user's outcome, curiosity about consequential unknowns, initiative within scope and willingness to revise an ineffective approach."
+      :reason "The next action is motivated by progress or useful information, not by preserving the previous answer or merely completing a checklist."
+      :stop "Completion, explicit cancellation, lack of available authorized progress, or exhausted resources produces an explicit terminal or handoff state."
+      :limit "This describes desired behavior; it does not assert emotions, intrinsic motivation or conscious absorption in a model.")]
+  :recordContracts [
+    (:record :id TaskFrame :required [:goal :beneficiary :scope :criteria :currentQuestion :taskVersion]
+      :optional [:preferences :unknowns :resourceBudget]
+      :meaning "An operational interpretation of intent; unresolved material ambiguities remain visible.")
+    (:record :id Observation :required [:source :method :value :scope :revision]
+      :optional [:timestamp :instrument :uncertainty :sourceDigest]
+      :meaning "What an observation process returned, before stronger interpretation.")
+    (:record :id Claim :required [:id :proposition :scope :status :evidence]
+      :statuses [:unknown :hypothesis :supported :refuted :contested :stale]
+      :optional [:counterEvidence :assumptions :revisionTrigger]
+      :meaning "Supported means supported within scope, not certain or universally true. Confidence requires a defined calibration procedure.")
+    (:record :id Decision :required [:question :alternatives :criteria :choice :basis]
+      :optional [:tradeoffs :assumptions :revisitWhen]
+      :meaning "A choice under preferences and constraints; it is not an empirical assertion.")
+    (:record :id Action :required [:operation :inputs :preconditions :capability :expectedOutcome]
+      :optional [:effects :reversibility :compensation :cost]
+      :meaning "An available operation whose authorization and execution belong to the host boundary.")
+    (:record :id Receipt :required [:issuer :taskVersion :artifactDigest :method :outcome :criteriaCoverage]
+      :optional [:assertionSites :executionCount :exitCode :observations]
+      :meaning "An observed outcome bound to what was checked; model-written fields alone are not a trusted receipt.")
+    (:record :id Handoff :required [:task :state :openQuestions :criticalConstraints :evidenceRefs :nextAction]
+      :optional [:omittedDetails :retrievalKeys :remainingBudget]
+      :meaning "Recoverable continuity for another bounded context, without silently losing unresolved errors.")]
+  :flowContract (
+    :path [:orient :observe :interpret :choose :act :compare :reconcile]
+    :terminal [:complete :pause :blocked :cancelled]
+    :branches [
+      (:branch :when :intentAmbiguous :next :clarifyOrObserve :reason "Resolve the uncertainty that changes the action; proceed on independent work.")
+      (:branch :when :essentialDoesNotFit :next :splitOrHandoff :reason "No silent truncation of intent, authority, current failure or essential meaning.")
+      (:branch :when :evidenceMissing :next :observe :reason "Plausibility alone cannot close an empirical claim.")
+      (:branch :when :sourceOrTaskChanged :next :reground :reason "A prior receipt applies only to its task and artifact revision.")
+      (:branch :when :observationsConflict :next :reconcile :reason "Align entity, time, units and scope; preserve unresolved conflict.")
+      (:branch :when :criterionUnmet :next :revise :reason "Use the failure to distinguish hypotheses or change the action.")
+      (:branch :when :noNewInformation :next :changeMethodOrPause :reason "Repeating self-review is not new evidence.")
+      (:branch :when :budgetExhausted :next :pause :reason "Resource exhaustion is not success.")
+      (:branch :when :trustedCoverageComplete :next :complete :reason "The applicable criteria are covered and no material contradiction remains.")]
+    :reflection "Compare the proposed account against criteria, alternatives and counterexamples. A critique suggests tests; external observations determine whether the tests support the account."
+    :reconciliation "Compare expected and observed outcomes and user intent. Revise the belief, action or scope explicitly; retract dependent claims when their basis is refuted."
+    :selfVerification "Consistency checks, re-derivation and executable checks can reveal errors. Agreement with oneself or with another model is not by itself ground truth."
+    :referenceBoundary "Flow.asl implements a small next-action policy. It does not implement semantic entailment, host authorization, receipt authentication, tokenizer accounting or a complete agent scheduler.")
+  :attentionDesign (
+    :unit "One active question, its critical constraints, current observation and next discriminating action."
+    :protected [:goal :criticalConstraints :currentFailure :openContradiction :requiredEvidence :actionInterface]
+    :external [:catalog :history :fullSources :inactiveSpecialties :supersededDetails]
+    :retrieval "A compact index exposes available concepts and operations only when the receiving host can actually retrieve them."
+    :refresh "Refresh task and evidence references at decision boundaries or changes; avoid unconditional repetition of all instructions."
+    :omission "Omitted details remain recoverable; a summary carries source references and records unresolved issues."
+    :measurement "Test dropped requirements, stale-evidence use, distractor sensitivity and recovery after handoff. These are behavioral proxies, not measurements of neural attention.")
+  :projectionContract (
+    :inputs [:task :modelProfile :hostEnvelope :availableCapabilities :conceptRegistry :tokenizer]
+    :modelProfile [:contextCapacity :outputReserve :supportedAsnSubset :observedComprehension :toolUseReliability]
+    :selection ["Validate the model's ability to read and emit the supported ASN subset." "Compute the actual whole-envelope budget using the deployment tokenizer." "Keep essential distinctions, task-critical facts and authority." "Select one relevant specialty view and close its declared dependencies." "Deduplicate shared concepts without dropping their meaning." "Add depth only when useful and affordable." "If protected content cannot fit, split the task, hand off, or return BudgetInsufficient."]
+    :stability "Keep the selected essential/profile prefix stable during a session where practical; changing specialties is an explicit context transition."
+    :format "Prefer keyed heterogeneous records. Schema-plus-rows is optional for repeated data after equivalence and comprehension checks."
+    :unknownTokenizer "A character estimate is advisory only and cannot certify a token bound."
+    :unsupportedModel "Use a simpler explicit ASN subset, constrained emission or deterministic parsing; if comprehension still fails, route to a capable model or report UnsupportedProfile."
+    :deploymentStatus :specifiedNotImplemented)
+  :budgetExample (
+    :kind :illustrativeAllocation :total 1000 :unit :tokens :tokenizer :deploymentSpecific
+    :parts [(:part :id HostAndTools :amount 140) (:part :id Essential :amount 200) (:part :id TaskAndState :amount 140) (:part :id Evidence :amount 220) (:part :id Specialty :amount 80) (:part :id OutputReserve :amount 180) (:part :id Margin :amount 40)]
+    :meaning "An arithmetic allocation for a narrow task, not a measurement of these files or a guaranteed usable context."
+    :condition "Actual counts replace these illustrative allocations. More host overhead or evidence can make this profile impossible."
+    :fallback "Externalize history, reduce task scope or hand off. Do not consume output reserve or remove essential distinctions silently.")
+  :evaluation (
+    :status :notRun :objective "Choose a Pareto-efficient profile for a defined model and task distribution."
+    :comparisons ["Current paradigm versus proposed conceptual kernel" "ASN versus meaning-equivalent ordinary structured representation" "Conceptual orientation versus imperative wording with equivalent content" "Essential alone versus essential plus relevant specialty" "Relevant projection versus full catalog" "Same reflection procedure with and without fresh external evidence"]
+    :controls [:sameTasks :sameTools :sameEvidence :sameBudget :fixedModelVersion :heldOutCriteria :repeatedRuns]
+    :strata [:narrowExtraction :planning :coding :research :humanCoordination :budgetPressure :contradictoryEvidence]
+    :metrics [:verifiedCompletion :semanticErrors :unsupportedClaims :omittedRequirements :repairCount :totalTokens :totalCost :latency :handoffRecovery]
+    :challengeCases ["Negation changes a requirement." "The source is quoted accurately but does not support the claim." "Two citations repeat one origin." "A receipt belongs to an earlier task or artifact." "A small context omits the latest failure." "A test passes while the user's outcome remains unmet." "An attractive hypothesis is contradicted." "A module is unavailable or exceeds budget." "No further informative action exists."]
+    :acceptance "Predeclare task-specific reliability limits and noninferiority margins; compare uncertainty intervals and paired outcomes. Equal results across tiers are valid measurements."
+    :limits "No claim of global optimality, universal transfer or intrinsic motivation follows from deterministic checks.")
+  :integration (
+    :existingWork "Amend the design assumptions of Phase466 when integrating; avoid creating a parallel permanent source of rules."
+    :targets ["harness/paradigm.asn" "harness/paradigms" "harness/src/context_assembler.asl" "harness/src/agent.asl" "harness/src/grounding.asl" ".asl/mem/principles.asn" ".asl/mem/tasks/Phase466ParadigmByForceAndTier.asn"]
+    :order ["Review this candidate and resolve source dispositions." "Select a single canonical concept registry; generate projections." "Replace silent essential eviction with explicit budget failure." "Replace heuristic truth labels and exhausted-review success with typed outcomes." "Integrate actual capability, tokenizer and receipt boundaries." "Run model evaluations before advertising efficacy or changing universal defaults."]
+    :currentFilesUnchanged true))
