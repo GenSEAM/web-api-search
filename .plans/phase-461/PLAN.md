@@ -37,14 +37,15 @@ Enforce strict separation between core language mechanisms and interchangeable e
   2. Verify macro hygiene and position preservation without domain contamination of the evaluator.
   3. Verify all 3 stages of `SuperviseGate.sh Task46102` (18 assertions executed cleanly).
 
-### Step 3: Task46103 — One Engine Interface with Interchangeable Engines
+### Step 3: Task46103 — One Engine Interface with Interchangeable Engines [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46103.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46103`
-- Owned Files: `asl/grammar/language-semantics.asn`, `asl/grammar/dependency-boundaries.asn`.
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define interchangeableEngineInterface semantic`.
+- Owned Files: `asl/grammar/language-semantics.asn`, `asl/grammar/protocol-conformance.asn`, `asl/grammar/dependency-boundaries.asn`.
 - Implementation:
   1. Define `interchangeableEngineInterface` semantics in `asl/grammar/language-semantics.asn`.
-  2. Specify unified engine host abstraction free of concrete engine name bindings.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46103`.
+  2. Specify unified host interface and conforming engines in `asl/grammar/protocol-conformance.asn` covering evaluation, filesystem, network, time, and randomness free of concrete engine names.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46103` (25 assertions executed cleanly).
 
 ### Step 4: Task46104 — Extensions Declare Required Host Capabilities
 - Fixture: `tests/acceptance/d81/Task46104.asl`

@@ -91,12 +91,12 @@
       :phase "phase-461"
       :title "One engine interface, engines interchangeable, the language naming none"
       :kind :architecture
-      :state :planned
+      :state :completed
       :lane "portability"
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789244000000
-      :updatedAt 1789244000000
+      :updatedAt 1789426500000
       :motivation "The deployed runtime today is a C host embedding a JavaScript evaluator on JavaScriptCore, which is macOS only, and the in-browser runtime that the relay phase depends on has no path while the language and the engine are the same artefact. Engine switching is not a feature to add later; it is the property that decides whether the language runs on a phone, in a browser or against a different host at all."
       :purpose "There is one declared interface between the language and its host covering evaluation, the file and network surface, time and randomness. The language specification names no engine. At least two engines satisfy the interface and the conformance suite runs unchanged against each, which is what makes the claim testable rather than architectural."
       :context (:contractRef D81PlanContext)
@@ -117,13 +117,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46103.asl"]
       :verificationCases ["The conformance suite passes unchanged on a second engine." "A program depending on an engine detail fails conformance rather than passing on one engine." "Two engines disagreeing on a conformance case is a reported finding, which makes the second engine an oracle as well as a target."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46103" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46103" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define interchangeableEngineInterface semantic")
+      :historicalReceipts ["rc-task46103-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Declare the host interface." "Bring a second engine to conformance." "Run one suite against both." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task46103-verified-20260912"])
     (:task
       :id "Task46104"
       :parentId ""

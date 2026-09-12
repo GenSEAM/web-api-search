@@ -1219,17 +1219,17 @@
       :scope ["asl/grammar/language-semantics.asn" "tests/acceptance/d81/Task46102.asl" ".asl/mem/tasks/Phase461CoreAndInterchangeableExtensions.asn"]
       :tags [:supervision :phase461 :task46102 :syntax-extension :hygiene :domain-as-library :approved]
       :fact "task46102-certified-complete"
-      :evidence "Authored syntaxExtensionHygienic and domainAsLibrary in asl/grammar/language-semantics.asn; ensured macros are hygienic preventing user binding capture while preserving syntax positions; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 18 executed assertions; receipts indexed in receipts.asn"
-      :consequence "Task46102 100% verified and certified; syntax extension domain-as-library established under ADR-0081")
+      :evidence "Authored syntaxExtensionHygienic and domainAsLibrary in language-semantics.asn; ensured domain forms (databases, views, queries) reside in libraries without expanding core evaluator vocabulary; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 18 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46102 100% verified and certified; hygienic syntax extension established under ADR-0081")
     (:note
-      :id "n107"
+      :id "n108"
       :author "codex"
       :created "2026-09-12"
       :status "active"
-      :scope ["asl/grammar/language-semantics.asn" "tests/acceptance/d81/Task46102.asl" ".asl/mem/tasks/Phase461CoreAndInterchangeableExtensions.asn"]
-      :tags [:supervision :phase461 :task46102 :syntax-extension :hygiene :domain-as-library :approved]
-      :fact "task46102-certified-complete"
-      :evidence "Authored syntaxExtensionHygienic and domainAsLibrary in language-semantics.asn; ensured domain forms (databases, views, queries) reside in libraries without expanding core evaluator vocabulary; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 18 executed assertions; receipts indexed in receipts.asn"
-      :consequence "Task46102 100% verified and certified; hygienic syntax extension established under ADR-0081")
+      :scope ["asl/grammar/language-semantics.asn" "asl/grammar/protocol-conformance.asn" "tests/acceptance/d81/Task46103.asl" ".asl/mem/tasks/Phase461CoreAndInterchangeableExtensions.asn"]
+      :tags [:supervision :phase461 :task46103 :interchangeable-engines :host-interface :approved]
+      :fact "task46103-certified-complete"
+      :evidence "Authored interchangeableEngineInterface in language-semantics.asn and hostInterface with conformingEngines (native-host and portable-wasm) in protocol-conformance.asn; verified single host interface covering evaluation, filesystem, network, time, and randomness free of concrete engine names; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 25 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46103 100% verified and certified; interchangeable engine interface established under ADR-0081")
   ]
 )
