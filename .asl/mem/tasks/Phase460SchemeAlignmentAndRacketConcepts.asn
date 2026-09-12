@@ -39,8 +39,8 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46001.asl"]
       :verificationCases ["An abbreviated spelling fails rather than resolving through an alias." "Executed assertion count is unchanged across the rename, so nothing was silently unbound." "The recomputed token total moves by less than one tenth of a percent, confirming the rename was free rather than assumed free." "A spelling inside a string literal is not rewritten."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46001" :status :notEstablished :contract D81Baseline)
+      :gateReadiness :baselineEstablished
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46001" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define schemeCoreFormsAlignment semantic")
       :historicalReceipts []
       :reviewStatus :requiresIndependentPlanReview
       :actionDag ["Fix the mapping." "Rewrite mechanically in one pass with the CamelCase conversion." "Recompute and record." "Independent acceptance."]
