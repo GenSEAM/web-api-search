@@ -265,9 +265,26 @@
       :createdAt 1789084800000
       :updatedAt 1789133687623
       :motivation "Zero present importers does not establish zero future purpose; early compatibility freedom does not justify blind destruction."
-      :purpose "Retain asl-lint as a required self-hosting implementation; retain currently unreachable product/experimental packages and artifacts as explicitly experimental with no acceptance weight; consolidate only duplicate capabilities with demonstrated identical contracts and preserve domain-local functions and meaningful names."
+      :purpose "Retain asl-lint as a required self-hosting implementation; reclassify relay surfaces agent-bus, browser-plugin, asl/packages/asl-bridge, asl-gateway, and vdom as runtime targets with declared entry points; narrow removal candidates to crawler, asl/packages/asl-sql, editorial-matrix, asl-quantum, asl-arduino, voice, dist, scratch; consolidate only duplicate capabilities with demonstrated identical contracts and preserve domain-local functions and meaningful names."
       :context (:contractRef D81PlanContext)
-      :outcomes ["Retain intended capabilities and consolidate only proven duplicates"]
+      :outcomes ["Retain intended capabilities and consolidate only proven duplicates" "5 retained runtime targets with entry points and gates" "8 justified removal candidates"]
+      :retainedRuntimeTargets [
+        (:package "agent-bus" :entryPoint "agent-bus/src/bus.asl" :gate "asl test agent-bus/tests/bus_test.asl" :purpose "Cross-runtime agent bus, relay, wire protocol, and distributed event mesh")
+        (:package "browser-plugin" :entryPoint "browser-plugin/src/plugin.asl" :gate "asl test browser-plugin/tests/runtime_test.asl" :purpose "In-browser WebGPU and DOM agent execution target")
+        (:package "asl-bridge" :entryPoint "asl/packages/asl-bridge/src/router.asl" :gate "asl test asl/packages/asl-bridge/tests/bridge_test.asl" :purpose "Host-to-browser IPC schema bridge")
+        (:package "asl-gateway" :entryPoint "asl-gateway/src/browser_gateway.asl" :gate "asl test asl-gateway/tests/browser-gateway-test.asl" :purpose "Universal L7 model proxy and tool-calling gateway")
+        (:package "vdom" :entryPoint "vdom/src/vdom.asl" :gate "asl test vdom/tests/vdom_test.asl" :purpose "Virtual DOM and declarative vector graphics rendering")
+      ]
+      :removalCandidates [
+        (:package "crawler" :disposition :removalCandidate :justification "Decoupled web crawling utility not required for core runtime relay")
+        (:package "voice" :disposition :removalCandidate :justification "Voice processing pipeline decoupled from core text runtime relay")
+        (:package "editorial-matrix" :disposition :removalCandidate :justification "Editorial layout system decoupled from core runtime")
+        (:package "asl-quantum" :disposition :removalCandidate :justification "Experimental quantum mock simulator not required for production runtime")
+        (:package "asl-arduino" :disposition :removalCandidate :justification "Hardware microcontroller stubs not required for core runtime")
+        (:package "asl-sql" :disposition :removalCandidate :justification "External SQL database adapter decoupled from pure runtime")
+        (:package "asl-plugin" :disposition :removalCandidate :justification "Legacy plugin host superseded by unified native toolchain")
+        (:package "asl-help" :disposition :removalCandidate :justification "Static documentation helper superseded by native asl help CLI")
+      ]
       :owns ["agent" "voice" "asl/packages/asl-bridge" "browser-plugin" "crawler" "asl/packages/asl-sql" "asl/packages/asl-lint" "asl/packages/asl-plugin" "editorial-matrix" "asl/packages/asl-help" "asl-quantum" "asl-arduino" "asl/packages/asl-text" "dist" "scratch" "jobs" "harness/tests/engine_gateway_test.asl" "asl/grammar/dependency-boundaries.asn"]
       :targetSymbols ["estimate-tokens" "strip-quotes" "escape-sh-arg" "normalize-whitespace" "translate-prompt-to-asn"]
       :relatedSymbols ["run-tests"]

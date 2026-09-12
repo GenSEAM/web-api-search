@@ -362,3 +362,99 @@
       :tasks ["Task43605" "Task43801" "Task43901" "Task44001"]
       :status :planned)
 
+    (:component
+      :id "comp-agent-bus-relay"
+      :name "Agent Bus Mesh and Multiplexed Transport Relay"
+      :category :relayRuntime
+      :purpose "Cross-runtime agent bus supporting mesh, cluster, presence, transport, wire, and browser-bridge across in-browser and local runtimes"
+      :files ["agent-bus/src/bus.asl" "agent-bus/src/mesh.asl" "agent-bus/src/transport.asl"]
+      :targetSymbols [
+        "make-bus"
+        "dispatch-message"
+        "connect-mesh"
+        "publish-topic"]
+      :invocationContexts [
+        (:context :trigger "Cross-runtime agent message dispatch" :caller "agent relay" :slaMs 1.0 :fallback ":local-socket")]
+      :dependencies []
+      :invariants [C1 C2 D34 D51 D81]
+      :owner "implementer"
+      :adr "ADR-0081"
+      :tasks ["Task44601" "Task44602" "Task44603"]
+      :status :active)
+
+    (:component
+      :id "comp-browser-plugin-relay"
+      :name "Browser Plugin Client Runtime Adapter"
+      :category :relayRuntime
+      :purpose "In-browser extension bridge for DOM compilation, local SLM integration, and mesh client connectivity"
+      :files ["browser-plugin/src/plugin.asl" "browser-plugin/src/background.asl" "browser-plugin/src/mesh_client.asl"]
+      :targetSymbols [
+        "init-plugin"
+        "connect-mesh-client"
+        "compile-dom"]
+      :invocationContexts [
+        (:context :trigger "Browser extension activation" :caller "browser runtime" :slaMs 10.0 :fallback ":detached-mode")]
+      :dependencies ["comp-agent-bus-relay"]
+      :invariants [C1 C2 D34 D51 D81]
+      :owner "implementer"
+      :adr "ADR-0081"
+      :tasks ["Task44601" "Task44604"]
+      :status :active)
+
+    (:component
+      :id "comp-asl-bridge-relay"
+      :name "ASL Cross-Package Bridge Adapter"
+      :category :relayRuntime
+      :purpose "Multi-runtime schema bridging, ports, and configuration cascade across heterogeneous runtime environments"
+      :files ["asl/packages/asl-bridge/src/bridge.asl" "asl/packages/asl-bridge/src/router.asl" "asl/packages/asl-bridge/src/ports.asl"]
+      :targetSymbols [
+        "make-bridge"
+        "route-packet"
+        "configure-ports"]
+      :invocationContexts [
+        (:context :trigger "Cross-package message bridging" :caller "router" :slaMs 2.0 :fallback ":direct-wire")]
+      :dependencies ["comp-agent-bus-relay"]
+      :invariants [C1 C2 D34 D51 D81]
+      :owner "implementer"
+      :adr "ADR-0081"
+      :tasks ["Task44601"]
+      :status :active)
+
+    (:component
+      :id "comp-asl-gateway-relay"
+      :name "ASL Wire Gateway and Remote Relay"
+      :category :relayRuntime
+      :purpose "HTTP, SSE, and WebSocket gateway server multiplexing wire frames across browser and local agents"
+      :files ["asl-gateway/src/server.asl" "asl-gateway/src/browser_gateway.asl" "asl-gateway/src/wire.asl"]
+      :targetSymbols [
+        "start-gateway"
+        "handle-wire-frame"
+        "stream-events"]
+      :invocationContexts [
+        (:context :trigger "External client connection" :caller "web client" :slaMs 5.0 :fallback ":reject-connection")]
+      :dependencies ["comp-agent-bus-relay"]
+      :invariants [C1 C2 D34 D51 D81]
+      :owner "implementer"
+      :adr "ADR-0081"
+      :tasks ["Task44601"]
+      :status :active)
+
+    (:component
+      :id "comp-vdom-relay"
+      :name "VDOM Reactive Surface and SVG Projection"
+      :category :relayRuntime
+      :purpose "Pure ASL virtual DOM diffing, SVG layout generation, and reactive UI projection for browser clients"
+      :files ["vdom/src/vdom.asl" "vdom/src/asn_svg.asl" "vdom/src/diagram.asl"]
+      :targetSymbols [
+        "create-vnode"
+        "diff-vdom"
+        "render-svg-projection"]
+      :invocationContexts [
+        (:context :trigger "UI frame render" :caller "client application" :slaMs 16.0 :fallback ":cached-dom")]
+      :dependencies []
+      :invariants [C1 C2 D34 D51 D81]
+      :owner "implementer"
+      :adr "ADR-0081"
+      :tasks ["Task44601"]
+      :status :active)
+

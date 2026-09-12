@@ -39,13 +39,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44601.asl"]
       :verificationCases ["A retained package without an entry point and a gate by the end of this phase fails; a removal-set package that gains an inbound reference is reported." "The component registry and the task list agree on the disposition of every one of the thirteen."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44601" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44601" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44601" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44601" :assertCount 33 :at 1789438800000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes the retained and removal sets." "Amend Task43807." "Declare entry points per retained package." "Register components." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :step 1 :status :ok :hash "HEAD")])
     (:task
       :id "Task44602"
       :parentId ""

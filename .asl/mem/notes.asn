@@ -1591,6 +1591,16 @@
       :fact "task44406-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44406.asl covering LLM case proposal inside mutation feedback loop, keeping only mutant-killing non-vacuous cases, discarding non-killing and duplicate proposals, ownership enforcement prohibiting edits to existing assertions or grader acceptance paths, and package budget tracking; established baseline failure and passed SuperviseGate.sh with 36 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task44406 certified complete; Phase 444 Test Telemetry and Coverage Guarantees 100% verified and certified under ADR-0081")
+    (:note
+      :id "n145"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope [".asl/mem/tasks/Phase438LanguageOptimizationAndPortableCore.asn" ".asl/mem/components.asn" "tests/acceptance/d81/Task44601.asl" ".asl/mem/tasks/Phase446MultiRuntimeRelayAndObservability.asn"]
+      :tags [:supervision :phase446 :task44601 :relay-surfaces :runtime-targets :components :approved]
+      :fact "task44601-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44601.asl covering reclassification of relay surfaces from removal candidates to runtime targets: amended Task43807 to explicitly retain agent-bus, browser-plugin, asl-bridge, asl-gateway, and vdom with declared entry points, narrowed removal set to remaining 8 candidates, and declared active components in .asl/mem/components.asn; established baseline failure and passed SuperviseGate.sh with 33 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task44601 certified complete; relay surfaces protected as active runtime targets under ADR-0081")
   ]
 )
 
