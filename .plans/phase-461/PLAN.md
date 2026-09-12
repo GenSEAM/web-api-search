@@ -57,14 +57,15 @@ Enforce strict separation between core language mechanisms and interchangeable e
   2. Enforce load-time capability verification and bidirectional AST usage checks in `asl/grammar/capabilities.asn`.
   3. Verify all 3 stages of `SuperviseGate.sh Task46104` (18 assertions executed cleanly).
 
-### Step 5: Task46105 — Adapters as Extensions on Two-Strikes Rule
+### Step 5: Task46105 — Adapters as Extensions on Two-Strikes Rule [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46105.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46105`
-- Owned Files: `asl/grammar/language-semantics.asn`, `.asl/mem/decisions`.
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define twoStrikesAdapterAdmission semantic`.
+- Owned Files: `asl/grammar/language-semantics.asn`, `asl/grammar/dependency-boundaries.asn`.
 - Implementation:
   1. Define `twoStrikesAdapterAdmission` semantics in `asl/grammar/language-semantics.asn`.
-  2. Ensure data/view adapters remain isolated packages and generic interfaces require two concrete implementations.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46105`.
+  2. Specify `adapterAdmission` and `twoStrikesRule` in `asl/grammar/dependency-boundaries.asn`.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46105` (18 assertions executed cleanly).
 
 ### Step 6: Task46106 — Strict Unidirectional Dependency Direction
 - Fixture: `tests/acceptance/d81/Task46106.asl`

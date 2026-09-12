@@ -169,12 +169,12 @@
       :phase "phase-461"
       :title "Data and view adapters as extensions, admitted only on the two strikes rule"
       :kind :architecture
-      :state :planned
+      :state :completed
       :lane "extensions"
       :priority :high
       :ownerRole "planner"
       :createdAt 1789244000000
-      :updatedAt 1789244000000
+      :updatedAt 1789427100000
       :motivation "Databases and frontend frameworks are the two places where a language most often acquires permanent clutter, because each new backend arrives with a reason to touch the core. This repository already states the guard in its own doctrine: zero pre-emptive universalism, and an abstraction extracted only on observing two concrete instances with the same contract. The measured cost of ignoring it is visible in the resolver, where one package earned a rewrite rule and a website earned a candidate path."
       :purpose "Data access and view rendering are extensions written against the core mechanisms and against nothing else. No interface is declared before two concrete adapters exist that share it, and the interface is then extracted from them rather than designed ahead of them. The core gains nothing for either domain."
       :context (:contractRef D81PlanContext)
@@ -195,13 +195,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46105.asl"]
       :verificationCases ["Adding a second data backend leaves the core digest unchanged." "An interface declared with only one implementing adapter fails the check." "An adapter reaching into core internals rather than the declared mechanisms fails."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46105" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46105" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define twoStrikesAdapterAdmission semantic")
+      :historicalReceipts ["rc-task46105-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Write two concrete adapters." "Extract the shared interface from them." "Enforce the rule." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task46105-verified-20260912"])
     (:task
       :id "Task46106"
       :parentId ""
