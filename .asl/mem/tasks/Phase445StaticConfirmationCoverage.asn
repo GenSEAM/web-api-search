@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase445StaticConfirmationCoverage"
   :createdAt 1789142321056
-  :status "planned"
+  :status "completed"
   :priorityOrder 9
   :summary "Static Confirmation Coverage: a working checker for every constraint that admits one, an explicit runtime-only declaration for the few that do not, and a coverage figure over the constraints themselves so the ratio cannot silently worsen."
   :phase "Phase445StaticConfirmationCoverage"
