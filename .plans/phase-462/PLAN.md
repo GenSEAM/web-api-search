@@ -26,14 +26,15 @@ Govern the entire lexicon by measured token cost under cl100k, removing human ae
   2. Ground selection rule in `TOKEN_CONVENTIONS.md`: measured token cost decides, length and family uniformity excluded.
   3. Verify all 3 stages of `SuperviseGate.sh Task46201` (19 assertions executed cleanly).
 
-### Step 2: Task46202 — No Symbol Enters the Language Unmeasured
+### Step 2: Task46202 — No Symbol Enters the Language Unmeasured [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46202.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46202`
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define symbolAdmissionMeasuredCostRule semantic`.
 - Owned Files: `asl/grammar/grammar.asn`, `asl/tools/asl.c`, `asl/grammar/language-semantics.asn`.
 - Implementation:
-  1. Define `unmeasuredSymbolRejection` semantic in `asl/grammar/language-semantics.asn`.
-  2. Ground Gate 6 audit enforcing measured token count on all exported symbols.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46202`.
+  1. Define `symbolAdmissionMeasuredCostRule` semantics in `asl/grammar/language-semantics.asn`.
+  2. Require measured token count and considered alternatives on symbol admission in `grammar.asn`.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46202` (18 assertions executed cleanly).
 
 ### Step 3: Task46203 — Close the Measured Excess in the Existing Lexicon
 - Fixture: `tests/acceptance/d81/Task46203.asl`

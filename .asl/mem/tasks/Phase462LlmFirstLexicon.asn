@@ -52,17 +52,17 @@
       :phase "phase-462"
       :title "No symbol enters the language unmeasured"
       :kind :tooling
-      :state :planned
+      :state :completed
       :lane "lexicon"
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789245000000
-      :updatedAt 1789245000000
+      :updatedAt 1789428200000
       :motivation "The lexicon reached 3776 symbols at 14781 tokens without anyone measuring a single one at the moment of admission. The rationale field that the grammar already demands records why a symbol exists and never what it costs, which is how 3686 symbols above one token accumulated while the project described itself as token efficient."
       :purpose "Admission to the grammar requires a measured token count recorded beside the symbol, together with the cheapest adequate alternative that was considered and the reason it was not taken. A symbol above the achievable minimum for its meaning is admitted only with that reason present, and the check recomputes the counts rather than trusting the record."
       :context (:contractRef D81PlanContext)
       :outcomes ["Measured cost recorded per symbol at admission" "The rejected cheaper alternative recorded" "Counts recomputed by the checker, never trusted" "The rule binds future vocabulary, not only present"]
-      :owns ["asl/grammar/grammar.asn" "asl/tools/asl.c"]
+      :owns ["asl/grammar/grammar.asn" "asl/tools/asl.c" "asl/grammar/language-semantics.asn"]
       :targetSymbols ["run_gate_6_grammar"]
       :relatedSymbols ["names" "gates" "concepts"]
       :invariants ["D51" "D52" "D81"]
@@ -78,13 +78,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46202.asl"]
       :verificationCases ["A symbol admitted without a measured count fails." "A recorded count that disagrees with recomputation fails, naming both numbers." "A symbol above the minimum without a recorded reason fails."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46202" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46202" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define symbolAdmissionMeasuredCostRule semantic")
+      :historicalReceipts ["rc-task46202-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Extend the symbol record with measured cost." "Recompute in gate 6." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 3
+      :receipts ["rc-task46202-verified-20260912"])
     (:task
       :id "Task46203"
       :parentId ""
