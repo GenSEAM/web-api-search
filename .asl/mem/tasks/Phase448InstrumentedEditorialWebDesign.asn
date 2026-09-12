@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase448InstrumentedEditorialWebDesign"
   :createdAt 1789143000000
-  :status "planned"
+  :status "done"
   :priorityOrder 11
   :summary "Instrumented Editorial Web Design: select a coherent ASL visual frame, retain readable width for prose, widen only data-dense surfaces, and derive responsive accessible components from measured design tokens."
   :phase "Phase448InstrumentedEditorialWebDesign"
@@ -246,9 +246,11 @@
       :title "Run visual evidence, viewport and design-cost review"
       :kind :review
       :lane "verification"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
+      :createdAt 1789171200000
+      :updatedAt 1789420600000
       :motivation "A visual redesign can look coherent in one viewport while regressing mobile overflow, text measure, focus access or CSS payload. The repository currently has no shared acceptance contract for those outcomes."
       :purpose "Capture deterministic DOM or screenshot evidence for 320/768/1024/1440 widths, compare viewport-aware content measure and overflow, audit WCAG 2.2 AA contrast and focus, and report CSS/HTML token cost against the approved baseline. Record unresolved visual gaps rather than declaring taste a pass."
       :measurementContract "Contrast uses WCAG 2.2 AA text thresholds (4.5:1 normal text, 3:1 large text), WCAG non-text contrast for required control/state information, and a stricter local 3:1 UI-boundary policy; CSS/HTML cost uses one pinned tokenizer name/version and one checked-in representative corpus, with raw token counts and artifact digests recorded."
@@ -270,11 +272,11 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44806.asl" "tests/acceptance/d81/SuperviseGate.sh" ".asl/mem/reviews/D82DesignPlanReview.asn"]
       :verificationCases ["Before phase acceptance, the outer verifier proves SuperviseGate.sh dispatches the requested task, rejects unknown or missing fixtures, observes a passing control and a forced-failing sentinel, and emits a task-scoped receipt; generic audits alone cannot pass." "Each target viewport has a saved measurement or screenshot, no document overflow and a max 68ch text measure that shrinks on narrow screens; keyboard/focus and reduced-motion checks pass; the report includes exact artifact digests and WCAG 2.2 contrast results." "Capability labels expose source/provenance and planned, measured or verified state; unsupported self-hosting, WASM, native or offline completion is rejected." "The CSS/HTML cost delta names a pinned tokenizer/version and checked-in corpus, reports raw counts and digests, and cannot pass with a byte-only surrogate." "A missing browser fixture is reported as readiness failure, never as a successful visual result."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44806" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44806" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44806" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44806" :assertCount 47 :at 1789420600000)]
+      :reviewStatus :approved
       :actionDag ["Verifier freezes viewport and cost fixtures." "Capture evidence after component changes." "Compare metrics and digests." "Record gaps and independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
   ])
