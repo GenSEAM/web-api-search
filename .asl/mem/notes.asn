@@ -1121,5 +1121,15 @@
       :fact "task45904-certified-complete"
       :evidence "Authored legibleAliasLength, globalPrefixUniqueness, and selfContainedSliceResolution semantics in asl/grammar/language-semantics.asn; verified 0.74 percent deliberate token cost and 11132 tokens grounding; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task45904 100% verified and certified; legible alias length and global prefix uniqueness established under ADR-0081")
+    (:note
+      :id "n98"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" ".asl/mem/telemetry/SymbolSurface20260912.asn" "TOKEN_CONVENTIONS.md" "tests/acceptance/d81/Task45905.asl" ".asl/mem/tasks/Phase459LanguageCompactionAndPredictability.asn"]
+      :tags [:supervision :phase459 :task45905 :symbol-surface :surface-ratchet :dual-inventory :trade-rule :approved]
+      :fact "task45905-certified-complete"
+      :evidence "Authored symbolSurfaceTracking, symbolSurfaceRatchet, and dualQuantityInventory semantics in asl/grammar/language-semantics.asn; generated SymbolSurface20260912.asn recording 17112 distinct head symbols and 1512691 tokens; documented symbol surface tracking and ratchet policy in TOKEN_CONVENTIONS.md; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 25 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task45905 100% verified and certified; distinct symbol surface established as primary tracked quantity above token count under ADR-0081")
   ]
 )

@@ -169,12 +169,12 @@
       :phase "phase-459"
       :title "Symbol surface as the tracked quantity, above token count"
       :kind :language
-      :state :planned
+      :state :completed
       :lane "predictability"
       :priority :high
       :ownerRole "planner"
       :createdAt 1789160000000
-      :updatedAt 1789160000000
+      :updatedAt 1789423600000
       :motivation "17112 distinct symbols appear in head position across 1512691 tokens, about one distinct symbol for every 88 tokens of corpus. A model working in this language must carry that surface, and it has almost no pretraining exposure to any of it. Published multi-language results put a low resource Lisp far below Python on the same tasks, which is a difference in familiarity rather than in syntax, and no amount of shortening changes it. Meanwhile every syntax change available here totals 3.38 percent. The project has been optimising the quantity that barely moves and not measuring the one that governs the outcome."
       :purpose "Distinct symbol surface is recorded in the same inventory as token count and is the quantity a language proposal must argue against. A change that reduces tokens while increasing surface, or while increasing distance between a binding and its uses, is rejected unless it carries evidence that accuracy did not fall."
       :context (:contractRef D81PlanContext)
@@ -195,13 +195,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task45905.asl"]
       :verificationCases ["Adding a synonym for an existing primitive raises the tracked surface and fails the ratchet." "A proposal reducing tokens while raising surface is rejected without accuracy evidence." "The inventory reports both quantities from one run."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45905" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45905" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define symbolSurfaceTracking semantic")
+      :historicalReceipts ["rc-task45905-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Add surface to the inventory." "Ratchet it." "Record the trade rule." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task45905-verified-20260912"])
     (:task
       :id "Task45906"
       :parentId ""

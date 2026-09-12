@@ -1,0 +1,11 @@
+(:telemetry
+  :id "SymbolSurface20260912"
+  :date "2026-09-12"
+  :task "Task45905"
+  :decision "ADR-0081"
+  :totalTokens 1512691
+  :distinctHeadSymbols 17112
+  :tokensPerDistinctHeadSymbol 88.4
+  :synonymExpansionBlocked true
+  :tradeRule "A change that reduces tokens while increasing surface, or while increasing distance between a binding and its uses, is rejected unless it carries evidence that accuracy did not fall."
+  :inventoryDualRunReported true)

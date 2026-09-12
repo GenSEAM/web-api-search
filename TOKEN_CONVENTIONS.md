@@ -200,3 +200,21 @@ To guarantee language predictability and eliminate memory overhead across autono
    - **Sanctioned Form**: `int-to-string`, `json-to-vdom`, `asn-to-svg`.
    - **Retired Forms**: `string-from-int`, `to-string`, `as-string` (`ERR_RETIRED_CONVERSION_FORM`).
 
+---
+
+## 8. Symbol Surface Tracking & Ratchet Policy (`Task45905`, `ADR-0081`)
+
+To govern language complexity and model predictability beyond superficial token counts, the repository tracks **distinct symbol surface** as a primary quantity:
+
+1. **Empirical Baseline**:
+   - 17112 (17,112) distinct symbols appear in head position across 1,512,691 corpus tokens (approximately 1 distinct symbol per 88.4 tokens).
+   - In low-resource language representations, distinct symbol surface and the distance between identifier bindings and their uses govern attention degradation and syntax hallucination.
+2. **The Trade Rule**:
+   - Distinct symbol surface is evaluated alongside token count in every language proposal.
+   - Any proposed change that saves tokens while increasing distinct symbol surface, or while increasing distance between a binding and its uses, is **rejected by default** unless accompanied by empirical evidence demonstrating that model accuracy does not degrade (`ERR_SURFACE_EXPANSION_WITHOUT_EVIDENCE`).
+3. **Symbol Surface Ratchet**:
+   - Adding synonyms, alternative spellings, or duplicate names for existing primitives expands the distinct symbol surface and fails the ratchet check (`ERR_SYMBOL_SURFACE_RATCHET_VIOLATION`).
+4. **Dual Quantity Inventory**:
+   - Language telemetry inventories must report both total token count and distinct head symbol surface in a single run (`ERR_MISSING_DUAL_INVENTORY`).
+
+

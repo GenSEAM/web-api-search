@@ -61,10 +61,16 @@ Address corpus fragmentation and establish one name per concept before 40 new bu
   2. Ground 0.74% deliberate token cost and 11,132 extra tokens in Phase 459 task file.
   3. Verify all 3 stages of `SuperviseGate.sh Task45904` (20 assertions executed cleanly).
 
-### Step 5: Task45905 — Symbol Surface as Tracked Quantity
+### Step 5: Task45905 — Symbol Surface as Tracked Quantity [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task45905.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task45905`
-- Implementation: Inventory distinct symbol surface and add ratchet checks.
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define symbolSurfaceTracking semantic`.
+- Owned Files: `asl/grammar/rules.asn`, `.asl/mem/telemetry`, `TOKEN_CONVENTIONS.md`.
+- Implementation:
+  1. Add `symbolSurfaceTracking`, `symbolSurfaceRatchet`, and `dualQuantityInventory` semantics to `asl/grammar/language-semantics.asn`.
+  2. Ground 17,112 distinct head symbols, 1,512,691 corpus tokens, and dual-run telemetry in `.asl/mem/telemetry/SymbolSurface20260912.asn`.
+  3. Document Section 8 on symbol surface tracking, ratchet policy, and trade rule in `TOKEN_CONVENTIONS.md`.
+  4. Verify all 3 stages of `SuperviseGate.sh Task45905` (25 assertions executed cleanly).
 
 ### Step 6: Task45906 — Correct D51 Claim to Measured Scope
 - Fixture: `tests/acceptance/d81/Task45906.asl`
