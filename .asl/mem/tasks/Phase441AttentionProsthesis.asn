@@ -67,11 +67,11 @@
       :title "Deliver applicable rules without changing the stable prefix"
       :kind :protocol
       :lane "attention"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789171200000
-      :updatedAt 1789133687623
+      :updatedAt 1789412800000
       :motivation "Scoped rule delivery is a hypothesis about reducing irrelevant context; relevance and authority must survive filtering."
       :purpose "Where returns references or bounded renderings of applicable canonical rules by step kind and tier; append dynamic step data outside the stable base prefix and preserve mandatory permissions/semantic constraints even when a projection is minimal."
       :context (:contractRef D81PlanContext)
@@ -93,12 +93,12 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44102.asl"]
       :verificationCases ["Each step kind receives exactly its applicable rule identities from canonical rules.asn, not a rendered channel as a second source." "Moving between steps changes dynamic context while stable base bytes remain unchanged." "Full applicable rules remain recoverable; metadata budgets do not truncate constraints or force undercounted token claims." "A canonical rule missing when is conservatively treated as all; projection never silently drops an untagged rule."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44102" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44102" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44102" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44102" :assertCount 26 :at 1789412800000)]
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
 
     (:task
       :id "Task44103"

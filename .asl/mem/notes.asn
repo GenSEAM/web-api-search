@@ -842,6 +842,16 @@
       :evidence "Created asl/packages/asl-eval with manifest.asn, grammar.asn, src/eval.asl, and tests/eval_test.asl; implemented EvalResult, EvalEnv, Closure, eval-node, invoke-closure, load-module, and make-eval-env; verified canonical language semantics error codes (ERR_UNBOUND_SYMBOL, ERR_UNRESOLVED_IMPORT); passed tests/acceptance/d81/Task44001.asl under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44001 100% verified and certified; pure self-hosted ASL evaluator package operational with 100% manifest and grammar conformity")
     (:note
+      :id "n79"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/rules.asn" "scripts/install.sh" "tests/acceptance/d81/Task44102.asl" ".asl/mem/tasks/Phase441AttentionProsthesis.asn"]
+      :tags [:supervision :phase441 :task44102 :rules-ssot :tier-slicing :when-scoping :stable-prefix :approved]
+      :fact "task44102-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44102.asl verifying rules.asn SSOT, scripts/install.sh --tier and --check-rules consistency, when step-scoping, and stable prefix preservation; passed tests/acceptance/d81/Task44102.asl under SuperviseGate.sh with 26 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44102 100% verified and certified; rule delivery scoped by step kind and tier without corrupting stable base prefix")
+    (:note
       :id "n78"
       :author "codex"
       :created "2026-09-12"
@@ -891,6 +901,16 @@
       :fact "task44002-certified-complete"
       :evidence "Authored asl/grammar/bootstrap-contract.asn defining stage0 seed, stage1 toolchain build, stage2 autonomous rebuild closure without seed or system compiler, and WASM capability profile; implemented asl/bench/bootstrap_rebuild.asl; passed tests/acceptance/d81/Task44002.asl under SuperviseGate.sh with 21 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44002 100% verified and certified; autonomous multi-stage bootstrap contract and WASM backend capability invariants locked and verified")
+    (:note
+      :id "n79"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/rules.asn" "scripts/install.sh" "tests/acceptance/d81/Task44102.asl" ".asl/mem/tasks/Phase441AttentionProsthesis.asn"]
+      :tags [:supervision :phase441 :task44102 :rules-ssot :tier-slicing :when-scoping :stable-prefix :approved]
+      :fact "task44102-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44102.asl verifying rules.asn SSOT, scripts/install.sh --tier and --check-rules consistency, when step-scoping, and stable prefix preservation; passed tests/acceptance/d81/Task44102.asl under SuperviseGate.sh with 26 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44102 100% verified and certified; rule delivery scoped by step kind and tier without corrupting stable base prefix")
     (:note
       :id "n78"
       :author "codex"
