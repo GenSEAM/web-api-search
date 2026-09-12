@@ -16,7 +16,7 @@ Address corpus fragmentation and establish one name per concept before 40 new bu
 
 ## Work Breakdown & Ordered DAG
 
-### Step 1: Task45901 — One Name per Concept Decided in Grammar
+### Step 1: Task45901 — One Name per Concept Decided in Grammar [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task45901.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task45901`
 - Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define predicateNaming semantic`.
@@ -28,7 +28,8 @@ Address corpus fragmentation and establish one name per concept before 40 new bu
      - `conversionNaming`: must use `source-to-target` format (`ERR_RETIRED_CONVERSION_FORM`).
   2. Document the "One Name per Concept" standard in `TOKEN_CONVENTIONS.md` highlighting `empty?` and retired forms.
   3. Ensure `asl/grammar/grammar.asn` conforms to the canonical forms.
-  4. Verify all 3 stages of `SuperviseGate.sh Task45901`.
+  4. Verify all 3 stages of `SuperviseGate.sh Task45901` (21 assertions executed cleanly).
+  5. Commits: `e884065` (asl submodule), `7e63403` (root repository).
 
 ### Step 2: Task45902 — Rename the 14 Measured Expensive Builtins
 - Fixture: `tests/acceptance/d81/Task45902.asl`
