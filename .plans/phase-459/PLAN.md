@@ -72,7 +72,14 @@ Address corpus fragmentation and establish one name per concept before 40 new bu
   3. Document Section 8 on symbol surface tracking, ratchet policy, and trade rule in `TOKEN_CONVENTIONS.md`.
   4. Verify all 3 stages of `SuperviseGate.sh Task45905` (25 assertions executed cleanly).
 
-### Step 6: Task45906 — Correct D51 Claim to Measured Scope
+### Step 6: Task45906 — Correct D51 Claim to Measured Scope [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task45906.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task45906`
-- Implementation: Update `TOKEN_CONVENTIONS.md`, `asl/grammar/rules.asn`, and `AGENTS.md` with exact scopes and empirical methods.
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define groundedNumericClaims semantic`.
+- Owned Files: `TOKEN_CONVENTIONS.md`, `asl/grammar/rules.asn`, `AGENTS.md`.
+- Implementation:
+  1. Add `groundedNumericClaims` and `dualScopeCompactionReport` semantics to `asl/grammar/language-semantics.asn`.
+  2. Correct D51 claim across `TOKEN_CONVENTIONS.md`, `asl/grammar/rules.asn`, and `AGENTS.md` to state 44% to 50% per long identifier and 3.06% corpus-wide across 888 files on 2026-09-12 under cl100k.
+  3. Render updated rules to all surfaces via `./scripts/install.sh --render-rules` and verify via `./scripts/install.sh --check-rules`.
+  4. Verify all 3 stages of `SuperviseGate.sh Task45906` (27 assertions executed cleanly).
+  5. Settle Phase 459 in `.asl/mem/roadmap.asn` as `done`.

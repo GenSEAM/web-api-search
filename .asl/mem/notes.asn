@@ -1131,5 +1131,15 @@
       :fact "task45905-certified-complete"
       :evidence "Authored symbolSurfaceTracking, symbolSurfaceRatchet, and dualQuantityInventory semantics in asl/grammar/language-semantics.asn; generated SymbolSurface20260912.asn recording 17112 distinct head symbols and 1512691 tokens; documented symbol surface tracking and ratchet policy in TOKEN_CONVENTIONS.md; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 25 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task45905 100% verified and certified; distinct symbol surface established as primary tracked quantity above token count under ADR-0081")
+    (:note
+      :id "n99"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "TOKEN_CONVENTIONS.md" "asl/grammar/rules.asn" "AGENTS.md" "tests/acceptance/d81/Task45906.asl" ".asl/mem/tasks/Phase459LanguageCompactionAndPredictability.asn"]
+      :tags [:supervision :phase459 :task45906 :grounded-claims :dual-scope :phase-complete :approved]
+      :fact "phase459-certified-complete"
+      :evidence "Authored groundedNumericClaims and dualScopeCompactionReport semantics in asl/grammar/language-semantics.asn; corrected D51 claim across TOKEN_CONVENTIONS.md, asl/grammar/rules.asn, and AGENTS.md to state 44-50% per long identifier and 3.06% corpus-wide on 888 files under cl100k; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 27 executed assertions; all 6 tasks (Task45901..Task45906) verified with 125 total assertions; Phase 459 marked done in roadmap.asn; receipts indexed in receipts.asn"
+      :consequence "Task45906 and Phase 459 Language Compaction and Predictability 100% verified and certified under ADR-0081")
   ]
 )

@@ -13,9 +13,10 @@ Modern Large Language Models (Claude, GPT-4, Gemini) process source code through
   `['test', '-', 'doctor', '-', 'detect', '-', 'missing', '-', 'dependency']`
 - When written in CamelCase—`TestDoctorDetectMissingDependency`—the capitalization boundaries allow subwords to merge with common stems into existing vocabulary entries, yielding **5 BPE tokens** (**-44.4% token reduction**).
 
-Across the monorepo's 33 `grammar.asn` files and 3,714 exported symbols:
-- **2,819 symbols (78.2%)** are dashed identifiers consuming 12,105 BPE tokens.
-- CamelCase representations compress these into 10,495 tokens—a direct **1,610 token savings** across grammar registries alone (13.3% monorepo-wide, and 25% to 50% on compound names).
+Across 888 files in the corpus (1,512,691 total tokens measured under `cl100k` on 2026-09-12):
+- **Per long identifier (>2 words)**: CamelCase achieves **44 to 50 percent** token reduction (e.g. 50.0% on `TestAstMutationDeletedAssertionBlocked` and 44.4% on `TestDoctorDetectMissingDependency`).
+- **Corpus-wide**: Converting all hyphenated identifiers saves 46,259 tokens (**3.06 percent** corpus-wide saving), because most identifiers are one or two words and 41.8% of tokens are string literals unreachable by naming conventions.
+- Across grammar registries alone (33 `grammar.asn` files, 3,714 exported symbols), 2,819 dashed symbols consume 12,105 tokens; CamelCase compresses them into 10,495 tokens (1,610 token savings / 13.3%).
 
 ### 1.2 The S-Expression Context Bias
 When autonomous agents generate AgentScript (`.asl`) or ASN (`.asn`), the prompt context (parentheses, homoiconic S-expressions, prefix notation) activates their historical training prior on classical Lisps (Scheme, Common Lisp, Clojure), where kebab-case is universal.
@@ -34,7 +35,7 @@ When autonomous agents generate AgentScript (`.asl`) or ASN (`.asn`), the prompt
 +---------------------------------------------------------------------------------------+
 |  I. Capital Alphanumeric Markers      |  II. PascalCase Composite Constructs          |
 |  D1..D56, C1..C5, L1..L10, R1..R10    |  Types, Structs, Test Suites, Phase Nodes     |
-|  -75% token reduction per reference   |  20% to 50% BPE token savings                 |
+|  -75% token reduction per reference   |  44% to 50% per id (3.06% corpus-wide)        |
 +---------------------------------------+-----------------------------------------------+
 |  III. Universal Zero-Kebab Standard   |  IV. Dual-Tier Rationality Annotations        |
 |  :camelCase Properties & Functions    |  :rationality :absolute | :contextSpecific    |
@@ -58,7 +59,7 @@ Markers reference immutable invariants, architectural decisions, deferred tracks
 | Task Property | `(:invariants [C0001 C0002])` | `(:invariants [C1 C2])` | 8 tokens -> 2 tokens (**-75%**) |
 
 ### Pillar II: PascalCase for Composite Constructs & Types (`D51`)
-When an identifier defines a **type, struct, typestate, phase, or test suite**, PascalCase MUST be used to eliminate punctuation splitting:
+When an identifier defines a **type, struct, typestate, phase, or test suite**, PascalCase MUST be used to eliminate punctuation splitting (achieving 44 to 50 percent token reduction per long identifier, and 3.06 percent corpus-wide across 888 files under cl100k):
 
 - **Structs and Types**: `VoiceFrame`, `AuditTokenEfficiency`, `ASTToken`, `CrawlResult`, `TaskRecord`
 - **Test Suites**: `TestAstMutationDeletedAssertionBlocked`, `TestDoctorDetectMissingDependency`

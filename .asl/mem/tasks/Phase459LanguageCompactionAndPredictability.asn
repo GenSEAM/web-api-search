@@ -208,12 +208,12 @@
       :phase "phase-459"
       :title "Correct the D51 claim to its measured scope"
       :kind :protocol
-      :state :planned
+      :state :completed
       :lane "naming"
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789160000000
-      :updatedAt 1789160000000
+      :updatedAt 1789423900000
       :motivation "TOKEN_CONVENTIONS.md and the names rule state a 20 to 50 percent reduction from CamelCase. Measured against the identifiers the document cites, that is exact: the two worked examples reproduce at 50.0 and 44.4 percent. Measured across the corpus the same change is 3.06 percent, because most identifiers are one or two words and 41.8 percent of tokens are string literals that no naming convention reaches. A figure true of an example and false of the system is the failure mode the concepts rule was adopted to prevent, and it is currently the headline number of the project's own convention document."
       :purpose "The claim carries its scope, its method and its corpus-wide figure: per long identifier 44 to 50 percent, corpus-wide 3.06 percent, measured on 888 files under cl100k on a stated date. The same treatment is applied to every other number in the document."
       :context (:contractRef D81PlanContext)
@@ -234,11 +234,11 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task45906.asl"]
       :verificationCases ["A number in the document without scope and method fails the check." "The stated corpus-wide figure is reproducible by command on the tree it names." "The rule surface rendered to every client carries the corrected claim."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45906" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45906" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define groundedNumericClaims semantic")
+      :historicalReceipts ["rc-task45906-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Recompute each stated number." "Attach scope and method." "Render to every surface." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])]
+      :stepIndex 4
+      :receipts ["rc-task45906-verified-20260912"])]
   :notes "The finding that shapes this phase is that the language is already compact. Head symbols cost one token, keywords cost one token, type signatures are 1.0 percent and string literals are 41.8 percent and unreachable. Everything syntax can still win totals 3.38 percent, while the quantity that plausibly governs model accuracy, distinct symbol surface and the distance between a binding and its use, has never been measured or tracked. Task45901 must precede Task45403, which is about to add 40 primitives.")
