@@ -1611,6 +1611,16 @@
       :fact "task44602-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44602.asl covering single wire frame schema with camelCase keys in asl/grammar/wire.asn, four transport codecs (stdio, unixSocket, http, sse) in agent-bus/src/wire.asl, identical frame roundtrip, and ingress validation with typed error rejection; established baseline failure and passed SuperviseGate.sh with 78 assertions evaluated, including asl/tools/asl.c op_frame and direct frame ingress handling in execute_single_step and handle_payload, and transport.asl envelope integration; receipts indexed in receipts.asn"
       :consequence "Task44602 certified complete; unified wire contract operational across all four transports under ADR-0081")
+    (:note
+      :id "n147"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["agent-bus/src/mesh.asl" "agent-bus/src/presence.asl" "asl/tools/asl.c" ".asl/mem/telemetry/mesh-trace.asn" "tests/acceptance/d81/Task44603.asl" ".asl/mem/tasks/Phase446MultiRuntimeRelayAndObservability.asn"]
+      :tags [:supervision :phase446 :task44603 :observability :mesh-trace :causal-order :gap-detection :approved]
+      :fact "task44603-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44603.asl covering causal identity on every frame across browser, local, server, and relay; clock skew does not reorder causal precedence; monotonic sequence jumps and missing parent references are detected and reported as explicit gaps; (:trace :scope :mesh) returns causally merged trace; passed SuperviseGate.sh with 80 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task44603 certified complete; cross-runtime observability with causal ordering and explicit gap reporting operational under ADR-0081")
   ]
 )
 

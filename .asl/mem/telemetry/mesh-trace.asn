@@ -1,0 +1,14 @@
+(:meshTraceTelemetry
+  :id "MeshTraceTelemetry20260913"
+  :date "2026-09-13"
+  :phase "Phase446"
+  :engine "bin/asl"
+  :runtimes ["browser" "local" "server" "relay"]
+  :entries [
+    (:trace-entry :timestamp 1789439200000 :step 1 :sessionId "mesh-sess-01" :runtimeTarget "browser" :seq 1 :parentDigest "" :op "read" :target "agent-bus/src/wire.asl" :status "ok" :digest "d-browser-01" :duration-ms 2)
+    (:trace-entry :timestamp 1789439100000 :step 1 :sessionId "mesh-sess-01" :runtimeTarget "server" :seq 1 :parentDigest "d-browser-01" :op "write" :target "agent-bus/src/mesh.asl" :status "ok" :digest "d-server-01" :duration-ms 4)
+    (:trace-entry :timestamp 1789439250000 :step 1 :sessionId "mesh-sess-01" :runtimeTarget "relay" :seq 1 :parentDigest "d-server-01" :op "route" :target "agent-bus/src/wire.asl" :status "ok" :digest "d-relay-01" :duration-ms 1)
+    (:trace-entry :timestamp 1789439300000 :step 1 :sessionId "mesh-sess-01" :runtimeTarget "local" :seq 1 :parentDigest "d-relay-01" :op "gate" :target "asl/tools/asl.c" :status "ok" :digest "d-local-01" :duration-ms 10)
+    (:trace-entry :timestamp 1789439350000 :step 3 :sessionId "mesh-sess-01" :runtimeTarget "server" :seq 3 :parentDigest "d-local-01" :op "edit" :target "agent-bus/src/presence.asl" :status "ok" :digest "d-server-03" :duration-ms 3)
+  ]
+)

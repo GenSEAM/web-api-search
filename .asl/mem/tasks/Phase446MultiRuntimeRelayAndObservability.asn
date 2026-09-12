@@ -92,11 +92,11 @@
       :title "Cross-runtime observability: one trace spanning browser, local, server and relay"
       :kind :protocol
       :lane "observability"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789142392680
-      :updatedAt 1789142392680
+      :updatedAt 1789439300000
       :motivation "The session trace in Task44207 is per process. With work distributed across an in-browser runtime, a local engine, a server and a relay, a per-process trace cannot answer what happened, which is the question every stage of the loop depends on. Causality across runtimes is the part that cannot be reconstructed afterwards."
       :purpose "Every frame carries sessionId, parent frame digest and a monotonic sequence, so traces from separate runtimes merge into one causal order; (:trace :scope :mesh) returns the merged view; a gap in the sequence is reported as a gap rather than silently closed. Clock skew is handled by causal order, not timestamps."
       :context (:contractRef D81PlanContext)
@@ -117,13 +117,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44603.asl"]
       :verificationCases ["Two runtimes producing interleaved work merge into one order that respects causality regardless of clock skew; a dropped frame appears as a reported gap, never as a silent renumbering." "The merged trace is readable by asl reflect without runtime-specific handling."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44603" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44603" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44603" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44603" :assertCount 80 :at 1789439300000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes a two-runtime scenario with a dropped frame." "Add causal identity to frames." "Merge traces by causal order." "Report gaps." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :step 1 :status :ok :hash "HEAD")])
     (:task
       :id "Task44604"
       :parentId ""
