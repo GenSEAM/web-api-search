@@ -26,14 +26,15 @@ Align AgentScript core forms with Scheme and Racket conventions where measured t
   2. Ground 16,041 uses across 11 core single-token forms (`define`, `struct`, `enum`, `lambda`, `match`, `begin`, `provide`, `require`, `field`, `string`, `null`) with zero token delta in Phase 460 task file.
   3. Verify all 3 stages of `SuperviseGate.sh Task46001` (17 assertions executed cleanly).
 
-### Step 2: Task46002 — Adopt Racket Binding Shape
+### Step 2: Task46002 — Adopt Racket Binding Shape [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46002.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46002`
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define racketBindingShape semantic`.
 - Owned Files: `asl/grammar/language-semantics.asn`, `asl/tools/engine_js.h`, `asl/packages`, `harness/src`.
 - Implementation:
-  1. Define `racketBindingShape` semantics and record rejection of 0.69% Clojure binding trade.
-  2. Verify Racket binding parser and reader acceptance.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46002`.
+  1. Define `racketBindingShape` and `clojureBindingShapeRejection` semantics in `asl/grammar/language-semantics.asn`.
+  2. Ground 5,249 uses and recorded rejection of 0.69% Clojure binding trade to maintain single-reference dialect alignment.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46002` (17 assertions executed cleanly).
 
 ### Step 3: Task46003 — Racket Module System Design for Resolution
 - Fixture: `tests/acceptance/d81/Task46003.asl`

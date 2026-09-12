@@ -52,12 +52,12 @@
       :phase "phase-460"
       :title "Adopt the Racket binding shape and decline the cheaper Clojure one"
       :kind :language
-      :state :planned
+      :state :completed
       :lane "alignment"
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789240000000
-      :updatedAt 1789240000000
+      :updatedAt 1789424500000
       :motivation "The current binding form is a third shape belonging to no existing Lisp: ASL writes (let [(a 1) (b 2)] body) where Racket writes (let ([a 1] [b 2]) body) and Clojure writes (let [a 1 b 2] body). Measured, ASL and Racket cost 13 tokens and Clojure costs 11. The cheaper form would save 0.69 percent across 5249 uses, and taking it would place the language a third distance from both references, which is the condition that produced the present problem. Alignment with one reference is worth more than two tokens a binding."
       :purpose "The binding form is Racket's. The choice, including the rejected Clojure option and the 0.69 percent it would have saved, is recorded so it is not reopened as an efficiency idea."
       :context (:contractRef D81PlanContext)
@@ -78,13 +78,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46002.asl"]
       :verificationCases ["The old shape is rejected by the reader rather than silently accepted." "A binding list valid in Racket parses here with the same meaning." "Assertion parity holds across the conversion."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46002" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46002" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define racketBindingShape semantic")
+      :historicalReceipts ["rc-task46002-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Change the reader." "Convert the tree." "Record the rejected option." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task46002-verified-20260912"])
     (:task
       :id "Task46003"
       :parentId ""

@@ -1151,5 +1151,15 @@
       :fact "task46001-certified-complete"
       :evidence "Authored schemeCoreFormsAlignment and zeroCostAbbreviationRetirement semantics in asl/grammar/language-semantics.asn; grounded 16041 uses across 11 core single-token forms (define, struct, enum, lambda, match, begin, provide, require, field, string, null) with zero token delta; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 17 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task46001 100% verified and certified; core forms aligned with Scheme spellings at measured zero token cost under ADR-0081")
+    (:note
+      :id "n101"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "tests/acceptance/d81/Task46002.asl" ".asl/mem/tasks/Phase460SchemeAlignmentAndRacketConcepts.asn"]
+      :tags [:supervision :phase460 :task46002 :racket-binding :clojure-rejection :alignment-trade :approved]
+      :fact "task46002-certified-complete"
+      :evidence "Authored racketBindingShape and clojureBindingShapeRejection semantics in asl/grammar/language-semantics.asn; grounded 5249 uses and recorded rejection of 0.69 percent Clojure binding trade to maintain single-reference dialect alignment; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 17 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46002 100% verified and certified; Racket canonical binding shape adopted under ADR-0081")
   ]
 )
