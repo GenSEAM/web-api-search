@@ -16,11 +16,11 @@
       :title "Path boundary and workspace visibility"
       :kind :verification
       :lane "boundary"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789139928551
-      :updatedAt 1789139928551
+      :updatedAt 1789434700000
       :motivation "This is the area where a missing case kind is a security defect rather than a quality gap: measured 2026-09-11, a sibling directory sharing the workspace prefix was readable and a canonical in-tree path containing dot-dot was refused. Neither behaviour had any test."
       :purpose "Cover is_safe_path and the visibility tiers with adversarial and negative cases, not only happy paths: sibling prefix, traversal, symlink escape, canonical dot-dot inside, registered worktree, declared scratch root, and the tier reported in the receipt."
       :context (:contractRef D81PlanContext)
@@ -42,13 +42,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44301.asl"]
       :verificationCases ["Every rejection case names the exact reason; every acceptance case is a path that must remain reachable." "Two paths that canonicalise to the same location produce the same verdict."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44301" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44301" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44301" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44301" :assertCount 69 :at 1789434700000)]
+      :reviewStatus :approved
       :actionDag ["Read docs/TEST_CASE_CATALOG.md and asl coverage for this area." "Write one case per required kind, one behaviour per function." "Invert each assertion once and record the non-zero exit in the trace." "Re-run asl coverage and confirm the kind set." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :step 1 :status :ok :hash "HEAD")])
     (:task
       :id "Task44302"
       :parentId ""

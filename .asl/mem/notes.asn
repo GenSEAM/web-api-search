@@ -1460,6 +1460,15 @@
       :tags [:supervision :phase445 :task44504 :coverage-report :runtime-only :doctor :gate7 :approved]
       :fact "task44504-and-phase445-certified-complete"
       :evidence "Implemented confirmation-coverage rows across rules, invariants, decisions, and capabilities in asl.c run_doctor; distinguished runtimeOnly rules (budget, edge) from advisory rules; enforced missing :check defense in Gate 7; verified 28 non-vacuous assertions; passed SuperviseGate.sh; all 4 tasks of Phase445 certified complete"
-      :consequence "Task44504 certified complete; Phase 445 Static Confirmation Coverage fully certified under ADR-0081")
+    (:note
+      :id "n132"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["tests/conformance/boundary/path_boundary_test.asl" "tests/acceptance/d81/Task44301.asl" ".asl/mem/tasks/Phase443TestCoverageCampaign.asn"]
+      :tags [:supervision :phase443 :task44301 :path-boundary :visibility-scope :conformance :approved]
+      :fact "task44301-certified-complete"
+      :evidence "Authored tests/conformance/boundary/path_boundary_test.asl covering negativeControl, adversarial, boundary, metamorphic, and errorPropagation case kinds for is_safe_path, resolve_path, and asl-mem/visibility-scope; established baseline failure and passed SuperviseGate.sh with 69 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task44301 certified complete; path boundary and workspace visibility conformance suite established under ADR-0081")
   ]
 )
