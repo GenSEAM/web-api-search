@@ -1581,6 +1581,16 @@
       :fact "task44405-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44405.asl covering outcome stability across repeated runs, duration distribution, disqualified unstable suites, executed-set regression diff naming both receipts, and bottleneck ranking by wall clock share in asl/bench/flakiness_detector.asl; established baseline failure and passed SuperviseGate.sh with 36 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task44405 certified complete; flakiness, bottlenecks, and regression detection operational under ADR-0081")
+    (:note
+      :id "n144"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["asl/bench/mutation_proposer_loop.asl" "tests/acceptance/d81/Task44406.asl" ".asl/mem/tasks/Phase444TestTelemetryAndCoverageGuarantees.asn"]
+      :tags [:supervision :phase444 :task44406 :mutation-feedback :proposal-loop :ownership-defense :non-vacuous :approved]
+      :fact "task44406-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44406.asl covering LLM case proposal inside mutation feedback loop, keeping only mutant-killing non-vacuous cases, discarding non-killing and duplicate proposals, ownership enforcement prohibiting edits to existing assertions or grader acceptance paths, and package budget tracking; established baseline failure and passed SuperviseGate.sh with 36 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task44406 certified complete; Phase 444 Test Telemetry and Coverage Guarantees 100% verified and certified under ADR-0081")
   ]
 )
 

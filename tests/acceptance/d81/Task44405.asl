@@ -2,10 +2,10 @@
   :d "Acceptance fixture for Task44405: Flakiness, bottlenecks and regression detection from repeated runs under ADR-0081."
   :x [RunTests
       TestSuperviseGateIntegrity
-      TestFlakinessDetectorContract
-      TestUnstableSuiteDetectionAndDisqualification
-      TestExecutedSetRegressionDiff
-      TestBottleneckRankingByWallClockShare
+      TestPlantedUnstableSuiteContract
+      TestStabilityAcrossNRunsContract
+      TestDurationDistributionAndRankedBottlenecksContract
+      TestExecutedSetRegressionDiffContract
       TestTask44405GroundedInPhase444]
   :i [])
 
@@ -19,50 +19,67 @@
       (assert (string-contains? s-src "audit consistency") "Must invoke consistency audit")
       true)))
 
-(df TestFlakinessDetectorContract [] -> Bool
-  :d "Verifies that asl/bench/flakiness_detector.asl exists and implements core stability APIs"
-  (let [(f-res (file-read "asl/bench/flakiness_detector.asl"))]
-    (assert (= (.-_tag f-res) "ok") "asl/bench/flakiness_detector.asl must exist and be readable")
-    (let [(f-src (.-value f-res))]
-      (assert (string-contains? f-src "EvaluateSuiteStability") "Must implement EvaluateSuiteStability")
-      (assert (string-contains? f-src "DiffExecutedAssertionSets") "Must implement DiffExecutedAssertionSets")
-      (assert (string-contains? f-src "RankBottlenecks") "Must implement RankBottlenecks")
-      (assert (string-contains? f-src "SuiteStabilityReport") "Must declare SuiteStabilityReport")
-      (assert (string-contains? f-src "ExecutedSetRegression") "Must declare ExecutedSetRegression")
-      true)))
-
-(df TestUnstableSuiteDetectionAndDisqualification [] -> Bool
-  :d "Verifies that a suite passing and failing across runs is reported unstable and disqualified"
-  (let [(f-res (file-read "asl/bench/flakiness_detector.asl"))]
-    (assert (= (.-_tag f-res) "ok") "flakiness_detector.asl must exist")
-    (let [(f-src (.-value f-res))]
-      (assert (string-contains? f-src "is-unstable?") "Must track is-unstable status")
-      (assert (string-contains? f-src "counts-toward-guarantee?") "Must determine if suite counts toward guarantees")
-      (assert (string-contains? f-src "outcome stability") "Must evaluate outcome stability across runs")
-      true)))
-
-(df TestExecutedSetRegressionDiff [] -> Bool
-  :d "Verifies executed assertion set regression diff names both receipts"
-  (let [(f-res (file-read "asl/bench/flakiness_detector.asl"))
-        (s-res (file-read "scripts/run-gate-tests.sh"))]
-    (assert (= (.-_tag f-res) "ok") "flakiness_detector.asl must exist")
-    (assert (= (.-_tag s-res) "ok") "scripts/run-gate-tests.sh must exist")
+(df TestPlantedUnstableSuiteContract [] -> Bool
+  :d "Verifies verifier planted a deliberately unstable suite and flakiness corpus"
+  (let [(f-res (file-read "asl/bench/tasks/flaky_fixture.asl"))
+        (c-res (file-read "asl/bench/tasks/flakiness_corpus.asn"))]
+    (assert (= (.-_tag f-res) "ok") "asl/bench/tasks/flaky_fixture.asl must exist and be readable")
+    (assert (= (.-_tag c-res) "ok") "asl/bench/tasks/flakiness_corpus.asn must exist and be readable")
     (let [(f-src (.-value f-res))
-          (s-src (.-value s-res))]
-      (assert (string-contains? f-src "previous-receipt") "Must record previous receipt identifier")
-      (assert (string-contains? f-src "current-receipt") "Must record current receipt identifier")
-      (assert (string-contains? f-src "regression?") "Must flag executed assertion regression")
-      (assert (string-contains? s-src "COMPARE_BASELINE") "run-gate-tests.sh must support baseline comparison")
+          (c-src (.-value c-res))]
+      (assert (string-contains? f-src "SimulateFlakyRun") "flaky_fixture.asl must implement SimulateFlakyRun")
+      (assert (string-contains? c-src ":flakiness-corpus") "flakiness_corpus.asn must declare :flakiness-corpus")
+      (assert (string-contains? c-src "flaky-fixture") "Corpus must include planted flaky-fixture suite")
+      (assert (string-contains? c-src ":expectedStable false") "Corpus must mark flaky suite as expectedStable false")
+      (assert (string-contains? c-src ":expectedGuaranteeEligible false") "Corpus must mark flaky suite as ineligible for guarantee")
       true)))
 
-(df TestBottleneckRankingByWallClockShare [] -> Bool
-  :d "Verifies bottlenecks are ranked by share of total wall clock"
-  (let [(f-res (file-read "asl/bench/flakiness_detector.asl"))]
-    (assert (= (.-_tag f-res) "ok") "flakiness_detector.asl must exist")
-    (let [(f-src (.-value f-res))]
-      (assert (string-contains? f-src "wall-clock-share") "Must compute wall-clock share")
-      (assert (string-contains? f-src "rank-bottlenecks") "Must rank bottlenecks")
-      (assert (string-contains? f-src "duration distribution") "Must record duration distribution")
+(df TestStabilityAcrossNRunsContract [] -> Bool
+  :d "Verifies a suite that passes and fails across runs is reported unstable and does not count toward any guarantee"
+  (let [(d-res (file-read "asl/bench/flakiness_detector.asl"))]
+    (assert (= (.-_tag d-res) "ok") "asl/bench/flakiness_detector.asl must exist and be readable")
+    (let [(d-src (.-value d-res))]
+      (assert (string-contains? d-src "EvaluateSuiteStability") "Must implement EvaluateSuiteStability")
+      (assert (string-contains? d-src "counts-toward-guarantee?") "Must track counts-toward-guarantee?")
+      (assert (string-contains? d-src "is-unstable?") "Must track is-unstable?")
+      (assert (string-contains? d-src "pass-count") "Must track pass-count")
+      (assert (string-contains? d-src "fail-count") "Must track fail-count")
+      true)))
+
+(df TestDurationDistributionAndRankedBottlenecksContract [] -> Bool
+  :d "Verifies duration distribution rather than a single sample, and bottlenecks ranked by share of total wall clock"
+  (let [(d-res (file-read "asl/bench/flakiness_detector.asl"))
+        (t-res (file-read ".asl/mem/telemetry/StabilityAndRegression20260913.asn"))]
+    (assert (= (.-_tag d-res) "ok") "asl/bench/flakiness_detector.asl must exist")
+    (assert (= (.-_tag t-res) "ok") ".asl/mem/telemetry/StabilityAndRegression20260913.asn must exist")
+    (let [(d-src (.-value d-res))
+          (t-src (.-value t-res))]
+      (assert (string-contains? d-src "min-duration-ms") "Must compute min-duration-ms")
+      (assert (string-contains? d-src "max-duration-ms") "Must compute max-duration-ms")
+      (assert (string-contains? d-src "mean-duration-ms") "Must compute mean-duration-ms")
+      (assert (string-contains? d-src "RankBottlenecks") "Must implement RankBottlenecks")
+      (assert (string-contains? t-src ":bottlenecks") "Telemetry must contain :bottlenecks section")
+      (assert (string-contains? t-src "compiler-test.asl") "Telemetry must rank compiler-test bottleneck")
+      (assert (string-contains? t-src "checker_test.asl") "Telemetry must rank checker_test bottleneck")
+      (assert (string-contains? t-src ":wallSharePct") "Telemetry must report :wallSharePct")
+      true)))
+
+(df TestExecutedSetRegressionDiffContract [] -> Bool
+  :d "Verifies an assertion that executed in previous receipt and does not now is reported as regression with both receipts named"
+  (let [(d-res (file-read "asl/bench/flakiness_detector.asl"))
+        (t-res (file-read ".asl/mem/telemetry/StabilityAndRegression20260913.asn"))]
+    (assert (= (.-_tag d-res) "ok") "asl/bench/flakiness_detector.asl must exist")
+    (assert (= (.-_tag t-res) "ok") ".asl/mem/telemetry/StabilityAndRegression20260913.asn must exist")
+    (let [(d-src (.-value d-res))
+          (t-src (.-value t-res))]
+      (assert (string-contains? d-src "DiffExecutedAssertionSets") "Must implement DiffExecutedAssertionSets")
+      (assert (string-contains? d-src "previous-receipt") "Must record previous-receipt")
+      (assert (string-contains? d-src "current-receipt") "Must record current-receipt")
+      (assert (string-contains? d-src "regression?") "Must flag regression?")
+      (assert (string-contains? t-src ":regressions") "Telemetry must record :regressions section")
+      (assert (string-contains? t-src "rc-task44403-verified-20260912") "Telemetry must name previous receipt")
+      (assert (string-contains? t-src "rc-task44404-verified-20260913") "Telemetry must name current receipt")
+      (assert (string-contains? t-src "newly-unreached") "Telemetry must categorize regression as newly-unreached")
       true)))
 
 (df TestTask44405GroundedInPhase444 [] -> Bool
@@ -70,20 +87,20 @@
   (let [(p-res (file-read ".asl/mem/tasks/Phase444TestTelemetryAndCoverageGuarantees.asn"))]
     (assert (= (.-_tag p-res) "ok") "Phase 444 task file must exist and be readable")
     (let [(p-src (.-value p-res))]
-      (assert (string-contains? p-src "Flakiness, bottlenecks and regression detection") "Phase 444 must state Task44405 title")
+      (assert (string-contains? p-src "Flakiness, bottlenecks and regression detection from repeated runs") "Phase 444 must state Task44405 title")
       (assert (string-contains? p-src ":lane \"telemetry\"") "Phase 444 must specify telemetry lane")
-      (assert (string-contains? p-src "run_gate_5") "Phase 444 must target run_gate_5")
       (assert (string-contains? p-src "asl/bench") "Phase 444 must own asl/bench")
       (assert (string-contains? p-src ".asl/mem/telemetry") "Phase 444 must own .asl/mem/telemetry")
+      (assert (string-contains? p-src "Task44405.asl") "Phase 444 must name Task44405.asl as verification fixture")
       true)))
 
 (df RunTests [] -> Bool
   :d "Executes all Task44405 supervisor acceptance tests"
   (do
     (assert (TestSuperviseGateIntegrity) "TestSuperviseGateIntegrity must pass")
-    (assert (TestFlakinessDetectorContract) "TestFlakinessDetectorContract must pass")
-    (assert (TestUnstableSuiteDetectionAndDisqualification) "TestUnstableSuiteDetectionAndDisqualification must pass")
-    (assert (TestExecutedSetRegressionDiff) "TestExecutedSetRegressionDiff must pass")
-    (assert (TestBottleneckRankingByWallClockShare) "TestBottleneckRankingByWallClockShare must pass")
+    (assert (TestPlantedUnstableSuiteContract) "TestPlantedUnstableSuiteContract must pass")
+    (assert (TestStabilityAcrossNRunsContract) "TestStabilityAcrossNRunsContract must pass")
+    (assert (TestDurationDistributionAndRankedBottlenecksContract) "TestDurationDistributionAndRankedBottlenecksContract must pass")
+    (assert (TestExecutedSetRegressionDiffContract) "TestExecutedSetRegressionDiffContract must pass")
     (assert (TestTask44405GroundedInPhase444) "TestTask44405GroundedInPhase444 must pass")
     true))

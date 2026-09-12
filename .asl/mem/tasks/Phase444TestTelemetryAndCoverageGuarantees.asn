@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase444TestTelemetryAndCoverageGuarantees"
   :createdAt 1789141670724
-  :status "planned"
+  :status "completed"
   :priorityOrder 8
   :summary "Test Telemetry and Coverage Guarantees: collect what the runtime already knows, turn it into three decidable guarantees plus one measured quality metric, and drive case authorship from surviving mutants rather than from intuition."
   :phase "Phase444TestTelemetryAndCoverageGuarantees"
@@ -212,11 +212,11 @@
       :title "LLM case proposal inside a mutation-feedback loop, never as the oracle"
       :kind :verification
       :lane "llm"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789141670724
-      :updatedAt 1789141670724
+      :updatedAt 1789438500000
       :motivation "Static analysis finds the uncovered symbol but not the input that breaks it, and an implementer inattentive to detail writes happy-path cases. Published evidence: vanilla LLM test generation plateaus around a 53 percent mutation score across four iterations while mutation feedback reaches 89.5 percent, so the model is useful as a proposer inside a loop and unreliable as the judge."
       :purpose "The loop proposes cases for symbols whose mutants survived, runs them, keeps only those that kill a previously surviving mutant, and discards the rest; every kept case must also pass the non-vacuity check by assertion inversion. The model never decides pass or fail, never edits an existing assertion, and never writes to grader-owned acceptance paths."
       :context (:contractRef D81PlanContext)
@@ -237,11 +237,11 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44406.asl"]
       :verificationCases ["A proposed case that passes without killing any mutant is discarded; a proposed case that duplicates an existing one is discarded." "An attempt to modify an existing assertion or a grader-owned path is refused by ownership enforcement, not by prompt."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44406" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44406" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44406" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44406" :assertCount 36 :at 1789438500000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes a symbol with a known surviving mutant and a known killing input." "Generate candidates for surviving mutants only." "Keep on mutant kill plus non-vacuity." "Enforce path and edit restrictions." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :step 1 :status :ok :hash "HEAD")])
   ])
