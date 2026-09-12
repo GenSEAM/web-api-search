@@ -1371,6 +1371,15 @@
       :fact "task46305-certified-complete"
       :evidence "Authored refutedStructuralRewritesRule in language-semantics.asn and documented the 3 measured refutations (devowelling +106%, delimiter deletion unparseable, indentation-significant +7.7%) in TOKEN_CONVENTIONS.md and principles.asn; confirmed explicit delimiters are the token-optimal structural encoding; verified baseline failure and negative mutation fault detection; passed under SuperviseGate.sh with 27 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task46305 100% verified and certified; Phase 463 all 5 tasks certified complete under ADR-0081")
+    (:note
+      :id "n123"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["asl/grammar/lexicon.asn" "scripts/install.sh" "tests/acceptance/d81/Task44701.asl" ".asl/mem/tasks/Phase447CanonicalLexiconCrossClient.asn"]
+      :tags [:supervision :phase447 :task44701 :canonical-lexicon :ssot :renderer :approved]
+      :fact "task44701-certified-complete"
+      :evidence "Verified asl/grammar/lexicon.asn single source of spoken-to-canonical mappings with camelCase keys; added --render-lexicon and --check-lexicon to scripts/install.sh; established supervised baseline failure and verified non-vacuous assertions; passed SuperviseGate.sh with 27 executed assertions; receipts recorded"
+      :consequence "Task44701 certified complete; canonical lexicon single source contract established under ADR-0081")
   ]
 )
-

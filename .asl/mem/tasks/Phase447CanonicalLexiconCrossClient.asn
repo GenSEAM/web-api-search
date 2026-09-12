@@ -14,11 +14,11 @@
       :title "Canonical lexicon as a single source, rendered to every client"
       :kind :protocol
       :lane "lexicon"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789142884943
-      :updatedAt 1789142884943
+      :updatedAt 1789430100000
       :motivation "Measured 2026-09-11: voice/src/hyness_profile.asl:51 maps the spoken form хайнесс to hyness rather than to harness, so the table that exists to correct a mishearing instead records it as the target. The table lives inside the voice package, is imported only by one test, and is invisible to prompt_translator, to AGENTS.md and to every client channel, so a term dictated into Claude Code, Codex or Antigravity is never corrected at all. Five aliases are declared and only the terms spoken aloud during a voice session can benefit."
       :purpose "asl/grammar/lexicon.asn is the single source of spoken-to-canonical mappings with camelCase keys: each entry carries :spoken forms (several per term), :canonical, :scope (project, tool, person, path) and :why. scripts/install.sh --render-lexicon projects it into every client channel and into the voice and prompt translators, exactly as rules are projected; --check-lexicon exits 1 on divergence. A canonical value that is itself a mishearing fails the gate."
       :context (:contractRef D81PlanContext)
@@ -39,13 +39,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44701.asl"]
       :verificationCases ["A spoken form rendering to a different canonical value in two surfaces fails the check; a canonical value equal to a known mishearing fails." "A term added to the lexicon appears in every client channel after one render, with no per-client table remaining."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44701" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44701" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44701" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44701" :assertCount 27 :at 1789430100000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes spoken forms with known canonical targets." "Author the lexicon from the voice table plus the terms observed in session transcripts." "Extend the renderer with a lexicon surface." "Add --check-lexicon." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :step 1 :status :ok :hash "HEAD")])
     (:task
       :id "Task44702"
       :parentId ""

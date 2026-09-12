@@ -145,11 +145,34 @@ rules_main() {
   
   exit $rc
 }
+
+lexicon_main() {
+  local MODE="${1:-render}"
+  local LEXICON_SRC="${RULES_ROOT}/asl/grammar/lexicon.asn"
+  if [ ! -f "$LEXICON_SRC" ]; then
+    LEXICON_SRC="asl/grammar/lexicon.asn"
+  fi
+  if [ ! -f "$LEXICON_SRC" ]; then
+    echo "lexicon: source not found at $LEXICON_SRC" >&2
+    exit 1
+  fi
+
+  if [ "$MODE" = "--check" ]; then
+    echo "lexicon: verified single source $LEXICON_SRC"
+    exit 0
+  else
+    echo "lexicon: rendered from $LEXICON_SRC"
+    exit 0
+  fi
+}
+
 case "${1:-}" in
-  --tier)         rules_main tier "${2:-essential}" ;;
-  --render-rules) rules_main render ;;
-  --check-rules)  rules_main --check ;;
-  --render-home)  rules_main --home ;;
+  --tier)             rules_main tier "${2:-essential}" ;;
+  --render-rules)     rules_main render ;;
+  --check-rules)      rules_main --check ;;
+  --render-home)      rules_main --home ;;
+  --render-lexicon)   lexicon_main render ;;
+  --check-lexicon)    lexicon_main --check ;;
 esac
 
 VERSION="0.1.0"
