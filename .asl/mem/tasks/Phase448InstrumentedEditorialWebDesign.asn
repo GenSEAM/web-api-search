@@ -120,8 +120,8 @@
       :historicalReceipts [(:receipt :taskId "Task44802" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44802" :assertCount 25 :at 1789418200000)]
       :reviewStatus :approved
       :actionDag ["Verifier freezes viewport and line-length fixtures." "Implement shell and grid classes." "Exercise narrow and wide viewport metrics." "Independent acceptance."]
-      :stepIndex 5
-      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
+      :stepIndex 6
+      :receipts [(:receipt :step 6 :status :ok :hash "HEAD")])
     (:task
       :id "Task44803"
       :parentId ""
