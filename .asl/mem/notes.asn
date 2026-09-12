@@ -931,5 +931,15 @@
       :fact "task44005-certified-complete"
       :evidence "Authored asl/grammar/self-hosting-contract.asn documenting stage0, stage1, stage2, and wasm bootstrap stages and settled architectural claims; verified published_claims.asn standards grounding; verified peripheral non-falsifiable conceptual schemas; passed tests/acceptance/d81/Task44005.asl under SuperviseGate.sh with 31 executed assertions; settled Phase 440 in roadmap.asn; receipts indexed in receipts.asn"
       :consequence "Task44005 and Phase 440 100% verified and certified; full ASL self-hosting governance, bootstrap stages, and published claims grounded under independent verification")
+    (:note
+      :id "n80"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/tools/asl.c" "asl/grammar/rpc.asn" "asl/grammar/protocol-conformance.asn" "tests/acceptance/d81/Task44103.asl" ".asl/mem/tasks/Phase441AttentionProsthesis.asn"]
+      :tags [:supervision :phase441 :task44103 :bounded-retrieval :pagination :snapshot-continuation :approved]
+      :fact "task44103-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44103.asl verifying read_file_slice line bounds, protocol-conformance.asn error codes, rpc.asn limit parameter, and bounded retrieval semantics; passed tests/acceptance/d81/Task44103.asl under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44103 100% verified and certified; bounded total retrieval and snapshot continuation verified without memory or token bloat")
   ]
 )

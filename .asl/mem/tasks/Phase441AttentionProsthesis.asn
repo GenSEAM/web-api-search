@@ -107,11 +107,11 @@
       :title "Bound total retrieval and preserve snapshot-consistent continuation"
       :kind :protocol
       :lane "attention"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789171200000
-      :updatedAt 1789133687623
+      :updatedAt 1789413200000
       :motivation "Per-operation limits alone do not bound a batch; relevance and recoverable complete state matter more than arbitrary file boundaries. Verified 2026-09-11: positional token buffer str[1024] (asl.c:352) and file[1024]/old_txt[2048]/new_txt[2048]/full_path[2048] cap every argument; (:write f <5000 bytes>) reported :status ok :bytes 1023 and wrote a 1023-byte file, a silent truncation. Dynamic StrBuf sizing for arguments and content is part of this task, and truncation must be an error, never a success."
       :purpose "Cap aggregate batch output as well as child reads under declared tunable budgets; allow a complete relevant small file, return typed continuation with session/snapshot/version binding, and reject stale cursors rather than mixing edited states."
       :context (:contractRef D81PlanContext)
@@ -133,12 +133,12 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44103.asl"]
       :verificationCases ["Many small child reads cannot exceed aggregate budget; requested limits and default cap are measured with declared token estimator/tokenizer." "Read/sec/out/ls/grep/callers/impact paginate with no omissions/duplicates on a stable snapshot; stale or cross-session cursor is rejected." "Hidden acceptance paths remain unavailable through read/search/outline/error messages, including encoded paths and symlink boundaries." "A complete small relevant file within budget is accepted."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44103" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44103" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44103" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44103" :assertCount 20 :at 1789413200000)]
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
 
     (:task
       :id "Task44104"
