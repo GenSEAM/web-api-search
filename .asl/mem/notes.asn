@@ -791,5 +791,25 @@
       :fact "task47003-certified-complete"
       :evidence "Embedded ASL_SOURCE_DIGEST macro into build_and_install.sh and install.sh; implemented get_source_digest, check_source_divergence, --source-digest subcommand, and version source digest output in asl.c; verified divergence warning emitted on mismatched workspace digest and silent execution on matching digest; passed tests/acceptance/d81/Task47003.asl under SuperviseGate.sh with 13 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task47003 100% verified and certified; binary-to-workspace source divergence announced before execution, preventing silent drift between agent binary and repository source")
+    (:note
+      :id "n69"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["tests/acceptance/d81/Task47004.asl" ".asl/mem/tasks/Phase470RestoreGateScopeAndReachExecution.asn"]
+      :tags [:supervision :phase470 :task47004 :ready-set-fixtures :acceptance-coverage :approved]
+      :fact "task47004-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task47004.asl verifying ready set fixture coverage, non-vacuous assertion inversion refutation, and SuperviseGate missing fixture exit code 3 refusal; verified gate passed with 18 assertions executed; receipts indexed in receipts.asn"
+      :consequence "Task47004 100% verified and certified; all dependency-free tasks in active scope carry verified acceptance fixtures")
+    (:note
+      :id "n70"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["tests/acceptance/d81/Task47005.asl" ".asl/mem/tasks/Phase470RestoreGateScopeAndReachExecution.asn"]
+      :tags [:supervision :phase470 :task47005 :gate-scope-reporting :dynamic-extent :approved]
+      :fact "task47005-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task47005.asl verifying explicit gate scope reporting, dynamic tree file discovery on each run, and announced scope reduction overrides; verified gate passed with 13 assertions executed; receipts indexed in receipts.asn"
+      :consequence "Task47005 100% verified and certified; silent narrowing of verification gates is structurally prevented")
   ]
 )

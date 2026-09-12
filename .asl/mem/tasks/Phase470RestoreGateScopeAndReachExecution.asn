@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase470RestoreGateScopeAndReachExecution"
   :createdAt 1789310000000
-  :status "planned"
+  :status "completed"
   :priorityOrder 1
   :summary "Restore Gate Scope and Reach Execution: make a green gate mean a green corpus again, close the seven remaining module names, reconcile the installed binary with the built one, and clear the path to tasks that can actually be claimed."
   :phase "Phase470RestoreGateScopeAndReachExecution"
@@ -82,8 +82,8 @@
     (:task
       :id "Task47004" :parentId "" :phase "phase-470"
       :title "Fixtures for the tasks that are ready, so work can be claimed"
-      :kind :verification :state :planned :lane "execution" :priority :critical :ownerRole "verifier"
-      :createdAt 1789310000000 :updatedAt 1789310000000
+      :kind :verification :state :done :lane "execution" :priority :critical :ownerRole "verifier"
+      :createdAt 1789310000000 :updatedAt 1789407200000
       :motivation "Nine fixtures exist against roughly one hundred and eighty tasks, and a task without one exits 3 at its own gate. The programme is fully specified and mostly unclaimable, and the missing artefact is the one the ownership contract says its author may not write."
       :purpose "Every task with no blocking dependency has a fixture written by its verifier before the work begins, composed by the doctrine: the negative case first, inversion producing a non zero exit, and a stub returning a constant failing at least one case. Fixture coverage for the ready set reaches complete, so the ready set is genuinely ready."
       :context (:contractRef D81PlanContext)
@@ -98,15 +98,16 @@
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
       :verificationRole "independentVerifier" :verificationOwns ["tests/acceptance/d81/Task47004.asl"]
       :verificationCases ["Every dependency-free task has a fixture whose inversion fails." "A fixture passing against a constant-returning stub is reported." "A task claimed without a fixture is refused."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task47004" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
-      :actionDag ["Enumerate the ready set." "Write fixtures by verifier." "Check inversion." "Independent acceptance."] :stepIndex 0 :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task47004" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task47004" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task47004" :assertCount 18 :at 1789407200000)]
+      :reviewStatus :approved
+      :actionDag ["Enumerate the ready set." "Write fixtures by verifier." "Check inversion." "Independent acceptance."] :stepIndex 5 :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task47005" :parentId "" :phase "phase-470"
       :title "A gate cannot narrow its own scope without saying so"
-      :kind :verification :state :planned :lane "scope" :priority :critical :ownerRole "verifier"
-      :createdAt 1789310000000 :updatedAt 1789310000000
+      :kind :verification :state :done :lane "scope" :priority :critical :ownerRole "verifier"
+      :createdAt 1789310000000 :updatedAt 1789407800000
       :motivation "Three distinct gates in this programme have passed while the condition they described was false, and the newest one did it by a mechanism none of the earlier fixes anticipated: it kept working correctly and was given less to look at. Fixing instances one at a time has not held, because the family is larger than any instance."
       :purpose "Every gate reports the extent of what it examined alongside its verdict, and the extent is compared against the extent of the thing it claims to cover. A gate whose coverage falls without a declared reason fails, so narrowing becomes as visible as failing."
       :context (:contractRef D81PlanContext)
@@ -121,10 +122,11 @@
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
       :verificationRole "independentVerifier" :verificationOwns ["tests/acceptance/d81/Task47005.asl"]
       :verificationCases ["Reducing a gate's scope without declaring it fails the run." "Coverage is recomputed each run rather than recorded." "A declared reduction passes and appears in the output."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task47005" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
-      :actionDag ["Report coverage per gate." "Compare against the claimed extent." "Fail silent narrowing." "Independent acceptance."] :stepIndex 0 :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task47005" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task47005" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task47005" :assertCount 13 :at 1789407800000)]
+      :reviewStatus :approved
+      :actionDag ["Report coverage per gate." "Compare against the claimed extent." "Fail silent narrowing." "Independent acceptance."] :stepIndex 5 :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task47006" :parentId "" :phase "phase-470"
       :title "launch moves into the binary and the script is retired in the same change"
