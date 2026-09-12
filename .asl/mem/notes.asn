@@ -761,5 +761,15 @@
       :fact "task44210-certified-complete"
       :evidence "Implemented write_capabilities_lock, audit_capabilities_lock, check_capabilities_staleness, and op_where in asl.c; declared asl-where in rpc.asn; verified asl doctor writes capabilities.lock with measured status; verified (:where) provides targeted capability slice by step kind and tier; verified Gate 7 audits lock freshness and catches declared-vs-measured contradictions; passed tests/acceptance/d81/Task44210.asl under SuperviseGate.sh with 13 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44210 100% verified and certified; measured capability registry and Gate 7 drift prevention active; Phase 442 fully completed")
+    (:note
+      :id "n66"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/tools/asl.c" "tests/acceptance/d81/Task47001.asl" ".asl/mem/tasks/Phase470RestoreGateScopeAndReachExecution.asn"]
+      :tags [:supervision :phase470 :task47001 :gate5-scope :scope-reporting :approved]
+      :fact "task47001-certified-complete"
+      :evidence "Modified run_gate_5_suites in asl.c to dynamically target runner scope and declare scope in gate output ([scope: ...]); eliminated hardcoded restriction to asl-gates/tests; passed tests/acceptance/d81/Task47001.asl under SuperviseGate.sh with 11 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task47001 100% verified and certified; Gate 5 explicit scope declaration active, preventing silent scope narrowing")
   ]
 )

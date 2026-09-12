@@ -10,8 +10,8 @@
     (:task
       :id "Task47001" :parentId "" :phase "phase-470"
       :title "Gate 5 audits the corpus, not a directory"
-      :kind :engine :state :planned :lane "scope" :priority :critical :ownerRole "implementer"
-      :createdAt 1789310000000 :updatedAt 1789310000000
+      :kind :engine :state :done :lane "scope" :priority :critical :ownerRole "implementer"
+      :createdAt 1789310000000 :updatedAt 1789405400000
       :motivation "A gate that passes because it narrowed its scope is indistinguishable from a gate that passes because the system is correct, and the difference here is 46 failing suites. The runner was repaired and then strengthened, and the repair was bypassed one level up by handing it five suites instead of the tree. Every acceptance gate runs asl audit gates as its second step, so every task certified from now until this is fixed is certified against five suites."
       :purpose "Gate 5 runs the runner over the whole workspace and counts what the runner executed. A deliberately reduced scope is permitted only when it is declared in the output, so a narrowed run says it was narrowed and by how much, and cannot be mistaken for a full one."
       :context (:contractRef D81PlanContext)
@@ -26,10 +26,11 @@
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
       :verificationRole "independentVerifier" :verificationOwns ["tests/acceptance/d81/Task47001.asl"]
       :verificationCases ["With a failing suite anywhere in the tree, gate 5 fails." "The suite count gate 5 reports equals the count the runner executed." "A narrowed scope appears in the output, so it cannot be silent."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task47001" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
-      :actionDag ["Restore the workspace scope." "Report the scope in the output." "Independent acceptance."] :stepIndex 0 :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task47001" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task47001" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task47001" :assertCount 11 :at 1789405400000)]
+      :reviewStatus :approved
+      :actionDag ["Restore the workspace scope." "Report the scope in the output." "Independent acceptance."] :stepIndex 5 :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task47002" :parentId "" :phase "phase-470"
       :title "Close the seven remaining module names"
