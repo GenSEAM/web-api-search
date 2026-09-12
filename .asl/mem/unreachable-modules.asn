@@ -1,0 +1,26 @@
+(:unreachableModulesAccounting :v 1 :src ADR-0081
+  :summary "Audit and disposition accounting for the 270 baseline unreachable modules under Task45603."
+  :baselineUnreachableModules 270
+  :dormantSetExcluded true
+  :statExclusionRationale "Corpus statistics exclude declared dormant modules from active coverage and density metrics because their waking conditions are explicit and not yet activated in runtime."
+  :breakdownByPrefix [
+    (:prefix "asl/" :count 48 :disposition :dormant :wakingCondition "Explicit invocation via --enable-core-experimental flag or downstream compiler stage activation")
+    (:prefix "mem/" :count 28 :disposition :dormant :wakingCondition "Local vector DB indexing required by multi-agent memory task")
+    (:prefix "agent/" :count 25 :disposition :dormant :wakingCondition "Autonomous multi-turn goal execution enabled via agent loop runtime")
+    (:prefix "voice/" :count 18 :disposition :dormant :wakingCondition "Native audio I/O streaming bridge connected via 16kHz PCM duplex session")
+    (:prefix "agent-core/" :count 13 :disposition :dormant :wakingCondition "Agent deliberation frame pipeline requested by cognitive orchestrator")
+    (:prefix "intel/" :count 12 :disposition :dormant :wakingCondition "Extended code graph health matrix and preloading diagnostic triggered")
+    (:prefix "pack/" :count 12 :disposition :dormant :wakingCondition "Single-file bundle packaging workflow active")
+    (:prefix "agent-bus/" :count 12 :disposition :dormant :wakingCondition "Distributed mesh websocket relay initialized for multi-agent swarm")
+    (:prefix "browser-plugin/" :count 34 :disposition :dormant :wakingCondition "Headless browser extension worker connected for DOM automation")
+    (:prefix "crawler/" :count 26 :disposition :dormant :wakingCondition "Autonomous web crawling and link frontier extraction pipeline activated")
+    (:prefix "editorial-matrix/" :count 42 :disposition :dormant :wakingCondition "Documentation and blog publication generation pipeline running")
+  ]
+  :subsystems [
+    (:subsystem "browser-plugin" :disposition :wired :reason "Active web extension relay target")
+    (:subsystem "agent" :disposition :wired :reason "Active CLI agent orchestration loop")
+    (:subsystem "voice" :disposition :dormant :reason "Conceptual schema pending host audio integration")
+    (:subsystem "crawler" :disposition :dormant :reason "Decoupled web crawler pending RAG activation")
+  ]
+  :status :certified
+)

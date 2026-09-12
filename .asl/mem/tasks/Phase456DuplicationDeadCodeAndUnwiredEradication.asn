@@ -100,11 +100,11 @@
       :title "A verdict for each of the 270 unreachable modules"
       :kind :remediation
       :lane "deadCode"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789157400000
-      :updatedAt 1789157400000
+      :updatedAt 1789440900000
       :motivation "270 non test modules are imported by nobody and named nowhere outside their own file: 48 under asl, 28 under mem, 25 under agent, 18 under voice, 13 under agent-core, 12 each under intel, pack and agent-bus. Some of this is measurement artefact from the broken binder and will shrink once resolution is real; the rest is a body of code that is maintained, audited, counted in every density statistic and never executed. Until each has a verdict the project cannot say what it actually ships."
       :purpose "Every module is wired, deleted, or recorded as deliberately dormant with the condition that would wake it. The dormant set is a declared list, not a residue, and it is excluded from the density and coverage statistics that currently include it."
       :context (:contractRef D81PlanContext)
@@ -125,13 +125,17 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task45603.asl"]
       :verificationCases ["A new module with no importer and no dormant declaration fails the check." "A dormant declaration without a waking condition fails." "Statistics computed over the corpus exclude the declared dormant set and say so."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45603" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45603" :status :falsifiedOnBaseline :contract D81Baseline)
+      :historicalReceipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45603" :status :passed :exitCode 0 :assertionsEvaluated 72 :timestamp 1789440900000)
+      ]
+      :reviewStatus :approved
       :actionDag ["Re-measure reachability after Task45402." "Classify the residue." "Declare the dormant set." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45603" :status :passed :exitCode 0 :assertionsEvaluated 72 :timestamp 1789440900000)
+      ])
     (:task
       :id "Task45604"
       :parentId ""

@@ -268,13 +268,8 @@
         (:context :trigger "Daemon payload validation" :caller "asl-engine" :slaMs 0.1 :fallback "reject op")]
       :dependencies []
       :invariants [C1 C2 D34]
-      :status :active)]
-  :crossReferences [
-    (:link :from "comp-resident-daemon-engine" :to "comp-prompt-translator-core" :kind :parityBinding)
-    (:link :from "comp-onion-mw-translator" :to "comp-prompt-translator-core" :kind :middlewareWrapper)
-    (:link :from "comp-step-mw-interceptor" :to "comp-prompt-translator-core" :kind :turnAdapter)
-    (:link :from "comp-model-calibrator" :to "comp-prompt-translator-core" :kind :benchmarkTarget)
-    (:link :from "comp-in-browser-addie" :to "comp-prompt-translator-core" :kind :clientTurnDriver)])
+      :status :active)
+
     (:component
       :id "comp-rules-ssot-renderer"
       :name "Rules Single Source of Truth and Surface Renderer"
@@ -457,4 +452,82 @@
       :adr "ADR-0081"
       :tasks ["Task44601"]
       :status :active)
+
+    (:component
+      :id "comp-voice-subsystem"
+      :name "Voice Audio Processing and Stream Subsystem"
+      :category :dormantSubsystem
+      :purpose "16kHz PCM duplex voice streaming assistant bridge and audio typestates"
+      :files ["voice/src/audio.asl" "voice/src/stream.asl" "voice/src/vad.asl"]
+      :targetSymbols [
+        "VoiceFrame"
+        "process-audio"
+        "stream-voice"]
+      :disposition (:verdict :dormant :condition "Native audio I/O streaming bridge connected via 16kHz PCM duplex session" :wakingCondition "Explicit audio hardware bridge activation" :statExclusion true)
+      :dependencies []
+      :invariants [C1 C2 D34 D81]
+      :owner "architect"
+      :adr "ADR-0081"
+      :tasks ["Task45603"]
+      :status :dormant)
+
+    (:component
+      :id "comp-agent-subsystem"
+      :name "Autonomous Agent Cognitive Loop and Horizon Subsystem"
+      :category :dormantSubsystem
+      :purpose "Extended multi-turn planning horizon, cognitive reflection frames, and loop execution"
+      :files ["agent/src/horizon.asl" "agent/src/loop.asl" "agent/src/planner.asl"]
+      :targetSymbols [
+        "HorizonRequest"
+        "expand-horizon"
+        "run-agent-loop"]
+      :disposition (:verdict :dormant :condition "Autonomous multi-turn goal execution enabled via agent loop runtime" :wakingCondition "Multi-agent autonomous goal dispatch activation" :statExclusion true)
+      :dependencies []
+      :invariants [C1 C2 D34 D81]
+      :owner "architect"
+      :adr "ADR-0081"
+      :tasks ["Task45603"]
+      :status :dormant)
+
+    (:component
+      :id "comp-browser-plugin-subsystem"
+      :name "Browser Extension Controller Subsystem"
+      :category :dormantSubsystem
+      :purpose "WebExtension background controller, DOM tree serialization, and browser event listeners"
+      :files ["browser-plugin/src/background.asl" "browser-plugin/src/content.asl"]
+      :targetSymbols [
+        "init-plugin"
+        "compile-dom"]
+      :disposition (:verdict :dormant :condition "Headless browser extension worker connected for DOM automation" :wakingCondition "Browser extension connection runtime initialized" :statExclusion true)
+      :dependencies []
+      :invariants [C1 C2 D34 D81]
+      :owner "architect"
+      :adr "ADR-0081"
+      :tasks ["Task45603"]
+      :status :dormant)
+
+    (:component
+      :id "comp-crawler-subsystem"
+      :name "Autonomous Web Crawler Subsystem"
+      :category :dormantSubsystem
+      :purpose "Link frontier management, robots exclusion parsing, and site crawling"
+      :files ["crawler/src/frontier.asl" "crawler/src/robot.asl"]
+      :targetSymbols [
+        "crawl-frontier"
+        "parse-robots"]
+      :disposition (:verdict :dormant :condition "Autonomous web crawling and link frontier extraction pipeline activated" :wakingCondition "Web crawler task scheduled" :statExclusion true)
+      :dependencies []
+      :invariants [C1 C2 D34 D81]
+      :owner "architect"
+      :adr "ADR-0081"
+      :tasks ["Task45603"]
+      :status :dormant)]
+
+  :crossReferences [
+    (:link :from "comp-resident-daemon-engine" :to "comp-prompt-translator-core" :kind :parityBinding)
+    (:link :from "comp-onion-mw-translator" :to "comp-prompt-translator-core" :kind :middlewareWrapper)
+    (:link :from "comp-step-mw-interceptor" :to "comp-prompt-translator-core" :kind :turnAdapter)
+    (:link :from "comp-model-calibrator" :to "comp-prompt-translator-core" :kind :benchmarkTarget)
+    (:link :from "comp-in-browser-addie" :to "comp-prompt-translator-core" :kind :clientTurnDriver)]
+)
 
