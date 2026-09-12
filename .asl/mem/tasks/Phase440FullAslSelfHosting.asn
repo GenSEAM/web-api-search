@@ -140,11 +140,11 @@
       :title "Verify self-hosted gates using independent negative controls"
       :kind :gate
       :lane "verification"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789084800000
-      :updatedAt 1789133687623
+      :updatedAt 1789411000000
       :motivation "A verifier written in ASL does not by itself make its results trustworthy or independent."
       :purpose "Run audit logic in ASL through the self-hosted native artifact and retain an independent verifier outside the authoring trust boundary; acceptance checks actual fault detection, dependency closure and provenance rather than an evaluator banner."
       :context (:contractRef D81PlanContext)
@@ -166,12 +166,12 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44004.asl"]
       :verificationCases ["Known semantic/package/claim faults cause the appropriate ASL gate failure and nonzero exit, including a success-looking banner from a failed producer." "Self-hosted audit results match independent expected outcomes and bind receipts to the tested stage2 artifact." "Foreign-boundary audit reports owned adapter source and rejects undeclared deployed dependencies without carve-outs."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44004" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44004" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44004" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44004" :assertCount 27 :at 1789411000000)]
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
 
     (:task
       :id "Task44005"

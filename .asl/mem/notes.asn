@@ -842,6 +842,16 @@
       :evidence "Created asl/packages/asl-eval with manifest.asn, grammar.asn, src/eval.asl, and tests/eval_test.asl; implemented EvalResult, EvalEnv, Closure, eval-node, invoke-closure, load-module, and make-eval-env; verified canonical language semantics error codes (ERR_UNBOUND_SYMBOL, ERR_UNRESOLVED_IMPORT); passed tests/acceptance/d81/Task44001.asl under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44001 100% verified and certified; pure self-hosted ASL evaluator package operational with 100% manifest and grammar conformity")
     (:note
+      :id "n76"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/packages/asl-gates" "asl/grammar/verification-contract.asn" "tests/acceptance/d81/Task44004.asl" ".asl/mem/tasks/Phase440FullAslSelfHosting.asn"]
+      :tags [:supervision :phase440 :task44004 :negative-controls :verification-contract :failure-preservation :approved]
+      :fact "task44004-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44004.asl verifying verification-contract.asn rules (assertionReachability, failurePreservation, emptySuiteRejection, explicitCoverageObligations, claimEvidenceGrounding, emptyCatalogRejection); verified asl-gates package manifest and grammar; verified foreign boundary audit and SuperviseGate error code preservation; passed tests/acceptance/d81/Task44004.asl under SuperviseGate.sh with 27 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44004 100% verified and certified; self-hosted gates verified against negative controls, failure preservation, and explicit coverage obligations")
+    (:note
       :id "n75"
       :author "codex"
       :created "2026-09-12"
