@@ -13,12 +13,12 @@
       :phase "phase-463"
       :title "Nesting depth is a bounded, tracked quantity"
       :kind :language
-      :state :planned
+      :state :completed
       :lane "emission"
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789260000000
-      :updatedAt 1789260000000
+      :updatedAt 1789429800000
       :motivation "Depth is the quantity a generating model has to carry in working state, and it is unbounded here: 32 at the maximum and deeper than 8 in 13.4 percent of openings. A closing run of four is one token to read and four decisions to emit, and a single miscount invalidates the whole file. Racket answers this with editor tooling for a human; there is no human here. Depth is measurable, it is under our control, and nobody has ever tracked it."
       :purpose "Depth is reported per file and per form in the inventory, a declared ceiling applies, and a form exceeding it is a finding naming the form rather than a style note. The ceiling is chosen from the measured distribution rather than asserted, and lowering it over time is tracked like any other ratchet."
       :context (:contractRef D81PlanContext)
@@ -39,13 +39,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46301.asl"]
       :verificationCases ["A form nested one level past the ceiling is reported with its path and line." "Depth inside a string literal is not counted." "The reported distribution is recomputed from the tree, not read from a record."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46301" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46301" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define nestingDepthCeilingRule semantic")
+      :historicalReceipts ["rc-task46301-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Compute the distribution." "Choose the ceiling from it." "Report exceeding forms." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task46301-verified-20260912"])
     (:task
       :id "Task46302"
       :parentId ""
