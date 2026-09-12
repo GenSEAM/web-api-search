@@ -345,11 +345,11 @@
       :title "Generate useful minimal/full tiers with exact measured budgets"
       :kind :protocol
       :lane "attention"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789171200000
-      :updatedAt 1789133687623
+      :updatedAt 1789416400000
       :motivation "Tier budgets are explicit engineering targets to evaluate, not evidence-derived universal limits."
       :purpose "Tag canonical rules and RPC capabilities by tier; render per-client/per-step projections with a 1000 pinned-tokenizer-token minimal engineering target while preserving or mechanically enforcing every mandatory authority/semantic constraint; never substitute a byte bound for tokens."
       :context (:contractRef D81PlanContext)
@@ -371,12 +371,12 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44109.asl"]
       :verificationCases ["Every rule/op has explicit tier disposition and canonical source identity; minimal output includes initialization, progression, errors and recoverable full contracts." "Pinned tokenizer measures complete minimal payload including operation schemas; overflow fails or yields an explicitly revised budget, never silent truncation." "Minimal and full agents face the same enforced isolation/authorization and reach equivalent permitted next actions on representative cases." "Per-client expected projection identity is checked, not byte equality between different editions."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44109" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44109" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44109" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44109" :assertCount 31 :at 1789416400000)]
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44110"
       :parentId ""

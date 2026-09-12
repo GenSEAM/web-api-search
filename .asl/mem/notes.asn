@@ -1001,5 +1001,15 @@
       :fact "task44108-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44108.asl verifying rules.asn edge procedure, session-contract.asn edgeEscalation rule and escalationSchema, edge_scenario.asn fixtures, and asl.c op_escalate host implementation with marksCompleted false guarantee; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 30 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44108 100% verified and certified; uncovered steps and unauthorized mutations handled with reversible containment and typed escalation")
+    (:note
+      :id "n86"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/rules.asn" "asl/grammar/rpc.asn" "asl/bench/tier_budget.asl" "asl/tools/asl.c" "tests/acceptance/d81/Task44109.asl" ".asl/mem/tasks/Phase441AttentionProsthesis.asn"]
+      :tags [:supervision :phase441 :task44109 :tier-budget :token-measurement :directive-payload :approved]
+      :fact "task44109-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44109.asl verifying rules.asn and rpc.asn tier disposition tags, tier_budget.asl 1000-token minimal budget evaluation and non-silent truncation, minimal and full invariant preservation, and asl.c DIRECTIVE_PAYLOAD symbol with projection identity checking; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 31 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44109 100% verified and certified; minimal and full tiers generated with exact measured budgets")
   ]
 )
