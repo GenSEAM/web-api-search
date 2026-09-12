@@ -1511,5 +1511,15 @@
       :fact "task44305-certified-complete"
       :evidence "Authored tests/conformance/gates/gates_conformance_test.asl covering negativeControl, adversarial, errorPropagation, idempotence, and concurrency case kinds for run_cmd_gate, run_gate_5_suites, standard-claims, run-claims-audit, and verify-claims-grounding; established baseline failure and passed SuperviseGate.sh with 78 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task44305 certified complete; gates, receipts and non-vacuity conformance suite established under ADR-0081")
+    (:note
+      :id "n137"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["asl/packages/asl-text/src/escape.asl" "tests/conformance/text/text_codec_conformance_test.asl" "tests/acceptance/d81/Task44306.asl" ".asl/mem/tasks/Phase443TestCoverageCampaign.asn"]
+      :tags [:supervision :phase443 :task44306 :codec :escaping :text-boundaries :conformance :approved]
+      :fact "task44306-certified-complete"
+      :evidence "Authored tests/conformance/text/text_codec_conformance_test.asl covering roundTrip, idempotence, malformed, boundary, and metamorphic case kinds for escape-asn-str, escape-json-str, escape-sh-arg, and unescape-asn-str; verified printable ASCII, Unicode astral plane, and control characters round tripping; established baseline failure and passed SuperviseGate.sh with 67 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task44306 certified complete; codec, escaping and text boundaries conformance suite established under ADR-0081")
   ]
 )
