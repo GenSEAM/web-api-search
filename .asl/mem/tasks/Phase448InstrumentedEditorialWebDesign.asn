@@ -207,9 +207,11 @@
       :title "Derive audience-specific component patterns from the frame"
       :kind :component
       :lane "composition"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
+      :createdAt 1789171200000
+      :updatedAt 1789420000000
       :motivation "The site must welcome general readers while exposing useful protocol depth to AI and language-tooling users; the current hero, docs tabs and blog cards present both audiences at once."
       :purpose "Refactor representative components into reusable patterns: outcome hero with one action, evidence drawer/inline details, workbench code panels, status rows, editorial article index and compact mobile navigation. Keep all output in existing ASL and Tailwind stack."
       :context (:contractRef D81PlanContext)
@@ -230,13 +232,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44805.asl"]
       :verificationCases ["Representative pages expose one clear primary action, one evidence affordance and no duplicate style primitive; route and anchor fixtures remain unchanged." "Capability cards and evidence drawers distinguish planned, measured and verified states, link each claim to its source/provenance, and do not present historical metrics as current completion." "Code and telemetry blocks remain horizontally scrollable without causing document overflow."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44805" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44805" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44805" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44805" :assertCount 24 :at 1789420000000)]
+      :reviewStatus :approved
       :actionDag ["Verifier freezes representative page fixtures." "Refactor hero, nav, docs and blog patterns." "Exercise both audience paths and route fixtures." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44806"
       :parentId ""
