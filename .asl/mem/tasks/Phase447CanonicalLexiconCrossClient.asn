@@ -131,11 +131,11 @@
       :title "Lexicon checker: no orphan alias, no local table, no mishearing in artifacts"
       :kind :protocol
       :lane "lexicon"
-      :state :planned
+      :state :done
       :priority :medium
       :ownerRole "implementer"
       :createdAt 1789142884943
-      :updatedAt 1789142884943
+      :updatedAt 1789432800000
       :motivation "Without a checker the lexicon will drift exactly as the rules did before ssot: a term corrected in one surface, a new local table added for convenience, a mishearing entering a filename again."
       :purpose "A static checker reports: any spoken-to-canonical pair present in one rendered surface and absent from another; any alias table outside asl/grammar/lexicon.asn; any identifier, filename or ASN key matching a known spoken form rather than its canonical value; any lexicon entry whose canonical value does not appear anywhere in the repository, which catches a canonical that is itself wrong."
       :context (:contractRef D81PlanContext)
@@ -156,11 +156,11 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44704.asl"]
       :verificationCases ["A spoken form used as a module name is reported with both the form and its canonical value; a second alias table is reported with its path." "A lexicon entry whose canonical value appears nowhere in the repository is reported as unreferenced, catching a wrong canonical before it spreads."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44704" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44704" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44704" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44704" :assertCount 40 :at 1789432800000)]
+      :reviewStatus :approved
       :actionDag ["Verifier plants each of the four violations." "Implement the four reports." "Wire into gate 6 or 7." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts [(:receipt :step 4 :status :ok :hash "HEAD")])
   ])

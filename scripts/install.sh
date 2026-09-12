@@ -158,7 +158,33 @@ lexicon_main() {
   fi
 
   if [ "$MODE" = "--check" ]; then
-    echo "lexicon: verified single source $LEXICON_SRC"
+    local err=0
+    if ! grep -q ":canonical \"harness\"" "$LEXICON_SRC"; then
+      echo "lexicon: divergence - harness canonical missing from $LEXICON_SRC" >&2
+      err=1
+    fi
+    local local_tables
+    local_tables=$(find voice harness asl -name "*alias_table*.asl" 2>/dev/null || true)
+    if [ -n "$local_tables" ]; then
+      echo "lexicon: forbidden local alias table found: $local_tables" >&2
+      err=1
+    fi
+    local bad_artifacts
+    bad_artifacts=$(find voice harness asl -name "*hyness*.asl" 2>/dev/null || true)
+    if [ -n "$bad_artifacts" ]; then
+      echo "lexicon: spoken form artifact name found: $bad_artifacts" >&2
+      err=1
+    fi
+    for term in "harness" "asex" "shrody" "pcp"; do
+      if ! grep -rq "$term" asl/packages voice harness 2>/dev/null; then
+        echo "lexicon: canonical term '$term' has no referents in repository" >&2
+        err=1
+      fi
+    done
+    if [ $err -ne 0 ]; then
+      exit 1
+    fi
+    echo "lexicon: verified single source $LEXICON_SRC (0 orphan aliases, 0 local tables, 0 mishearings)"
     exit 0
   else
     echo "lexicon: rendered from $LEXICON_SRC"

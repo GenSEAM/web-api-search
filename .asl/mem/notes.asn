@@ -1401,5 +1401,15 @@
       :fact "task44703-certified-complete"
       :evidence "Implemented apply-canonical-lexicon in voice/src/transliterator.asl and normalize-lexicon-terms in harness/src/prompt_translator.asl; verified both translators normalize acoustic ASR mishearings to authoritative canonical terms; established baseline failure and verified non-vacuous assertions; passed SuperviseGate.sh with 20 executed assertions; receipts recorded"
       :consequence "Task44703 certified complete; one table three consumers contract established under ADR-0081")
+    (:note
+      :id "n126"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["asl/packages/asl-gates/src/lexicon_gate.asl" "scripts/install.sh" "asl/tools/asl.c" "tests/acceptance/d81/Task44704.asl" ".asl/mem/tasks/Phase447CanonicalLexiconCrossClient.asn"]
+      :tags [:supervision :phase447 :task44704 :lexicon-checker :drift-defense :ssot :approved]
+      :fact "task44704-certified-complete"
+      :evidence "Implemented pure ASL lexicon-gate in asl-gates package, static checker in scripts/install.sh --check-lexicon (reporting surface divergence, local alias tables, artifact mishearings, and canonical referents), and wired canonical lexicon source verification into asl.c run_gate_6_grammar; removed voice/src/hyness_profile.asl; established baseline failure and verified 40 non-vacuous assertions; passed SuperviseGate.sh with 40 executed assertions; receipts recorded"
+      :consequence "Task44704 certified complete; Phase 447 all 4 tasks certified complete under ADR-0081")
   ]
 )
