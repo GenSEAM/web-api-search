@@ -1,0 +1,244 @@
+(:taskCollection
+  :id "Phase464InstructionTruthAndExampleCoverage"
+  :createdAt 1789270000000
+  :status "planned"
+  :priorityOrder 1
+  :summary "Instruction Truth and Example Coverage: every command an instruction names must exist, every operation must answer the question asked or fail, every dated claim must carry its recheck, and every task must carry the fixture its own gate requires."
+  :phase "Phase464InstructionTruthAndExampleCoverage"
+  :baseline "Measured 2026-09-12. Absent commands invoked directly: asl intel, asl doc, asl task, asl doctor. The user global rule file loaded into every session in every project names asl intel outline, asl intel search, asl intel callers, asl intel impact, asl doc outline, asl doc section and asl doc search as the priority toolchain; all seven are absent. The project instruction file mandates a six stage lifecycle through asl task spawn, claim, recover and settle; absent. The capabilities rule states that status is written by asl doctor into capabilities.lock; absent, so all 36 statuses in capabilities.asn are hand written and the 17 absent, 5 lies, 5 partial and 9 works are unmeasured. The rpc op :grep falls through to the find handler: a request for one symbol under one directory returned :status ok with 319 files matching a default glob, and :q does the same. The semantics rule still states that the evaluator abandons a body at exit 0 on unknown symbols, which measurement refutes at exit 1. Acceptance fixtures exist for 2 of 139 tasks while SuperviseGate.sh exits 3 without one."
+  :tasks [
+    (:task
+      :id "Task46401"
+      :parentId ""
+      :phase "phase-464"
+      :title "An instruction surface names only commands that exist"
+      :kind :protocol
+      :state :planned
+      :lane "instructionTruth"
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789270000000
+      :updatedAt 1789270000000
+      :motivation "Seven commands named as the priority toolchain do not exist, and they are named in a file loaded at the start of every session in every project, so the cost is paid before any work begins and is paid again every session. A further four are mandated by the project file as the task lifecycle. A missing instruction leaves the reader to look; a wrong one spends a call, a turn and some confidence first, and the reader looks anyway."
+      :purpose "Every command, subcommand and operation named in any rendered instruction surface is verified to exist by the same gate that renders the surface, and a surface naming an absent command fails to render rather than shipping. Where the command is wanted and absent, the surface says so explicitly with its fallback, which is what the capabilities rule already requires of capabilities and has never required of instructions."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Rendered surfaces name only existing commands" "The render gate verifies existence" "A wanted but absent command is declared absent with its fallback" "The seven and the four resolved one way or the other"]
+      :owns ["asl/grammar/rules.asn" "scripts/install.sh" "AGENTS.md" "CLAUDE.md"]
+      :targetSymbols ["render_between" "inject_directive"]
+      :relatedSymbols ["ssot" "capabilities" "tools"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn []
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46401"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46401.asl"]
+      :verificationCases ["Adding a reference to a non existent subcommand fails the render." "Removing a subcommand from the binary fails the render of every surface that names it." "A command declared absent with a fallback renders and is not counted as a defect."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46401" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Enumerate commands named across surfaces." "Verify each against the binary." "Resolve or declare each." "Gate the render." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46402"
+      :parentId ""
+      :phase "phase-464"
+      :title "An operation answers the question asked or fails"
+      :kind :engine
+      :state :planned
+      :lane "instructionTruth"
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789270000000
+      :updatedAt 1789270000000
+      :motivation "The rpc op :grep does not report that it is unimplemented. It falls through to the find handler, ignores both arguments and returns :status ok with 319 files matching a default glob. A caller checking status sees success, a caller reading the result sees a plausible file list, and nothing anywhere says the question was not answered. :q behaves the same way. This is the most dangerous class of defect in the system, worse than absence, because absence is detectable."
+      :purpose "An unimplemented or unrecognised operation returns an explicit error naming itself, never the result of a different operation. The dispatcher has no fall through: an operation not matched is rejected. Every op declared in the rpc grammar is either implemented or declared absent, and the declaration is checked against the dispatcher."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["No operation returns another operation's result" "No silent fall through in the dispatcher" "Declared ops checked against the dispatcher" ":grep and :q resolved one way or the other"]
+      :owns ["asl/tools/asl.c" "asl/grammar/rpc.asn"]
+      :targetSymbols ["rpc"]
+      :relatedSymbols ["tools" "capabilities" "gates"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn []
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46402"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46402.asl"]
+      :verificationCases ["An unknown op returns an error naming the op, not a result." ":grep for a symbol under one directory returns only matches for that symbol under that directory, or an explicit unimplemented error." "An op present in the grammar and absent from the dispatcher fails the check."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46402" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Remove the fall through." "Reject unmatched ops." "Reconcile grammar against dispatcher." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46403"
+      :parentId ""
+      :phase "phase-464"
+      :title "asl doctor exists and writes the capability statuses it is said to write"
+      :kind :tooling
+      :state :planned
+      :lane "instructionTruth"
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789270000000
+      :updatedAt 1789270000000
+      :motivation "The capabilities rule states that status is written by asl doctor into capabilities.lock and that a hand edited status contradicting measurement fails a gate. asl doctor does not exist, so every one of the 36 statuses is hand written, nothing can contradict anything, and the rule that was adopted to prevent declared capabilities from being trusted is itself a declared capability that is trusted. The distribution currently asserts 17 absent, 5 lies, 5 partial and 9 works without a single measurement behind it."
+      :purpose "asl doctor invokes each declared capability, reads its result rather than its status, and writes the measured status into a lock file. A hand written status that disagrees with the lock fails. The status vocabulary distinguishes absent, present but wrong, partial and working, because the measured difference between absent and wrong is the difference this system keeps getting caught by."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["asl doctor exists and measures" "Statuses written from measurement, not by hand" "Disagreement between hand and lock fails" "The lies category distinguished from the absent category by evidence"]
+      :owns ["asl/tools/asl.c" "asl/grammar/capabilities.asn"]
+      :targetSymbols ["capabilities"]
+      :relatedSymbols ["capabilities" "gates" "concepts"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46402"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46403"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46403.asl"]
+      :verificationCases ["Breaking a working capability moves its measured status without any hand edit." "A hand written status contradicting the lock fails, naming both." "A capability that returns ok with a wrong result is measured as lying, not as working."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46403" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Implement the probe per capability." "Write the lock." "Gate hand edits against it." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46404"
+      :parentId ""
+      :phase "phase-464"
+      :title "A dated claim carries the command that rechecks it"
+      :kind :protocol
+      :state :planned
+      :lane "instructionTruth"
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789270000000
+      :updatedAt 1789270000000
+      :motivation "The semantics rule still tells every agent that the evaluator abandons a body at exit 0 on unknown symbols and that green should be treated as unverified. Measurement refutes it: an unbound symbol now exits 1. The rule is not wrong because someone was careless, it is wrong because it describes a moment and nothing rechecks it. The same shape sits in the foreign rule and in the capabilities rule, and the telemetry baseline is stale against two engine rebuilds."
+      :purpose "A claim about the current state carries the command that establishes it and the date it last held. The render gate runs those commands and fails when a claim no longer reproduces, so a temporary truth expires by itself rather than by someone remembering."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Every current-state claim carries a recheck command and a date" "A claim that stops reproducing fails the render" "The semantics, foreign and capabilities clauses brought current" "The telemetry baseline re-measured"]
+      :owns ["asl/grammar/rules.asn" "scripts/install.sh" ".asl/mem/telemetry"]
+      :targetSymbols ["semantics" "foreign" "capabilities"]
+      :relatedSymbols ["ssot" "concepts"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46401" "Task45406"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46404"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46404.asl"]
+      :verificationCases ["Fixing the condition a :now clause describes makes the render fail until the clause is retired." "A claim without a recheck command fails the render." "The recheck runs against the tree, not against a record of the tree."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46404" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Attach a recheck command per dated claim." "Run them in the render gate." "Retire what no longer holds." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46405"
+      :parentId ""
+      :phase "phase-464"
+      :title "Every task carries the fixture its own gate requires"
+      :kind :verification
+      :state :planned
+      :lane "examples"
+      :priority :critical
+      :ownerRole "verifier"
+      :createdAt 1789270000000
+      :updatedAt 1789270000000
+      :motivation "Every task gate in the plan calls SuperviseGate.sh, which exits 3 when the acceptance fixture is absent. Fixtures exist for 2 of 139 tasks. The plan is therefore fully specified and almost entirely unexecutable, and the missing artefact is the one that decides whether a task was done, which by the ownership contract cannot be written by whoever does the task."
+      :purpose "Each task has a fixture written by its verifier against the behaviour the task promised rather than against its implementation, composed by the doctrine in docs/EXAMPLE_DOCTRINE.md: the negative case first, inversion producing a non zero exit, and a stub returning a constant failing at least one case. Fixture coverage is tracked and a task without one cannot be claimed."
+      :outcomes ["A fixture per task, written by the verifier" "Inversion checked for every fixture" "Coverage tracked from 2 of 139" "A task without a fixture cannot be claimed"]
+      :context (:contractRef D81PlanContext)
+      :owns ["tests/acceptance/d81" "docs/EXAMPLE_DOCTRINE.md"]
+      :targetSymbols []
+      :relatedSymbols ["gates" "grading" "hiddenTests"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task45506"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46405"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46405.asl"]
+      :verificationCases ["A fixture whose inverted assertion still passes is reported as vacuous." "A fixture passing against a stub that returns a constant is reported." "A task claimed without a fixture is refused."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46405" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Write fixtures by verifier, negative case first." "Check inversion on each." "Track coverage." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46406"
+      :parentId ""
+      :phase "phase-464"
+      :title "A probe for every operation any instruction names"
+      :kind :verification
+      :state :planned
+      :lane "examples"
+      :priority :high
+      :ownerRole "verifier"
+      :createdAt 1789270000000
+      :updatedAt 1789270000000
+      :motivation "The operations this project relies on were never probed, which is how :grep came to answer a different question with a success status and how seven absent commands came to be recommended first. A probe that checks status would have passed on both."
+      :purpose "Every operation named in a rule, an instruction surface or the capability registry has a probe that invokes it and asserts on the result, not the status: that the answer concerns the thing asked about, in the place asked about. Probes run with the gates, so an operation that starts lying is caught where it starts."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["A probe per named operation, asserting on results" "Probes run with the gates" "An operation that begins answering a different question fails" "The probe set feeds asl doctor"]
+      :owns ["tests/probes" "docs/EXAMPLE_DOCTRINE.md"]
+      :targetSymbols []
+      :relatedSymbols ["capabilities" "tools" "gates"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46403" "Task46405"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46406"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46406.asl"]
+      :verificationCases ["A probe asserting only on status is itself reported as insufficient." "Rewiring an op to a different handler fails its probe." "An operation named anywhere without a probe is reported."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46406" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Enumerate named operations." "Probe each on results." "Run with the gates." "Feed the doctor." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])]
+  :notes "This phase exists because the instruction surface, the capability registry and the operation dispatcher all assert things that measurement refutes, and because the plan cannot execute without the fixtures its own gates require. Task46401 and Task46402 have no dependencies and are the cheapest correct thing available today.")

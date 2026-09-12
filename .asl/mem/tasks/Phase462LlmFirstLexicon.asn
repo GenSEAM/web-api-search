@@ -1,0 +1,245 @@
+(:taskCollection
+  :id "Phase462LlmFirstLexicon"
+  :createdAt 1789245000000
+  :status "planned"
+  :priorityOrder 3
+  :summary "LLM-First Lexicon: measured token count decides every name, the human is removed from the source and served by decoders instead, and the rule binds all future vocabulary."
+  :phase "Phase462LlmFirstLexicon"
+  :baseline "Measured 2026-09-12 under cl100k. Of 3776 symbols declared across the grammar registries only 90, being 2.4 percent, cost one token; 3686 cost more, and the lexicon totals 14781 tokens against 3776 if every symbol were single-token, an excess of 11005. The distribution runs to 12 tokens for a single name. Independently measured on the same day: shortening a word below the whole-word boundary raises cost rather than lowering it, with sixteen common words costing 16 tokens in full and 33 devowelled, a rise of 106 percent; and abbreviating an already single-token keyword saves exactly zero across 21617 uses. Within the abbreviated core family df and dfs are one token while dfl, dfn and dfe are two, and every corresponding full word is one."
+  :tasks [
+    (:task
+      :id "Task46201"
+      :parentId ""
+      :phase "phase-462"
+      :title "The selection rule: measured cost decides, length and pattern do not"
+      :kind :protocol
+      :state :planned
+      :lane "lexicon"
+      :priority :critical
+      :ownerRole "planner"
+      :createdAt 1789245000000
+      :updatedAt 1789245000000
+      :motivation "Names in this project have been chosen by three competing intuitions: shorter is cheaper, a family should look uniform, and a reader should recognise it. All three are unreliable and the first two are measurably wrong here. define costs exactly what df costs; dfe costs twice what enum costs; devowelling doubles the bill. The only criterion that survived measurement is the measured count itself, and it is not correlated with length."
+      :purpose "One rule governs every name. Among candidates that carry the intended meaning, take the measured minimum token count. At equal cost take the form with the stronger presence in ordinary code, because the model's prior was built from it. Length is not a criterion. Uniformity of a family is not a criterion, and a single-token form that does not extend into a family is accepted as it stands. The rule is recorded with the measurements that produced it so it is not relitigated by intuition."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["One recorded selection rule with its measured basis" "Length and family pattern explicitly excluded as criteria" "A non-extensible single-token form accepted" "The three refuted intuitions recorded as closed"]
+      :owns ["asl/grammar/rules.asn" "TOKEN_CONVENTIONS.md" ".asl/mem/decisions"]
+      :targetSymbols ["names"]
+      :relatedSymbols ["names" "concepts" "ssot"]
+      :invariants ["D51" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task45901"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46201"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46201.asl"]
+      :verificationCases ["A proposal replacing a one token word with a shorter multi-token abbreviation is rejected by the rule." "A proposal raising cost for family uniformity is rejected, with try against with-handlers as the worked case." "A single-token form that cannot be extended into a family is accepted."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46201" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Record the rule with its measurements." "Render to every surface." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46202"
+      :parentId ""
+      :phase "phase-462"
+      :title "No symbol enters the language unmeasured"
+      :kind :tooling
+      :state :planned
+      :lane "lexicon"
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789245000000
+      :updatedAt 1789245000000
+      :motivation "The lexicon reached 3776 symbols at 14781 tokens without anyone measuring a single one at the moment of admission. The rationale field that the grammar already demands records why a symbol exists and never what it costs, which is how 3686 symbols above one token accumulated while the project described itself as token efficient."
+      :purpose "Admission to the grammar requires a measured token count recorded beside the symbol, together with the cheapest adequate alternative that was considered and the reason it was not taken. A symbol above the achievable minimum for its meaning is admitted only with that reason present, and the check recomputes the counts rather than trusting the record."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Measured cost recorded per symbol at admission" "The rejected cheaper alternative recorded" "Counts recomputed by the checker, never trusted" "The rule binds future vocabulary, not only present"]
+      :owns ["asl/grammar/grammar.asn" "asl/tools/asl.c"]
+      :targetSymbols ["run_gate_6_grammar"]
+      :relatedSymbols ["names" "gates" "concepts"]
+      :invariants ["D51" "D52" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46201" "Task45504"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46202"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46202.asl"]
+      :verificationCases ["A symbol admitted without a measured count fails." "A recorded count that disagrees with recomputation fails, naming both numbers." "A symbol above the minimum without a recorded reason fails."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46202" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Extend the symbol record with measured cost." "Recompute in gate 6." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46203"
+      :parentId ""
+      :phase "phase-462"
+      :title "Close the measured excess in the existing lexicon"
+      :kind :remediation
+      :state :planned
+      :lane "lexicon"
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789245000000
+      :updatedAt 1789245000000
+      :motivation "3686 of 3776 declared symbols cost more than one token and the excess over a single-token lexicon is 11005 tokens. Part of that is irreducible, because a name carrying five words of meaning cannot be one token and should not pretend to be. Part is pure waste, and it divides cleanly: the closed set of core forms and keywords can and must reach one token, while the open set of compound names reaches its minimum through the spelling that tokenizes best, measured at 44 to 50 percent for CamelCase on exactly these long hyphenated names, of which test-e2e-onion-pipeline-and-horizon at 12 tokens is representative."
+      :purpose "The closed set of core forms and keywords is entirely single-token. The open set is converted to the measured cheapest adequate spelling. The residue is recorded as irreducible with the meaning that makes it so, and the lexicon total is tracked thereafter."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["The closed set at one token throughout" "The open set at its measured minimum spelling" "The irreducible residue named and justified" "Lexicon total tracked in the inventory"]
+      :owns ["asl/grammar/grammar.asn" "asl/packages" "harness/src" "intel/src" "mem/src"]
+      :targetSymbols ["dfl" "dfn" "dfe"]
+      :relatedSymbols ["names" "output"]
+      :invariants ["D51" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46001" "Task45903"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46203"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46203.asl"]
+      :verificationCases ["Every core form and keyword measures one token." "A compound name not in its cheapest adequate spelling is reported." "The recorded residue is reproducible by recomputation, not quoted from the plan."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46203" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Split closed set from open set." "Bring the closed set to one token." "Convert the open set." "Record the residue." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46204"
+      :parentId ""
+      :phase "phase-462"
+      :title "The human reads a decoder, never the source"
+      :kind :tooling
+      :state :planned
+      :lane "decoding"
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789245000000
+      :updatedAt 1789245000000
+      :motivation "Every concession the language has made to a human reader has cost it something and bought nothing measurable, because the language is consumed by a model. Removing the human from the source does not license abbreviation, and this is the point most easily got wrong: the model's prior was built from text humans wrote, so optimising for the model still selects ordinary words. What removing the human does license is dropping legibility as a tiebreaker, and what it obliges is a decoder, because a form nobody can read is a form nobody can audit, and this project runs on audit."
+      :purpose "A decoder renders any source, form or symbol into an expanded human readable account on demand, including the meaning of a qualified prefix, the definition a call resolves to and the expansion of a macro. It is a tool and never a mode of the language: no legibility concession enters the source, and no decoder output is ever an input."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["A decoder covering source, forms, prefixes and expansions" "Legibility removed as a criterion for the language itself" "Decoder output never re-enters as source" "Auditability preserved without cost to the language"]
+      :owns ["asl/tools/asl.c" "asl/packages/asl-help/src"]
+      :targetSymbols []
+      :relatedSymbols ["output" "capabilities" "grading"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46004" "Task45701"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46204"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46204.asl"]
+      :verificationCases ["The decoder resolves a qualified prefix to the module it denotes without the reader opening the header." "A macro use expands to its form with positions preserved." "Decoder output fed back as source is rejected, so the two directions cannot be confused."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46204" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Build the decoder over the resolved graph and positions." "Refuse decoder output as input." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46205"
+      :parentId ""
+      :phase "phase-462"
+      :title "One substrate: code and ASN convert without loss"
+      :kind :language
+      :state :planned
+      :lane "lexicon"
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789245000000
+      :updatedAt 1789245000000
+      :motivation "Code and the ledger already share an S-expression substrate, and the saving that the owner measurements attribute to this representation comes from that sharing: one notation for a form, a record, a prompt and a result. The sharing is currently a convention rather than a property, and it has already failed once in a way that was caught by hand, where an unescaped quote inside a record passed the checker and had to be repaired by a second party."
+      :purpose "Conversion between a language form and its ASN representation is total and lossless in both directions, including positions, escaping and keyword shape, and is exercised as a round trip rather than asserted. A construct that cannot round trip is a defect in the construct."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Lossless round trip between form and record" "Positions and escaping preserved" "A non round tripping construct treated as a defect"]
+      :owns ["asl/packages/asl-codec/src" "asl/grammar/language-semantics.asn"]
+      :targetSymbols []
+      :relatedSymbols ["output" "ssot" "semantics"]
+      :invariants ["C3" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46004" "Task45505"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46205"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46205.asl"]
+      :verificationCases ["A form containing a quote, a newline and a nested record round trips byte identical." "A position survives the round trip." "A construct that cannot round trip fails rather than being converted approximately."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46205" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Define the correspondence." "Exercise the round trip over the corpus." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46206"
+      :parentId ""
+      :phase "phase-462"
+      :title "A structure carries its own meaning across agents and models"
+      :kind :protocol
+      :state :planned
+      :lane "portability"
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789245000000
+      :updatedAt 1789245000000
+      :motivation "The consumers are agents exchanging structures with each other and with different models, and a structure that needs its origin session to be understood must be explained at every hop. That explanation is the real token cost of a non portable structure, and it recurs per hop and per model rather than once. The defect already measured is exactly this: 66 percent of qualified prefixes are one or two characters, the prefix s denotes a different module in 76 files, and 11.7 percent of uses sit more than 200 lines from the binding that gives them meaning. A structure containing such a prefix cannot be interpreted by a receiver that does not hold the sender context, so it is not portable, and the sender must either resolve it or narrate it."
+      :purpose "A structure is interpretable by a receiver holding nothing but the structure and the declared vocabulary: prefixes denote the same thing everywhere, references are resolvable rather than positional, and extension points are declared in the structure rather than implied by the sender. Portability is measured as the fraction of emitted structures interpretable standalone, and the saving is measured as the preamble no longer sent."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Structures interpretable without sender context" "One meaning per prefix across every agent and channel" "Extension points declared in the structure" "Portability measured, and the preamble saving measured with it"]
+      :owns ["asl/grammar/rpc.asn" "asl/grammar/protocol-conformance.asn" "asl/packages/asl-codec/src"]
+      :targetSymbols []
+      :relatedSymbols ["output" "context" "ssot" "capabilities"]
+      :invariants ["C3" "D34" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46205" "Task45904"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46206"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46206.asl"]
+      :verificationCases ["A structure carrying a prefix that denotes two different modules across the corpus fails the portability check." "A receiver process holding no sender state interprets an emitted structure and reaches the same meaning." "A structure requiring a preamble to be understood is reported, and the preamble length is the measured cost."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46206" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Define standalone interpretability." "Measure the emitted structures against it." "Remove the preamble and record the saving." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])]
+
+  :notes "Removing the human reader settles the tiebreaker and does not reverse the direction. The model's prior comes from text humans wrote, so optimising for the model keeps selecting ordinary words: define over df at equal cost, enum over dfe at half the cost, and the full word over the devowelled form at half the cost again. The one thing that changes is that legibility no longer has to be paid for in the source, because Task46204 pays it in a tool.")

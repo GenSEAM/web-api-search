@@ -1,0 +1,205 @@
+(:taskCollection
+  :id "Phase457StaticAnalysisToolchain"
+  :createdAt 1789157400000
+  :status "planned"
+  :priorityOrder 5
+  :summary "Static Analysis Toolchain: the cross cutting sweep becomes a first class command that answers what binds, what is duplicated, what is dead and what is unreachable, emits one inventory, and is itself proved able to find a seeded defect of every kind it reports."
+  :phase "Phase457StaticAnalysisToolchain"
+  :baseline "The 2026-09-11 sweep that produced every number in D81StaticSweepAudit20260911 was run from one off scripts in a session scratchpad. Nothing in the repository can reproduce it. asl audit today answers only the seven gates, and those gates reported all seven passed while 136 of 313 suites were failing, so the existing analysis surface cannot distinguish working code from broken code."
+  :tasks [
+    (:task
+      :id "Task45701"
+      :parentId ""
+      :phase "phase-457"
+      :title "asl audit bind: the resolution and binding graph"
+      :kind :tooling
+      :lane "staticAnalysis"
+      :state :planned
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789157400000
+      :updatedAt 1789157400000
+      :motivation "The single most expensive defect in the repository was invisible because nothing reports the import graph. A module importing a name that exists only as a grammar fixture, a file using an alias it never declared, and a call to a builtin the evaluator lacks are three different defects that all surface as the same message at the wrong location. Determining that took a session of ad hoc measurement, and no artefact in the repository can repeat it."
+      :purpose "One command reports, over the whole corpus: every declared module and the file that declares it, duplicate module names, every import and whether it resolves, every module qualified symbol and whether a declared alias covers it, and every unbound symbol classified as missing builtin, unresolved module or undeclared alias. It uses the same module index the evaluator uses, so the analyser and the runtime cannot disagree."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Import graph with resolution status per edge" "Unbound symbols classified by cause rather than listed flat" "Analyser and evaluator share one index" "The 2026-09-11 numbers reproducible by command"]
+      :owns ["asl/tools/asl.c" "asl/grammar/rpc.asn"]
+      :targetSymbols ["resolveModulePath"]
+      :relatedSymbols ["capabilities" "tools"]
+      :invariants ["C3" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task45401" "Task45506"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45701"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task45701.asl"]
+      :verificationCases ["An import naming a module that exists only under asl/grammar/corpus is reported unresolved with its importing file and line." "A qualified symbol with no declared alias is reported separately from a missing builtin." "The command reports the same unresolved edges the evaluator refuses to bind, on the same tree."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45701" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Expose the module index." "Walk imports and qualified symbols." "Classify unbound causes." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task45702"
+      :parentId ""
+      :phase "phase-457"
+      :title "asl audit dup: duplicate definitions against declared ownership"
+      :kind :tooling
+      :lane "staticAnalysis"
+      :state :planned
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789157400000
+      :updatedAt 1789157400000
+      :motivation "C3 and D34 assign canonical helpers to foundational packages, and the repository has 371 redundant copies of 291 names with no command that can say so. Phase452 was certified complete against this exact requirement, which was possible because the only evidence available was the claim itself. A rule with no measurement is a preference."
+      :purpose "The command reports every name defined more than once, whether the copies cross a package boundary, which package D34 assigns the name to, and whether each copy is a declared justified local optimum. Per file conventions such as a test entry point are declared exempt in the registry rather than hardcoded in the analyser."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Duplicate report keyed by declared ownership" "Justified local optima declared, not inferred" "Conventional names exempted by declaration"]
+      :owns ["asl/tools/asl.c" "asl/grammar/dependency-boundaries.asn"]
+      :targetSymbols ["dependency-boundaries"]
+      :relatedSymbols ["concepts" "names"]
+      :invariants ["C3" "D34" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task45701"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45702"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task45702.asl"]
+      :verificationCases ["Adding a second definition of a D34 owned name is reported with both paths." "A declared local optimum is not reported, and removing its declaration makes it reported again." "A name duplicated inside one package is distinguished from one duplicated across packages."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45702" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Read declared ownership." "Group definitions by name and package." "Report against ownership." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task45703"
+      :parentId ""
+      :phase "phase-457"
+      :title "asl audit dead: unreferenced, stubbed and unreachable"
+      :kind :tooling
+      :lane "staticAnalysis"
+      :state :planned
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789157400000
+      :updatedAt 1789157400000
+      :motivation "Dead definitions, constant body stubs and unreachable modules are three kinds of code that pass every existing gate: they are syntactically valid, comment free, sigil free and correctly named, and gate 6 counts them among the 3906 audited symbols as evidence of health. A stub that returns a constant is the most dangerous of the three because it is indistinguishable from an implementation at the call site."
+      :purpose "The command reports definitions referenced nowhere, definitions whose body is a bare constant, definitions carrying an unresolved marker, and modules that no import reaches, each with path and line, and each separable so that a dormant declaration suppresses only what it declares."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Three kinds reported separately with locations" "Dormant declarations suppress only their own subject" "Density statistics can exclude the declared dormant set"]
+      :owns ["asl/tools/asl.c" ".asl/mem/components.asn"]
+      :targetSymbols ["collect_tree_files"]
+      :relatedSymbols ["capabilities" "bounded"]
+      :invariants ["C1" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task45701" "Task45702"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45703"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task45703.asl"]
+      :verificationCases ["A function referenced only from inside a string literal is still reported dead." "A function returning a constant legitimately is exempt only by declaration, and the exemption names it." "A module reachable only from a dormant module is reported unreachable."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45703" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Build the reference graph over stripped literals." "Classify bodies." "Traverse reachability." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task45704"
+      :parentId ""
+      :phase "phase-457"
+      :title "One inventory and a baseline that may only improve"
+      :kind :tooling
+      :lane "staticAnalysis"
+      :state :planned
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789157400000
+      :updatedAt 1789157400000
+      :motivation "The numbers that matter are currently spread across a gate that prints seven lines, a telemetry file written by hand, and a session scratchpad that will not survive the session. Without a single tracked inventory there is no way to tell whether the system improved between two days, which is how a body of 48 recorded gaps reached a certified-green verdict with no per gap evidence."
+      :purpose "One command emits one ASN inventory covering binding, duplication, dead code, reachability, suite execution and gate honesty, written to a tracked path. The previous inventory is the baseline: a run whose measured position is worse on any dimension fails unless the regression is declared with a reason, and the declaration is part of the record."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["One tracked inventory per run" "Regression fails unless declared" "Improvement over time is a measured fact rather than a claim" "The scratchpad scripts are retired"]
+      :owns ["asl/tools/asl.c" ".asl/mem/telemetry"]
+      :targetSymbols ["run_audit_consistency"]
+      :relatedSymbols ["output" "concepts" "ssot"]
+      :invariants ["D52" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task45702" "Task45703" "Task45406"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45704"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task45704.asl"]
+      :verificationCases ["Introducing one duplicate definition fails the run against the stored baseline." "A hand edited inventory fails, because the record carries the digest of the tree it measured." "A declared regression passes and the declaration appears in the record with its reason."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45704" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Define the inventory schema." "Emit from the three analysers and the runner." "Add the comparison and the declaration path." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task45705"
+      :parentId ""
+      :phase "phase-457"
+      :title "The analyser is proved able to find a seeded defect of every kind it reports"
+      :kind :verification
+      :lane "staticAnalysis"
+      :state :planned
+      :priority :critical
+      :ownerRole "verifier"
+      :createdAt 1789157400000
+      :updatedAt 1789157400000
+      :motivation "An analyser that reports zero findings is indistinguishable from an analyser that is not running, and this repository has already shipped three checks in exactly that state. The sweep that found the binding defect would itself have reported clean if its reference graph had been wrong, and nothing would have contradicted it."
+      :purpose "For every category the toolchain reports there is a fixture containing exactly one seeded instance, and the analyser must find it and must find nothing else in that fixture. A category with no fixture cannot be reported, so adding a check requires proving it can fire."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["One seeded fixture per reported category" "A category without a fixture cannot be reported" "False negatives are detectable rather than silent"]
+      :owns ["tests/acceptance/d81"]
+      :targetSymbols []
+      :relatedSymbols ["gates" "grading"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task45704"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45705"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task45705.asl"]
+      :verificationCases ["Disabling any single check makes its fixture fail." "A fixture seeded with one defect yields exactly one finding, so the analyser is measured for precision as well as recall." "A category reported without a fixture fails the suite."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45705" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Seed one fixture per category." "Require exactly one finding each." "Bind categories to fixtures." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])]
+  :notes "This phase is what the owner asked for directly: a cross cutting static assessment of what works, what does not, what is unwired, what is dead, what is stubbed and what is duplicated. Task45705 is the part that keeps it honest, because the failure mode of an analyser is silence.")

@@ -6,7 +6,7 @@
   :summary "Language Optimization and Portable Core: C evaluator without JavaScriptCore, wasm32-wasi build, content search, sequenced batches, VFS ported from ASL design, corrected published figures, corpus consolidation."
   :phase "Phase438LanguageOptimizationAndPortableCore"
   :baseline "Historical diagnostics are unverified audit inputs; independent per-task semantic baselines are explicitly pending, not fabricated from missing commands."
-  :phaseGate "for task in Task43801 Task43802 Task43803 Task43804 Task43805 Task43806 Task43807 Task43808; do sh tests/acceptance/d81/SuperviseGate.sh \"$task\" || exit $?; done"
+  :phaseGate "for task in Task43801 Task43802 Task43803 Task43804 Task43805 Task43806 Task43807 Task43808 Task43809; do sh tests/acceptance/d81/SuperviseGate.sh \"$task\" || exit $?; done"
   :gateReadiness :requiresIndependentBaseline
   :settlement ".asl/mem/reviews/D81PlanSettlement.asn"
   :executionPolicy "Phases execute 436 -> 437 -> 438 -> 439 -> 440 -> 441; each task depends on the preceding conflicting writer; use per-file session leases and one current step per session. Read-only work may run concurrently."

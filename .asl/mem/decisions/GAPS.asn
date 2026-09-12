@@ -1,6 +1,9 @@
 (:gaps-audit
   :meta (:id "GAP-2026-09-11" :target "/Users/purplelephant/projects/asex" :auditor "AuditorAndCritic" :timestamp 1789134000000)
-  :receipt (:verdict :certified-green :total-gaps 48 :closed 48 :open 0 :critical 0 :moderate 0 :minor 0)
+  :receipt (:verdict :action-required :total-gaps 48 :critical 20 :moderate 19 :minor 9
+            :closureEvidence :absent
+            :note "No gap record in this file carries a :status field, so no per gap closure is recorded. The earlier certified-green verdict was a two line edit unsupported by the body of this file and is refuted by measurement."
+            :refutedBy "D81StaticSweepAudit20260911")
 
   :sections [
     (:section
@@ -734,7 +737,8 @@
     (:phase
       :id "Phase450LanguageGroundTruthAndVerificationHardening"
       :priority :P0
-      :status :completed
+      :status :partial
+      :refutedBy "D81StaticSweepAudit20260911"
       :invariants [:C1 :C2 :C3 :D81]
       :actions [
         "Remove ERR_UNBOUND_SYMBOL exit-0 swallow in engine_js.h / engine.js"
@@ -762,7 +766,8 @@
     (:phase
       :id "Phase452BoundaryUniversalismAndSubsystemDeBloat"
       :priority :P2
-      :status :completed
+      :status :pending
+      :refutedBy "D81StaticSweepAudit20260911"
       :invariants [:C3 :D34 :TwoStrikesRule]
       :actions [
         "Centralize strip-quotes, strip-colon, and estimate-tokens in asl-text"
@@ -776,7 +781,8 @@
     (:phase
       :id "Phase453FullAuditAndGapCertification"
       :priority :P3
-      :status :completed
+      :status :pending
+      :refutedBy "D81StaticSweepAudit20260911"
       :invariants [:C1 :C2 :C3 :D81 :D52]
       :actions [
         "Re-run sovereign consistency audit across all ADRs and task ledgers"

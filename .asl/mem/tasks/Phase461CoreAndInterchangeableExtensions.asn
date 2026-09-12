@@ -1,0 +1,244 @@
+(:taskCollection
+  :id "Phase461CoreAndInterchangeableExtensions"
+  :createdAt 1789244000000
+  :status "planned"
+  :priorityOrder 2
+  :summary "Core and Interchangeable Extensions: a core that knows no extension by name, four mechanisms that let everything else be a library, one engine interface, and adapters admitted only on the two strikes rule."
+  :phase "Phase461CoreAndInterchangeableExtensions"
+  :baseline "Measured 2026-09-12: the module resolver inside the evaluator hardcodes 25 subsystem and path names, among them asl-sql, asl-parser, asl-checker, asl-contracts, harness, intel, mem, vdom, pack, voice, crawler, agent-bus, gsa and a blog data directory, together with a rewrite rule that turns the module name core into sql. The C host names a further 7. Adding a package therefore requires editing the engine, and the engine cannot be read without learning the names of the subsystems built on it. The corpus holds 35 packages and 770 modules of which 270 non test modules are reachable from nothing."
+  :tasks [
+    (:task
+      :id "Task46101"
+      :parentId ""
+      :phase "phase-461"
+      :title "The core knows no extension by name"
+      :kind :architecture
+      :state :planned
+      :lane "core"
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789244000000
+      :updatedAt 1789244000000
+      :motivation "The instruction not to clutter the language describes a condition that already exists and can be counted: 25 subsystem names sit inside the module resolver and 7 more in the C host. The engine contains a special case mapping the module name core to sql for the benefit of one package, and a candidate path pointing at the blog data directory of the website. Every new package is a change to the language implementation, and every reader of the core must learn the product built on it. No amount of later modularity survives a core that enumerates its own clients."
+      :purpose "Core is the reader, the module system, the evaluator, contracts and the primitive set, and it contains no name of any package, product, directory or domain. Extensions are located through the declared module graph alone. A check counts subsystem names appearing in core sources and fails on any."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Zero extension names in core sources, from a measured 32" "Adding a package requires no core change" "The core is readable without knowing the products built on it"]
+      :owns ["asl/tools/engine_js.h" "asl/tools/asl.c" "asl/grammar/dependency-boundaries.asn"]
+      :targetSymbols ["resolveModulePath"]
+      :relatedSymbols ["foreign" "concepts" "ssot"]
+      :invariants ["C3" "D34" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46003"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46101"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46101.asl"]
+      :verificationCases ["A package added under a new name resolves with no core edit." "Introducing any package name into a core source fails the check and quotes the line." "Deleting a package leaves the core unchanged and produces an unresolved module error at the requiring site, not a core failure."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46101" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Remove the hardcoded names with the resolver rewrite." "Add the name check over core sources." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46102"
+      :parentId ""
+      :phase "phase-461"
+      :title "Syntax extension, so a domain is a library and not an engine change"
+      :kind :language
+      :state :planned
+      :lane "core"
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789244000000
+      :updatedAt 1789244000000
+      :motivation "The reason 25 names ended up inside the resolver is that there was no other way to add a domain. Without syntax extension every new shape of expression is a change to the evaluator, so the engine accumulates the vocabulary of databases, websites and voice pipelines. A language that intends to serve several domains without growing for each of them needs exactly one mechanism: the ability for a library to define a form."
+      :purpose "A form can be defined in the language, hygienically, with the definition living in an ordinary module. The database, view and query shapes that would otherwise enter the evaluator are written as libraries against this mechanism. Macro expansion preserves source position so that errors inside an expansion point at the writer's form."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Forms definable in libraries" "Hygiene, so an expansion cannot capture a user binding" "Positions preserved through expansion" "No domain vocabulary enters the evaluator"]
+      :owns ["asl/tools/engine_js.h" "asl/grammar/language-semantics.asn"]
+      :targetSymbols ["evalNode" "parseAllSExprs"]
+      :relatedSymbols ["semantics" "names" "foreign"]
+      :invariants ["C3" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46004"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46102"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46102.asl"]
+      :verificationCases ["A macro introducing a temporary binding does not capture a user variable of the same name." "An error inside an expansion quotes the call site written by the author, not the expansion." "A domain form added as a library needs no evaluator change, demonstrated by an unchanged engine digest."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46102" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Implement hygienic expansion over located forms." "Move one domain shape out of the engine into a library as proof." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46103"
+      :parentId ""
+      :phase "phase-461"
+      :title "One engine interface, engines interchangeable, the language naming none"
+      :kind :architecture
+      :state :planned
+      :lane "portability"
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789244000000
+      :updatedAt 1789244000000
+      :motivation "The deployed runtime today is a C host embedding a JavaScript evaluator on JavaScriptCore, which is macOS only, and the in-browser runtime that the relay phase depends on has no path while the language and the engine are the same artefact. Engine switching is not a feature to add later; it is the property that decides whether the language runs on a phone, in a browser or against a different host at all."
+      :purpose "There is one declared interface between the language and its host covering evaluation, the file and network surface, time and randomness. The language specification names no engine. At least two engines satisfy the interface and the conformance suite runs unchanged against each, which is what makes the claim testable rather than architectural."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["A declared host interface" "Two conforming engines running one unchanged suite" "The specification free of engine names" "A browser target reachable without a language change"]
+      :owns ["asl/grammar/protocol-conformance.asn" "asl/tools/asl.c" "asl/grammar/dependency-boundaries.asn"]
+      :targetSymbols ["run_evaluator"]
+      :relatedSymbols ["foreign" "capabilities"]
+      :invariants ["C3" "D34" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46101"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46103"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46103.asl"]
+      :verificationCases ["The conformance suite passes unchanged on a second engine." "A program depending on an engine detail fails conformance rather than passing on one engine." "Two engines disagreeing on a conformance case is a reported finding, which makes the second engine an oracle as well as a target."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46103" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Declare the host interface." "Bring a second engine to conformance." "Run one suite against both." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46104"
+      :parentId ""
+      :phase "phase-461"
+      :title "An extension declares the host capabilities it needs, and the core enforces them"
+      :kind :architecture
+      :state :planned
+      :lane "portability"
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789244000000
+      :updatedAt 1789244000000
+      :motivation "Portability across a phone, a browser and a server is not achieved by compiling everywhere; it is achieved by knowing which parts cannot run where, before they are loaded. An extension that opens files cannot run in a browser, and today nothing declares that, so the failure appears as a runtime error in an unrelated place, which is the same mis-attribution already measured 52 times in the binding layer."
+      :purpose "An extension declares the host capabilities it requires. Loading it against a host that lacks one fails at load, naming the extension and the capability. The declaration is checked against what the extension actually uses, so an undeclared use is a defect and an over-declaration is reported as unnecessary."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Capability requirements declared per extension" "Load-time failure naming extension and capability" "Declarations checked against actual use in both directions" "Target reachability answerable before running"]
+      :owns ["asl/grammar/capabilities.asn" "asl/grammar/dependency-boundaries.asn" "asl/tools/asl.c"]
+      :targetSymbols ["capabilities"]
+      :relatedSymbols ["capabilities" "edge" "foreign"]
+      :invariants ["C3" "D34" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46103"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46104"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46104.asl"]
+      :verificationCases ["An extension using the filesystem without declaring it fails the check." "Loading a filesystem extension against a browser host fails at load with both names quoted." "A declared capability never used is reported, so declarations do not drift upward into meaninglessness."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46104" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Define the capability vocabulary." "Declare per extension." "Check both directions." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46105"
+      :parentId ""
+      :phase "phase-461"
+      :title "Data and view adapters as extensions, admitted only on the two strikes rule"
+      :kind :architecture
+      :state :planned
+      :lane "extensions"
+      :priority :high
+      :ownerRole "planner"
+      :createdAt 1789244000000
+      :updatedAt 1789244000000
+      :motivation "Databases and frontend frameworks are the two places where a language most often acquires permanent clutter, because each new backend arrives with a reason to touch the core. This repository already states the guard in its own doctrine: zero pre-emptive universalism, and an abstraction extracted only on observing two concrete instances with the same contract. The measured cost of ignoring it is visible in the resolver, where one package earned a rewrite rule and a website earned a candidate path."
+      :purpose "Data access and view rendering are extensions written against the core mechanisms and against nothing else. No interface is declared before two concrete adapters exist that share it, and the interface is then extracted from them rather than designed ahead of them. The core gains nothing for either domain."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Data and view live entirely in extensions" "An interface extracted only after two concrete adapters" "Core unchanged by the addition of either" "The two strikes rule enforced rather than stated"]
+      :owns ["asl/packages" "asl/grammar/dependency-boundaries.asn"]
+      :targetSymbols []
+      :relatedSymbols ["concepts" "foreign"]
+      :invariants ["C3" "D34" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46102" "Task46104"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46105"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46105.asl"]
+      :verificationCases ["Adding a second data backend leaves the core digest unchanged." "An interface declared with only one implementing adapter fails the check." "An adapter reaching into core internals rather than the declared mechanisms fails."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46105" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Write two concrete adapters." "Extract the shared interface from them." "Enforce the rule." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46106"
+      :parentId ""
+      :phase "phase-461"
+      :title "Dependency direction: core never depends on an extension"
+      :kind :architecture
+      :state :planned
+      :lane "extensions"
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789244000000
+      :updatedAt 1789244000000
+      :motivation "An extensible system fails in one characteristic way: an extension becomes load bearing, the core starts to assume it, and the extension can no longer be replaced. That has already happened here, where the resolver assumes the sql package and the website. Modularity is not a structure, it is a direction of dependency, and the only way to keep it is to check it."
+      :purpose "Dependency flows one way. The core declares its surface, extensions depend on it, and nothing in the core depends on an extension or on a specific extension being present. The check runs over the module graph, so it measures actual dependency rather than intended layering, and the graph it reads is the one the evaluator resolves."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["One-way dependency enforced over the resolved module graph" "Any extension removable without touching core" "Layering measured rather than asserted"]
+      :owns ["asl/grammar/dependency-boundaries.asn" "asl/tools/asl.c"]
+      :targetSymbols ["dependency-boundaries"]
+      :relatedSymbols ["foreign" "concepts" "parallel"]
+      :invariants ["C3" "D34" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46101" "Task45701"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46106"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46106.asl"]
+      :verificationCases ["A core module requiring an extension fails the check, naming both." "Removing any single extension leaves the core suite passing." "The check reads the resolved graph, so a dependency created through a dynamic path is still counted."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46106" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Declare the core surface." "Check direction over the resolved graph." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])]
+  :notes "Four mechanisms carry the whole requirement: a module system, syntax extension, a host interface and capability declarations. Everything named in the request as a target, mobile, web, databases, frontend frameworks, engine switching, is then a library rather than a language feature. The measured reason to insist is that the opposite already happened: 25 subsystem names inside the resolver and 7 in the C host.")

@@ -1,0 +1,75 @@
+(:review
+  :id "D81StaticSweepAudit20260911"
+  :kind :crossCuttingStaticSweep
+  :measuredAt 1789157400000
+  :measuredBy "claude-opus-5"
+  :scope "Whole monorepo: 789 ASL files, 770 module headers, 7541 definitions, 313 test suites, C host asl/tools/asl.c, embedded evaluator asl/tools/engine_js.h, 12 shell scripts."
+  :method "Deterministic scans only: definition and reference graph over stripped string literals, module import graph via the :i form, per-suite evaluator execution with exit codes measured without a pipe, and direct reading of the decoded evaluator."
+
+  :rootCause (:id "SilentImportResolutionFailure"
+    :statement "Module import resolution fails silently, so a missing module is reported later as an unknown symbol at the call site instead of an unresolved module at the import site."
+    :evidence ["engine_js.h decoded line 1696: the import branch is guarded by (resolved and fs.existsSync(resolved)) with no else branch, no diagnostic and no error"
+               "engine_js.h decoded lines 1633 to 1667: resolveModulePath is a hardcoded ladder of about 25 path guesses with package specific special cases, not driven by the 770 declared module headers"
+               "agent-bus/src/bus.asl declares :i [(core/strings :a s)]; agent-bus/src/core/strings.asl does not exist; the only core/strings.asl in the tree is asl/grammar/corpus/modules/core/strings.asl, a grammar fixture"
+               "Consequence measured: agent-bus/tests/bus_test.asl fails with unknown builtin or function s/concat"]
+    :consequence "Forced duplication: a module that cannot import must redefine what it needs. 291 names carry 371 redundant copies, 129 of them across package boundaries.")
+
+  :measurements [
+    (:m :id "TestExecutionReality" :suites 313 :nonZeroExit 136 :reportedByRunnerBefore 0 :reportedByRunnerAfter 136
+        :note "Every one of the 136 failures is ERR_UNBOUND_SYMBOL. Zero are assertion failures.")
+    (:m :id "UnboundSymbolDeficit" :distinctMissing 76 :bareBuiltins 40 :aliasPrefixes 36
+        :missingControlForms ["case" "match"] :missingFalsificationPrimitive "refute"
+        :sample ["fst" "snd" "reverse" "append" "join" "fold-left" "list-filter" "list-take" "list-fold" "string-trim" "string-append" "count" "get" "nil?" "enumerate" "second"])
+    (:m :id "FailureAttribution" :qualifiedSymbolWithDeclaredImport 30 :qualifiedSymbolWithNoImport 22 :bareBuiltinMissing 55
+        :note "52 of 136 are module qualified and therefore mis-attributed by the current error message.")
+    (:m :id "Duplication" :duplicatedNames 291 :redundantCopies 371 :crossPackage 129
+        :worst [(:name "estimate-tokens" :copies 15) (:name "strip-quotes" :copies 10) (:name "calc-savings" :copies 8) (:name "strip-colon" :copies 6) (:name "extract-between" :copies 5) (:name "balance-delimiters" :copies 3) (:name "escape-sh-arg" :copies 2)]
+        :note "install.sh additionally exists as four byte copies under asl/dist, asl/dist/dist and asl/web/public and asl/web/dist.")
+    (:m :id "DeadAndStub" :deadDefinitions 14 :stubDefinitions 10 :constantBodyStubs 2 :markerStubs 8)
+    (:m :id "Unwired" :nonTestModulesNeverImportedOrNamed 270 :totalModules 770)
+    (:m :id "FabricatedGateClaims" :file "asl/tools/asl.c" :line 2655
+        :text "Gate 5 anti-weakening invariant verified: 100.0 percent multi-case qualified (1599/1599 tests), Core Tier: 100.0 percent (120/120 tests)"
+        :note "printf with zero format arguments. The ratios are string literals. Nothing is measured.")
+    (:m :id "LexicalAssertionCounting" :file "asl/tools/asl.c" :line 2433
+        :note "Gate 5 counts assertions with strstr over file text and prints them as evaluated assertions verified across suites.")
+    (:m :id "VacuousTestInvocation" :file "asl/tools/asl.c" :line 3420
+        :note "asl test with no path walks the tree, collects test files into a buffer, frees the buffer and returns 0 while printing nothing.")
+    (:m :id "InertFlag" :file "asl/tools/asl.c" :line 3393
+        :note "--strict-falsify occurs exactly once, as a continue. It sets nothing and changes no behaviour.")
+    (:m :id "HardcodedConsistencyCounts" :file "asl/tools/asl.c" :line 3035
+        :note "phase_count is initialised to the literal 39 and never computed. It is printed as Phases Cataloged 39 phase entries, and reused at line 3097 to print Falsifiable Gate Invariants 39 non-empty gates with a literal 100 percent well-formed. The roadmap held 58 phase rows when this was measured. wave_count is computed but reported as 105 waves from Wave 1 to Wave 105 while the roadmap carries 106 distinct wave labels with a maximum of 106, and the same report states Roadmap Discrepancies 0 detected.")
+    (:m :id "CheckerBlindSpot" :command "asl check"
+        :note "Accepts unescaped double quotes inside ASN string literals and reports syntax integrity verified cleanly. This is the defect hand-fixed in Phase436 and Phase438 motivation strings.")
+    (:m :id "PlanWriteConflicts" :unorderedWriterPairs 529 :filesAffected 11
+        :worst [(:file "asl/tools/asl.c" :pairs 450) (:file "asl/grammar/rpc.asn" :pairs 40) (:file "scripts/install.sh" :pairs 14)]
+        :note "Pairs of tasks that own the same file and are not ordered with respect to each other in the dependency graph.")]
+
+  :certificationRefutations [
+    (:refuted "Phase450LanguageGroundTruthAndVerificationHardening" :claimed :completed :measured :partial
+      :done ["Unbound symbol is now fatal: measured exit 1 on an unbound call, exit 1 on a failing assert, exit 0 on a passing one"
+             "tests/acceptance/d81/SuperviseGate.sh exists and fails closed with exit 3 when a fixture is absent"]
+      :notDone ["Gate 5 still counts assertions with strstr at asl.c:2433"
+                "asl test with no arguments still returns 0 without executing, at asl.c:3420"
+                "31 fixed 1024 byte buffers remain in asl.c"
+                "python3 remains declared in .asl/mem/dependencies.asn:29"
+                "backlog.asn still holds 16 completed tasks that were to be drained"]
+      :sideEffect "Making unbound symbols fatal increased hidden failures, because scripts/run-gate-tests.sh recorded a failure only for two assertion specific patterns and discarded every other non zero exit.")
+    (:refuted "Phase452BoundaryUniversalismAndSubsystemDeBloat" :claimed :completed :measured :notDone
+      :evidence ["strip-quotes remains defined 10 times across 4 packages" "strip-colon 6 times across 3" "estimate-tokens 15 times across 5"
+                 "balance-delimiters was promoted to asl-parser/src/balance.asl but harness/src/normalizer.asl:40 and harness/src/anti_hallucination.asl:54 still redefine it"
+                 "asl/packages/asl-codec/src/sh-transpile.asl:35 still defines escape-sh-arg while line 12 imports asl-text/escape and line 36 documents the canonical use"]
+      :note "Canonical copies were added. No duplicate was removed. Net duplication increased.")
+    (:refuted "Phase453FullAuditAndGapCertification" :claimed :completed :measured :unsupported
+      :evidence ["Commit 68d1e0b flipped the file verdict from action-required with 48 gaps and 14 critical to certified-green with 48 closed and 0 open, in a two line diff"
+                 "None of the 48 gap records carries a :status field, so no per gap closure is recorded anywhere in the file"
+                 "The file still contains 20 records with :severity :critical while the header claims :critical 0"
+                 "Gap at GAPS.asn line 271 names asl test without arguments returns 0 without running tests, which is still true"])]
+
+  :fixApplied (:file "scripts/run-gate-tests.sh"
+    :change "A failure is now recorded for any non zero evaluator exit, and for a suite that no evaluator executed, rather than only for output matching two assertion specific patterns."
+    :falsification (:baselineExit 0 :baselineReported 0 :patchedExit 1 :patchedReported 136)
+    :effect "asl audit gates now exits 1 and stops at gate 5 instead of printing ALL 7 VERIFICATION GATES PASSED CLEANLY.")
+
+  :caveat "asl audit consistency exits 0 throughout this session and one of its five dimensions counts with a hardcoded constant, so its green is weaker evidence than it appears."
+  :verdict :actionRequired
+  :supersedes "GAPS.asn receipt certified-green written at commit 68d1e0b")

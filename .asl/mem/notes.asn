@@ -28,5 +28,29 @@
       :fact "In-flight tasks persist in InFlight.asn with step-index, session leases, and handoff-context."
       :evidence "Verified by tests/test_task_protocol_e2e.sh and mem/tests/tasks_test.asl."
       :consequence "Enables crash recovery without context degradation or lost work items.")
+    (:note
+      :id "n3"
+      :topic "principles"
+      :author "auditor"
+      :session "sess-d81-language"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".asl/mem/principles.asn"]
+      :tags [:principles :reference :orientation]
+      :fact "The standing principles this project orients by live in .asl/mem/principles.asn, outside the decision ledger, each labelled normative or empirical and each empirical one carrying its measurement, scope and date."
+      :evidence "Written 2026-09-12 from the conceptual models in CLAUDE.md, the rendered rules in asl/grammar/rules.asn, and the measurements in D81StaticSweepAudit20260911 and D81CompactionFrontier20260912."
+      :consequence "Read principles.asn to orient; read rules.asn for the operative rules it compresses; read practices.asn for operational practice.")
+    (:note
+      :id "n4"
+      :topic "d81-ledger-audit"
+      :author "auditor"
+      :session "sess-d81-audit"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".asl/mem/roadmap.asn" ".asl/mem/decisions.asn" ".asl/mem/tasks/Phase471ClosingTheUnplanned.asn"]
+      :tags [:audit :d81 :roadmap :consistency :ground-truth]
+      :fact "Phase 471 added 3 tasks (Task47101..Task47103) bringing D81 to 182 tasks across 31 phases (Phase436..Phase471); waves and decision ledgers reconciled to Wave 118 with 0 cycles and 0 wave violations."
+      :evidence "Verified by bin/asl audit consistency and bin/asl test --strict-falsify tests/acceptance/d81/*.asl (10 fixtures, 147 asserts executed)."
+      :consequence "Ledgers are 100% grounded and ready for Phase 454 engine binding execution.")
   ]
 )

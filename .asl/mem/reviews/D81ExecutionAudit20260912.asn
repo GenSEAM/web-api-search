@@ -1,0 +1,46 @@
+(:review
+  :id "D81ExecutionAudit20260912"
+  :kind :executionAudit
+  :measuredAt 1789310000000
+  :measuredBy "claude-opus-5"
+  :question "What has actually been implemented, what regressed, and what stands between here and a task going green."
+
+  :improved [
+    (:m :id "CorpusFailures" :from 142 :to 46 :of 314
+        :detail "Failing suites fell from a peak of 142 to 46, a 68 percent reduction. Distinct unresolved module names fell from 36 to 7.")
+    (:m :id "ErrorAttribution" :from :misattributed :to :located
+        :detail "On 2026-09-11 all 136 failures reported an unknown symbol at a call site while the defect was elsewhere. Now 9 report ERR_UNRESOLVED_IMPORT naming the module and the importing file.")
+    (:m :id "RealAssertionFailuresVisible" :first true
+        :detail "ERR_TEST_RESULT_NOT_TRUE appears for the first time, in tests/fixtures/run_tests_false.asl, a deliberate negative fixture. Before this, no assertion could fail because no assertion ran.")
+    (:m :id "AcceptanceFixtures" :from 2 :to 9
+        :detail "Task43601 through Task43607 plus Task45401 and Task45403, executing 4, 10, 11, 12, 8, 24, 26, 4 and 34 assertions, 133 in total, all exit 0.")
+    (:m :id "RunnerHardened"
+        :detail "The swallow repaired on 2026-09-11 survived and was strengthened: a run executing zero assertions now fails as well as a non zero exit, so a silent pass is no longer producible.")
+    (:m :id "FirstGreenTask"
+        :detail "sh tests/acceptance/d81/SuperviseGate.sh Task43601 exits 0. This is the first task in the programme whose full acceptance gate passes.")]
+
+  :regressed [
+    (:m :id "Gate5ScopeNarrowed" :severity :critical :file "asl/tools/asl.c" :line 2662
+        :detail "Gate 5 now invokes the runner as bash run-gate-tests.sh bin/asl node asl/packages/asl-gates/tests and collects assertions only from that directory. It audits 5 suites and reports 171 assertions."
+        :consequence "asl audit gates prints ALL 7 VERIFICATION GATES PASSED CLEANLY while 46 of 314 suites fail. Run against the whole tree the same runner exits 1 and reports 45 failures. The gate passes because it stopped looking, which is the same failure family this programme exists to end, arriving from a new direction."
+        :note "The repair is not in the runner, which is correct, but in the scope the gate hands it.")
+    (:m :id "InstalledBinaryDrift" :severity :high
+        :detail "The asl on PATH is /Users/purplelephant/.asl/bin/asl with digest 6be341c3, while the repository holds bin/asl and asl/bin/asl with digest 947ab120. They are different builds, and nothing reports the divergence."
+        :consequence "Every command an agent runs by following the instructions uses a binary that is not the one the repository builds and tests.")]
+
+  :remaining [
+    (:m :id "UnresolvedModules" :count 7 :names ["posts" "core/process" "mem/src/xref" "examples/blink" "daemon" "asl/packages/asl-compiler/src/compact_rewrite" "api/packages"]
+        :note "daemon appears as an import target although the daemon was retired into the engine earlier in this programme.")
+    (:m :id "SwarmSuitesDead" :count 4 :names ["browser-bridge-test" "gateway-test" "mesh_orchestration_test" "tool_plane_test"]
+        :note "Ten agent-bus suites pass 308 assertions; these four execute none.")
+    (:m :id "FixtureCoverage" :have 9 :need 180
+        :note "Every task gate calls SuperviseGate.sh, which exits 3 without a fixture.")]
+
+  :shortestPathToExecution [
+    "Restore gate 5 to the whole workspace, so a green gate means the corpus is green. Without this every acceptance below it is certified against 5 suites."
+    "Close the 7 unresolved module names, which is a small enumerable list rather than 46 failures."
+    "Reconcile the installed binary with the built one, or the measurements and the build refer to different programs."
+    "Write fixtures for the ready tasks, since a task without one cannot be claimed at all."]
+
+  :verdict :realProgressWithANewBlindSpot
+  :summary "Failures fell by 68 percent, attribution became correct, and the first task gate passed. In the same window gate 5 narrowed its scope to 5 suites and now reports the whole system green while 46 suites fail.")

@@ -8,6 +8,7 @@
   :cluster "product/web-design"
   :deciders ["user" "planner" "independentVerifier"]
   :review ".asl/mem/reviews/D82DesignPlanReview.asn"
+  :completionAudit ".asl/mem/reviews/D82CompletionAudit.asn"
   :problem "The ASL web surface serves language engineers, AI practitioners and general readers, but its current visual grammar mixes narrow max-w-6xl shells, purple/indigo gradients, cosmic decoration, pill-heavy controls and repeated equal cards. The result spends attention on theme before product value and gives no explicit width policy for prose versus data tools."
   :drivers [
     "Keep a calm technical identity: graphite surfaces, one desaturated ASL signal, strong typographic hierarchy and restrained depth."
@@ -15,6 +16,7 @@
     "Use a measured width policy: approximately 72rem for the primary shell and a wider 80rem data canvas only for tables, playgrounds and visualizers; prose has a max 68ch measure and shrinks with the viewport."
     "Make responsive behavior and keyboard access part of the visual system, not post-hoc fixes."
     "Derive components from one token source so ASL projections, CSS and Tailwind do not drift."
+    "Present self-hosting, WASM and offline capabilities as source-bound statuses with provenance; never let visual polish turn historical or planned metrics into completion claims."
   ]
   :evidence [
     "asl/web/src/index.css:7-18 defines a purple-heavy palette and shadow hue."
@@ -22,6 +24,8 @@
     "asl/web/src/components/Hero.asl:8 uses max-w-6xl, purple/indigo gradients, rounded cards and multiple metric claims in one hero."
     "asl/web/src/components/Navbar.asl:10 uses a fixed rounded-full toolbar with labels hidden until nav breakpoints."
     "asl/web/src/views/BlogView.asl:8-30 and asl/web/src/views/DocsView.asl:15-31 repeat max-w-6xl shells and pill-like tab groups."
+    "asl/web/src/components/Ecosystem.asl:123-174 and asl/web/src/views/RoadmapView.asl:21-90 expose WASM, native and self-hosting claims that require provenance-aware presentation."
+    ".asl/mem/decisions/Adr0081LanguageGroundTruthAndSovereignPortabilityProgram.asn:13 defines source-bound portability and self-hosting goals."
     "https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md:26-32 requires visible focus and focus-within treatment."
     "Web Interface Guidelines command.md:44-60 requires reduced motion, transform/opacity animation and balanced text."
     "https://www.w3.org/TR/WCAG22/#contrast-minimum defines WCAG 2.2 AA contrast for text (4.5:1 normal, 3:1 large)."
@@ -36,6 +40,7 @@
     (:choice :id palette :value "Graphite and warm neutral surfaces with one desaturated ASL signal; remove purple/blue gradients")
     (:choice :id geometry :value "Use 8–12px container radii, 4–8px control radii and reserve full pills for tags/status")
     (:choice :id audience :value "Progressive disclosure: plain outcome, concrete action, optional protocol/evidence detail")
+    (:choice :id evidence :value "Capability status, source/provenance and planned-versus-verified state are visible before performance numbers")
   ]
   :consequences [
     (:pos "A stable visual language can serve technical and general audiences without duplicating pages.")

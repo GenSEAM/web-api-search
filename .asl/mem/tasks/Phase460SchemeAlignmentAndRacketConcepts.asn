@@ -1,0 +1,244 @@
+(:taskCollection
+  :id "Phase460SchemeAlignmentAndRacketConcepts"
+  :createdAt 1789240000000
+  :status "planned"
+  :priorityOrder 1
+  :summary "Scheme Alignment and Racket Concepts: stop being gratuitously different from the Lisp the model already knows, adopt Racket designs for the module system, located syntax and blame-carrying contracts, and keep Racket out of the deployed runtime."
+  :phase "Phase460SchemeAlignmentAndRacketConcepts"
+  :baseline "Measured 2026-09-12 under cl100k over 888 files and 1512691 tokens. Seven of eleven divergent core forms save exactly zero tokens by being abbreviated, covering 16041 uses: df and define are both one token, as are dfs and struct, mt and match, do and begin, x and provide, i and require, f and field. The remaining renames are also free: fn to lambda, str to string, nil to null, all zero delta across a further 5576 uses; dfe to enum saves 165 tokens. ASL already shares if 3011, let 5263, and 1214, or 1265, not 1530, cond 393, case, quote and lambda with Scheme. The binding form costs the same in both shapes: ASL (let [(a 1) (b 2)] body) and Racket (let ([a 1] [b 2]) body) are 13 tokens each. The definition form is at parity with its Racket equivalent carrying the same information: ASL 19 tokens against define/contract 18 and Typed Racket 20. Converting true and false to hash-t and hash-f would cost 0.43 percent and is rejected."
+  :tasks [
+    (:task
+      :id "Task46001"
+      :parentId ""
+      :phase "phase-460"
+      :title "Rename the core forms to their Scheme spellings, at zero token cost"
+      :kind :language
+      :state :planned
+      :lane "alignment"
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789240000000
+      :updatedAt 1789240000000
+      :motivation "A byte pair tokenizer assigns a single token to define, struct, match, begin, provide, require, lambda and string precisely because those words are frequent in the code it was trained on, and that same frequency is what gives a model its prior. Abbreviating them therefore loses the prior and saves nothing: measured, the abbreviation is worth zero tokens across 21617 uses. The present surface is the worst available position, a language that looks like a Lisp so the model predicts Lisp forms, while every form is renamed so the predictions are wrong. Correcting it is free."
+      :purpose "The core forms carry their Scheme and Racket spellings wherever the spelling is measured at one token: define, struct, enum, lambda, match, begin, provide, require, field, string, null. try is retained against with-handlers, which measures three tokens: a rename that raises cost is refused even when it improves family consistency, because measured token count decides and pattern does not. The abbreviated spellings are removed rather than aliased. true and false stay as they are, being valid Racket bindings and cheaper than the hash forms. The abbreviated family is not uniform today: df and dfs are one token while dfl, dfn and dfe are two, splitting as d plus fl, df plus n and d plus fe. Every corresponding full word is one token: define, struct, enum, lambda, list, name, type, proc. A uniformly single-token and uniformly transparent family is therefore available at the full words. A uniformly two-word family is also consistent and costs two to three tokens per use, define-function at two and define-struct at three, which on the 6881 uses of df is 0.45 percent of the corpus; it is recorded as the priced alternative rather than adopted. The docstring keyword stays, being one token against two for any comment form."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Eleven core forms renamed, old spellings removed" "Measured cost recomputed on the tree and recorded" "true, false and the docstring keyword retained with the measurement that justifies each"]
+      :owns ["asl/grammar/language-semantics.asn" "asl/grammar/grammar.asn" "asl/tools/engine_js.h" "asl/packages" "harness/src" "intel/src" "mem/src" "agent-core/src"]
+      :targetSymbols ["df" "dfs" "dfe" "fn" "mt" "do"]
+      :relatedSymbols ["names" "semantics" "foreign"]
+      :invariants ["D51" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task45901"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46001"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46001.asl"]
+      :verificationCases ["An abbreviated spelling fails rather than resolving through an alias." "Executed assertion count is unchanged across the rename, so nothing was silently unbound." "The recomputed token total moves by less than one tenth of a percent, confirming the rename was free rather than assumed free." "A spelling inside a string literal is not rewritten."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46001" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Fix the mapping." "Rewrite mechanically in one pass with the CamelCase conversion." "Recompute and record." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46002"
+      :parentId ""
+      :phase "phase-460"
+      :title "Adopt the Racket binding shape and decline the cheaper Clojure one"
+      :kind :language
+      :state :planned
+      :lane "alignment"
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789240000000
+      :updatedAt 1789240000000
+      :motivation "The current binding form is a third shape belonging to no existing Lisp: ASL writes (let [(a 1) (b 2)] body) where Racket writes (let ([a 1] [b 2]) body) and Clojure writes (let [a 1 b 2] body). Measured, ASL and Racket cost 13 tokens and Clojure costs 11. The cheaper form would save 0.69 percent across 5249 uses, and taking it would place the language a third distance from both references, which is the condition that produced the present problem. Alignment with one reference is worth more than two tokens a binding."
+      :purpose "The binding form is Racket's. The choice, including the rejected Clojure option and the 0.69 percent it would have saved, is recorded so it is not reopened as an efficiency idea."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Binding form matches Racket exactly" "The rejected cheaper option recorded with its measured value" "One reference dialect, not a blend"]
+      :owns ["asl/grammar/language-semantics.asn" "asl/tools/engine_js.h" "asl/packages" "harness/src"]
+      :targetSymbols ["let"]
+      :relatedSymbols ["names" "semantics"]
+      :invariants ["D51" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46001"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46002"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46002.asl"]
+      :verificationCases ["The old shape is rejected by the reader rather than silently accepted." "A binding list valid in Racket parses here with the same meaning." "Assertion parity holds across the conversion."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46002" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Change the reader." "Convert the tree." "Record the rejected option." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46003"
+      :parentId ""
+      :phase "phase-460"
+      :title "Take Racket's module system as the design for resolution"
+      :kind :language
+      :state :planned
+      :lane "concepts"
+      :priority :critical
+      :ownerRole "planner"
+      :createdAt 1789240000000
+      :updatedAt 1789240000000
+      :motivation "The most expensive defect measured in this repository is that a module which does not resolve is skipped in silence, and the resolver is a ladder of about 25 hardcoded path guesses. Racket settled this in the late nineteen nineties: a module path denotes a module, resolution is performed by a module name resolver against declared collection roots, a module that cannot be found is a compile time error, and a module is instantiated once and cached. Task45401 and Task45402 are about to reinvent this, and there is no reason to reinvent it badly when the reference design is public and forty years of Scheme experience stand behind it."
+      :purpose "Task45401 and Task45402 are specified against Racket's module semantics rather than improvised: a module path resolves through a declared root set with no positional guessing, resolution failure is an error at the requiring site, instantiation happens once per resolved path, and cycles are detected and reported rather than silently truncated."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Resolution semantics specified against a known-good reference" "Cycle detection reported rather than truncated" "Single instantiation per resolved path" "Task45401 and Task45402 inherit the specification"]
+      :owns ["asl/grammar/language-semantics.asn" "asl/grammar/dependency-boundaries.asn"]
+      :targetSymbols ["resolveModulePath" "loadModuleImports"]
+      :relatedSymbols ["semantics" "foreign" "concepts"]
+      :invariants ["C3" "D34" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn []
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46003"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46003.asl"]
+      :verificationCases ["A cyclic require is reported as a cycle naming the path, not silently truncated by a loading set." "A module instantiated from two requiring sites is instantiated once and both see the same bindings." "A module path that denotes nothing is an error at the requiring site."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46003" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Write the resolution specification against the reference." "Bind Task45401 and Task45402 to it." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46004"
+      :parentId ""
+      :phase "phase-460"
+      :title "Every form carries its source location, as a syntax object does"
+      :kind :language
+      :state :planned
+      :lane "concepts"
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789240000000
+      :updatedAt 1789240000000
+      :motivation "Measured: 52 of 136 failing suites report a symbol at a call site in one file when the defect is an unresolved import in another. The reader currently produces bare values, so by the time anything fails there is nothing left that knows where the form came from. Racket's answer is the syntax object, a value that carries source, line, column and span through reading, expansion and error reporting, and it is the reason a Racket error can point at the form that caused it rather than at the place the consequence surfaced."
+      :purpose "The reader attaches source, line and column to every form, the evaluator preserves them through binding and application, and every diagnostic quotes the position of the form responsible. The checker and the static analysers read the same positions, so a finding and a runtime error name the same place."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Source position on every form from the reader" "Diagnostics quote the responsible form" "Analysers and runtime agree on positions" "Task45402 satisfied by construction"]
+      :owns ["asl/tools/engine_js.h" "asl/tools/asl.c"]
+      :targetSymbols ["parseAllSExprs" "evalNode"]
+      :relatedSymbols ["semantics" "output" "gates"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46003"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46004"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46004.asl"]
+      :verificationCases ["An error inside a function called from another file quotes the definition site and the call site, not one of them." "A position survives being passed through a higher order function." "The checker and the evaluator report the same line for the same defect."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46004" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Attach positions in the reader." "Preserve through evaluation." "Route diagnostics through them." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46005"
+      :parentId ""
+      :phase "phase-460"
+      :title "Contracts that assign blame, in place of hand-rolled gate prose"
+      :kind :language
+      :state :planned
+      :lane "concepts"
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789240000000
+      :updatedAt 1789240000000
+      :motivation "The verification apparatus here is a body of prose rules about who may weaken what, enforced by review. Racket's contract system solves the same problem mechanically: a contract at a module boundary states what each side promises, and when it is violated the error names the party that broke the promise rather than the line that noticed. That is precisely the attribution the grading rule asks for, and it is the same failure this session measured three times, where a check reported a result it had not computed and nothing could say who was responsible."
+      :purpose "Function and module boundaries carry contracts with blame. A violated precondition blames the caller, a violated postcondition blames the definition, and the acceptance gates read contract violations as structured findings rather than as text. Contracts are checked where they are cheap and declared where checking is deferred, never silently unchecked."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Contracts with blame at module boundaries" "Gate findings structured rather than textual" "A deferred check is declared, never silent"]
+      :owns ["asl/grammar/verification-contract.asn" "asl/tools/engine_js.h" "asl/packages/asl-gates/src"]
+      :targetSymbols ["verification-contract"]
+      :relatedSymbols ["gates" "grading" "hiddenTests"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46004" "Task45506"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46005"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46005.asl"]
+      :verificationCases ["A caller passing a bad argument is blamed, and the callee is not." "A function returning a bad value is blamed, and its caller is not." "A contract declared but not checked is reported as unchecked rather than counted as satisfied."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46005" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Define the contract form." "Attach blame using source positions." "Route gate findings through it." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46006"
+      :parentId ""
+      :phase "phase-460"
+      :title "Record the decision: Racket is a reference and an optional oracle, never a deployment dependency"
+      :kind :protocol
+      :state :planned
+      :lane "concepts"
+      :priority :critical
+      :ownerRole "planner"
+      :createdAt 1789240000000
+      :updatedAt 1789240000000
+      :motivation "The question of whether Racket becomes the foundation deserves a recorded answer rather than a drifting assumption. Against adoption as a runtime: it is not installed here, it would be a new ecosystem dependency where the foreign rule permits none beyond declared boundaries, it contradicts the sovereign single binary direction, it has no viable path to the in-browser runtime Phase446 requires, and on published multi-language evaluations Racket itself scores far below Python, so adopting it does not solve the familiarity problem but relocates it. For adoption as a reference: its module system, its syntax objects and its contracts are the designs three of the planned tasks are about to approximate."
+      :purpose "The decision is written down with its reasons and its rejected alternatives: Racket is adopted as the naming and semantic reference, is permitted as a development time boundary on the same footing as the seed compiler and independent test hosts, and is excluded from anything the deployed runtime requires. A second implementation as a Racket language, usable as a differential oracle against the C engine, is recorded as an available option with its maintenance cost stated, not adopted here."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["A recorded decision with reasons and rejected alternatives" "Racket permitted as a development boundary, excluded from deployment" "The differential oracle option recorded with its cost, not silently adopted" "The familiarity argument stated with its measured basis and its limits"]
+      :owns [".asl/mem/decisions" "asl/grammar/dependency-boundaries.asn" "asl/grammar/rules.asn"]
+      :targetSymbols ["foreign"]
+      :relatedSymbols ["concepts" "foreign" "ssot"]
+      :invariants ["D34" "D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46003"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46006"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46006.asl"]
+      :verificationCases ["A build that requires Racket to produce the deployed artefact fails the boundary check." "A development tool that requires Racket passes, being a declared boundary." "The recorded decision names the rejected alternatives, so reopening it requires new evidence rather than a fresh opinion."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46006" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Write the decision with alternatives and reasons." "Extend the boundary check." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])]
+  :notes "The measured basis for this phase is that the abbreviation bought nothing. Seven of eleven divergent forms cost the same as their Scheme spelling, and the tokenizer gives those words one token precisely because they are frequent in the corpus that also formed the model's prior. The language does not need to become more compact; it needs to stop paying for distance it never sold.")

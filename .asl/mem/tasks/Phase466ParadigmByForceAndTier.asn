@@ -1,0 +1,205 @@
+(:taskCollection
+  :id "Phase466ParadigmByForceAndTier"
+  :createdAt 1789290000000
+  :status "planned"
+  :priorityOrder 2
+  :summary "Paradigm by Force and Tier: separate what binds from what orients from what merely usually works, give each its own word, and load by tier so a small agent gets the core and a specialist gets its pack."
+  :phase "Phase466ParadigmByForceAndTier"
+  :baseline "Measured 2026-09-12 under cl100k. The rendered agent surface is 5913 tokens, of which 2264 are the nineteen rules and 3649, being 62 percent, is paradigm prose: four teleological mandates at 1263, lexical density and boundary invariants at 1666, visibility topology at 335, boundary universalism at 249. CLAUDE.md is a symlink to AGENTS.md with an identical digest, so one file correctly serves two clients. Classifying the nineteen rules by the force they actually carry gives seven invariants at 617 tokens, four orientations at 465, two affordances at 289 and six heuristics at 449. The essential core is therefore about a tenth of what every agent loads, and nothing today can load less than all of it. Every item is currently called a rule, so a heuristic about commit style reads with the same force as the invariant that a writer does not grade its own work."
+  :tasks [
+    (:task
+      :id "Task46601"
+      :parentId ""
+      :phase "phase-466"
+      :title "Four forces, four words: invariant, orientation, affordance, heuristic"
+      :kind :protocol
+      :state :planned
+      :lane "paradigm"
+      :priority :critical
+      :ownerRole "planner"
+      :createdAt 1789290000000
+      :updatedAt 1789290000000
+      :motivation "Everything in the paradigm is called a rule, and a single word carrying four different forces is what makes the set feel restrictive: a defeasible preference about commit messages arrives with the same grammatical authority as the condition that makes a result invalid. An agent that cannot tell which is which either obeys everything, which is brittle, or discounts everything, which is worse. The distinction is not stylistic: it decides what may be dropped when context is short, and today nothing may be dropped because nothing is marked."
+      :purpose "Each item declares its force. An invariant states what makes work invalid and is never dropped; seven exist and they are few on purpose. An orientation says how to read a situation and carries no compliance test, because a test would turn it back into a rule. An affordance says what can actually be done here and is loaded for the situation at hand. A heuristic says what usually works and must name the condition under which it fails, which is what makes it an instrument rather than an order: an agent that knows when to stop following a heuristic is not constrained by it."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Four declared forces replacing one word" "A heuristic without its defeat condition fails the check" "An invariant without a failing gate fails the check" "What may be dropped under pressure becomes decidable"]
+      :owns ["asl/grammar/rules.asn" ".asl/mem/principles.asn" "TOKEN_CONVENTIONS.md"]
+      :targetSymbols []
+      :relatedSymbols ["concepts" "ssot" "budget" "edge"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn []
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46601"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46601.asl"]
+      :verificationCases ["A heuristic with no stated defeat condition is rejected." "An invariant with no gate that can fail is rejected, so the count of invariants cannot quietly grow." "An orientation carrying a compliance test is rejected, since that makes it an invariant wearing the wrong word."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46601" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Assign a force to every item." "Require the defeat condition and the gate." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46602"
+      :parentId ""
+      :phase "phase-466"
+      :title "Tiers that a context budget can actually spend"
+      :kind :protocol
+      :state :planned
+      :lane "paradigm"
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789290000000
+      :updatedAt 1789290000000
+      :motivation "Every agent loads the same 5913 tokens whether it is a scout reading outlines or a supervisor planning a wave, and a small model pays the same as a large one for material it will not use. The measured shape makes the tiering obvious rather than arbitrary: 617 tokens decide validity, 465 more decide how to read a situation, 449 more are defeasible practice, and 3649 are prose that only some agents ever need."
+      :purpose "Tiers are defined by what is lost when they are absent, not by importance in the abstract. Essential is the seven invariants, because without them a result cannot be trusted. Tier zero adds the affordances for the current situation, because an agent that does not know what works will try what does not. Tier one adds orientation. Tier two adds heuristics. Tier three adds the stance for this agent's own role and no other. Tier four adds one domain pack. Tier five is everything. A tier is a budget the caller spends, and the renderer emits exactly the requested tier from the single source."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Six tiers rendered from one source" "Essential measured at about 617 tokens against 5913 today" "A caller requests a tier and receives exactly it" "Small agents and specialists served from the same source"]
+      :owns ["asl/grammar/rules.asn" "scripts/install.sh" "AGENTS.md"]
+      :targetSymbols ["render_between" "inject_directive"]
+      :relatedSymbols ["ssot" "budget" "context" "capabilities"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46601"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46602"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46602.asl"]
+      :verificationCases ["Each tier renders deterministically from the single source and its drift is caught by the existing gate." "A lower tier is a strict prefix of a higher one, so raising the tier never changes what was already there and the cached prefix survives." "Essential alone contains every invariant and no heuristic."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46602" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Define the six tiers by loss." "Render each from the source." "Require prefix containment." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46603"
+      :parentId ""
+      :phase "phase-466"
+      :title "The orientations that are missing: stake, adaptive thinking, problem solving"
+      :kind :protocol
+      :state :planned
+      :lane "paradigm"
+      :priority :high
+      :ownerRole "planner"
+      :createdAt 1789290000000
+      :updatedAt 1789290000000
+      :motivation "The paradigm names four roles and what each may not do, and says almost nothing about how to think when the situation does not match a role. The edge rule is the only orientation for an unanticipated situation and it is 173 tokens. Nothing addresses why an agent should care about the outcome rather than the instruction, how to change approach when the current one is not working, or how to take a problem apart when no step covers it. These are the situations where an agent most often produces fluent nonsense, and the paradigm is thinnest exactly there."
+      :purpose "Three orientations are added and kept short. Stake: the work is judged by whether it holds, not by whether it was instructed, so a defect found outside the assignment is reported rather than stepped over. Adaptive thinking: an approach that is not working is abandoned rather than pressed harder, and the signal is the absence of new evidence rather than the absence of progress. Problem solving: when no step covers the situation, reduce it to the cheapest thing that would prove you wrong and run that first. Each is an orientation, so none carries a compliance test."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Three orientations covering stake, adaptation and problem solving" "Each short enough for tier one" "No compliance tests attached" "The gap at the edge rule closed"]
+      :owns ["asl/grammar/rules.asn" ".asl/mem/principles.asn"]
+      :targetSymbols ["edge"]
+      :relatedSymbols ["edge" "concepts" "grading"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46601"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46603"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46603.asl"]
+      :verificationCases ["Each addition is classified as an orientation and carries no test." "The three together fit the tier one budget." "None duplicates an existing item, checked by name and by content."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46603" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Draft the three." "Classify and size them." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46604"
+      :parentId ""
+      :phase "phase-466"
+      :title "Domain packs: design, development, research, audit, loaded by situation"
+      :kind :protocol
+      :state :planned
+      :lane "paradigm"
+      :priority :high
+      :ownerRole "planner"
+      :createdAt 1789290000000
+      :updatedAt 1789290000000
+      :motivation "An agent doing design work and an agent doing research need different things, and today both receive the same 1666 token lexical density specification and the same four role mandates. A specialised concept that only one kind of agent needs is pure cost for every other, and the cost is paid on every session."
+      :purpose "Each domain has a pack containing only what that domain adds: what a good outcome looks like there, the failure characteristic of it, and the affordances that apply. A pack is loaded when the situation calls for it, as the capability registry is already loaded by situation, and no pack is required to read another. Packs stay small enough that loading two is cheaper than loading the full paradigm."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["One pack per domain, loadable independently" "No pack depends on another" "Two packs cheaper than the full paradigm" "Situation selects the pack, as it already selects capabilities"]
+      :owns ["asl/grammar/rules.asn" "asl/grammar/capabilities.asn" "scripts/install.sh"]
+      :targetSymbols ["capabilities"]
+      :relatedSymbols ["capabilities" "budget" "ssot"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46602"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46604"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46604.asl"]
+      :verificationCases ["A pack loaded alone is coherent without any other pack." "Loading every pack costs no more than the present monolith, so modularity is not paid for twice." "A concept appearing in two packs is reported, because that means it belongs in orientation."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46604" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Partition the prose into packs." "Remove what is shared into orientation." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task46605"
+      :parentId ""
+      :phase "phase-466"
+      :title "Measure whether a tier helps or only costs less"
+      :kind :verification
+      :state :planned
+      :lane "paradigm"
+      :priority :critical
+      :ownerRole "verifier"
+      :createdAt 1789290000000
+      :updatedAt 1789290000000
+      :motivation "A smaller instruction surface is cheaper by construction and better only by assumption. Published work on instruction load is model dependent, and this project has already been wrong about a token economy it had not measured. Cutting 5913 tokens to 617 is worthless if the work degrades, and worth a great deal if it does not."
+      :purpose "Each tier runs against the fixed task set from the emission benchmark, and the outcome per tier and per model is recorded: tasks completed, invariants violated, and unsupported claims. The tier a given model should receive is then chosen from that measurement rather than from its size, and a tier that costs less and performs worse is recorded as such."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["A measured outcome per tier and per model" "Tier selection derived from measurement" "A cheaper tier that performs worse recorded rather than shipped"]
+      :owns ["asl/bench" ".asl/mem/telemetry"]
+      :targetSymbols []
+      :relatedSymbols ["concepts" "budget" "grading"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task46602" "Task46304"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46605"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task46605.asl"]
+      :verificationCases ["Two tiers produce two different measured outcomes on one task set and one model." "An invariant violation is counted by running the gate, not by reading the output." "A result showing the full paradigm outperforming a tier passes the gate and is recorded."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46605" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Run each tier on the fixed set." "Record outcomes per model." "Derive the assignment." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])]
+  :notes "The organising idea is to sort by force rather than by topic. Sorting by force is what makes the set stop feeling restrictive, because a heuristic that names its own defeat condition is an instrument, and it is also what makes tiering possible, because only then is it decidable what may be dropped.")

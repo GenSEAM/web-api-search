@@ -5,7 +5,7 @@
   :priorityOrder 11
   :summary "Canonical Lexicon Cross-Client: one spoken-to-canonical source rendered to every client and both translators, the mishearing retired from artifact names, and a checker so it cannot return."
   :phase "Phase447CanonicalLexiconCrossClient"
-  :baseline "2026-09-11: voice/src/hyness_profile.asl:51 maps хайнесс to hyness instead of harness; the mishearing occurs 78 times across five files and names the module, three structs, the profile value and .asl/hyness.config.asn; the alias table holds five entries, is imported by one test only, and is invisible to prompt_translator, to AGENTS.md and to every client channel."
+  :baseline "2026-09-11: voice/src/hyness_profile.asl:51 maps хайнесс to hyness instead of harness; the owner confirmed 2026-09-12 that harness is also heard as ханес, so a term carries several spoken forms and a single-form table cannot hold them; the mishearing occurs 78 times across five files and names the module, three structs, the profile value and .asl/hyness.config.asn; the alias table holds five entries, is imported by one test only, and is invisible to prompt_translator, to AGENTS.md and to every client channel."
   :tasks [
     (:task
       :id "Task44701"

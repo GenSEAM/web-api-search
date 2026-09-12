@@ -1,0 +1,45 @@
+(:review
+  :id "D81CompactionFrontier20260912"
+  :kind :languageCompactionFrontier
+  :measuredAt 1789243000000
+  :measuredBy "claude-opus-5"
+  :question "Where is the optimal point of compaction: how far can spelling be shortened before models stop understanding, and does shortening spelling even reduce tokens."
+  :method "Direct tokenization under cl100k_base and o200k_base. Every figure below is a token count, not an estimate."
+
+  :finding (:id "StructuralCompactionAndLexicalCompactionAreDifferentThings"
+    :statement "Compaction of structure and compaction of spelling behave in opposite directions, and only the first one pays."
+    :structural "Owner measurement, taken as given here: ASN and S-Lang in paradigmatic representation against default prose prompting produced multiple-fold token reduction and higher accuracy on the owner agent and tooling, and 12 percent on Terminal Bench 4 with Gemma-class models, with Claude also improving. This is compaction of structure: keyword and value instead of sentences, one form instead of a paragraph, no filler."
+    :lexical "Measured here: shortening a word that the tokenizer already prices at one token cannot save anything, and usually costs. This is compaction of spelling."
+    :rule "Compress structure. Do not compress spelling below the whole-word boundary.")
+
+  :measurements [
+    (:m :id "VowelDropping" :verdict :refuted
+      :sample 16 :fullWordTokens 16 :devowelledTokens 33 :delta "+106.2 percent"
+      :detail [(:full "context" :tok 1 :short "cntxt" :tok 2 :pieces ["cnt" "xt"])
+               (:full "function" :tok 1 :short "fnctn" :tok 3 :pieces ["fn" "ct" "n"])
+               (:full "verify" :tok 1 :short "vrfy" :tok 3 :pieces ["v" "rf" "y"])
+               (:full "dependency" :tok 1 :short "dpndncy" :tok 3 :pieces ["dp" "nd" "ncy"])
+               (:full "string" :tok 1 :short "strng" :tok 2 :pieces ["str" "ng"])]
+      :why "A byte pair vocabulary is built from real text. A frequent whole word is one token because it was frequent; a devowelled form was never frequent, so it splits into two or three pieces. Dropping vowels therefore doubles the token count while also removing the form the model has a prior for. It is worse on both axes at once, so there is no trade to make."
+      :exceptions "Two of sixteen stayed at one token, mdl and gt, and both collide with unrelated frequent strings. These are accidents of the vocabulary, not a method.")
+    (:m :id "SingleLetterAndUltraShort" :verdict :neutralOnTokens
+      :detail "a, c, s, m, t, f, fn and ctx are each one token, the same as the whole words they would replace."
+      :why "Single letters cost the same as define, struct, string, context and lambda, which are also one token each. The saving is zero and the cost is that one letter means a different thing in every file. This is the same defect already measured as 246 single character import aliases with the alias s declared in 76 files.")
+    (:m :id "DfFamily" :verdict :premisePartlyRefuted
+      :detail [(:form "df" :tok 1) (:form "dfs" :tok 1) (:form "dfl" :tok 2 :pieces ["d" "fl"])
+               (:form "dfn" :tok 2 :pieces ["df" "n"]) (:form "dfe" :tok 2 :pieces ["d" "fe"])]
+      :fullWords [(:form "define" :tok 1) (:form "struct" :tok 1) (:form "lambda" :tok 1)
+                  (:form "list" :tok 1) (:form "name" :tok 1) (:form "enum" :tok 1)
+                  (:form "type" :tok 1) (:form "proc" :tok 1)]
+      :twoWord [(:form "define-list" :tok 2) (:form "define-name" :tok 2) (:form "define-function" :tok 2)
+                (:form "defineFn" :tok 2) (:form "define-struct" :tok 3) (:form "defn" :tok 2)]
+      :why "Only df and dfs are one token. dfl, dfn and dfe are already two, so the abbreviated family is not uniform in cost today. Every corresponding full word is one token. A uniformly single-token and uniformly transparent family is therefore available at the full words, while a uniformly two-word family costs two to three tokens per use. Consistency is reachable at either price; the cheaper one is also the legible one.")
+    (:m :id "PriceOfTwoWordFamily"
+      :detail "df appears 6881 times. Moving it to a two token form costs 6881 tokens, 0.45 percent of the 1512691 token corpus. Moving it to define costs nothing.")]
+
+  :closes ["Drop vowels to compact the language: refuted, doubles tokens."
+           "Drop consonants or use single letters: no token saving, and it reproduces the alias opacity already measured."
+           "Abbreviate common keywords: no token saving, measured zero across 21617 uses."]
+  :keeps ["Structural compaction of prompts and representations, which is where the owner measurements come from."
+          "Whole words as the floor: shorten to a word, never below one."]
+  :verdict :optimalPointIsWholeWords)

@@ -1,0 +1,170 @@
+(:principlesLedger
+  :version "1.0.0"
+  :package asl-mem
+  :updatedAt 1789246000000
+  :purpose "The standing principles this project orients by, kept outside the decision ledger because a decision is answerable to a moment and a principle is answerable to evidence. A principle is either normative, adopted deliberately and without measurement, or empirical, and an empirical one carries its measurement, its scope and its date. A principle with a number and no source does not belong here."
+  :classes [(:normative "Adopted as a value. Not falsifiable, and not presented as a finding.")
+            (:empirical "Carries a measurement with method, scope and date. Refutable by a better measurement.")]
+
+  :principles [
+
+    (:principle :id "GroundTruthOverReport" :class :empirical :domain :epistemic
+      :statement "A report is not evidence. Only an executed check with an observed exit code is."
+      :why "Three separate gates in this repository were green while the condition they described was false, and each had been quoted as evidence for months."
+      :basis (:measured "2026-09-11" :detail "asl audit gates printed ALL 7 VERIFICATION GATES PASSED CLEANLY while 136 of 313 suites were failing; the runner recorded a failure only for two assertion specific patterns and discarded every other non zero exit.")
+      :practice "Measure exit codes without a pipe, since a pipeline reports the last command. Read the source of a check before quoting its output.")
+
+    (:principle :id "AGateThatCannotFailIsNotAGate" :class :empirical :domain :epistemic
+      :statement "A check must be shown to fail on a seeded defect before its success means anything."
+      :why "An untested branch reports the same thing as a working one, and silence is the failure mode of every analyser."
+      :basis (:measured "2026-09-11" :detail "asl test with no path walked the tree, collected the suites, freed the buffer and returned 0 in silence; --strict-falsify occurred once in the binary, as a continue.")
+      :practice "Every gate carries a seeded defect fixture. A category with no fixture may not be reported.")
+
+    (:principle :id "OutputStatesOnlyWhatWasComputed" :class :empirical :domain :epistemic
+      :statement "A program may not print a quantity or an invariant it did not evaluate."
+      :why "A printed literal outlives the check it describes and is indistinguishable from a result."
+      :basis (:measured "2026-09-11" :detail "asl.c:2655 printed 100.0 percent and 1599/1599 and 120/120 with zero format arguments; asl.c:3035 set phase_count to the literal 39 and printed it as the number of phases and again as the number of well formed gates, against 58 actual rows.")
+      :practice "A line reporting a number takes a format argument. An unimplemented check says so instead of claiming a result.")
+
+    (:principle :id "CertificationIsDerivedNeverWritten" :class :empirical :domain :epistemic
+      :statement "A verdict is computed from per item evidence. A verdict field that an edit can set is not a verdict."
+      :why "The strongest claim in the repository was produced by changing one line."
+      :basis (:measured "2026-09-11" :detail "Commit 68d1e0b moved a 48 gap ledger from action-required with 14 critical to certified-green with 0 open in a two line diff, while no gap record carried a status field and 20 still carried critical severity.")
+      :practice "Every item carries its own status, receipt and the command that produced it. The aggregate is derived.")
+
+    (:principle :id "TheWriterDoesNotGrade" :class :normative :domain :epistemic
+      :statement "Whoever produced the work does not certify it, and verification rests on reproducible evidence rather than on a role label."
+      :why "Self correction without external signal tends to degrade results, and self evaluation prefers its own output. Adopted as a value rather than derived here.")
+
+    (:principle :id "FailLoudlyAndInThePlaceResponsible" :class :empirical :domain :epistemic
+      :statement "A silent failure is worse than a loud one, and a failure reported in the wrong place is worse than both."
+      :why "A deferred error names the consequence rather than the cause, and the reader repairs the wrong file."
+      :basis (:measured "2026-09-11" :detail "An unresolved import was skipped without a diagnostic, so 52 of 136 failing suites reported an unknown symbol at a call site while the defect was an import in another file.")
+      :practice "Report at the site of the defect, with the file, the line and what was sought.")
+
+    (:principle :id "ReversibilityBeforeOptimality" :class :normative :domain :cybernetic
+      :statement "Given a choice, keep the option open: read before write, stage before commit, branch before merge, ask before delete, and take a verified restore point before anything that discards."
+      :why "A system without a remote has only the working tree, and the cost of a wrong irreversible step is unbounded while the cost of reversibility is small and known.")
+
+    (:principle :id "FeedbackBeforeControl" :class :normative :domain :cybernetic
+      :statement "Nothing is steered that is not first measured. A control placed on an unmeasured quantity produces confidence rather than control."
+      :why "The project optimised token count, which moves by about three percent, while symbol surface and binding distance governed the outcome and were never measured.")
+
+    (:principle :id "VarietyMustMatchTheEnvironment" :class :normative :domain :cybernetic
+      :statement "A rule set cannot enumerate the situations it will meet. When no rule matches, recognise that rather than fill the gap fluently: preserve optionality, contain the change, run the cheapest thing that would prove you wrong, and escalate with what was seen and tried."
+      :why "Models fill gaps fluently instead of noticing them, and the loop has to end in a receipt to someone else.")
+
+    (:principle :id "TheLedgerIsTheMemory" :class :normative :domain :cybernetic
+      :statement "The plan lives in the ledger, not in the session. Re-read it before mutating and after every gate, and act from what it returns."
+      :why "Compliance declines within a long session, and a plan held in context is a plan that drifts without anyone noticing.")
+
+    (:principle :id "CompressStructureNeverSpelling" :class :empirical :domain :language
+      :statement "Compaction pays on structure and does not pay on spelling. Shorten a paragraph to a form; never shorten a word below the whole-word boundary."
+      :why "A byte pair vocabulary prices a frequent whole word at one token because it was frequent, and that same frequency is the model's prior. Shortening it loses the prior and gains nothing."
+      :basis (:measured "2026-09-12" :method "cl100k_base and o200k_base, direct tokenization"
+              :detail "Sixteen common words cost 16 tokens in full and 33 devowelled, a rise of 106 percent. Abbreviating an already single-token keyword saved exactly zero across 21617 uses: df and define, dfs and struct, mt and match, do and begin, provide, require and field are one token each.")
+      :closes ["Drop vowels" "Drop consonants" "Single letter names" "Abbreviate common keywords"])
+
+    (:principle :id "MeasuredCostDecidesTheName" :class :empirical :domain :language
+      :statement "Among candidates that carry the intended meaning, take the measured minimum token count. Length is not a criterion and family uniformity is not a criterion. A single-token form that does not extend into a family is accepted as it stands."
+      :why "The three intuitions that competed here, shorter is cheaper, a family should look uniform and a reader should recognise it, are unreliable, and the first two are measurably wrong."
+      :basis (:measured "2026-09-12" :detail "df and dfs are one token while dfl, dfn and dfe are two; every corresponding full word is one. try is one token and with-handlers is three, so the consistent rename is refused. Of 3776 declared symbols only 90 cost one token, and the lexicon totals 14781 against 3776, an excess of 11005."))
+
+    (:principle :id "OptimisingForTheModelStillSelectsOrdinaryWords" :class :empirical :domain :language
+      :statement "Removing the human reader settles a tiebreaker and does not reverse the direction. The model's prior was built from text humans wrote, so the cheapest and the most predictable form are usually the same ordinary word."
+      :why "It is easy to read LLM-first as a licence to abbreviate. It is the opposite: the vocabulary the model handles best is the vocabulary that was frequent in its training text."
+      :basis (:measured "2026-09-12" :detail "Full words cost one token and their shortened forms two or three. Legibility is therefore free, and is paid for in a decoder tool rather than in the source."))
+
+    (:principle :id "NearMissSyntaxIsWorseThanEither" :class :empirical :domain :language
+      :statement "A language that looks like a known one but renames its forms is worse than one that matches it and worse than one that clearly differs, because the model's prior fires and is wrong."
+      :why "Prediction is cheap when it is right and expensive when it is confidently wrong."
+      :basis (:measured "2026-09-12" :detail "The corpus already shares if, let, cond, and, or, not, case, quote and lambda with Scheme, while renaming define, struct, match, begin, provide, require and field at zero token saving across 21617 uses.")
+      :practice "Align to one reference dialect rather than blending several. The Clojure binding shape was cheaper by 0.69 percent and was declined for this reason.")
+
+    (:principle :id "PortabilityIsTokenEconomy" :class :empirical :domain :language
+      :statement "A structure that cannot be understood without its origin context must be explained at every hop. A self describing structure is explained once."
+      :why "The consumers are agents exchanging structures with each other and with different models, so the preamble recurs per hop and per model while the structure is sent once."
+      :basis (:measured "2026-09-11" :detail "66 percent of qualified prefixes are one or two characters, the prefix s denotes a different module in 76 files, and 11.7 percent of 11132 uses sit more than 200 lines from the binding that gives them meaning, with a maximum of 1172.")
+      :practice "One meaning per prefix across every agent and channel; references resolvable rather than positional; extension points declared in the structure.")
+
+    (:principle :id "CoreKnowsNoExtension" :class :empirical :domain :architecture
+      :statement "The core contains no name of any package, product, directory or domain. Adding an extension is never a core change."
+      :why "A core that enumerates its clients cannot be read without learning the products built on it, and no later modularity survives it."
+      :basis (:measured "2026-09-12" :detail "The module resolver hardcodes 25 subsystem and path names including asl-sql, harness, intel, mem, vdom, voice, crawler and a blog data directory, with a rewrite turning the module name core into sql; the C host names 7 more.")
+      :practice "Four mechanisms carry extensibility: a module system, syntax extension, a host interface and declared capabilities. Everything else is a library.")
+
+    (:principle :id "TwoStrikesBeforeAbstraction" :class :normative :domain :architecture
+      :statement "Zero pre-emptive universalism. An abstraction is extracted only after two concrete instances with the same contract are in hand, and it is extracted from them rather than designed ahead of them."
+      :why "Databases and view frameworks are where a language most reliably acquires permanent clutter, because each arrival brings a reason to touch the core.")
+
+    (:principle :id "BoundaryUniversalismWithLocalAutonomy" :class :normative :domain :architecture
+      :statement "Wire protocols, escaping, delimiter balance and path normalisation are universal and live in one canonical place. Domain typestates, substrate isolation and hot inner loops stay monomorphic and local."
+      :why "A leaky generic abstraction costs more than a duplicated clear one, and the two categories are not the same problem.")
+
+    (:principle :id "DependencyFlowsOneWay" :class :empirical :domain :architecture
+      :statement "Extensions depend on core. Nothing in core depends on an extension or on a specific extension being present."
+      :why "Modularity is a direction of dependency rather than a structure, and the only way to keep it is to measure it over the resolved graph."
+      :basis (:measured "2026-09-12" :detail "The resolver assumes the sql package and the website, so neither is replaceable today."))
+
+    (:principle :id "DuplicationIsUsuallyDownstream" :class :empirical :domain :architecture
+      :statement "Before removing duplication, find out whether the system forces it. A campaign against a symptom produces more of the symptom."
+      :why "A module that cannot import must redefine what it needs."
+      :basis (:measured "2026-09-11" :detail "291 names carry 371 redundant copies, 129 across package boundaries, because import resolution fails silently. A prior remediation added canonical copies without removing any duplicate and increased duplication."))
+
+    (:principle :id "StructuralTaxIsNotOverhead" :class :empirical :domain :language
+      :statement "Explicit delimiters are the token-optimal structural encoding at this corpus depth. The 12.66 percent they cost is the cheapest available encoding, not overhead to remove."
+      :why "Three intuitive structural rewrites were measured and all three failed, and the most attractive of them measured a saving that does not exist."
+      :basis (:measured "2026-09-12" :method "cl100k_base, real rendering rather than deletion"
+              :detail "Deleting delimiters from the existing formatting appears to save 13.6 percent and produces an unparseable file. A real indentation-significant rendering that preserves the tree costs 7.7 percent more, because every level pays a newline and an indent while a closing run pays one token, the tokenizer already merging runs of one to five. Making trailing closers implicit saves 0.39 percent. Nesting reaches depth 32 with 13.4 percent of openings deeper than 8.")
+      :closes ["Indentation-significant rendering" "Delimiter removal" "Trailing-closer elision as a significant saving"]
+      :practice "Reduce depth by flattening forms, never by removing the delimiters that mark it.")
+
+    (:principle :id "MeasureTheThingNotItsProxy" :class :normative :domain :process
+      :statement "Token count, symbol surface and nesting depth are proxies for whether a model produces correct output. Where the thing itself can be measured, measure it and calibrate the proxies against it."
+      :why "A session of careful proxy measurement produced one conclusion that its own direct measurement then reversed.")
+
+    (:principle :id "DeclaredIsNotWorking" :class :empirical :domain :epistemic
+      :statement "A capability is not available because it is documented, declared in a registry, or returns a success status. Only a measured invocation establishes it."
+      :why "The instruction surface loaded into every session directs the agent to a toolchain that does not exist, and the operation that does exist returns success while answering a different question."
+      :basis (:measured "2026-09-12" :detail "asl intel, asl doc, asl task and asl doctor are all absent, and the user global rule file names asl intel outline, search, callers and impact plus asl doc outline, section and search as the priority toolchain. The rpc op :grep falls through to the find handler and answered a request for a symbol in one directory with :status ok and 319 files matching a default glob; :q does the same.")
+      :practice "Before relying on an operation, invoke it and read the result, not the status. A wrong answer with an ok status is worse than an error.")
+
+    (:principle :id "DocumentationThatMisdirectsIsWorseThanNone" :class :normative :domain :process
+      :statement "An instruction naming a path that does not exist costs more than silence, because it is followed first and fails last."
+      :why "A missing instruction leaves the reader to look. A wrong one spends a tool call, a turn and some confidence before the reader starts looking anyway, and it does so at the beginning of every session."
+      :practice "Every command named in an instruction surface is checked to exist by the same gate that renders the surface.")
+
+    (:principle :id "PurposeNotPersona" :class :normative :domain :process
+      :statement "Roles are separated by purpose and epistemic boundary, not by personality. A scout perceives and does not write, a planner decomposes and does not execute, an implementer changes only what it owns, an auditor runs the gates and does not author."
+      :why "Persona prompting showed no reliable benefit, while the separation that does work is the one that makes a party unable to grade itself.")
+
+    (:principle :id "VisibilityIsScoped" :class :normative :domain :architecture
+      :statement "An agent sees its own session when unanchored, its workspace and derived worktrees when inside one, and the whole system only from the sovereign root. Navigating inward collapses visibility back."
+      :why "Sibling repositories are context pollution, and an agent that can see everything will read everything.")
+
+    (:principle :id "ReadBySymbolAndSlice" :class :normative :domain :process
+      :statement "Load by symbol and slice rather than by file, bound every read, and continue rather than widen. Bound the output, not the completeness: a small relevant file may fit the bound whole."
+      :why "Degradation with context length is nonuniform and distractor sensitive, and a slice that arrives without its bindings is worse than a smaller slice that carries them.")
+
+    (:principle :id "OneWriterPerOwnedPartition" :class :empirical :domain :process
+      :statement "Two units of work that write one path are either ordered against each other or partitioned so the overlap disappears."
+      :why "Parallel development and shared ownership are compatible only when the ordering is computed rather than assumed."
+      :basis (:measured "2026-09-11" :detail "529 pairs of planned tasks owned a common file with no dependency ordering them, 450 of those on one file."))
+
+    (:principle :id "AStepIsATransaction" :class :normative :domain :process
+      :statement "A step has an owned write set and a closing gate. Batch independent edits inside a step; never batch steps and verify afterwards."
+      :why "An unverified sequence hides which change broke what, and the cost of finding out grows with the batch.")
+
+    (:principle :id "NumbersCarryScopeOrTheyAreNotClaims" :class :empirical :domain :process
+      :statement "A figure true of an example and false of the system is worse than no figure. Every number carries its method, its scope and its date."
+      :why "The project's own convention document leads with a reduction that is exact on its two examples and an order of magnitude smaller on the corpus."
+      :basis (:measured "2026-09-12" :detail "CamelCase measures 50.0 and 44.4 percent on the two documented identifiers and 3.06 percent across 888 files, because most identifiers are short and 41.8 percent of tokens are string literals that no naming convention reaches."))
+
+    (:principle :id "NormativeAndEmpiricalAreNotMixed" :class :normative :domain :process
+      :statement "A value may be adopted without measurement and must then be labelled as adopted. An empirical claim enters only with a measurable definition and a check that fails on the baseline."
+      :why "Stating a value as a finding is how unsourced numbers entered this system and passed review.")]
+
+  :seeAlso [(:reviews ["D81StaticSweepAudit20260911" "D81CompactionFrontier20260912" "D81ConceptReview" "D81PlanSettlement"])
+            (:rules "asl/grammar/rules.asn is the single rendered source of the operative rules; this ledger holds the reasoning those rules compress.")
+            (:practices ".asl/mem/practices.asn holds operational practice; this ledger holds principle.")
+            (:paradigms "CLAUDE.md carries the teleological mandates for scout, planner, implementer and auditor, and the visibility topology.")])

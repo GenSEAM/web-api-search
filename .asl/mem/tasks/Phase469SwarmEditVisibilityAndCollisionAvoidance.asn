@@ -1,0 +1,171 @@
+(:taskCollection
+  :id "Phase469SwarmEditVisibilityAndCollisionAvoidance"
+  :createdAt 1789300000000
+  :status "planned"
+  :priorityOrder 3
+  :summary "Swarm Edit Visibility and Collision Avoidance: peers already see each other, so add what each is holding, a subscription to peer and filesystem change, somewhere resident for it to live, and the branching merge that is already written and unused."
+  :phase "Phase469SwarmEditVisibilityAndCollisionAvoidance"
+  :baseline "Measured 2026-09-12. The swarm layer exists and executes: 308 assertions pass across ten agent-bus suites, including presence at 38 with SwarmRoom, join-swarm-room, list-room-peers, find-peer-in-room, propose-task, accept-task and format-presence-roster; bus at 22 with BusEvent, BusChannel, format-sse-event and dispatch-bus-event; transport at 36; mesh at 26; wire at 29; cluster at 24; and mvcc-bus at 23, whose module line reads Branching Causal Message DAG and Semantic Intent Merging for Multi-Agent Swarms and which declares CausalMessage, IntentConflict and MergedIntent. Four suites do not execute: browser-bridge, gateway and mesh_orchestration exit 1 with zero assertions, and tool_plane fails with ERR_UNBOUND_SYMBOL. Two capabilities are genuinely absent. Presence carries no field for what a peer is editing, holding or has claimed: a search of presence.asl for editing, current file, claim, lock or file found nothing. Filesystem change notification exists nowhere in the repository except pack/src/targets/preview_server.asl. Separately mvcc-bus declares its exports with the keyword :exports where every other module uses :x, so it is invisible to tooling that reads the export list."
+  :tasks [
+    (:task
+      :id "Task46901" :parentId "" :phase "phase-469"
+      :title "A peer publishes what it is holding, not only that it is here"
+      :kind :protocol :state :planned :lane "presence" :priority :critical :ownerRole "implementer"
+      :createdAt 1789300000000 :updatedAt 1789300000000
+      :motivation "A room, peers, a roster and task negotiation all work, and the one thing a peer cannot learn is the thing that causes collisions: what the others are touching. Measured in the plan itself, 1309 pairs of planned tasks write a common path with no ordering between them, 1096 of those on one file, so the collisions are not hypothetical and are already enumerable before anyone starts."
+      :purpose "A peer publishes its current claim: the paths it holds, whether the hold is read or write, when it was taken and when it expires. The roster shows it, so a peer about to write can see who holds the path first. The claim is advisory and expiring rather than a lock, because an agent that dies holding a lock is worse than a collision, and the lease machinery for exactly this is already built and passing at 100 assertions."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Claims published on the roster with mode and expiry" "A writer can see an existing holder before writing" "Advisory and expiring, never a blocking lock" "Built on the lease module that already passes"]
+      :owns ["agent-bus/src/presence.asl" "agent-bus/src/bus.asl"]
+      :targetSymbols ["SwarmPeer" "format-presence-roster" "list-room-peers"] :relatedSymbols ["parallel" "oneStep" "anchor"]
+      :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn ["Task46501"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46901"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["tests/acceptance/d81/Task46901.asl"]
+      :verificationCases ["A peer claiming a path appears as its holder on another peer's roster." "An expired claim stops appearing without any action by the holder." "A second writer is warned and not blocked, so a dead peer cannot stall the room."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46901" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Add the claim to the peer record." "Show it on the roster." "Expire it by lease." "Independent acceptance."] :stepIndex 0 :receipts [])
+    (:task
+      :id "Task46902" :parentId "" :phase "phase-469"
+      :title "Observability that is pulled, never pushed into context"
+      :kind :engine :state :planned :lane "subscription" :priority :critical :ownerRole "implementer"
+      :createdAt 1789300000000 :updatedAt 1789301000000
+      :motivation "Being event driven is attractive and paying for it in context is not. Measured 2026-09-12 under cl100k: one bus event costs 47 tokens as ASN and 54 framed as SSE, while asking who holds a path costs 17 tokens when the answer is nobody and 37 when it is one peer. A thirty minute session at one event a second pushes 97200 tokens into context; the same session asking before each of twenty writes pulls 740. That is a factor of 131, and the pushed tokens are paid whether or not a single event mattered. A stream is the right shape for a machine and the wrong shape for a context window."
+      :purpose "Events accumulate outside context in the spool that is already indexed, and an agent asks at the moment it matters rather than listening continuously. What enters context is a scalar, being who holds this path and until when, not the events that produced it. Aggregation and filtering happen in a tool pipeline outside the model, so an agent composes tools to obtain one number instead of reading a log to derive it. A push is permitted only where the agent asked to be woken on a named condition, and what arrives is the condition having become true, not the event that made it true."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Events held outside context and queried on demand" "A scalar answer rather than a stream" "Aggregation composed from tools, outside the model" "Push only on a named condition, carrying the condition"]
+      :owns ["agent-bus/src/bus.asl" "mem/src/spool_search.asl" "mem/src/pointer.asl" "asl/tools/asl.c"]
+      :targetSymbols ["dispatch-bus-event" "spool-query-bm25" "should-offload?" "extract-scalar-fact"] :relatedSymbols ["bounded" "budget" "context" "tools"]
+      :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn ["Task46901" "Task46703"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46902"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["tests/acceptance/d81/Task46902.asl"]
+      :verificationCases ["A thousand events occur and the querying agent context grows by the size of its answers, not by the size of the log." "A file changed by a process that never touched the bus is still visible to a query." "A condition push delivers the condition and not the events behind it." "The measured session cost is compared against the pushed equivalent and recorded."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46902" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Spool events outside context." "Answer queries as scalars." "Compose aggregation from tools." "Restrict push to named conditions." "Independent acceptance."] :stepIndex 0 :receipts [])
+    (:task
+      :id "Task46903" :parentId "" :phase "phase-469"
+      :title "Somewhere resident for the room to live"
+      :kind :architecture :state :planned :lane "residency" :priority :critical :ownerRole "planner"
+      :createdAt 1789300000000 :updatedAt 1789300000000
+      :motivation "A room, a roster, claims and a subscription all require something that outlives a single command, and the engine is invoked once per command and exits. The daemon was deliberately retired into the engine earlier in this programme, so reintroducing a separate daemon would undo that decision; mesh.asl still carries a DaemonPeer type from before it. What is needed is a decision about residency, not a new process by the old name."
+      :purpose "The decision is recorded: what holds room state between commands, how a peer joins and leaves, what happens to claims when the resident part is not running, and whether residency is optional so that a single agent working alone pays nothing for it. The answer is bound to the host interface work rather than invented separately, since where the engine runs is the same question."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["A recorded residency decision with its alternatives" "Claims behave defined when nothing is resident" "Single-agent use pays nothing" "Bound to the host interface, not a second daemon"]
+      :owns ["asl/grammar/protocol-conformance.asn" ".asl/mem/decisions" "agent-bus/src/mesh.asl"]
+      :targetSymbols ["DaemonPeer"] :relatedSymbols ["foreign" "capabilities" "edge"]
+      :invariants ["C3" "D34" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn ["Task46705"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46903"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["tests/acceptance/d81/Task46903.asl"]
+      :verificationCases ["A single agent with nothing resident completes a task with no swarm cost." "Claims taken before a restart are either restored or expired, and which one is stated." "The decision names what was rejected, including a separate daemon."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46903" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Decide residency with the host interface." "Define claim behaviour without it." "Independent acceptance."] :stepIndex 0 :receipts [])
+    (:task
+      :id "Task46904" :parentId "" :phase "phase-469"
+      :title "Give the branching merge that already works something to merge"
+      :kind :architecture :state :planned :lane "collision" :priority :high :ownerRole "implementer"
+      :createdAt 1789300000000 :updatedAt 1789300000000
+      :motivation "mvcc-bus is a branching causal message DAG with semantic intent merging, declaring CausalMessage, IntentConflict and MergedIntent, and it passes 23 assertions against nothing real. The collision problem it was written for is measured and present: 1309 unordered writer pairs across the plan. It is also invisible to tooling, because it declares its exports with :exports while every other module uses :x."
+      :purpose "Concurrent work is separated by branch and rejoined through the merge that exists: each agent's writes land on its own branch, the causal DAG records what each intended, and a conflict is surfaced as an IntentConflict naming both intents rather than as a textual collision. The export keyword is normalised so the module is visible. Whether git branches or the existing vfs fork carries this is decided by measurement of both, not by preference."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Concurrent writes separated and rejoined" "A conflict names both intents, not both texts" "mvcc-bus visible to tooling" "The carrier chosen by measurement"]
+      :owns ["agent-bus/src/mvcc_bus.asl" "mem/src/vfs_fork.asl" "mem/src/vfs_merge.asl"]
+      :targetSymbols ["CausalMessage" "IntentConflict" "MergedIntent"] :relatedSymbols ["parallel" "git" "oneStep"]
+      :invariants ["C3" "D76" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn ["Task46901" "Task45803"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46904"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["tests/acceptance/d81/Task46904.asl"]
+      :verificationCases ["Two agents editing one file on separate branches rejoin without either losing work." "Two incompatible intents produce an IntentConflict naming both, not a silent last-writer-wins." "The module is found by a tool that reads export lists."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46904" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Normalise the export keyword." "Bind the DAG to real writes." "Measure both carriers." "Independent acceptance."] :stepIndex 0 :receipts [])
+    (:task
+      :id "Task46905" :parentId "" :phase "phase-469"
+      :title "Repair the four swarm suites that do not execute"
+      :kind :remediation :state :planned :lane "repair" :priority :high :ownerRole "implementer"
+      :createdAt 1789300000000 :updatedAt 1789300000000
+      :motivation "Ten swarm suites pass 308 assertions and four run none: browser-bridge, gateway and mesh_orchestration exit 1 having executed zero assertions, and tool_plane fails with ERR_UNBOUND_SYMBOL. Gateway and mesh orchestration are exactly the paths a room depends on, so the observability being planned would rest on the untested quarter."
+      :purpose "All four execute with non zero assertion counts, and a zero assertion exit is treated as a failure in its own right rather than as an exit code to interpret."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Four suites executing with non zero assertions" "The paths a room depends on covered" "Zero-assertion exits treated as failures"]
+      :owns ["agent-bus/src" "agent-bus/tests"]
+      :targetSymbols ["route-packet" "inspect-gateway-turn" "route-tools"] :relatedSymbols ["semantics" "gates"]
+      :invariants ["D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn ["Task45405"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46905"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["tests/acceptance/d81/Task46905.asl"]
+      :verificationCases ["Each of the four reports a non zero executed assertion count." "A suite exiting zero with zero assertions fails." "The unbound symbol in tool_plane resolves to a declared module."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46905" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Diagnose each." "Bind and repair." "Require non zero assertions." "Independent acceptance."] :stepIndex 0 :receipts [])
+    (:task
+      :id "Task46906" :parentId "" :phase "phase-469"
+      :title "Measure whether seeing each other prevents anything"
+      :kind :verification :state :planned :lane "effect" :priority :critical :ownerRole "verifier"
+      :createdAt 1789300000000 :updatedAt 1789300000000
+      :motivation "Cross agent observability is plausible and unmeasured, and it costs every peer a subscription and every write a publication. This programme has already produced one confident conclusion that direct measurement reversed. The collision rate is measurable: two agents given overlapping work, with and without visibility."
+      :purpose "The same overlapping task pair runs with the room visible and hidden, and the difference is recorded: writes lost, conflicts raised, work repeated, and tasks completed. A null result is recorded and acted on, and the cost in events and calls is counted against whatever benefit appears."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["A measured collision rate with and without visibility" "Lost writes and repeated work counted, not estimated" "The cost counted against the benefit" "A null result recorded"]
+      :owns ["asl/bench" ".asl/mem/telemetry"]
+      :targetSymbols [] :relatedSymbols ["grading" "concepts" "parallel"]
+      :invariants ["D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn ["Task46902" "Task46904" "Task46304"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46906"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["tests/acceptance/d81/Task46906.asl"]
+      :verificationCases ["The two arms differ only in whether the room is visible." "A lost write is detected by comparing the tree, not by asking an agent." "A result showing no improvement passes the gate and is recorded."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46906" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Construct the overlapping pair." "Run both arms." "Count outcomes and cost." "Independent acceptance."] :stepIndex 0 :receipts [])
+    (:task
+      :id "Task46907" :parentId "" :phase "phase-469"
+      :title "Ad hoc composition: the agent builds the question it needs"
+      :kind :tooling :state :planned :lane "subscription" :priority :high :ownerRole "implementer"
+      :createdAt 1789301000000 :updatedAt 1789301000000
+      :motivation "No fixed set of queries anticipates what an agent will want to know, and adding a command per question is how a tool surface grows until it costs as much as the log it replaced. The alternative is composition: a short script or a pipe of existing operations folds the data outside the model and only the result crosses into context. The batch rpc form already demonstrates the shape by answering several questions in one roundtrip."
+      :purpose "An agent composes a one off query over the event spool and the module graph from the operations that exist, in one roundtrip, with the reduction performed outside the model. The composition is bounded, its output is capped, it states when it truncated, and a composition whose result would be a log rather than an answer is refused rather than served."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Ad hoc composition over spool and graph" "Reduction outside the model" "Bounded output that reports truncation" "A log shaped result refused"]
+      :owns ["asl/tools/asl.c" "asl/grammar/rpc.asn" "asl/packages/asl-sh/src"]
+      :targetSymbols ["rpc"] :relatedSymbols ["tools" "bounded" "budget"]
+      :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn ["Task46902" "Task46703"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46907"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["tests/acceptance/d81/Task46907.asl"]
+      :verificationCases ["A question with no dedicated command is answered by composition in one roundtrip." "A composition whose result would exceed the bound is truncated and says so." "A composition returning raw events rather than a reduction is refused."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46907" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Allow composition over spool and graph." "Bound and report truncation." "Refuse log shaped results." "Independent acceptance."] :stepIndex 0 :receipts [])]
+  :notes "The swarm layer is built and mostly passing. What is absent is narrow: a peer cannot say what it is holding, nothing watches the disk, nothing is resident to hold a room, and the branching merge written for exactly this collision problem has never been connected to a real write.")

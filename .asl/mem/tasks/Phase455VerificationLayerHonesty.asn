@@ -1,0 +1,244 @@
+(:taskCollection
+  :id "Phase455VerificationLayerHonesty"
+  :createdAt 1789157400000
+  :status "planned"
+  :priorityOrder 3
+  :summary "Verification Layer Honesty: no command reports a result it did not compute, no flag is inert, no invocation succeeds without executing, and every gate is itself proved able to fail."
+  :phase "Phase455VerificationLayerHonesty"
+  :baseline "Measured 2026-09-11: asl.c:3420 returns 0 without executing when asl test is given no path; asl.c:3393 is the only occurrence of --strict-falsify and it is a continue; asl.c:2433 counts assertions with strstr over file text and asl.c:2654 prints them as evaluated assertions verified; asl.c:2655 prints 100.0 percent and 1599/1599 and 120/120 with zero format arguments; asl check accepts unescaped double quotes inside ASN strings and reports syntax integrity verified cleanly; each checked file prints its clean line twice."
+  :tasks [
+    (:task
+      :id "Task45501"
+      :parentId ""
+      :phase "phase-455"
+      :title "asl test with no path executes or fails, never returns a silent zero"
+      :kind :engine
+      :lane "honesty"
+      :state :planned
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789157400000
+      :updatedAt 1789157400000
+      :motivation "asl.c:3420 walks the whole workspace, collects every matching test file into a buffer, frees the buffer and returns 0 while printing nothing. The work of finding the suites is performed and the result is discarded. This is the branch reached by the Phase435 gate, which is written as asl test --strict-falsify with no path, so that gate cannot fail under any condition. The same gap is recorded at GAPS.asn line 271 and was declared closed without being closed."
+      :purpose "An invocation with no path executes the discovered suites and reports them, or exits non zero stating that it will not run without a target. Silence with exit 0 is not a reachable outcome."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["No path either executes the corpus or exits non zero" "Phase435 style gates can fail" "Discovery result is used rather than freed"]
+      :owns ["asl/tools/asl.c"]
+      :targetSymbols ["main" "walk_dir_recursive" "find_walker_cb"]
+      :relatedSymbols ["gates" "budget"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn []
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45501"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task45501.asl"]
+      :verificationCases ["With a failing suite present in the tree, the no path invocation exits non zero." "The no path invocation produces output naming what it did." "Exit 0 with empty output is not producible."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45501" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Use the discovery result." "Decide execute or refuse." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task45502"
+      :parentId ""
+      :phase "phase-455"
+      :title "No inert flags: strict-falsify either changes behaviour or is removed"
+      :kind :engine
+      :lane "honesty"
+      :state :planned
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789157400000
+      :updatedAt 1789157400000
+      :motivation "--strict-falsify occurs exactly once in asl.c, at line 3393, inside a loop that skips it. It sets no variable and reaches no other code. Fourteen planned task gates and the global ground truth rule are written around a flag that has never done anything, and the runner message still announces failure under --strict-falsify for runs where the flag was absent."
+      :purpose "The flag names a real behaviour, requiring each executed suite to have at least one assertion or refutation that actually ran and failing the run otherwise, or it is deleted from the binary, the rules and every gate in one change. An argument the binary accepts and ignores is a defect in its own right, so unknown and inert flags are rejected."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["The flag has a defined, tested effect or is gone everywhere at once" "Accepted but ignored arguments are rejected" "Runner messages describe the run that happened"]
+      :owns ["asl/tools/asl.c" "scripts/run-gate-tests.sh" "asl/grammar/rules.asn"]
+      :targetSymbols ["main"]
+      :relatedSymbols ["gates" "ssot"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task45501"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45502"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task45502.asl"]
+      :verificationCases ["If kept: a suite with zero executed assertions passes without the flag and fails with it." "If removed: the token appears nowhere in the binary, the rules or any gate." "An unrecognised flag exits non zero rather than being treated as a path or skipped."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45502" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Decide keep or remove." "Apply across binary, rules and gates in one change." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task45503"
+      :parentId ""
+      :phase "phase-455"
+      :title "Gate 5 reports assertions that ran, not occurrences of the word"
+      :kind :engine
+      :lane "honesty"
+      :state :planned
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789157400000
+      :updatedAt 1789157400000
+      :motivation "run_gate_5_suites at asl.c:2433 opens each test file and counts occurrences of the text (assert with strstr, then asl.c:2654 prints the total as evaluated assertions verified across suites. Nothing was evaluated and nothing was verified: a commented out assertion, an assertion in a function no caller reaches and an assertion inside a suite that aborts on its first line all count the same. The evaluator already maintains a real counter and prints it per file, so the honest number exists and is discarded."
+      :purpose "Gate 5 aggregates the counters the evaluator emits per suite and reports suites executed, assertions executed and refutations executed. A suite that aborts contributes what it actually ran and is listed as aborted."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Counts come from execution" "Aborted suites are visible rather than averaged in" "The printed sentence describes what was measured"]
+      :owns ["asl/tools/asl.c" "scripts/run-gate-tests.sh"]
+      :targetSymbols ["run_gate_5_suites" "assertionCount"]
+      :relatedSymbols ["gates" "output"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task45406"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45503"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task45503.asl"]
+      :verificationCases ["A suite whose assertions are unreachable reports zero executed while its file still contains the text." "A suite aborting midway reports the assertions it reached and is marked aborted." "The reported total equals the sum of the per suite counters."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45503" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Emit per suite counters from the runner." "Aggregate in gate 5." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task45504"
+      :parentId ""
+      :phase "phase-455"
+      :title "No output may state a result the program did not compute"
+      :kind :engine
+      :lane "honesty"
+      :state :planned
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789157400000
+      :updatedAt 1789157400000
+      :motivation "asl.c:2655 prints Gate 5 anti-weakening invariant verified: 100.0 percent multi-case qualified with 1599 of 1599 tests and a core tier of 120 of 120, using a printf with zero format arguments. Every figure in that sentence is a string literal. The line is printed unconditionally whenever the preceding call returns zero, so the invariant is announced by a program that never evaluates it. Three neighbouring lines assert zero collisions, a zero comment invariant and a zero emoji invariant in the same shape. The same pattern reaches the consistency audit: asl.c:3035 initialises phase_count to the literal 39, prints it as the number of phases catalogued, and reuses it at asl.c:3097 as the number of well-formed falsifiable gates, while the roadmap held 58 phase rows."
+      :purpose "A line that states a quantity or an invariant prints values the run computed. Where a check is not implemented, the output says so rather than claiming a result, and a check that cannot be performed is an error rather than a silent pass."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Every reported quantity is a computed value" "Unimplemented checks say so" "A gate line cannot outlive the check it describes"]
+      :owns ["asl/tools/asl.c"]
+      :targetSymbols ["run_gate_5_suites" "run_gate_6_grammar" "run_gate_7_skills"]
+      :relatedSymbols ["gates" "concepts" "output"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task45503"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45504"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task45504.asl"]
+      :verificationCases ["Changing the corpus changes every reported figure that describes the corpus." "A source scan finds no output line stating a ratio or a percentage without a corresponding format argument." "Removing a check removes or falsifies its line rather than leaving it standing."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45504" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Enumerate result claiming output lines." "Bind each to a computation or retire it." "Add the source scan." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task45505"
+      :parentId ""
+      :phase "phase-455"
+      :title "asl check rejects unescaped quotes inside ASN strings and stops printing twice"
+      :kind :engine
+      :lane "honesty"
+      :state :planned
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789157400000
+      :updatedAt 1789157400000
+      :motivation "A file containing an unescaped double quote inside a string literal passes asl check with the message delimiter balance and syntax integrity verified cleanly. This is the defect that reached Phase436 and Phase438 motivation text and had to be repaired by hand, and the checker that exists to catch it declared it clean. Separately, each checked file prints its clean line twice, which makes checker output an unreliable basis for counting."
+      :purpose "The checker validates string literal termination as well as delimiter balance, names the file and line on failure, and prints one line per file."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Unescaped quotes inside strings fail the check" "One line per file" "The ledger files that carry prose are actually protected"]
+      :owns ["asl/tools/asl.c"]
+      :targetSymbols ["check_file_delimiters"]
+      :relatedSymbols ["gates" "output"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task45501"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45505"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task45505.asl"]
+      :verificationCases ["The exact Phase436 motivation string before its repair fails the check." "A correctly escaped quote inside a string passes." "A clean file produces exactly one output line."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45505" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Track string state in the scanner." "Fix the duplicated report." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task45506"
+      :parentId ""
+      :phase "phase-455"
+      :title "Every gate is proved able to fail, by seeding the defect it claims to catch"
+      :kind :verification
+      :lane "honesty"
+      :state :planned
+      :priority :critical
+      :ownerRole "verifier"
+      :createdAt 1789157400000
+      :updatedAt 1789157400000
+      :motivation "Three separate gates were green while the condition they describe was false, and none of them was ever run against a defect. A gate that has never failed is an untested branch, and the project has been treating untested branches as evidence. The runner swallow survived because no case ever asked whether a real failure reaches the report."
+      :purpose "Each of the seven gates and each acceptance gate carries a seeded defect fixture that it must reject. The suite runs the gate against the seeded tree, requires a non zero exit, then against the clean tree, requires zero, and a gate that passes the seeded tree is itself a failure."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["A seeded defect per gate" "A gate that cannot fail is reported as broken" "The meta suite runs in the same command as the gates"]
+      :owns ["tests/acceptance/d81" "scripts/run-gate-tests.sh"]
+      :targetSymbols ["run_gate_5_suites" "run_gate_6_grammar" "run_gate_7_skills"]
+      :relatedSymbols ["gates" "grading" "hiddenTests"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task45504"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45506"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task45506.asl"]
+      :verificationCases ["Restoring the pre-fix run-gate-tests.sh makes the meta suite fail, because the gate stops detecting the seeded failure." "A gate whose check is deleted fails the meta suite even though its own output is unchanged." "The seeded tree is never left behind after a run."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45506" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Seed one defect per gate." "Run each gate against seeded and clean trees." "Wire into the gate command." "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])]
+  :notes "The runner swallow that hid 136 failures was repaired on 2026-09-11 outside this phase, with a recorded falsification: original exit 0 reporting 0 failures, patched exit 1 reporting 136. Task45506 exists so that repair cannot silently regress.")

@@ -1,0 +1,65 @@
+(:review
+  :id "D83WholeRepositoryAudit20260912"
+  :kind :wholeRepositoryGapAudit
+  :measuredAt "2026-09-12"
+  :scope "Root repository plus 18 Git subrepositories: 2021 tracked files, 315 ASL test files, and current working-tree state"
+  :method "Repository inventory, ASL RPC structural reads, independent read-only scouts, direct test execution, strict gate execution, binary provenance, and targeted source verification"
+  :coverage (:trackedFiles 2021 :repositories 19 :testFiles 315 :fullRunnerFailures 32 :filesModified 0)
+  :verification
+    (:consistencyAudit :exitCode 0 :note "Reports balanced ASN and reconciled ledgers, but uses hard-coded phase and milestone counts in asl/tools/asl.c")
+    (:strictFullRunner :command "./scripts/run-gate-tests.sh" :exitCode 1 :failures 32 :note "The full test corpus is not green")
+    (:gateAudit :command "asl audit gates" :exitCode 0 :note "Uses an installed binary that is not byte-identical to root bin/asl and reports a narrower/stale test scope")
+    (:syntax :note "The gate reports 898 ASL files structurally balanced")
+  :findings [
+    (:finding :id "D83-F01" :severity :critical :area :verification
+      :evidence ["asl/tools/asl.c:2654 invokes the gate runner with workspace scope ."
+                 "PATH asl is /Users/purplelephant/.local/bin/asl; its digest differs from root bin/asl"
+                 "./scripts/run-gate-tests.sh reports 32 failing suites while asl audit gates exits 0"]
+      :impact "Green verification does not establish whole-repository health")
+    (:finding :id "D83-F02" :severity :critical :area :execution
+      :evidence ["harness/src/coding.asl:133-155 returns successful fs-read, fs-write, fs-list, exec-cmd, ast-search, and intel-query results without performing the operations"
+                 "asl/packages/asl-sh/src/core/process.asl:111-118 returns exit code 0 and empty output without executing a process"
+                 "agent/src/agent.asl:118-139 builds a successful StepResult after host-call errors"]
+      :impact "The system can certify actions that never happened")
+    (:finding :id "D83-F03" :severity :critical :area :security
+      :evidence ["browser-plugin/src/background.asl:12-50 dispatches actions based on string presence and does not invoke a safety gate"
+                 "browser-plugin/src/runtime.asl:124-127 ignores payload and returns a synthetic ping result"
+                 "agent/src/policy.asl:105-155 authorizes paths with string prefix matching"
+                 "asl-contracts/src/tool_plane.asl:91-112 authorizes empty repository and role contexts"]
+      :impact "Untrusted or malformed requests can cross authorization boundaries")
+    (:finding :id "D83-F04" :severity :high :area :moduleResolution
+      :evidence ["The full runner reports unresolved modules posts, core/process, mem/src/xref, examples/blink, daemon, asl/packages/asl-compiler/src/compact_rewrite, and api/packages"
+                 "agent-bus/src/tool_plane.asl:11 imports contract functionality while agent-bus/manifest.asn:7 declares no dependency"
+                 "harness/src/onion/middleware.asl:4 imports an unresolved namespace"]
+      :impact "Cross-package functionality and tests are unreachable or fail at call sites")
+    (:finding :id "D83-F05" :severity :high :area :functionalCorrectness
+      :evidence ["harness/src/verifier.asl:35 counts angle brackets instead of validating tag nesting"
+                 "harness/src/compactor.asl:53-58 keeps the oldest turns instead of the most recent turns"
+                 "asl/packages/asl-text/src/string.asl:52-55 exposes a two-argument concat while codec callers pass multiple arguments"
+                 "web-api-search/src/engine.asl:51-53 replaces spaces but does not percent-encode query characters"
+                 "crawler/src/crawler.asl:29,69 computes byte-count from string length"]
+      :impact "Valid inputs are rejected, invalid inputs pass, or outputs are semantically wrong")
+    (:finding :id "D83-F06" :severity :high :area :contracts
+      :evidence ["asl-contracts/src/spec.asl:27-31 checks address prefix and length but not hexadecimal characters"
+                 "voice/src/intent_cleaner.asl:40 and voice/src/endturn.asl:174 fail their own tests"
+                 "asl/packages/asl-sh/src/reducer.asl:205-219 treats diagnostic FAILED lines as section headers"
+                 "mem/src/roadmap.asl:85-100 omits lease state from serialized roadmap output"]
+      :impact "Public contracts and persisted state are not round-trippable or correctly enforced")
+    (:finding :id "D83-F07" :severity :moderate :area :governanceDrift
+      :evidence ["asl/.asl.config.asn:38-49 declares asl coverage, but the CLI rejects coverage"
+                 "bin/asl-skills:3 invokes asl skill install, but the CLI rejects skill"
+                 "asl-gateway/README.md:83-107 documents binaries absent from the repository"
+                 "asl/AGENTS.md:59-75 documents RPC behavior contradicted by the active asl-toolbelt"]
+      :impact "Declared workflows cannot be reproduced from repository instructions")
+    (:finding :id "D83-F08" :severity :moderate :area :languageHygiene
+      :evidence ["Legacy @d-..., d-...., c-...., and r-.... references remain across source, tests, docs, and skills despite the bare-shortcode policy"
+                 "Existing GAPS.asn has no per-finding status field, so closure claims cannot be independently reconciled"]
+      :impact "Policy migration and remediation status remain ambiguous")]
+  :priorities [
+    "Use one repository-built binary and make Gate 5 execute the complete corpus"
+    "Remove fake-success process and tool implementations"
+    "Enforce canonical path and tool authorization at every runtime boundary"
+    "Repair module resolution and dependency declarations"
+    "Fix failing functional contracts, then reconcile docs and ledgers"]
+  :verdict :actionRequired
+  :summary "The repository is structurally parseable but functionally non-green. The most serious gap is verification trust: the full runner fails while the installed gate binary reports success on a narrower or stale view.")
