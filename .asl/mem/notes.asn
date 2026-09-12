@@ -1460,6 +1460,7 @@
       :tags [:supervision :phase445 :task44504 :coverage-report :runtime-only :doctor :gate7 :approved]
       :fact "task44504-and-phase445-certified-complete"
       :evidence "Implemented confirmation-coverage rows across rules, invariants, decisions, and capabilities in asl.c run_doctor; distinguished runtimeOnly rules (budget, edge) from advisory rules; enforced missing :check defense in Gate 7; verified 28 non-vacuous assertions; passed SuperviseGate.sh; all 4 tasks of Phase445 certified complete"
+      :consequence "Task44504 certified complete; Phase 445 Static Confirmation Coverage fully certified under ADR-0081")
     (:note
       :id "n132"
       :author "codex"
