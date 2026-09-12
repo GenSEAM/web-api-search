@@ -91,12 +91,12 @@
       :phase "phase-460"
       :title "Take Racket's module system as the design for resolution"
       :kind :language
-      :state :planned
+      :state :completed
       :lane "concepts"
       :priority :critical
       :ownerRole "planner"
       :createdAt 1789240000000
-      :updatedAt 1789240000000
+      :updatedAt 1789425000000
       :motivation "The most expensive defect measured in this repository is that a module which does not resolve is skipped in silence, and the resolver is a ladder of about 25 hardcoded path guesses. Racket settled this in the late nineteen nineties: a module path denotes a module, resolution is performed by a module name resolver against declared collection roots, a module that cannot be found is a compile time error, and a module is instantiated once and cached. Task45401 and Task45402 are about to reinvent this, and there is no reason to reinvent it badly when the reference design is public and forty years of Scheme experience stand behind it."
       :purpose "Task45401 and Task45402 are specified against Racket's module semantics rather than improvised: a module path resolves through a declared root set with no positional guessing, resolution failure is an error at the requiring site, instantiation happens once per resolved path, and cycles are detected and reported rather than silently truncated."
       :context (:contractRef D81PlanContext)
@@ -117,13 +117,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46003.asl"]
       :verificationCases ["A cyclic require is reported as a cycle naming the path, not silently truncated by a loading set." "A module instantiated from two requiring sites is instantiated once and both see the same bindings." "A module path that denotes nothing is an error at the requiring site."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46003" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46003" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define racketModuleResolution semantic")
+      :historicalReceipts ["rc-task46003-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Write the resolution specification against the reference." "Bind Task45401 and Task45402 to it." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task46003-verified-20260912"])
     (:task
       :id "Task46004"
       :parentId ""

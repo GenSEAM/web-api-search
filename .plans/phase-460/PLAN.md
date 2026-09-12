@@ -36,14 +36,15 @@ Align AgentScript core forms with Scheme and Racket conventions where measured t
   2. Ground 5,249 uses and recorded rejection of 0.69% Clojure binding trade to maintain single-reference dialect alignment.
   3. Verify all 3 stages of `SuperviseGate.sh Task46002` (17 assertions executed cleanly).
 
-### Step 3: Task46003 — Racket Module System Design for Resolution
+### Step 3: Task46003 — Racket Module System Design for Resolution [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46003.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46003`
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define racketModuleResolution semantic`.
 - Owned Files: `asl/grammar/language-semantics.asn`, `asl/grammar/dependency-boundaries.asn`.
 - Implementation:
-  1. Define `racketModuleResolution` semantics with cycle detection and single instantiation.
-  2. Bind Task45401 and Task45402 to the formal resolution specification.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46003`.
+  1. Define `racketModuleResolution`, `moduleCycleDetection`, and `singleModuleInstantiation` semantics in `asl/grammar/language-semantics.asn`.
+  2. Specify `collectionRoots` in `asl/grammar/dependency-boundaries.asn`.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46003` (20 assertions executed cleanly).
 
 ### Step 4: Task46004 — Source Location Tracking (Syntax Objects)
 - Fixture: `tests/acceptance/d81/Task46004.asl`

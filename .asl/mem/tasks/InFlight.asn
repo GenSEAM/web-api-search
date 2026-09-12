@@ -1,14 +1,14 @@
 (:in-flight
-  :session-id ""
+  :session-id "57abefd4-689b-44f0-8084-f5b1813fae50"
   :lane ""
-  :activePhase ""
+  :activePhase "phase-460"
   :activeTasks []
-  :dispatchedAt 0
+  :dispatchedAt 1789425100000
   :status "idle"
   :handoffId ""
   :handoffCheckpoint 0
   :sourceDigest ""
-  :authoritativeConstraints []
+  :authoritativeConstraints ["D81" "C3" "D34"]
   :unresolvedQuestions []
   :negativeFindings []
   :receiptReferences []
