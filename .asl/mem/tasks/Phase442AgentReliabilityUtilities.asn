@@ -248,11 +248,11 @@
       :title "Append-only session trace: every op, gate and mutation with digests"
       :kind :protocol
       :lane "observability"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789139870800
-      :updatedAt 1789139870800
+      :updatedAt 1789403800000
       :motivation "Measured 2026-09-11: .asl/mem/trace.asn is a twenty-line static matrix that no code writes to, so no stage can answer what actually happened. Reflection had to be reconstructed by re-reading a conversation, and a reverted 1220-line removal was discovered only by chance an hour later. Without an observation log, planning, reflection and verification each rely on the model remembering, which is the failure mode being engineered against."
       :purpose "Every RPC op, gate run and file mutation appends one bounded ASN record to the session trace: timestamp, session, step, op, target, before and after digest, exit status and duration. (:trace [:since N] [:op X] [:limit N]) reads it back. The trace is the shared substrate that plan verify, watch, the gap report and receipts all read; no stage recomputes state from memory."
       :context (:contractRef D81PlanContext)
@@ -273,13 +273,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44207.asl"]
       :verificationCases ["A mutation records both digests and a later external change is visible as a digest mismatch in the trace; a rejected op records the rejection, not a gap." "Reading the trace never rewrites it and respects :limit."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44207" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44207" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44207" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44207" :assertCount 15 :at 1789403800000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes an op sequence with known digests." "Implement append with before and after digests." "Implement bounded query." "Rotate on size." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44208"
       :parentId ""
