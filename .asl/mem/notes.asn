@@ -1141,5 +1141,15 @@
       :fact "phase459-certified-complete"
       :evidence "Authored groundedNumericClaims and dualScopeCompactionReport semantics in asl/grammar/language-semantics.asn; corrected D51 claim across TOKEN_CONVENTIONS.md, asl/grammar/rules.asn, and AGENTS.md to state 44-50% per long identifier and 3.06% corpus-wide on 888 files under cl100k; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 27 executed assertions; all 6 tasks (Task45901..Task45906) verified with 125 total assertions; Phase 459 marked done in roadmap.asn; receipts indexed in receipts.asn"
       :consequence "Task45906 and Phase 459 Language Compaction and Predictability 100% verified and certified under ADR-0081")
+    (:note
+      :id "n100"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "tests/acceptance/d81/Task46001.asl" ".asl/mem/tasks/Phase460SchemeAlignmentAndRacketConcepts.asn"]
+      :tags [:supervision :phase460 :task46001 :scheme-alignment :core-forms :zero-cost :approved]
+      :fact "task46001-certified-complete"
+      :evidence "Authored schemeCoreFormsAlignment and zeroCostAbbreviationRetirement semantics in asl/grammar/language-semantics.asn; grounded 16041 uses across 11 core single-token forms (define, struct, enum, lambda, match, begin, provide, require, field, string, null) with zero token delta; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 17 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46001 100% verified and certified; core forms aligned with Scheme spellings at measured zero token cost under ADR-0081")
   ]
 )

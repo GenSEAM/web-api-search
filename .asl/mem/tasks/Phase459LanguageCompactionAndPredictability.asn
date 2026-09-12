@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase459LanguageCompactionAndPredictability"
   :createdAt 1789160000000
-  :status "planned"
+  :status "done"
   :priorityOrder 1
   :summary "Language Compaction and Predictability: one name per concept, the measured 3.38 percent of syntax compaction actually available, opaque aliases retired at a deliberate token cost, and symbol surface tracked as the quantity that governs model accuracy."
   :phase "Phase459LanguageCompactionAndPredictability"

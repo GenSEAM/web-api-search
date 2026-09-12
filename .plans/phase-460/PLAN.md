@@ -1,0 +1,72 @@
+# Phase 460 Plan: Scheme Alignment and Racket Concepts
+
+## Status
+- **Phase**: Phase460SchemeAlignmentAndRacketConcepts
+- **Priority**: High Architectural & Language Alignment
+- **Status**: in-progress
+
+## Context & Objectives
+Align AgentScript core forms with Scheme and Racket conventions where measured token cost is zero, adopt Racket designs for module resolution, syntax locations, and blame-assigning contracts, while strictly excluding Racket from the deployed runtime:
+1. Rename core forms to Scheme spellings at measured zero token cost (`define`, `struct`, `enum`, `lambda`, `match`, `begin`, `provide`, `require`, `field`, `string`, `null`).
+2. Adopt Racket binding shape `(let ([a 1] [b 2]) body)` and decline Clojure shape, recording the 0.69% measured trade.
+3. Adopt Racket module system as the reference design for resolution and cycle detection.
+4. Attach source location (source, line, col) to every AST form like syntax objects for precise blame attribution.
+5. Introduce contracts with blame on boundaries (precondition blames caller, postcondition blames definition).
+6. Record architectural decision: Racket is reference and optional development oracle, never a deployed runtime dependency.
+
+## Work Breakdown & Ordered DAG
+
+### Step 1: Task46001 — Rename Core Forms to Scheme Spellings [COMPLETED & CERTIFIED]
+- Fixture: `tests/acceptance/d81/Task46001.asl`
+- Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46001`
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define schemeCoreFormsAlignment semantic`.
+- Owned Files: `asl/grammar/language-semantics.asn`, `asl/grammar/grammar.asn`, `asl/tools/engine_js.h`, `asl/packages`, `harness/src`, `intel/src`, `mem/src`, `agent-core/src`.
+- Implementation:
+  1. Define `schemeCoreFormsAlignment` and `zeroCostAbbreviationRetirement` semantics in `asl/grammar/language-semantics.asn`.
+  2. Ground 16,041 uses across 11 core single-token forms (`define`, `struct`, `enum`, `lambda`, `match`, `begin`, `provide`, `require`, `field`, `string`, `null`) with zero token delta in Phase 460 task file.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46001` (17 assertions executed cleanly).
+
+### Step 2: Task46002 — Adopt Racket Binding Shape
+- Fixture: `tests/acceptance/d81/Task46002.asl`
+- Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46002`
+- Owned Files: `asl/grammar/language-semantics.asn`, `asl/tools/engine_js.h`, `asl/packages`, `harness/src`.
+- Implementation:
+  1. Define `racketBindingShape` semantics and record rejection of 0.69% Clojure binding trade.
+  2. Verify Racket binding parser and reader acceptance.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46002`.
+
+### Step 3: Task46003 — Racket Module System Design for Resolution
+- Fixture: `tests/acceptance/d81/Task46003.asl`
+- Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46003`
+- Owned Files: `asl/grammar/language-semantics.asn`, `asl/grammar/dependency-boundaries.asn`.
+- Implementation:
+  1. Define `racketModuleResolution` semantics with cycle detection and single instantiation.
+  2. Bind Task45401 and Task45402 to the formal resolution specification.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46003`.
+
+### Step 4: Task46004 — Source Location Tracking (Syntax Objects)
+- Fixture: `tests/acceptance/d81/Task46004.asl`
+- Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46004`
+- Owned Files: `asl/tools/engine_js.h`, `asl/tools/asl.c`.
+- Implementation:
+  1. Define `sourceLocationPreservation` semantics ensuring reader and evaluator retain line/column/source.
+  2. Connect diagnostic error reporting to syntax object positions.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46004`.
+
+### Step 5: Task46005 — Contracts with Blame
+- Fixture: `tests/acceptance/d81/Task46005.asl`
+- Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46005`
+- Owned Files: `asl/grammar/verification-contract.asn`, `asl/tools/engine_js.h`, `asl/packages/asl-gates/src`.
+- Implementation:
+  1. Define `contractBlameAttribution` semantics (precondition blames caller, postcondition blames definition).
+  2. Connect structured gate findings to contract violation reports.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46005`.
+
+### Step 6: Task46006 — Record Decision: Racket as Reference, Not Deployment Runtime
+- Fixture: `tests/acceptance/d81/Task46006.asl`
+- Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46006`
+- Owned Files: `.asl/mem/decisions`, `asl/grammar/dependency-boundaries.asn`, `asl/grammar/rules.asn`.
+- Implementation:
+  1. Record architectural decision in `.asl/mem/decisions/` and `intent.asn`.
+  2. Update boundary check in `dependency-boundaries.asn` and `rules.asn`.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46006`.

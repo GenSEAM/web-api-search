@@ -13,12 +13,12 @@
       :phase "phase-460"
       :title "Rename the core forms to their Scheme spellings, at zero token cost"
       :kind :language
-      :state :planned
+      :state :completed
       :lane "alignment"
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789240000000
-      :updatedAt 1789240000000
+      :updatedAt 1789424300000
       :motivation "A byte pair tokenizer assigns a single token to define, struct, match, begin, provide, require, lambda and string precisely because those words are frequent in the code it was trained on, and that same frequency is what gives a model its prior. Abbreviating them therefore loses the prior and saves nothing: measured, the abbreviation is worth zero tokens across 21617 uses. The present surface is the worst available position, a language that looks like a Lisp so the model predicts Lisp forms, while every form is renamed so the predictions are wrong. Correcting it is free."
       :purpose "The core forms carry their Scheme and Racket spellings wherever the spelling is measured at one token: define, struct, enum, lambda, match, begin, provide, require, field, string, null. try is retained against with-handlers, which measures three tokens: a rename that raises cost is refused even when it improves family consistency, because measured token count decides and pattern does not. The abbreviated spellings are removed rather than aliased. true and false stay as they are, being valid Racket bindings and cheaper than the hash forms. The abbreviated family is not uniform today: df and dfs are one token while dfl, dfn and dfe are two, splitting as d plus fl, df plus n and d plus fe. Every corresponding full word is one token: define, struct, enum, lambda, list, name, type, proc. A uniformly single-token and uniformly transparent family is therefore available at the full words. A uniformly two-word family is also consistent and costs two to three tokens per use, define-function at two and define-struct at three, which on the 6881 uses of df is 0.45 percent of the corpus; it is recorded as the priced alternative rather than adopted. The docstring keyword stays, being one token against two for any comment form."
       :context (:contractRef D81PlanContext)
@@ -39,13 +39,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46001.asl"]
       :verificationCases ["An abbreviated spelling fails rather than resolving through an alias." "Executed assertion count is unchanged across the rename, so nothing was silently unbound." "The recomputed token total moves by less than one tenth of a percent, confirming the rename was free rather than assumed free." "A spelling inside a string literal is not rewritten."]
-      :gateReadiness :baselineEstablished
+      :gateReadiness :verified
       :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46001" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define schemeCoreFormsAlignment semantic")
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :historicalReceipts ["rc-task46001-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Fix the mapping." "Rewrite mechanically in one pass with the CamelCase conversion." "Recompute and record." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task46001-verified-20260912"])
     (:task
       :id "Task46002"
       :parentId ""
