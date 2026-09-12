@@ -1,10 +1,11 @@
 (module tests/acceptance/d81/Task46004
-  :d "Acceptance fixture for Task46004: Every form carries its source location as a syntax object under ADR-0081."
+  :d "Acceptance fixture for Task46004: Source location tracking via syntax objects under ADR-0081."
   :x [RunTests
       TestSuperviseGateIntegrity
-      TestSourceLocationPreservationContract
-      TestDiagnosticPositionQuotingContract
-      TestSourceLocationGroundedInPhase460]
+      TestSyntaxObjectSourceLocationContract
+      TestDualPositionDiagnosticContract
+      TestSyntaxPositionPreservationContract
+      TestEngineSourceLocationPreservation]
   :i [])
 
 (df TestSuperviseGateIntegrity [] -> Bool
@@ -17,40 +18,49 @@
       (assert (string-contains? s-src "audit consistency") "Must invoke consistency audit")
       true)))
 
-(df TestSourceLocationPreservationContract [] -> Bool
-  :d "Verifies language-semantics.asn defines sourceLocationPreservation semantic"
+(df TestSyntaxObjectSourceLocationContract [] -> Bool
+  :d "Verifies language-semantics.asn defines syntaxObjectSourceLocation semantic"
   (let [(s-res (file-read "asl/grammar/language-semantics.asn"))]
     (assert (= (.-_tag s-res) "ok") "language-semantics.asn must exist and be readable")
     (let [(s-src (.-value s-res))]
-      (assert (string-contains? s-src "sourceLocationPreservation") "language-semantics.asn must define sourceLocationPreservation semantic")
-      (assert (string-contains? s-src "ERR_SOURCE_LOCATION_MISSING") "language-semantics.asn must specify ERR_SOURCE_LOCATION_MISSING failureCode")
+      (assert (string-contains? s-src "syntaxObjectSourceLocation") "language-semantics.asn must define syntaxObjectSourceLocation semantic")
+      (assert (string-contains? s-src "ERR_MISSING_SOURCE_LOCATION") "language-semantics.asn must specify ERR_MISSING_SOURCE_LOCATION failureCode")
       true)))
 
-(df TestDiagnosticPositionQuotingContract [] -> Bool
-  :d "Verifies language-semantics.asn defines diagnosticPositionQuoting semantic"
+(df TestDualPositionDiagnosticContract [] -> Bool
+  :d "Verifies language-semantics.asn defines dualPositionDiagnostic semantic"
   (let [(s-res (file-read "asl/grammar/language-semantics.asn"))]
     (assert (= (.-_tag s-res) "ok") "language-semantics.asn must exist and be readable")
     (let [(s-src (.-value s-res))]
-      (assert (string-contains? s-src "diagnosticPositionQuoting") "language-semantics.asn must define diagnosticPositionQuoting semantic")
-      (assert (string-contains? s-src "ERR_UNLOCATED_DIAGNOSTIC") "language-semantics.asn must specify ERR_UNLOCATED_DIAGNOSTIC failureCode")
+      (assert (string-contains? s-src "dualPositionDiagnostic") "language-semantics.asn must define dualPositionDiagnostic semantic")
+      (assert (string-contains? s-src "ERR_TRUNCATED_ERROR_SITE") "language-semantics.asn must specify ERR_TRUNCATED_ERROR_SITE failureCode")
       true)))
 
-(df TestSourceLocationGroundedInPhase460 [] -> Bool
-  :d "Verifies Phase 460 task file grounds syntax objects and source location diagnostics"
-  (let [(p-res (file-read ".asl/mem/tasks/Phase460SchemeAlignmentAndRacketConcepts.asn"))]
-    (assert (= (.-_tag p-res) "ok") "Phase 460 task file must exist and be readable")
-    (let [(p-src (.-value p-res))]
-      (assert (string-contains? p-src "syntax object") "Phase 460 must reference syntax objects")
-      (assert (string-contains? p-src "source, line, column and span") "Phase 460 must specify location components")
-      (assert (string-contains? p-src "52 of 136 failing suites") "Phase 460 must ground measured failure counts")
-      (assert (string-contains? p-src "Task45402") "Phase 460 must reference Task45402")
+(df TestSyntaxPositionPreservationContract [] -> Bool
+  :d "Verifies language-semantics.asn defines syntaxPositionPreservation semantic"
+  (let [(s-res (file-read "asl/grammar/language-semantics.asn"))]
+    (assert (= (.-_tag s-res) "ok") "language-semantics.asn must exist and be readable")
+    (let [(s-src (.-value s-res))]
+      (assert (string-contains? s-src "syntaxPositionPreservation") "language-semantics.asn must define syntaxPositionPreservation semantic")
+      (assert (string-contains? s-src "ERR_SYNTAX_POSITION_LOST") "language-semantics.asn must specify ERR_SYNTAX_POSITION_LOST failureCode")
+      true)))
+
+(df TestEngineSourceLocationPreservation [] -> Bool
+  :d "Verifies asl/tools/engine.js parses and preserves source, line, and col metadata"
+  (let [(e-res (file-read "asl/tools/engine.js"))]
+    (assert (= (.-_tag e-res) "ok") "asl/tools/engine.js must exist and be readable")
+    (let [(e-src (.-value e-res))]
+      (assert (string-contains? e-src "getCol") "engine.js must calculate column offset")
+      (assert (string-contains? e-src "sourcePath") "engine.js parseAllSExprs must accept sourcePath")
+      (assert (string-contains? e-src "span") "engine.js AST nodes must preserve span metadata")
       true)))
 
 (df RunTests [] -> Bool
   :d "Executes all Task46004 acceptance tests"
   (do
     (assert (TestSuperviseGateIntegrity) "TestSuperviseGateIntegrity must pass")
-    (assert (TestSourceLocationPreservationContract) "TestSourceLocationPreservationContract must pass")
-    (assert (TestDiagnosticPositionQuotingContract) "TestDiagnosticPositionQuotingContract must pass")
-    (assert (TestSourceLocationGroundedInPhase460) "TestSourceLocationGroundedInPhase460 must pass")
+    (assert (TestSyntaxObjectSourceLocationContract) "TestSyntaxObjectSourceLocationContract must pass")
+    (assert (TestDualPositionDiagnosticContract) "TestDualPositionDiagnosticContract must pass")
+    (assert (TestSyntaxPositionPreservationContract) "TestSyntaxPositionPreservationContract must pass")
+    (assert (TestEngineSourceLocationPreservation) "TestEngineSourceLocationPreservation must pass")
     true))

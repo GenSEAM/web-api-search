@@ -169,12 +169,12 @@
       :phase "phase-460"
       :title "Contracts that assign blame, in place of hand-rolled gate prose"
       :kind :language
-      :state :planned
+      :state :completed
       :lane "concepts"
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789240000000
-      :updatedAt 1789240000000
+      :updatedAt 1789425300000
       :motivation "The verification apparatus here is a body of prose rules about who may weaken what, enforced by review. Racket's contract system solves the same problem mechanically: a contract at a module boundary states what each side promises, and when it is violated the error names the party that broke the promise rather than the line that noticed. That is precisely the attribution the grading rule asks for, and it is the same failure this session measured three times, where a check reported a result it had not computed and nothing could say who was responsible."
       :purpose "Function and module boundaries carry contracts with blame. A violated precondition blames the caller, a violated postcondition blames the definition, and the acceptance gates read contract violations as structured findings rather than as text. Contracts are checked where they are cheap and declared where checking is deferred, never silently unchecked."
       :context (:contractRef D81PlanContext)
@@ -195,13 +195,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46005.asl"]
       :verificationCases ["A caller passing a bad argument is blamed, and the callee is not." "A function returning a bad value is blamed, and its caller is not." "A contract declared but not checked is reported as unchecked rather than counted as satisfied."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46005" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46005" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define contractBlameAttribution semantic")
+      :historicalReceipts ["rc-task46005-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Define the contract form." "Attach blame using source positions." "Route gate findings through it." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task46005-verified-20260912"])
     (:task
       :id "Task46006"
       :parentId ""

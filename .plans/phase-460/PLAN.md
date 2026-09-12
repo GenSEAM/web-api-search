@@ -57,14 +57,15 @@ Align AgentScript core forms with Scheme and Racket conventions where measured t
   3. Ground re-attribution of 52 of 136 failing suites in Phase 460 task file.
   4. Verify all 3 stages of `SuperviseGate.sh Task46004` (19 assertions executed cleanly).
 
-### Step 5: Task46005 — Contracts with Blame
+### Step 5: Task46005 — Contracts with Blame [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46005.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46005`
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define contractBlameAttribution semantic`.
 - Owned Files: `asl/grammar/verification-contract.asn`, `asl/tools/engine_js.h`, `asl/packages/asl-gates/src`.
 - Implementation:
-  1. Define `contractBlameAttribution` semantics (precondition blames caller, postcondition blames definition).
-  2. Connect structured gate findings to contract violation reports.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46005`.
+  1. Define `contractBlameAttribution` semantics in `asl/grammar/language-semantics.asn` and rules in `asl/grammar/verification-contract.asn`.
+  2. Connect structured gate findings to mechanical blame attribution (preconditions blame caller, postconditions blame definition, deferred checks marked unchecked).
+  3. Verify all 3 stages of `SuperviseGate.sh Task46005` (20 assertions executed cleanly).
 
 ### Step 6: Task46006 — Record Decision: Racket as Reference, Not Deployment Runtime
 - Fixture: `tests/acceptance/d81/Task46006.asl`

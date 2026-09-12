@@ -1,10 +1,10 @@
 (:in-flight
   :session-id "57abefd4-689b-44f0-8084-f5b1813fae50"
-  :lane ""
+  :lane "concepts"
   :activePhase "phase-460"
-  :activeTasks []
-  :dispatchedAt 1789425100000
-  :status "idle"
+  :activeTasks ["Task46005"]
+  :dispatchedAt 1789425200000
+  :status "executing"
   :handoffId ""
   :handoffCheckpoint 0
   :sourceDigest ""

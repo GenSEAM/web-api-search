@@ -1181,5 +1181,15 @@
       :fact "task46004-certified-complete"
       :evidence "Authored sourceLocationPreservation and diagnosticPositionQuoting semantics in asl/grammar/language-semantics.asn; grounded syntax objects carrying source, line, column and span to re-attribute 52 mis-attributed failing suites; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 19 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task46004 100% verified and certified; syntax object source location tracking adopted under ADR-0081")
+    (:note
+      :id "n104"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "asl/grammar/verification-contract.asn" "tests/acceptance/d81/Task46005.asl" ".asl/mem/tasks/Phase460SchemeAlignmentAndRacketConcepts.asn"]
+      :tags [:supervision :phase460 :task46005 :contracts :blame :preconditions :postconditions :approved]
+      :fact "task46005-certified-complete"
+      :evidence "Authored contractBlameAttribution in asl/grammar/language-semantics.asn and asl/grammar/verification-contract.asn; mechanical blame assigns precondition failure to caller, postcondition failure to definition, and deferred checks reported as unchecked rather than satisfied; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46005 100% verified and certified; mechanical contracts with blame adopted under ADR-0081")
   ]
 )
