@@ -1031,5 +1031,15 @@
       :fact "task44801-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44801.asl verifying styles.asn single signal token and light/dark roles, widthPolicy 72rem primary shell and 80rem canvas, tailwind.config.js maxWidth alignment, index.css shell classes, and ADR-0082 settled choices; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 33 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44801 100% verified and certified; instrumented editorial frame and token contract frozen without duplicate accents or unconstrained widths")
+    (:note
+      :id "n89"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/web/src/views/HomeView.asl" "asl/web/src/views/DocsView.asl" "asl/web/src/views/BlogView.asl" "asl/web/src/views/RoadmapView.asl" "asl/web/src/components/SkyLoomVisualizer.asl" "asl/web/src/components/UnifiedPackageMatrix.asl" "asl/web/src/index.css" "tests/acceptance/d81/Task44802.asl" ".asl/mem/tasks/Phase448InstrumentedEditorialWebDesign.asn"]
+      :tags [:supervision :phase448 :task44802 :prose-spine :wide-canvas :shell-layout :overflow-containment :approved]
+      :fact "task44802-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44802.asl verifying HomeView, DocsView, BlogView, RoadmapView max-w-shell primary layout, SkyLoomVisualizer max-w-canvas opt-in, upm-container declaration, index.css scroll-padding-top and overflow containment, and RoadmapView capability provenance; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 25 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44802 100% verified and certified; prose spine and measured wide-surface layout applied cleanly under ADR-0082")
   ]
 )

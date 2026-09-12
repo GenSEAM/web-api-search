@@ -90,9 +90,11 @@
       :title "Apply the prose spine and measured wide-surface layout"
       :kind :layout
       :lane "geometry"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
+      :createdAt 1789171200000
+      :updatedAt 1789418200000
       :motivation "Home, docs and blog repeatedly use max-w-6xl, but data surfaces need more room while narrative copy should not become a full-width wall of text."
       :purpose "Add shared shell conventions: 72rem primary frame, max 68ch reading measure that shrinks with the viewport, 80rem opt-in data canvas, CSS grid for split layouts, safe-area padding and overflow containment."
       :context (:contractRef D81PlanContext)
@@ -113,13 +115,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44802.asl"]
       :verificationCases ["A 320px viewport has no document overflow; a 1440px narrative paragraph remains within 68ch; a table/playground may use the wide canvas only through an explicit class." "Roadmap and status surfaces distinguish planned, measured and verified self-hosting/WASM/native/offline capabilities and link each claim to source/provenance." "Anchor targets remain visible below the fixed nav."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44802" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44802" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44802" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44802" :assertCount 25 :at 1789418200000)]
+      :reviewStatus :approved
       :actionDag ["Verifier freezes viewport and line-length fixtures." "Implement shell and grid classes." "Exercise narrow and wide viewport metrics." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44803"
       :parentId ""
