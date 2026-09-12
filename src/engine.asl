@@ -48,9 +48,20 @@
   :d "Filters proxy pool for active healthy nodes."
   (filter is-proxy-healthy proxies))
 
+(df url-encode-query [(q Str)] -> Str
+  (let [(q1 (string-replace q "%" "%25"))
+        (q2 (string-replace q1 "+" "%2B"))
+        (q3 (string-replace q2 " " "%20"))
+        (q4 (string-replace q3 "&" "%26"))
+        (q5 (string-replace q4 "?" "%3F"))
+        (q6 (string-replace q5 "=" "%3D"))
+        (q7 (string-replace q6 "\"" "%22"))
+        (q8 (string-replace q7 "'" "%27"))]
+    q8))
+
 (df build-search-url [(engine Str) (query Str) (limit I64)] -> Str
   :d "Generates target query endpoint for the selected search provider."
-  (let [(clean-q (string-replace query " " "+"))
+  (let [(clean-q (url-encode-query query))
         (lim-str (string-from-int64 limit))]
     (cond
       ((= engine "wikipedia")

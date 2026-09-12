@@ -11,8 +11,8 @@
         (ddg (eng/build-search-url "ddg" "agent script" 5))
         (tavily (eng/build-search-url "tavily" "ai agents" 3))
         (searx (eng/build-search-url "searxng" "agents" 5))]
-    (assert (= gh "https://api.github.com/search/repositories?q=agent+script&per_page=5") "GitHub URL must match")
-    (assert (= ddg "https://html.duckduckgo.com/html/?q=agent+script") "DDG URL must match")
+    (assert (= gh "https://api.github.com/search/repositories?q=agent%20script&per_page=5") "GitHub URL must match")
+    (assert (= ddg "https://html.duckduckgo.com/html/?q=agent%20script") "DDG URL must match")
     (assert (string-contains? tavily "api.tavily.com") "Tavily URL must contain api domain")
     (assert (string-contains? searx "searx.be") "SearXNG URL must contain domain")
     true))
