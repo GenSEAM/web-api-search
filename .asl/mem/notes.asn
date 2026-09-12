@@ -981,5 +981,15 @@
       :fact "task44106-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44106.asl verifying attention_prosthesis.asl structs and constructors, attention_fixtures/manifest.asn 5 policy arms, provider telemetry fields, and calculation semantics; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 41 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44106 100% verified and certified; paired evaluation of attention policies with repeated reliable task outcomes and grounded telemetry locked under independent verification")
+    (:note
+      :id "n84"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope [".agents/skills/asl-toolbelt/SKILL.md" "asl/grammar/rules.asn" "tests/acceptance/d81/Task44107.asl" ".asl/mem/tasks/Phase441AttentionProsthesis.asn"]
+      :tags [:supervision :phase441 :task44107 :portable-loop-docs :fallbacks :rules-ssot :approved]
+      :fact "task44107-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44107.asl verifying SKILL.md portable execution loop and current fallbacks, rules.asn SSOT consistency, capabilities.asn measured lock alignment, and host refusal semantics; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 38 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44107 100% verified and certified; verified portable execution loop and current capability fallbacks documented without unsubstantiated claims")
   ]
 )

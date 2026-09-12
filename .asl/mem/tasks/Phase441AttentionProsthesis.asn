@@ -267,11 +267,11 @@
       :title "Document the verified portable loop and current fallbacks"
       :kind :docs
       :lane "attention"
-      :state :planned
+      :state :done
       :priority :medium
       :ownerRole "implementer"
       :createdAt 1789171200000
-      :updatedAt 1789133687623
+      :updatedAt 1789415200000
       :motivation "Portable documentation requires a supported-client execution contract and verified operations."
       :purpose "Render the loop and supported capabilities into portable skill/client projections from canonical sources; document implemented status only after matching behavioral receipts, and retain file-ledger fallback until those operations are verified."
       :context (:contractRef D81PlanContext)
@@ -293,12 +293,12 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44107.asl"]
       :verificationCases ["A fresh supported client can execute the documented plan/where/act/receipt/resume loop with exact argument and result schemas." "Unavailable host capabilities produce explicit fallback instructions or refusal rather than an invented operation." "Rendered docs match canonical capability and rule projections; no task claims portability merely because a table says works."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44107" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44107" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44107" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44107" :assertCount 38 :at 1789415200000)]
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44108"
       :parentId ""
