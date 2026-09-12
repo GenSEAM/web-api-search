@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase446MultiRuntimeRelayAndObservability"
   :createdAt 1789142392680
-  :status "planned"
+  :status "completed"
   :priorityOrder 10
   :summary "Multi-Runtime Relay and Observability: one wire contract and one causal trace across in-browser, local, server and relay runtimes, with ownership partitioned at the relay so parallel development cannot lose work, and camelCase enforced on every emitter before the surfaces multiply."
   :phase "Phase446MultiRuntimeRelayAndObservability"
