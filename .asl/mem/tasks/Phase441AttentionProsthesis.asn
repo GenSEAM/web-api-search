@@ -135,7 +135,7 @@
       :verificationCases ["Many small child reads cannot exceed aggregate budget; requested limits and default cap are measured with declared token estimator/tokenizer." "Read/sec/out/ls/grep/callers/impact paginate with no omissions/duplicates on a stable snapshot; stale or cross-session cursor is rejected." "Hidden acceptance paths remain unavailable through read/search/outline/error messages, including encoded paths and symlink boundaries." "A complete small relevant file within budget is accepted."]
       :gateReadiness :verified
       :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44103" :status :baselineVerified :contract D81Baseline)
-      :historicalReceipts [(:receipt :taskId "Task44103" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44103" :assertCount 20 :at 1789413200000)]
+      :historicalReceipts [(:receipt :taskId "Task44103" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44103" :assertCount 27 :at 1789413200000)]
       :reviewStatus :approved
       :stepIndex 5
       :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
