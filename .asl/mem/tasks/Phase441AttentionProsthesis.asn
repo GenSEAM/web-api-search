@@ -306,11 +306,11 @@
       :title "Handle uncovered steps with reversible containment and escalation"
       :kind :protocol
       :lane "attention"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789171200000
-      :updatedAt 1789133687623
+      :updatedAt 1789415600000
       :motivation "The edge procedure is a declared control principle, not a measured universal optimum or a definition of hallucination."
       :purpose "When no authorized plan step covers the situation, read and preserve options, contain only authorized reversible effects, run the cheapest relevant falsification and escalate with evidence; unauthorized or uncontainable actions escalate immediately without mandatory mutation attempts."
       :context (:contractRef D81PlanContext)
@@ -332,12 +332,12 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44108.asl"]
       :verificationCases ["No matching step triggers a bounded decision record preserving observed facts, attempted safe checks, alternatives and required decision." "Unauthorized/destructive scenario escalates immediately and leaves state unchanged; a cheap read-only refutation may resolve the situation without escalation." "Escalation receipts are bound to session/state and cannot themselves mark implementation complete."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44108" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44108" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44108" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44108" :assertCount 30 :at 1789415600000)]
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44109"
       :parentId ""

@@ -39,3 +39,5 @@
 (:trace-entry :timestamp 1789241819000 :step 1 :op "read" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)
 (:trace-entry :timestamp 1789241819000 :step 2 :op "read" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 1)
 (:trace-entry :timestamp 1789241819000 :step 3 :op "read" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)
+(:trace-entry :timestamp 1789242288000 :step 1 :op "escalate" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)
+(:trace-entry :timestamp 1789242290000 :step 1 :op "escalate" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)

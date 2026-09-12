@@ -991,5 +991,15 @@
       :fact "task44107-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44107.asl verifying SKILL.md portable execution loop and current fallbacks, rules.asn SSOT consistency, capabilities.asn measured lock alignment, and host refusal semantics; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 38 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44107 100% verified and certified; verified portable execution loop and current capability fallbacks documented without unsubstantiated claims")
+    (:note
+      :id "n85"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/session-contract.asn" "tests/fixtures/edge_scenario.asn" "asl/grammar/rpc.asn" "asl/tools/asl.c" "tests/acceptance/d81/Task44108.asl" ".asl/mem/tasks/Phase441AttentionProsthesis.asn"]
+      :tags [:supervision :phase441 :task44108 :edge-procedure :containment :escalation :approved]
+      :fact "task44108-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44108.asl verifying rules.asn edge procedure, session-contract.asn edgeEscalation rule and escalationSchema, edge_scenario.asn fixtures, and asl.c op_escalate host implementation with marksCompleted false guarantee; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 30 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44108 100% verified and certified; uncovered steps and unauthorized mutations handled with reversible containment and typed escalation")
   ]
 )
