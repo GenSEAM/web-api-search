@@ -842,6 +842,16 @@
       :evidence "Created asl/packages/asl-eval with manifest.asn, grammar.asn, src/eval.asl, and tests/eval_test.asl; implemented EvalResult, EvalEnv, Closure, eval-node, invoke-closure, load-module, and make-eval-env; verified canonical language semantics error codes (ERR_UNBOUND_SYMBOL, ERR_UNRESOLVED_IMPORT); passed tests/acceptance/d81/Task44001.asl under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44001 100% verified and certified; pure self-hosted ASL evaluator package operational with 100% manifest and grammar conformity")
     (:note
+      :id "n75"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/packages/asl-cli" "asl/grammar/dependency-boundaries.asn" "tests/acceptance/d81/Task44003.asl" ".asl/mem/tasks/Phase440FullAslSelfHosting.asn"]
+      :tags [:supervision :phase440 :task44003 :cli-routing :dependency-boundaries :declared-host-adapter :approved]
+      :fact "task44003-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44003.asl verifying asl-cli capability dispatch, usage help, and command catalog; verified dependency-boundaries.asn declared host adapter and zero deployed runtime requirements; verified core packages (asl-lint, asl-checker, asl-gates, asl-cli) reachability; passed tests/acceptance/d81/Task44003.asl under SuperviseGate.sh with 32 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44003 100% verified and certified; all tooling dispatch, dependency boundaries, and package reachability locked under reproducible verification")
+    (:note
       :id "n74"
       :author "codex"
       :created "2026-09-12"

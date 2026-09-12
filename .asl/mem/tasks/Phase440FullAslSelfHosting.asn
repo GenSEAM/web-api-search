@@ -100,11 +100,11 @@
       :title "Route all tooling through the self-hosted native artifact"
       :kind :language
       :lane "self-hosting"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789084800000
-      :updatedAt 1789133687623
+      :updatedAt 1789410400000
       :motivation "Owned host source is not itself a foreign binary dependency; the guarantee concerns autonomous rebuild and the deployed invocation closure."
       :purpose "Dispatch every released CLI/RPC capability into ASL implementations from the native self-hosted tool; retain owned C or equivalent OS adapter source only at a declared boundary, preserve asl-lint, and prove absence of required third-party runtime/compiler invocations without an arbitrary host LOC threshold."
       :context (:contractRef D81PlanContext)
@@ -126,12 +126,12 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44003.asl"]
       :verificationCases ["Enumerate all released capabilities and execute positive/error cases through the stage2 native CLI; no shadow C implementation silently substitutes ASL semantics." "Dependency inspection plus an isolated PATH/runtime environment shows check/test/RPC need no external compiler or runtime; OS/ABI substrate is explicitly allowed." "Required packages including asl-lint remain reachable; optional local pooling and one-shot semantics remain equivalent." "Host adapter contains only declared OS/ABI capabilities; line count is reported as descriptive data, never a correctness criterion."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44003" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44003" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44003" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44003" :assertCount 32 :at 1789410400000)]
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
 
     (:task
       :id "Task44004"
