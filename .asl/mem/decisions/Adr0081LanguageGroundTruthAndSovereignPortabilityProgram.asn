@@ -36,6 +36,7 @@
     (:class :substrate :policy "Machine, OS/ABI and declared WASM imports are explicit boundaries; independence does not mean no execution substrate.")
   ]
   :settledChoices [
+    (:choice :id racketReferencePolicy :value "Racket is adopted as a naming and semantic reference and permitted as an optional development-time differential oracle boundary on the same footing as seed compilers and independent test hosts, but is strictly excluded from anything the deployed sovereign runtime requires.")
     (:choice :id compatibility :value "Breaking changes permitted; canonical semantic contracts determine correctness.")
     (:choice :id nativeArtifact :value "ASL compiler emits native executable images (ELF/Mach-O/PE), ABI/linking support and WASM; the autonomous chain regenerates owned OS adapters from source, never a carried precompiled blob. Owned C is a valid declared source boundary only where the self-hosted chain can rebuild it; otherwise use ASL-owned low-level adapter source.")
     (:choice :id pooling :value "Keep optional local serve using the identical one-shot CAS/session contract; never required for correctness.")

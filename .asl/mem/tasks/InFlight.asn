@@ -1,15 +1,15 @@
 (:in-flight
-  :session-id "57abefd4-689b-44f0-8084-f5b1813fae50"
-  :lane "concepts"
-  :activePhase "phase-460"
-  :activeTasks ["Task46005"]
-  :dispatchedAt 1789425200000
-  :status "executing"
+  :session-id ""
+  :lane ""
+  :activePhase ""
+  :activeTasks []
+  :dispatchedAt 0
+  :status "idle"
   :handoffId ""
   :handoffCheckpoint 0
   :sourceDigest ""
-  :authoritativeConstraints ["D81" "C3" "D34"]
+  :authoritativeConstraints []
   :unresolvedQuestions []
   :negativeFindings []
   :receiptReferences []
-)
+  :provisionalToolCallCount 0)

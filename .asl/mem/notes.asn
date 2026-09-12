@@ -1191,5 +1191,15 @@
       :fact "task46005-certified-complete"
       :evidence "Authored contractBlameAttribution in asl/grammar/language-semantics.asn and asl/grammar/verification-contract.asn; mechanical blame assigns precondition failure to caller, postcondition failure to definition, and deferred checks reported as unchecked rather than satisfied; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task46005 100% verified and certified; mechanical contracts with blame adopted under ADR-0081")
+    (:note
+      :id "n105"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope [".asl/mem/decisions/Adr0081LanguageGroundTruthAndSovereignPortabilityProgram.asn" "asl/grammar/language-semantics.asn" "asl/grammar/dependency-boundaries.asn" "tests/acceptance/d81/Task46006.asl" ".asl/mem/tasks/Phase460SchemeAlignmentAndRacketConcepts.asn"]
+      :tags [:supervision :phase460 :task46006 :racket-reference :oracle-tier :adr-0081 :boundary :approved]
+      :fact "task46006-certified-complete"
+      :evidence "Recorded racketReferenceOracle in ADR-0081 settledChoices, oracle tier in dependency-boundaries.asn, and racketReferenceBoundary in language-semantics.asn; confirmed Racket permitted as development oracle and strictly excluded from deployed runtime; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 19 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46006 100% verified and certified; Phase 460 fully completed under ADR-0081")
   ]
 )

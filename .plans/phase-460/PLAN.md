@@ -67,11 +67,12 @@ Align AgentScript core forms with Scheme and Racket conventions where measured t
   2. Connect structured gate findings to mechanical blame attribution (preconditions blame caller, postconditions blame definition, deferred checks marked unchecked).
   3. Verify all 3 stages of `SuperviseGate.sh Task46005` (20 assertions executed cleanly).
 
-### Step 6: Task46006 — Record Decision: Racket as Reference, Not Deployment Runtime
+### Step 6: Task46006 — Record Decision: Racket as Reference, Not Deployment Runtime [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46006.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46006`
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define racketReferenceBoundary semantic`.
 - Owned Files: `.asl/mem/decisions`, `asl/grammar/dependency-boundaries.asn`, `asl/grammar/rules.asn`.
 - Implementation:
-  1. Record architectural decision in `.asl/mem/decisions/` and `intent.asn`.
-  2. Update boundary check in `dependency-boundaries.asn` and `rules.asn`.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46006`.
+  1. Record `racketReferenceOracle` in `.asl/mem/decisions/Adr0081LanguageGroundTruthAndSovereignPortabilityProgram.asn`.
+  2. Declare `oracle` tier in `asl/grammar/dependency-boundaries.asn` and `racketReferenceBoundary` in `asl/grammar/language-semantics.asn`.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46006` (19 assertions executed cleanly).

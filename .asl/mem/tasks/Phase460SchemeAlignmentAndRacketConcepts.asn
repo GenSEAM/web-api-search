@@ -208,12 +208,12 @@
       :phase "phase-460"
       :title "Record the decision: Racket is a reference and an optional oracle, never a deployment dependency"
       :kind :protocol
-      :state :planned
+      :state :completed
       :lane "concepts"
       :priority :critical
       :ownerRole "planner"
       :createdAt 1789240000000
-      :updatedAt 1789240000000
+      :updatedAt 1789425600000
       :motivation "The question of whether Racket becomes the foundation deserves a recorded answer rather than a drifting assumption. Against adoption as a runtime: it is not installed here, it would be a new ecosystem dependency where the foreign rule permits none beyond declared boundaries, it contradicts the sovereign single binary direction, it has no viable path to the in-browser runtime Phase446 requires, and on published multi-language evaluations Racket itself scores far below Python, so adopting it does not solve the familiarity problem but relocates it. For adoption as a reference: its module system, its syntax objects and its contracts are the designs three of the planned tasks are about to approximate."
       :purpose "The decision is written down with its reasons and its rejected alternatives: Racket is adopted as the naming and semantic reference, is permitted as a development time boundary on the same footing as the seed compiler and independent test hosts, and is excluded from anything the deployed runtime requires. A second implementation as a Racket language, usable as a differential oracle against the C engine, is recorded as an available option with its maintenance cost stated, not adopted here."
       :context (:contractRef D81PlanContext)
@@ -234,11 +234,11 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46006.asl"]
       :verificationCases ["A build that requires Racket to produce the deployed artefact fails the boundary check." "A development tool that requires Racket passes, being a declared boundary." "The recorded decision names the rejected alternatives, so reopening it requires new evidence rather than a fresh opinion."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46006" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46006" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define racketReferenceBoundary semantic")
+      :historicalReceipts ["rc-task46006-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Write the decision with alternatives and reasons." "Extend the boundary check." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])]
+      :stepIndex 3
+      :receipts ["rc-task46006-verified-20260912"])]
   :notes "The measured basis for this phase is that the abbreviation bought nothing. Seven of eleven divergent forms cost the same as their Scheme spelling, and the tokenizer gives those words one token precisely because they are frequent in the corpus that also formed the model's prior. The language does not need to become more compact; it needs to stop paying for distance it never sold.")
