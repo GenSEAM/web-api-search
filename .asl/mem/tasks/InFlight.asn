@@ -1,10 +1,10 @@
 (:in-flight
   :session-id "57abefd4-689b-44f0-8084-f5b1813fae50"
-  :lane "vfs"
+  :lane ""
   :activePhase "Phase443TestCoverageCampaign"
-  :activeTasks ["Task44304"]
-  :dispatchedAt 1789435200000
-  :status "in-progress"
+  :activeTasks []
+  :dispatchedAt 0
+  :status "idle"
   :handoffId ""
   :handoffCheckpoint 0
   :sourceDigest ""

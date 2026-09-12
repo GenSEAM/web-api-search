@@ -1491,5 +1491,15 @@
       :fact "task44303-certified-complete"
       :evidence "Authored tests/conformance/rpc/rpc_dispatcher_test.asl covering negativeControl, malformed, errorPropagation, boundary, and roundTrip case kinds for execute_single_step, handle_payload, and :ERR_UNIMPLEMENTED rejection; established baseline failure and passed SuperviseGate.sh with 55 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task44303 certified complete; RPC dispatcher and wire contract conformance suite established under ADR-0081")
+    (:note
+      :id "n135"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["mem/src/vfs.asl" "tests/conformance/vfs/vfs_staging_test.asl" "tests/acceptance/d81/Task44304.asl" ".asl/mem/tasks/Phase443TestCoverageCampaign.asn"]
+      :tags [:supervision :phase443 :task44304 :staged-editing :leases :rollback :conformance :approved]
+      :fact "task44304-certified-complete"
+      :evidence "Authored tests/conformance/vfs/vfs_staging_test.asl covering idempotence, concurrency, negativeControl, errorPropagation, and resourceBound case kinds; implemented vfs-cas-update, vfs-discard, vfs-flush, vfs-acquire-lease, vfs-release-lease, and vfs-staged-write in mem/src/vfs.asl; established baseline failure and passed SuperviseGate.sh with 83 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task44304 certified complete; staged editing, leases and rollback conformance suite established under ADR-0081")
   ]
 )

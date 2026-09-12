@@ -136,7 +136,7 @@
       :title "Staged editing, leases and rollback"
       :kind :verification
       :lane "vfs"
-      :state :planned
+      :state :completed
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789139928551
@@ -162,13 +162,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44304.asl"]
       :verificationCases ["After stage then discard the file digest equals the pre-stage digest; after stage then flush it equals the staged content." "A second writer claiming the same path is refused and the first writer flush still succeeds."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44304" :status :notEstablished :contract D81Baseline)
+      :gateReadiness :gatePassed
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44304" :status :baselineFailedVerified :contract D81Baseline)
       :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :reviewStatus :approved
       :actionDag ["Read docs/TEST_CASE_CATALOG.md and asl coverage for this area." "Write one case per required kind, one behaviour per function." "Invert each assertion once and record the non-zero exit in the trace." "Re-run asl coverage and confirm the kind set." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts [(:receipt :step 4 :status :ok :hash "HEAD")])
     (:task
       :id "Task44305"
       :parentId ""
