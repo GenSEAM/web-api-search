@@ -77,7 +77,7 @@ while IFS= read -r f; do
   if grep -qE '\(assert[ \t]+' "$f" 2>/dev/null; then
     TEST_FILES+=("$f")
   fi
-done < <(find "${TARGET_SCOPE}" -name "*test*.asl" 2>/dev/null | grep -v 'node_modules' | grep -v '/\.' | grep -v '/corpus/invalid/' | sort)
+done < <(find "${TARGET_SCOPE}" -name "*test*.asl" 2>/dev/null | grep -v 'node_modules' | grep -v '/\.' | grep -v '/corpus/invalid/' | grep -v '/tests/fixtures/' | sort)
 
 export EVAL_RUNNER NODE_BIN TMPDIR STRICT_FALSIFY
 

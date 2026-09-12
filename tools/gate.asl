@@ -84,11 +84,19 @@
         (v7 (make-verdict 7 "Modular Skills Consistency & Freshness"
                           (> total-skills 0)
                           (str "Audited " (string-from-int64 total-skills) " modular skills in skills repository.")))]
-    (GateSummary
-      :total-gates 7
-      :passed-gates 7
-      :all-clean true
-      :verdicts (list v1 v2 v3 v4 v5 v6 v7))))
+    (let [(pass-count (+ (if (.-passed v1) 1 0)
+                         (if (.-passed v2) 1 0)
+                         (if (.-passed v3) 1 0)
+                         (if (.-passed v4) 1 0)
+                         (if (.-passed v5) 1 0)
+                         (if (.-passed v6) 1 0)
+                         (if (.-passed v7) 1 0)))
+          (clean (= pass-count 7))]
+      (GateSummary
+        :total-gates 7
+        :passed-gates pass-count
+        :all-clean clean
+        :verdicts (list v1 v2 v3 v4 v5 v6 v7)))))
 
 (df run-gate-suite [(cfg GateConfig)] -> AuditReport
   :d "Executes the 7-gate verification pipeline under pure ASL runner."

@@ -12,6 +12,7 @@ HOST="127.0.0.1"
 CMD="${1:-status}"
 shift || true
 
+EXTRA_ARGS=()
 while [ $# -gt 0 ]; do
   case "$1" in
     --port|-p)
@@ -19,6 +20,7 @@ while [ $# -gt 0 ]; do
       shift 2
       ;;
     *)
+      EXTRA_ARGS+=("$1")
       shift
       ;;
   esac
@@ -104,16 +106,25 @@ function demuxContent(raw) {
 }
 
 function parseStructuredTool(tcStr, id) {
-  const match = tcStr.match(/\(call\s+:tool\s+([a-zA-Z0-9_-]+)(?:\s+(.*))?\)/);
+  const match = tcStr.match(/\(+:?call\s+:tool\s+["\x27]?([a-zA-Z0-9_-]+)["\x27]?(?:\s+(.*))?\)+/);
   if (match) {
     const name = match[1];
-    const argsRaw = match[2] || "";
+    let argsRaw = (match[2] || "").trim();
+    let parsedArgs = { raw_args: argsRaw };
+    if (argsRaw.startsWith(":args ")) {
+      const argsContent = argsRaw.slice(6).trim();
+      try {
+        parsedArgs = JSON.parse(argsContent);
+      } catch (e) {
+        parsedArgs = { raw_args: argsContent };
+      }
+    }
     return {
       id: "call_asl_" + id,
       type: "function",
       function: {
         name: name,
-        arguments: JSON.stringify({ raw_args: argsRaw }),
+        arguments: typeof parsedArgs === "string" ? parsedArgs : JSON.stringify(parsedArgs),
       },
     };
   }
@@ -125,6 +136,95 @@ function parseStructuredTool(tcStr, id) {
       arguments: JSON.stringify({ raw: tcStr }),
     },
   };
+}
+
+function staticFormatToAsn(format, text) {
+  const fmt = (format || "").toLowerCase().trim();
+  if (fmt === "json") {
+    try {
+      const parsed = JSON.parse(text);
+      return jsonToAsn(parsed);
+    } catch (e) {
+      return `(:error :reason "Invalid JSON: ${e.message}")`;
+    }
+  }
+  if (fmt === "csv") {
+    const lines = (text || "").trim().split("\n").filter(l => l.trim().length > 0);
+    if (lines.length === 0) return "[]";
+    const header = lines[0].split(",").map(h => h.trim().replace(/^["\x27]|["\x27]$/g, ""));
+    const records = [];
+    for (let i = 1; i < lines.length; i++) {
+      const cols = lines[i].split(",").map(c => c.trim().replace(/^["\x27]|["\x27]$/g, ""));
+      let rec = "(:record";
+      for (let j = 0; j < header.length; j++) {
+        const key = header[j] || `col_${j}`;
+        const val = cols[j] !== undefined ? JSON.stringify(cols[j]) : "nil";
+        rec += ` :${key} ${val}`;
+      }
+      rec += ")";
+      records.push(rec);
+    }
+    return "[" + records.join(" ") + "]";
+  }
+  if (fmt === "yaml" || fmt === "yml") {
+    const lines = (text || "").split("\n");
+    let out = "(:map";
+    for (const l of lines) {
+      const trimmed = l.trim();
+      if (!trimmed || trimmed.startsWith("#")) continue;
+      const colonIdx = trimmed.indexOf(":");
+      if (colonIdx > 0) {
+        const k = trimmed.slice(0, colonIdx).trim().replace(/[^a-zA-Z0-9_-]/g, "");
+        let v = trimmed.slice(colonIdx + 1).trim();
+        if (v === "true" || v === "false" || v === "null" || (!isNaN(v) && v !== "")) {
+          out += ` :${k} ${v === "null" ? "nil" : v}`;
+        } else {
+          v = v.replace(/^["\x27]|["\x27]$/g, "");
+          out += ` :${k} ${JSON.stringify(v)}`;
+        }
+      }
+    }
+    out += ")";
+    return out;
+  }
+  return JSON.stringify(text || "");
+}
+
+
+function jsonToAsn(val, indent = 0) {
+  const pad = " ".repeat(indent);
+  if (val === null || val === undefined) return "nil";
+  if (typeof val === "boolean") return val ? "true" : "false";
+  if (typeof val === "number") return String(val);
+  if (typeof val === "string") return JSON.stringify(val);
+  if (Array.isArray(val)) {
+    if (val.length === 0) return "[]";
+    const items = val.map(v => jsonToAsn(v, indent + 2)).join(" ");
+    return "[" + items + "]";
+  }
+  if (typeof val === "object") {
+    const keys = Object.keys(val);
+    if (keys.length === 0) return "(:map)";
+    let out = "(:map";
+    for (const k of keys) {
+      out += ` :${k} ${jsonToAsn(val[k], indent + 2)}`;
+    }
+    out += ")";
+    return out;
+  }
+  return String(val);
+}
+
+function toolCallToAsn(tc) {
+  const name = (tc.function && tc.function.name) || tc.name || "tool";
+  let args = "()";
+  try {
+    const parsed = typeof tc.function.arguments === "string" ? JSON.parse(tc.function.arguments) : tc.function.arguments;
+    args = jsonToAsn(parsed);
+  } catch (e) {
+    args = JSON.stringify(tc.function.arguments || "");
+  }
+  return `(:call :tool "${name}" :id "${tc.id || "tc"}" :args ${args})`;
 }
 
 function resolveUpstream(headers, payload) {
@@ -139,6 +239,24 @@ function resolveUpstream(headers, payload) {
 
   if (customUrl && customUrl.trim().length > 0) {
     return { mode: "proxy", url: customUrl.replace(/\/+$/, ""), key: customKey || bearerToken || "", provider: "custom" };
+  }
+
+  // Local Model Endpoints (Ollama, llama.cpp, vLLM, LocalAI, Apple Silicon MLX)
+  if (process.env.OLLAMA_BASE_URL || process.env.OLLAMA_HOST) {
+    const oUrl = (process.env.OLLAMA_BASE_URL || process.env.OLLAMA_HOST || "http://127.0.0.1:11434/v1").replace(/\/+$/, "");
+    return { mode: "proxy", url: oUrl.endsWith("/v1") ? oUrl : oUrl + "/v1", key: customKey || "ollama", provider: "ollama" };
+  }
+  if (process.env.LLAMACPP_BASE_URL) {
+    const lUrl = process.env.LLAMACPP_BASE_URL.replace(/\/+$/, "");
+    return { mode: "proxy", url: lUrl.endsWith("/v1") ? lUrl : lUrl + "/v1", key: customKey || "llamacpp", provider: "llamacpp" };
+  }
+  if (process.env.VLLM_BASE_URL) {
+    const vUrl = process.env.VLLM_BASE_URL.replace(/\/+$/, "");
+    return { mode: "proxy", url: vUrl.endsWith("/v1") ? vUrl : vUrl + "/v1", key: customKey || "vllm", provider: "vllm" };
+  }
+  if (process.env.LOCAL_LLM_URL || process.env.LOCALAI_BASE_URL) {
+    const locUrl = (process.env.LOCAL_LLM_URL || process.env.LOCALAI_BASE_URL).replace(/\/+$/, "");
+    return { mode: "proxy", url: locUrl.endsWith("/v1") ? locUrl : locUrl + "/v1", key: customKey || "local", provider: "local-llm" };
   }
   if (process.env.OPENROUTER_API_KEY && process.env.OPENROUTER_API_KEY.trim().length > 5 && !process.env.OPENROUTER_API_KEY.startsWith("dummy")) {
     return { mode: "proxy", url: (process.env.OPENROUTER_BASE_URL || "https://openrouter.ai/api/v1").replace(/\/+$/, ""), key: process.env.OPENROUTER_API_KEY.trim(), provider: "openrouter" };
@@ -160,7 +278,7 @@ function resolveUpstream(headers, payload) {
     return { mode: "proxy", url: "https://openrouter.ai/api/v1", key: bearerToken, provider: "bearer-openrouter" };
   }
 
-  return { mode: "mock", url: null, key: null, provider: "mock-local" };
+  return { mode: "unconfigured", url: null, key: null, provider: "unconfigured", error: "No upstream LLM provider credentials configured. Set OPENAI_API_KEY, ANTHROPIC_API_KEY, or pass X-ASL-Upstream-Key/Url headers." };
 }
 
 const server = http.createServer(async (req, res) => {
@@ -236,7 +354,7 @@ const server = http.createServer(async (req, res) => {
       const messages = payload.messages || [];
       const hasVerifiedExec = Boolean(payload.has_verified_execution);
 
-      if (reqUpstream.mode === "proxy" && !payload.mock_completion) {
+      if (reqUpstream.mode === "proxy") {
         try {
           const upstreamUrl = reqUpstream.url + "/chat/completions";
           const fwdHeaders = { "Content-Type": "application/json" };
@@ -342,62 +460,15 @@ const server = http.createServer(async (req, res) => {
         }
       }
 
-      // Mock / Local Fallback Mode
-      const rawCompletion = payload.mock_completion || (messages.length > 0 ? messages[messages.length - 1].content : "");
-      const demux = demuxContent(rawCompletion);
-      const thinkTokens = demux.thinkContent ? Math.ceil(demux.thinkContent.length / 4) : 0;
-      const isEsh = detectEshViolation(demux.uiContent) && !hasVerifiedExec;
-
-      if (demux.thinkContent) {
-        state.quarantinedThinkBlocks++;
-        state.quarantinedThinkTokens += thinkTokens;
-      }
-      if (isEsh) {
-        state.eshViolationsIntercepted++;
-      }
-      if (demux.toolCalls.length > 0) {
-        state.toolCallsExtracted += demux.toolCalls.length;
-      }
-
-      const toolObjs = demux.toolCalls.map((tc, idx) => parseStructuredTool(tc, idx + 1));
-      const finishReason = isEsh ? "esh_violation" : (toolObjs.length > 0 ? "tool_calls" : "stop");
-
-      const responsePayload = {
-        id: "chatcmpl-asl-gw-" + Date.now(),
-        object: "chat.completion",
-        created: Math.floor(Date.now() / 1000),
-        model: model,
-        choices: [
-          {
-            index: 0,
-            message: {
-              role: "assistant",
-              content: isEsh ? "Action blocked by L7 Cognitive Gateway: verbal claim of test passage without verified execution receipt (ESH violation)." : (demux.uiContent || ""),
-              reasoning_content: demux.thinkContent || null,
-              tool_calls: toolObjs.length > 0 ? toolObjs : undefined,
-            },
-            finish_reason: finishReason,
-          },
-        ],
-        usage: {
-          prompt_tokens: Math.ceil(body.length / 4),
-          completion_tokens: Math.ceil(demux.uiContent.length / 4) + thinkTokens,
-          total_tokens: Math.ceil(body.length / 4) + Math.ceil(demux.uiContent.length / 4) + thinkTokens,
-          reasoning_tokens: thinkTokens,
-        },
-        gateway: {
-          allowed: !isEsh,
-          quarantined_cot_tokens: thinkTokens,
-          esh_intercepted: isEsh,
-          tool_frames_extracted: toolObjs.length,
-          upstream_provider: reqUpstream.provider,
-          rejection_reason: isEsh ? "Verbal self-declared execution without verified runtime proof (ESH violation)" : "",
-        },
-      };
-
-      state.lastTurn = responsePayload.gateway;
-      res.writeHead(200, { ...corsHeaders, "Content-Type": "application/json" });
-      res.end(JSON.stringify(responsePayload, null, 2));
+      res.writeHead(503, { ...corsHeaders, "Content-Type": "application/json" });
+      res.end(JSON.stringify({
+        error: {
+          message: reqUpstream.error || "Cognitive gateway upstream is unconfigured. Simulated mock execution is strictly forbidden by Invariant STUB-01.",
+          type: "gateway_unconfigured",
+          code: 503
+        }
+      }));
+      return;
     });
     return;
   }
@@ -409,10 +480,22 @@ const server = http.createServer(async (req, res) => {
       state.totalRequests++;
       let payload = {};
       try { payload = JSON.parse(body || "{}"); } catch {}
+      const reqUpstream = resolveUpstream(req.headers, payload);
+      if (reqUpstream.mode !== "proxy") {
+        res.writeHead(503, { ...corsHeaders, "Content-Type": "application/json" });
+        res.end(JSON.stringify({
+          error: {
+            message: reqUpstream.error || "Cognitive gateway upstream is unconfigured. Simulated mock execution is strictly forbidden by Invariant STUB-01.",
+            type: "gateway_unconfigured",
+            code: 503
+          }
+        }));
+        return;
+      }
       const model = payload.model || process.env.ASL_GATEWAY_MODEL || "gemma-4-31b-it";
       const messages = payload.messages || [];
       const hasVerifiedExec = Boolean(payload.has_verified_execution);
-      const rawText = payload.mock_completion || (messages.length > 0 ? messages[messages.length - 1].content : "");
+      const rawText = messages.length > 0 ? messages[messages.length - 1].content : "";
 
       const demux = demuxContent(rawText);
       const isEsh = detectEshViolation(demux.uiContent) && !hasVerifiedExec;
@@ -456,6 +539,79 @@ const server = http.createServer(async (req, res) => {
           output_tokens: Math.ceil(demux.uiContent.length / 4),
         },
       }));
+    });
+    return;
+  }
+
+  if (req.method === "POST" && url.pathname === "/v1/convert/json-to-asn") {
+    let body = "";
+    req.on("data", chunk => { body += chunk; });
+    req.on("end", () => {
+      try {
+        const payload = JSON.parse(body || "{}");
+        const target = payload.json !== undefined ? payload.json : payload;
+        const asn = jsonToAsn(target);
+        res.writeHead(200, { ...corsHeaders, "Content-Type": "application/json" });
+        res.end(JSON.stringify({ ok: true, asn: asn }));
+      } catch (e) {
+        res.writeHead(400, { ...corsHeaders, "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: { message: "Invalid JSON: " + e.message } }));
+      }
+    });
+    return;
+  }
+
+  if (req.method === "POST" && url.pathname === "/v1/convert/tool-call-to-asn") {
+    let body = "";
+    req.on("data", chunk => { body += chunk; });
+    req.on("end", () => {
+      try {
+        const payload = JSON.parse(body || "{}");
+        const tcs = Array.isArray(payload.tool_calls) ? payload.tool_calls : (payload.tool_call ? [payload.tool_call] : [payload]);
+        const asnCalls = tcs.map(tc => toolCallToAsn(tc));
+        res.writeHead(200, { ...corsHeaders, "Content-Type": "application/json" });
+        res.end(JSON.stringify({ ok: true, asn_calls: asnCalls, asn_text: asnCalls.join("\n") }));
+      } catch (e) {
+        res.writeHead(400, { ...corsHeaders, "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: { message: "Invalid JSON tool call: " + e.message } }));
+      }
+    });
+    return;
+  }
+
+  if (req.method === "POST" && url.pathname === "/v1/convert/asn-to-tool-call") {
+    let body = "";
+    req.on("data", chunk => { body += chunk; });
+    req.on("end", () => {
+      try {
+        const payload = JSON.parse(body || "{}");
+        const asnCall = payload.asn_call || payload.raw || body;
+        const structured = parseStructuredTool(asnCall, 1);
+        res.writeHead(200, { ...corsHeaders, "Content-Type": "application/json" });
+        res.end(JSON.stringify({ ok: true, tool_call: structured }));
+      } catch (e) {
+        res.writeHead(400, { ...corsHeaders, "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: { message: "Invalid ASN tool call: " + e.message } }));
+      }
+    });
+    return;
+  }
+
+  if (req.method === "POST" && url.pathname === "/v1/convert/format") {
+    let body = "";
+    req.on("data", chunk => { body += chunk; });
+    req.on("end", () => {
+      try {
+        const payload = JSON.parse(body || "{}");
+        const format = payload.format || url.searchParams.get("format") || "json";
+        const content = payload.content !== undefined ? payload.content : "";
+        const asn = staticFormatToAsn(format, content);
+        res.writeHead(200, { ...corsHeaders, "Content-Type": "application/json" });
+        res.end(JSON.stringify({ ok: true, format: format, asn: asn }));
+      } catch (e) {
+        res.writeHead(400, { ...corsHeaders, "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: { message: "Invalid format conversion request: " + e.message } }));
+      }
     });
     return;
   }
@@ -548,6 +704,38 @@ case "$CMD" in
     ;;
   stop)
     stop_server
+    ;;
+  convert)
+    TARGET="${EXTRA_ARGS[0]:-}"
+    if [ -z "$TARGET" ]; then
+      echo "Usage: asl-gateway convert <file.json>" >&2
+      exit 1
+    fi
+    node -e '
+      const fs = require("fs");
+      function jsonToAsn(val, indent = 0) {
+        if (val === null || val === undefined) return "nil";
+        if (typeof val === "boolean") return val ? "true" : "false";
+        if (typeof val === "number") return String(val);
+        if (typeof val === "string") return JSON.stringify(val);
+        if (Array.isArray(val)) return "[" + val.map(v => jsonToAsn(v, indent + 2)).join(" ") + "]";
+        if (typeof val === "object") {
+          let out = "(:record";
+          for (const k of Object.keys(val)) out += ` :${k} ${jsonToAsn(val[k], indent + 2)}`;
+          return out + ")";
+        }
+        return String(val);
+      }
+      try {
+        const raw = fs.readFileSync(process.argv[1], "utf8");
+        const parsed = JSON.parse(raw);
+        console.log(jsonToAsn(parsed));
+      } catch (e) {
+        console.error("Conversion error:", e.message);
+        process.exit(1);
+      }
+    ' "$TARGET"
+    exit 0
     ;;
   status)
     status_server

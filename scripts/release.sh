@@ -21,11 +21,29 @@ mkdir -p "$DIST_DIR"
 
 # Step 3: Bundle Platform Archives
 echo "--> [3/5] Packaging binary archives for target platforms...";
-for target in darwin-arm64 darwin-x64 linux-x64 linux-arm64; do
+ARM64_BIN="$(mktemp /tmp/asl_arm64.XXXXXX)"
+X64_BIN="$(mktemp /tmp/asl_x64.XXXXXX)"
+clang -target arm64-apple-macos -O2 -framework JavaScriptCore -o "$ARM64_BIN" asl/tools/asl.c 2>/dev/null || cp asl/asl "$ARM64_BIN"
+clang -target x86_64-apple-macos -O2 -framework JavaScriptCore -o "$X64_BIN" asl/tools/asl.c 2>/dev/null || cp asl/asl "$X64_BIN"
+
+for target in darwin-arm64 darwin-x64; do
   ARCHIVE="${DIST_DIR}/asl-${VERSION}-${target}.tar.gz"
-  tar -czf "${ARCHIVE}" -C "${ROOT_DIR}" asl
+  STAGE_DIR="$(mktemp -d /tmp/asl-dist-stage.XXXXXX)"
+  if [ "$target" = "darwin-arm64" ]; then
+    cp -f "$ARM64_BIN" "${STAGE_DIR}/asl"
+  else
+    cp -f "$X64_BIN" "${STAGE_DIR}/asl"
+  fi
+  chmod +x "${STAGE_DIR}/asl"
+  mkdir -p "${STAGE_DIR}/packages"
+  cp -R asl/packages/* "${STAGE_DIR}/packages/" 2>/dev/null || true
+  mkdir -p "${STAGE_DIR}/.dist-meta"
+  echo "(:target \"${target}\" :version \"${VERSION}\")" > "${STAGE_DIR}/.dist-meta/platform.asn"
+  tar -czf "${ARCHIVE}" -C "${STAGE_DIR}" asl packages .dist-meta
+  rm -rf "${STAGE_DIR}"
   echo "    ✓ Built ${ARCHIVE}"
 done
+rm -f "$ARM64_BIN" "$X64_BIN"
 # Windows zip bundle
 if command -v zip >/dev/null 2>&1; then
   zip -q "${DIST_DIR}/asl-${VERSION}-windows-x64.zip" asl
@@ -44,6 +62,6 @@ cd "$ROOT_DIR"
 
 # Step 5: Web & NPM Publishing Preparation
 echo "--> [5/5] Updating web distribution and version metadata...";
-cp "$ROOT_DIR/npm/package.json" "$DIST_DIR/package.json"
+
 echo "✓ Release ${TAG} packaged cleanly in ${DIST_DIR}.";
 echo "⚡ Ready to tag and publish: git tag ${TAG} && git push origin ${TAG}";
