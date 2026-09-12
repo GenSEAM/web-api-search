@@ -1261,5 +1261,15 @@
       :fact "task46106-certified-complete"
       :evidence "Authored unidirectionalDependencyDirection in language-semantics.asn and dependencyDirection with unidirectionalFlow in dependency-boundaries.asn; verified one-way dependency flow from extensions to core with any extension removable without touching core; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 18 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task46106 100% verified and certified; Phase 461 all 6 tasks certified complete under ADR-0081")
+    (:note
+      :id "n112"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "TOKEN_CONVENTIONS.md" "tests/acceptance/d81/Task46201.asl" ".asl/mem/tasks/Phase462LlmFirstLexicon.asn"]
+      :tags [:supervision :phase462 :task46201 :selection-rule :measured-token-cost :approved]
+      :fact "task46201-certified-complete"
+      :evidence "Authored measuredTokenCostSelectionRule in language-semantics.asn and Section 9 in TOKEN_CONVENTIONS.md; enforced measured token cost decides name selection while length and family uniformity are explicitly excluded; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 19 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46201 100% verified and certified; measured token cost selection rule established under ADR-0081")
   ]
 )

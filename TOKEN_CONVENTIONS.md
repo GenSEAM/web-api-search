@@ -218,4 +218,34 @@ To govern language complexity and model predictability beyond superficial token 
 4. **Dual Quantity Inventory**:
    - Language telemetry inventories must report both total token count and distinct head symbol surface in a single run (`ERR_MISSING_DUAL_INVENTORY`).
 
+---
+
+## 9. Lexicon Selection Rule: Measured Cost Decides (`Task46201`, `ADR-0081`)
+
+One selection rule governs every identifier and keyword in the language and grammar:
+
+1. **Measured Minimum Token Count**:
+   - Among candidate names that carry the intended meaning, take the measured token count under the production tokenizer (cl100k).
+   - At equal cost, take the form with the stronger presence in ordinary code, because the model's prior was built from it.
+2. **Excluded Criteria**:
+   - **Length is not a criterion**: shorter character strings often tokenize into more BPE tokens. For example, `define` costs 1 token while `df` costs 1 token; devowelling 16 common words increased token cost from 16 to 33 tokens (+106%).
+   - **Uniformity of a family is not a criterion**: a single-token form that cannot be extended into a family is accepted as it stands. For example, `try` is 1 token while uniform `with-handlers` is 3 tokens. Raising cost to satisfy family uniformity is strictly rejected (`ERR_SPECULATIVE_NAME_CHOICE`).
+   - A non-extensible single-token form is accepted without compromise.
+
+---
+
+## 9. Measured Token Cost Selection Rule (`Task46201`, `ADR-0081`)
+
+Every identifier in the language and grammar registries is governed by measured token count under cl100k:
+
+1. **The Selection Rule**:
+   - Among candidate identifiers that carry the intended meaning, choose the one with the minimum measured token count under the canonical tokenizer (cl100k).
+   - At equal token cost, choose the form with the stronger pre-existing representation in standard code corpora, matching model training priors.
+2. **Excluded Criteria**:
+   - Length is not a criterion: Character count does not correlate with token cost, and devowelling or truncation frequently doubles token costs.
+   - Uniformity of a family is not a criterion: Syntactic families do not require artificial lexical consistency if uniformity increases token counts. A single-token form that does not extend into a family is accepted as it stands.
+3. **Closed Refuted Intuitions**:
+   - Shorter is cheaper (refuted: devowelling 16 words increased cost from 16 to 33 tokens, a 106% rise).
+   - Families must look uniform (refuted: raises cost without syntactic benefit).
+   - Single-token forms must generalize (refuted: non-extensible single-token forms are accepted as is).
 

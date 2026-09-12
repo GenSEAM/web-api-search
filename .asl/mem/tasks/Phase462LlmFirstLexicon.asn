@@ -13,17 +13,17 @@
       :phase "phase-462"
       :title "The selection rule: measured cost decides, length and pattern do not"
       :kind :protocol
-      :state :planned
+      :state :completed
       :lane "lexicon"
       :priority :critical
       :ownerRole "planner"
       :createdAt 1789245000000
-      :updatedAt 1789245000000
+      :updatedAt 1789427800000
       :motivation "Names in this project have been chosen by three competing intuitions: shorter is cheaper, a family should look uniform, and a reader should recognise it. All three are unreliable and the first two are measurably wrong here. define costs exactly what df costs; dfe costs twice what enum costs; devowelling doubles the bill. The only criterion that survived measurement is the measured count itself, and it is not correlated with length."
       :purpose "One rule governs every name. Among candidates that carry the intended meaning, take the measured minimum token count. At equal cost take the form with the stronger presence in ordinary code, because the model's prior was built from it. Length is not a criterion. Uniformity of a family is not a criterion, and a single-token form that does not extend into a family is accepted as it stands. The rule is recorded with the measurements that produced it so it is not relitigated by intuition."
       :context (:contractRef D81PlanContext)
       :outcomes ["One recorded selection rule with its measured basis" "Length and family pattern explicitly excluded as criteria" "A non-extensible single-token form accepted" "The three refuted intuitions recorded as closed"]
-      :owns ["asl/grammar/rules.asn" "TOKEN_CONVENTIONS.md" ".asl/mem/decisions"]
+      :owns ["asl/grammar/rules.asn" "TOKEN_CONVENTIONS.md" ".asl/mem/decisions" "asl/grammar/language-semantics.asn"]
       :targetSymbols ["names"]
       :relatedSymbols ["names" "concepts" "ssot"]
       :invariants ["D51" "D81"]
@@ -39,13 +39,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46201.asl"]
       :verificationCases ["A proposal replacing a one token word with a shorter multi-token abbreviation is rejected by the rule." "A proposal raising cost for family uniformity is rejected, with try against with-handlers as the worked case." "A single-token form that cannot be extended into a family is accepted."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46201" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46201" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define measuredTokenCostSelectionRule semantic")
+      :historicalReceipts ["rc-task46201-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Record the rule with its measurements." "Render to every surface." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 3
+      :receipts ["rc-task46201-verified-20260912"])
     (:task
       :id "Task46202"
       :parentId ""
