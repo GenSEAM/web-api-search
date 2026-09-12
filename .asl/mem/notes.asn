@@ -1641,6 +1641,16 @@
       :fact "task44605-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44605.asl covering OPFS workspace boundary enforcement in asl.c, browser runtime, and browser bridge; paths escaping OPFS workspace are rejected by the same policy that rejects them natively; capabilities unavailable in the browser report absent with explicit fallbacks rather than failing opaquely; in-browser wasm engine dispatches steps over OPFS and rejects escapes with ERR_BOUNDARY_VIOLATION; browser runtime trace frames merge into cross-runtime mesh trace with zero sequence gaps; passed SuperviseGate.sh with 82 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task44605 certified complete; in-browser runtime operational over OPFS workspace with identical boundary policy and mesh trace integration under ADR-0081")
+    (:note
+      :id "n150"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["agent-bus/src/mesh.asl" "agent-bus/src/wire.asl" "harness/src/key_mapping.asl" "harness/src/trace_recorder.asl" "asl/tools/asl.c" ".asl/mem/telemetry/key-mapping.asn" "tests/acceptance/d81/Task44606.asl" ".asl/mem/tasks/Phase446MultiRuntimeRelayAndObservability.asn"]
+      :tags [:supervision :phase446 :task44606 :naming :d51 :camelCase :telemetry :emitters :key-mapping :approved]
+      :fact "task44606-and-phase446-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44606.asl covering canonical key migration dictionary at .asl/mem/telemetry/key-mapping.asn, bidirectional key translation in harness/src/key_mapping.asl, D51 emitted output checker in asl.c and gate 6, camelCase machine emitters across telemetry, wire frames, and mesh traces; passed SuperviseGate.sh with 92 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task44606 certified complete; all 6 tasks of Phase 446 verified and certified complete under ADR-0081")
   ]
 )
 

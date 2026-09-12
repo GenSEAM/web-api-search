@@ -12,33 +12,33 @@
       :name :hidden
       :mode "room-hidden"
       :description "Concurrent swarm peers execute overlapping write workflows without advisory path claims or presence roster visibility"
-      :lost-writes 284
-      :raised-conflicts 412
-      :repeated-work-tokens 184500
-      :completion-rate 0.68
-      :mean-time-to-settlement-ms 4210)
+      :lostWrites 284
+      :raisedConflicts 412
+      :repeatedWorkTokens 184500
+      :completionRate 0.68
+      :meanTimeToSettlementMs 4210)
     (:arm
       :name :visible
       :mode "room-visible"
       :description "Concurrent swarm peers execute identical overlapping write workflows with advisory path claims and presence roster query enabled"
-      :lost-writes 0
-      :raised-conflicts 18
-      :repeated-work-tokens 7200
-      :completion-rate 0.99
-      :mean-time-to-settlement-ms 840)
+      :lostWrites 0
+      :raisedConflicts 18
+      :repeatedWorkTokens 7200
+      :completionRate 0.99
+      :meanTimeToSettlementMs 840)
   ]
   :comparativeDelta (
-    :lost-writes-delta -284
-    :collision-reduction-factor 1.00
-    :conflicts-reduction-factor 0.956
-    :token-overhead-saved 177300
+    :lostWritesDelta -284
+    :collisionReductionFactor 1.00
+    :conflictsReductionFactor 0.956
+    :tokenOverheadSaved 177300
   )
   :uncertainty (
-    :confidence-interval "95%"
-    :lost-writes-ci-low 0
-    :lost-writes-ci-high 2
-    :sample-iterations 50
-    :standard-error 0.42
+    :confidenceInterval "95%"
+    :lostWritesCiLow 0
+    :lostWritesCiHigh 2
+    :sampleIterations 50
+    :standardError 0.42
   )
   :empiricalConclusion "Swarm room edit visibility and advisory path claims eliminate silent lost writes (falling from 284 to 0) and reduce raised conflicts by 95.6% under identical concurrent edit workloads verified in Phase 469."
   :reproducibilityReceipt (:engine "bin/asl" :strictFalsify true :suite "agent-bus/tests/presence-test.asl" :phase 469)

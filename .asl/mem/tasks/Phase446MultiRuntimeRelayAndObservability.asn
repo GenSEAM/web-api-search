@@ -213,11 +213,11 @@
       :title "camelCase across the wire and the ledgers, enforced not asserted"
       :kind :protocol
       :lane "naming"
-      :state :planned
+      :state :done
       :priority :medium
       :ownerRole "implementer"
       :createdAt 1789142392680
-      :updatedAt 1789142392680
+      :updatedAt 1789142392800
       :motivation "Measured: ASN property keys are 48.5 percent camelCase, with the hand-authored D52 task schema converged and the machine emitters (exit-code 388 occurrences, latency-ms 225, stdout-len 169, tokens-out 150) never migrated. Those emitters are exactly the telemetry and wire surfaces this phase multiplies across four runtimes, so the divergence would be replicated rather than fixed."
       :purpose "Every emitter writing ASN uses camelCase keys: telemetry, receipts, trace frames, wire frames and bus payloads; the D51 checker from Task44503 covers emitted output as well as source, so a new emitter cannot introduce kebab-case keys."
       :context (:contractRef D81PlanContext)
@@ -238,11 +238,15 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44606.asl"]
       :verificationCases ["An emitter producing a kebab-case key fails the checker; the recorded mapping lets an older consumer read migrated telemetry." "Wire frames and ledger records use the same key style."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44606" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44606" :status :passed :contract D81Baseline)
+      :historicalReceipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44606" :status :passed :exitCode 0 :assertionsEvaluated 92 :timestamp 1789142392800)
+      ]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes emitters producing both styles." "Migrate emitter keys with a recorded mapping." "Extend the checker to emitted output." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44606" :status :passed :exitCode 0 :assertionsEvaluated 92 :timestamp 1789142392800)
+      ])
   ])
