@@ -20,11 +20,11 @@
       :title "Implement the evaluator in ASL under canonical conformance"
       :kind :language
       :lane "self-hosting"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789084800000
-      :updatedAt 1789133687623
+      :updatedAt 1789409200000
       :motivation "Self-hosted semantics must be independently specified before replacing the bootstrap implementation."
       :purpose "Implement ASL evaluation, closures, type checks and imports reusing the canonical parser; run under the owned C seed against independently fixed observable semantics rather than inherited JS behavior or equal assertion counts."
       :context (:contractRef D81PlanContext)
@@ -46,12 +46,12 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44001.asl"]
       :verificationCases ["ASL and C implementations satisfy identical expected values/errors/effects on boundary and corpus conformance cases." "Shared wrong behavior is caught by pinned expected vectors, not merely agreement between implementations." "Resource/recursion errors and host capability rejection conform; performance is measured separately from correctness."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44001" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44001" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44001" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44001" :assertCount 20 :at 1789409200000)]
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
 
     (:task
       :id "Task44002"
