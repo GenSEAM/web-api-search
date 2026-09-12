@@ -8,6 +8,7 @@
   :handoffId ""
   :handoffCheckpoint 0
   :sourceDigest ""
+  :heartbeat 1789432400000
   :authoritativeConstraints []
   :unresolvedQuestions []
   :negativeFindings []
