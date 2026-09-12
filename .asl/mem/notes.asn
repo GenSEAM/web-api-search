@@ -1451,5 +1451,15 @@
       :fact "finsel-plan-audited-and-remediated"
       :evidence "Cross-checked concurrent implementer remediation plan across 39 tasks; falsified 6 instances of pseudo (:call ...) syntax in bin/asl eval, RPC syntax bug in Task-F01, pre-commit baseline pass in Task-F03, and phantom test files in F04 F07 F09 F10 F12 F21 F31; remediated all 39 tasks to target genuine ASL test suites and verified executable commands; confirmed delimiter balance via asl check"
       :consequence "FINSEL remediation plan aligned with monorepo falsifiability and syntactic invariants under ADR-0081")
+    (:note
+      :id "n131"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["asl/tools/asl.c" "tests/acceptance/d81/Task44504.asl" ".asl/mem/tasks/Phase445StaticConfirmationCoverage.asn" ".asl/mem/roadmap.asn"]
+      :tags [:supervision :phase445 :task44504 :coverage-report :runtime-only :doctor :gate7 :approved]
+      :fact "task44504-and-phase445-certified-complete"
+      :evidence "Implemented confirmation-coverage rows across rules, invariants, decisions, and capabilities in asl.c run_doctor; distinguished runtimeOnly rules (budget, edge) from advisory rules; enforced missing :check defense in Gate 7; verified 28 non-vacuous assertions; passed SuperviseGate.sh; all 4 tasks of Phase445 certified complete"
+      :consequence "Task44504 certified complete; Phase 445 Static Confirmation Coverage fully certified under ADR-0081")
   ]
 )

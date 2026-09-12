@@ -131,11 +131,11 @@
       :title "Concept-to-checker coverage report"
       :kind :gate
       :lane "static"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789142321056
-      :updatedAt 1789142321056
+      :updatedAt 1789434400000
       :motivation "The system accumulated paradigm claims faster than confirmations: nineteen rules, five invariants, fifty-six decisions and thirty-six capabilities, against roughly a third with any mechanical check. Without a coverage figure over the constraints themselves, the ratio silently worsens with every new concept."
       :purpose "asl doctor emits a confirmation-coverage row per constraint class: rules with :check, invariants with a checker, decisions with a falsifiable gate, capabilities with a measured status. The report names every unconfirmed constraint. Gate 7 fails when a newly added rule, invariant or capability arrives without a :check field, which makes the admission rule in the concepts rule mechanical rather than aspirational."
       :context (:contractRef D81PlanContext)
@@ -156,11 +156,11 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44504.asl"]
       :verificationCases ["A newly added rule without :check fails gate 7 and is named; the coverage figure moves when a checker is added or removed." "The report distinguishes unchecked from declared runtime-only."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44504" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44504" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44504" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44504" :assertCount 28 :at 1789434400000)]
+      :reviewStatus :approved
       :actionDag ["Verifier adds a constraint without a checker." "Emit coverage per class." "List unconfirmed constraints." "Fail on a new unchecked constraint." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts [(:receipt :step 4 :status :ok :hash "HEAD")])
   ])
