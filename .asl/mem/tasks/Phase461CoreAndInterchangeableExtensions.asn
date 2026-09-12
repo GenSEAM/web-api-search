@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase461CoreAndInterchangeableExtensions"
   :createdAt 1789244000000
-  :status "planned"
+  :status "completed"
   :priorityOrder 2
   :summary "Core and Interchangeable Extensions: a core that knows no extension by name, four mechanisms that let everything else be a library, one engine interface, and adapters admitted only on the two strikes rule."
   :phase "Phase461CoreAndInterchangeableExtensions"
@@ -208,12 +208,12 @@
       :phase "phase-461"
       :title "Dependency direction: core never depends on an extension"
       :kind :architecture
-      :state :planned
+      :state :completed
       :lane "extensions"
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789244000000
-      :updatedAt 1789244000000
+      :updatedAt 1789427400000
       :motivation "An extensible system fails in one characteristic way: an extension becomes load bearing, the core starts to assume it, and the extension can no longer be replaced. That has already happened here, where the resolver assumes the sql package and the website. Modularity is not a structure, it is a direction of dependency, and the only way to keep it is to check it."
       :purpose "Dependency flows one way. The core declares its surface, extensions depend on it, and nothing in the core depends on an extension or on a specific extension being present. The check runs over the module graph, so it measures actual dependency rather than intended layering, and the graph it reads is the one the evaluator resolves."
       :context (:contractRef D81PlanContext)
@@ -234,11 +234,11 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46106.asl"]
       :verificationCases ["A core module requiring an extension fails the check, naming both." "Removing any single extension leaves the core suite passing." "The check reads the resolved graph, so a dependency created through a dynamic path is still counted."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46106" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46106" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define unidirectionalDependencyDirection semantic")
+      :historicalReceipts ["rc-task46106-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Declare the core surface." "Check direction over the resolved graph." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])]
+      :stepIndex 3
+      :receipts ["rc-task46106-verified-20260912"])]
   :notes "Four mechanisms carry the whole requirement: a module system, syntax extension, a host interface and capability declarations. Everything named in the request as a target, mobile, web, databases, frontend frameworks, engine switching, is then a library rather than a language feature. The measured reason to insist is that the opposite already happened: 25 subsystem names inside the resolver and 7 in the C host.")

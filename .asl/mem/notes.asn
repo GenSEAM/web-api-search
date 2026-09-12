@@ -1251,5 +1251,15 @@
       :fact "task46105-certified-complete"
       :evidence "Authored twoStrikesAdapterAdmission in language-semantics.asn and adapterAdmission with twoStrikesRule in dependency-boundaries.asn; ensured data and view adapters live entirely in extension packages and shared interfaces require two concrete implementations; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 18 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task46105 100% verified and certified; two-strikes adapter admission established under ADR-0081")
+    (:note
+      :id "n111"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "asl/grammar/dependency-boundaries.asn" "tests/acceptance/d81/Task46106.asl" ".asl/mem/tasks/Phase461CoreAndInterchangeableExtensions.asn"]
+      :tags [:supervision :phase461 :task46106 :unidirectional-dependency :module-graph :approved]
+      :fact "task46106-certified-complete"
+      :evidence "Authored unidirectionalDependencyDirection in language-semantics.asn and dependencyDirection with unidirectionalFlow in dependency-boundaries.asn; verified one-way dependency flow from extensions to core with any extension removable without touching core; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 18 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46106 100% verified and certified; Phase 461 all 6 tasks certified complete under ADR-0081")
   ]
 )

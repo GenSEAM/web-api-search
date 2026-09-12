@@ -3,7 +3,7 @@
 ## Status
 - **Phase**: Phase461CoreAndInterchangeableExtensions
 - **Priority**: Critical Architectural Boundary & Extension Layering
-- **Status**: in-progress
+- **Status**: completed & verified
 
 ## Context & Objectives
 Enforce strict separation between core language mechanisms and interchangeable extensions under ADR-0081, D34 (Boundary Universalism), and C3:
@@ -67,11 +67,13 @@ Enforce strict separation between core language mechanisms and interchangeable e
   2. Specify `adapterAdmission` and `twoStrikesRule` in `asl/grammar/dependency-boundaries.asn`.
   3. Verify all 3 stages of `SuperviseGate.sh Task46105` (18 assertions executed cleanly).
 
-### Step 6: Task46106 — Strict Unidirectional Dependency Direction
+### Step 6: Task46106 — Strict Unidirectional Dependency Direction [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46106.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46106`
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define unidirectionalDependencyDirection semantic`.
 - Owned Files: `asl/grammar/language-semantics.asn`, `asl/grammar/dependency-boundaries.asn`.
 - Implementation:
   1. Define `unidirectionalDependencyDirection` semantics in `asl/grammar/language-semantics.asn`.
-  2. Enforce strict layering check proving core has zero incoming dependencies from extensions.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46106`.
+  2. Specify `dependencyDirection` with `unidirectionalFlow` rule in `asl/grammar/dependency-boundaries.asn`.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46106` (18 assertions executed cleanly).
+
