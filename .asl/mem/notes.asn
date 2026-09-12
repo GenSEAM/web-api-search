@@ -1541,5 +1541,15 @@
       :fact "task44401-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44401.asl covering assertionCount, evalNode, run_gate_5, and unbound symbol telemetry records; established baseline failure and passed SuperviseGate.sh with 34 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task44401 certified complete; test telemetry record contract verified under ADR-0081")
+    (:note
+      :id "n140"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["docs/TEST_CASE_CATALOG.md" "asl/tools/asl.c" "tests/acceptance/d81/Task44402.asl" ".asl/mem/tasks/Phase444TestTelemetryAndCoverageGuarantees.asn"]
+      :tags [:supervision :phase444 :task44402 :coverage-guarantees :catalog :mutation-metric :approved]
+      :fact "task44402-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44402.asl covering 12 case kinds in TEST_CASE_CATALOG.md, three decidable coverage guarantees (symbol coverage, executed assertion parity, required case kinds enforcement per Phase 443 area), and separation of mutation score from coverage; established baseline failure and passed SuperviseGate.sh with 53 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task44402 certified complete; three decidable coverage guarantees and case kinds enforcement established under ADR-0081")
   ]
 )

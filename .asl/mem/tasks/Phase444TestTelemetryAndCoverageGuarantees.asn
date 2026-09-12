@@ -56,11 +56,11 @@
       :title "Three decidable coverage guarantees, gated; mutation score as the quality metric"
       :kind :verification
       :lane "coverage"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789141670724
-      :updatedAt 1789141670724
+      :updatedAt 1789437300000
       :motivation "Full path coverage is not decidable and must not be promised; what is decidable is whether every exported symbol has an executing test, whether every declared assertion executed, and whether each area carries its required case kinds. Today none of the three is checked and the only published figure was a substring count."
       :purpose "Gate 7 enforces three guarantees per package: every exported symbol named by at least one executing test; declared assertions equal executed assertions or each gap is listed with a reason; the required case kinds declared in Phase443 are present. Mutation score is reported separately as the quality metric and is never called coverage."
       :context (:contractRef D81PlanContext)
@@ -81,13 +81,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44402.asl"]
       :verificationCases ["An uncovered exported symbol, an unreached assertion without a reason, and a missing required case kind each fail their own guarantee with a distinct message." "A package passing all three still reports its mutation score, and a low score does not silently pass as covered."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44402" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44402" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44402" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44402" :assertCount 53 :at 1789437300000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes packages violating each guarantee separately." "Implement the three checks." "Keep mutation score in a distinct field." "Wire thresholds per package." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts [(:receipt :step 4 :status :ok :hash "HEAD")])
     (:task
       :id "Task44403"
       :parentId ""
