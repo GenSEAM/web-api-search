@@ -5,4 +5,11 @@
   :activeTasks []
   :dispatchedAt 0
   :status "idle"
+  :handoffId ""
+  :handoffCheckpoint 0
+  :sourceDigest ""
+  :authoritativeConstraints []
+  :unresolvedQuestions []
+  :negativeFindings []
+  :receiptReferences []
 )

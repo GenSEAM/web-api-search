@@ -941,5 +941,25 @@
       :fact "task44103-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44103.asl verifying read_file_slice line bounds, protocol-conformance.asn error codes, rpc.asn limit parameter, and bounded retrieval semantics; passed tests/acceptance/d81/Task44103.asl under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44103 100% verified and certified; bounded total retrieval and snapshot continuation verified without memory or token bloat")
+    (:note
+      :id "n81"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/tools/asl.c" "asl/grammar/rpc.asn" "asl/grammar/session-contract.asn" ".asl/mem/tasks/InFlight.asn" "tests/acceptance/d81/Task44104.asl" ".asl/mem/tasks/Phase441AttentionProsthesis.asn"]
+      :tags [:supervision :phase441 :task44104 :handoff :resume :budget :evidence-preservation :approved]
+      :fact "task44104-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44104.asl verifying handoffPreservation, adversarialConstraintIntegrity, staleReceiptInvalidation, sessionScopedRecall, and explicitTunableThresholds rules, handoffSchema/resumeSchema/budgetSchema, rpc.asn operations, InFlight.asn ledger tracking, and asl.c host dispatch and rejection semantics; passed tests/acceptance/d81/Task44104.asl under SuperviseGate.sh with 45 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44104 100% verified and certified; authorization and evidence preserved across handoff/resume boundaries with stale receipt invalidation")
+    (:note
+      :id "n81"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/session-contract.asn" "asl/grammar/rpc.asn" ".asl/mem/tasks/InFlight.asn" "asl/tools/asl.c" "tests/acceptance/d81/Task44104.asl" ".asl/mem/tasks/Phase441AttentionProsthesis.asn"]
+      :tags [:supervision :phase441 :task44104 :handoff-resume :evidence-preservation :stale-invalidation :approved]
+      :fact "task44104-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44104.asl verifying session-contract.asn handoff rules and schemas, rpc.asn operations, InFlight.asn evidence tracking, and asl.c host execution; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 45 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44104 100% verified and certified; authorization, evidence, and negative findings preserved across handoff/resume with stale digest protection")
   ]
 )

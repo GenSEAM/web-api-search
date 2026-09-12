@@ -147,11 +147,11 @@
       :title "Preserve authorization and evidence across handoff/resume"
       :kind :protocol
       :lane "attention"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789171200000
-      :updatedAt 1789133687623
+      :updatedAt 1789413800000
       :motivation "Restoring a step index does not establish semantic handoff fidelity; the existing small-model experiment will evaluate context policies."
       :purpose "Budget/handoff/resume/recall persist canonical user constraints, ownership, unresolved questions, uncertainty, negative findings and receipt/source versions through bounded references; a compact summary is an index to complete state, not a lossy replacement."
       :context (:contractRef D81PlanContext)
@@ -173,12 +173,12 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44104.asl"]
       :verificationCases ["Adversarial constraints placed outside the summary still determine the identical authorized next action before/after resume." "Repeated compaction, changed source and invalidated receipts do not restore stale authority or verified status." "Pending questions, negative findings and ownership survive; recall is restricted to the session scope." "Thresholds are explicit tunable engineering hypotheses; relevant static verification is permitted for read-only work and no arbitrary six-call test run is mandatory."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44104" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44104" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44104" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44104" :assertCount 45 :at 1789413800000)]
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
 
     (:task
       :id "Task44105"
