@@ -169,17 +169,17 @@
       :phase "phase-462"
       :title "One substrate: code and ASN convert without loss"
       :kind :language
-      :state :planned
+      :state :completed
       :lane "lexicon"
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789245000000
-      :updatedAt 1789245000000
+      :updatedAt 1789429000000
       :motivation "Code and the ledger already share an S-expression substrate, and the saving that the owner measurements attribute to this representation comes from that sharing: one notation for a form, a record, a prompt and a result. The sharing is currently a convention rather than a property, and it has already failed once in a way that was caught by hand, where an unescaped quote inside a record passed the checker and had to be repaired by a second party."
       :purpose "Conversion between a language form and its ASN representation is total and lossless in both directions, including positions, escaping and keyword shape, and is exercised as a round trip rather than asserted. A construct that cannot round trip is a defect in the construct."
       :context (:contractRef D81PlanContext)
       :outcomes ["Lossless round trip between form and record" "Positions and escaping preserved" "A non round tripping construct treated as a defect"]
-      :owns ["asl/packages/asl-codec/src" "asl/grammar/language-semantics.asn"]
+      :owns ["asl/packages/asl-codec/src" "asl/grammar/language-semantics.asn" "asl/packages/asl-codec/grammar.asn"]
       :targetSymbols []
       :relatedSymbols ["output" "ssot" "semantics"]
       :invariants ["C3" "D81"]
@@ -195,13 +195,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46205.asl"]
       :verificationCases ["A form containing a quote, a newline and a nested record round trips byte identical." "A position survives the round trip." "A construct that cannot round trip fails rather than being converted approximately."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46205" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46205" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define losslessAsnCodeConversion semantic")
+      :historicalReceipts ["rc-task46205-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Define the correspondence." "Exercise the round trip over the corpus." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 3
+      :receipts ["rc-task46205-verified-20260912"])
     (:task
       :id "Task46206"
       :parentId ""

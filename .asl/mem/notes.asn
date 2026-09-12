@@ -1292,15 +1292,15 @@
       :evidence "Authored closedSetSingleTokenKeywordRule in language-semantics.asn; ensured closed set of core forms measures one token throughout and open set adopts measured minimum CamelCase spelling; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 18 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task46203 100% verified and certified; closed set single token keywords established under ADR-0081")
     (:note
-      :id "n114"
+      :id "n116"
       :author "codex"
       :created "2026-09-12"
       :status "active"
-      :scope ["asl/grammar/language-semantics.asn" "tests/acceptance/d81/Task46203.asl" ".asl/mem/tasks/Phase462LlmFirstLexicon.asn"]
-      :tags [:supervision :phase462 :task46203 :closed-set-tokens :lexicon-excess :approved]
-      :fact "task46203-certified-complete"
-      :evidence "Authored closedSetSingleTokenKeywordRule in language-semantics.asn; mandated that closed set of core forms measures one token throughout while open set uses measured minimum CamelCase spelling; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 18 executed assertions; receipts indexed in receipts.asn"
-      :consequence "Task46203 100% verified and certified; closed set single token keyword rule established under ADR-0081")
+      :scope ["asl/grammar/language-semantics.asn" "asl/packages/asl-codec/grammar.asn" "tests/acceptance/d81/Task46205.asl" ".asl/mem/tasks/Phase462LlmFirstLexicon.asn"]
+      :tags [:supervision :phase462 :task46205 :lossless-substrate :code-asn-roundtrip :approved]
+      :fact "task46205-certified-complete"
+      :evidence "Authored losslessAsnCodeConversion in language-semantics.asn and substrate conversion property in asl-codec grammar.asn; ensured total lossless conversion between code forms and ASN records with preserved positions and escaping; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 18 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46205 100% verified and certified; lossless code and ASN conversion established under ADR-0081")
     (:note
       :id "n115"
       :author "codex"

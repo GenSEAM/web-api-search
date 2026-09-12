@@ -1,15 +1,16 @@
 (:in-flight
   :session-id "57abefd4-689b-44f0-8084-f5b1813fae50"
-  :lane "lexicon"
-  :activePhase "phase-462"
-  :activeTasks ["Task46205"]
-  :dispatchedAt 1789428900000
-  :status "executing"
+  :lane ""
+  :activePhase ""
+  :activeTasks []
+  :dispatchedAt 0
+  :status "idle"
   :handoffId ""
   :handoffCheckpoint 0
   :sourceDigest ""
-  :authoritativeConstraints ["D81" "D51" "C1"]
+  :authoritativeConstraints []
   :unresolvedQuestions []
   :negativeFindings []
   :receiptReferences []
   :provisionalToolCallCount 0)
+

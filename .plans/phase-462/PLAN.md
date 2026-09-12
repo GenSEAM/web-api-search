@@ -56,14 +56,15 @@ Govern the entire lexicon by measured token cost under cl100k, removing human ae
   2. Specify `decoderTool` contract in `protocol-conformance.asn` ensuring human-readable decoding without source re-entry.
   3. Verify all 3 stages of `SuperviseGate.sh Task46204` (19 assertions executed cleanly).
 
-### Step 5: Task46205 — One Substrate: Code and ASN Convert Without Loss
+### Step 5: Task46205 — One Substrate: Code and ASN Convert Without Loss [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46205.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46205`
-- Owned Files: `asl/packages/asl-codec/src`, `asl/grammar/language-semantics.asn`.
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define losslessAsnCodeConversion semantic`.
+- Owned Files: `asl/grammar/language-semantics.asn`, `asl/packages/asl-codec/grammar.asn`.
 - Implementation:
-  1. Define `losslessAsnCodeConversion` semantic in `asl/grammar/language-semantics.asn`.
-  2. Verify lossless isomorphism between ASL code S-expressions and compact ASN.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46205`.
+  1. Define `losslessAsnCodeConversion` semantics in `asl/grammar/language-semantics.asn`.
+  2. Enforce total, bidirectional, lossless conversion between S-expression forms and ASN records with preserved positions and escaping in `asl-codec/grammar.asn`.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46205` (18 assertions executed cleanly).
 
 ### Step 6: Task46206 — A Structure Carries Its Own Meaning Across Agents and Models
 - Fixture: `tests/acceptance/d81/Task46206.asl`
