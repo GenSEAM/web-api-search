@@ -721,5 +721,15 @@
       :fact "task44206-certified-complete"
       :evidence "Implemented asl watch continuous pre-flight command in asl.c; verified delimiter checking, InFlight.asn reference, and (:watch-report :tree-status ...); passed tests/acceptance/d81/Task44206.asl under SuperviseGate.sh with 12 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44206 100% verified and certified; continuous pre-flight tree health verification active in CLI")
+    (:note
+      :id "n62"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/tools/asl.c" "asl/grammar/rpc.asn" ".asl/mem/trace.asn" "tests/acceptance/d81/Task44207.asl" ".asl/mem/tasks/Phase442AgentReliabilityUtilities.asn"]
+      :tags [:supervision :phase442 :task44207 :session-trace :mutation-digests :approved]
+      :fact "task44207-certified-complete"
+      :evidence "Implemented append_session_trace and op_trace in asl.c; verified before/after sha256 digests on write/edit operations, execution duration tracking, size-based trace rotation at 500KB into trace.asn.1, and bounded query via (:trace [:since <ms>] [:op <op>] [:limit <n>]); declared in asl/grammar/rpc.asn; passed tests/acceptance/d81/Task44207.asl under SuperviseGate.sh with 15 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44207 100% verified and certified; append-only observable session trace active in RPC engine")
   ]
 )
