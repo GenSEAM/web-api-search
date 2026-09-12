@@ -209,7 +209,7 @@
       :title "Continuous pre-flight: asl watch"
       :kind :tooling
       :lane "reliability"
-      :state :planned
+      :state :done
       :priority :medium
       :ownerRole "implementer"
       :createdAt 1789139714894
@@ -234,13 +234,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44206.asl"]
       :verificationCases ["With a planted imbalance the watcher records a red tree and (:where) reports it before the next mutation is authorized; a clean tree records green and does not block." "The watcher never rewrites source and holds no lease."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44206" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44206" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44206" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44206" :assertCount 12 :at 1789403400000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes a broken-tree scenario." "Implement changed-file scan on interval." "Record in the ledger." "Surface in (:where)." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44207"
       :parentId ""

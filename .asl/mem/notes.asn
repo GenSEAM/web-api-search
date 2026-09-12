@@ -711,5 +711,15 @@
       :fact "task44205-certified-complete"
       :evidence "Verified resident BM25 semantic recall (:q) in asl.c with ranked hits (:file :line :score :snippet); verified :id 'asl-q' in asl/grammar/rpc.asn; verified reference BM25 functions in mem/src/bm25.asl; passed tests/acceptance/d81/Task44205.asl under SuperviseGate.sh with 17 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44205 100% verified and certified; resident BM25 search over memory and code active in RPC engine")
+    (:note
+      :id "n61"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/tools/asl.c" ".asl/mem/tasks/InFlight.asn" "tests/acceptance/d81/Task44206.asl" ".asl/mem/tasks/Phase442AgentReliabilityUtilities.asn"]
+      :tags [:supervision :phase442 :task44206 :asl-watch :delimiter-balance :tree-status :approved]
+      :fact "task44206-certified-complete"
+      :evidence "Implemented asl watch continuous pre-flight command in asl.c; verified delimiter checking, InFlight.asn reference, and (:watch-report :tree-status ...); passed tests/acceptance/d81/Task44206.asl under SuperviseGate.sh with 12 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44206 100% verified and certified; continuous pre-flight tree health verification active in CLI")
   ]
 )
