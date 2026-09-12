@@ -170,7 +170,7 @@
       :title "Semantic recall over the ledgers: (:q) on the resident BM25 index"
       :kind :protocol
       :lane "reliability"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789139714894
@@ -195,13 +195,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44205.asl"]
       :verificationCases ["A query naming a prior ADR returns that ADR above unrelated files; a query with no match returns an empty ranked list rather than a canned file list; an unsupported scope is rejected explicitly." "Index build time and memory stay within the declared bound on the full corpus."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44205" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44205" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44205" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44205" :assertCount 17 :at 1789403000000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes queries with known expected top hits across decisions, tasks and code." "Port or invoke the BM25 index." "Rank and bound results." "Reject unsupported scopes." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44206"
       :parentId ""
