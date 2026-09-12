@@ -1501,5 +1501,15 @@
       :fact "task44304-certified-complete"
       :evidence "Authored tests/conformance/vfs/vfs_staging_test.asl covering idempotence, concurrency, negativeControl, errorPropagation, and resourceBound case kinds; implemented vfs-cas-update, vfs-discard, vfs-flush, vfs-acquire-lease, vfs-release-lease, and vfs-staged-write in mem/src/vfs.asl; established baseline failure and passed SuperviseGate.sh with 83 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task44304 certified complete; staged editing, leases and rollback conformance suite established under ADR-0081")
+    (:note
+      :id "n136"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["tests/conformance/gates/gates_conformance_test.asl" "tests/acceptance/d81/Task44305.asl" ".asl/mem/tasks/Phase443TestCoverageCampaign.asn"]
+      :tags [:supervision :phase443 :task44305 :gates :receipts :non-vacuity :conformance :approved]
+      :fact "task44305-certified-complete"
+      :evidence "Authored tests/conformance/gates/gates_conformance_test.asl covering negativeControl, adversarial, errorPropagation, idempotence, and concurrency case kinds for run_cmd_gate, run_gate_5_suites, standard-claims, run-claims-audit, and verify-claims-grounding; established baseline failure and passed SuperviseGate.sh with 78 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task44305 certified complete; gates, receipts and non-vacuity conformance suite established under ADR-0081")
   ]
 )

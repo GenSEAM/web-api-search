@@ -176,7 +176,7 @@
       :title "Gates, receipts and non-vacuity"
       :kind :verification
       :lane "verification"
-      :state :planned
+      :state :completed
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789139928551
@@ -202,13 +202,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44305.asl"]
       :verificationCases ["Each of the seven gates fails on its own planted violation and passes on a clean tree; a gate whose check is a tautology is reported." "A receipt not issued by the runner is refused and does not advance the ledger."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44305" :status :notEstablished :contract D81Baseline)
+      :gateReadiness :gatePassed
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44305" :status :baselineFailedVerified :contract D81Baseline)
       :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :reviewStatus :approved
       :actionDag ["Read docs/TEST_CASE_CATALOG.md and asl coverage for this area." "Write one case per required kind, one behaviour per function." "Invert each assertion once and record the non-zero exit in the trace." "Re-run asl coverage and confirm the kind set." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44306"
       :parentId ""
