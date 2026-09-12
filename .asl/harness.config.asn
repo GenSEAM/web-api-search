@@ -1,0 +1,31 @@
+(:harness-config
+  :version "1.0.0"
+  :profile-name "harness-workstation"
+  :locale-policy (:primary "en" :secondary "ru" :mixed-mode true)
+  :acoustic-devices [
+    (:device :kind :input :name "Default Microphone" :sample-rate 16000 :channels 1)
+    (:device :kind :output :name "Default Speaker" :sample-rate 24000)
+  ]
+  :speaker-biometrics [
+    (:speaker :id "primary-operator" :profile-path "~/.asl/harness/speaker_voiceprint.onnx" :strict-threshold 0.82)
+  ]
+  :local-lexicon [
+    (:alias :spoken "асекс" :maps-to "genseam")
+    (:alias :spoken "хайнесс" :maps-to "harness")
+    (:alias :spoken "ханес" :maps-to "harness")
+    (:alias :spoken "шроуди" :maps-to "shrody")
+    (:alias :spoken "датахаб" :maps-to "datahub")
+    (:alias :spoken "пцп" :maps-to "pcp")
+  ]
+  :processing-endpoints [
+    (:tier-0 :engine :in-memory :threads 4)
+    (:tier-1 :engine :silero-onnx :threads 2 :accelerator :apple-neural-engine)
+    (:tier-2 :engine :mlx-local :model "Qwen2.5-Coder-3B-Instruct-4bit" :port 8081)
+    (:tier-3 :engine :gateway-proxy :endpoint "http://127.0.0.1:8443/v1/messages")
+  ]
+  :computer-control [
+    (:cdp-endpoint "ws://127.0.0.1:9222/devtools/browser")
+    (:accessibility-enabled true)
+    (:screen-capture-dir "~/.asl/run/captures")
+  ]
+  :mesh-hub (:socket-path "~/.asl/run/hub.sock" :max-workers 8))

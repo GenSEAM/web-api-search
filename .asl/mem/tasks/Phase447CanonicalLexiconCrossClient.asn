@@ -53,11 +53,11 @@
       :title "Retire the mishearing from artifact names: hyness becomes harness"
       :kind :protocol
       :lane "lexicon"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789142884943
-      :updatedAt 1789142884943
+      :updatedAt 1789432000000
       :motivation "The mishearing did not stay in the dictionary: 78 occurrences across five files name the module asl-voice/hyness-profile, the structs HynessPhoneticAlias, HynessHardwareEndpoint and HynessProfile, the config .asl/hyness.config.asn and the profile value hyness-workstation. An artifact named after an ASR error teaches every future reader and every model that the error is the term."
       :purpose "Rename the module, structs, file and config to the canonical harness form with CamelCase per D51 (HarnessPhoneticAlias, HarnessHardwareEndpoint, HarnessProfile, voice/src/harness_profile.asl, .asl/harness.config.asn), update the grammar registry and the one importing test, and record the rename mapping so an older config is still readable. No occurrence of the mishearing survives outside that mapping."
       :context (:contractRef D81PlanContext)
@@ -78,13 +78,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44702.asl"]
       :verificationCases ["A repository-wide search for the mishearing returns only the recorded rename mapping; the renamed module still loads and its test passes." "An older config naming the previous key is read through the mapping rather than rejected."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44702" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44702" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44702" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44702" :assertCount 29 :at 1789432000000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes the expected symbol and file names." "Rename symbols and files." "Update grammar and the importing test." "Record the mapping." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 2
+      :receipts [(:receipt :step 2 :status :ok :hash "HEAD")])
     (:task
       :id "Task44703"
       :parentId ""

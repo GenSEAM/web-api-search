@@ -1381,5 +1381,15 @@
       :fact "task44701-certified-complete"
       :evidence "Verified asl/grammar/lexicon.asn single source of spoken-to-canonical mappings with camelCase keys; added --render-lexicon and --check-lexicon to scripts/install.sh; established supervised baseline failure and verified non-vacuous assertions; passed SuperviseGate.sh with 27 executed assertions; receipts recorded"
       :consequence "Task44701 certified complete; canonical lexicon single source contract established under ADR-0081")
+    (:note
+      :id "n124"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["voice/src/harness_profile.asl" ".asl/harness.config.asn" "voice/manifest.asn" "voice/tests/audio_bridge_test.asl" "tests/acceptance/d81/Task44702.asl" ".asl/mem/tasks/Phase447CanonicalLexiconCrossClient.asn"]
+      :tags [:supervision :phase447 :task44702 :harness-artifact-names :ssot :approved]
+      :fact "task44702-certified-complete"
+      :evidence "Renamed voice profile module to asl-voice/harness-profile, structs to HarnessProfile, HarnessPhoneticAlias, HarnessHardwareEndpoint in voice/src/harness_profile.asl; created canonical .asl/harness.config.asn; updated voice/manifest.asn and audio_bridge_test.asl; established baseline failure and verified non-vacuous assertions; passed SuperviseGate.sh with 29 executed assertions; receipts recorded"
+      :consequence "Task44702 certified complete; canonical harness artifact names established under ADR-0081")
   ]
 )
