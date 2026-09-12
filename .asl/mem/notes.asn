@@ -1081,5 +1081,15 @@
       :fact "phase448-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44806.asl verifying SuperviseGate task dispatch and rejection, 72rem shell and 80rem canvas width policy, WCAG 2.2 AA contrast ratios and focus-visible outline, capability provenance and verified status, and ADR-0082 settled design system choices; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 47 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44806 and Phase 448 100% verified and certified; all 6 tasks completed under ADR-0081 and ADR-0082")
+    (:note
+      :id "n94"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "TOKEN_CONVENTIONS.md" "tests/acceptance/d81/Task45901.asl" ".asl/mem/tasks/Phase459LanguageCompactionAndPredictability.asn"]
+      :tags [:supervision :phase459 :task45901 :naming-conventions :one-name-per-concept :predicate-naming :constructor-naming :conversion-naming :approved]
+      :fact "task45901-certified-complete"
+      :evidence "Authored predicateNaming, constructorNaming, and conversionNaming semantics in asl/grammar/language-semantics.asn; documented One Name per Concept standard in TOKEN_CONVENTIONS.md with empty? and retired forms; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 21 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task45901 100% verified and certified; one canonical name per concept established before Task45403 builtins under ADR-0081")
   ]
 )

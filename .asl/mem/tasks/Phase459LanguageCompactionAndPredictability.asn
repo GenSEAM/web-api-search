@@ -13,12 +13,12 @@
       :phase "phase-459"
       :title "One name per concept, decided before any new builtin is written"
       :kind :language
-      :state :planned
+      :state :completed
       :lane "naming"
       :priority :critical
       :ownerRole "planner"
       :createdAt 1789160000000
-      :updatedAt 1789160000000
+      :updatedAt 1789421200000
       :motivation "A model predicting how to ask whether a value is a thing finds three sanctioned answers in this corpus: 337 names end in a question mark, 227 begin with is, and 192 do both. Constructors carry four prefixes and conversions four shapes. Each variant is individually defensible and collectively they mean the model must memorise this repository rather than generalise from the languages it has read. This is not a token problem, it is an accuracy problem, and it compounds: Task45403 is about to add 40 new builtins, and writing them before the convention is settled bakes the fragmentation into the primitives themselves."
       :purpose "One spelling per concept, recorded in the grammar rather than in prose: a predicate ends in a question mark and never begins with is, a constructor is make followed by the type, a conversion is source-to-target. A checker rejects a definition that uses a retired form, and the 40 builtins of Task45403 are named from this decision rather than from habit."
       :context (:contractRef D81PlanContext)
@@ -39,13 +39,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task45901.asl"]
       :verificationCases ["A definition named is-empty is rejected and the message names the sanctioned form." "A definition named is-empty? is rejected, because carrying both markers is the most common current variant." "A predicate correctly named empty? passes." "The check runs over the grammar registries as well as over sources, so a retired form cannot be reintroduced by declaration."]
-      :gateReadiness :baselineEstablished
+      :gateReadiness :verified
       :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45901" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define predicateNaming semantic")
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :historicalReceipts ["rc-task45901-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Decide one form per concept." "Record it in the grammar." "Add the checker." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task45901-verified-20260912"])
     (:task
       :id "Task45902"
       :parentId ""

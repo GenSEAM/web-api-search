@@ -181,3 +181,22 @@ To prevent defeasible heuristics from being treated with the same perceived auth
 4. **Heuristic (`:force :heuristic`)**:
    Defines practices that usually work. Every heuristic MUST declare its explicit defeat condition (`:defeat`) naming when the rule does not apply.
 
+---
+
+## 7. One Name per Concept (`Task45901`, `ADR-0081`)
+
+To guarantee language predictability and eliminate memory overhead across autonomous agents and language models, the repository enforces strictly **one canonical name per concept** recorded in `asl/grammar/language-semantics.asn`:
+
+1. **Predicates (`predicateNaming`)**:
+   - A predicate MUST end in a question mark (`?`) and MUST NEVER begin with `is-` or `is`.
+   - **Sanctioned Form**: `empty?`, `fresh?`, `valid?`, `alive?`.
+   - **Retired Forms**: `is-empty`, `is-empty?`, `is-fresh?`, `is-valid?` (`ERR_RETIRED_PREDICATE_FORM`).
+2. **Constructors (`constructorNaming`)**:
+   - A constructor MUST begin with `make-` followed by the target type or construct name.
+   - **Sanctioned Form**: `make-node`, `make-symbol-entry`, `make-frame`.
+   - **Retired Forms**: `create-node`, `build-node`, `new-node` (`ERR_RETIRED_CONSTRUCTOR_FORM`).
+3. **Conversions (`conversionNaming`)**:
+   - A type conversion MUST strictly follow the `source-to-target` pattern.
+   - **Sanctioned Form**: `int-to-string`, `json-to-vdom`, `asn-to-svg`.
+   - **Retired Forms**: `string-from-int`, `to-string`, `as-string` (`ERR_RETIRED_CONVERSION_FORM`).
+
