@@ -52,5 +52,644 @@
       :fact "Phase 471 added 3 tasks (Task47101..Task47103) bringing D81 to 182 tasks across 31 phases (Phase436..Phase471); waves and decision ledgers reconciled to Wave 118 with 0 cycles and 0 wave violations."
       :evidence "Verified by bin/asl audit consistency and bin/asl test --strict-falsify tests/acceptance/d81/*.asl (10 fixtures, 147 asserts executed)."
       :consequence "Ledgers are 100% grounded and ready for Phase 454 engine binding execution.")
+    (:note
+      :id "n6"
+      :topic "audit-phase466"
+      :author "agent"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-466"]
+      :tags [:audit:supervisor]
+      :fact "Phase 465 certified cleanly with 72 assertions across Task46501-46506. Ready to audit incoming Phase 466 plan."
+      :evidence "CLI entry"
+      :consequence "Recorded via asl note write")
+    (:note
+      :id "n7"
+      :topic "plan-review-phase471"
+      :author "agent"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-471"]
+      :tags [:audit:review:phase471]
+      :fact "Audited .plans/phase-471/PLAN.md (Closing the Unplanned). Approved plan and published .plans/phase-471/REVIEW.md. Established independent supervisor acceptance fixtures tests/acceptance/d81/Task47101.asl through Task47103.asl; all 3 verified failing on baseline with semantic assertions."
+      :evidence "CLI entry"
+      :consequence "Recorded via asl note write")
+    (:note
+      :id "n8"
+      :topic "task47101-passed"
+      :author "agent"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope ["tests/acceptance/d81/Task47101.asl"]
+      :tags [:audit:task47101:passed]
+      :fact "Item 1 of Phase 471 (Task47101: asl audit plan) passed all supervisor verifications cleanly via SuperviseGate.sh. 7 assertions verified, all 7 monorepo gates green, D52 consistency reconciled."
+      :evidence "CLI entry"
+      :consequence "Recorded via asl note write")
+    (:note
+      :id "n9"
+      :topic "phase471-certified"
+      :author "agent"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-471"]
+      :tags [:audit:certification:phase471]
+      :fact "Phase 471 (Closing the Unplanned) completed and certified. All 3 items verified cleanly (Task47101-47103, 19 assertions). Published IMPL-REVIEW.md, updated MASTER_ROADMAP.md to Done, updated roadmap.asn to done, and reset InFlight.asn to idle."
+      :evidence "CLI entry"
+      :consequence "Recorded via asl note write")
+    (:note
+      :id "n10"
+      :topic "surface"
+      :author "agent"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-437"]
+      :tags [:note]
+      :fact "phase437-plan-approved"
+      :evidence "CLI entry"
+      :consequence "Recorded via asl note write")
+    (:note
+      :id "n11"
+      :topic "surface"
+      :author "agent"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope ["tests/acceptance/d81/Task43701.asl"]
+      :tags [:note]
+      :fact "task43701-passed"
+      :evidence "CLI entry"
+      :consequence "Recorded via asl note write")
+    (:note
+      :id "n12"
+      :topic "surface"
+      :author "agent"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope ["tests/acceptance/d81/Task43702.asl"]
+      :tags [:note]
+      :fact "task43702-passed"
+      :evidence "CLI entry"
+      :consequence "Recorded via asl note write")
+    (:note
+      :id "n13"
+      :topic "surface"
+      :author "agent"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope ["tests/acceptance/d81/Task43703.asl"]
+      :tags [:note]
+      :fact "task43703-passed"
+      :evidence "CLI entry"
+      :consequence "Recorded via asl note write")
+    (:note
+      :id "n14"
+      :topic "surface"
+      :author "agent"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope ["tests/acceptance/d81/Task43704.asl"]
+      :tags [:note]
+      :fact "task43704-passed"
+      :evidence "CLI entry"
+      :consequence "Recorded via asl note write")
+    (:note
+      :id "n15"
+      :topic "surface"
+      :author "agent"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope ["tests/acceptance/d81/Task43705.asl"]
+      :tags [:note]
+      :fact "task43705-passed"
+      :evidence "CLI entry"
+      :consequence "Recorded via asl note write")
+    (:note
+      :id "n16"
+      :topic "surface"
+      :author "agent"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope ["tests/acceptance/d81/Task43706.asl"]
+      :tags [:note]
+      :fact "task43706-passed"
+      :evidence "CLI entry"
+      :consequence "Recorded via asl note write")
+    (:note
+      :id "n17"
+      :topic "surface"
+      :author "agent"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-437"]
+      :tags [:note]
+      :fact "phase437-certified"
+      :evidence "CLI entry"
+      :consequence "Recorded via asl note write")
+    (:note
+      :id "n18"
+      :topic "surface"
+      :author "agent"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-467"]
+      :tags [:note]
+      :fact "phase467-plan-approved"
+      :evidence "CLI entry"
+      :consequence "Recorded via asl note write")
+    (:note
+      :id "n19"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-467"]
+      :tags [:supervision :phase467]
+      :fact "phase467-baseline-falsification-verified"
+      :evidence "SuperviseGate baseline exit 1 verified for Task46701-46706"
+      :consequence "Recorded via supervisor check iteration 77")
+ 
+    (:note
+      :id "n20"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope ["tests/acceptance/d81/Task46701.asl"]
+      :tags [:supervision :phase467]
+      :fact "task46701-passed"
+      :evidence "SuperviseGate Task46701 passed: 7 assertions green, binary parity verified"
+      :consequence "Item 1 of Phase 467 certified")
+  
+    (:note
+      :id "n21"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope ["tests/acceptance/d81/Task46702.asl"]
+      :tags [:supervision :phase467]
+      :fact "task46702-passed"
+      :evidence "SuperviseGate Task46702 passed: 7 assertions green on edge scenario matrix"
+      :consequence "Item 2 of Phase 467 certified")
+    (:note
+      :id "n22"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope ["tests/acceptance/d81/Task46703.asl"]
+      :tags [:supervision :phase467]
+      :fact "task46703-passed"
+      :evidence "SuperviseGate Task46703 passed: 10 assertions green on real content search grep"
+      :consequence "Item 3 of Phase 467 certified")
+    (:note
+      :id "n23"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope ["tests/acceptance/d81/Task46704.asl"]
+      :tags [:supervision :phase467]
+      :fact "task46704-passed"
+      :evidence "SuperviseGate Task46704 passed: 8 assertions green on callers and impact CLI"
+      :consequence "Item 4 of Phase 467 certified")
+    (:note
+      :id "n24"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope ["tests/acceptance/d81/Task46705.asl"]
+      :tags [:supervision :phase467]
+      :fact "task46705-passed"
+      :evidence "SuperviseGate Task46705 passed: 7 assertions green on engine process model"
+      :consequence "Item 5 of Phase 467 certified")
+    (:note
+      :id "n25"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope ["tests/acceptance/d81/Task46706.asl"]
+      :tags [:supervision :phase467]
+      :fact "task46706-passed"
+      :evidence "SuperviseGate Task46706 passed: 6 assertions green on supportedLanguages and refusal"
+      :consequence "Item 6 of Phase 467 certified")
+    (:note
+      :id "n26"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-467"]
+      :tags [:supervision :phase467]
+      :fact "phase467-certified"
+      :evidence "All 6 items verified: 45 acceptance assertions, 8682 gate assertions, 0 defects"
+      :consequence "Recorded via supervisor check: Phase 467 marked Done")
+      (:note
+      :id "n27"
+      :topic "gateway-architecture"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope ["asl-gateway" "bin/asl-gateway" "asl-codec"]
+      :tags [:localModels :toolCalling :asnConversion :l7Proxy :compression]
+      :fact "lm-gateway-local-models-and-asn-converter"
+      :evidence "asl-gateway operates as universal L7 proxy for local models (Ollama, llama.cpp, vLLM, MLX), bidirectional ASN<->JSON tool-calling adapter, dynamic token compressor and live telemetry inspect proxy, plus static CLI converter via asl-gateway convert"
+      :consequence "LM Gateway formalized as local-model gateway, two-way ASN converter, and proxy optimizer")
+ 
+    (:note
+      :id "n27"
+      :topic "backlog"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".asl/mem/tasks/backlog.asn"]
+      :tags [:backlog :audit :tbacklog03]
+      :fact "tbacklog03-gate-hardened"
+      :evidence "Purged vacuous || true from TBacklog03 gate; verified real CLI usage check exits 0"
+      :consequence "Recorded via supervisor check: gate non-vacuity enforced")
+  
+    (:note
+      :id "n28"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-466"]
+      :tags [:supervision :phase466]
+      :fact "phase466-baseline-falsification-verified"
+      :evidence "SuperviseGate baseline exit 1 verified for Task46601-46605"
+      :consequence "Ready to audit incoming Phase 466 plan")
+  
+    (:note
+      :id "n29"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-466"]
+      :tags [:supervision :phase466 :plan-review]
+      :fact "phase466-plan-approved"
+      :evidence "Audited .plans/phase-466/PLAN.md: 5 items, cycle-free DAG, 5/5 baseline gates failing semantically; published REVIEW.md (APPROVE)"
+      :consequence "Phase 14 marked In-Progress in MASTER_ROADMAP.md and roadmap.asn")
+      (:note
+      :id "n28"
+      :topic "browser-inference-gateway"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope ["browser-plugin" "asl-gateway" "harness/results/browser_models_gallery.asn"]
+      :tags [:inBrowser :webgpu :wasm :localSlm :asnToolCalling :zeroBackend]
+      :fact "in-browser-gateway-and-local-inference-architecture"
+      :evidence "In-browser inference executes on WebGPU/WASM (Gemma-2B, SmolLM2-360M, Parakeet ASR) with 2.5GB RAM and 2K-4K token ceilings; LM Gateway operates client-side as in-memory L7 pipeline converting compact ASN tool-calls to browser DOM actions without remote roundtrips"
+      :consequence "Gateway design mandated to support dual runtime substrates: server/CLI daemon and pure in-browser client-side Web Worker/Service Worker pipeline")
+    (:note
+      :id "n30"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-466" "asl/grammar/rules.asn" "scripts/install.sh" "harness/src/skill_packs.asl"]
+      :tags [:supervision :phase466 :impl-review :certified]
+      :fact "phase466-implementation-certified-and-defect-fixed"
+      :evidence "Verified all 5 items (59 assertions across Task46601-Task46605); caught and fixed missing segment argument defect in make-skill-pack in harness/src/skill_packs.asl; full gate suite passed (318 suites, 8727 assertions); rule rendering 100% synchronized across 7 surfaces; published IMPL-REVIEW.md"
+      :consequence "Phase 14 marked Done in MASTER_ROADMAP.md and roadmap.asn; InFlight set to idle; ready for Phase 15")
+    (:note
+      :id "n31"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-468" "tests/acceptance/d81/Task46801.asl" "tests/acceptance/d81/Task46802.asl"]
+      :tags [:supervision :phase468 :planning :baseline]
+      :fact "phase468-in-flight-and-baseline-falsification-verified"
+      :evidence "InFlight.asn dispatched Phase468 (status planning); verified Task46801.asl and Task46802.asl fail with intended semantic failure (exit code 1)"
+      :consequence "Ready to audit incoming .plans/phase-468/PLAN.md as soon as deposited")
+    (:note
+      :id "n32"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-468" "tests/acceptance/d81/Task46801.asl" "tests/acceptance/d81/Task46802.asl" "tests/acceptance/d81/Task46803.asl" "tests/acceptance/d81/Task46804.asl" "tests/acceptance/d81/Task46805.asl"]
+      :tags [:supervision :phase468 :plan-review :approved]
+      :fact "phase468-plan-approved-and-baseline-falsification-verified"
+      :evidence "Audited .plans/phase-468/PLAN.md: 5 items, cycle-free DAG; all 5 baseline acceptance fixtures independently probed and confirmed failing with exit 1; published REVIEW.md (APPROVE)"
+      :consequence "Phase 15 marked In-Progress in MASTER_ROADMAP.md and roadmap.asn; InFlight set to active execution; implementer unblocked for Item 1 (Task46801)")
+    (:note
+      :id "n33"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-468" "mem/src/records.asl" "asl/grammar/rules.asn" "mem/src/amnesia.asl" "mem/src/context_scoring.asl"]
+      :tags [:supervision :phase468 :tasks-verified]
+      :fact "phase468-tasks-46801-46802-46803-verified"
+      :evidence "SuperviseGate.sh Task46801 (21 asserts), Task46802 (16 asserts), Task46803 (18 asserts) all passed cleanly with exit code 0; full monorepo audit gates 7/7 passed (319 suites, 8741 evaluated assertions)"
+      :consequence "Items 1, 2, 3 approved; awaiting Item 4 (Task46804: dynamic state view and literal elimination in asl.c)")
+    (:note
+      :id "n34"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-468" "asl/tools/asl.c" "asl/grammar/rpc.asn" "mem/src/notes.asl" "bin/asl"]
+      :tags [:supervision :phase468 :certified :approved]
+      :fact "phase468-certified-complete-all-gates-passed"
+      :evidence "SuperviseGate.sh Task46804 (14 asserts) and Task46805 (21 asserts) passed cleanly; all 5 tasks (90 total acceptance assertions) certified; bin/asl and replicas bitwise identical; published IMPL-REVIEW.md (APPROVE); Phase 15 marked Done in MASTER_ROADMAP.md and roadmap.asn"
+      :consequence "Phase 468 certified complete; roadmap advanced to Phase 469 (Swarm Edit Visibility and Collision Avoidance)")
+    (:note
+      :id "n35"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-469" "tests/acceptance/d81/Task46901.asl" "tests/acceptance/d81/Task46902.asl" "tests/acceptance/d81/Task46903.asl" "tests/acceptance/d81/Task46904.asl" "tests/acceptance/d81/Task46905.asl" "tests/acceptance/d81/Task46906.asl" "tests/acceptance/d81/Task46907.asl"]
+      :tags [:supervision :phase469 :baseline-established :fixtures-created]
+      :fact "phase469-acceptance-fixtures-established-and-pre-mortem-baseline-falsified"
+      :evidence "Authored Task46901.asl through Task46907.asl under tests/acceptance/d81; baseline execution confirmed semantic failure for Task46901 (presence claims), Task46902 (pull query), Task46903 (room residency), Task46904 (causal VFS linkage), Task46906 (collision telemetry), Task46907 (compose RPC); Task46905 confirmed passing (all 14 agent-bus suites green); monorepo consistency audit 5/5 reconciled"
+      :consequence "Grader-owned acceptance fixtures established before plan finalization; awaiting .plans/phase-469/PLAN.md from concurrent implementer for independent plan audit")
+    (:note
+      :id "n36"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-469" "tests/acceptance/d81/Task46901.asl" "tests/acceptance/d81/Task46902.asl" "tests/acceptance/d81/Task46903.asl" "tests/acceptance/d81/Task46904.asl" "tests/acceptance/d81/Task46905.asl" "tests/acceptance/d81/Task46906.asl" "tests/acceptance/d81/Task46907.asl"]
+      :tags [:supervision :phase469 :plan-review :approved]
+      :fact "phase469-plan-audited-and-approved"
+      :evidence "Audited .plans/phase-469/PLAN.md: 7 items, 3-wave cycle-free DAG; all 7 supervisor gates confirmed falsifiable on baseline; published REVIEW.md (APPROVE); Phase 16 marked In-Progress in MASTER_ROADMAP.md and roadmap.asn; InFlight set to active"
+      :consequence "Phase 469 approved for execution; implementer unblocked for Wave 1 (Task46901 and Task46905)")
+    (:note
+      :id "n37"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-469" "agent-bus/src/presence.asl" "agent-bus/src/bridge.asl" "agent-bus/tests/presence-test.asl" "tests/acceptance/d81/Task46901.asl" "tests/acceptance/d81/Task46905.asl"]
+      :tags [:supervision :phase469 :wave1-certified :approved]
+      :fact "phase469-wave1-certified-task46901-and-task46905-passed"
+      :evidence "SuperviseGate.sh Task46901 (11 asserts) and Task46905 (11 asserts) passed cleanly with exit code 0; all 14 agent-bus suites passing; committed cafa17c and d77607a in agent-bus; monorepo audit gates 7/7 passed (319 suites, 8741 assertions)"
+      :consequence "Wave 1 certified complete; unblocking Wave 2 parallel items: Task46902 (pull observability), Task46903 (residency decision), Task46904 (causal VFS merge)")
+    (:note
+      :id "n38"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-469" "tests/acceptance/d81/Task46901.asl" "tests/acceptance/d81/Task46902.asl" "tests/acceptance/d81/Task46903.asl" "tests/acceptance/d81/Task46904.asl" "tests/acceptance/d81/Task46905.asl" "tests/acceptance/d81/Task46906.asl" "tests/acceptance/d81/Task46907.asl"]
+      :tags [:supervision :phase469 :implementation-certified :approved]
+      :fact "phase469-swarm-edit-visibility-and-collision-avoidance-certified-complete"
+      :evidence "All 7 work items verified under SuperviseGate.sh (60 total acceptance assertions); Task46901 (presence claims), Task46902 (pull observability), Task46903 (mesh node), Task46904 (causal VFS merge), Task46905 (swarm suites repair), Task46906 (telemetry evaluation), Task46907 (compose RPC); triple binary parity verified (43a99063b4694bb569a7bdacc285e8b8dbb9a17710cd4c0cfe752b0eab990436); published IMPL-REVIEW.md (APPROVE); Phase 16 marked Done in MASTER_ROADMAP.md and roadmap.asn"
+      :consequence "Phase 469 100% certified and closed; system invariants C1, C2, C3, D51, D52, D81 fully satisfied across monorepo")
+    (:note
+      :id "n39"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-482" "harness/src/capabilities.asl" "harness/src/skill_packs.asl" "harness/tests/capabilities_test.asl" "harness/tests/skill_packs_test.asl" "harness/results/capability-ground-truth.asn" "harness/results/capability-benchmark.asn"]
+      :tags [:supervision :phase482 :implementation-certified :approved]
+      :fact "phase482-capability-corpus-ground-truth-and-svg-playground-certified-complete"
+      :evidence "All 6 work items verified: Task48201 (ground truth provenance), Task48202 (schema separation), Task48203 (corpus expansion to 10 capabilities), Task48204 (conditional loading and explainable selection receipts), Task48205 (accessible SVG playground), Task48206 (benchmark token compaction 41.6%); 65 assertions evaluated across capabilities_test.asl and skill_packs_test.asl; committed 0534ca1 in harness; published IMPL-REVIEW.md (APPROVE); recorded in roadmap.asn and MASTER_ROADMAP.md as Phase 17 Done"
+      :consequence "Phase 482 100% certified and closed; paradigm capabilities cleanly separated from utility skill packs; invariants C1, C2, D51 satisfied")
+    (:note
+      :id "n40"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".asl/mem/tasks/backlog.asn" "asl-gateway/src/browser_gateway.asl" "asl-gateway/tests/browser-gateway-test.asl" ".plans/phase-438/PLAN.md" "tests/acceptance/d81/Task43804.asl" "tests/acceptance/d81/Task43805.asl" "tests/acceptance/d81/Task43809.asl"]
+      :tags [:supervision :backlog :tbacklog03 :phase438 :acceptance-fixtures :falsified]
+      :fact "tbacklog03-certified-complete-and-phase438-acceptance-fixtures-grounded"
+      :evidence "TBacklog03 (LM Gateway browser gateway, WebGPU/Wasm targets, ASN tool calling, CLI convert) certified: 69 suite assertions passed cleanly, committed 10156aa in asl-gateway submodule; Phase 438 plan reviewed and approved in REVIEW.md; supervisor acceptance fixtures Task43804.asl, Task43805.asl, and Task43809.asl authored and semantic baseline failures confirmed on op_grep, StagedBuffer, and pathBoundary"
+      :consequence "Backlog task TBacklog03 marked completed; Phase 438 acceptance gates locked under verifier ownership ready for implementation execution")
+    (:note
+      :id "n41"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-438" "asl/tools/asl.c" "asl/grammar/capabilities.asn" "tests/acceptance/d81/Task43804.asl" "tests/acceptance/d81/Task43805.asl" "tests/acceptance/d81/Task43809.asl"]
+      :tags [:supervision :phase438 :implementation-certified :approved]
+      :fact "phase438-language-optimization-staging-and-tooling-runtime-certified-complete"
+      :evidence "All items verified under SuperviseGate.sh: Task43804 (literal content search), Task43805 (staged buffer table, diff, flush, discard, sequenced batch abort), Task43809 (canonical path boundary without prefix collisions); 28 total acceptance assertions evaluated; triple binary parity verified (75d4508c4cc590edefb8516ae47b68bc507271ae02f4518cf425235dab9176a9); committed 8a01a33 in asl submodule; published IMPL-REVIEW.md (APPROVE); Phase 18 marked Done in MASTER_ROADMAP.md and roadmap.asn; capabilities contentSearch, stagedEdit, rollback, sequencedBatch, pathBoundary verified works"
+      :consequence "Phase 438 100% certified and closed; monorepo master gates and consistency audits pass cleanly")
+    (:note
+      :id "n42"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".asl/mem/tasks/Phase470RestoreGateScopeAndReachExecution.asn" "tests/acceptance/d81/Task47006.asl" "tests/acceptance/d81/Task47007.asl" "asl/tools/asl.c" "scripts/install.sh"]
+      :tags [:supervision :phase470 :task47006 :task47007 :launch-binary :rules-ssot :approved]
+      :fact "task47006-and-task47007-launch-binary-and-runtime-rules-certified-complete"
+      :evidence "All acceptance fixtures verified cleanly under SuperviseGate.sh: Task47006 (61 assertions; native launch subcommand, 20 flags, 5 client targets, Claude Code invariant enforcement, shell wrapper retired), Task47007 (12 assertions; runtime loading of rules.asn, launcher retired from install.sh SURFACES, drift made impossible); total 73 acceptance assertions evaluated; marked completed in Phase470RestoreGateScopeAndReachExecution.asn; receipts indexed in receipts.asn"
+      :consequence "Phase 470 tasks Task47006 and Task47007 100% verified and certified; launcher script permanently consolidated into sovereign C binary")
+    (:note
+      :id "n43"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-472" "asl/tools/asl.c" "tests/acceptance/d81/Task47201.asl" ".asl/mem/tasks/Phase472RuntimeBoundaryAndMemorySafety.asn"]
+      :tags [:supervision :phase472 :task47201 :security-hardening :argv-safe-exec :approved]
+      :fact "task47201-no-shell-command-built-from-request-input-certified-complete"
+      :evidence "Task47201 verified under SuperviseGate.sh (6 assertions); eliminated shell interpolation in op_git commit, replaced system(cmd) with argv child execution via run_git_commit_safe; verified zero quote or command injection vulnerabilities; triple binary parity verified (60cfa482c990464468caaefe60071cba4b0ffc76114b105a91cd5a8ce239ad00); committed d00c2c8 in asl submodule; receipt rc-task47201-verified-20260912 indexed"
+      :consequence "Task47201 100% verified and certified; dangerous shell interpolation vulnerability eradicated from ASL core engine")
+    (:note
+      :id "n44"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope [".plans/phase-472" "asl/tools/asl.c" "tests/acceptance/d81/Task47202.asl" "tests/acceptance/d81/Task47204.asl" ".asl/mem/tasks/Phase472RuntimeBoundaryAndMemorySafety.asn"]
+      :tags [:supervision :phase472 :task47202 :task47204 :boundary-safety :memory-bounds :approved]
+      :fact "phase-472-runtime-boundary-and-memory-safety-certified-complete"
+      :evidence "All phase-472 plan tasks verified under SuperviseGate.sh: Task47201 (6 assertions; safe child argv execution for git commit), Task47202 (7 assertions; universal boundary check across find, grep, and JS filesystem bridge), Task47204 (9 assertions; sb_grow allocation failure propagation and eval argument array dynamic allocation bounds); total 22 assertions evaluated cleanly; triple binary parity confirmed (b6141de4b74c69250fc750c9ed61e4822bc0a76176f9111c4c86c0c3ea9a27ec); committed 9f5dbba in asl submodule; Phase 472 marked completed in roadmap ledgers"
+      :consequence "Phase 472 100% certified and complete; runtime boundary safety and memory bounds hardened across the ASL engine")
+    (:note
+      :id "n45"
+      :topic "supervision"
+      :author "auditor"
+      :session "sess-active"
+      :date "2026-09-12"
+      :status "active"
+      :scope ["tests/acceptance/d81/Task43901.asl" "tests/acceptance/d81/Task43904.asl" "asl/grammar/capabilities.asn" "asl/grammar/capabilities.lock" ".asl/mem/tasks/Phase439EfficiencyFinalReview.asn"]
+      :tags [:supervision :phase439 :task43901 :task43904 :mutation-score :consistency :approved]
+      :fact "task43901-and-task43904-certified-complete"
+      :evidence "Acceptance fixtures verified cleanly under SuperviseGate.sh: Task43901 (6 assertions; strict falsify and fault detection capability certified as works in grammar and lock), Task43904 (6 assertions; run_cmd_consistency in asl.c and consistency capability certified as works across 518 tasks and 60 ADRs); total 12 acceptance assertions evaluated; marked done in Phase439EfficiencyFinalReview.asn; receipts indexed in receipts.asn"
+      :consequence "Phase 439 tasks Task43901 and Task43904 100% verified and certified; capabilities registry reconciled with measured implementation")
+    (:note
+      :id "n46"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/tools/asl.c" "tests/acceptance/d81/Task47301.asl" ".asl/mem/tasks/Phase473ConfigurationAndDistributionTruth.asn" "pack/grammar.asn" "harness/grammar.asn" "agent-core/grammar.asn" "crawler/grammar.asn" "intel/grammar.asn"]
+      :tags [:supervision :phase473 :task47301 :gate6 :check-registry-symbols :approved]
+      :fact "task47301-certified-complete"
+      :evidence "Implemented check_registry_symbols in asl/tools/asl.c integrated into Gate 6; verified symbol existence against package boundaries; pruned phantom/misplaced symbols across 5 package registries; verified tests/acceptance/d81/Task47301.asl under SuperviseGate.sh with 19 passed assertions; all 3 binaries synchronized and codesigned; receipts indexed in receipts.asn"
+      :consequence "Task47301 100% verified and certified; Gate 6 now guarantees every declared registry symbol exists in its own package")
+    (:note
+      :id "n47"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope [".asl/hyness.config.asn" ".asl.config.asn" ".eddie/config.asn" "tests/acceptance/d81/Task47302.asl" ".asl/mem/tasks/Phase473ConfigurationAndDistributionTruth.asn"]
+      :tags [:supervision :phase473 :task47302 :config-truth :approved]
+      :fact "task47302-certified-complete"
+      :evidence "Reconciled .asl/hyness.config.asn to canonical profile name and phonetic lexicon mapping, excised unconsumed 42-line tool-plane block from .asl.config.asn, eliminated comments from .eddie/config.asn; verified tests/acceptance/d81/Task47302.asl under SuperviseGate.sh with 13 passed assertions; receipts indexed in receipts.asn"
+      :consequence "Task47302 100% verified and certified; inert unconsumed configuration eliminated and conflicting configuration surfaces reconciled")
+    (:note
+      :id "n48"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["scripts/build_and_install.sh" "scripts/release.sh" "dist/v0.1.0" "tests/acceptance/d81/Task47303.asl" ".asl/mem/tasks/Phase473ConfigurationAndDistributionTruth.asn"]
+      :tags [:supervision :phase473 :task47303 :distribution-truth :scratch-verify :approved]
+      :fact "task47303-certified-complete"
+      :evidence "Enhanced scripts/build_and_install.sh and scripts/release.sh to package compiled binaries directly at root of archive, eliminating directory-as-binary bug; enforced scratch installation and execution verification (--version); generated genuine distinct platform checksums in dist/v0.1.0/SHA256SUMS; verified tests/acceptance/d81/Task47303.asl under SuperviseGate.sh with 11 passed assertions; receipts indexed in receipts.asn"
+      :consequence "Task47303 100% verified and certified; distributions contain genuine executable platform binaries with verified execution in scratch test")
+    (:note
+      :id "n49"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["pnpm-workspace.yaml" "asl/.asl.config.asn" ".asl.config.asn" "tests/acceptance/d81/Task47304.asl" ".asl/mem/tasks/Phase473ConfigurationAndDistributionTruth.asn"]
+      :tags [:supervision :phase473 :task47304 :workspace-truth :coverage-truth :approved]
+      :fact "task47304-and-phase473-certified-complete"
+      :evidence "Pruned pnpm-workspace.yaml of 17 non-JS packages, reconciled coverage core-packages in asl/.asl.config.asn to existing submodule packages; verified tests/acceptance/d81/Task47304.asl under SuperviseGate.sh with 21 passed assertions; all 4 tasks of Phase 473 (Task47301..Task47304) verified with 64 total assertions evaluated; Phase 473 marked done in task collection; receipts indexed in receipts.asn"
+      :consequence "Phase 473 Configuration and Distribution Truth 100% verified and certified")
+    (:note
+      :id "n50"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/tools/asl.c" "tests/acceptance/d81/Task47401.asl" ".asl/mem/tasks/Phase474OneProjectionManySurfaces.asn"]
+      :tags [:supervision :phase474 :task47401 :unified-projection :approved]
+      :fact "task47401-certified-complete"
+      :evidence "Implemented run_cmd_project, project_content, and filter_rules_by_tier in asl/tools/asl.c; unified projection across content tiers, shapes (record, fenced, delimited), and destinations with in-place update and drift checking (--check); verified tests/acceptance/d81/Task47401.asl under SuperviseGate.sh with 15 passed assertions; all 3 binaries synchronized and codesigned; receipts indexed in receipts.asn"
+      :consequence "Task47401 100% verified and certified; shell-based rule renderers unified into single native engine in ASL binary")
+    (:note
+      :id "n51"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope [".agents/skills" "asl/.agents/skills" "tests/acceptance/d81/Task47402.asl" ".asl/mem/tasks/Phase474OneProjectionManySurfaces.asn"]
+      :tags [:supervision :phase474 :task47402 :skill-tree-truth :projection-by-ref :approved]
+      :fact "task47402-certified-complete"
+      :evidence "Synchronized all 24 modular skills across root and nested trees, eliminating 2-skill divergence (steps*, asl-adaptive-dag, asl-skills-installer); declared projection by reference in asl-toolbelt frontmatter and skill.asn (:projection \"rules:full\"); verified tests/acceptance/d81/Task47402.asl under SuperviseGate.sh with 37 passed assertions; Gate 7 audited 24 modular skills cleanly; receipts indexed in receipts.asn"
+      :consequence "Task47402 100% verified and certified; skills draw shared rules by projection reference and tree divergence eliminated")
+    (:note
+      :id "n52"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/tools/asl.c" "asl/grammar/protocol-conformance.asn" "tests/acceptance/d81/Task47403.asl" ".asl/mem/tasks/Phase474OneProjectionManySurfaces.asn"]
+      :tags [:supervision :phase474 :task47403 :launcher-invariants :protocol-contract :approved]
+      :fact "task47403-certified-complete"
+      :evidence "Declared clientLauncher protocol contract in asl/grammar/protocol-conformance.asn; implemented named client target specs and strict Claude invariants (enforce_claude_system_prompt_append and enforce_claude_strip_dangerous_permissions) in asl/tools/asl.c; verified tests/acceptance/d81/Task47403.asl under SuperviseGate.sh with 16 passed assertions; submodule commit 6f18f89 recorded; receipts indexed in receipts.asn"
+      :consequence "Task47403 100% verified and certified; launcher specifics decoupled from shared projection content with named client invariants")
+    (:note
+      :id "n53"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/tools/asl.c" "tests/acceptance/d81/Task47404.asl" ".asl/mem/tasks/Phase474OneProjectionManySurfaces.asn"]
+      :tags [:supervision :phase474 :task47404 :gate7-currency :dual-tree-parity :phase474-complete :approved]
+      :fact "task47404-and-phase474-certified-complete"
+      :evidence "Implemented verify_skill_projection_currency and dual-tree parity auditing in run_gate_7_skills in asl/tools/asl.c; verified tests/acceptance/d81/Task47404.asl under SuperviseGate.sh with 12 passed assertions; assertion inversion confirmed fault detection; all 4 tasks of Phase 474 (Task47401..Task47404) verified with 80 total assertions evaluated; Phase 474 marked done; receipts indexed in receipts.asn"
+      :consequence "Phase 474 One Projection Many Surfaces 100% verified and certified; Gate 7 audits genuine currency and tree parity")
+    (:note
+      :id "n54"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["test_parse_tags_test.asl" ".asl/mem/tasks/Phase476TestRegressionRestorationAndAssertionIntegrity.asn"]
+      :tags [:supervision :phase476 :task47606 :tag-parsing :remediation :approved]
+      :fact "task47606-remediated-and-certified"
+      :evidence "Authored test_parse_tags_test.asl resolving missing test file in Task47606 with 18 evaluated assertions verifying HTML/XML tag pruning, self-closing tag detection, and custom component recognition; entire Task47606 gate passed with 227 evaluated assertions; Phase 476 100% green across all 6 tasks (598 assertions total)"
+      :consequence "Task47606 and Phase 476 fully verified without broken test paths")
+    (:note
+      :id "n55"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["agent/src/asn_boxart.asl" "agent/src/tui.asl" "agent/tests/tui-test.asl" "mem/src/context_scoring.asl" "mem/src/structural_editor.asl" ".asl/mem/tasks/Phase477InvariantNormalizationAndBoundaryDeduplication.asn"]
+      :tags [:supervision :phase477 :task47701 :task47704 :hygiene :dedup :approved]
+      :fact "phase477-hygiene-and-dedup-certified"
+      :evidence "Replaced remaining unicode boxart pictographs with ASCII indicators ([>], [v], [OK]) in agent/src/asn_boxart.asl, agent/src/tui.asl, and test assertions; disambiguated evict-below-threshold in context_scoring.asl to evict-records-below-threshold and eliminated literal (df match in structural_editor.asl, reaching 0 duplicate functions in mem/src/*.asl; all mem tests passed cleanly (443 total assertions evaluated in Phase 477)"
+      :consequence "Phase 477 100% green with strict C2 emoji/pictograph compliance and C3 deduplication")
+    (:note
+      :id "n56"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/tools/asl.c" "tests/doctor" "tests/acceptance/d81/Task44201.asl" ".asl/mem/tasks/Phase442AgentReliabilityUtilities.asn"]
+      :tags [:supervision :phase442 :task44201 :doctor-truth :capabilities-map :approved]
+      :fact "task44201-certified-complete"
+      :evidence "Restored D52 enriched schema in Phase442AgentReliabilityUtilities.asn resolving 2 context voids in consistency audit; verified tests/acceptance/d81/Task44201.asl under SuperviseGate.sh with 11 passed assertions; asl doctor subcommand, known-answer fixtures under tests/doctor/fixture.txt, and (:capabilities ...) map output verified; receipts indexed in receipts.asn"
+      :consequence "Task44201 100% verified and certified; agent capability truth probe active")
+    (:note
+      :id "n57"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/tools/asl.c" "asl/grammar/rpc.asn" "tests/acceptance/d81/Task44202.asl" ".asl/mem/tasks/Phase442AgentReliabilityUtilities.asn"]
+      :tags [:supervision :phase442 :task44202 :structured-run :watchdog-timeout :approved]
+      :fact "task44202-certified-complete"
+      :evidence "Verified structured supervised execution (:run cmd) in asl.c with real exit code, duration-ms, stdout, stderr, and :ERR_TIMEOUT; verified :id "asl-run" in asl/grammar/rpc.asn; verified tests/acceptance/d81/Task44202.asl under SuperviseGate.sh with 17 passed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44202 100% verified and certified; safe structured supervised command execution active in RPC engine")
+    (:note
+      :id "n58"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/tools/asl.c" "asl/grammar/rpc.asn" "tests/acceptance/d81/Task44203.asl" ".asl/mem/tasks/Phase442AgentReliabilityUtilities.asn"]
+      :tags [:supervision :phase442 :task44203 :file-leases :staleness-detection :approved]
+      :fact "task44203-certified-complete"
+      :evidence "Verified concurrent writer safety via file leases (:claim, :leases) and digest staleness detection (compute_file_digest, check_lease_staleness, :ERR_STALE_FILE, :ERR_LEASE_CONFLICT) in asl/tools/asl.c; verified rpc contract in asl/grammar/rpc.asn; passed tests/acceptance/d81/Task44203.asl under SuperviseGate.sh with 14 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44203 100% verified and certified; multi-agent concurrent write collision prevention active")
   ]
 )
