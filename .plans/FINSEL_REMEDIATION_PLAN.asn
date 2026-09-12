@@ -1,0 +1,260 @@
+(:plan
+  :id "FINSEL-20260913"
+  :title "Master Multi-Model Monorepo Remediation Plan"
+  :status :planned
+  :monorepo-scope [:wave-1 :wave-2 :wave-3 :wave-4 :wave-5 :wave-6 :wave-7 :wave-8]
+  :phases [
+    (:phase
+      :id :p0-integrity-and-security
+      :name "P0 Epistemic Integrity & Security Gates"
+      :tasks [
+        (:task
+          :id "Task-F01"
+          :title "Wire Dynamic Verification into C Host RPC Gate"
+          :owns ["asl/tools/asl.c"]
+          :baseline "Hardcoded return in run_cmd_rpc_batch"
+          :gate "bin/asl rpc '(:batch (:gate))' | grep -v 'passed 7 :active 7 :total 7'")
+        (:task
+          :id "Task-F02"
+          :title "Implement Live Argument Parsing in CLI Gate Command"
+          :owns ["asl/packages/asl-cli/src/cli.asl"]
+          :baseline "asl gate returns :status :ok on missing files"
+          :gate "! bin/asl gate /tmp/non_existent_file.asl")
+        (:task
+          :id "Task-F03"
+          :title "Repair Native Pre-Commit Hook Executable Target"
+          :owns ["asl/tools/hooks/pre-commit"]
+          :baseline "Calls non-canonical path instead of bin/asl"
+          :gate "grep -q 'bin/asl gate' asl/tools/hooks/pre-commit")
+        (:task
+          :id "Task-F04"
+          :title "Defend C Host Buffer Overruns and Command Injections"
+          :owns ["asl/tools/asl.c"]
+          :baseline "Unbounded strcpy and unquoted popen calls"
+          :gate "./bin/asl doctor")
+        (:task
+          :id "Task-F05"
+          :title "Eliminate Indiscriminate Quote Stripping in Shell Transpiler"
+          :owns ["asl/packages/asl-codec/src/sh-transpile.asl"]
+          :baseline "asn-to-sh strips internal double quotes"
+          :gate "bin/asl test asl/packages/asl-codec/tests/sh-transpile-test.asl")
+        (:task
+          :id "Task-F06"
+          :title "Eliminate Caller-Supplied Magic Numbers in Gate Runner"
+          :owns ["asl/packages/asl-gates/src/gate_runner.asl" "asl/packages/asl-gates/src/runner.asl"]
+          :baseline "Trivial > 0 check on caller counts"
+          :gate "bin/asl test asl/packages/asl-gates/tests/gate_runner_test.asl")
+        (:task
+          :id "Task-F07"
+          :title "Replace Hardcoded Magic Numbers in Tools Gate Suite"
+          :owns ["tools/gate.asl"]
+          :baseline "Static numbers passed to run-all-seven-gates"
+          :gate "bin/asl check tools/gate.asl")
+        (:task
+          :id "Task-F08"
+          :title "Ground Site Claims Verification Against Live Measurements"
+          :owns ["asl/packages/asl-gates/src/site-claims.asl"]
+          :baseline "Claims audit compares claims to itself"
+          :gate "bin/asl test asl/packages/asl-gates/tests/site_claims_test.asl")
+        (:task
+          :id "Task-F09"
+          :title "Sanitize Crawler CLI Arguments & Enforce SSRF Defenses"
+          :owns ["crawler/src/crawler.asl"]
+          :baseline "curl invoked without -- delimiter and allows file:// scheme"
+          :gate "bin/asl test crawler/tests/crawler_test.asl")
+        (:task
+          :id "Task-F10"
+          :title "Defend VDOM Attribute Sanitization Against Stored XSS"
+          :owns ["vdom/src/vdom.asl"]
+          :baseline "Retains javascript: URIs in href and src attributes"
+          :gate "bin/asl test vdom/tests/vdom_test.asl")
+        (:task
+          :id "Task-F11"
+          :title "Enforce Cryptographic Checksum Verification in Distribution Installer"
+          :owns ["pack/src/dist.asl"]
+          :baseline "Installer script runs tar without verifying checksum"
+          :gate "bin/asl test pack/tests/dist_test.asl")
+        (:task
+          :id "Task-F12"
+          :title "Enforce Non-Vacuous Execution in Supervisor Acceptance Gate"
+          :owns ["tests/acceptance/d81/SuperviseGate.sh"]
+          :baseline "Acceptance tests require existing task id"
+          :gate "! sh tests/acceptance/d81/SuperviseGate.sh TaskNonExistent")])
+    (:phase
+      :id :p1-runtime-and-execution
+      :name "P1 Core Runtime & Tool Execution Engines"
+      :tasks [
+        (:task
+          :id "Task-F13"
+          :title "Implement CLI Entrypoint in Agent Package"
+          :owns ["agent/src/cli.asl" "agent/bin/gsa"]
+          :baseline "agent/bin/gsa exits immediately without running"
+          :gate "agent/bin/gsa --help | grep 'Usage:'")
+        (:task
+          :id "Task-F14"
+          :title "Connect Agent Dispatcher to Genuine Engine Tools"
+          :owns ["agent/src/dispatch.asl"]
+          :baseline "ast-patch, deps-resolve return hardcoded mock strings"
+          :gate "bin/asl test agent/tests/dispatch_test.asl")
+        (:task
+          :id "Task-F15"
+          :title "Implement Subprocess Execution and Pipe Engine in ASL Shell"
+          :owns ["asl/packages/asl-sh/src/core/process.asl" "asl/packages/asl-sh/src/core/pipe.asl"]
+          :baseline "exec! returns ERR_UNSUPPORTED for binaries other than echo"
+          :gate "bin/asl test asl/packages/asl-sh/tests/process_test.asl")
+        (:task
+          :id "Task-F16"
+          :title "Replace Multi-Target Codegen Dummy Stubs in ASL Compiler"
+          :owns ["asl/packages/asl-compiler/src/compiler.asl"]
+          :baseline "compile-source-target returns constant dummy strings"
+          :gate "bin/asl test asl/packages/asl-compiler/tests/compiler_test.asl")
+        (:task
+          :id "Task-F17"
+          :title "Implement True AST Symbol Extraction in Intel Engine"
+          :owns ["intel/src/extractor.asl"]
+          :baseline "extract-asl-symbols returns empty list"
+          :gate "bin/asl test intel/tests/intel_test.asl")
+        (:task
+          :id "Task-F18"
+          :title "Implement Dynamic AST Traversal and Blast Radius Reachability"
+          :owns ["intel/src/graph.asl" "intel/src/query.asl"]
+          :baseline "q-impact is missing transitive traversal algorithm"
+          :gate "bin/asl test intel/tests/query_test.asl")
+        (:task
+          :id "Task-F19"
+          :title "Hydrate Symbol Graph on Intel Preload"
+          :owns ["intel/src/preload.asl"]
+          :baseline "Traverses empty graph created by graph-create"
+          :gate "bin/asl test intel/tests/preload_test.asl")
+        (:task
+          :id "Task-F20"
+          :title "Connect Ablation Study Runner to Genuine Model Inference Harness"
+          :owns ["bench/aep/ablation.asl" "bench/aep/acceptance_test.asl"]
+          :baseline "Hardcoded 1.0 pass rate and 0.0 hallucination"
+          :gate "bin/asl test bench/aep/tests/ablation_test.asl")
+        (:task
+          :id "Task-F21"
+          :title "Replace Faked Synchronization and Pre-Commit Status Checks"
+          :owns ["tools/sync-workspace.asl" "tools/pre-commit.asl"]
+          :baseline "Hardcoded mock true for submodules and 0 0 thresholds"
+          :gate "bin/asl test tools/tests/sync-workspace-test.asl")])
+    (:phase
+      :id :p1-concurrency-memory-ast
+      :name "P1 Concurrency, Memory & Structural AST Soundness"
+      :tasks [
+        (:task
+          :id "Task-F22"
+          :title "Implement Delimiter Stack in Parser Balance Checker"
+          :owns ["asl/packages/asl-parser/src/balance.asl"]
+          :baseline "Validates interleaved delimiters ([)] as balanced"
+          :gate "bin/asl test asl/packages/asl-parser/tests/balance_test.asl")
+        (:task
+          :id "Task-F23"
+          :title "Fix Sequential String Unescaping Order of Operations"
+          :owns ["asl/packages/asl-text/src/escape.asl" "agent-bus/src/nd_asn.asl"]
+          :baseline "unescape-str mutates \\\\n into real newline"
+          :gate "bin/asl test asl/packages/asl-text/tests/escape_test.asl")
+        (:task
+          :id "Task-F24"
+          :title "Prevent Irreversible Context Loss in Memory Pointer Collapse"
+          :owns ["mem/src/pointer_orchestrator.asl"]
+          :baseline "Collapsed pointer permanently sets payload to empty string"
+          :gate "bin/asl test mem/tests/pointer_orchestrator_test.asl")
+        (:task
+          :id "Task-F25"
+          :title "Eliminate Phantom Dirty Overwrites in Software Transactional Memory"
+          :owns ["mem/src/stm.asl"]
+          :baseline "stm-write on unread file defaults base hash to 0"
+          :gate "bin/asl test mem/tests/stm_test.asl")
+        (:task
+          :id "Task-F26"
+          :title "Replace Line-Based S-Expression Splitting in AST Merge"
+          :owns ["mem/src/ast_merge.asl"]
+          :baseline "Splits on newline and shreds multi-line forms"
+          :gate "bin/asl test mem/tests/ast_merge_test.asl")
+        (:task
+          :id "Task-F27"
+          :title "Hydrate Memory Chunk Before Context Eviction"
+          :owns ["mem/src/hydration.asl"]
+          :baseline "evict-raw-context drops messages without persisting"
+          :gate "bin/asl test mem/tests/hydration_test.asl")
+        (:task
+          :id "Task-F28"
+          :title "Resolve Asymmetric Intent Contradiction in MVCC Bus"
+          :owns ["agent-bus/src/mvcc_bus.asl"]
+          :baseline "Catches approve/reject but misses reject/approve"
+          :gate "bin/asl test agent-bus/tests/mvcc_bus_test.asl")
+        (:task
+          :id "Task-F29"
+          :title "Prevent Permanent Deadlock on Intermediate Task States"
+          :owns ["agent-core/src/scheduler.asl"]
+          :baseline "is-reapable-state? omits clarification and verifying states"
+          :gate "bin/asl test agent-core/tests/scheduler_test.asl")
+        (:task
+          :id "Task-F30"
+          :title "Correct Field Target in Pub/Sub Event Filtering"
+          :owns ["agent-bus/src/bus.asl"]
+          :baseline "Searches target path inside payload string"
+          :gate "bin/asl test agent-bus/tests/bus_test.asl")
+        (:task
+          :id "Task-F31"
+          :title "Add Key Reconciliation to VDOM List Diffing"
+          :owns ["vdom/src/vdom.asl"]
+          :baseline "Omits key matching when reordering child lists"
+          :gate "bin/asl test vdom/tests/vdom_test.asl")])
+    (:phase
+      :id :p2-universalism-and-dedup
+      :name "P2 Boundary Universalism & Redundancy Consolidation"
+      :tasks [
+        (:task
+          :id "Task-F32"
+          :title "Unify Core Agent Structs Under Boundary Universalism (C3/D34)"
+          :owns ["agent-core/src/types.asl" "agent-bus/src/types.asl" "agent/src/types.asl"]
+          :baseline "Three duplicate definitions of AgentMessage, ToolDef, ToolResult"
+          :gate "bin/asl check agent-core && bin/asl check agent-bus && bin/asl check agent")
+        (:task
+          :id "Task-F33"
+          :title "Deduplicate Token Estimation Helper Across Monorepo"
+          :owns ["mem/src/" "agent/src/" "agent-core/src/" "asl-lint/src/"]
+          :baseline "Duplicate df estimate-tokens copied across 8 files"
+          :gate "grep -rn 'df estimate-tokens' asl/ agent* mem/ | wc -l | grep '^1$'")
+        (:task
+          :id "Task-F34"
+          :title "Remove Redundant Shadow Files and Naming Collisions"
+          :owns ["asl-gates/src/runner.asl" "agent/tests/agent_test.asl" "asl-registry/src/schema_bridge.asl"]
+          :baseline "Duplicate shadow files present alongside canonical files"
+          :gate "! test -f asl/packages/asl-gates/src/runner.asl && ! test -f agent/tests/agent_test.asl")
+        (:task
+          :id "Task-F35"
+          :title "Standardize Agent Package Module Namespaces"
+          :owns ["agent-core/src/*.asl" "agent-bus/src/*.asl" "agent/src/*.asl"]
+          :baseline "Drift between manifest prefixes and source declarations"
+          :gate "bin/asl check agent-core agent-bus agent")
+        (:task
+          :id "Task-F36"
+          :title "Resolve Tautological Tests in Memory and Acceptance Suites"
+          :owns ["mem/tests/mem_test.asl" "tests/acceptance/d81/Task45404.asl"]
+          :baseline "assert (= 1 1) and external module bypasses in tests"
+          :gate "bin/asl test mem/tests/mem_test.asl && bin/asl test tests/acceptance/d81/Task45404.asl")])
+    (:phase
+      :id :p2-invariants-and-grammar
+      :name "P2 Monorepo Invariants & Grammar Realignment"
+      :tasks [
+        (:task
+          :id "Task-F37"
+          :title "Restore Invariant C1 (Zero Comments) Across Monorepo"
+          :owns ["asl/grammar/*.asn" "harness/*.asn" "mem/grammar.asn" "asl/packages/asl-codegen/src/emit_jsx.asl"]
+          :baseline "40+ lines of raw ;; and // @ts comments in grammar and code"
+          :gate "! grep -rn ';;' asl/grammar/ harness/ mem/grammar.asn && ! grep -rn '// @ts' asl/packages/asl-codegen/")
+        (:task
+          :id "Task-F38"
+          :title "Restore Invariant C2 (Zero Emojis) Across Gate Runners and Tests"
+          :owns ["asl/packages/asl-gates/src/gate_runner.asl" "asl/packages/asl-registry/tests/registry_test.asl"]
+          :baseline "C2 emoji audit across ASN schemas"
+          :gate "bin/asl audit gates --only=6")
+        (:task
+          :id "Task-F39"
+          :title "Restore Invariant C5 (Zero Sigils) and Syntax Alignment"
+          :owns ["agent/src/triage.asl" "vdom/src/diagram.asl" "asl-sh/src/core/process.asl"]
+          :baseline "@pcp: sigils and ${...} template strings in code"
+          :gate "! grep -rn '@pcp:' agent/ src/ && ! grep -rn '\\${' vdom/src/diagram.asl")])])

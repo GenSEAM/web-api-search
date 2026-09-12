@@ -44,3 +44,5 @@
 (:trace-entry :timestamp 1789249358000 :step 1 :op "gate" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)
 (:trace-entry :timestamp 1789249358000 :step 1 :op "chk" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)
 (:trace-entry :timestamp 1789249386000 :step 1 :op "gate" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)
+(:trace-entry :timestamp 1789250519000 :step 1 :op "op" :target "" :before-digest "" :after-digest "" :status "rejected" :duration-ms 0)
+(:trace-entry :timestamp 1789250525000 :step 1 :op "gate" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)

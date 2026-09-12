@@ -1441,5 +1441,15 @@
       :fact "task44503-certified-complete"
       :evidence "Exported audit-c3-duplicates and audit-d51-convergence in asl-gates rule-checkers and registered in grammar.asn; wired check_c3_duplicates and check_d51_convergence in asl.c run_gate_6_grammar; corrected Phase415 state and T415CamelTests to in-progress with empirical test function ratio (80 of 1673); established baseline failure and verified 39 non-vacuous assertions; passed SuperviseGate.sh with 39 executed assertions; receipts recorded"
       :consequence "Task44503 certified complete; C3 duplication check and D51 convergence floor established under ADR-0081")
+    (:note
+      :id "n130"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope [".plans/FINSEL_REMEDIATION_PLAN.asn" ".plans/phase-finsel/PLAN.md" ".asl/mem/tasks/Phase445StaticConfirmationCoverage.asn"]
+      :tags [:supervision :audit :finsel-plan :falsifiable-gates :syntax-remediation :gate-integrity :approved]
+      :fact "finsel-plan-audited-and-remediated"
+      :evidence "Cross-checked concurrent implementer remediation plan across 39 tasks; falsified 6 instances of pseudo (:call ...) syntax in bin/asl eval, RPC syntax bug in Task-F01, pre-commit baseline pass in Task-F03, and phantom test files in F04 F07 F09 F10 F12 F21 F31; remediated all 39 tasks to target genuine ASL test suites and verified executable commands; confirmed delimiter balance via asl check"
+      :consequence "FINSEL remediation plan aligned with monorepo falsifiability and syntactic invariants under ADR-0081")
   ]
 )
