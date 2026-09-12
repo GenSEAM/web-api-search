@@ -92,7 +92,7 @@
       :title "Concurrent writer safety: file leases and staleness detection"
       :kind :protocol
       :lane "reliability"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789139714894
@@ -117,13 +117,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44203.asl"]
       :verificationCases ["Two sessions claiming the same path: the second claim is refused; a write after an external modification is rejected with :ERR_STALE_FILE and the file is unchanged; an expired lease rejects rather than proceeds." "A single-session workflow is unaffected and requires no extra calls."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44203" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44203" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44203" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44203" :assertCount 14 :at 1789401400000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes a two-session scenario with an overlapping path." "Implement claims with digests in the session ledger." "Check digest on mutate." "Expire and fail closed." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44204"
       :parentId ""
