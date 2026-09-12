@@ -1,0 +1,10 @@
+(:testTelemetry :v 2 :date "2026-09-12" :method "asl test per suite, stdout parsed for executed-assertion line and failure cause; parallel runner with digest"
+  :runnerDigest "1a0d457381469bfb"
+  :suites 312 :passedSuites 312 :failedSuites 0
+  :declaredAsserts 8555 :executedAsserts 9228 :executedRefutes 26 :totalWallMs 37196
+  :failureCauses [
+    (:cause "ASSERTION_FAILURE" :count 0)
+    (:cause "ERR_UNRESOLVED_IMPORT" :count 0)
+    (:cause "ERR_UNBOUND_SYMBOL" :count 0)
+    (:cause "OTHER_ERROR" :count 0)
+  ])

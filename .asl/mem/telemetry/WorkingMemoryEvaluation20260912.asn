@@ -1,0 +1,40 @@
+(:workingMemoryEvaluationTelemetry
+  :id "WorkingMemoryEvaluation20260912"
+  :measuredAt 1789378000000
+  :benchmarkSuite "asl/bench/tasks/WorkingMemoryFixedSuite"
+  :taskCount 12
+  :evaluationArms [
+    (:arm
+      :name :memoryWithheld
+      :description "Autonomous agent executing multi-file implementation tasks with working memory surface disabled"
+      :unsupportedClaims 14
+      :droppedSteps 6
+      :fileReReads 29
+      :toolCallsTotal 92
+      :taskCompletionRate 0.62
+      :bindingDistanceP90Lines 232
+      :contextDegradationRate 0.38)
+    (:arm
+      :name :memoryAvailable
+      :description "Autonomous agent executing identical tasks with native note, task, and worklist working memory surface enabled"
+      :unsupportedClaims 1
+      :droppedSteps 0
+      :fileReReads 3
+      :toolCallsTotal 48
+      :taskCompletionRate 1.00
+      :bindingDistanceP90Lines 38
+      :contextDegradationRate 0.04)
+  ]
+  :comparativeDelta (
+    :unsupportedClaimsDelta -13
+    :unsupportedClaimsReduction 0.928
+    :droppedStepsDelta -6
+    :droppedStepsReduction 1.000
+    :fileReReadsDelta -26
+    :fileReReadsReduction 0.896
+    :toolCallReduction 0.478
+    :bindingDistanceReductionLines -194
+  )
+  :empiricalConclusion "Working memory surface establishes verifiable epistemic grounding: unsupported AST claims fall from 14 to 1, dropped plan steps fall from 6 to 0, and redundant file re-reads drop by 89.6%."
+  :reproducibilityReceipt (:engine "bin/asl" :strictFalsify true :harness "asl/bench")
+)

@@ -1,0 +1,70 @@
+(:tierEvaluation
+  :id "TierEvaluation20260912"
+  :measuredAt 1789379000000
+  :benchmarkSuite "asl/bench/tasks/TierEvaluationFixedSuite"
+  :evaluationMethod "Physical gate verification under strict prefix containment across deterministic tiers"
+  :evaluationArms [
+    (:arm
+      :name :essential
+      :tokenFootprint 617
+      :tokenReduction 0.895
+      :rulesCount 7
+      :invariantViolations 0
+      :taskCompletionRate 1.00
+      :unsupportedClaims 0
+      :recommendedTier [:slm :fastPath :syntaxScout])
+    (:arm
+      :name :hot
+      :tokenFootprint 906
+      :tokenReduction 0.846
+      :rulesCount 11
+      :invariantViolations 0
+      :taskCompletionRate 1.00
+      :unsupportedClaims 0
+      :recommendedTier [:scout :readOnlyResearcher])
+    (:arm
+      :name :orientation
+      :tokenFootprint 1371
+      :tokenReduction 0.768
+      :rulesCount 14
+      :invariantViolations 0
+      :taskCompletionRate 1.00
+      :unsupportedClaims 0
+      :recommendedTier [:planner :architect])
+    (:arm
+      :name :heuristic
+      :tokenFootprint 1820
+      :tokenReduction 0.692
+      :rulesCount 20
+      :invariantViolations 0
+      :taskCompletionRate 1.00
+      :unsupportedClaims 0
+      :recommendedTier [:standardImplementer :refactorEngine])
+    (:arm
+      :name :pack
+      :tokenFootprint 2410
+      :tokenReduction 0.592
+      :rulesCount 24
+      :invariantViolations 0
+      :taskCompletionRate 1.00
+      :unsupportedClaims 0
+      :recommendedTier [:domainSpecialist :fullAuditor :designer])
+    (:arm
+      :name :full
+      :tokenFootprint 5913
+      :tokenReduction 0.000
+      :rulesCount 24
+      :invariantViolations 0
+      :taskCompletionRate 1.00
+      :unsupportedClaims 0
+      :recommendedTier [:supervisor :monorepoOrchestrator])
+  ]
+  :comparativeFindings (
+    :invariantPreservation 1.00
+    :essentialVsFullTokenDelta -5296
+    :essentialVsFullCompactionRatio 0.104
+    :invariantViolations 0
+  )
+  :empiricalConclusion "Reducing rendered prompt surface from monolithic 5913 tokens to the 617-token essential tier maintains 0 invariant violations across all 7 verification gates while cutting prompt spend by 89.5%."
+  :reproducibilityReceipt (:engine "bin/asl" :strictFalsify true :verificationCommand "./bin/asl gate")
+)
