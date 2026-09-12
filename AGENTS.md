@@ -137,6 +137,9 @@
 
 # Agent Teleology & Epistemic Mandates
 
+> [!NOTE]
+> This project currently operates locally and does not have an upstream remote repository.
+
 In this repository, autonomous agents operate under explicit non-anthropomorphic **Teleological Mandates**. Agents are defined not by superficial role titles or emotional personas, but by their fundamental purpose (**"Смысл жизни"**), strict **Zones of Responsibility (Epistemic Boundaries)**, and immutable **Priority Values ("Что первостепенно")**.
 
 Mechanical constraints belong to deterministic tools (`asl rpc '(:batch ...)'`, `asl check`, `asl lint`, `asl test --strict-falsify`, `asl audit`, `asl doctor`, `asl gate`) and command pipelines (`steps`). Agents embody teleological posture and value trade-offs.
