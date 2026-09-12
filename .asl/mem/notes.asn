@@ -1411,5 +1411,15 @@
       :fact "task44704-certified-complete"
       :evidence "Implemented pure ASL lexicon-gate in asl-gates package, static checker in scripts/install.sh --check-lexicon (reporting surface divergence, local alias tables, artifact mishearings, and canonical referents), and wired canonical lexicon source verification into asl.c run_gate_6_grammar; removed voice/src/hyness_profile.asl; established baseline failure and verified 40 non-vacuous assertions; passed SuperviseGate.sh with 40 executed assertions; receipts recorded"
       :consequence "Task44704 certified complete; Phase 447 all 4 tasks certified complete under ADR-0081")
+    (:note
+      :id "n127"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["asl/grammar/rules.asn" "asl/tools/asl.c" "AGENTS.md" "tests/acceptance/d81/Task44501.asl" ".asl/mem/tasks/Phase445StaticConfirmationCoverage.asn"]
+      :tags [:supervision :phase445 :task44501 :rule-checkers :advisory-rules :doctor :gate7 :approved]
+      :fact "task44501-certified-complete"
+      :evidence "Added :check naming checker or :none to every rule in asl/grammar/rules.asn; synchronized via install.sh --render-rules; updated asl doctor to report enforced vs advisory rules; implemented check_rule_checkers in Gate 7 to reject phantom checkers; established baseline failure and verified 41 non-vacuous assertions; passed SuperviseGate.sh with 41 executed assertions; receipts recorded"
+      :consequence "Task44501 certified complete; every rule names its checker standard established under ADR-0081")
   ]
 )

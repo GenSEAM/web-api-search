@@ -14,11 +14,11 @@
       :title "Every rule names its checker; an unchecked rule is visibly advisory"
       :kind :governance
       :lane "static"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789142321056
-      :updatedAt 1789142321056
+      :updatedAt 1789433200000
       :motivation "Measured 2026-09-11 across asl/tools/asl.c and asl/packages/asl-gates: of nineteen rules only gates, foreign, edge and tools have meaningful checker presence, and eleven have none at all (output, semantics, grading, concepts, anchor, oneStep, budget, hiddenTests, bounded, ssot, capabilities). C1, C2 and C5 do have real checkers at asl.c:512, 564, 591, 2259 and 2503, while C3 has none. A rule the model cannot distinguish from an enforced one is a rule it will quietly ignore under load."
       :purpose "Every rule in asl/grammar/rules.asn carries a :check field naming its checker command or :none; asl doctor verifies that each named checker exists and returns a verdict on a known-answer fixture; the rendered payload shows enforced and advisory rules distinctly so the model knows which are mechanically held. A :check that names a missing or non-failing checker fails gate 7."
       :context (:contractRef D81PlanContext)
@@ -39,13 +39,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44501.asl"]
       :verificationCases ["A rule naming a checker that does not exist fails gate 7; a rule naming a checker that passes on a planted violation also fails." "The rendered payload marks an advisory rule as advisory, and the count of enforced rules matches the doctor map."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44501" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44501" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44501" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44501" :assertCount 41 :at 1789433200000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes rules with a real, a missing and a non-failing checker." "Add :check to every rule." "Verify existence and falsifiability in doctor." "Render the enforced and advisory split." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :step 1 :status :ok :hash "HEAD")])
     (:task
       :id "Task44502"
       :parentId ""
