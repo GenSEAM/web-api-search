@@ -1,20 +1,15 @@
 (:in-flight
   :session-id "57abefd4-689b-44f0-8084-f5b1813fae50"
-  :lane ""
-  :activePhase ""
-  :activeTasks []
-  :dispatchedAt 0
-  :status "idle"
+  :lane "decoding"
+  :activePhase "phase-462"
+  :activeTasks ["Task46204"]
+  :dispatchedAt 1789428600000
+  :status "executing"
   :handoffId ""
   :handoffCheckpoint 0
   :sourceDigest ""
-  :authoritativeConstraints []
+  :authoritativeConstraints ["D81" "D51" "C1"]
   :unresolvedQuestions []
   :negativeFindings []
   :receiptReferences []
   :provisionalToolCallCount 0)
-
-
-
-
-

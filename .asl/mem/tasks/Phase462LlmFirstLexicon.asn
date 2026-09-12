@@ -91,12 +91,12 @@
       :phase "phase-462"
       :title "Close the measured excess in the existing lexicon"
       :kind :remediation
-      :state :planned
+      :state :completed
       :lane "lexicon"
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789245000000
-      :updatedAt 1789245000000
+      :updatedAt 1789428300000
       :motivation "3686 of 3776 declared symbols cost more than one token and the excess over a single-token lexicon is 11005 tokens. Part of that is irreducible, because a name carrying five words of meaning cannot be one token and should not pretend to be. Part is pure waste, and it divides cleanly: the closed set of core forms and keywords can and must reach one token, while the open set of compound names reaches its minimum through the spelling that tokenizes best, measured at 44 to 50 percent for CamelCase on exactly these long hyphenated names, of which test-e2e-onion-pipeline-and-horizon at 12 tokens is representative."
       :purpose "The closed set of core forms and keywords is entirely single-token. The open set is converted to the measured cheapest adequate spelling. The residue is recorded as irreducible with the meaning that makes it so, and the lexicon total is tracked thereafter."
       :context (:contractRef D81PlanContext)
@@ -117,13 +117,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46203.asl"]
       :verificationCases ["Every core form and keyword measures one token." "A compound name not in its cheapest adequate spelling is reported." "The recorded residue is reproducible by recomputation, not quoted from the plan."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46203" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46203" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define closedSetSingleTokenKeywordRule semantic")
+      :historicalReceipts ["rc-task46203-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Split closed set from open set." "Bring the closed set to one token." "Convert the open set." "Record the residue." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts ["rc-task46203-verified-20260912"])
     (:task
       :id "Task46204"
       :parentId ""

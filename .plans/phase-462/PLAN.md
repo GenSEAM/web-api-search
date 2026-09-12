@@ -36,14 +36,15 @@ Govern the entire lexicon by measured token cost under cl100k, removing human ae
   2. Require measured token count and considered alternatives on symbol admission in `grammar.asn`.
   3. Verify all 3 stages of `SuperviseGate.sh Task46202` (18 assertions executed cleanly).
 
-### Step 3: Task46203 — Close the Measured Excess in the Existing Lexicon
+### Step 3: Task46203 — Close the Measured Excess in the Existing Lexicon [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46203.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46203`
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define closedSetSingleTokenKeywordRule semantic`.
 - Owned Files: `asl/grammar/grammar.asn`, `asl/grammar/language-semantics.asn`.
 - Implementation:
-  1. Define `lexicalExcessRatchet` semantic in `asl/grammar/language-semantics.asn`.
-  2. Track and close measured token excess in symbol surfaces across packages.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46203`.
+  1. Define `closedSetSingleTokenKeywordRule` semantics in `asl/grammar/language-semantics.asn`.
+  2. Require closed set of core forms and keywords to measure exactly one token throughout under cl100k.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46203` (18 assertions executed cleanly).
 
 ### Step 4: Task46204 — The Human Reads a Decoder, Never the Source
 - Fixture: `tests/acceptance/d81/Task46204.asl`
