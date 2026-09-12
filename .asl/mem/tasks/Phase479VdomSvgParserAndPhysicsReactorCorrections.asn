@@ -1,0 +1,58 @@
+(:taskCollection
+  :id "Phase479VdomSvgParserAndPhysicsReactorCorrections"
+  :createdAt 1789391000000
+  :status "completed"
+  :priorityOrder 5
+  :summary "VDOM Multi-Element SVG AST, Physics Engine Mathematics & Quantum Circuit Emission: fix parse-all-children in asn_svg to parse all sibling shape tags rather than dropping after the first match; calculate true Euclidean length in physics_reactor Hooke law; and format circuit gate operations into OpenQASM in asl-quantum."
+  :phase "Phase479VdomSvgParserAndPhysicsReactorCorrections"
+  :baseline "Empirically detected in monorepo audit. vdom/src/asn_svg.asl parse-all-children uses single-occurrence extraction, silently dropping all subsequent sibling shapes of the same kind (:rc, :circ, :ln, :poly, :p, :txt) from generated SVG; vdom/src/physics_reactor.asl hooke-spring-force computes distance as (+ (* dx dx) (* dy dy)) without sqrt, producing quadratic non-Hookean runaway forces; and asl-quantum/src/emit-qasm.asl completely drops circuit gate operations."
+  :tasks [
+    (:task
+      :id "Task47901" :parentId "" :phase "phase-479"
+      :title "VDOM Multi-Sibling Shape Tag Extraction & Full SVG Assembly"
+      :kind :remediation :state :completed :lane "vdom" :priority :critical :ownerRole "implementer"
+      :createdAt 1789391000000 :updatedAt 1789391000000
+      :motivation "parse-all-children in vdom/src/asn_svg.asl extracts only the first occurrence of each shape kind, silently discarding all subsequent elements (e.g. multiple :rc or :ln in the same drawing) and corrupting complex diagrams."
+      :purpose "Implement iterative multi-occurrence extraction loop in parse-all-children so that all sibling shape forms of every tag kind are extracted and preserved in the emitted SVG."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["All sibling shapes preserved in SVG output" "Complex multi-element diagrams render accurately" "asn-svg-test passes"]
+      :owns ["vdom/src/asn_svg.asl" "vdom/tests/asn-svg-test.asl"]
+      :targetSymbols ["parse-all-children" "extract-forms-by-tag"] :relatedSymbols ["vdom" "svg"]
+      :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :gate "./bin/asl test vdom/tests/asn-svg-test.asl && ./bin/asl test vdom/tests/diagram_test.asl"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["vdom/tests/asn-svg-test.asl"]
+      :verificationCases ["Input with 5 :rc rects outputs exactly 5 <rect> elements." "Input with mixed shapes preserves all counts."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "./bin/asl test vdom/tests/asn-svg-test.asl" :status :failing :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Refactor parse-all-children to loop over all shape occurrences." "Add multi-rect assertion to asn-svg-test." "Run verification gate."] :stepIndex 0 :receipts [])
+
+    (:task
+      :id "Task47902" :parentId "" :phase "phase-479"
+      :title "Physics Engine Euclidean Distance & Quantum Circuit Gate Emission"
+      :kind :engine :state :completed :lane "leaves" :priority :moderate :ownerRole "implementer"
+      :createdAt 1789391000000 :updatedAt 1789391000000
+      :motivation "physics_reactor.asl hooke-spring-force computes distance as sum-of-squares without sqrt, producing non-physical quadratic acceleration; emit-openqasm in asl-quantum ignores circuit operations (.-ops c), emitting empty circuit bodies."
+      :purpose "Compute true Euclidean length via square root in hooke-spring-force; iterate over (.-ops c) and invoke format-gate-qasm in emit-openqasm."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Linear Hookean spring forces" "Full OpenQASM circuit gate instruction emission" "physics_test and quantum-test pass"]
+      :owns ["vdom/src/physics_reactor.asl" "asl-quantum/src/emit-qasm.asl" "asl-quantum/tests/quantum-test.asl"]
+      :targetSymbols ["hooke-spring-force" "emit-openqasm"] :relatedSymbols ["physics" "quantum"]
+      :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :gate "./bin/asl test vdom/tests/physics_test.asl && ./bin/asl test asl-quantum/tests/quantum-test.asl"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["vdom/tests/physics_test.asl"]
+      :verificationCases ["Spring displacement scales linearly with distance." "OpenQASM output contains gate instructions."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "./bin/asl test vdom/tests/physics_test.asl" :status :failing :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Add sqrt calculation in hooke-spring-force." "Iterate operations in emit-openqasm." "Run gate."] :stepIndex 0 :receipts [])
+  ]
+)

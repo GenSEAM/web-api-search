@@ -1,0 +1,106 @@
+(:taskCollection
+  :id "Phase475EngineRuntimeEvaluatorAndModuleFoundation"
+  :createdAt 1789375000000
+  :status "completed"
+  :priorityOrder 1
+  :summary "Engine Runtime, Evaluator & Module Foundation: qualified enum constructors bound in evaluator and binary recompiled; non-existent core/strings eradicated across 5 packages; :exports normalized to :x; Clojure ns headers replaced with pure ASL module; pure functional steps-pipeline; and vacuous assertions eliminated."
+  :phase "Phase475EngineRuntimeEvaluatorAndModuleFoundation"
+  :baseline "Measured 2026-09-12 by monorepo empirical audit recorded in .asl/mem/decisions/GAPS.asn. 36 native test suites fail under asl test --strict-falsify. Core causes: engine.js registers enum variants bare, failing qualified variant calls (tr/RuntimeKind:browser-webpage, InferenceTarget:on-device-webgpu); binary bin/asl embeds compiled engine_js.h and requires recompilation; non-existent module core/strings is imported across 8 test and source files in asl-sql, agent-bus, mem, editorial-matrix, and harness; Clojure (ns ...) headers in asl/web views trigger ERR_UNBOUND_SYMBOL; non-standard :exports in 4 modules masks exported symbols; steps-pipeline uses imperative set! and non-existent to-string; and browser-bridge-test contains 3 consecutive vacuous (assert true) statements."
+  :tasks [
+    (:task
+      :id "Task47501" :parentId "" :phase "phase-475"
+      :title "Evaluator Qualified Enum Constructor Binding & Native Binary Recompilation"
+      :kind :engine :state :completed :lane "engine" :priority :critical :ownerRole "implementer"
+      :createdAt 1789375000000 :updatedAt 1789375000000
+      :motivation "engine.js registers enum variants bare in the environment scope, so qualified calls like (InferenceTarget:on-device-webgpu) and (tr/RuntimeKind:browser-webpage) fail with ERR_UNBOUND_SYMBOL. Because bin/asl embeds engine_js.h as a compiled C string literal, any edit to engine.js must be regenerated via gen_engine_header.sh and recompiled into bin/asl to take effect in the native runtime."
+      :purpose "Register qualified enum variant constructors (${enumName}:${variantName}) and module-prefixed variant closures in engine.js. Run gen_engine_header.sh and recompile bin/asl. Both browser_agent_test and quota_test must pass cleanly."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Qualified enum constructors bound in evaluator" "engine_js.h regenerated" "bin/asl recompiled" "browser_agent_test and quota_test pass"]
+      :owns ["asl/tools/engine.js" "asl/tools/engine_js.h" "asl/tools/asl.c" "asl/asl" "bin/asl"]
+      :targetSymbols ["register_enum" "js_evaluate_expression"] :relatedSymbols ["tools" "gates"]
+      :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :gate "./bin/asl test browser-plugin/tests/browser_agent_test.asl && ./bin/asl test web-api-search/tests/quota_test.asl"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["browser-plugin/tests/browser_agent_test.asl" "web-api-search/tests/quota_test.asl"]
+      :verificationCases ["Calling qualified enum constructor resolves cleanly." "Cross-module alias calling qualified enum constructor succeeds." "Recompiled binary evaluates test suites to exit 0."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "./bin/asl test browser-plugin/tests/browser_agent_test.asl" :status :failing :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Bind qualified variant symbols in engine.js." "Export aliased variants in module import resolver." "Run gen_engine_header.sh." "Recompile bin/asl." "Run gate verification."] :stepIndex 1 :receipts ["rc-phase47501-verified-20260912"])
+
+    (:task
+      :id "Task47502" :parentId "" :phase "phase-475"
+      :title "Eradicate Non-Existent core/strings Across All Monorepo Packages"
+      :kind :remediation :state :completed :lane "boundary" :priority :critical :ownerRole "implementer"
+      :createdAt 1789375000000 :updatedAt 1789375000000
+      :motivation "Eight test and source modules import (core/strings :a s) which does not exist anywhere in the filesystem. This triggers fatal ERR_UNRESOLVED_IMPORT across asl-sql, agent-bus, mem, editorial-matrix, harness, and asl/web. In addition, browser-bridge-test:68-70 contains three vacuous (assert true) statements violating ground-truth standards."
+      :purpose "Re-point all string imports to canonical (asl-text/string :a s) or native string primitives. Declare asl-text in manifests. Replace vacuous assertions in browser-bridge-test with concrete CORS header assertions."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Zero imports of core/strings monorepo-wide" "asl-text declared in manifests" "All 8 failing test suites pass compilation" "Vacuous assertions eradicated"]
+      :owns ["asl/packages/asl-sql/src/core/sql.asl" "asl/packages/asl-sql/manifest.asn" "agent-bus/tests/browser-bridge-test.asl" "mem/src/migration.asl" "editorial-matrix/src/syndication-cadence.asl" "editorial-matrix/src/article-projector.asl" "harness/tests/bench-runners-test.asl" "harness/tests/browser-harness-test.asl" "asl/web/src/components/Hero.asl" "asl/web/src/components/Navbar.asl" "asl/web/src/components/ThemeToggle.asl" "asl/web/src/components/Footer.asl" "asl/web/src/components/ui/Logo.asl"]
+      :targetSymbols ["import" "string-join"] :relatedSymbols ["ssot" "boundaries"]
+      :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :gate "./bin/asl test asl/packages/asl-sql/tests/sql_test.asl && ./bin/asl test asl/packages/asl-sql/tests/ddl_test.asl && ./bin/asl test agent-bus/tests/browser-bridge-test.asl && ./bin/asl test mem/tests/migration-test.asl && ./bin/asl test editorial-matrix/tests/syndication-cadence-test.asl && ./bin/asl test editorial-matrix/tests/article-projector-test.asl && ./bin/asl test harness/tests/bench-runners-test.asl && ./bin/asl test harness/tests/browser-harness-test.asl"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["asl/packages/asl-sql/tests/sql_test.asl"]
+      :verificationCases ["grep for core/strings across the monorepo returns 0 matches." "All 8 affected test suites pass under strict-falsify."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "./bin/asl test asl/packages/asl-sql/tests/sql_test.asl" :status :failing :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Re-route imports in asl-sql to asl-text/string." "Remove unused import in browser-bridge-test and fix assertions." "Update mem/src/migration.asl." "Update editorial-matrix modules." "Update harness test suites." "Update asl/web components." "Verify gate."] :stepIndex 1 :receipts ["rc-phase47502-verified-20260912"])
+
+    (:task
+      :id "Task47503" :parentId "" :phase "phase-475"
+      :title "Canonicalize Module Headers (:exports to :x, ns to module)"
+      :kind :remediation :state :completed :lane "syntax" :priority :high :ownerRole "implementer"
+      :createdAt 1789375000000 :updatedAt 1789375000000
+      :motivation "Six source modules in agent-core, agent-bus, and mem use non-standard :exports [...] which is ignored by ASL module loaders, treating public functions as private. asl/web views use Clojure (ns ...) headers causing ERR_UNBOUND_SYMBOL: ns."
+      :purpose "Replace :exports with canonical :x across all six modules. Replace (ns ...) headers with standard (module asl-web/views/... :d ... :x [...] :i [...]) headers."
+      :context (:contractRef D81PlanContext)
+      :outcomes [":exports replaced with :x across all modules" "Clojure ns headers replaced with module" "playgound_test and test_card pass"]
+      :owns ["agent-core/src/dag_merge.asl" "agent-core/src/prompt_tree.asl" "agent-bus/src/mvcc_bus.asl" "mem/src/speculative_fork.asl" "mem/src/ast_merge.asl" "mem/src/stm.asl" "asl/web/src/views/playground_test.asl" "asl/web/src/views/test_card.asl"]
+      :targetSymbols ["module" ":x"] :relatedSymbols ["syntax" "invariants"]
+      :invariants ["C4" "D46" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :gate "! grep -rn :exports agent-core/src/ agent-bus/src/ mem/src/ && ./bin/asl test asl/web/src/views/playground_test.asl && ./bin/asl test asl/web/src/views/test_card.asl"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["asl/web/src/views/playground_test.asl"]
+      :verificationCases ["No file contains non-standard exports keyword." "asl/web playground_test passes cleanly."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "./bin/asl test asl/web/src/views/playground_test.asl" :status :failing :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Replace :exports with :x in agent-core, agent-bus, and mem." "Rewrite ns headers in asl/web views to module." "Run verification gate."] :stepIndex 1 :receipts ["rc-phase47503-verified-20260912"])
+
+    (:task
+      :id "Task47504" :parentId "" :phase "phase-475"
+      :title "Symbol Alias Disambiguation & Pure Functional Steps Pipeline"
+      :kind :remediation :state :completed :lane "engine" :priority :critical :ownerRole "implementer"
+      :createdAt 1789375000000 :updatedAt 1789375000000
+      :motivation "agent-test.asl imports alias ed instead of eddie; promptpool_test calls sm/state-clarification instead of tt/state-clarification; steps-pipeline.asl uses non-existent imperative set! (GATE-10) and non-existent builtin to-string (GATE-12); and onion middleware symbol bindings between agent and harness fail."
+      :purpose "Fix import alias in agent-test.asl; update constructor calls in promptpool_test.asl; refactor steps-pipeline.asl set! and to-string to pure functional let/fold and string-from-int64; resolve onion middleware bindings."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["agent-test.asl passes" "promptpool_test.asl passes" "steps-pipeline-test.asl passes" "teleology_test.asl passes" "plugin_host and resident_layer pass"]
+      :owns ["agent/tests/agent-test.asl" "agent-core/tests/promptpool_test.asl" "harness/src/steps-pipeline.asl" "harness/src/plugin_host.asl" "harness/src/resident_layer.asl" "harness/manifest.asn"]
+      :targetSymbols ["steps-pipeline" "eddie" "state-clarification"] :relatedSymbols ["gates" "semantics"]
+      :invariants ["C1" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :gate "./bin/asl test agent/tests/agent-test.asl && ./bin/asl test agent-core/tests/promptpool_test.asl && ./bin/asl test harness/tests/steps-pipeline-test.asl && ./bin/asl test harness/tests/teleology_test.asl && ./bin/asl test harness/tests/plugin_host_test.asl && ./bin/asl test harness/tests/resident_layer_test.asl"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["agent/tests/agent-test.asl"]
+      :verificationCases ["All 6 affected test suites pass under strict-falsify."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "./bin/asl test agent/tests/agent-test.asl" :status :failing :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Fix alias in agent-test.asl." "Fix constructor in promptpool_test.asl." "Refactor set! and to-string in steps-pipeline.asl." "Update onion middleware exports." "Run verification gate."] :stepIndex 1 :receipts ["rc-phase47504-verified-20260912"])
+  ]
+)

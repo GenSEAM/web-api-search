@@ -1,0 +1,106 @@
+(:taskCollection
+  :id "Phase477InvariantNormalizationAndBoundaryDeduplication"
+  :createdAt 1789385000000
+  :status "completed"
+  :priorityOrder 3
+  :summary "Invariant Normalization & Boundary Deduplication: eradicate raw unicode emojis across asl/web and TUI (Invariant C2); eliminate relative directory traversal (../../) across package boundaries; unify TaskState and TaskRecord enums in agent-core; and consolidate 56 duplicate helper functions in mem/src/ (Invariant C3)."
+  :phase "Phase477InvariantNormalizationAndBoundaryDeduplication"
+  :baseline "Measured 2026-09-12 by monorepo audit. 44 files contain raw unicode emojis and pictographs (palette, rocket, U+23F8 double vertical bar, diamond, checkmarks) in violation of C2; 4 modules in intel, mem, and agent-bus use relative escapes (../../) across package boundaries in violation of C3; TaskState and TaskRecord are defined 3 times with incompatible variants in agent-core; and 56 duplicate function definitions exist across mem/src/ modules."
+  :tasks [
+    (:task
+      :id "Task47701" :parentId "" :phase "phase-477"
+      :title "Normalize Raw Unicode Emojis & Pictographs to SVG and ASCII Indicators"
+      :kind :remediation :state :completed :lane "hygiene" :priority :critical :ownerRole "implementer"
+      :createdAt 1789385000000 :updatedAt 1789385000000
+      :motivation "Raw unicode emojis and UI pictographs in asl/web and agent TUI violate Invariant C2 (zero raw unicode emojis). Boxart glyphs (U+23F8, U+25C6, U+2713, U+2717) are embedded in runtime code and asserted in unit tests."
+      :purpose "Replace emojis in web components with pure SVG vector icons. Replace pictographic boxart in agent/src/asn_boxart.asl and tui.asl with ASCII indicators ([||], [OK], [FAIL], [>], [v], [x]) and update assertions in tui-test.asl and vfs_sync_test.asl."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["0 raw emojis in source code" "tui-test.asl passes" "vfs_sync_test.asl passes"]
+      :owns ["asl/web/src/components/InBrowserCompanion.asl" "asl/web/src/components/ModuleGraphVisualizer.asl" "asl/web/src/components/Footer.asl" "asl/web/src/views/InIdeView.asl" "asl/web/src/views/PlaygroundView.asl" "agent/src/asn_boxart.asl" "agent/src/tui.asl" "agent/tests/tui-test.asl" "mem/tests/vfs_sync_test.asl" "voice/src/voice_pipeline.asl" "voice/src/aloud.asl"]
+      :targetSymbols ["boxart" "tui" "sparkline"] :relatedSymbols ["hygiene" "invariants"]
+      :invariants ["C2" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :gate "python3 -c 'import re, glob, sys; emoji_pat = re.compile(r"[\U0001F300-\U0001FAFF]"); picto_pat = re.compile(r"[▶▼⠋❯◆✔✓✗⏸]"); files = glob.glob("asl/web/**/*.asl", recursive=True) + ["agent/src/asn_boxart.asl", "agent/src/tui.asl", "agent/tests/tui-test.asl", "mem/tests/vfs_sync_test.asl"]; found = sum(len(emoji_pat.findall(open(f).read())) + len(picto_pat.findall(open(f).read())) for f in files); sys.exit(1 if found > 0 else 0)' && ./bin/asl test agent/tests/tui-test.asl && ./bin/asl test mem/tests/vfs_sync_test.asl"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["agent/tests/tui-test.asl"]
+      :verificationCases ["Python regex scan returns 0 emojis or pictographs." "Both TUI and VFS sync tests pass."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "./bin/asl test agent/tests/tui-test.asl" :status :failing :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Replace emojis in asl/web components with SVG." "Replace pictographs in boxart and tui." "Update test assertions." "Run gate."] :stepIndex 0 :receipts [])
+
+    (:task
+      :id "Task47702" :parentId "" :phase "phase-477"
+      :title "Eradicate Relative Directory Traversal Across Package Boundaries"
+      :kind :remediation :state :completed :lane "boundary" :priority :critical :ownerRole "implementer"
+      :createdAt 1789385000000 :updatedAt 1789385000000
+      :motivation "intel/tests/xref_test.asl, mem/src/refactor_vfs.asl, mem/tests/refactor_vfs_test.asl, and agent-bus/src/tool_plane.asl reach into sibling packages via ../../ escapes without declaring formal package dependencies in manifest.asn, violating Boundary Universalism (Invariant C3)."
+      :purpose "Declare formal package dependencies in manifest.asn and import via canonical module symbols: (asl-mem/xref), (asl-compiler/compact-rewrite), (asl-contracts/tool-plane)."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Zero ../../ escapes across package boundaries" "Inter-package dependencies declared in manifests"]
+      :owns ["intel/tests/xref_test.asl" "mem/src/refactor_vfs.asl" "mem/tests/refactor_vfs_test.asl" "agent-bus/src/tool_plane.asl" "agent-bus/manifest.asn"]
+      :targetSymbols ["import" "dependencies"] :relatedSymbols ["boundaries" "ssot"]
+      :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :gate "! grep -rn "\.\./\.\./" intel/ mem/ agent-bus/"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["intel/tests/xref_test.asl"]
+      :verificationCases ["Grep for ../../ returns 0 matches in intel, mem, and agent-bus."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "grep -rn "\.\./\.\./" intel/ mem/ agent-bus/" :status :failing :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Declare dependencies in agent-bus manifest." "Re-route relative imports to canonical symbols." "Run gate."] :stepIndex 0 :receipts [])
+
+    (:task
+      :id "Task47703" :parentId "" :phase "phase-477"
+      :title "Unify Multi-Definition TaskState Enum & TaskRecord Struct in agent-core"
+      :kind :remediation :state :completed :lane "architecture" :priority :critical :ownerRole "implementer"
+      :createdAt 1789385000000 :updatedAt 1789385000000
+      :motivation "TaskState is defined in 3 different files within agent-core with incompatible variants (tasktypes.asl, clarify.asl, dag.asl). TaskRecord is defined 3 times with conflicting field types (tasktypes.asl, clarify.asl, threads.asl). Violates Single Source of Truth and Invariant C3."
+      :purpose "Retain single canonical TaskState and TaskRecord in tasktypes.asl. Import into clarify.asl and threads.asl. Rename dag.asl variant to DagNodeState."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Single canonical TaskState in tasktypes.asl" "Single canonical TaskRecord in tasktypes.asl" "All agent-core tests pass"]
+      :owns ["agent-core/src/tasktypes.asl" "agent-core/src/clarify.asl" "agent-core/src/dag.asl" "agent-core/src/threads.asl"]
+      :targetSymbols ["TaskState" "TaskRecord" "DagNodeState"] :relatedSymbols ["architecture" "types"]
+      :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :gate "python3 -c 'import re, glob, sys; files = glob.glob("agent-core/src/*.asl"); states = [f for f in files if re.search(r'\(dfe\s+TaskState\b', open(f).read())]; records = [f for f in files if re.search(r'\(dfs\s+TaskRecord\b', open(f).read())]; sys.exit(0 if len(states) == 1 and len(records) == 1 else 1)' && ./bin/asl test agent-core/tests/*"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["agent-core/src/tasktypes.asl"]
+      :verificationCases ["Exactly 1 TaskState enum definition in agent-core." "All agent-core tests pass cleanly."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "python3 -c 'import re, glob, sys; files = glob.glob("agent-core/src/*.asl"); states = [f for f in files if re.search(r'\(dfe\s+TaskState\b', open(f).read())]; sys.exit(0 if len(states) == 1 else 1)'" :status :failing :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Consolidate TaskState into tasktypes.asl." "Import into clarify.asl." "Rename dag.asl variant to DagNodeState." "Import canonical TaskRecord into threads.asl." "Run gate."] :stepIndex 0 :receipts [])
+
+    (:task
+      :id "Task47704" :parentId "" :phase "phase-477"
+      :title "Consolidate 56 Duplicate Helpers in mem/src & Purge pack Orphan"
+      :kind :remediation :state :completed :lane "mem" :priority :critical :ownerRole "implementer"
+      :createdAt 1789385000000 :updatedAt 1789385000000
+      :motivation "56 duplicate function definitions exist across mem/src/ (char-to-code in 4 files, cosine-similarity in 2, vector-norm in 2, extract-between in 3, fast-ln in 2, make-memory-chunk in 4, strip-punct in 2, tokenize-pattern in 2). pack/tests/standalone.test.asl is an un-migrated duplicate file with an illegal dot in filename."
+      :purpose "Consolidate text helpers into canonical asl-text, math utilities into mem/src/math.asl, and re-import across mem modules. Delete pack/tests/standalone.test.asl. Ensure all mem test suites pass cleanly under ./bin/asl test mem/tests/*."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Zero duplicate helper functions in mem/src" "pack orphan test deleted" "All mem test suites pass"]
+      :owns ["mem/src/subtree_cache.asl" "mem/src/vfs.asl" "mem/src/structural_editor.asl" "mem/src/simhash.asl" "mem/src/driver.asl" "mem/src/store.asl" "mem/src/math.asl" "mem/src/telemetry.asl" "mem/src/pointer_orchestrator.asl" "mem/src/checkpoint.asl" "mem/src/context_scoring.asl" "mem/src/bm25.asl" "mem/src/summary_search.asl" "mem/src/token_regex.asl" "mem/src/egraph.asl" "pack/tests/standalone.test.asl"]
+      :targetSymbols ["math" "fast-ln" "char-to-code"] :relatedSymbols ["mem" "dedup"]
+      :invariants ["C3" "D34" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn ["Task47703"]
+      :gate "python3 -c 'import re, glob, sys; from collections import defaultdict; func_defs = defaultdict(list); pattern = re.compile(r'\(df\s+([a-zA-Z0-9_-]+)'); [func_defs[m.group(1)].append((f, idx)) for f in sorted(glob.glob("mem/src/*.asl")) for idx, line in enumerate(open(f), 1) for m in [pattern.search(line)] if m]; duplicates = {k: v for k, v in func_defs.items() if len(v) > 1}; sys.exit(1 if len(duplicates) > 0 or glob.glob("pack/tests/standalone.test.asl") else 0)' && ./bin/asl test mem/tests/*"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["mem/src/math.asl"]
+      :verificationCases ["Zero duplicate functions in mem/src." "All memory test suites pass cleanly."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "python3 -c 'import re, glob, sys; from collections import defaultdict; func_defs = defaultdict(list); pattern = re.compile(r'\(df\s+([a-zA-Z0-9_-]+)'); [func_defs[m.group(1)].append((f, idx)) for f in sorted(glob.glob("mem/src/*.asl")) for idx, line in enumerate(open(f), 1) for m in [pattern.search(line)] if m]; duplicates = {k: v for k, v in func_defs.items() if len(v) > 1}; sys.exit(1 if len(duplicates) > 0 else 0)'" :status :failing :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Extract shared text utilities to asl-text." "Consolidate math functions into mem/src/math.asl." "Update callers across mem/src/." "Delete pack/tests/standalone.test.asl." "Run gate."] :stepIndex 0 :receipts [])
+  ]
+)

@@ -1,0 +1,84 @@
+(:id "SystemArchitectureReview" :version "0.1.0" :state :complete :kind :planning
+ :intent "Reconcile the whole conceptual architecture with the current repository, organize discoverable knowledge, reuse existing implementation plans and define decision-oriented research, including explicit code navigation and monitoring."
+ :scope "Review and planning, plus a small README navigation link. Runtime changes, package removals, bulk moves and model experiments are not part of this execution."
+ :owns [".asl/mem/tasks/SystemArchitectureReview.asn" ".asl/mem/decisions/SystemArchitecture.asn" "README.md"]
+ :review ".asl/mem/reviews/SystemArchitectureReview.asn"
+ :decision ".asl/mem/decisions/SystemArchitecture.asn"
+ :clarification (:phrase "пол Ханеса" :meaning "harness" :status :confirmed :source "Explicit user clarification in this conversation.")
+ :sources ["docs/ParadigmSystem/Plan.asn" ".asl/mem/roadmap.asn" ".asl/mem/tasks/Phase461CoreAndInterchangeableExtensions.asn" ".asl/mem/tasks/Phase462LlmFirstLexicon.asn" ".asl/mem/tasks/Phase464InstructionTruthAndExampleCoverage.asn" ".asl/mem/tasks/Phase465AgentWorkingMemorySurface.asn" ".asl/mem/tasks/Phase468IntentGoalPracticeLifecycle.asn" ".asl/mem/tasks/Phase474OneProjectionManySurfaces.asn"]
+ :steps [
+  (:id :audit :state :complete :owner :scouts :writes false :gate "Independent source-linked topology, concept overlap and acceptance-readiness reports, scoped to the files inspected.")
+  (:id :synthesis :state :complete :owner :root :gate "Every proposed workstream maps to an existing task or an explicit gap, preserves source authority, declares dependencies and separates prospective gates from observed results.")
+  (:id :review :state :complete :owner :independent-reviewer :gate "Read authored files, independently check links, task references, phase dependencies and scoped syntax; reject ungrounded completion or universal efficiency claims.")
+  (:id :navigation :state :complete :owner :root :gate "README links resolve to the actual plan and decision; existing generated rule surfaces and user changes remain intact.")]
+ :corpus ["docs/ParadigmSystem/Design.asn" "docs/ParadigmSystem/Catalog.asn" "docs/ParadigmSystem/Essential.asn" "docs/ParadigmSystem/Migration.asn" "docs/ParadigmSystem/ContextEngine.asn" "docs/ParadigmSystem/AgentProtocol.asn" "docs/ParadigmSystem/ConceptBase.asn" "docs/ParadigmSystem/MarkerForms.asn" "docs/ParadigmSystem/Research.asn" "docs/ParadigmSystem/Review.asn" "docs/ParadigmSystem/ConceptBaseReview.asn" "docs/ParadigmSystem/MarkerFormsReview.asn" "docs/ParadigmSystem/Flow.asl" "docs/ParadigmSystem/FlowTest.asl" "docs/ParadigmSystem/FlowEvidence.asn" "docs/ParadigmSystem/Plan.asn"]
+ :scheduling "This file coordinates a review and proposed amendments; it is not a second implementation roadmap. Existing task IDs retain authority. A workstream becomes executable only after its affected tasks have owned paths, independent acceptance fixtures and intended semantic baseline failures."
+ :readiness "Independently reviewed design; the review task is complete and implementation workstreams below are not admitted to execution. Missing commands, missing fixtures and substring-only checks do not supply semantic red baselines."
+ :baseline (:scope "57 tasks in Phases436,461,462,464,465,468,470,474,475,476; independent narrow probes, not a full regression run."
+  :supervisor (:tasks 47 :fixtures 8 :missing 39 :missingexit 3)
+  :direct (:tasks 10 :scope "Phase475/476 use direct suite commands, so absence of corresponding Task fixtures is not a defect.")
+  :state "Phase475/476 collection status and task-level states disagree; task receipts must settle readiness. Recompute before scheduling because the workspace is changing."
+  :syntax "Both invalid bare-symbol vectors and odd keyword records pass asl check. A normative grammar gate is still missing."
+  :runtime "Current installed and repository binary bytes matched in the scoped review; historical divergence is not asserted as current.")
+ :reconciliation [
+  (:phase "Phase436LanguageSemanticsGroundTruth" :action :reuse :tasks ["Task43601"] :change "Treat the existing reached regression as evidence for its scope only; admit remaining semantics through fresh task receipts, not the collection label.")
+  (:phase "Phase457StaticAnalysisToolchain" :action :extend :tasks ["Task45701"] :change "Use a shared binding index for structural navigation and runtime resolution; add explicit edge certainty, coverage and freshness rather than advertising substring search as a semantic graph.")
+  (:phase "Phase461CoreAndInterchangeableExtensions" :action :reuse :tasks ["Task46101"] :change "Keep domain-independent core and justified local boundaries. Do not flatten the repository or build generic services merely for naming symmetry.")
+  (:phase "Phase462LlmFirstLexicon" :action :amend :tasks ["Task46201" "Task46202" "Task46203" "Task46204" "Task46205" "Task46206"] :change "Replace token-only optimization with semantic fidelity and end-to-end cost; retain exact tokenizer measurements. Canonicalize semantic bindings, allow evaluated projections, and remove the claim that humans must never read source.")
+  (:phase "Phase464InstructionTruthAndExampleCoverage" :action :reuse :tasks ["Task46401"] :change "Cover command examples, normative ASN examples, source/derived distinctions and truthful fallback descriptions on each consumer surface.")
+  (:phase "Phase465AgentWorkingMemorySurface" :action :extend :tasks ["Task46501" "Task46503" "Task46505" "Task46506"] :change "Expose and verify existing memory before adding another store; connect task-aware code navigation, stale-evidence invalidation and source-bound recovery.")
+  (:phase "Phase468IntentGoalPracticeLifecycle" :action :extend :tasks ["Task46801"] :change "Apply applicability, retirement and supersession to documentation and concepts while retaining historical evidence. Closure conditions need observable evaluation appropriate to the record, not necessarily an arbitrary shell command.")
+  (:phase "Phase470RestoreGateScopeAndReachExecution" :action :reuse :tasks ["Task47001" "Task47006" "Task47007"] :change "Restore actual gate scope and inspect behavioral fixtures before relying on aggregate green results. Recheck source and binary revisions before scheduling.")
+  (:phase "Phase474OneProjectionManySurfaces" :action :extend :tasks ["Task47401" "Task47402" "Task47403" "Task47404"] :change "Reuse its content/shape/destination mechanism for task-relevant knowledge and navigation capabilities. Do not add a competing renderer or root catalog.")
+  (:phase "Phase475EngineRuntimeEvaluatorAndModuleFoundation" :action :reconcile :tasks ["Task47501" "Task47502" "Task47503" "Task47504"] :change "Run the matching existing direct gates and inspect receipts before treating collection completion as settled.")
+  (:phase "Phase476TestRegressionRestorationAndAssertionIntegrity" :action :reconcile :tasks ["Task47601" "Task47602" "Task47603" "Task47604" "Task47605" "Task47606"] :change "Reuse targeted regression paths without claiming every test establishes a semantic baseline or true fault detection.")]
+ :workstreams [
+  (:id "Baseline" :priority :critical :owner :independent-verifier :depends []
+   :outcomes ["Fresh source and command capability receipt" "Per-task fixture inventory and semantic baseline classification" "Reliable minimal evaluation boundary"]
+   :reuse ["Task47001" "Task46401" "Task43601"] :owns ["tests/acceptance/d81" "Existing affected task receipt fields"]
+   :commands ["./bin/asl test --strict-falsify tests/acceptance/d81/Task43601.asl" "sh tests/acceptance/d81/SuperviseGate.sh Task47001"]
+   :gate "The first command is an existing regression, not a red baseline. The second is a prospective integration gate: its missing fixture and broad-check integrity must be resolved independently first. Seed invalid input, unreached assertions, stale success and a production mutation; require the intended failure before implementation."
+   :readiness :requires-fixtures :stop "Infrastructure failure or an uninspected passing label does not admit dependent execution.")
+  (:id "Contracts" :priority :critical :owner :language-maintainer :depends ["Baseline"]
+   :outcomes ["Normative data/execution/wire precedence and runnable conformance corpus" "One owner per reused semantic contract" "Versioned concept IDs and profile-specific marker bindings"]
+   :reuse ["Task46101" "Task46201" "Task46205" "Task46206"] :owns ["asl/grammar" "Existing ASN/ASL normative specifications" "Affected shared contract definitions"]
+   :commands ["sh tests/acceptance/d81/SuperviseGate.sh Task46205" "sh tests/acceptance/d81/SuperviseGate.sh Task46206"]
+   :gate "Independently supplied fixtures distinguish values from calls and fields from marker lists; roundtrip preserves meaning and invalid/unknown values fail. The existing delimiter checker is only a supplementary check."
+   :readiness :requires-fixtures :stop "Do not bulk-rewrite concept files until the profile and compatibility mapping are accepted.")
+  (:id "KnowledgeRouting" :priority :high :owner :knowledge-maintainer :depends ["Contracts"]
+   :outcomes ["Owned current/proposed/historical/generated records" "Stable reference resolution and compatible rename aliases" "Task-relevant component map and one source-driven projection" "README routes to the actual current work"]
+   :reuse ["Task46801" "Task47401" "Task47402" "Task47404" "Task46401"] :owns [".asl/mem/components.asn" "Existing decision indexes and principle owners" "scripts/install.sh" "Generated surfaces through their renderer"]
+   :commands ["sh tests/acceptance/d81/SuperviseGate.sh Task47401" "sh tests/acceptance/d81/SuperviseGate.sh Task47404" "sh tests/acceptance/d81/SuperviseGate.sh Task46801"]
+   :gate "A stale or missing source, conflicting owner, broken legacy reference and altered generated surface each fail an independent fixture. An agent must retrieve the authoritative applicable record from a task query without loading the whole memory store."
+   :readiness :requires-fixtures :stop "No deletion before incoming references, aliases, consumers and rollback are verified.")
+  (:id "CodeNavigation" :priority :high :owner :intel-maintainer :depends ["Baseline" "Contracts"]
+   :outcomes ["Question-based routing among exact search, symbols, relations, abstracts and source spans" "Explicit candidate/bound-edge/derived/source evidence kinds" "Revision-bound incremental monitoring and recovery after missed events"]
+   :reuse ["Task45701" "Task46501" "Task47401"] :owns ["intel navigation and index contracts" "mem source and derived-block identity" "asl/grammar/rpc.asn" "harness task-context selection"]
+   :commands ["sh tests/acceptance/d81/SuperviseGate.sh Task45701" "sh tests/acceptance/d81/SuperviseGate.sh Task46501"]
+   :gate "Fixtures distinguish same-named symbols, declarations and string mentions from calls; show unresolved dynamic edges explicitly; stale abstracts cannot authorize edits; rename/delete/watch-overflow force correct invalidation or reconciliation. Task45701 needs these supplemental navigation cases before this stream is admitted."
+   :readiness :requires-fixtures :stop "Do not promote current substring handlers to AST truth or require semantic search for an already known exact target.")
+  (:id "VerticalSlice" :priority :high :owner :runtime-maintainers :depends ["Contracts"]
+   :outcomes ["One real evidence adapter and recoverable block" "Mandatory-budget admission and immutable context snapshot" "One durable task transition and bounded script action" "Independent source-bound verification and unresolved outcomes"]
+   :reuse ["Task46501" "Task46503" "Task46505"] :owns ["mem" "harness" "agent-core" "agent-bus"]
+   :commands ["sh tests/acceptance/d81/SuperviseGate.sh Task46501" "sh tests/acceptance/d81/SuperviseGate.sh Task46505"]
+   :gate "Existing memory gates cover only their declared scope. Independent supplemental cases must cover duplicate delivery, stale revisions, ambiguous effects, missing evidence and exhausted budgets before the context/coordinator slice becomes executable."
+   :readiness :requires-task-amendments :stop "A fabricated snippet, text-derived success or unbound receipt blocks the slice. Serialize writers sharing these packages with CodeNavigation.")
+  (:id "Experiments" :priority :high :owner :researcher :depends ["Baseline"]
+   :outcomes ["R1-R9 preregistered protocols and owned independent grading" "Paired model outcomes, raw receipts and full cost" "Accepted, rejected or inconclusive profile decisions"]
+   :reuse ["Task46202" "Task46206" "Task46506"] :owns ["Existing harness evaluation cases" ".asl/mem/reviews" "Candidate model views"]
+   :commands ["sh tests/acceptance/d81/SuperviseGate.sh Task46206" "sh tests/acceptance/d81/SuperviseGate.sh Task46506"]
+   :gate "These prospective task commands do not currently execute the research protocols. Define behavioral fixtures and a paired evaluation runner first; validate grading with known-correct and seeded-wrong outcomes. R2/R4/R6 can use a trustworthy external host without waiting for all runtime work; R5/R7/R8/R9 require the particular adapters they measure."
+   :readiness :protocols-planned :stop "No allocated model budget or frozen grading protocol means no efficacy run, not a passing or failed research result.")
+  (:id "ScaleAndRetire" :priority :conditional :owner :component-owners :depends ["KnowledgeRouting" "CodeNavigation" "VerticalSlice" "Experiments"]
+   :outcomes ["Only measured useful prefetch, corpus expansion or distributed operation" "Duplicate active sources retired with compatibility" "Confirmed unused implementation removed inside its owner boundary"]
+   :reuse ["Task46101" "Task46801" "Task47404"] :owns ["Only paths approved by the preceding consumer and dependency inventory"]
+   :commands ["sh tests/acceptance/d81/SuperviseGate.sh Task47404" "sh tests/acceptance/d81/SuperviseGate.sh Task46801"]
+   :gate "Retirement gates require resolvable incoming IDs and unchanged consumer behavior; scaling also requires the relevant accepted R7/R8/R9 result. These commands need independent additions for each concrete deletion or scaling change."
+   :readiness :conditional :stop "Negative or inconclusive experiments leave the simpler system in place. No package deletion from import count alone.")]
+ :next ["Prepare a fresh readiness inventory and a small independent semantic fixture set for the first affected tasks." "Resolve the ASN data/profile contradiction and shared definition ownership." "Repair reference ownership and validate a minimal question-to-source navigation route." "Run the narrow evidence/context/action/verification slice and preregister parallel model experiments." "Promote only supported variants and then retire duplicate active records."]
+ :handoff (:consumer "Gemini Flash" :entry ".asl/mem/tasks/SystemArchitectureReview.asn" :readFirst [".asl/mem/decisions/SystemArchitecture.asn" ".asl/mem/reviews/SystemArchitectureReview.asn"]
+  :executionOrder ["Run a fresh capability and fixture inventory." "Implement only Baseline and Contracts work with explicit owned paths." "Re-run the independent review before KnowledgeRouting, CodeNavigation or VerticalSlice." "Run one vertical slice before any scale, prefetch, mesh or bulk KB population." "Run R1-R9 only with frozen profiles and independent grading."]
+  :hardStops ["Missing fixture or command is infrastructure-unavailable, not a semantic red baseline." "Substring candidate is not a bound graph edge." "Delimiter check is not normative ASN conformance." "Unknown, stale, fabricated or unreached success blocks dependent work." "Do not delete, move or regenerate dirty/shared surfaces without incoming-reference and rollback checks."]
+  :receipt "Each completed item returns path, gate command, exit code, executed assertions, source revision and unresolved limitations. Keep status :planned or :inconclusive when evidence is absent." )
+ :parallel "Read-only inventory and protocol research can overlap. KnowledgeRouting, CodeNavigation and runtime work may overlap only with disjoint owned write sets; shared RPC, mem and harness edits are serialized. Runtime execution does not wait for every speculative research question."
+ :implementation :not-started)

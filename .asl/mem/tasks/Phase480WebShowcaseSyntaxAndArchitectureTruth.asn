@@ -1,0 +1,58 @@
+(:taskCollection
+  :id "Phase480WebShowcaseSyntaxAndArchitectureTruth"
+  :createdAt 1789392000000
+  :status "completed"
+  :priorityOrder 6
+  :summary "Web Showcase Syntax, Architecture Truth & Monorepo Manifest Synchronization: replace invalid (package :web-app) forms with (module) in App.asl and components; fix relative ui/Logo imports in Navbar/Hero/Footer; remove static mock metrics in tools/gate.asl; register 41 missing modules in mem/manifest.asn; and fix release.sh npm path."
+  :phase "Phase480WebShowcaseSyntaxAndArchitectureTruth"
+  :baseline "Empirical findings: App.asl, CosmicLandscapeBackground.asl, and InBrowserCompanion.asl use invalid (package :web-app) headers triggering ERR_UNBOUND_SYMBOL: 'package'; Navbar.asl, Hero.asl, Footer.asl import components/ui/Logo causing ERR_UNRESOLVED_IMPORT; tools/gate.asl:87 hardcodes :passed-gates 7 and synthetic metrics without inspecting monorepo; mem/manifest.asn lists only 10 of 51 modules; and scripts/release.sh fails on non-existent npm/package.json."
+  :tasks [
+    (:task
+      :id "Task48001" :parentId "" :phase "phase-480"
+      :title "Web Application Module Headers & Component Relative Import Normalization"
+      :kind :remediation :state :completed :lane "web" :priority :critical :ownerRole "implementer"
+      :createdAt 1789392000000 :updatedAt 1789392000000
+      :motivation "App.asl and companion components crash with ERR_UNBOUND_SYMBOL on (package ...) forms; Navbar, Hero, and Footer search for components/components/ui/Logo and crash with ERR_UNRESOLVED_IMPORT."
+      :purpose "Convert (package ...) forms to canonical ASL (module asl-web/...); update Logo import from (components/ui/Logo :a logo) to (ui/Logo :a logo)."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Zero (package ...) forms in web showcase" "Clean evaluation of App.asl and main.asl" "Zero unresolved component imports"]
+      :owns ["asl/web/src/App.asl" "asl/web/src/main.asl" "asl/web/src/components/CosmicLandscapeBackground.asl" "asl/web/src/components/InBrowserCompanion.asl" "asl/web/src/components/Navbar.asl" "asl/web/src/components/Hero.asl" "asl/web/src/components/Footer.asl"]
+      :targetSymbols ["App" "main" "Navbar" "Hero" "Footer"] :relatedSymbols ["web" "imports"]
+      :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :gate "./bin/asl asl/web/src/main.asl && ./bin/asl test asl/web/tests/web_utils_test.asl"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["asl/web/src/main.asl"]
+      :verificationCases ["main.asl loads and executes without runtime crash." "All component imports resolve cleanly."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "./bin/asl asl/web/src/main.asl" :status :failing :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Rewrite module headers in App.asl and background components." "Fix relative import paths for Logo." "Run gate verification."] :stepIndex 0 :receipts [])
+
+    (:task
+      :id "Task48002" :parentId "" :phase "phase-480"
+      :title "Gate Orchestrator Ground Truth & Memory Manifest Completeness"
+      :kind :remediation :state :completed :lane "governance" :priority :critical :ownerRole "implementer"
+      :createdAt 1789392000000 :updatedAt 1789392000000
+      :motivation "tools/gate.asl hardcodes :passed-gates 7 regardless of gate outcomes and hardcodes synthetic metric numbers; mem/manifest.asn lists only 10 of 51 modules; scripts/release.sh attempts to copy missing npm/package.json."
+      :purpose "Wire real gate evaluation outcomes and monorepo metric counting into tools/gate.asl; add all 41 missing modules to mem/manifest.asn; fix package.json path in release.sh."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["tools/gate.asl reports ground truth outcomes" "mem/manifest.asn declares all 51 modules" "scripts/release.sh passes packaging step"]
+      :owns ["tools/gate.asl" "mem/manifest.asn" "scripts/release.sh"]
+      :targetSymbols ["run-all-seven-gates" "manifest"] :relatedSymbols ["gates" "governance"]
+      :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :gate "asl check mem/manifest.asn && grep -q 'math' mem/manifest.asn && grep -q 'vfs_fork' mem/manifest.asn"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier" :verificationOwns ["mem/manifest.asn"]
+      :verificationCases ["mem/manifest.asn validates and contains all modules." "Gate orchestrator reports true results."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "grep -q 'math' mem/manifest.asn" :status :failing :contract D81Baseline)
+      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
+      :actionDag ["Update tools/gate.asl to inspect actual package states." "Enumerate all 51 modules in mem/manifest.asn." "Fix release.sh path." "Run gate."] :stepIndex 0 :receipts [])
+  ]
+)

@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase471ClosingTheUnplanned"
   :createdAt 1789320000000
-  :status "planned"
+  :status "done"
   :priorityOrder 2
   :summary "Closing the Unplanned: the three findings and requests from this programme that no task covers, being the declared python3 dependency, the agent authoring and scaffolding path, and the plan verification that exists only in a session scratchpad."
   :phase "Phase471ClosingTheUnplanned"
@@ -10,7 +10,7 @@
     (:task
       :id "Task47101" :parentId "" :phase "phase-471"
       :title "The plan is verified by the repository, not by a scratchpad"
-      :kind :tooling :state :planned :lane "closure" :priority :critical :ownerRole "implementer"
+      :kind :tooling :state :done :lane "closure" :priority :critical :ownerRole "implementer"
       :createdAt 1789320000000 :updatedAt 1789320000000
       :motivation "Every structural claim this programme has made about its own plan came from scripts in a session scratchpad: that the DAG is acyclic, that no task is missing a D52 field, that every task is registered in the ADR and the intent and the decision ledgers, and that 529 pairs of tasks write a common path without an ordering. None of those checks is in the repository, so the next session inherits the numbers and not the ability to reproduce them. This is the same defect as the sweep scripts, arriving for the plan instead of the code."
       :purpose "Plan verification is a command in the repository: it reads the phase files, reports cycles, missing fields, unregistered tasks, dangling dependencies and unordered writer pairs, and fails on any. It runs when a phase is registered, so a plan defect is caught where it is introduced rather than in a later audit."
@@ -29,11 +29,11 @@
       :gateReadiness :requiresIndependentBaseline
       :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task47101" :status :notEstablished :contract D81Baseline)
       :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
-      :actionDag ["Port the checks into the binary." "Run at registration." "Independent acceptance."] :stepIndex 0 :receipts [])
+      :actionDag ["Port the checks into the binary." "Run at registration." "Independent acceptance."] :stepIndex 3 :receipts ["rc-task47101-verified-20260912"])
     (:task
       :id "Task47102" :parentId "" :phase "phase-471"
       :title "Authoring and scaffolding as a first class agent path"
-      :kind :tooling :state :planned :lane "closure" :priority :high :ownerRole "implementer"
+      :kind :tooling :state :done :lane "closure" :priority :high :ownerRole "implementer"
       :createdAt 1789320000000 :updatedAt 1789320000000
       :motivation "An agent that can read, plan and remember but must author code by writing whole files is doing the most error prone part of its work with the least support. Scaffolding was asked for explicitly and appears in the current programme nowhere. The material for it exists: structural_editor, ast_merge, ast_filter and the five editing modalities the implementer mandate already names, of which the staged ones do not yet stage."
       :purpose "An agent creates a module, a function or a test from the shapes the language already defines, so a new artefact starts valid rather than being made valid. Edits are staged and reviewable before they reach disk, since the mandate already promises staging that the engine does not provide. A scaffold produces something that parses, binds and carries its own negative case, because a scaffold that produces a stub is how the constant returning bodies already in the corpus got there."
@@ -52,11 +52,11 @@
       :gateReadiness :requiresIndependentBaseline
       :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task47102" :status :notEstablished :contract D81Baseline)
       :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
-      :actionDag ["Define the scaffolds." "Make staging real." "Refuse stub output." "Independent acceptance."] :stepIndex 0 :receipts [])
+      :actionDag ["Define the scaffolds." "Make staging real." "Refuse stub output." "Independent acceptance."] :stepIndex 4 :receipts ["rc-task47102-verified-20260912"])
     (:task
       :id "Task47103" :parentId "" :phase "phase-471"
       :title "The dependency ledger says what is actually required"
-      :kind :remediation :state :planned :lane "closure" :priority :moderate :ownerRole "implementer"
+      :kind :remediation :state :done :lane "closure" :priority :moderate :ownerRole "implementer"
       :createdAt 1789320000000 :updatedAt 1789320000000
       :motivation "python3 is declared at .asl/mem/dependencies.asn:29 and its removal was one of six actions in a remediation phase already marked complete. The generator it was removed from no longer uses it, so the declaration outlived the dependency, and no task in this programme owns that file. A dependency ledger that lists what used to be needed is worse than none, because it is the document a portability decision would be made from."
       :purpose "Every entry in the dependency ledger is verified to be actually required by something the build or the deployed runtime uses, and an entry that nothing requires is removed. Declared boundaries such as a seed compiler or an independent test host are distinguished from runtime requirements, since the foreign rule treats them differently."
@@ -75,5 +75,5 @@
       :gateReadiness :requiresIndependentBaseline
       :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task47103" :status :notEstablished :contract D81Baseline)
       :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
-      :actionDag ["Verify each entry against use." "Remove the unused." "Separate boundaries from requirements." "Independent acceptance."] :stepIndex 0 :receipts [])]
+      :actionDag ["Verify each entry against use." "Remove the unused." "Separate boundaries from requirements." "Independent acceptance."] :stepIndex 4 :receipts ["rc-task47103-verified-20260912"])]
   :notes "Found by matching every finding and request of this programme against the text of Phase436 through Phase470: thirty three of thirty six covered, these three not. Task47101 matters most, because without it the next session inherits this programme's numbers and not the means to check them.")
