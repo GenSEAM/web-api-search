@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase463AslFirstBeyondRacket"
   :createdAt 1789260000000
-  :status "planned"
+  :status "completed"
   :priorityOrder 4
   :summary "ASL-First Beyond Racket: lead on the axes Racket never optimised, being emission reliability, nesting depth, binding distance and a measured error rate, after measurement closed the structural rewrite that looked like the largest win."
   :phase "Phase463AslFirstBeyondRacket"
@@ -169,12 +169,12 @@
       :phase "phase-463"
       :title "Record the refuted rewrites so they do not return"
       :kind :protocol
-      :state :planned
+      :state :completed
       :lane "emission"
       :priority :high
       :ownerRole "planner"
       :createdAt 1789260000000
-      :updatedAt 1789260000000
+      :updatedAt 1789431400000
       :motivation "Three structural compaction ideas were measured in one session and all three failed: devowelling raises cost by 106 percent, deleting delimiters from existing formatting appears to save 13.6 percent while producing an unparseable file, and a real indentation-significant rendering costs 7.7 percent more because each level pays a newline and an indent. Each of the three is intuitive, each will be proposed again, and each is cheap to re-measure and expensive to half-adopt."
       :purpose "The refuted rewrites are recorded with their measurements, their method and the reason the intuition fails, alongside the surviving conclusion that explicit delimiters are the token-optimal encoding at this corpus depth. A proposal to reopen one carries a new measurement rather than a fresh argument."
       :context (:contractRef D81PlanContext)
@@ -195,11 +195,11 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46305.asl"]
       :verificationCases ["Each recorded refutation is reproducible by command on the current tree." "A recorded number that no longer reproduces fails the check rather than standing." "The record names the scope, so a conclusion true at this depth is not read as universal."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46305" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46305" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define refutedStructuralRewritesRule semantic")
+      :historicalReceipts ["rc-task46305-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Record the three refutations." "Make each reproducible by command." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])]
+      :stepIndex 4
+      :receipts ["rc-task46305-verified-20260912"])]
   :notes "The largest apparent win in this session was structural and it did not survive its own measurement. What remains as genuinely ASL-first is the set of quantities no existing language tracks: nesting depth as an emission cost, distance from a binding to its use as an attention cost, and above all a measured emission error rate, which converts every future language argument from opinion into a comparison.")

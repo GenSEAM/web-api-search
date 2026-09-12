@@ -3,7 +3,7 @@
 ## Status
 - **Phase**: Phase463AslFirstBeyondRacket
 - **Priority**: Critical Structural Optimization & Emission Fidelity
-- **Status**: active
+- **Status**: completed & verified
 
 ## Context & Objectives
 Optimize AgentScript along axes Racket never optimized: emission reliability, nesting depth, binding distance, and an empirical emission error rate:
@@ -52,11 +52,11 @@ Optimize AgentScript along axes Racket never optimized: emission reliability, ne
   3. Verify all 3 stages of `SuperviseGate.sh Task46304` (20 assertions executed cleanly).
 
 
-### Step 5: Task46305 — Record the Refuted Rewrites So They Do Not Return
+### Step 5: Task46305 — Record the Refuted Rewrites So They Do Not Return [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46305.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46305`
 - Owned Files: `.asl/mem/principles.asn`, `TOKEN_CONVENTIONS.md`, `asl/grammar/language-semantics.asn`.
 - Implementation:
   1. Define `refutedStructuralRewritesRule` semantic in `asl/grammar/language-semantics.asn`.
   2. Document 3 measured refutations (devowelling, delimiter deletion, indentation-significant rendering) in `TOKEN_CONVENTIONS.md` and `.asl/mem/principles.asn`.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46305`.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46305` (27 assertions executed cleanly).

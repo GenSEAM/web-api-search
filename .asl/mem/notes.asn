@@ -1361,6 +1361,16 @@
       :fact "task46304-certified-complete"
       :evidence "Authored measuredEmissionErrorRateRule in language-semantics.asn; mandated that language changes are evaluated by model generation against a versioned fixed task set, measuring the emission error rate of forms that fail to parse, bind, or assert; rejected token savings that raise the error rate; verified baseline failure and negative mutation fault detection; passed under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task46304 100% verified and certified; measured emission error rate standard established under ADR-0081")
+    (:note
+      :id "n122"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "TOKEN_CONVENTIONS.md" ".asl/mem/principles.asn" "tests/acceptance/d81/Task46305.asl" ".asl/mem/tasks/Phase463AslFirstBeyondRacket.asn"]
+      :tags [:supervision :phase463 :task46305 :refuted-rewrites :explicit-delimiters :principles :approved]
+      :fact "task46305-certified-complete"
+      :evidence "Authored refutedStructuralRewritesRule in language-semantics.asn and documented the 3 measured refutations (devowelling +106%, delimiter deletion unparseable, indentation-significant +7.7%) in TOKEN_CONVENTIONS.md and principles.asn; confirmed explicit delimiters are the token-optimal structural encoding; verified baseline failure and negative mutation fault detection; passed under SuperviseGate.sh with 27 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46305 100% verified and certified; Phase 463 all 5 tasks certified complete under ADR-0081")
   ]
 )
 

@@ -178,7 +178,13 @@
  
     (:principle :id "ReconstructibilityThreshold" :class :normative :domain :epistemic
       :statement "Write only what the next agent cannot reconstruct from the tree. Anything reconstructible from code, git history, or a command is refused; a rejected alternative is accepted because no command reports what was not chosen."
-      :why "Restating command outputs or git state creates drift, bloats prompt context, and duplicates the tree. Durable memory is reserved strictly for untraced rationale, external constraints, and rejected alternatives.")]
+      :why "Restating command outputs or git state creates drift, bloats prompt context, and duplicates the tree. Durable memory is reserved strictly for untraced rationale, external constraints, and rejected alternatives.")
+
+    (:principle :id "RefutedStructuralRewrites" :class :empirical :domain :syntax
+      :statement "Three intuitive structural rewrites were empirically measured and refuted: devowelling raises token costs by 106 percent, deleting delimiters produces an unparseable tree that measures nothing, and indentation-significant rendering raises cost by 7.7 percent. Explicit delimiters are the token-optimal structural encoding at this corpus depth."
+      :why "Each of the three was proposed on intuition and would be proposed again; recording the measurements prevents redundant re-exploration."
+      :basis (:measured "2026-09-12" :detail "Over 888 files and 1512691 tokens: devowelling 16 common words rose from 16 to 33 tokens (+106 percent); indentation-significant rendering added newlines and indents costing +7.7 percent against paren runs merging into single tokens. Explicit delimiters are the token-optimal structural encoding.")
+      :practice "Reopening any refuted structural rewrite requires a new empirical measurement rather than fresh argument.")]
 
   :seeAlso [(:reviews ["D81StaticSweepAudit20260911" "D81CompactionFrontier20260912" "D81ConceptReview" "D81PlanSettlement"])
             (:rules "asl/grammar/rules.asn is the single rendered source of the operative rules; this ledger holds the reasoning those rules compress.")

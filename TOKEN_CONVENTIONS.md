@@ -248,4 +248,25 @@ Every identifier in the language and grammar registries is governed by measured 
    - Shorter is cheaper (refuted: devowelling 16 words increased cost from 16 to 33 tokens, a 106% rise).
    - Families must look uniform (refuted: raises cost without syntactic benefit).
    - Single-token forms must generalize (refuted: non-extensible single-token forms are accepted as is).
+   - Deleting delimiters from existing formatting appears to save 13.6% but yields an unparseable tree; indentation-significant rendering raises token costs by 7.7%.
+   - **Surviving Structural Law**: Explicit delimiters are the token-optimal structural encoding at this corpus depth; S-expressions are retained without compromise.
+
+
+
+## 10. Refuted Structural Compaction Rewrites (`Task46305`, `ADR-0081`)
+
+Three intuitive structural rewrites were empirically evaluated on the corpus (888 files, 1,512,691 tokens under cl100k) and all three failed:
+
+1. **Devowelling**:
+   - Compaction hypothesis: dropping vowels shortens tokens.
+   - Empirical finding: devowelling 16 common words increased token cost from 16 to 33 tokens (+106%).
+2. **Delimiter Deletion**:
+   - Compaction hypothesis: deleting delimiters from existing formatting appears to save 13.6%.
+   - Empirical finding: delimiter deletion leaves syntax unparseable, destroying tree balance and structural verification.
+3. **Indentation-Significant Rendering**:
+   - Compaction hypothesis: Python/YAML style significant indentation eliminates closing delimiters.
+   - Empirical finding: indentation-significant rendering costs 7.7% more tokens, because every level pays a newline and an indent token, whereas paren runs merge into single tokens.
+4. **Surviving Conclusion**:
+   - Explicit delimiters with balanced S-expressions are the token-optimal structural encoding at this corpus depth. The language retains explicit delimiters throughout.
+   - Reopening any refuted rewrite requires reproducible measured evidence on the current tree rather than opinion or argument.
 
