@@ -80,7 +80,7 @@
       :verificationCases ["The same frame round-trips identically over all four transports; a frame valid on one and invalid on another fails the conformance vectors." "A malformed frame is rejected at ingress and never partially applied."]
       :gateReadiness :verified
       :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44602" :status :baselineVerified :contract D81Baseline)
-      :historicalReceipts [(:receipt :taskId "Task44602" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44602" :assertCount 47 :at 1789439100000)]
+      :historicalReceipts [(:receipt :taskId "Task44602" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44602" :assertCount 78 :at 1789439100000)]
       :reviewStatus :approved
       :actionDag ["Verifier freezes frame vectors valid and invalid." "Define the schema." "Implement each transport as a codec." "Reject invalid frames at ingress." "Independent acceptance."]
       :stepIndex 1

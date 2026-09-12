@@ -5,8 +5,11 @@
       TestSingleFrameSchemaContract
       TestFourTransportsAsCodecsContract
       TestIngressValidationAndRejectionContract
+      TestEngineWireFrameContract
+      TestTransportEnvelopeIntegrationContract
       TestTask44602GroundedInPhase446]
-  :i [("../../../agent-bus/src/wire" :a wire)])
+  :i [("../../../agent-bus/src/wire" :a wire)
+      ("../../../agent-bus/src/transport" :a transport)])
 
 (df TestSuperviseGateIntegrity [] -> Bool
   :d "Verifies SuperviseGate.sh enforces task dispatch, strict falsify, and multi-stage verification"
@@ -92,6 +95,37 @@
       (assert (= (.-errorKind res-mal) "ERR_MALFORMED_PAYLOAD") "Must return ERR_MALFORMED_PAYLOAD")
       true)))
 
+(df TestEngineWireFrameContract [] -> Bool
+  :d "Verifies asl.c engine executes and validates wire frames at ingress with typed rejection"
+  (let [(c-res (file-read "asl/tools/asl.c"))]
+    (assert (= (.-_tag c-res) "ok") "asl/tools/asl.c must exist and be readable")
+    (let [(c-src (.-value c-res))]
+      (assert (string-contains? c-src "op_frame") "asl.c must implement op_frame")
+      (assert (string-contains? c-src "ERR_MISSING_IDENTITY") "asl.c must validate missing identity")
+      (assert (string-contains? c-src "ERR_MISSING_SESSION_ID") "asl.c must validate missing sessionId")
+      (assert (string-contains? c-src "ERR_MISSING_DIGEST") "asl.c must validate missing digest")
+      (assert (string-contains? c-src "ERR_MALFORMED_PAYLOAD") "asl.c must validate malformed payload")
+      (assert (string-contains? c-src "(:frame") "asl.c must recognize (:frame in handle_payload")
+      (assert (string-contains? c-src "execute_single_step") "asl.c must wire op_frame into execute_single_step")
+      true)))
+
+(df TestTransportEnvelopeIntegrationContract [] -> Bool
+  :d "Verifies agent-bus transport envelopes bridge to and from canonical wire frames"
+  (let [(env (transport/make-transport-envelope "env-task44602" (transport/frame-rpc-req) "agent-verifier" "agent-auditor" 42 "(:query :active)" 5000))]
+    (assert (transport/validate-transport-envelope env) "Envelope passes validation")
+    (let [(frame (transport/envelope->canonical-wire-frame env))]
+      (assert (= (.-identity frame) "env-task44602") "Frame identity matches")
+      (assert (= (.-sessionId frame) "sess-agent-verifier") "SessionId matches")
+      (assert (= (.-causality frame) "seq-42") "Causality matches")
+      (assert (= (.-payload frame) "(:query :active)") "Payload matches")
+      (let [(val-res (wire/validate-wire-frame frame))]
+        (assert (.-valid? val-res) "Converted frame passes ingress validation")
+        (let [(back (transport/canonical-wire-frame->envelope frame))]
+          (assert (= (.-id back) "env-task44602") "Envelope ID restored")
+          (assert (= (.-payload back) "(:query :active)") "Envelope payload restored")
+          (assert (transport/RunTests) "transport/RunTests passes cleanly")
+          true)))))
+
 (df TestTask44602GroundedInPhase446 [] -> Bool
   :d "Verifies Phase 446 task collection grounds Task44602"
   (let [(p-res (file-read ".asl/mem/tasks/Phase446MultiRuntimeRelayAndObservability.asn"))]
@@ -102,6 +136,8 @@
       (assert (string-contains? p-src "asl/grammar/wire.asn") "Phase 446 must own wire.asn")
       (assert (string-contains? p-src "agent-bus/src/wire.asl") "Phase 446 must own wire.asl")
       (assert (string-contains? p-src "agent-bus/src/transport.asl") "Phase 446 must own transport.asl")
+      (assert (string-contains? p-src "asl/tools/asl.c") "Phase 446 must own asl.c")
+      (assert (string-contains? p-src "execute_single_step") "Phase 446 must target execute_single_step")
       true)))
 
 (df RunTests [] -> Bool
@@ -111,5 +147,7 @@
     (assert (TestSingleFrameSchemaContract) "TestSingleFrameSchemaContract must pass")
     (assert (TestFourTransportsAsCodecsContract) "TestFourTransportsAsCodecsContract must pass")
     (assert (TestIngressValidationAndRejectionContract) "TestIngressValidationAndRejectionContract must pass")
+    (assert (TestEngineWireFrameContract) "TestEngineWireFrameContract must pass")
+    (assert (TestTransportEnvelopeIntegrationContract) "TestTransportEnvelopeIntegrationContract must pass")
     (assert (TestTask44602GroundedInPhase446) "TestTask44602GroundedInPhase446 must pass")
     true))
