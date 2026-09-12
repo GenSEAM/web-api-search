@@ -3,7 +3,7 @@
 ## Status
 - **Phase**: Phase456DuplicationDeadCodeAndUnwiredEradication
 - **Priority**: Critical / High
-- **Status**: in-progress (2/4 tasks certified complete)
+- **Status**: Completed (4/4 tasks certified complete)
 - **Wave**: Wave 103
 
 ## Context & Objectives
@@ -50,3 +50,4 @@ Execute Phase 456 under ADR-0081 and monorepo verification contracts (D81, D52, 
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task45603`
 - **Owned Files**: `asl/grammar/dependency-boundaries.asn`, `.asl/mem/components.asn`, `voice`, `agent`, `browser-plugin`, `crawler`
 - **Acceptance Criteria**: Audit all unreachable modules; classify as wired, deleted, or recorded dormant with explicit waking conditions; ensure corpus statistics exclude declared dormant modules.
+- **Verification Status**: **VERIFIED COMPLETE** (Receipt: `rc-task45603-verified-20260913`, Note: `n154`).
