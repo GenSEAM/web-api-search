@@ -91,12 +91,12 @@
       :phase "phase-459"
       :title "CamelCase for multi-word identifiers, at the corpus-wide figure"
       :kind :language
-      :state :planned
+      :state :completed
       :lane "compaction"
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789160000000
-      :updatedAt 1789160000000
+      :updatedAt 1789422400000
       :motivation "4398 of 6966 defined names carry three or more words, and hyphenated identifiers are 20.4 percent of all corpus tokens at 3.19 tokens per occurrence against 2.58 for CamelCase. Only 4.0 percent of identifier occurrences are CamelCase today, so D51 is declared and barely applied. Converting every hyphenated identifier saves 46259 tokens, which is 3.06 percent of the corpus: real, and the largest single item available, and an order of magnitude below the 20 to 50 percent the convention document states."
       :purpose "Multi-word identifiers are CamelCase, applied by a transformation over the tree rather than by hand, and the saving is measured on the tree before and after rather than extrapolated from example lines."
       :context (:contractRef D81PlanContext)
@@ -117,13 +117,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task45903.asl"]
       :verificationCases ["Executed assertion count is unchanged across the conversion, so the rename did not silently unbind anything." "An identifier inside a string literal is not rewritten." "The recorded saving is computed, not quoted from the plan."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45903" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45903" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define assertionParityAcrossTransformations semantic")
+      :historicalReceipts ["rc-task45903-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Transform mechanically." "Measure before and after." "Confirm assertion parity." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task45903-verified-20260912"])
     (:task
       :id "Task45904"
       :parentId ""

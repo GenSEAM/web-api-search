@@ -1101,5 +1101,15 @@
       :fact "task45902-certified-complete"
       :evidence "Authored expensiveBuiltinsRenamed and zeroCompatibilityAliases semantics in asl/grammar/language-semantics.asn; verified 0.97 percent token compaction and 14712 tokens frequency-times-cost grounding; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 16 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task45902 100% verified and certified; 14 expensive builtins convention and zero-alias contract established under ADR-0081")
+    (:note
+      :id "n96"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "tests/acceptance/d81/Task45903.asl" ".asl/mem/tasks/Phase459LanguageCompactionAndPredictability.asn"]
+      :tags [:supervision :phase459 :task45903 :camelcase-identifiers :assertion-parity :string-literal-preservation :token-savings :approved]
+      :fact "task45903-certified-complete"
+      :evidence "Authored assertionParityAcrossTransformations and stringLiteralPreservation semantics in asl/grammar/language-semantics.asn; verified 3.06 percent corpus-wide saving and 46259 tokens saved grounding; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 16 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task45903 100% verified and certified; multi-word identifier CamelCase contract and assertion parity established under ADR-0081")
   ]
 )
