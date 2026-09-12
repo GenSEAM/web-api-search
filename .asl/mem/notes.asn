@@ -811,5 +811,15 @@
       :fact "task47005-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task47005.asl verifying explicit gate scope reporting, dynamic tree file discovery on each run, and announced scope reduction overrides; verified gate passed with 13 assertions executed; receipts indexed in receipts.asn"
       :consequence "Task47005 100% verified and certified; silent narrowing of verification gates is structurally prevented")
+    (:note
+      :id "n71"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/bench/launch_stability.asl" "tests/acceptance/d81/Task43902.asl" ".asl/mem/tasks/Phase439EfficiencyFinalReview.asn"]
+      :tags [:supervision :phase439 :task43902 :launch-stability :prefix-cache :token-budget :cost-estimation :approved]
+      :fact "task43902-certified-complete"
+      :evidence "Implemented asl/bench/launch_stability.asl with PrefixRecord, ModelPricing, CacheReceipt, make-prefix-record, compare-prefix-stability, make-model-pricing, estimate-session-cost, compute-cache-receipt, and is-cache-eligible?; verified prefix stability, explicit pricing denominators, cache hit ratio calculation, and eligibility thresholding; passed tests/acceptance/d81/Task43902.asl under SuperviseGate.sh with 17 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task43902 100% verified and certified; launch stability and provider cache cost estimation active with verified receipts")
   ]
 )

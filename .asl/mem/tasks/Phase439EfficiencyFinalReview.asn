@@ -59,11 +59,11 @@
       :title "Measure actual cache use and cost per correct task"
       :kind :measurement
       :lane "efficiency"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789084800000
-      :updatedAt 1789133687623
+      :updatedAt 1789408200000
       :motivation "Byte stability is useful but does not prove cache hits, provider eligibility or end-to-end savings."
       :purpose "Measure stable payload bytes, pinned-tokenizer size and actual provider cache usage over paired tasks; record writes, reads, misses, outputs, latency and correct outcomes, separating engineering payload/session budgets from model-dependent efficacy."
       :context (:contractRef D81PlanContext)
@@ -85,12 +85,12 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task43902.asl"]
       :verificationCases ["Repeated identical prefixes and deliberate prefix changes produce correctly classified stability results; provider cache receipts are captured when available." "Uncached, cached and compacted costs use explicit denominators and current recorded pricing; absent usage data is unknown, never inferred from shasum." "Payload token and total-session token budgets are checked separately; byte-count surrogates cannot satisfy token requirements."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task43902" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task43902" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task43902" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task43902" :assertCount 17 :at 1789408200000)]
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
 
     (:task
       :id "Task43903"
