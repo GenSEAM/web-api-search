@@ -1171,5 +1171,15 @@
       :fact "task46003-certified-complete"
       :evidence "Authored racketModuleResolution, moduleCycleDetection, singleModuleInstantiation semantics in asl/grammar/language-semantics.asn and collectionRoots in asl/grammar/dependency-boundaries.asn; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task46003 100% verified and certified; Racket module resolution model adopted under ADR-0081")
+    (:note
+      :id "n103"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "tests/acceptance/d81/Task46004.asl" ".asl/mem/tasks/Phase460SchemeAlignmentAndRacketConcepts.asn"]
+      :tags [:supervision :phase460 :task46004 :syntax-objects :source-location :diagnostics :approved]
+      :fact "task46004-certified-complete"
+      :evidence "Authored sourceLocationPreservation and diagnosticPositionQuoting semantics in asl/grammar/language-semantics.asn; grounded syntax objects carrying source, line, column and span to re-attribute 52 mis-attributed failing suites; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 19 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46004 100% verified and certified; syntax object source location tracking adopted under ADR-0081")
   ]
 )

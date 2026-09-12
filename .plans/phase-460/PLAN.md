@@ -46,14 +46,16 @@ Align AgentScript core forms with Scheme and Racket conventions where measured t
   2. Specify `collectionRoots` in `asl/grammar/dependency-boundaries.asn`.
   3. Verify all 3 stages of `SuperviseGate.sh Task46003` (20 assertions executed cleanly).
 
-### Step 4: Task46004 — Source Location Tracking (Syntax Objects)
+### Step 4: Task46004 — Source Location Tracking (Syntax Objects) [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46004.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46004`
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define sourceLocationPreservation semantic`.
 - Owned Files: `asl/tools/engine_js.h`, `asl/tools/asl.c`.
 - Implementation:
-  1. Define `sourceLocationPreservation` semantics ensuring reader and evaluator retain line/column/source.
-  2. Connect diagnostic error reporting to syntax object positions.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46004`.
+  1. Define `sourceLocationPreservation` and `diagnosticPositionQuoting` semantics in `asl/grammar/language-semantics.asn`.
+  2. Connect diagnostic error reporting to syntax object positions carrying source, line, column, and span.
+  3. Ground re-attribution of 52 of 136 failing suites in Phase 460 task file.
+  4. Verify all 3 stages of `SuperviseGate.sh Task46004` (19 assertions executed cleanly).
 
 ### Step 5: Task46005 — Contracts with Blame
 - Fixture: `tests/acceptance/d81/Task46005.asl`

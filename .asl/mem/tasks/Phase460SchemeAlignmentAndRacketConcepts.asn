@@ -130,12 +130,12 @@
       :phase "phase-460"
       :title "Every form carries its source location, as a syntax object does"
       :kind :language
-      :state :planned
+      :state :completed
       :lane "concepts"
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789240000000
-      :updatedAt 1789240000000
+      :updatedAt 1789425000000
       :motivation "Measured: 52 of 136 failing suites report a symbol at a call site in one file when the defect is an unresolved import in another. The reader currently produces bare values, so by the time anything fails there is nothing left that knows where the form came from. Racket's answer is the syntax object, a value that carries source, line, column and span through reading, expansion and error reporting, and it is the reason a Racket error can point at the form that caused it rather than at the place the consequence surfaced."
       :purpose "The reader attaches source, line and column to every form, the evaluator preserves them through binding and application, and every diagnostic quotes the position of the form responsible. The checker and the static analysers read the same positions, so a finding and a runtime error name the same place."
       :context (:contractRef D81PlanContext)
@@ -156,13 +156,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46004.asl"]
       :verificationCases ["An error inside a function called from another file quotes the definition site and the call site, not one of them." "A position survives being passed through a higher order function." "The checker and the evaluator report the same line for the same defect."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46004" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46004" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define sourceLocationPreservation semantic")
+      :historicalReceipts ["rc-task46004-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Attach positions in the reader." "Preserve through evaluation." "Route diagnostics through them." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task46004-verified-20260912"])
     (:task
       :id "Task46005"
       :parentId ""
