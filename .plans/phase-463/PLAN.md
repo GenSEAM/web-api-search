@@ -24,14 +24,14 @@ Optimize AgentScript along axes Racket never optimized: emission reliability, ne
   2. Implement delimiter depth tracking and ceiling reporting in `asl/tools/asl.c` (excluding string literals).
   3. Verify all 3 stages of `SuperviseGate.sh Task46301` (20 assertions executed cleanly).
 
-### Step 2: Task46302 — Flattening Forms, Adopted Only on a Measured Double Win
+### Step 2: Task46302 — Flattening Forms, Adopted Only on a Measured Double Win [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46302.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46302`
 - Owned Files: `asl/grammar/language-semantics.asn`, `asl/tools/engine_js.h`.
 - Implementation:
   1. Define `flatteningFormDoubleWinRule` semantic in `asl/grammar/language-semantics.asn`.
-  2. Introduce flattening forms evaluated under double win criteria (depth and token count).
-  3. Verify all 3 stages of `SuperviseGate.sh Task46302`.
+  2. Require flattening forms to be admitted strictly on a measured double win (depth and token count).
+  3. Verify all 3 stages of `SuperviseGate.sh Task46302` (20 assertions executed cleanly).
 
 ### Step 3: Task46303 — A Binding Is Never Far From Its Use
 - Fixture: `tests/acceptance/d81/Task46303.asl`

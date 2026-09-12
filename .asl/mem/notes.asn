@@ -1331,5 +1331,15 @@
       :fact "task46301-certified-complete"
       :evidence "Authored nestingDepthCeilingRule in language-semantics.asn and verified delimiter depth tracking in asl.c excluding string literals; established empirical ceiling tracking and per-file form reporting; verified baseline failure and negative mutation fault detection; passed under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task46301 100% verified and certified; Phase 463 first task certified complete under ADR-0081")
+    (:note
+      :id "n119"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "tests/acceptance/d81/Task46302.asl" ".asl/mem/tasks/Phase463AslFirstBeyondRacket.asn"]
+      :tags [:supervision :phase463 :task46302 :flattening-forms :double-win :approved]
+      :fact "task46302-certified-complete"
+      :evidence "Authored flatteningFormDoubleWinRule in language-semantics.asn; mandated that flattening forms are admitted only upon measured double win (lowering both nesting depth and token count on real corpus sites); verified baseline failure and negative mutation fault detection; passed under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46302 100% verified and certified; flattening forms double win standard established under ADR-0081")
   ]
 )

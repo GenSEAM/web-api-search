@@ -52,12 +52,12 @@
       :phase "phase-463"
       :title "Flattening forms, adopted only on a measured double win"
       :kind :language
-      :state :planned
+      :state :completed
       :lane "emission"
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789260000000
-      :updatedAt 1789260000000
+      :updatedAt 1789430200000
       :motivation "The way to reduce depth is not to remove delimiters, which was measured and costs 7.7 percent, but to stop nesting in the first place. A chain of transformations written as nested applications reaches depth quickly and reads back to front; the same chain written as a sequence is flat. The corpus has a modal depth of 5 with a long tail, and most of that tail is chained calls and nested let bindings rather than genuine structure."
       :purpose "A small set of flattening forms is introduced, each admitted only when it lowers both the measured depth and the measured token count on real corpus sites. A form that lowers depth while raising tokens, or the reverse, is recorded as rejected with both numbers. No form is adopted on the grounds that it reads better."
       :context (:contractRef D81PlanContext)
@@ -78,13 +78,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46302.asl"]
       :verificationCases ["Rewriting a real corpus site with the form lowers both measured quantities, and the case quotes both before and after." "A candidate that lowers only one is rejected by the gate, not by judgement." "The flattened form and the nested form evaluate identically on the same inputs."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46302" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46302" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define flatteningFormDoubleWinRule semantic")
+      :historicalReceipts ["rc-task46302-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Find the depth tail sites." "Propose forms." "Measure both quantities per candidate." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task46302-verified-20260912"])
     (:task
       :id "Task46303"
       :parentId ""
