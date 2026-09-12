@@ -134,11 +134,11 @@
       :title "Mutation strategy under a budget: selection, equivalence and incrementality"
       :kind :verification
       :lane "mutation"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789141670724
-      :updatedAt 1789141670724
+      :updatedAt 1789437900000
       :motivation "Inverting 8791 assertions naively costs one full run each; the corpus already takes 42 seconds for a single pass and asl audit gates takes 14.7 seconds, so an unbudgeted mutation campaign is unrunnable. A score computed on an arbitrary subset is also meaningless unless the selection rule is declared."
       :purpose "Declare and implement a selection rule: all assertions in core-tier packages, plus assertions touching symbols changed since the last receipt, plus a fixed random sample elsewhere with a recorded seed. Surviving mutants are triaged into killed, equivalent with justification, and genuinely surviving. Results are incremental against the previous run rather than recomputed."
       :context (:contractRef D81PlanContext)
@@ -159,13 +159,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44404.asl"]
       :verificationCases ["The same seed reproduces the same selection; a known equivalent mutant is classified as equivalent with a justification, not silently counted as a survivor." "A second run after no source change completes from cache and reports the same score."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44404" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44404" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44404" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44404" :assertCount 44 :at 1789437900000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes a corpus with a known killable and a known equivalent mutant." "Implement selection with a seed." "Triage survivors." "Cache by digest for incrementality." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :step 1 :status :ok :hash "HEAD")])
     (:task
       :id "Task44405"
       :parentId ""

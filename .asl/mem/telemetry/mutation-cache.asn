@@ -1,0 +1,13 @@
+(:mutation-cache
+  :seed 42
+  :budgetMs 5000
+  :sourceDigest "4b5a57f9ea15c412-1567"
+  :total 4
+  :selected 4
+  :killed 2
+  :equivalent [
+    (:mutant "mut-equiv-01" :symbol "is-under-budget?" :justification "Logical equivalence: (<= a b) is logically identical to (or (< a b) (= a b)) across all integers; leaves program semantics unchanged")
+    (:mutant "mut-equiv-02" :symbol "eval-identity" :justification "Arithmetic identity: adding zero to integer x is identical to x; leaves evaluation semantics unchanged")
+  ]
+  :survived 0
+  :score "1.000")
