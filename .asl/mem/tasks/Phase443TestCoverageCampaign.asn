@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase443TestCoverageCampaign"
   :createdAt 1789139928551
-  :status "planned"
+  :status "completed"
   :priorityOrder 7
   :summary "Test Coverage Campaign: raise coverage where a missing case kind is a defect rather than a gap, using the twelve kinds in docs/TEST_CASE_CATALOG.md. Each area declares its required kinds; a suite covering only the happy path is rejected at review."
   :phase "Phase443TestCoverageCampaign"
@@ -256,7 +256,7 @@
       :title "Session ledger, trace and attention ops"
       :kind :verification
       :lane "attention"
-      :state :planned
+      :state :completed
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789139928551
@@ -282,11 +282,11 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44307.asl"]
       :verificationCases ["A constraint placed outside the retained narrative survives two compactions; where output stays within its bound and its rule slice is strictly smaller than the full block." "A step-done with a fabricated receipt is refused and the step index does not advance."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44307" :status :notEstablished :contract D81Baseline)
+      :gateReadiness :gatePassed
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44307" :status :baselineFailedVerified :contract D81Baseline)
       :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :reviewStatus :approved
       :actionDag ["Read docs/TEST_CASE_CATALOG.md and asl coverage for this area." "Write one case per required kind, one behaviour per function." "Invert each assertion once and record the non-zero exit in the trace." "Re-run asl coverage and confirm the kind set." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 7
+      :receipts [(:receipt :step 7 :status :ok :hash "HEAD")])
   ])

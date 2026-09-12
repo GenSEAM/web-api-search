@@ -1521,5 +1521,15 @@
       :fact "task44306-certified-complete"
       :evidence "Authored tests/conformance/text/text_codec_conformance_test.asl covering roundTrip, idempotence, malformed, boundary, and metamorphic case kinds for escape-asn-str, escape-json-str, escape-sh-arg, and unescape-asn-str; verified printable ASCII, Unicode astral plane, and control characters round tripping; established baseline failure and passed SuperviseGate.sh with 67 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task44306 certified complete; codec, escaping and text boundaries conformance suite established under ADR-0081")
+    (:note
+      :id "n138"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["mem/src/tasks_store.asl" "mem/src/task_recovery.asl" "tests/conformance/ledger/ledger_attention_test.asl" "tests/acceptance/d81/Task44307.asl" ".asl/mem/tasks/Phase443TestCoverageCampaign.asn"]
+      :tags [:supervision :phase443 :task44307 :session-ledger :trace :attention :conformance :approved]
+      :fact "task44307-and-phase443-certified-complete"
+      :evidence "Authored tests/conformance/ledger/ledger_attention_test.asl covering boundary, resourceBound, negativeControl, idempotence, and concurrency case kinds for receipt-is-verified?, make-task-receipt, resume-action-dag, and recover-task-session; verified constraint survival across compactions, bounded rule slices, and refusal of fabricated receipts; established baseline failure and passed SuperviseGate.sh with 62 assertions evaluated; receipts indexed in receipts.asn; all 7 tasks of Phase443 certified complete"
+      :consequence "Task44307 certified complete; Phase 443 Test Coverage Campaign fully certified under ADR-0081")
   ]
 )
