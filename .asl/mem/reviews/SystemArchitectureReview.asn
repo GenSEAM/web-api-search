@@ -1,0 +1,79 @@
+(:id "SystemArchitectureReview" :version "0.1.0" :date "2026-09-12" :verdict :approve :scope :conceptual-plan
+ :plan ".asl/mem/tasks/SystemArchitectureReview.asn"
+ :decision ".asl/mem/decisions/SystemArchitecture.asn"
+ :meaning "Approval covers the integrated audit, proposed workstreams, research questions and additive navigation link. It does not admit implementation tasks, certify the runtime or authorize API spending."
+ :artifacts [
+  (:path ".asl/mem/tasks/SystemArchitectureReview.asn" :sha256 "4ee8ad50ed9372aaecda7a2d69b10e337821189186fe31a631f7c91d7753a6be")
+  (:path ".asl/mem/decisions/SystemArchitecture.asn" :sha256 "a904c699d22d0b60ec33d5b09e60096e950fe55d034908f9c81a746e70915372")
+  (:path "README.md" :sha256 "4905bd441e6c835dada13db317ac313fd40cf15d97d75ed259bcc51b9feed8ba")]
+ :clarification (:phrase "пол Ханеса" :meaning "harness" :status :confirmed :source "Explicit user clarification in this conversation." :scope "Terminology only; source inventory and implementation readiness unchanged.")
+ :plan-lifecycle :closed-planning-only
+ :method "Independent reading of authored files, source-linked spot checks, exact file/reference inventories, finite DAG checks, scoped delimiter checks and narrow behavioral probes. Existing dirty task/decision files were not edited."
+ :validation (:corpus-paths 16 :unique-corpus-paths 16 :missing-corpus-paths []
+  :phase-mappings 11 :task-references 32 :unresolved-task-references []
+  :workstreams 7 :workstream-order ["Baseline" "Contracts" "Experiments" "KnowledgeRouting" "CodeNavigation" "VerticalSlice" "ScaleAndRetire"]
+  :research-experiments 9 :research-order ["R1" "R2" "R4" "R5" "R6" "R9" "R3" "R7" "R8"]
+  :duplicate-ids [] :unknown-dependencies [] :cycles [] :invalid-source-line-references []
+  :method "Extract the authored record/vector/string subset, require unique record keys and IDs, resolve referenced files and task IDs, and repeatedly remove nodes whose dependencies are already visited. This finite structural extraction is not the normative ASN parser.")
+ :syntax [
+  (:command "./bin/asl check .asl/mem/tasks/SystemArchitectureReview.asn" :exit 0)
+  (:command "./bin/asl check .asl/mem/decisions/SystemArchitecture.asn" :exit 0)]
+ :grammar (:method :manual-derivation :result :compatible-simple-record-subset
+  :source "asl/grammar/asn.lark:24"
+  :basis "The authored roots and nested records alternate keyword keys with values; values use records, vectors, strings, keywords, integers and Booleans. No bare PascalCase scalar or odd tagged record is required."
+  :executed-normative-parser false
+  :limitation "Lark is absent from the inspected Python interpreters and asl/grammar/validate_asn.py is absent. Delimiter checks do not prove normative grammar or application semantics.")
+ :assessment [
+  (:source ".asl/mem/tasks/SystemArchitectureReview.asn:14" :finding "The file explicitly coordinates amendments to existing tasks instead of introducing a second implementation roadmap. Prospective commands are labelled unavailable or incomplete, and missing fixtures do not count as semantic failure baselines.")
+  (:source ".asl/mem/tasks/SystemArchitectureReview.asn:58" :finding "The minimal evidence/context/action slice reuses existing packages. Supplemental event, snapshot, effect and receipt cases are required before execution; broad provisional ownership is not claimed to be an admitted atomic write set.")
+  (:source ".asl/mem/decisions/SystemArchitecture.asn:14" :finding "Identity, provenance, scope and revision are shared only across identical contracts; storage, model views and transport remain distinct. No new universal record, mesh or large knowledge corpus is required for the first slice.")
+  (:source ".asl/mem/decisions/SystemArchitecture.asn:41" :finding "Documentation gains ownership, applicability, authoritative references and retirement. Existing proposal history and normative prose are preserved; no relocation or package deletion was performed.")
+  (:source ".asl/mem/decisions/SystemArchitecture.asn:60" :finding "Question-driven navigation allows direct exact search and relevant small-file reads, distinguishes graph relations, and binds derived abstracts to source/dependency revisions. No mandatory graph-first route or stale-summary authority is introduced.")
+  (:source ".asl/mem/decisions/SystemArchitecture.asn:108" :finding "R1-R9 separate measurement validity, orientation, essential ablation, markers, context, review, knowledge, coordination and code navigation. Benefits remain hypotheses; paired uncertainty, total costs, task-specific margins and negative outcomes are explicit.")
+  (:source "README.md:18" :finding "git diff -- README.md showed exactly one added navigation paragraph and a blank line. Both new relative links resolve. Its proposal label does not claim deployed capabilities.")]
+ :navigation-evidence [
+  (:source "asl/tools/asl.c:347" :finding "extract_outline reads lines with fgets and matches declaration prefixes using strncmp/sscanf. It is a lexical outline, not a fully parsed or bound AST.")
+  (:source "asl/tools/asl.c:800" :finding "sym_walker_cb restricts to ASL files and uses declaration-line substrings plus strstr(query). It yields candidate locations without exact name or lexical-scope resolution.")
+  (:source "asl/tools/asl.c:832" :finding "callers_walker_cb accepts either a parenthesized text pattern or any substring mention, including declarations and strings. Its results do not establish invocation edges.")
+  (:source "asl/tools/asl.c:864" :finding "impact_walker_cb searches ASL/ASN lines for substrings; it does not compute transitive semantic impact.")
+  (:source "intel/src/extractor.asl:71" :finding "The inspected extract-asl-symbols returns empty symbols and refs lists. Graph data structures are not evidence of a connected extraction/indexing path.")
+  (:command "./bin/asl rpc '(:batch (:callers \"extract-asl-symbols\" :limit 5) (:sym \"extract-asl-sym\" :limit 5))'" :exit 0
+   :observed "callers returns intel/src/extractor.asl:7 and :71: its export-list mention and declaration. The incomplete name extract-asl-sym returns the declaration at :71."
+   :meaning "Fresh behavioral counterexamples to exact bound-symbol and actual-caller interpretations; source reads confirm the returned locations.")
+  (:fallback "Use bounded filename/lexical candidates, inspect current declarations/imports/conditions manually, and bind observations to source digests. Treat unavailable graph, semantic or freshness capabilities as unavailable rather than as empty verified results.")]
+ :readiness-inventory (:scope "Prior narrow snapshot in this same review session; recompute before admitting work in the changing workspace."
+  :phases [436 461 462 464 465 468 470 474 475 476] :tasks 57
+  :supervisor-tasks 47 :existing-supervisor-fixtures 8 :missing-supervisor-fixtures 39
+  :existing-fixtures ["Task43601" "Task43602" "Task43603" "Task43604" "Task43605" "Task43606" "Task43607" "Task47006"]
+  :direct-task-count 10 :direct-phases [475 476] :gate-path-references-per-direct-phase [18 18] :missing-direct-gate-paths []
+  :scope-limit "Phase457 is included in the 11 mapping checks but not in this earlier 57-task readiness denominator. Fixture existence alone is not behavior verification."
+  :lifecycle "Phase475/476 collection status says completed while all 10 task states were planned and receipts empty. These discrepancies require reconciliation, not automatic reopening or automatic certification."
+  :supervisor-source "tests/acceptance/d81/SuperviseGate.sh:45"
+  :supervisor-limit "Missing fixture exits 3; existing fixture dispatch then runs broad audit gates and consistency, so no complete supervisor suite was run here."
+  :gate-scope-source "asl/tools/asl.c:2771"
+  :gate-scope "Gate 5 passes asl/packages/asl-gates/tests to its runner and collection, then counts assertion substrings. This does not certify whole-workspace regression coverage."
+  :strict-source "asl/tools/asl.c:4204"
+  :strict-limit "The inspected --strict-falsify adds rejection of files with no assertions; it does not itself perform assertion inversion or production mutation.")
+ :prior-probes [
+  (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46201" :exit 3 :observed "Required Task46201 fixture missing." :classification :infrastructure-failure :semantic-baseline false)
+  (:command "./bin/asl test tests/acceptance/d81/Task43601.asl" :exit 0 :runner-reported-assertions 4 :scope "Reached module-resolution regression only; no new all-site inversion or mutation score claimed.")
+  (:command "./bin/asl rpc '(:batch (:where) (:grep \"Situation-keyed capability registry\" :limit 1) (:EvidenceAuditUnknownOp))'" :exit 0 :observed "where and unknown op reject ERR_UNIMPLEMENTED; grep returns op find with zero matches." :meaning "Inspect structured errors despite shell exit zero; grep is still filename matching.")
+  (:command "./bin/asl --help" :exit 0 :observed "Generic batch-RPC usage only." :meaning "A help label does not prove every declared capability exists.")
+  (:command "./bin/asl check /private/tmp/AsnGrammarBaseline-7s1g3hap/NormativeKeywordVector.asn" :input "[:purpose :evidence]" :exit 0)
+  (:command "./bin/asl check /private/tmp/AsnGrammarBaseline-7s1g3hap/InvalidBareVector.asn" :input "[Purpose Evidence]" :exit 0 :normative-grammar :invalid)
+  (:command "./bin/asl check /private/tmp/AsnGrammarBaseline-7s1g3hap/OddKeywordRecord.asn" :input "(:purpose :evidence :boundaries)" :exit 0 :normative-grammar :invalid)]
+ :binary-observation (:installed "/Users/purplelephant/.local/bin/asl" :resolved "/Users/purplelephant/projects/asex/asl/asl" :matches "bin/asl" :bytes 256256
+  :sha256 "97d37020ae64e69dd20b73bee746f95f9a38046fa93803cee19264b931a1cdbd"
+  :scope "Matched bytes in the recorded readiness snapshot, not proof of reproducible build or historical identity.")
+ :documentation-evidence (:source "harness/paradigm.asn:77" :literal-decision-refs 30 :missing-workspace-paths 30
+  :registries [".asl/mem/decisions.asn" ".asl/mem/decisions/decisions.asn"] :registry-bytes-equal false
+  :old-inflight ".asl/mem/tasks/in_flight.asn" :old-inflight-exists false :current-inflight ".asl/mem/tasks/InFlight.asn" :current-inflight-exists true)
+ :remaining-work ["Create independent semantic fixtures for the admitted task scope; missing-command failures are not sufficient."
+  "Restore an executable normative ASN gate and distinguish application-schema acceptance from parse acceptance."
+  "Correct aggregate coverage, source/result provenance and capability truth before trusting efficiency measurements."
+  "Retire stale README numerical claims through the planned source-owned surface work; the navigation-only diff does not validate them."
+  "Evaluate navigation, context, marker, kernel and multi-agent benefits on held-out tasks; ablations can still miss interactions, so broad generalization requires replication."
+  "Narrow proposed package-level write sets and supplement existing task gates before any runtime work; present approval is not execution admission."]
+ :blocking-amendments []
+ :runs (:broad-suites 0 :model-calls 0 :installs 0)
+ :reviewer-writes [".asl/mem/reviews/SystemArchitectureReview.asn"])

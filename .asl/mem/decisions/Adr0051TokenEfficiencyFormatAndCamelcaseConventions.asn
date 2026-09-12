@@ -6,7 +6,7 @@
   :date "2026-09-09"
   :cluster "architecture/governance"
   :deciders ["architect" "planner" "implementer" "auditor"]
-  :problem "Pretrained LLM tokenizers (BPE / SentencePiece) incur a heavy token-splitting penalty on hyphenated S-expression identifiers (kebab-case), splitting multi-word symbols at every hyphen. Conversely, agents operating in Lisp-like homoiconic environments default to kebab-case unless explicitly guided, wasting 20-50% tokens on composite constructs. Additionally, legacy dash-zero markers (d-0001..d-0050) consume 3-4 BPE tokens instead of 1, and grammar registries lacked fine-grained rationality classification."
+  :problem "Pretrained LLM tokenizers (BPE / SentencePiece) incur a heavy token-splitting penalty on hyphenated S-expression identifiers (kebab-case), splitting multi-word symbols at every hyphen. Conversely, agents operating in Lisp-like homoiconic environments default to kebab-case unless explicitly guided, wasting 20-50% tokens on composite constructs. Additionally, legacy dash-zero markers (D0001..D0050) consume 3-4 BPE tokens instead of 1, and grammar registries lacked fine-grained rationality classification."
   :drivers [
     "BPE Token Compression: CamelCase merges subwords with capital transitions, saving 20-50% tokens on composite names"
     "Capital Alphanumeric Markers: D1..D51, C1..C5, L1..L10, R1..R10 compress marker references from 4 tokens to 1 token"
