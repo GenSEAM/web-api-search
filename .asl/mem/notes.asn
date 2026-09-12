@@ -1629,7 +1629,7 @@
       :scope ["agent-bus/src/cluster.asl" "agent-bus/src/gateway.asl" "asl/tools/asl.c" "tests/acceptance/d81/Task44604.asl" ".asl/mem/tasks/Phase446MultiRuntimeRelayAndObservability.asn"]
       :tags [:supervision :phase446 :task44604 :parallel :relay-lease :stale-lease-rejection :partitioning :approved]
       :fact "task44604-certified-complete"
-      :evidence "Authored tests/acceptance/d81/Task44604.asl covering authoritative relay lease registry: second claimant is refused and write never reaches filesystem; unleased and expired writes fail closed with ERR_STALE_LEASE at gateway and relay; disjoint partitions proceed without contention; passed SuperviseGate.sh with 38 assertions evaluated; receipts indexed in receipts.asn"
+      :evidence "Authored tests/acceptance/d81/Task44604.asl covering authoritative relay lease registry: second claimant is refused and write never reaches filesystem; unleased and expired writes fail closed with ERR_STALE_LEASE at gateway and relay; disjoint partitions proceed without contention; passed SuperviseGate.sh with 74 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task44604 certified complete; authoritative partitioned ownership and conflict resolution operational at the relay under ADR-0081")
   ]
 )

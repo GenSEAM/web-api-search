@@ -158,7 +158,7 @@
       :verificationCases ["The second claimant is refused and its write never reaches a filesystem; an expired lease fails closed rather than being renewed implicitly." "Two agents working disjoint partitions proceed without contention."]
       :gateReadiness :verified
       :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44604" :status :baselineVerified :contract D81Baseline)
-      :historicalReceipts [(:receipt :taskId "Task44604" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44604" :assertCount 38 :at 1789439400000)]
+      :historicalReceipts [(:receipt :taskId "Task44604" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44604" :assertCount 74 :at 1789439400000)]
       :reviewStatus :approved
       :actionDag ["Verifier fixes two runtimes claiming one path." "Implement the relay lease table." "Reject stale writes at the relay." "Derive partitions from :owns." "Independent acceptance."]
       :stepIndex 1
