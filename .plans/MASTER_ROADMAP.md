@@ -1,7 +1,7 @@
 # Monorepo Master Execution Roadmap (.plans)
 
 ## Structural Overview
-This execution DAG resolves all 58 empirical gap records cataloged in .asl/mem/decisions/GAPS.asn. All phases are sequenced by strict dependencies and partitioned by git submodule boundaries to prevent index.lock collisions.
+This execution DAG tracks all active, completed, and planned phases across the monorepo under ADR-0081 and monorepo verification contracts. All phases are sequenced by strict dependencies and partitioned by git submodule boundaries to prevent index.lock collisions.
 
 ```mermaid
 graph TD
@@ -13,16 +13,23 @@ graph TD
     P6 --> P7["Phase 7: Repository Hygiene, Configuration Truth & Full Corpus Gate Scope (Completed)"]
     P7 --> P8["Phase 8: Verification Layer Honesty & Static Analysis Toolchain (Completed)"]
     P8 --> P9["Phase 9: Instruction Surface Truth, Doctor Tooling & Capabilities Lock (Completed)"]
-    P9 --> P10["Phase 10: Agent Working Memory Surface (Completed)"]
-    P10 --> P11["Phase 11: Closing the Unplanned (Completed)"]
-    P11 --> P12["Phase 12: Client Launch & Codex Efficiency (Completed)"]
-    P12 --> P13["Phase 13: Tool Reliability & Scenario Coverage (Completed)"]
-    P13 --> P14["Phase 14: Paradigm by Force & Tier (Completed)"]
-    P14 --> P15["Phase 15: Intent, Goal and Practice Lifecycle (Completed)"]
-    P15 --> P16["Phase 16: Swarm Edit Visibility and Collision Avoidance (Done)"]
-    P16 --> P17["Phase 17: Capability Corpus Ground Truth, Schema Separation & Harness Selection (Done)"]
-    P17 --> P18["Phase 18: Language Optimization, Staging & Tooling Runtime (Done)"]
-    P18 --> P19["Phase 19: Runtime Boundary and Memory Safety (Done)"]
+    P9 --> P10["Phase 10: Agent Working Memory Surface (Phase 465, Completed)"]
+    P10 --> P11["Phase 11: Closing the Unplanned (Phase 471, Completed)"]
+    P11 --> P12["Phase 12: Client Launch & Codex Efficiency (Phase 437, Completed)"]
+    P12 --> P13["Phase 13: Tool Reliability & Scenario Coverage (Phase 467, Completed)"]
+    P13 --> P14["Phase 14: Paradigm by Force & Tier (Phase 466, Completed)"]
+    P14 --> P15["Phase 15: Intent, Goal and Practice Lifecycle (Phase 468, Completed)"]
+    P15 --> P16["Phase 16: Swarm Edit Visibility and Collision Avoidance (Phase 469, Done)"]
+    P16 --> P17["Phase 17: Capability Corpus Ground Truth (Phase 482, Done)"]
+    P17 --> P18["Phase 18: Language Optimization & Staging Runtime (Phase 438, Done)"]
+    P18 --> P19["Phase 19: Runtime Boundary & Memory Safety (Phase 472, Done)"]
+    P19 --> P20["Phase 20: Configuration & Distribution Truth (Phase 473, In Progress)"]
+    P20 --> P21["Phase 21: One Projection, Many Surfaces (Phase 474, In Progress)"]
+    P21 --> P22["Phase 22: Scheme & Racket Alignment (Phases 459–463, Done)"]
+    P22 --> P23["Phase 23: Language Semantics & Ground Truth (Phases 436, 439, 440, 454, Planned)"]
+    P23 --> P24["Phase 24: Attention Prosthesis & Lexicon (Phases 441, 442, 445, 447, Certified)"]
+    P24 --> P25["Phase 25: Editorial Design & Scope Recovery (Phases 448, 470, Planned)"]
+    P25 --> P26["Phase 26: FINSEL Monorepo Remediation (Phase FINSEL, Planned)"]
 ```
 
 ---
@@ -50,6 +57,25 @@ graph TD
 | **Phase 17** | [.plans/phase-482/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-482/PLAN.md) | **Done** | Capability Corpus Ground Truth, Schema Separation & Harness Selection: W3C/WCAG/GOV.UK provenance facts, schema separation from legacy SkillPacks, 10 grounded capabilities, query exclusion filtering, explainable selection receipts, and accessible SVG playground presets. |
 | **Phase 18** | [.plans/phase-438/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-438/PLAN.md) | **Done** | Language Optimization, Staging & Tooling Runtime: literal content search (Task43804), in-memory staging table, diff, flush, and discard (Task43805), sequenced batch fail-fast abort (Task43805), path boundary canonicalization (Task43809), and triple binary parity. |
 | **Phase 19** | [.plans/phase-472/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-472/PLAN.md) | **Done** | Runtime Boundary & Memory Safety: safe child argv execution for git commit (Task47201), universal path boundary check across find, grep, and JS filesystem bridge (Task47202), buffer growth failure propagation and eval arg bounds hardening (Task47204). |
+| **Phase 20** | [.plans/phase-473/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-473/PLAN.md) | **In Progress** | Configuration and Distribution Truth: package distribution artifacts, compiler configurations, and installation verification. |
+| **Phase 21** | [.plans/phase-474/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-474/PLAN.md) | **In Progress** | One Projection, Many Surfaces: rules projection via `asl project`, unified skill tree (24 skills), client launch invariants. |
+| **Phase 22** | [.plans/phase-442/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-442/PLAN.md) | **Done** | Agent Reliability Utilities: timeout protection, execution sandbox bounds, and crash recovery. |
+| **Phase 23** | [.plans/phase-459/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-459/PLAN.md) | **Done** | Language Compaction and Predictability: one name per concept, canonical naming semantics, and cl100k token optimizations. |
+| **Phase 24** | [.plans/phase-460/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-460/PLAN.md) | **Done** | Scheme Alignment and Racket Concepts: Scheme core forms, Racket binding shapes, source location blame, and contract boundaries. |
+| **Phase 25** | [.plans/phase-461/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-461/PLAN.md) | **Done** | Core and Interchangeable Extensions: strict decoupling between core engine and extension libraries under D34/C3. |
+| **Phase 26** | [.plans/phase-462/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-462/PLAN.md) | **Done** | LLM-First Lexicon: measured token cost decisions under cl100k, lossless substrate translation, and portable semantic records. |
+| **Phase 27** | [.plans/phase-463/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-463/PLAN.md) | **Done** | ASL-First Beyond Racket: bounded nesting depth tracking, bounded binding-to-use distance, and empirical emission error rates. |
+| **Phase 28** | [.plans/phase-477/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-477/PLAN.md) | **Done** | Invariant Normalization and Boundary Deduplication: Unicode emoji normalization to SVG/ASCII (C2). |
+| **Phase 29** | [.plans/phase-436/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-436/PLAN.md) | **Planned** | Language Semantics Ground Truth: import binding, loud evaluator failures, boolean test contracts, honest RPC capability declarations. |
+| **Phase 30** | [.plans/phase-439/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-439/PLAN.md) | **Planned** | Efficiency Final Review: fault detection mutation vs assertion falsification, cache use telemetry, quantitative claim reproduction. |
+| **Phase 31** | [.plans/phase-440/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-440/PLAN.md) | **Planned** | Full ASL Self-Hosting: self-hosted AST evaluator in pure ASL, dual native/WASM bootstrap compiler generation, tooling routing. |
+| **Phase 32** | [.plans/phase-441/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-441/PLAN.md) | **Planned** | Attention Prosthesis: session runner receipts, byte-stable prompt prefixes, hidden test protection, and rule tier budgets. |
+| **Phase 33** | [.plans/phase-445/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-445/PLAN.md) | **Done** | Static Confirmation Coverage: native parser for `rules.asn`, static checkers for all unconfirmed rules, and concept-to-checker coverage. |
+| **Phase 34** | [.plans/phase-447/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-447/PLAN.md) | **Done** | Canonical Lexicon Cross Client: single source of truth `lexicon.asn`, eradication of "hyness" phonetic drift, cross-client rendering. |
+| **Phase 35** | [.plans/phase-448/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-448/PLAN.md) | **Planned** | Instrumented Editorial Web Design: token contract in `styles.asn`, prose spine layout, accessible responsive UI primitives. |
+| **Phase 36** | [.plans/phase-454/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-454/PLAN.md) | **Planned** | Engine Binding Ground Truth: manifest-driven module resolution, fatal unresolved imports, 40 missing builtins, first-class `refute`. |
+| **Phase 37** | [.plans/phase-470/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-470/PLAN.md) | **Planned** | Restore Gate Scope and Reach Execution: full monorepo corpus scope for Gate 5, built binary parity, embedded binary launch command. |
+| **Phase 38** | [.plans/phase-finsel/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-finsel/PLAN.md) | **Planned** | FINSEL Master Remediation: 39 falsifiable tasks resolving all defects cataloged during the 8-wave, 3-model monorepo audit. |
 
 ---
 
