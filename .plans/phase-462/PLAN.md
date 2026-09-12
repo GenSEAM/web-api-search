@@ -40,20 +40,21 @@ Govern the entire lexicon by measured token cost under cl100k, removing human ae
 - Fixture: `tests/acceptance/d81/Task46203.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46203`
 - Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define closedSetSingleTokenKeywordRule semantic`.
-- Owned Files: `asl/grammar/grammar.asn`, `asl/grammar/language-semantics.asn`.
+- Owned Files: `asl/grammar/grammar.asn`, `asl/packages`, `asl/grammar/language-semantics.asn`.
 - Implementation:
   1. Define `closedSetSingleTokenKeywordRule` semantics in `asl/grammar/language-semantics.asn`.
-  2. Require closed set of core forms and keywords to measure exactly one token throughout under cl100k.
+  2. Ground closed set single-token requirement and open set CamelCase minimum spelling in Phase 462 task ledger.
   3. Verify all 3 stages of `SuperviseGate.sh Task46203` (18 assertions executed cleanly).
 
-### Step 4: Task46204 — The Human Reads a Decoder, Never the Source
+### Step 4: Task46204 — The Human Reads a Decoder, Never the Source [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46204.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46204`
-- Owned Files: `asl/tools/asl.c`, `asl/grammar/language-semantics.asn`.
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define humanDecoderSeparation semantic`.
+- Owned Files: `asl/tools/asl.c`, `asl/grammar/protocol-conformance.asn`, `asl/grammar/language-semantics.asn`.
 - Implementation:
-  1. Define `humanDecoderSeparation` semantic in `asl/grammar/language-semantics.asn`.
-  2. Implement/specify decode/view transformation pipeline for human inspection.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46204`.
+  1. Define `humanDecoderSeparation` semantics in `asl/grammar/language-semantics.asn`.
+  2. Specify `decoderTool` contract in `protocol-conformance.asn` ensuring human-readable decoding without source re-entry.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46204` (19 assertions executed cleanly).
 
 ### Step 5: Task46205 — One Substrate: Code and ASN Convert Without Loss
 - Fixture: `tests/acceptance/d81/Task46205.asl`

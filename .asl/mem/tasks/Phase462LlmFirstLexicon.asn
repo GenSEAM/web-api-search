@@ -96,12 +96,12 @@
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789245000000
-      :updatedAt 1789428300000
+      :updatedAt 1789428600000
       :motivation "3686 of 3776 declared symbols cost more than one token and the excess over a single-token lexicon is 11005 tokens. Part of that is irreducible, because a name carrying five words of meaning cannot be one token and should not pretend to be. Part is pure waste, and it divides cleanly: the closed set of core forms and keywords can and must reach one token, while the open set of compound names reaches its minimum through the spelling that tokenizes best, measured at 44 to 50 percent for CamelCase on exactly these long hyphenated names, of which test-e2e-onion-pipeline-and-horizon at 12 tokens is representative."
       :purpose "The closed set of core forms and keywords is entirely single-token. The open set is converted to the measured cheapest adequate spelling. The residue is recorded as irreducible with the meaning that makes it so, and the lexicon total is tracked thereafter."
       :context (:contractRef D81PlanContext)
       :outcomes ["The closed set at one token throughout" "The open set at its measured minimum spelling" "The irreducible residue named and justified" "Lexicon total tracked in the inventory"]
-      :owns ["asl/grammar/grammar.asn" "asl/packages" "harness/src" "intel/src" "mem/src"]
+      :owns ["asl/grammar/grammar.asn" "asl/packages" "harness/src" "intel/src" "mem/src" "asl/grammar/language-semantics.asn"]
       :targetSymbols ["dfl" "dfn" "dfe"]
       :relatedSymbols ["names" "output"]
       :invariants ["D51" "D81"]
@@ -122,7 +122,7 @@
       :historicalReceipts ["rc-task46203-verified-20260912"]
       :reviewStatus :approved
       :actionDag ["Split closed set from open set." "Bring the closed set to one token." "Convert the open set." "Record the residue." "Independent acceptance."]
-      :stepIndex 5
+      :stepIndex 3
       :receipts ["rc-task46203-verified-20260912"])
     (:task
       :id "Task46204"
@@ -130,12 +130,12 @@
       :phase "phase-462"
       :title "The human reads a decoder, never the source"
       :kind :tooling
-      :state :planned
+      :state :completed
       :lane "decoding"
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789245000000
-      :updatedAt 1789245000000
+      :updatedAt 1789428600000
       :motivation "Every concession the language has made to a human reader has cost it something and bought nothing measurable, because the language is consumed by a model. Removing the human from the source does not license abbreviation, and this is the point most easily got wrong: the model's prior was built from text humans wrote, so optimising for the model still selects ordinary words. What removing the human does license is dropping legibility as a tiebreaker, and what it obliges is a decoder, because a form nobody can read is a form nobody can audit, and this project runs on audit."
       :purpose "A decoder renders any source, form or symbol into an expanded human readable account on demand, including the meaning of a qualified prefix, the definition a call resolves to and the expansion of a macro. It is a tool and never a mode of the language: no legibility concession enters the source, and no decoder output is ever an input."
       :context (:contractRef D81PlanContext)
@@ -156,13 +156,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46204.asl"]
       :verificationCases ["The decoder resolves a qualified prefix to the module it denotes without the reader opening the header." "A macro use expands to its form with positions preserved." "Decoder output fed back as source is rejected, so the two directions cannot be confused."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46204" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46204" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define humanDecoderSeparation semantic")
+      :historicalReceipts ["rc-task46204-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Build the decoder over the resolved graph and positions." "Refuse decoder output as input." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 3
+      :receipts ["rc-task46204-verified-20260912"])
     (:task
       :id "Task46205"
       :parentId ""

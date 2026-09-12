@@ -1,9 +1,9 @@
 (:in-flight
   :session-id "57abefd4-689b-44f0-8084-f5b1813fae50"
-  :lane "decoding"
+  :lane "lexicon"
   :activePhase "phase-462"
-  :activeTasks ["Task46204"]
-  :dispatchedAt 1789428600000
+  :activeTasks ["Task46205"]
+  :dispatchedAt 1789428900000
   :status "executing"
   :handoffId ""
   :handoffCheckpoint 0
