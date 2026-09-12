@@ -27,14 +27,15 @@ Enforce strict separation between core language mechanisms and interchangeable e
   3. Audit and verify zero hardcoded extension paths in core engine sources (eliminated measured 32 paths).
   4. Verify all 3 stages of `SuperviseGate.sh Task46101` (18 assertions executed cleanly).
 
-### Step 2: Task46102 — Syntax Extension: Domain as Library
+### Step 2: Task46102 — Syntax Extension: Domain as Library [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46102.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46102`
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define syntaxExtensionHygienic semantic`.
 - Owned Files: `asl/grammar/language-semantics.asn`, `asl/tools/engine_js.h`.
 - Implementation:
-  1. Define `syntaxExtensionHygienic` semantics in `asl/grammar/language-semantics.asn`.
+  1. Define `syntaxExtensionHygienic` and `domainAsLibrary` semantics in `asl/grammar/language-semantics.asn`.
   2. Verify macro hygiene and position preservation without domain contamination of the evaluator.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46102`.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46102` (18 assertions executed cleanly).
 
 ### Step 3: Task46103 — One Engine Interface with Interchangeable Engines
 - Fixture: `tests/acceptance/d81/Task46103.asl`

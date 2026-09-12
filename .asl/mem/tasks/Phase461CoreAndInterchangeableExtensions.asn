@@ -52,12 +52,12 @@
       :phase "phase-461"
       :title "Syntax extension, so a domain is a library and not an engine change"
       :kind :language
-      :state :planned
+      :state :completed
       :lane "core"
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789244000000
-      :updatedAt 1789244000000
+      :updatedAt 1789426300000
       :motivation "The reason 25 names ended up inside the resolver is that there was no other way to add a domain. Without syntax extension every new shape of expression is a change to the evaluator, so the engine accumulates the vocabulary of databases, websites and voice pipelines. A language that intends to serve several domains without growing for each of them needs exactly one mechanism: the ability for a library to define a form."
       :purpose "A form can be defined in the language, hygienically, with the definition living in an ordinary module. The database, view and query shapes that would otherwise enter the evaluator are written as libraries against this mechanism. Macro expansion preserves source position so that errors inside an expansion point at the writer's form."
       :context (:contractRef D81PlanContext)
@@ -78,13 +78,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46102.asl"]
       :verificationCases ["A macro introducing a temporary binding does not capture a user variable of the same name." "An error inside an expansion quotes the call site written by the author, not the expansion." "A domain form added as a library needs no evaluator change, demonstrated by an unchanged engine digest."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46102" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46102" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define syntaxExtensionHygienic semantic")
+      :historicalReceipts ["rc-task46102-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Implement hygienic expansion over located forms." "Move one domain shape out of the engine into a library as proof." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 3
+      :receipts ["rc-task46102-verified-20260912"])
     (:task
       :id "Task46103"
       :parentId ""

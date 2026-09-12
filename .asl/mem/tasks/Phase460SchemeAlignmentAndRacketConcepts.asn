@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase460SchemeAlignmentAndRacketConcepts"
   :createdAt 1789240000000
-  :status "planned"
+  :status "done"
   :priorityOrder 1
   :summary "Scheme Alignment and Racket Concepts: stop being gratuitously different from the Lisp the model already knows, adopt Racket designs for the module system, located syntax and blame-carrying contracts, and keep Racket out of the deployed runtime."
   :phase "Phase460SchemeAlignmentAndRacketConcepts"
