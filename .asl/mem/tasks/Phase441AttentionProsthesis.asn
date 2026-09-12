@@ -27,11 +27,11 @@
       :title "Bind session progression to trusted runner receipts"
       :kind :protocol
       :lane "attention"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789171200000
-      :updatedAt 1789133687623
+      :updatedAt 1789412200000
       :motivation "A stored author claim is not evidence; ledger progression needs a local trusted execution boundary and version binding."
       :purpose "Persist session-specific plans and leases in the Tier3 ledger; only a trusted local verifier runner may issue progress receipts binding session, step, gate identity, source/artifact digests and actual exit/outcomes; model-supplied exit zero or a nonempty string never advances the ledger."
       :context (:contractRef D81PlanContext)
@@ -53,12 +53,12 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44101.asl"]
       :verificationCases ["Successful verifier invocation advances exactly the matching current step; false exit, forged receipt, wrong gate/step/session, stale source and replay are rejected without state change." "Receipt issuer has a separate trust boundary from author and cannot be impersonated by supplying a hash; no network signing infrastructure is required." "Concurrent sessions and expired leases cannot clobber plans; crash recovery resumes only durable verified state." "Where returns bounded metadata with references to full gate/constraints/evidence; the 150-token engineering target excludes separately paged authoritative content."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44101" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44101" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44101" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44101" :assertCount 23 :at 1789412200000)]
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
 
     (:task
       :id "Task44102"
