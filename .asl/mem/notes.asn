@@ -1621,6 +1621,16 @@
       :fact "task44603-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44603.asl covering causal identity on every frame across browser, local, server, and relay; clock skew does not reorder causal precedence; monotonic sequence jumps and missing parent references are detected and reported as explicit gaps; (:trace :scope :mesh) returns causally merged trace; passed SuperviseGate.sh with 80 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task44603 certified complete; cross-runtime observability with causal ordering and explicit gap reporting operational under ADR-0081")
+    (:note
+      :id "n148"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["agent-bus/src/cluster.asl" "agent-bus/src/gateway.asl" "asl/tools/asl.c" "tests/acceptance/d81/Task44604.asl" ".asl/mem/tasks/Phase446MultiRuntimeRelayAndObservability.asn"]
+      :tags [:supervision :phase446 :task44604 :parallel :relay-lease :stale-lease-rejection :partitioning :approved]
+      :fact "task44604-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44604.asl covering authoritative relay lease registry: second claimant is refused and write never reaches filesystem; unleased and expired writes fail closed with ERR_STALE_LEASE at gateway and relay; disjoint partitions proceed without contention; passed SuperviseGate.sh with 38 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task44604 certified complete; authoritative partitioned ownership and conflict resolution operational at the relay under ADR-0081")
   ]
 )
 

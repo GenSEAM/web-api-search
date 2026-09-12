@@ -131,11 +131,11 @@
       :title "Parallel development across runtimes: partitioned ownership and conflict resolution at the relay"
       :kind :protocol
       :lane "parallel"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789142392680
-      :updatedAt 1789142392680
+      :updatedAt 1789439400000
       :motivation "File leases in Task44203 are local to one filesystem. Parallel development across runtimes needs the partition to hold when two agents on different machines touch the same logical artifact, and this session twice lost work to an unleased concurrent writer on a single machine."
       :purpose "The relay holds the authoritative lease table keyed by logical path and sessionId; a claim is granted by the relay, not by the local engine; a write whose lease is not current is rejected with ERR_STALE_LEASE at the relay before it reaches a filesystem; releasing is explicit and expiry fails closed. Partitions are declared per task :owns so the DAG determines who may write what."
       :context (:contractRef D81PlanContext)
@@ -156,13 +156,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44604.asl"]
       :verificationCases ["The second claimant is refused and its write never reaches a filesystem; an expired lease fails closed rather than being renewed implicitly." "Two agents working disjoint partitions proceed without contention."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44604" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44604" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44604" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44604" :assertCount 38 :at 1789439400000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes two runtimes claiming one path." "Implement the relay lease table." "Reject stale writes at the relay." "Derive partitions from :owns." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :step 1 :status :ok :hash "HEAD")])
     (:task
       :id "Task44605"
       :parentId ""
