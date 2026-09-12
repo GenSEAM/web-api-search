@@ -170,7 +170,7 @@
       :title "In-browser runtime: wasm engine with OPFS-backed workspace and the same boundary policy"
       :kind :protocol
       :lane "browser"
-      :state :planned
+      :state :completed
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789142392680
@@ -195,13 +195,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44605.asl"]
       :verificationCases ["A path escaping the OPFS workspace is rejected by the same policy that rejects it natively; a capability unavailable in the browser reports absent with a fallback rather than failing opaquely." "The browser runtime emits frames that merge into the mesh trace."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44605" :status :notEstablished :contract D81Baseline)
+      :gateReadiness :gatePassed
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44605" :status :passed :contract D81Baseline)
       :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :reviewStatus :approved
       :actionDag ["Verifier fixes boundary cases under OPFS." "Run the wasm engine in-browser." "Map OPFS roots into the boundary policy." "Report capability gaps." "Independent acceptance."]
       :stepIndex 0
-      :receipts [])
+      :receipts ["rc-task44605-verified-20260913"])
     (:task
       :id "Task44606"
       :parentId ""

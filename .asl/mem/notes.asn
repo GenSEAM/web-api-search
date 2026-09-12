@@ -1631,6 +1631,16 @@
       :fact "task44604-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44604.asl covering authoritative relay lease registry: second claimant is refused and write never reaches filesystem; unleased and expired writes fail closed with ERR_STALE_LEASE at gateway and relay; disjoint partitions proceed without contention; passed SuperviseGate.sh with 74 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task44604 certified complete; authoritative partitioned ownership and conflict resolution operational at the relay under ADR-0081")
+    (:note
+      :id "n149"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["browser-plugin/src/runtime.asl" "agent-bus/src/browser-bridge.asl" "asl/tools/asl.c" "tests/acceptance/d81/Task44605.asl" ".asl/mem/tasks/Phase446MultiRuntimeRelayAndObservability.asn"]
+      :tags [:supervision :phase446 :task44605 :browser-runtime :opfs-boundary :capability-registry :mesh-trace :approved]
+      :fact "task44605-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44605.asl covering OPFS workspace boundary enforcement in asl.c, browser runtime, and browser bridge; paths escaping OPFS workspace are rejected by the same policy that rejects them natively; capabilities unavailable in the browser report absent with explicit fallbacks rather than failing opaquely; in-browser wasm engine dispatches steps over OPFS and rejects escapes with ERR_BOUNDARY_VIOLATION; browser runtime trace frames merge into cross-runtime mesh trace with zero sequence gaps; passed SuperviseGate.sh with 82 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task44605 certified complete; in-browser runtime operational over OPFS workspace with identical boundary policy and mesh trace integration under ADR-0081")
   ]
 )
 
