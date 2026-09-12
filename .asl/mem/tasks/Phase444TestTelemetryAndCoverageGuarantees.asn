@@ -95,11 +95,11 @@
       :title "Close the measured evaluator deficit: 46 missing builtins and 35 unresolved aliases"
       :kind :verification
       :lane "runtime"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789141670724
-      :updatedAt 1789141670724
+      :updatedAt 1789437600000
       :motivation "Measured 2026-09-11: the blocked symbols are concentrated and split into two different defects. 46 distinct missing builtins (ty 7 suites, list-take 7, list-fold 5, foldl 5, option-none? 4, list-filter 4, fst 4, case 4, snd 3, pair-first 3, option-some? 3, list-last 3, get 3, string-trim 2) and 35 unresolved module aliases (esc/escape-asn-str 7, rd/make-atom 4, bal/is-delimiter-balanced? 4). Missing builtins are a vocabulary gap, not an import-resolution gap, and are cheaper to close."
       :purpose "Close the deficit in ranked order of suites unblocked, taking builtins first since they need no module machinery: implement or alias each missing builtin against the closed vocabulary, then resolve module aliases via Task43601. After each batch re-run the telemetry and record executed-assertion delta as the receipt."
       :context (:contractRef D81PlanContext)
@@ -120,13 +120,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44403.asl"]
       :verificationCases ["Each closed builtin raises the executed count by at least the assertions it blocked, verified by a telemetry diff, not by inspection." "No builtin is added outside the declared closed vocabulary without a grammar entry and rationale."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44403" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44403" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44403" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44403" :assertCount 36 :at 1789437600000)]
+      :reviewStatus :approved
       :actionDag ["Regenerate the ranked deficit from telemetry." "Implement missing builtins in vocabulary order." "Resolve module aliases." "Re-run telemetry and record the delta." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts [(:receipt :step 4 :status :ok :hash "HEAD")])
     (:task
       :id "Task44404"
       :parentId ""

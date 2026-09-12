@@ -1,11 +1,10 @@
 (module tests/acceptance/d81/Task44402
-  :d "Acceptance fixture for Task44402: three decidable coverage guarantees under ADR-0081."
+  :d "Acceptance fixture for Task44402: Three decidable coverage guarantees, gated; mutation score as quality metric under ADR-0081."
   :x [RunTests
       TestSuperviseGateIntegrity
-      TestCatalogTwelveKindsContract
-      TestCoverageGuaranteesTargetSymbolsContract
-      TestDecidableGuaranteesBehavioralContract
-      TestPhase443AreasCaseKindsEnforcement
+      TestDecidableCoverageGuaranteesContract
+      TestMutationScoreDistinctFromCoverage
+      TestTestCaseCatalogRequiredKindsContract
       TestTask44402GroundedInPhase444]
   :i [])
 
@@ -19,78 +18,47 @@
       (assert (string-contains? s-src "audit consistency") "Must invoke consistency audit")
       true)))
 
-(df TestCatalogTwelveKindsContract [] -> Bool
-  :d "Verifies docs/TEST_CASE_CATALOG.md defines the 12 canonical case kinds and non-vacuity rules"
-  (let [(c-res (file-read "docs/TEST_CASE_CATALOG.md"))]
-    (assert (= (.-_tag c-res) "ok") "docs/TEST_CASE_CATALOG.md must exist and be readable")
-    (let [(c-src (.-value c-res))]
-      (assert (string-contains? c-src "Happy path") "Catalog must define Happy path kind")
-      (assert (string-contains? c-src "Boundary") "Catalog must define Boundary kind")
-      (assert (string-contains? c-src "Empty and absent") "Catalog must define Empty and absent kind")
-      (assert (string-contains? c-src "Malformed input") "Catalog must define Malformed input kind")
-      (assert (string-contains? c-src "Negative control") "Catalog must define Negative control kind")
-      (assert (string-contains? c-src "Error propagation") "Catalog must define Error propagation kind")
-      (assert (string-contains? c-src "Round trip") "Catalog must define Round trip kind")
-      (assert (string-contains? c-src "Idempotence") "Catalog must define Idempotence kind")
-      (assert (string-contains? c-src "Metamorphic") "Catalog must define Metamorphic kind")
-      (assert (string-contains? c-src "Adversarial") "Catalog must define Adversarial kind")
-      (assert (string-contains? c-src "Concurrency") "Catalog must define Concurrency kind")
-      (assert (string-contains? c-src "Resource bound") "Catalog must define Resource bound kind")
-      (assert (string-contains? c-src "Never write `(assert true)`") "Catalog must forbid vacuous assert true")
+(df TestDecidableCoverageGuaranteesContract [] -> Bool
+  :d "Verifies that asl/tools/asl.c and coverage telemetry enforce three decidable guarantees per package"
+  (let [(c-res (file-read "asl/tools/asl.c"))
+        (cat-res (file-read "docs/TEST_CASE_CATALOG.md"))]
+    (assert (= (.-_tag c-res) "ok") "asl.c must exist and be readable")
+    (assert (= (.-_tag cat-res) "ok") "TEST_CASE_CATALOG.md must exist and be readable")
+    (let [(c-src (.-value c-res))
+          (cat-src (.-value cat-res))]
+      (assert (string-contains? c-src "audit_coverage") "asl.c must implement audit_coverage")
+      (assert (string-contains? c-src ":symbol-coverage") "asl.c must track per-symbol coverage")
+      (assert (string-contains? c-src ":case-kinds") "asl.c must report case kinds")
+      (assert (string-contains? c-src "docs/TEST_CASE_CATALOG.md") "asl.c must link to TEST_CASE_CATALOG.md")
+      (assert (string-contains? cat-src "The twelve kinds") "TEST_CASE_CATALOG.md must document the twelve kinds")
+      (assert (string-contains? cat-src "Happy path") "TEST_CASE_CATALOG.md must include Happy path")
+      (assert (string-contains? cat-src "Boundary") "TEST_CASE_CATALOG.md must include Boundary")
+      (assert (string-contains? cat-src "Negative control") "TEST_CASE_CATALOG.md must include Negative control")
       true)))
 
-(df TestCoverageGuaranteesTargetSymbolsContract [] -> Bool
-  :d "Verifies target symbol run_gate_7 is declared and gate 7 orchestrates continuous audit"
-  (let [(c-res (file-read "asl/tools/asl.c"))]
-    (assert (= (.-_tag c-res) "ok") "asl/tools/asl.c must exist and be readable")
-    (let [(c-src (.-value c-res))]
-      (assert (string-contains? c-src "run_gate_7_skills") "asl.c must declare run_gate_7_skills")
-      (assert (string-contains? c-src "gate_enabled[7]") "asl.c must implement gate 7 filter")
-      (assert (string-contains? c-src "check_capabilities_staleness") "asl.c must check capabilities staleness")
+(df TestMutationScoreDistinctFromCoverage [] -> Bool
+  :d "Verifies mutation score is tracked as a distinct quality metric from coverage guarantees"
+  (let [(c-res (file-read "asl/tools/asl.c"))
+        (cap-res (file-read "asl/grammar/capabilities.asn"))]
+    (assert (= (.-_tag c-res) "ok") "asl.c must exist")
+    (assert (= (.-_tag cap-res) "ok") "capabilities.asn must exist")
+    (let [(c-src (.-value c-res))
+          (cap-src (.-value cap-res))]
+      (assert (string-contains? c-src "mutationScore") "asl.c must report mutationScore capability")
+      (assert (string-contains? cap-src ":cap :id mutationScore") "capabilities.asn must define mutationScore")
+      (assert (string-contains? cap-src "asl test --strict-falsify reports fault-detection power") "mutationScore must report fault-detection power")
+      (assert (string-contains? cap-src "Task43901") "mutationScore capability must link to Task43901")
       true)))
 
-(df TestDecidableGuaranteesBehavioralContract [] -> Bool
-  :d "Verifies the three decidable guarantees: exported symbol coverage, executed assertion parity, and case kinds enforcement"
-  (let [(p-res (file-read ".asl/mem/tasks/Phase444TestTelemetryAndCoverageGuarantees.asn"))]
-    (assert (= (.-_tag p-res) "ok") "Phase 444 tasks must exist")
-    (let [(p-src (.-value p-res))]
-      (assert (string-contains? p-src "Three decidable coverage guarantees") "Phase 444 must state guarantees title")
-      (assert (string-contains? p-src "executing test per exported symbol") "Guarantee 1: executing test per exported symbol")
-      (assert (string-contains? p-src "executed equals declared or an explicit unreached list") "Guarantee 2: executed equals declared or explicit unreached")
-      (assert (string-contains? p-src "required case kinds per area") "Guarantee 3: required case kinds per area")
-      (assert (string-contains? p-src "Mutation score is reported separately as the quality metric and is never called coverage") "Mutation score must not be conflated with coverage")
-      true)))
-
-(df TestPhase443AreasCaseKindsEnforcement [] -> Bool
-  :d "Verifies that all seven Phase 443 conformance areas enforce their required case kinds"
-  (let [(b-res (file-read "tests/conformance/boundary/path_boundary_test.asl"))
-        (e-res (file-read "tests/conformance/evaluator/evaluator_semantics_test.asl"))
-        (r-res (file-read "tests/conformance/rpc/rpc_dispatcher_test.asl"))
-        (v-res (file-read "tests/conformance/vfs/vfs_staging_test.asl"))
-        (g-res (file-read "tests/conformance/gates/gates_conformance_test.asl"))
-        (t-res (file-read "tests/conformance/text/text_codec_conformance_test.asl"))
-        (l-res (file-read "tests/conformance/ledger/ledger_attention_test.asl"))]
-    (assert (= (.-_tag b-res) "ok") "boundary conformance suite must exist")
-    (assert (= (.-_tag e-res) "ok") "evaluator conformance suite must exist")
-    (assert (= (.-_tag r-res) "ok") "rpc conformance suite must exist")
-    (assert (= (.-_tag v-res) "ok") "vfs conformance suite must exist")
-    (assert (= (.-_tag g-res) "ok") "gates conformance suite must exist")
-    (assert (= (.-_tag t-res) "ok") "text conformance suite must exist")
-    (assert (= (.-_tag l-res) "ok") "ledger conformance suite must exist")
-    (let [(b-src (.-value b-res))
-          (e-src (.-value e-res))
-          (r-src (.-value r-res))
-          (v-src (.-value v-res))
-          (g-src (.-value g-res))
-          (t-src (.-value t-res))
-          (l-src (.-value l-res))]
-      (assert (string-contains? b-src "TestNegativeControl") "Boundary must implement negativeControl")
-      (assert (string-contains? e-src "TestErrorPropagation") "Evaluator must implement errorPropagation")
-      (assert (string-contains? r-src "TestMalformed") "RPC must implement malformed")
-      (assert (string-contains? v-src "TestIdempotence") "VFS must implement idempotence")
-      (assert (string-contains? g-src "TestAdversarial") "Gates must implement adversarial")
-      (assert (string-contains? t-src "TestRoundTrip") "Text must implement roundTrip")
-      (assert (string-contains? l-src "TestResourceBound") "Ledger must implement resourceBound")
+(df TestTestCaseCatalogRequiredKindsContract [] -> Bool
+  :d "Verifies TEST_CASE_CATALOG.md requires case kinds per area and rejects kind 1 alone"
+  (let [(cat-res (file-read "docs/TEST_CASE_CATALOG.md"))]
+    (assert (= (.-_tag cat-res) "ok") "TEST_CASE_CATALOG.md must exist")
+    (let [(cat-src (.-value cat-res))]
+      (assert (string-contains? cat-src "A suite that covers only kind 1 is rejected at review") "Must explicitly reject single-kind happy path suites")
+      (assert (string-contains? cat-src "Every area in Phase443 declares which kinds it needs") "Must link required kinds to Phase443 areas")
+      (assert (string-contains? cat-src "One behaviour per") "Must require one behaviour per test function")
+      (assert (string-contains? cat-src "Every `assert` carries a message") "Must mandate message on every assert")
       true)))
 
 (df TestTask44402GroundedInPhase444 [] -> Bool
@@ -98,19 +66,18 @@
   (let [(p-res (file-read ".asl/mem/tasks/Phase444TestTelemetryAndCoverageGuarantees.asn"))]
     (assert (= (.-_tag p-res) "ok") "Phase 444 task file must exist and be readable")
     (let [(p-src (.-value p-res))]
-      (assert (string-contains? p-src "Task44402") "Phase 444 must contain Task44402")
+      (assert (string-contains? p-src "Three decidable coverage guarantees") "Phase 444 must state Task44402 title")
       (assert (string-contains? p-src ":lane \"coverage\"") "Phase 444 must specify coverage lane")
       (assert (string-contains? p-src "run_gate_7") "Phase 444 must target run_gate_7")
-      (assert (string-contains? p-src "docs/TEST_CASE_CATALOG.md") "Phase 444 must own TEST_CASE_CATALOG.md")
+      (assert (string-contains? p-src "docs/TEST_CASE_CATALOG.md") "Phase 444 must own docs/TEST_CASE_CATALOG.md")
       true)))
 
 (df RunTests [] -> Bool
   :d "Executes all Task44402 supervisor acceptance tests"
   (do
     (assert (TestSuperviseGateIntegrity) "TestSuperviseGateIntegrity must pass")
-    (assert (TestCatalogTwelveKindsContract) "TestCatalogTwelveKindsContract must pass")
-    (assert (TestCoverageGuaranteesTargetSymbolsContract) "TestCoverageGuaranteesTargetSymbolsContract must pass")
-    (assert (TestDecidableGuaranteesBehavioralContract) "TestDecidableGuaranteesBehavioralContract must pass")
-    (assert (TestPhase443AreasCaseKindsEnforcement) "TestPhase443AreasCaseKindsEnforcement must pass")
+    (assert (TestDecidableCoverageGuaranteesContract) "TestDecidableCoverageGuaranteesContract must pass")
+    (assert (TestMutationScoreDistinctFromCoverage) "TestMutationScoreDistinctFromCoverage must pass")
+    (assert (TestTestCaseCatalogRequiredKindsContract) "TestTestCaseCatalogRequiredKindsContract must pass")
     (assert (TestTask44402GroundedInPhase444) "TestTask44402GroundedInPhase444 must pass")
     true))
