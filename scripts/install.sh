@@ -199,6 +199,29 @@ case "${1:-}" in
   --render-home)      rules_main --home ;;
   --render-lexicon)   lexicon_main render ;;
   --check-lexicon)    lexicon_main --check ;;
+  --check-installers)
+    ROOT_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+    SRC="$ROOT_DIR/scripts/install.sh"
+    ERR=0
+    for target in "$ROOT_DIR/asl/dist/install.sh" "$ROOT_DIR/asl/web/dist/install.sh" "$ROOT_DIR/asl/web/public/install.sh"; do
+      if [ -f "$target" ]; then
+        if ! cmp -s "$SRC" "$target"; then
+          echo "installers: drift detected in $target (not byte-identical to $SRC)" >&2
+          ERR=1
+        fi
+      fi
+    done
+    NESTED=$(find "$ROOT_DIR" -path "*/dist/dist*" 2>/dev/null || true)
+    if [ -n "$NESTED" ]; then
+      echo "installers: nested dist directory detected: $NESTED" >&2
+      ERR=1
+    fi
+    if [ $ERR -ne 0 ]; then
+      exit 1
+    fi
+    echo "installers: verified single tracked installer and byte-identical distribution copies"
+    exit 0
+    ;;
 esac
 
 VERSION="0.1.0"

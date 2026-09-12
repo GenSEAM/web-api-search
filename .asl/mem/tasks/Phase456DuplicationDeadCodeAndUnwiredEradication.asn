@@ -131,11 +131,11 @@
       :title "One install.sh, not four byte copies"
       :kind :remediation
       :lane "duplication"
-      :state :planned
+      :state :done
       :priority :moderate
       :ownerRole "implementer"
       :createdAt 1789157400000
-      :updatedAt 1789157400000
+      :updatedAt 1789440000000
       :motivation "install.sh exists at scripts/install.sh and as further copies under asl/dist, asl/dist/dist, asl/web/public and asl/web/dist. scripts/install.sh is the renderer that projects the rule source into every client surface, so a stale copy is an alternative source of truth for the rules themselves, which is precisely the failure the ssot rule was written to end. The nested asl/dist/dist path also indicates a build that has copied its own output into itself."
       :purpose "One tracked install.sh. Distribution copies are produced by the build, are ignored by the checker only when byte identical to the source, and the nested duplication is removed."
       :context (:contractRef D81PlanContext)
@@ -156,11 +156,15 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task45604.asl"]
       :verificationCases ["Editing a distribution copy fails the check rather than being overwritten in silence." "A rule change reaches every client through the single source." "No path contains dist inside dist."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45604" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45604" :status :passed :contract D81Baseline)
+      :historicalReceipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45604" :status :passed :exitCode 0 :assertionsEvaluated 33 :timestamp 1789440000000)
+      ]
+      :reviewStatus :approved
       :actionDag ["Compare the copies." "Regenerate from source." "Add the identity check." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])]
+      :stepIndex 4
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45604" :status :passed :exitCode 0 :assertionsEvaluated 33 :timestamp 1789440000000)
+      ])]
   :notes "Sequenced strictly after Phase454. Attempting this campaign before imports resolve is what produced the Phase452 outcome: canonical copies added, duplicates retained, net duplication increased.")

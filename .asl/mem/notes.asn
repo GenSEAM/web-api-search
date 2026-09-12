@@ -1651,6 +1651,16 @@
       :fact "task44606-and-phase446-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44606.asl covering canonical key migration dictionary at .asl/mem/telemetry/key-mapping.asn, bidirectional key translation in harness/src/key_mapping.asl, D51 emitted output checker in asl.c and gate 6, camelCase machine emitters across telemetry, wire frames, and mesh traces; passed SuperviseGate.sh with 92 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task44606 certified complete; all 6 tasks of Phase 446 verified and certified complete under ADR-0081")
+    (:note
+      :id "n151"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["scripts/install.sh" "asl/dist/install.sh" "asl/web/dist/install.sh" "asl/web/public/install.sh" "asl/tools/asl.c" "tests/acceptance/d81/Task45604.asl" ".asl/mem/tasks/Phase456DuplicationDeadCodeAndUnwiredEradication.asn"]
+      :tags [:supervision :phase456 :task45604 :installers :single-source :deduplication :gate7 :approved]
+      :fact "task45604-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task45604.asl covering single tracked installer source at scripts/install.sh, --check-installers validation mode, synchronization of all distribution copies (asl/dist, asl/web/dist, asl/web/public), verification of zero nested dist directories, and Gate 7 check_distribution_installers enforcement in asl.c; passed SuperviseGate.sh with 33 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task45604 certified complete; installer duplication resolved to single tracked source and byte-identical distribution copies under ADR-0081")
   ]
 )
 
