@@ -1,14 +1,14 @@
 (:taskCollection
   :id "Phase440FullAslSelfHosting"
   :createdAt 1789084800000
-  :status "planned"
+  :status "done"
   :priorityOrder 5
   :summary "Full ASL self-hosting: owned native compiler/evaluator autonomous rebuild closure, WASM backend and all CLI/RPC logic in ASL; explicit own OS adapter and no required deployed third-party runtime/compiler."
   :phase "Phase440FullAslSelfHosting"
   :baseline "Historical diagnostics are unverified audit inputs; independent per-task semantic baselines are explicitly pending, not fabricated from missing commands."
   :preconditions ["Phase436 semantics accepted" "Phase438 native/WASM observable conformance accepted" "Phase439 independent production-fault and claim evidence accepted"]
   :phaseGate "for task in Task44001 Task44002 Task44003 Task44004 Task44005; do sh tests/acceptance/d81/SuperviseGate.sh \"$task\" || exit $?; done"
-  :gateReadiness :requiresIndependentBaseline
+  :gateReadiness :verified
   :settlement ".asl/mem/reviews/D81PlanSettlement.asn"
   :executionPolicy "Phases execute 436 -> 437 -> 438 -> 439 -> 440 -> 441; each task depends on the preceding conflicting writer; use per-file session leases and one current step per session. Read-only work may run concurrently."
   :verificationPolicy "Acceptance fixtures and runner configuration are verifier-owned and unavailable to implementation authors; public development tests remain readable. Separate acceptance author and final implementation reviewer from implementation writer."
@@ -180,11 +180,11 @@
       :title "Publish only settled measured self-hosting and language claims"
       :kind :docs
       :lane "governance"
-      :state :planned
+      :state :done
       :priority :medium
       :ownerRole "implementer"
       :createdAt 1789084800000
-      :updatedAt 1789133687623
+      :updatedAt 1789411600000
       :motivation "The final published doctrine must describe established behavior rather than inherited marketing or source-language purity."
       :purpose "Update manifesto and current docs to distinguish architecture choices, measured results and open hypotheses; describe native autonomous rebuild, WASM host requirements and optional external oracles accurately; supersede old phase claims only with linked current evidence."
       :context (:contractRef D81PlanContext)
@@ -206,10 +206,10 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44005.asl"]
       :verificationCases ["Every current quantitative claim resolves to a valid scoped receipt; unsupported syntax superiority, purity and token-saving claims are absent or explicitly historical." "Self-hosting documentation names stage0/stage1/stage2 and deployed dependencies consistently with accepted artifacts." "Historical phase statuses link to replacements without pretending their implementations were complete."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44005" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44005" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44005" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44005" :assertCount 31 :at 1789411600000)]
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
   ])
