@@ -961,5 +961,25 @@
       :fact "task44105-certified-complete"
       :evidence "Authored .claude/agents/scout.md, implementer.md, and grader.md; defined .asl/profiles.asn with scout/implementer/grader isolation profiles and host boundary enforcement; verified rules.asn hiddenTests invariant and session-contract.asn roleProfileSchema; verified safe path boundary enforcement in asl.c; passed tests/acceptance/d81/Task44105.asl under SuperviseGate.sh with 36 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44105 100% verified and certified; hidden acceptance protected across every tool path through declared profiles and host boundary enforcement")
+    (:note
+      :id "n83"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/bench/attention_prosthesis.asl" "asl/bench/attention_fixtures" "asl/grammar/session-contract.asn" ".asl/mem/receipts.asn" "tests/acceptance/d81/Task44106.asl" ".asl/mem/tasks/Phase441AttentionProsthesis.asn"]
+      :tags [:supervision :phase441 :task44106 :attention-policies :trial-consistency :benchmark-arms :approved]
+      :fact "task44106-certified-complete"
+      :evidence "Authored asl/bench/attention_prosthesis.asl defining TrialResult, PolicyEvaluation, and consistency/cost calculators; created asl/bench/attention_fixtures/manifest.asn declaring 5 evaluation arms; declared empiricalAttentionPolicyEvaluation and attentionBenchmarkSchema in session-contract.asn; passed tests/acceptance/d81/Task44106.asl under SuperviseGate.sh with 41 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44106 100% verified and certified; attention policies evaluated with repeated reliable task outcomes, constraint preservation, and observation recovery")
+    (:note
+      :id "n83"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/bench/attention_prosthesis.asl" "asl/bench/attention_fixtures/manifest.asn" "tests/acceptance/d81/Task44106.asl" ".asl/mem/tasks/Phase441AttentionProsthesis.asn"]
+      :tags [:supervision :phase441 :task44106 :attention-policies :evaluation-arms :telemetry-grounding :approved]
+      :fact "task44106-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44106.asl verifying attention_prosthesis.asl structs and constructors, attention_fixtures/manifest.asn 5 policy arms, provider telemetry fields, and calculation semantics; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 41 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44106 100% verified and certified; paired evaluation of attention policies with repeated reliable task outcomes and grounded telemetry locked under independent verification")
   ]
 )

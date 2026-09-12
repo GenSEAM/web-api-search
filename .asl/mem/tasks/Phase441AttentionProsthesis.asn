@@ -227,11 +227,11 @@
       :title "Evaluate attention policies with repeated reliable task outcomes"
       :kind :measurement
       :lane "attention"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789171200000
-      :updatedAt 1789133687623
+      :updatedAt 1789414600000
       :motivation "External studies motivate experiments, not universal ASL efficacy; the benchmark must evaluate reliability and semantic preservation as well as average pass rate."
       :purpose "Run the existing repository-task experiment as paired repeated runs with baseline, ledger-only, recoverable observation masking, relevant retrieval and constraint-preserving summary arms; preregister tasks/models/seeds, resource budgets and analysis before evaluating held-out tasks."
       :context (:contractRef D81PlanContext)
@@ -253,12 +253,12 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44106.asl"]
       :verificationCases ["Record correct task outcomes, repeated-run consistency, equivalent-prompt robustness, controlled tool-fault recovery and confidence/abstention calibration with intervals." "Measure cost per correct task, latency, retries, aggregate retrieval/output and actual available cache reads/writes/misses; distinguish missing provider data from zero." "Critical constraints remain satisfied after compaction; source references can recover masked observations." "Choose thresholds from development runs, then freeze them before held-out evaluation; never promise an improvement or a universal six-call/agent-count optimum."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44106" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44106" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44106" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44106" :assertCount 41 :at 1789414600000)]
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
 
     (:task
       :id "Task44107"
