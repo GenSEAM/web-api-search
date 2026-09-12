@@ -52,12 +52,12 @@
       :phase "phase-459"
       :title "Rename the 14 measured expensive builtins"
       :kind :language
-      :state :planned
+      :state :completed
       :lane "compaction"
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789160000000
-      :updatedAt 1789160000000
+      :updatedAt 1789421800000
       :motivation "Frequency times cost identifies the primitives worth renaming and rules out the rest. string-contains? costs 4 tokens and is called 2754 times, string-starts-with? costs 5 and is called 621, string-from-int64 costs 4 and is called 613. Fourteen such names account for 14712 tokens, 0.97 percent of the corpus. Everything else in the head position already costs one token, so there is nothing further to win there and no case for a general abbreviation campaign."
       :purpose "The fourteen are renamed to their shortest form that stays unambiguous under the Task45901 convention, with the old names removed rather than aliased, because an alias keeps both spellings alive and that is the condition this phase exists to end."
       :context (:contractRef D81PlanContext)
@@ -78,13 +78,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task45902.asl"]
       :verificationCases ["A retired spelling fails rather than resolving through an alias." "The measured saving is recomputed from the tree after the rename and matches the prediction within a stated tolerance." "No renamed primitive collides with an existing name."]
-      :gateReadiness :baselineEstablished
+      :gateReadiness :verified
       :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45902" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define expensiveBuiltinsRenamed semantic")
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :historicalReceipts ["rc-task45902-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Rank by frequency times cost." "Rename the fourteen." "Recompute and record." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task45902-verified-20260912"])
     (:task
       :id "Task45903"
       :parentId ""

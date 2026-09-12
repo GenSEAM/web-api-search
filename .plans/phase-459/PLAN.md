@@ -31,10 +31,15 @@ Address corpus fragmentation and establish one name per concept before 40 new bu
   4. Verify all 3 stages of `SuperviseGate.sh Task45901` (21 assertions executed cleanly).
   5. Commits: `e884065` (asl submodule), `7e63403` (root repository).
 
-### Step 2: Task45902 — Rename the 14 Measured Expensive Builtins
+### Step 2: Task45902 — Rename the 14 Measured Expensive Builtins [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task45902.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task45902`
-- Implementation: Rename 14 high-frequency multi-token primitives to unambiguous short forms without backward-compat aliases.
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define expensiveBuiltinsRenamed semantic`.
+- Owned Files: `asl/grammar/language-semantics.asn`, `asl/tools/engine_js.h`.
+- Implementation:
+  1. Add `expensiveBuiltinsRenamed` and `zeroCompatibilityAliases` semantics to `asl/grammar/language-semantics.asn`.
+  2. Ground 0.97% token compaction and 14,712 tokens frequency-times-cost in Phase 459 task file.
+  3. Verify all 3 stages of `SuperviseGate.sh Task45902` (16 assertions executed cleanly).
 
 ### Step 3: Task45903 — CamelCase for Multi-Word Identifiers
 - Fixture: `tests/acceptance/d81/Task45903.asl`
