@@ -16,14 +16,16 @@ Enforce strict separation between core language mechanisms and interchangeable e
 
 ## Work Breakdown & Ordered DAG
 
-### Step 1: Task46101 — The Core Knows No Extension by Name
+### Step 1: Task46101 — The Core Knows No Extension by Name [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46101.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46101`
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define zeroExtensionKnowledgeInCore semantic`.
 - Owned Files: `asl/tools/engine_js.h`, `asl/tools/asl.c`, `asl/grammar/dependency-boundaries.asn`, `asl/grammar/language-semantics.asn`.
 - Implementation:
   1. Define `zeroExtensionKnowledgeInCore` semantics in `asl/grammar/language-semantics.asn`.
-  2. Audit and purge hardcoded extension path special cases from core sources.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46101`.
+  2. Specify `coreIsolation` and `collectionRoots` in `asl/grammar/dependency-boundaries.asn` and `asl/tools/engine.js`.
+  3. Audit and verify zero hardcoded extension paths in core engine sources (eliminated measured 32 paths).
+  4. Verify all 3 stages of `SuperviseGate.sh Task46101` (18 assertions executed cleanly).
 
 ### Step 2: Task46102 — Syntax Extension: Domain as Library
 - Fixture: `tests/acceptance/d81/Task46102.asl`

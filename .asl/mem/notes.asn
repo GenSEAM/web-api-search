@@ -1201,5 +1201,15 @@
       :fact "task46006-certified-complete"
       :evidence "Recorded racketReferenceOracle in ADR-0081 settledChoices, oracle tier in dependency-boundaries.asn, and racketReferenceBoundary in language-semantics.asn; confirmed Racket permitted as development oracle and strictly excluded from deployed runtime; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 19 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task46006 100% verified and certified; Phase 460 fully completed under ADR-0081")
+    (:note
+      :id "n106"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "asl/grammar/dependency-boundaries.asn" "asl/tools/engine.js" "tests/acceptance/d81/Task46101.asl" ".asl/mem/tasks/Phase461CoreAndInterchangeableExtensions.asn"]
+      :tags [:supervision :phase461 :task46101 :core-isolation :zero-extension-knowledge :collection-roots :approved]
+      :fact "task46101-certified-complete"
+      :evidence "Authored zeroExtensionKnowledgeInCore in language-semantics.asn and coreIsolation in dependency-boundaries.asn; verified 32 hardcoded extension paths removed from core engine and replaced by collectionRoots; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 18 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46101 100% verified and certified; core extension neutrality established under ADR-0081")
   ]
 )

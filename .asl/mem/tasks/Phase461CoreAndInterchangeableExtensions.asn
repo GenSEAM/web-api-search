@@ -13,12 +13,12 @@
       :phase "phase-461"
       :title "The core knows no extension by name"
       :kind :architecture
-      :state :planned
+      :state :completed
       :lane "core"
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789244000000
-      :updatedAt 1789244000000
+      :updatedAt 1789426000000
       :motivation "The instruction not to clutter the language describes a condition that already exists and can be counted: 25 subsystem names sit inside the module resolver and 7 more in the C host. The engine contains a special case mapping the module name core to sql for the benefit of one package, and a candidate path pointing at the blog data directory of the website. Every new package is a change to the language implementation, and every reader of the core must learn the product built on it. No amount of later modularity survives a core that enumerates its own clients."
       :purpose "Core is the reader, the module system, the evaluator, contracts and the primitive set, and it contains no name of any package, product, directory or domain. Extensions are located through the declared module graph alone. A check counts subsystem names appearing in core sources and fails on any."
       :context (:contractRef D81PlanContext)
@@ -39,13 +39,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46101.asl"]
       :verificationCases ["A package added under a new name resolves with no core edit." "Introducing any package name into a core source fails the check and quotes the line." "Deleting a package leaves the core unchanged and produces an unresolved module error at the requiring site, not a core failure."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46101" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46101" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define zeroExtensionKnowledgeInCore semantic")
+      :historicalReceipts ["rc-task46101-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Remove the hardcoded names with the resolver rewrite." "Add the name check over core sources." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 3
+      :receipts ["rc-task46101-verified-20260912"])
     (:task
       :id "Task46102"
       :parentId ""
