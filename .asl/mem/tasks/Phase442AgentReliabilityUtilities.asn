@@ -326,11 +326,11 @@
       :title "Reflection utility: gap report between declared outcomes and observed trace"
       :kind :gate
       :lane "observability"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789139870800
-      :updatedAt 1789139870800
+      :updatedAt 1789404600000
       :motivation "Measured 2026-09-11: the reflection stage of the epistemic loop had no instrument, so gaps were found by an external reviewer rather than by the system: three duplicated task records, three gates that passed on baseline, amendments silently overwritten and a removal reverted. Self-review by the author is the one mechanism the evidence says degrades results, so reflection must be mechanical."
       :purpose "asl reflect <task> compares the task declared :outcomes and :owns against the session trace and the working tree, and reports: outcomes with no corresponding mutation, mutations outside :owns, files changed by another session since the claim, gates never executed, and receipts whose digest no longer matches. It states findings, never a verdict, and is readable by the grader as evidence."
       :context (:contractRef D81PlanContext)
@@ -351,13 +351,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44209.asl"]
       :verificationCases ["A declared outcome with no mutation in the trace is reported; a write outside :owns is reported with its path; a receipt whose source digest changed is reported stale." "The utility never marks a task done and never writes to the task file."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44209" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44209" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44209" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44209" :assertCount 15 :at 1789404600000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes a task with a missing outcome and an out-of-owns write." "Implement the comparison over the trace." "Detect foreign changes and stale receipts." "Emit findings without a verdict." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44210"
       :parentId ""
