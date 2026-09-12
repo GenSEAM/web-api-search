@@ -1531,5 +1531,15 @@
       :fact "task44307-and-phase443-certified-complete"
       :evidence "Authored tests/conformance/ledger/ledger_attention_test.asl covering boundary, resourceBound, negativeControl, idempotence, and concurrency case kinds for receipt-is-verified?, make-task-receipt, resume-action-dag, and recover-task-session; verified constraint survival across compactions, bounded rule slices, and refusal of fabricated receipts; established baseline failure and passed SuperviseGate.sh with 62 assertions evaluated; receipts indexed in receipts.asn; all 7 tasks of Phase443 certified complete"
       :consequence "Task44307 certified complete; Phase 443 Test Coverage Campaign fully certified under ADR-0081")
+    (:note
+      :id "n139"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["asl/tools/engine_js.h" "asl/tools/asl.c" ".asl/mem/telemetry" "tests/acceptance/d81/Task44401.asl" ".asl/mem/tasks/Phase444TestTelemetryAndCoverageGuarantees.asn"]
+      :tags [:supervision :phase444 :task44401 :telemetry :assertions :unbound-deficit :approved]
+      :fact "task44401-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44401.asl covering assertionCount, evalNode, run_gate_5, and unbound symbol telemetry records; established baseline failure and passed SuperviseGate.sh with 34 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task44401 certified complete; test telemetry record contract verified under ADR-0081")
   ]
 )

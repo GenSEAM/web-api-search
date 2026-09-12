@@ -1,11 +1,11 @@
 (:in-flight
   :session-id "57abefd4-689b-44f0-8084-f5b1813fae50"
   :lane ""
-  :activePhase "Phase443TestCoverageCampaign"
+  :activePhase "Phase444TestTelemetryAndCoverageGuarantees"
   :activeTasks []
   :dispatchedAt 0
   :status "idle"
   :handoffId ""
   :handoffCheckpoint 0
   :sourceDigest ""
-)
+  :leases [])

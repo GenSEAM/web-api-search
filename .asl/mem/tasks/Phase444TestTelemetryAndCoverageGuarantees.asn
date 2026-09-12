@@ -17,11 +17,11 @@
       :title "Test telemetry record: per-assertion identity, timing and unbound deficit into the trace"
       :kind :verification
       :lane "telemetry"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789141670724
-      :updatedAt 1789141670724
+      :updatedAt 1789437000000
       :motivation "Measured 2026-09-11 by running all 313 suites in 42 seconds: 4448 of 8791 declared assertions execute (50.6 percent), 159 suites execute none, and 155 hit ERR_UNBOUND_SYMBOL. The evaluator already counts executed assertions, already prints them, already accepts a --metrics flag and already emits a DEBUG_UNBOUND diagnostic naming the missing symbol; none of it is collected, so the gate reports a substring count instead of the number the runtime already knows."
       :purpose "The runner emits one ASN telemetry record per suite into the session trace: file, declared and executed assertion identities (file, function, ordinal) rather than counts, per-assertion and per-suite duration, exit status, and every unbound symbol with the function that needed it. asl test --metrics is the carrier and gate 5 reads it instead of grepping the source."
       :context (:contractRef D81PlanContext)
@@ -42,13 +42,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44401.asl"]
       :verificationCases ["A suite whose body is abandoned reports executed 0 with the blocking symbol named, never a declared count." "Assertion identities are stable across runs so a newly unreached assertion is detectable as a regression."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44401" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44401" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44401" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44401" :assertCount 34 :at 1789437000000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes suites with known executed and unreached assertions." "Emit identities and durations from the existing counter." "Record unbound symbols with their requesting function." "Point gate 5 at the record." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :step 1 :status :ok :hash "HEAD")])
     (:task
       :id "Task44402"
       :parentId ""
