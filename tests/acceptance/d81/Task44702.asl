@@ -6,6 +6,7 @@
       TestHarnessConfigArtifactContract
       TestAudioBridgeTestContract
       TestVoiceManifestContract
+      TestVoiceGrammarContract
       TestTask44702GroundedInPhase447]
   :i [])
 
@@ -58,6 +59,16 @@
       (assert (string-contains? m-src "asl-voice/harness-profile") "Manifest must register asl-voice/harness-profile")
       true)))
 
+(df TestVoiceGrammarContract [] -> Bool
+  :d "Verifies voice/grammar.asn registers canonical HarnessProfile and endpoints"
+  (let [(g-res (file-read "voice/grammar.asn"))]
+    (assert (= (.-_tag g-res) "ok") "voice/grammar.asn must exist and be readable")
+    (let [(g-src (.-value g-res))]
+      (assert (string-contains? g-src ":name \"HarnessProfile\"") "voice/grammar.asn must register HarnessProfile")
+      (assert (string-contains? g-src ":name \"HarnessPhoneticAlias\"") "voice/grammar.asn must register HarnessPhoneticAlias")
+      (assert (string-contains? g-src ":name \"HarnessHardwareEndpoint\"") "voice/grammar.asn must register HarnessHardwareEndpoint")
+      true)))
+
 (df TestTask44702GroundedInPhase447 [] -> Bool
   :d "Verifies Phase 447 task collection grounds Task44702"
   (let [(p-res (file-read ".asl/mem/tasks/Phase447CanonicalLexiconCrossClient.asn"))]
@@ -76,5 +87,6 @@
     (assert (TestHarnessConfigArtifactContract) "TestHarnessConfigArtifactContract must pass")
     (assert (TestAudioBridgeTestContract) "TestAudioBridgeTestContract must pass")
     (assert (TestVoiceManifestContract) "TestVoiceManifestContract must pass")
+    (assert (TestVoiceGrammarContract) "TestVoiceGrammarContract must pass")
     (assert (TestTask44702GroundedInPhase447) "TestTask44702GroundedInPhase447 must pass")
     true))

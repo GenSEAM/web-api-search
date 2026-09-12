@@ -1391,5 +1391,15 @@
       :fact "task44702-certified-complete"
       :evidence "Renamed voice profile module to asl-voice/harness-profile, structs to HarnessProfile, HarnessPhoneticAlias, HarnessHardwareEndpoint in voice/src/harness_profile.asl; created canonical .asl/harness.config.asn; updated voice/manifest.asn and audio_bridge_test.asl; established baseline failure and verified non-vacuous assertions; passed SuperviseGate.sh with 29 executed assertions; receipts recorded"
       :consequence "Task44702 certified complete; canonical harness artifact names established under ADR-0081")
+    (:note
+      :id "n125"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["voice/src/transliterator.asl" "harness/src/prompt_translator.asl" "tests/acceptance/d81/Task44703.asl" ".asl/mem/tasks/Phase447CanonicalLexiconCrossClient.asn"]
+      :tags [:supervision :phase447 :task44703 :one-table-three-consumers :transliterator :prompt-translator :approved]
+      :fact "task44703-certified-complete"
+      :evidence "Implemented apply-canonical-lexicon in voice/src/transliterator.asl and normalize-lexicon-terms in harness/src/prompt_translator.asl; verified both translators normalize acoustic ASR mishearings to authoritative canonical terms; established baseline failure and verified non-vacuous assertions; passed SuperviseGate.sh with 20 executed assertions; receipts recorded"
+      :consequence "Task44703 certified complete; one table three consumers contract established under ADR-0081")
   ]
 )

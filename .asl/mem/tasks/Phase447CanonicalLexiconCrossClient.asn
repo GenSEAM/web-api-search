@@ -92,11 +92,11 @@
       :title "One table, three consumers: voice transliterator, prompt translator, client channels"
       :kind :protocol
       :lane "lexicon"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789142884943
-      :updatedAt 1789142884943
+      :updatedAt 1789432400000
       :motivation "Correction today happens in at most one place and only for dictated audio. The same term arrives mistyped or ASR-mangled through a pasted prompt, a Codex instruction and an Antigravity channel, and each path has either its own table or none. Three consumers with three tables is the divergence pattern the ssot rule exists to prevent."
       :purpose "voice/src/transliterator.asl and harness/src/prompt_translator.asl both consume the rendered lexicon rather than holding their own table, and every client channel carries the rendered mapping so a term is corrected before the model reasons about it. Correction is reported, not silent: a substitution emits a record naming the spoken form and the canonical value."
       :context (:contractRef D81PlanContext)
@@ -117,13 +117,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44703.asl"]
       :verificationCases ["The same mangled term arriving by voice, by pasted text and by a client channel resolves to one canonical value; a substitution is visible in the trace." "Removing the local tables does not change any resolution result."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44703" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44703" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44703" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44703" :assertCount 20 :at 1789432400000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes inputs mangled through each path." "Point both translators at the rendered lexicon." "Carry the mapping into client channels." "Emit a substitution record." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 3
+      :receipts [(:receipt :step 3 :status :ok :hash "HEAD")])
     (:task
       :id "Task44704"
       :parentId ""
