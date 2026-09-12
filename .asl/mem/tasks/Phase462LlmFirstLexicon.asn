@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase462LlmFirstLexicon"
   :createdAt 1789245000000
-  :status "planned"
+  :status "completed"
   :priorityOrder 3
   :summary "LLM-First Lexicon: measured token count decides every name, the human is removed from the source and served by decoders instead, and the rule binds all future vocabulary."
   :phase "Phase462LlmFirstLexicon"
@@ -208,17 +208,17 @@
       :phase "phase-462"
       :title "A structure carries its own meaning across agents and models"
       :kind :protocol
-      :state :planned
+      :state :completed
       :lane "portability"
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789245000000
-      :updatedAt 1789245000000
+      :updatedAt 1789429400000
       :motivation "The consumers are agents exchanging structures with each other and with different models, and a structure that needs its origin session to be understood must be explained at every hop. That explanation is the real token cost of a non portable structure, and it recurs per hop and per model rather than once. The defect already measured is exactly this: 66 percent of qualified prefixes are one or two characters, the prefix s denotes a different module in 76 files, and 11.7 percent of uses sit more than 200 lines from the binding that gives them meaning. A structure containing such a prefix cannot be interpreted by a receiver that does not hold the sender context, so it is not portable, and the sender must either resolve it or narrate it."
       :purpose "A structure is interpretable by a receiver holding nothing but the structure and the declared vocabulary: prefixes denote the same thing everywhere, references are resolvable rather than positional, and extension points are declared in the structure rather than implied by the sender. Portability is measured as the fraction of emitted structures interpretable standalone, and the saving is measured as the preamble no longer sent."
       :context (:contractRef D81PlanContext)
       :outcomes ["Structures interpretable without sender context" "One meaning per prefix across every agent and channel" "Extension points declared in the structure" "Portability measured, and the preamble saving measured with it"]
-      :owns ["asl/grammar/rpc.asn" "asl/grammar/protocol-conformance.asn" "asl/packages/asl-codec/src"]
+      :owns ["asl/grammar/rpc.asn" "asl/grammar/protocol-conformance.asn" "asl/packages/asl-codec/src" "asl/grammar/language-semantics.asn"]
       :targetSymbols []
       :relatedSymbols ["output" "context" "ssot" "capabilities"]
       :invariants ["C3" "D34" "D81"]
@@ -234,12 +234,12 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46206.asl"]
       :verificationCases ["A structure carrying a prefix that denotes two different modules across the corpus fails the portability check." "A receiver process holding no sender state interprets an emitted structure and reaches the same meaning." "A structure requiring a preamble to be understood is reported, and the preamble length is the measured cost."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46206" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46206" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define standaloneInterpretableStructureRule semantic")
+      :historicalReceipts ["rc-task46206-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Define standalone interpretability." "Measure the emitted structures against it." "Remove the preamble and record the saving." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])]
+      :stepIndex 3
+      :receipts ["rc-task46206-verified-20260912"])]
 
   :notes "Removing the human reader settles the tiebreaker and does not reverse the direction. The model's prior comes from text humans wrote, so optimising for the model keeps selecting ordinary words: define over df at equal cost, enum over dfe at half the cost, and the full word over the devowelled form at half the cost again. The one thing that changes is that legibility no longer has to be paid for in the source, because Task46204 pays it in a tool.")

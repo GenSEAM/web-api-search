@@ -1311,5 +1311,15 @@
       :fact "task46204-certified-complete"
       :evidence "Authored humanDecoderSeparation in language-semantics.asn and decoderTool contract in protocol-conformance.asn; ensured human legibility is provided strictly via out-of-band decoders and never paid for as language source bloat, enforcing no-reentry as source; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 19 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task46204 100% verified and certified; human decoder separation established under ADR-0081")
+    (:note
+      :id "n117"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "asl/grammar/protocol-conformance.asn" "tests/acceptance/d81/Task46206.asl" ".asl/mem/tasks/Phase462LlmFirstLexicon.asn"]
+      :tags [:supervision :phase462 :task46206 :portable-structures :standalone :approved]
+      :fact "task46206-certified-complete"
+      :evidence "Authored standaloneInterpretableStructureRule in language-semantics.asn and portableStructures in protocol-conformance.asn; ensured structures are standalone interpretable without requiring sender context or session preamble, guaranteeing globally consistent prefix semantics; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 18 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46206 100% verified and certified; Phase 462 all 6 tasks certified complete under ADR-0081")
   ]
 )
