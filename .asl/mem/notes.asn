@@ -1352,15 +1352,15 @@
       :evidence "Authored bindingToUseDistanceRule in language-semantics.asn; mandated that binding-to-use distance is measured and bounded over the resolved module graph, and uses beyond the bound must be self-describing for sliced window interpretability; verified baseline failure and negative mutation fault detection; passed under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task46303 100% verified and certified; bounded binding-to-use distance established under ADR-0081")
     (:note
-      :id "n120"
+      :id "n121"
       :author "codex"
       :created "2026-09-12"
       :status "active"
-      :scope ["asl/grammar/language-semantics.asn" "tests/acceptance/d81/Task46303.asl" ".asl/mem/tasks/Phase463AslFirstBeyondRacket.asn"]
-      :tags [:supervision :phase463 :task46303 :binding-distance :locality :self-describing :approved]
-      :fact "task46303-certified-complete"
-      :evidence "Authored bindingToUseDistanceRule in language-semantics.asn; mandated bounded distance between binding and use across resolved graph and required self-describing bindings for slice interpretability; verified baseline failure and negative mutation fault detection; passed under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
-      :consequence "Task46303 100% verified and certified; bounded binding-to-use distance established under ADR-0081")
+      :scope ["asl/grammar/language-semantics.asn" "tests/acceptance/d81/Task46304.asl" ".asl/mem/tasks/Phase463AslFirstBeyondRacket.asn"]
+      :tags [:supervision :phase463 :task46304 :emission-error-rate :evaluation :benchmark :approved]
+      :fact "task46304-certified-complete"
+      :evidence "Authored measuredEmissionErrorRateRule in language-semantics.asn; mandated that language changes are evaluated by model generation against a versioned fixed task set, measuring the emission error rate of forms that fail to parse, bind, or assert; rejected token savings that raise the error rate; verified baseline failure and negative mutation fault detection; passed under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46304 100% verified and certified; measured emission error rate standard established under ADR-0081")
   ]
 )
 

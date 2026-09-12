@@ -42,14 +42,15 @@ Optimize AgentScript along axes Racket never optimized: emission reliability, ne
   2. Measure and bound binding-to-use distances across packages, requiring self-describing bindings.
   3. Verify all 3 stages of `SuperviseGate.sh Task46303` (20 assertions executed cleanly).
 
-### Step 4: Task46304 — A Measured Emission Error Rate, Which No Language Has
+### Step 4: Task46304 — A Measured Emission Error Rate, Which No Language Has [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46304.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46304`
 - Owned Files: `asl/bench`, `.asl/mem/telemetry`, `asl/grammar/language-semantics.asn`.
 - Implementation:
   1. Define `measuredEmissionErrorRateRule` semantic in `asl/grammar/language-semantics.asn`.
   2. Establish fixed benchmark generation task set and measure parsing/binding/assertion failure rates.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46304`.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46304` (20 assertions executed cleanly).
+
 
 ### Step 5: Task46305 — Record the Refuted Rewrites So They Do Not Return
 - Fixture: `tests/acceptance/d81/Task46305.asl`

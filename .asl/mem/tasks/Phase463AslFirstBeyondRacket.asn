@@ -130,12 +130,12 @@
       :phase "phase-463"
       :title "A measured emission error rate, which no language has"
       :kind :verification
-      :state :planned
+      :state :completed
       :lane "emission"
       :priority :critical
       :ownerRole "verifier"
       :createdAt 1789260000000
-      :updatedAt 1789260000000
+      :updatedAt 1789430800000
       :motivation "Every claim about a language being better for models finally rests on whether a model produces correct output in it, and that quantity has never been measured here or anywhere for this language. Token counts, symbol surface and nesting depth are all proxies for it. Without it, a design argument between two forms cannot be settled except by opinion, and this session has already shown how much opinion about token economy turns out to be wrong when measured."
       :purpose "A fixed task set is generated in the language by several models, and the outcome is measured as the rate of forms that fail to parse, fail to bind, or fail their own assertions. The rate is recorded per model and per language variant, so a proposed change is evaluated by generating against it rather than by argument, and a change that lowers tokens while raising the error rate is rejected."
       :context (:contractRef D81PlanContext)
@@ -156,13 +156,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46304.asl"]
       :verificationCases ["Two language variants differing in one form produce two different measured rates on the same task set." "A variant lowering tokens and raising the rate is rejected by the gate." "The task set is fixed and versioned, so a rate is comparable across dates."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46304" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46304" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define measuredEmissionErrorRateRule semantic")
+      :historicalReceipts ["rc-task46304-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Fix and version the task set." "Generate across models and variants." "Record rates." "Bind language decisions to them." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task46304-verified-20260912"])
     (:task
       :id "Task46305"
       :parentId ""
