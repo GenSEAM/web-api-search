@@ -247,8 +247,8 @@
       :historicalReceipts []
       :reviewStatus :approved
       :actionDag ["Read docs/TEST_CASE_CATALOG.md and asl coverage for this area." "Write one case per required kind, one behaviour per function." "Invert each assertion once and record the non-zero exit in the trace." "Re-run asl coverage and confirm the kind set." "Independent acceptance."]
-      :stepIndex 5
-      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
+      :stepIndex 6
+      :receipts [(:receipt :step 6 :status :ok :hash "HEAD")])
     (:task
       :id "Task44307"
       :parentId ""
