@@ -78,8 +78,8 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task45902.asl"]
       :verificationCases ["A retired spelling fails rather than resolving through an alias." "The measured saving is recomputed from the tree after the rename and matches the prediction within a stated tolerance." "No renamed primitive collides with an existing name."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45902" :status :notEstablished :contract D81Baseline)
+      :gateReadiness :baselineEstablished
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45902" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define expensiveBuiltinsRenamed semantic")
       :historicalReceipts []
       :reviewStatus :requiresIndependentPlanReview
       :actionDag ["Rank by frequency times cost." "Rename the fourteen." "Recompute and record." "Independent acceptance."]
