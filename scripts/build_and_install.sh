@@ -23,13 +23,14 @@ if [ -f "asl/tools/asl.c" ]; then
     mkdir -p bin asl/bin
     TMP_OBJ="$(mktemp /tmp/asl_obj.XXXXXX)"
     TMP_BIN="$(mktemp /tmp/asl_bin.XXXXXX)"
-    clang -c -O2 -o "$TMP_OBJ" asl/tools/asl.c
+    DIGEST=$(shasum -a 256 asl/tools/asl.c 2>/dev/null | awk '{print substr($1,1,16)}' || echo "unknown")
+    clang -c -O2 -DASL_SOURCE_DIGEST="\"$DIGEST\"" -o "$TMP_OBJ" asl/tools/asl.c
     clang -framework JavaScriptCore -o "$TMP_BIN" "$TMP_OBJ"
     cp -f "$TMP_BIN" asl/asl 2>/dev/null || true
     cp -f "$TMP_BIN" bin/asl 2>/dev/null || true
     cp -f "$TMP_BIN" asl/bin/asl 2>/dev/null || true
     rm -f "$TMP_OBJ" "$TMP_BIN"
-    echo "    ✓ Compiled native ASL engine."
+    echo "    ✓ Compiled native ASL engine (digest: $DIGEST)."
   fi
 fi
 
@@ -57,8 +58,8 @@ mkdir -p "$DIST_DIR"
 
 ARM64_BIN="$(mktemp /tmp/asl_arm64.XXXXXX)"
 X64_BIN="$(mktemp /tmp/asl_x64.XXXXXX)"
-clang -target arm64-apple-macos -O2 -framework JavaScriptCore -o "$ARM64_BIN" asl/tools/asl.c 2>/dev/null || cp asl/asl "$ARM64_BIN"
-clang -target x86_64-apple-macos -O2 -framework JavaScriptCore -o "$X64_BIN" asl/tools/asl.c 2>/dev/null || cp asl/asl "$X64_BIN"
+clang -target arm64-apple-macos -O2 -DASL_SOURCE_DIGEST="\"$DIGEST\"" -framework JavaScriptCore -o "$ARM64_BIN" asl/tools/asl.c 2>/dev/null || cp asl/asl "$ARM64_BIN"
+clang -target x86_64-apple-macos -O2 -DASL_SOURCE_DIGEST="\"$DIGEST\"" -framework JavaScriptCore -o "$X64_BIN" asl/tools/asl.c 2>/dev/null || cp asl/asl "$X64_BIN"
 
 for target in darwin-arm64 darwin-x64; do
   ARCHIVE="${DIST_DIR}/asl-${VERSION}-${target}.tar.gz"

@@ -213,7 +213,15 @@ if [ "$BINARY_INSTALLED" -eq 0 ]; then
   SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)"
   LOCAL_ASL="$(cd "$SCRIPT_DIR/.." 2>/dev/null && pwd)/asl/asl"
   LOCAL_ENGINE="$(cd "$SCRIPT_DIR/.." 2>/dev/null && pwd)/asl/bin/asl-engine"
-  if [ -f "$LOCAL_ASL" ]; then
+  LOCAL_SRC="$(cd "$SCRIPT_DIR/.." 2>/dev/null && pwd)/asl/tools/asl.c"
+  if [ -f "$LOCAL_SRC" ] && command -v clang >/dev/null 2>&1; then
+    echo "📦 Compiling and installing ASL with embedded source digest...";
+    DIGEST=$(shasum -a 256 "$LOCAL_SRC" 2>/dev/null | awk '{print substr($1,1,16)}' || echo "unknown")
+    clang -O2 -DASL_SOURCE_DIGEST="\"$DIGEST\"" -framework JavaScriptCore "$LOCAL_SRC" -o "${INSTALL_DIR}/asl"
+    chmod +x "${INSTALL_DIR}/asl"
+    ln -sf "${INSTALL_DIR}/asl" "${INSTALL_DIR}/agentscript"
+    cp -f "${INSTALL_DIR}/asl" "$LOCAL_ASL" 2>/dev/null || true
+  elif [ -f "$LOCAL_ASL" ]; then
     echo "📦 Installing ASL from local workspace: $LOCAL_ASL...";
     ln -sf "$LOCAL_ASL" "${INSTALL_DIR}/asl"
     ln -sf "$LOCAL_ASL" "${INSTALL_DIR}/agentscript"

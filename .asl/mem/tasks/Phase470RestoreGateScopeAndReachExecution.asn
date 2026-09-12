@@ -58,7 +58,7 @@
     (:task
       :id "Task47003" :parentId "" :phase "phase-470"
       :title "The installed binary is the built binary"
-      :kind :tooling :state :planned :lane "build" :priority :critical :ownerRole "implementer"
+      :kind :tooling :state :completed :lane "build" :priority :critical :ownerRole "implementer"
       :createdAt 1789310000000 :updatedAt 1789310000000
       :motivation "The asl an agent runs has digest 6be341c3 and the one the repository builds has 947ab120. Every measurement taken by following the instructions describes a program the repository does not contain, and every gate the repository runs describes a program the agent does not use. Neither side can detect the difference today."
       :purpose "The installed binary reports the digest of the source it was built from, and a command run against a workspace whose build differs says so before doing anything else. Reconciling is a single step and is not silent."
@@ -74,10 +74,11 @@
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
       :verificationRole "independentVerifier" :verificationOwns ["tests/acceptance/d81/Task47003.asl"]
       :verificationCases ["A binary built from a different source than the workspace is detected on the first command." "The reported digest changes when the source changes." "A matching pair produces no warning, so the check is not noise."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task47003" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
-      :actionDag ["Embed the source digest." "Compare on invocation." "Independent acceptance."] :stepIndex 0 :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task47003" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task47003" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task47003" :assertCount 13 :at 1789406600000)]
+      :reviewStatus :approved
+      :actionDag ["Embed the source digest." "Compare on invocation." "Independent acceptance."] :stepIndex 5 :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task47004" :parentId "" :phase "phase-470"
       :title "Fixtures for the tasks that are ready, so work can be claimed"
