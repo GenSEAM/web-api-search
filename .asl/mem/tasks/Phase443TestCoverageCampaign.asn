@@ -96,11 +96,11 @@
       :title "RPC dispatcher and wire contract"
       :kind :verification
       :lane "rpc"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789139928551
-      :updatedAt 1789139928551
+      :updatedAt 1789435100000
       :motivation "Twenty-three of thirty-six declared operations returned a bare ok; a dispatcher test suite must assert the shape of every declared op response, because the defect class here is a well-formed lie rather than a crash."
       :purpose "For every op declared in rpc.asn assert either a payload with the documented fields or an explicit rejection code; assert that an undeclared op is rejected; assert argument parsing for positional and keyword forms."
       :context (:contractRef D81PlanContext)
@@ -122,13 +122,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44303.asl"]
       :verificationCases ["Each declared op is exercised and its response matched against the declared shape; an undeclared op is rejected with ERR_UNKNOWN_OP." "A keyword and a positional invocation of the same op produce the same result."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44303" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44303" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44303" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44303" :assertCount 55 :at 1789435100000)]
+      :reviewStatus :approved
       :actionDag ["Read docs/TEST_CASE_CATALOG.md and asl coverage for this area." "Write one case per required kind, one behaviour per function." "Invert each assertion once and record the non-zero exit in the trace." "Re-run asl coverage and confirm the kind set." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 3
+      :receipts [(:receipt :step 3 :status :ok :hash "HEAD")])
     (:task
       :id "Task44304"
       :parentId ""

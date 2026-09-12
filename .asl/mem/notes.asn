@@ -1481,5 +1481,15 @@
       :fact "task44302-certified-complete"
       :evidence "Authored tests/conformance/evaluator/evaluator_semantics_test.asl covering negativeControl, errorPropagation, boundary, malformed, and metamorphic case kinds for evalNode, loadModuleImports, invokeClosure, and diagnostic error codes; established baseline failure and passed SuperviseGate.sh with 57 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task44302 certified complete; evaluator semantics and module resolution conformance suite established under ADR-0081")
+    (:note
+      :id "n134"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["tests/conformance/rpc/rpc_dispatcher_test.asl" "tests/acceptance/d81/Task44303.asl" ".asl/mem/tasks/Phase443TestCoverageCampaign.asn"]
+      :tags [:supervision :phase443 :task44303 :rpc-dispatcher :wire-contract :conformance :approved]
+      :fact "task44303-certified-complete"
+      :evidence "Authored tests/conformance/rpc/rpc_dispatcher_test.asl covering negativeControl, malformed, errorPropagation, boundary, and roundTrip case kinds for execute_single_step, handle_payload, and :ERR_UNIMPLEMENTED rejection; established baseline failure and passed SuperviseGate.sh with 55 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task44303 certified complete; RPC dispatcher and wire contract conformance suite established under ADR-0081")
   ]
 )
