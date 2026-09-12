@@ -131,7 +131,7 @@
       :title "Executable plan verifier: asl plan verify"
       :kind :gate
       :lane "reliability"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789139714894
@@ -156,13 +156,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44204.asl"]
       :verificationCases ["A duplicated task identity, a dependency cycle, an unresolved contractRef and a gate that passes on baseline are each reported and fail the command; a clean plan exits 0." "A planned task owning a future output does not fail; a completed phase owning an absent path does."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44204" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44204" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44204" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44204" :assertCount 17 :at 1789402600000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes plans with a duplicate id, a cycle, a vacuous gate and a relic owns path." "Implement the walker and ASN findings." "Execute gates for falsifiability via (:run …)." "Wire into gate 7." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44205"
       :parentId ""
