@@ -691,5 +691,15 @@
       :fact "task44203-certified-complete"
       :evidence "Verified concurrent writer safety via file leases (:claim, :leases) and digest staleness detection (compute_file_digest, check_lease_staleness, :ERR_STALE_FILE, :ERR_LEASE_CONFLICT) in asl/tools/asl.c; verified rpc contract in asl/grammar/rpc.asn; passed tests/acceptance/d81/Task44203.asl under SuperviseGate.sh with 14 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44203 100% verified and certified; multi-agent concurrent write collision prevention active")
+    (:note
+      :id "n59"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/tools/asl.c" "tests/acceptance/d81/Task44204.asl" ".asl/mem/tasks/Phase442AgentReliabilityUtilities.asn"]
+      :tags [:supervision :phase442 :task44204 :plan-verify :dag-acyclic :d52-audit :approved]
+      :fact "task44204-certified-complete"
+      :evidence "Implemented asl plan verify subcommand in main and print_usage; added ASN findings emission (:plan-audit-report :status ... :phases ... :tasks ... :cycles ... :d52-errors ...); passed tests/acceptance/d81/Task44204.asl under SuperviseGate.sh with 17 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44204 100% verified and certified; automated plan verification and DAG cycle detection active via CLI")
   ]
 )

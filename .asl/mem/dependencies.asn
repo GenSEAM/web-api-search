@@ -23,22 +23,43 @@
       :purpose "Specialized hardware, quantum, and crawler domain packages"
       :stability :experimental
       :isolation :modular)
+    (:cluster
+      :id "build-boundaries"
+      :purpose "Non-runtime build, bootstrap, and test boundary tools governed by asl/grammar/dependency-boundaries.asn"
+      :stability :static
+      :isolation :buildTimeOnly)
   ]
   :dependencies [
     (:dependency
-      :name "python3"
-      :type :binary
-      :version ">=3.10"
-      :cluster "runtime-substrate"
-      :license "PSF-2.0"
-      :rationale "Underpinned legacy AST engine and header generators; now completely eradicated and replaced with native C and POSIX tooling"
-      :risk :none
-      :interconnectedWith ["bash" "git"]
-      :functionalOverhead :none
-      :actionPlan :purged
-      :replacementCandidate "asl/tools/asl.c and xxd"
-      :lastReviewed "2026-09-11"
-      :nextReview "2026-12-11")
+      :name "clang"
+      :type :buildBoundary
+      :version ">=14.0"
+      :cluster "build-boundaries"
+      :boundaryTier "bootstrap"
+      :license "Apache-2.0-with-LLVM-exception"
+      :rationale "Host C seed compiler used to compile the resident engine adapter (asl/tools/asl.c) into native single binary"
+      :risk :low
+      :interconnectedWith ["bash"]
+      :functionalOverhead :low
+      :actionPlan :retain
+      :replacementCandidate "asl-self-host"
+      :lastReviewed "2026-09-12"
+      :nextReview "2026-12-12")
+    (:dependency
+      :name "JavaScriptCore"
+      :type :testBoundary
+      :version "macOS-system"
+      :cluster "build-boundaries"
+      :boundaryTier "test"
+      :license "LGPL-2.1"
+      :rationale "Independent test host substrate linked by host adapter for acceptance test execution; zero deployed external runtime footprint"
+      :risk :low
+      :interconnectedWith ["clang"]
+      :functionalOverhead :low
+      :actionPlan :retain
+      :replacementCandidate "pure-asl-evaluator"
+      :lastReviewed "2026-09-12"
+      :nextReview "2026-12-12")
     (:dependency
       :name "git"
       :type :binary

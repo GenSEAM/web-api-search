@@ -2,6 +2,7 @@
   :version "1.0.0"
   :package asl-mem
   :updatedAt 1773286000000
+  :closure "Contradicted by empirical measurement or superseded by updated practice"
   :practices [
     (:practice
       :id "PRAC-001"
@@ -9,6 +10,7 @@
       :topic "task-decomposition"
       :title "Atomic Task Decomposition & Bounded Turn Budgeting"
       :status :active
+      :closure "Contradicted by empirical measurement or superseded by updated task decomposition protocol"
       :scope ["mem/tasks" "harness/planner"]
       :summary "Decompose work items to fit within <= 5 turns, <= 2 owned files, and <= 100 LOC diff to prevent attention decay and context flooding"
       :protocol [
@@ -25,6 +27,7 @@
       :topic "reconciliation"
       :title "Dedicated Reconciliation Bridges for Coupled Tasks"
       :status :active
+      :closure "Contradicted by empirical measurement or superseded by automated interface reconciliation"
       :scope ["mem/tasks" "agent-bus"]
       :summary "Insert explicit reconciliation tasks between coupled interface updates instead of forcing implementers to bridge both sides concurrently"
       :protocol [
@@ -41,6 +44,7 @@
       :topic "stigmergy"
       :title "Stigmergic Clean-Context Handoffs via Physical Receipts"
       :status :active
+      :closure "Contradicted by empirical measurement or superseded by continuous streaming memory protocol"
       :scope ["mem/receipts" "harness/worker"]
       :summary "Pass execution state across agents strictly through disk artifacts and TaskReceipts rather than accumulating unbounded chat history"
       :protocol [
@@ -57,6 +61,7 @@
       :topic "model-routing"
       :title "Asymmetric Model Capability Routing"
       :status :active
+      :closure "Contradicted by empirical measurement or superseded by homogeneous frontier model routing"
       :scope ["harness/supervisor" "harness/model_calibration"]
       :summary "Route roles to calibrated model tiers: Frontier for planning and audit, Flash for atomic implementation, SLM for bounded formatting"
       :protocol [
@@ -73,6 +78,7 @@
       :topic "vector-graphics"
       :title "Safe Vector Art & Pure ASN-to-SVG Transpilation"
       :status :active
+      :closure "Contradicted by empirical measurement or superseded by native vector format compiler"
       :scope ["asl-codec" "asl-svg"]
       :summary "Generate visual assets using native ASN vector S-expressions (:rc, :circ, :p, :ln, :g, :v) to achieve 50% token compaction and zero XML syntax errors"
       :protocol [
@@ -89,6 +95,7 @@
       :topic "attention-budget"
       :title "Dynamic Attention Budgeting & Context Amnesia Cascades"
       :status :active
+      :closure "Contradicted by empirical measurement or superseded by architectural zero-loss context caching"
       :scope ["harness/budget" "mem/amnesia"]
       :summary "Monitor accumulated prompt tokens and trigger deterministic compaction at 60% of model attention degradation threshold"
       :protocol [
@@ -105,6 +112,7 @@
       :topic "ground-truth"
       :title "Empirical Ground Truth & Anti-Vacuity Verification"
       :status :active
+      :closure "Contradicted by empirical measurement or superseded by formal verification theorem prover"
       :scope ["asl-gates" "harness/verifier"]
       :summary "Enforce strict falsifiability: tests must have the power to fail on baseline, pass with exit 0, and evaluate non-zero assertions"
       :protocol [
@@ -121,6 +129,7 @@
       :topic "boundary-universalism"
       :title "Boundary Universalism & The Two-Strikes Rule"
       :status :active
+      :closure "Contradicted by empirical measurement or superseded by unified monorepo core standard"
       :scope ["asl-text" "asl-parser" "mem/vfs"]
       :summary "Mandate canonical shared helpers for wire and syntax boundaries while protecting local domain autonomy from premature polymorphic abstraction"
       :protocol [
@@ -137,6 +146,7 @@
       :topic "token-economy"
       :title "Token Efficiency Format & CamelCase Conventions"
       :status :active
+      :closure "Contradicted by empirical measurement or superseded by subword-free native AST encoding"
       :scope ["grammar" "intel"]
       :summary "Apply CamelCase naming for composite constructs (>2 words) and bare capital markers (C1..C5, D1..D54, P1..P10) to reduce BPE token overhead by 25-50%"
       :protocol [
@@ -153,6 +163,7 @@
       :topic "task-context"
       :title "Enriched Task Context Standard & Bidirectional Traceability"
       :status :active
+      :closure "Contradicted by empirical measurement or superseded by autonomous AST intent synthesis"
       :scope ["mem/tasks" "mem/decisions"]
       :summary "Encapsulate full context within task definitions across all tiers to eliminate context evaporation across boundaries"
       :protocol [

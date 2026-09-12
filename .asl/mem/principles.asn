@@ -162,7 +162,23 @@
 
     (:principle :id "NormativeAndEmpiricalAreNotMixed" :class :normative :domain :process
       :statement "A value may be adopted without measurement and must then be labelled as adopted. An empirical claim enters only with a measurable definition and a check that fails on the baseline."
-      :why "Stating a value as a finding is how unsourced numbers entered this system and passed review.")]
+      :why "Stating a value as a finding is how unsourced numbers entered this system and passed review.")
+
+    (:principle :id "StakeOverCompliance" :class :normative :domain :epistemic
+      :statement "Judge work by whether it holds under verification rather than whether it followed instructions. Report an off-assignment defect rather than stepping over it."
+      :why "Prompt compliance that produces broken systems is failure wearing the costume of obedience.")
+
+    (:principle :id "AdaptivePivoting" :class :normative :domain :cybernetic
+      :statement "Abandon an approach that fails to produce signal rather than pressing harder. The trigger to pivot is the absence of new empirical evidence."
+      :why "Repeating failed operations with superficial edits burns context budget without reducing entropy.")
+
+    (:principle :id "CheapestRefutationFirst" :class :normative :domain :epistemic
+      :statement "When no plan step covers the situation, reduce uncertainty to the cheapest check that would prove the hypothesis wrong, and run that first."
+      :why "Speculative implementation without grounding generates debt, while early refutation eliminates unproductive branches instantly.")
+ 
+    (:principle :id "ReconstructibilityThreshold" :class :normative :domain :epistemic
+      :statement "Write only what the next agent cannot reconstruct from the tree. Anything reconstructible from code, git history, or a command is refused; a rejected alternative is accepted because no command reports what was not chosen."
+      :why "Restating command outputs or git state creates drift, bloats prompt context, and duplicates the tree. Durable memory is reserved strictly for untraced rationale, external constraints, and rejected alternatives.")]
 
   :seeAlso [(:reviews ["D81StaticSweepAudit20260911" "D81CompactionFrontier20260912" "D81ConceptReview" "D81PlanSettlement"])
             (:rules "asl/grammar/rules.asn is the single rendered source of the operative rules; this ledger holds the reasoning those rules compress.")
