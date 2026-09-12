@@ -18,3 +18,5 @@
      (:sym "asl-sh/watchdog" :shortcodes ("D0006"))
      (:sym "asl-mem/research" :shortcodes ("D0007"))
      (:sym "asl-mem/research/query-research-memory" :shortcodes ("D0007")))))
+
+(:trace-entry :timestamp 1789238591000 :step 1 :op "where" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)

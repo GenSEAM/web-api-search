@@ -751,5 +751,15 @@
       :fact "task44209-certified-complete"
       :evidence "Implemented audit_reflection and run_cmd_reflect in asl.c; verified task declared :owns and :outcomes extraction, comparison against session trace (.asl/mem/trace.asn), detection of out-of-owns mutations, foreign changes, unfulfilled outcomes, and stale receipts; documented in print_usage; passed tests/acceptance/d81/Task44209.asl under SuperviseGate.sh with 15 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44209 100% verified and certified; reflection gap report active via CLI")
+    (:note
+      :id "n65"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/tools/asl.c" "asl/grammar/capabilities.asn" "asl/grammar/capabilities.lock" "asl/grammar/rpc.asn" "tests/acceptance/d81/Task44210.asl" ".asl/mem/tasks/Phase442AgentReliabilityUtilities.asn"]
+      :tags [:supervision :phase442 :task44210 :capabilities-registry :doctor-lock :where-slice :gate7-drift :approved]
+      :fact "task44210-certified-complete"
+      :evidence "Implemented write_capabilities_lock, audit_capabilities_lock, check_capabilities_staleness, and op_where in asl.c; declared asl-where in rpc.asn; verified asl doctor writes capabilities.lock with measured status; verified (:where) provides targeted capability slice by step kind and tier; verified Gate 7 audits lock freshness and catches declared-vs-measured contradictions; passed tests/acceptance/d81/Task44210.asl under SuperviseGate.sh with 13 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44210 100% verified and certified; measured capability registry and Gate 7 drift prevention active; Phase 442 fully completed")
   ]
 )

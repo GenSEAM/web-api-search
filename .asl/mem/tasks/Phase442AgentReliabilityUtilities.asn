@@ -365,11 +365,11 @@
       :title "Measured capability registry: doctor writes the status, (:where) delivers the slice, drift is gated"
       :kind :protocol
       :lane "observability"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789141198808
-      :updatedAt 1789141198808
+      :updatedAt 1789405000000
       :motivation "An agent that does not know which of its tools work will use a broken one and build on its answer; measured 2026-09-11, 22 of 36 declared capabilities are absent or actively misleading while the skill tables presented them as available. Hand-written status is the same drift that put 62 references to eight nonexistent subcommands into the skills, so status must be produced by measurement, not by an author."
       :purpose "asl/grammar/capabilities.asn declares each capability keyed by situation with :use, :fallback, :task and :tier but never a hand-written truth claim; asl doctor measures every one against a known-answer fixture and writes asl/grammar/capabilities.lock; the renderer joins declaration and measurement into the skill tool tables and the client payloads; (:where) returns only the capability slice for the current step kind and tier; gate 7 fails when a declared status contradicts the lock or when the lock is older than the engine binary."
       :context (:contractRef D81PlanContext)
@@ -390,11 +390,11 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44210.asl"]
       :verificationCases ["A capability whose declared status differs from the measured lock fails gate 7 and names both values." "A lock older than the engine binary fails as stale rather than being trusted." "(:where) during a change step returns the change and verify capabilities and omits the others; the slice is strictly smaller than the registry." "Every capability with status absent or lies carries a non-empty fallback; a missing fallback fails the gate."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44210" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44210" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44210" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44210" :assertCount 13 :at 1789405000000)]
+      :reviewStatus :approved
       :actionDag ["Verifier freezes known-answer fixtures for each capability." "Strip hand-written status from the registry into the doctor lock." "Extend the renderer to join declaration and measurement into skill tables and payloads." "Add the slice to (:where)." "Gate 7 divergence and staleness check." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
   ])
