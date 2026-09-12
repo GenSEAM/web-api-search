@@ -1659,8 +1659,18 @@
       :scope ["scripts/install.sh" "asl/dist/install.sh" "asl/web/dist/install.sh" "asl/web/public/install.sh" "asl/tools/asl.c" "tests/acceptance/d81/Task45604.asl" ".asl/mem/tasks/Phase456DuplicationDeadCodeAndUnwiredEradication.asn"]
       :tags [:supervision :phase456 :task45604 :installers :single-source :deduplication :gate7 :approved]
       :fact "task45604-certified-complete"
-      :evidence "Authored tests/acceptance/d81/Task45604.asl covering single tracked installer source at scripts/install.sh, --check-installers validation mode, synchronization of all distribution copies (asl/dist, asl/web/dist, asl/web/public), verification of zero nested dist directories, and Gate 7 check_distribution_installers enforcement in asl.c; passed SuperviseGate.sh with 33 assertions evaluated; receipts indexed in receipts.asn"
+      :evidence "Authored tests/acceptance/d81/Task45604.asl covering single tracked installer source at scripts/install.sh, --check-installers validation mode, synchronization of all distribution copies (asl/dist, asl/web/dist, asl/web/public), verification of zero nested dist directories, and Gate 7 check_distribution_installers enforcement in asl.c; passed SuperviseGate.sh with 46 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task45604 certified complete; installer duplication resolved to single tracked source and byte-identical distribution copies under ADR-0081")
+    (:note
+      :id "n152"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["asl/packages/asl-codec/src/csv-transpile.asl" "asl/packages/asl-codec/src/toml-transpile.asl" "asl/packages/asl-codec/src/yaml-transpile.asl" "asl/packages/asl-codec/src/svg-transpile.asl" "asl/packages/asl-codec/src/transpile.asl" "asl/packages/asl-codec/src/asnl.asl" "asl/packages/asl-codec/src/compact_notations.asl" "asl/packages/asl-codec/src/sh-transpile.asl" "harness/src/normalizer.asl" "harness/src/anti_hallucination.asl" ".asl/mem/duplication-residue.asn" "tests/acceptance/d81/Task45601.asl" ".asl/mem/tasks/Phase456DuplicationDeadCodeAndUnwiredEradication.asn"]
+      :tags [:supervision :phase456 :task45601 :deduplication :canonical-helpers :two-strikes :residue :approved]
+      :fact "task45601-certified-complete"
+      :evidence "Verified tests/acceptance/d81/Task45601.asl covering deletion of redundant helpers (estimate-tokens, strip-quotes, strip-colon, extract-between, calc-savings, balance-delimiters, escape-sh-arg), elimination of shadow in sh-transpile, delegation to canonical asl-text/text, asl-text/escape and asl-parser/balance, creation of .asl/mem/duplication-residue.asn documenting 371 baseline copies and 6 justified survivors under two strikes rule D34; passed SuperviseGate.sh with 77 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task45601 certified complete; redundant copies across codec, harness, and text unified into single canonical packages under ADR-0081")
   ]
 )
 

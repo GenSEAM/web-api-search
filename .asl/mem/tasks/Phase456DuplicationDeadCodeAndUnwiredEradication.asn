@@ -14,11 +14,11 @@
       :title "Delete the 371 redundant copies now that importing works"
       :kind :remediation
       :lane "duplication"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789157400000
-      :updatedAt 1789157400000
+      :updatedAt 1789440300000
       :motivation "Phase452 was certified complete for exactly this work and no duplicate was removed: canonical copies were added beside the originals, so the measured effect was more duplication, not less. The reason the campaign failed is upstream. A module that cannot import cannot delegate, so every consumer had to carry its own copy, and instructing authors to import from asl-text while the binder silently drops unresolved imports produced files that declare the import, document the canonical use and still define the helper locally. Removal is safe only after Phase454."
       :purpose "Each duplicated name has one definition in the package D34 assigns it to, every other definition is deleted, and each consumer binds through a declared import that resolves. The count of redundant copies is recorded before and after."
       :context (:contractRef D81PlanContext)
@@ -39,13 +39,17 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task45601.asl"]
       :verificationCases ["Adding a second definition of a centralised name fails the check." "A file that both imports a module and redefines one of its exports fails." "A survivor without a recorded justification fails, so the residue cannot grow quietly."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45601" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45601" :status :passed :contract D81Baseline)
+      :historicalReceipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45601" :status :passed :exitCode 0 :assertionsEvaluated 77 :timestamp 1789440300000)
+      ]
+      :reviewStatus :approved
       :actionDag ["Assign each duplicated name an owning package." "Delete duplicates and bind through imports." "Record and justify the residue." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45601" :status :passed :exitCode 0 :assertionsEvaluated 77 :timestamp 1789440300000)
+      ])
     (:task
       :id "Task45602"
       :parentId ""
