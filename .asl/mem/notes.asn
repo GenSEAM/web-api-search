@@ -1051,5 +1051,15 @@
       :fact "task44803-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44803.asl verifying removal of generic gradients, purple/indigo utilities, and transition-all across owned views and components, addition of aria-hidden on decorative SVG, single signal accent, and capability state provenance; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 50 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44803 100% verified and certified; generic gradient surfaces replaced with calm technical hierarchy under ADR-0082")
+    (:note
+      :id "n91"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/web/src/components/Navbar.asl" "asl/web/src/components/SearchModal.asl" "asl/web/src/components/ThemeToggle.asl" "asl/web/index.html" "asl/web/src/views/HomeView.asl" "asl/web/src/index.css" "tests/acceptance/d81/Task44804.asl" ".asl/mem/tasks/Phase448InstrumentedEditorialWebDesign.asn"]
+      :tags [:supervision :phase448 :task44804 :accessibility :responsive-nav :skip-link :aria-live :reduced-motion :approved]
+      :fact "task44804-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44804.asl verifying Navbar landmarks, labels, max-w-shell, index.html skip link, HomeView main-content id, SearchModal aria-live polite region and Escape dismissal, and index.css focus-visible / prefers-reduced-motion; proved baseline failure and assertion inversion; passed under SuperviseGate.sh with 29 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task44804 100% verified and certified; navigation, controls and motion made responsive and accessible under ADR-0082")
   ]
 )

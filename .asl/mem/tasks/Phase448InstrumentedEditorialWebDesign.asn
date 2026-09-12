@@ -168,9 +168,11 @@
       :title "Make navigation, controls and motion responsive and accessible"
       :kind :accessibility
       :lane "interaction"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
+      :createdAt 1789171200000
+      :updatedAt 1789419400000
       :motivation "The fixed navbar hides labels at several widths, interactive strings contain inline handlers, and the current surface contract does not specify focus, active, reduced-motion or loading behavior per component."
       :purpose "Define keyboard-visible focus, active/pressed states, touch targets, semantic landmarks, skip link, aria-live feedback, safe-area spacing, explicit transitions and reduced-motion behavior across the shared shell and controls."
       :context (:contractRef D81PlanContext)
@@ -191,13 +193,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44804.asl"]
       :verificationCases ["A keyboard-only traversal reaches every nav action and tab; focus remains visible at 320px; reduced-motion disables nonessential animation; a search result announcement uses aria-live." "No touched selector uses transition-all or outline-none without a replacement."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44804" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44804" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44804" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44804" :assertCount 29 :at 1789419400000)]
+      :reviewStatus :approved
       :actionDag ["Verifier freezes keyboard and reduced-motion cases." "Update semantics and control states." "Run keyboard, focus and motion checks." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task44805"
       :parentId ""
