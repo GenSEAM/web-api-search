@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase467ToolReliabilityAndScenarioCoverage"
   :createdAt 1789291000000
-  :status "planned"
+  :status "done"
   :priorityOrder 3
   :summary "Tool Reliability and Scenario Coverage: an inventory an agent can see, a scenario matrix per tool, a stated engine and process model, and the search and dependency surfaces measured rather than assumed."
   :phase "Phase467ToolReliabilityAndScenarioCoverage"
@@ -10,7 +10,7 @@
     (:task
       :id "Task46701" :parentId "" :phase "phase-467"
       :title "An inventory the agent can see, with measured status per tool"
-      :kind :tooling :state :planned :lane "inventory" :priority :critical :ownerRole "implementer"
+      :kind :tooling :state :done :lane "inventory" :priority :critical :ownerRole "implementer"
       :createdAt 1789291000000 :updatedAt 1789291000000
       :motivation "An agent cannot choose well among tools it cannot enumerate. Today the enumeration is spread across a rule that lists rpc ops with warnings, a capability registry whose 36 statuses are hand written, and two instruction files naming eleven commands that do not exist. The working :callers and :impact are named in no surface at all, so the one capability that answers how everything connects is the one nobody is told about."
       :purpose "One inventory lists every tool and operation with what it does, what it returns, its measured status and its named fallback, generated from the probe results rather than written by hand, and rendered into the agent surface at the tier where affordances belong."
@@ -33,7 +33,7 @@
     (:task
       :id "Task46702" :parentId "" :phase "phase-467"
       :title "A scenario matrix per tool, not a happy path per tool"
-      :kind :verification :state :planned :lane "coverage" :priority :critical :ownerRole "verifier"
+      :kind :verification :state :done :lane "coverage" :priority :critical :ownerRole "verifier"
       :createdAt 1789291000000 :updatedAt 1789291000000
       :motivation "The defect that let :grep answer a different question for months is exactly the defect a happy path test cannot find, because :grep returns a plausible list. Tools fail on the edges: an empty file, a file that is not there, a path that escapes the root, a name with a space or a non Latin character, a symlink, a file too large to hold, a binary, a concurrent writer, a path at the length limit. None of these has a case anywhere."
       :purpose "Every tool carries a matrix of scenarios rather than an example: absent, empty, large, binary, unicode, symlinked, permission denied, concurrently modified, path traversal, and the normal case last. Each scenario asserts on the result and on the failure mode, so a tool that degrades silently under one of them is caught by the scenario that produces it."
@@ -56,7 +56,7 @@
     (:task
       :id "Task46703" :parentId "" :phase "phase-467"
       :title "Content search and process handling become first class and measured"
-      :kind :engine :state :planned :lane "coverage" :priority :critical :ownerRole "implementer"
+      :kind :engine :state :done :lane "coverage" :priority :critical :ownerRole "implementer"
       :createdAt 1789291000000 :updatedAt 1789291000000
       :motivation "Content search is the operation an agent reaches for most and it is the one that lies. Process handling has no declared surface at all, so anything long running is spawned without a stated model for its lifetime, its output or its failure. Both are the places where an agent burns a turn and learns nothing."
       :purpose "Content search returns matches with path, line and the matched span, bounded and continuable, and fails explicitly rather than degrading into a filename search. Process handling declares how a process is started, how its output is bounded, how it is ended and what happens when it outlives the session. Both are probed by the scenario matrix."
@@ -79,7 +79,7 @@
     (:task
       :id "Task46704" :parentId "" :phase "phase-467"
       :title "How everything connects, as a queryable surface"
-      :kind :tooling :state :planned :lane "graph" :priority :high :ownerRole "implementer"
+      :kind :tooling :state :done :lane "graph" :priority :high :ownerRole "implementer"
       :createdAt 1789291000000 :updatedAt 1789291000000
       :motivation "The capability an agent most needs for an unfamiliar codebase is what depends on what, and it already exists: :callers and :impact returned 29 and 30 results for a real symbol. It is named in no instruction surface, has no CLI, and is not connected to the module index the resolver work is building, so the same graph is about to be computed twice and disagree."
       :purpose "One graph answers definition, callers, dependents and blast radius, built from the same module index the evaluator binds against, so the analyser and the runtime cannot diverge. It is bounded and continuable, it names the base language of each node, and it is discoverable from the inventory."
@@ -102,7 +102,7 @@
     (:task
       :id "Task46705" :parentId "" :phase "phase-467"
       :title "Where the engine runs, and what that costs the tooling"
-      :kind :architecture :state :planned :lane "engine" :priority :high :ownerRole "planner"
+      :kind :architecture :state :done :lane "engine" :priority :high :ownerRole "planner"
       :createdAt 1789291000000 :updatedAt 1789291000000
       :motivation "The tooling behaves differently depending on where the engine is, and where it is has never been written down. Module resolution currently depends on the process working directory, so the same command answers differently from two directories. The engine is macOS only, and the relay work assumes a browser runtime that cannot exist while the language and the engine are one artefact."
       :purpose "The engine model is stated: what a session is, where the root is determined from, whether state persists between invocations, and what the tooling may assume. Anything that varies with the working directory either stops varying or declares that it does. The model is the same document the host interface work is built against, so one answer serves both."
@@ -125,7 +125,7 @@
     (:task
       :id "Task46706" :parentId "" :phase "phase-467"
       :title "ASL first, other base languages by the same matrix"
-      :kind :tooling :state :planned :lane "coverage" :priority :moderate :ownerRole "implementer"
+      :kind :tooling :state :done :lane "coverage" :priority :moderate :ownerRole "implementer"
       :createdAt 1789291000000 :updatedAt 1789291000000
       :motivation "The tools are used against whatever the repository holds, and a tool correct on ASL and wrong on another language fails silently in exactly the way :grep did. Coverage stated for one language and assumed for the rest is how that happens."
       :purpose "Each tool declares the base languages it supports, and the scenario matrix runs per declared language. A language not declared is refused rather than attempted, so the failure is a refusal and not a wrong answer."

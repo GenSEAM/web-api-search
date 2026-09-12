@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase438LanguageOptimizationAndPortableCore"
   :createdAt 1789084800000
-  :status "planned"
+  :status "done"
   :priorityOrder 3
   :summary "Language Optimization and Portable Core: C evaluator without JavaScriptCore, wasm32-wasi build, content search, sequenced batches, VFS ported from ASL design, corrected published figures, corpus consolidation."
   :phase "Phase438LanguageOptimizationAndPortableCore"
@@ -139,7 +139,7 @@
       :title "Implement truthful portable content search"
       :kind :protocol
       :lane "rpc"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789084800000
@@ -179,7 +179,7 @@
       :title "Implement transactional batches with isolated staging"
       :kind :protocol
       :lane "rpc"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789084800000
@@ -337,7 +337,7 @@
       :title "Workspace boundary policy: canonical paths, lineage and scratch roots, no prefix collision"
       :kind :protocol
       :lane "rpc"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789137957483

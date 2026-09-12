@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase437ClientLaunchAndCodexEfficiency"
   :createdAt 1789084800000
-  :status "planned"
+  :status "done"
   :priorityOrder 2
   :summary "Client Launch and Codex Efficiency: complete MCP removal, per-client minimal launch payloads for Claude Code and Antigravity, deduplicated cache-stable governance, zero references to absent commands."
   :phase "Phase437ClientLaunchAndCodexEfficiency"
@@ -19,7 +19,7 @@
       :title "Settle the CLI integration boundary and retire unused MCP projections"
       :kind :removal
       :lane "tooling"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789084800000
@@ -59,7 +59,7 @@
       :title "Render a minimal stable Claude launch projection"
       :kind :tooling
       :lane "launch"
-      :state :needsRevalidation
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789084800000
@@ -99,7 +99,7 @@
       :title "Render truthful Codex and Antigravity client projections"
       :kind :tooling
       :lane "launch"
-      :state :needsRevalidation
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789084800000
@@ -139,7 +139,7 @@
       :title "Deduplicate effective injection with one home per block"
       :kind :tooling
       :lane "governance"
-      :state :needsRevalidation
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789084800000
@@ -179,7 +179,7 @@
       :title "Validate capability references and future-operation fallbacks"
       :kind :docs
       :lane "governance"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789084800000
@@ -219,7 +219,7 @@
       :title "Settle contradictory directives without performance mythology"
       :kind :governance
       :lane "governance"
-      :state :needsRevalidation
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789084800000
@@ -258,7 +258,7 @@
       :title "Settle all reviewed rules in one canonical generated source"
       :kind :governance
       :lane "governance"
-      :state :needsRevalidation
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789130666357

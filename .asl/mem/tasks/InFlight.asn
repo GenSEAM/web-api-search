@@ -1,5 +1,8 @@
-(:inFlightBuffer
-  :version 1
-  :lane "core"
-  :updatedAt 1789142000000
-  :activeTasks [])
+(:in-flight
+  :session-id ""
+  :lane ""
+  :activePhase ""
+  :activeTasks []
+  :dispatchedAt 0
+  :status "idle"
+)

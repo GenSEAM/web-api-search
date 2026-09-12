@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase447CanonicalLexiconCrossClient"
   :createdAt 1789142884943
-  :status "planned"
+  :status "done"
   :priorityOrder 11
   :summary "Canonical Lexicon Cross-Client: one spoken-to-canonical source rendered to every client and both translators, the mishearing retired from artifact names, and a checker so it cannot return."
   :phase "Phase447CanonicalLexiconCrossClient"

@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase466ParadigmByForceAndTier"
   :createdAt 1789290000000
-  :status "planned"
+  :status "completed"
   :priorityOrder 2
   :summary "Paradigm by Force and Tier: separate what binds from what orients from what merely usually works, give each its own word, and load by tier so a small agent gets the core and a specialist gets its pack."
   :phase "Phase466ParadigmByForceAndTier"
@@ -13,7 +13,7 @@
       :phase "phase-466"
       :title "Four forces, four words: invariant, orientation, affordance, heuristic"
       :kind :protocol
-      :state :planned
+      :state :completed
       :lane "paradigm"
       :priority :critical
       :ownerRole "planner"
@@ -44,15 +44,15 @@
       :historicalReceipts []
       :reviewStatus :requiresIndependentPlanReview
       :actionDag ["Assign a force to every item." "Require the defeat condition and the gate." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts ["rc-phase46601-verified-20260912"])
     (:task
       :id "Task46602"
       :parentId ""
       :phase "phase-466"
       :title "Tiers that a context budget can actually spend"
       :kind :protocol
-      :state :planned
+      :state :completed
       :lane "paradigm"
       :priority :critical
       :ownerRole "implementer"
@@ -83,15 +83,15 @@
       :historicalReceipts []
       :reviewStatus :requiresIndependentPlanReview
       :actionDag ["Define the six tiers by loss." "Render each from the source." "Require prefix containment." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts ["rc-phase46602-verified-20260912"])
     (:task
       :id "Task46603"
       :parentId ""
       :phase "phase-466"
       :title "The orientations that are missing: stake, adaptive thinking, problem solving"
       :kind :protocol
-      :state :planned
+      :state :completed
       :lane "paradigm"
       :priority :high
       :ownerRole "planner"
@@ -122,15 +122,15 @@
       :historicalReceipts []
       :reviewStatus :requiresIndependentPlanReview
       :actionDag ["Draft the three." "Classify and size them." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts ["rc-phase46603-verified-20260912"])
     (:task
       :id "Task46604"
       :parentId ""
       :phase "phase-466"
       :title "Domain packs: design, development, research, audit, loaded by situation"
       :kind :protocol
-      :state :planned
+      :state :completed
       :lane "paradigm"
       :priority :high
       :ownerRole "planner"
@@ -161,15 +161,15 @@
       :historicalReceipts []
       :reviewStatus :requiresIndependentPlanReview
       :actionDag ["Partition the prose into packs." "Remove what is shared into orientation." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts ["rc-phase46604-verified-20260912"])
     (:task
       :id "Task46605"
       :parentId ""
       :phase "phase-466"
       :title "Measure whether a tier helps or only costs less"
       :kind :verification
-      :state :planned
+      :state :completed
       :lane "paradigm"
       :priority :critical
       :ownerRole "verifier"
@@ -200,6 +200,6 @@
       :historicalReceipts []
       :reviewStatus :requiresIndependentPlanReview
       :actionDag ["Run each tier on the fixed set." "Record outcomes per model." "Derive the assignment." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])]
+      :stepIndex 1
+      :receipts ["rc-phase46605-verified-20260912"])]
   :notes "The organising idea is to sort by force rather than by topic. Sorting by force is what makes the set stop feeling restrictive, because a heuristic that names its own defeat condition is an instrument, and it is also what makes tiering possible, because only then is it decidable what may be dropped.")

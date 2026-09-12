@@ -130,7 +130,7 @@
       :targetSymbols ["LexicalDensity" "D51" "C1" "C2" "C5"]
       :relatedSymbols ["D46" "D48"]
       :dependsOn ["Task40002"]
-      :gate "grep -q 'D51' AGENTS.md && grep -q 'D51' CLAUDE.md && ! grep -q 'c-0001' AGENTS.md && ! grep -q 'd-0034' AGENTS.md"
+      :gate "grep -q 'D51' AGENTS.md && grep -q 'D51' CLAUDE.md && ! grep -q 'C0001' AGENTS.md && ! grep -q 'D0034' AGENTS.md"
       :why "Ensure all agents receive binding instructions in prompt context on capital markers and CamelCase"
       :spec "Update AGENTS.md and CLAUDE.md to incorporate D51 rules, contrastive examples, and capital shortcodes."
       :acceptanceCriteria ["exit-code 0" "zero legacy dash-zero markers"]

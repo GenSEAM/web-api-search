@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase465AgentWorkingMemorySurface"
   :createdAt 1789280000000
-  :status "planned"
+  :status "done"
   :priorityOrder 2
   :summary "Agent Working Memory Surface: give the memory engine that already exists a command surface, a file worklist, a scope lifecycle, an instruction that an agent keeps notes, and a measurement of whether any of it helps."
   :phase "Phase465AgentWorkingMemorySurface"
@@ -13,7 +13,7 @@
       :phase "phase-465"
       :title "A command surface over the memory that already works"
       :kind :tooling
-      :state :planned
+      :state :done
       :lane "surface"
       :priority :critical
       :ownerRole "implementer"
@@ -52,7 +52,7 @@
       :phase "phase-465"
       :title "A file worklist with a per entry mark, walked by cursor"
       :kind :language
-      :state :planned
+      :state :done
       :lane "worklist"
       :priority :critical
       :ownerRole "implementer"
@@ -91,7 +91,7 @@
       :phase "phase-465"
       :title "Scope means something: step, task, epic, and what retires a note"
       :kind :protocol
-      :state :planned
+      :state :done
       :lane "scope"
       :priority :high
       :ownerRole "implementer"
@@ -130,7 +130,7 @@
       :phase "phase-465"
       :title "Tell the agent the memory exists, and why rather than when"
       :kind :protocol
-      :state :planned
+      :state :done
       :lane "surface"
       :priority :critical
       :ownerRole "implementer"
@@ -169,7 +169,7 @@
       :phase "phase-465"
       :title "Repair the facade and the checkpoint suite the engine rests on"
       :kind :remediation
-      :state :planned
+      :state :done
       :lane "surface"
       :priority :high
       :ownerRole "implementer"
@@ -208,7 +208,7 @@
       :phase "phase-465"
       :title "Measure whether keeping notes actually helps"
       :kind :verification
-      :state :planned
+      :state :done
       :lane "effect"
       :priority :critical
       :ownerRole "verifier"

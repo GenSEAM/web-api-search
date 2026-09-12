@@ -530,5 +530,39 @@
       ]
       :owns []
 :gate "asl test --strict-falsify agent/tests/processing_router_test.asl")
+      (:task
+      :id "TBacklog03"
+      :title "LM Gateway Universal Local & In-Browser Models, ASN Tool-Calling Transpiler & Proxy Optimization"
+      :lane "gateway"
+      :state :completed
+      :priority :high
+      :trigger :onDemand
+      :queuePosition 3
+      :effort :m
+      :risk :low
+      :createdAt 1789396000000
+      :queuedAt 1789396000000
+      :why "Use LM Gateway for local models (Ollama, llama.cpp, vLLM, MLX) AND on-device in-browser inference (WebGPU, Wasm, Chrome Prompt API), bidirectional ASN<->JSON tool-calling transpilation, and live proxy token compression and telemetry"
+      :motivation "Bridge local execution, in-browser on-device inference, and cloud LLMs through a unified cognitive proxy that normalizes JSON tool-calling into pure ASN S-expressions and compresses payload tokens to satisfy strict browser tab ceilings"
+      :purpose "LM Gateway Local & In-Browser Models, ASN Tool Calling Converter & L7 Compression Proxy"
+      :context "Formalized gateway proxying local and in-browser models, converting JSON tool calls to ASN"
+      :outcomes [
+        "Local model routing via Ollama/llama.cpp/vLLM auto-discovery"
+        "In-browser WebGPU/Wasm client-side gateway mode with zero-backend airgap"
+        "Bidirectional ASN <-> tool-calling adapter certified"
+        "Client-side ASN <-> DOM/JSON tool calling adapter under 118-token schema ceiling"
+        "Static CLI format converter (asl-gateway convert)"
+        "Live token counting and compression proxy active"
+      ]
+      :invariants ["c1" "c2" "c3" "c4" "c5" "d34" "d46" "d51" "d52"]
+      :variations ["On-demand proxy invocation"]
+      :failureModes ["Upstream unconfigured or invalid JSON payload"]
+      :actionDag [
+        "Verify local model routing and endpoints"
+        "Test bidirectional JSON to ASN tool calling"
+        "Verify static conversion command"
+      ]
+      :owns ["bin/asl-gateway" "asl-gateway/src/wire.asl"]
+      :gate "bin/asl-gateway convert 2>&1 | grep -q 'Usage: asl-gateway convert'")
   ]
 )

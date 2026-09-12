@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase456DuplicationDeadCodeAndUnwiredEradication"
   :createdAt 1789157400000
-  :status "planned"
+  :status "done"
   :priorityOrder 4
   :summary "Duplication, Dead Code and Unwired Eradication: remove the 371 redundant copies that the broken binder forced into existence, retire the dead and the stubbed, and give every unreachable module a recorded verdict."
   :phase "Phase456DuplicationDeadCodeAndUnwiredEradication"

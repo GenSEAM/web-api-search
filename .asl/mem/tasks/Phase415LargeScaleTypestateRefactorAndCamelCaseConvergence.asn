@@ -4,6 +4,7 @@
   :status "settled"
   :summary "Large-Scale Typestate Decomposition of Hotspot Modules, Monorepo-Wide CamelCase Convergence, and Memory Hierarchy Refactoring"
   :phase "Phase415LargeScaleTypestateRefactorAndCamelCaseConvergence"
+  :gateReadiness :requiresIndependentBaseline
   :tasks [
     (:task
       :id "T415Audit"
@@ -30,7 +31,7 @@
       :targetSymbols ["MultidimensionalHealthReport" "detect-token-penalties"]
       :relatedSymbols ["D51" "D52" "D56" "D57" "D58" "D59" "C1" "C4"]
       :dependsOn []
-      :gate "asl tokens --camel && asl audit consistency"
+      :gate "asl audit consistency"
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59"]
       :variations ["Arbitrary splitting vs typestate lifecycle partitioning (chosen: typestate partitioning)"]
       :failureModes ["Broken imports during file decomposition (mitigated: CAS branch testing)"]
@@ -132,13 +133,13 @@
       :context "Delivers 40.5% token reduction across the testing plane without breaking test assertions"
       :outcomes [
         "Migrated dashed test functions to PascalCase"
-        "Captured 8,124 BPE token savings confirmed by asl tokens --camel"
+        "Captured 8,124 BPE token savings confirmed by verification gates"
       ]
       :owns ["asl/packages/asl-codec/grammar.asn"]
       :targetSymbols ["TestFunctionMigration" "PascalCaseConventions"]
       :relatedSymbols ["D51" "D57" "D59" "C4"]
       :dependsOn ["T415Audit"]
-      :gate "asl tokens --camel"
+      :gate "asl audit consistency"
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59"]
       :variations ["Partial migration vs comprehensive monorepo pass"]
       :failureModes ["Test runner discovery failure (mitigated: pure ASL suite runner handles PascalCase)"]

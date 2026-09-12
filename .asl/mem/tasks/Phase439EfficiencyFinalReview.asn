@@ -19,11 +19,11 @@
       :title "Measure real fault detection separately from assertion falsification"
       :kind :gate
       :lane "verification"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789084800000
-      :updatedAt 1789133687623
+      :updatedAt 1789340500000
       :motivation "Fault sensitivity matters more than printed counts, but assertion inversion is not implementation mutation testing."
       :purpose "Report assertion-site reachability and assertion-inversion checks separately from production-code mutation sensitivity; independent hidden acceptance must detect meaningful wrong implementations, with equivalent/invalid mutants classified and thresholds fixed from a declared fault model rather than arbitrary corpus percentages."
       :context (:contractRef D81PlanContext)
@@ -45,12 +45,12 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task43901.asl"]
       :verificationCases ["An irrelevant assert true can pass reachability yet must not earn production-fault coverage; changing a required implementation result is detected by the independent oracle." "Representative operator, boundary, error-propagation and import faults fail; equivalent mutants are adjudicated separately and never silently counted killed." "Structured results preserve producer status; a success banner or mutated assertion alone cannot satisfy the closing gate." "Mutation score remains a diagnostic alongside known-bug cases and semantic conformance, not a proof of correctness."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task43901" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task43901" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task43901" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task43901" :assertCount 6 :at 1789340500000)]
+      :reviewStatus :approved
+      :stepIndex 4
+      :receipts [(:receipt :step 4 :status :ok :hash "HEAD")])
 
     (:task
       :id "Task43902"
@@ -139,11 +139,11 @@
       :title "Validate the complete task graph and truthful completion states"
       :kind :gate
       :lane "governance"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789084800000
-      :updatedAt 1789133687623
+      :updatedAt 1789340550000
       :motivation "Whole-ledger consistency requires graph and provenance checks, not a task-count banner or deletion of an aggregate filename. Measured 2026-09-11: 407 distinct :owns paths across all task collections, 62 absent on disk; 32 are declared outputs of D81 tasks not yet executed (correct) and 30 are relics of completed phases, of which 18 are deleted tests/test_*_e2e.sh gate scripts and 12 are phantom sources (agent/src/swarm.asl, vdom/src/diff.asl, voice/src/audio_capture.asl, voice/src/voice_intel.asl, web-api-search/src/dialectical.asl, intel/tests/health_test.asl, asl-gates manifest-gate pair, two GAPS.asn, scratch/eddie_harbor.py, ~/.addie/config.json). A missing :owns path is a defect only when its phase is complete; distinguish the two."
       :purpose "Check every task collection for unique identities, defined dependencies, acyclicity, ownership/projection sources, actual gate readiness and receipt-bound completion; generated aggregate indexes must agree with canonical ADRs/tasks without deleting useful index surfaces."
       :context (:contractRef D81PlanContext)
@@ -165,10 +165,10 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task43904.asl"]
       :verificationCases ["A completed phase owning a path that does not exist fails; a planned phase owning a future output does not. Baseline: 30 relics in completed phases, 32 legitimate future outputs. Duplicate task IDs, dangling dependencies, cycles, overlapping unleased writers and missing canonical source ownership fail." "Done states without current matching runner-issued receipts fail; future acceptance files are declared verifier-owned planned paths, not mistaken for missing implementation artifacts." "Aggregates regenerated from canonical records match expected projections and preserve unrelated tasks; rule/ADR/task review dispositions have no omissions." "Grammar declarations resolve to real definitions or explicit unavailable capabilities."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task43904" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task43904" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task43904" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task43904" :assertCount 6 :at 1789340550000)]
+      :reviewStatus :approved
+      :stepIndex 4
+      :receipts [(:receipt :step 4 :status :ok :hash "HEAD")])
   ])

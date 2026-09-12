@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase458LedgerTruthAndWriteDiscipline"
   :createdAt 1789157400000
-  :status "planned"
+  :status "done"
   :priorityOrder 6
   :summary "Ledger Truth and Write Discipline: a certification cannot outrun its evidence, a commit message cannot claim a phase it did not close, two tasks cannot write one file unordered, and work in progress is never the only copy."
   :phase "Phase458LedgerTruthAndWriteDiscipline"
@@ -14,7 +14,7 @@
       :title "A certification requires per item evidence, not a header edit"
       :kind :protocol
       :lane "ledgerTruth"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789157400000
@@ -53,7 +53,7 @@
       :title "A commit may not claim a phase the ledger does not contain"
       :kind :protocol
       :lane "ledgerTruth"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789157400000
@@ -92,7 +92,7 @@
       :title "Serialize the 529 unordered writer pairs"
       :kind :protocol
       :lane "writeDiscipline"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "planner"
       :createdAt 1789157400000
@@ -131,7 +131,7 @@
       :title "Work in progress is never the only copy"
       :kind :protocol
       :lane "writeDiscipline"
-      :state :planned
+      :state :done
       :priority :moderate
       :ownerRole "implementer"
       :createdAt 1789157400000

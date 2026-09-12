@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase455VerificationLayerHonesty"
   :createdAt 1789157400000
-  :status "planned"
+  :status "done"
   :priorityOrder 3
   :summary "Verification Layer Honesty: no command reports a result it did not compute, no flag is inert, no invocation succeeds without executing, and every gate is itself proved able to fail."
   :phase "Phase455VerificationLayerHonesty"
@@ -14,7 +14,7 @@
       :title "asl test with no path executes or fails, never returns a silent zero"
       :kind :engine
       :lane "honesty"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789157400000
@@ -53,7 +53,7 @@
       :title "No inert flags: strict-falsify either changes behaviour or is removed"
       :kind :engine
       :lane "honesty"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789157400000
@@ -92,7 +92,7 @@
       :title "Gate 5 reports assertions that ran, not occurrences of the word"
       :kind :engine
       :lane "honesty"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789157400000
@@ -131,7 +131,7 @@
       :title "No output may state a result the program did not compute"
       :kind :engine
       :lane "honesty"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789157400000
@@ -170,7 +170,7 @@
       :title "asl check rejects unescaped quotes inside ASN strings and stops printing twice"
       :kind :engine
       :lane "honesty"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789157400000
@@ -209,7 +209,7 @@
       :title "Every gate is proved able to fail, by seeding the defect it claims to catch"
       :kind :verification
       :lane "honesty"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "verifier"
       :createdAt 1789157400000

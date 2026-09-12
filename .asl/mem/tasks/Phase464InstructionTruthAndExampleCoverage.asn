@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase464InstructionTruthAndExampleCoverage"
   :createdAt 1789270000000
-  :status "planned"
+  :status "done"
   :priorityOrder 1
   :summary "Instruction Truth and Example Coverage: every command an instruction names must exist, every operation must answer the question asked or fail, every dated claim must carry its recheck, and every task must carry the fixture its own gate requires."
   :phase "Phase464InstructionTruthAndExampleCoverage"
@@ -13,7 +13,7 @@
       :phase "phase-464"
       :title "An instruction surface names only commands that exist"
       :kind :protocol
-      :state :planned
+      :state :done
       :lane "instructionTruth"
       :priority :critical
       :ownerRole "implementer"
@@ -52,7 +52,7 @@
       :phase "phase-464"
       :title "An operation answers the question asked or fails"
       :kind :engine
-      :state :planned
+      :state :done
       :lane "instructionTruth"
       :priority :critical
       :ownerRole "implementer"
@@ -91,7 +91,7 @@
       :phase "phase-464"
       :title "asl doctor exists and writes the capability statuses it is said to write"
       :kind :tooling
-      :state :planned
+      :state :done
       :lane "instructionTruth"
       :priority :critical
       :ownerRole "implementer"
@@ -130,7 +130,7 @@
       :phase "phase-464"
       :title "A dated claim carries the command that rechecks it"
       :kind :protocol
-      :state :planned
+      :state :done
       :lane "instructionTruth"
       :priority :high
       :ownerRole "implementer"
@@ -169,7 +169,7 @@
       :phase "phase-464"
       :title "Every task carries the fixture its own gate requires"
       :kind :verification
-      :state :planned
+      :state :done
       :lane "examples"
       :priority :critical
       :ownerRole "verifier"
@@ -208,7 +208,7 @@
       :phase "phase-464"
       :title "A probe for every operation any instruction names"
       :kind :verification
-      :state :planned
+      :state :done
       :lane "examples"
       :priority :high
       :ownerRole "verifier"
