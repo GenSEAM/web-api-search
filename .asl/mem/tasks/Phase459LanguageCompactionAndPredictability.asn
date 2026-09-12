@@ -39,8 +39,8 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task45901.asl"]
       :verificationCases ["A definition named is-empty is rejected and the message names the sanctioned form." "A definition named is-empty? is rejected, because carrying both markers is the most common current variant." "A predicate correctly named empty? passes." "The check runs over the grammar registries as well as over sources, so a retired form cannot be reintroduced by declaration."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45901" :status :notEstablished :contract D81Baseline)
+      :gateReadiness :baselineEstablished
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45901" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define predicateNaming semantic")
       :historicalReceipts []
       :reviewStatus :requiresIndependentPlanReview
       :actionDag ["Decide one form per concept." "Record it in the grammar." "Add the checker." "Independent acceptance."]
