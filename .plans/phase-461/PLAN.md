@@ -47,14 +47,15 @@ Enforce strict separation between core language mechanisms and interchangeable e
   2. Specify unified host interface and conforming engines in `asl/grammar/protocol-conformance.asn` covering evaluation, filesystem, network, time, and randomness free of concrete engine names.
   3. Verify all 3 stages of `SuperviseGate.sh Task46103` (25 assertions executed cleanly).
 
-### Step 4: Task46104 — Extensions Declare Required Host Capabilities
+### Step 4: Task46104 — Extensions Declare Required Host Capabilities [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46104.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46104`
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define extensionDeclaredCapabilities semantic`.
 - Owned Files: `asl/grammar/language-semantics.asn`, `asl/grammar/capabilities.asn`.
 - Implementation:
   1. Define `extensionDeclaredCapabilities` semantics in `asl/grammar/language-semantics.asn`.
-  2. Enforce load-time capability verification between declared requirements and host capabilities.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46104`.
+  2. Enforce load-time capability verification and bidirectional AST usage checks in `asl/grammar/capabilities.asn`.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46104` (18 assertions executed cleanly).
 
 ### Step 5: Task46105 — Adapters as Extensions on Two-Strikes Rule
 - Fixture: `tests/acceptance/d81/Task46105.asl`

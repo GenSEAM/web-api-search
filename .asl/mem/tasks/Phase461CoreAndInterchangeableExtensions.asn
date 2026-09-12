@@ -130,12 +130,12 @@
       :phase "phase-461"
       :title "An extension declares the host capabilities it needs, and the core enforces them"
       :kind :architecture
-      :state :planned
+      :state :completed
       :lane "portability"
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789244000000
-      :updatedAt 1789244000000
+      :updatedAt 1789426800000
       :motivation "Portability across a phone, a browser and a server is not achieved by compiling everywhere; it is achieved by knowing which parts cannot run where, before they are loaded. An extension that opens files cannot run in a browser, and today nothing declares that, so the failure appears as a runtime error in an unrelated place, which is the same mis-attribution already measured 52 times in the binding layer."
       :purpose "An extension declares the host capabilities it requires. Loading it against a host that lacks one fails at load, naming the extension and the capability. The declaration is checked against what the extension actually uses, so an undeclared use is a defect and an over-declaration is reported as unnecessary."
       :context (:contractRef D81PlanContext)
@@ -156,13 +156,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46104.asl"]
       :verificationCases ["An extension using the filesystem without declaring it fails the check." "Loading a filesystem extension against a browser host fails at load with both names quoted." "A declared capability never used is reported, so declarations do not drift upward into meaninglessness."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46104" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46104" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define extensionDeclaredCapabilities semantic")
+      :historicalReceipts ["rc-task46104-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Define the capability vocabulary." "Declare per extension." "Check both directions." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task46104-verified-20260912"])
     (:task
       :id "Task46105"
       :parentId ""

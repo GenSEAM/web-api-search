@@ -1231,5 +1231,15 @@
       :fact "task46103-certified-complete"
       :evidence "Authored interchangeableEngineInterface in language-semantics.asn and hostInterface with conformingEngines (native-host and portable-wasm) in protocol-conformance.asn; verified single host interface covering evaluation, filesystem, network, time, and randomness free of concrete engine names; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 25 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task46103 100% verified and certified; interchangeable engine interface established under ADR-0081")
+    (:note
+      :id "n109"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "asl/grammar/capabilities.asn" "tests/acceptance/d81/Task46104.asl" ".asl/mem/tasks/Phase461CoreAndInterchangeableExtensions.asn"]
+      :tags [:supervision :phase461 :task46104 :declared-capabilities :load-time-enforcement :approved]
+      :fact "task46104-certified-complete"
+      :evidence "Authored extensionDeclaredCapabilities in language-semantics.asn and extensionCapabilities in capabilities.asn; ensured load-time capability checking naming extension and capability with bidirectional verification against AST form usage; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 18 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46104 100% verified and certified; extension capability declaration and enforcement established under ADR-0081")
   ]
 )
