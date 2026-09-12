@@ -1671,6 +1671,16 @@
       :fact "task45601-certified-complete"
       :evidence "Verified tests/acceptance/d81/Task45601.asl covering deletion of redundant helpers (estimate-tokens, strip-quotes, strip-colon, extract-between, calc-savings, balance-delimiters, escape-sh-arg), elimination of shadow in sh-transpile, delegation to canonical asl-text/text, asl-text/escape and asl-parser/balance, creation of .asl/mem/duplication-residue.asn documenting 371 baseline copies and 6 justified survivors under two strikes rule D34; passed SuperviseGate.sh with 77 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task45601 certified complete; redundant copies across codec, harness, and text unified into single canonical packages under ADR-0081")
+    (:note
+      :id "n153"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["vdom/src/asn_svg.asl" "asl-arduino/src/gpio.asl" "asl/packages/asl-sql/src/core/sql.asl" "tests/acceptance/d81/Task45602.asl" ".asl/mem/tasks/Phase456DuplicationDeadCodeAndUnwiredEradication.asn"]
+      :tags [:supervision :phase456 :task45602 :dead-code :stubs :constants :approved]
+      :fact "task45602-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task45602.asl covering deletion of unreferenced dead definition make-svg-node in vdom/src/asn_svg.asl, enforcement of explicit :constant true exemption for bare constant functions in asl-arduino/src/gpio.asl (pin-output, pin-input, pin-high, pin-low), verification of implemented render-placeholder in asl-sql; passed SuperviseGate.sh with 26 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task45602 certified complete; dead definitions and unexempted constant stubs eradicated under ADR-0081")
   ]
 )
 

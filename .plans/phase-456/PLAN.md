@@ -14,7 +14,7 @@ Execute Phase 456 under ADR-0081 and monorepo verification contracts (D81, D52, 
    - *Status*: **Done** (Certified under SuperviseGate.sh with 77 assertions).
 2. **Task45602**: Retire the 14 definitions nothing references and the 10 stubs
    - *Rationale*: 14 definitions are referenced nowhere in the corpus, registries, manifests, or tests (including make-svg-node in vdom/src/asn_svg.asl); 10 definitions are constant-returning stubs or carry unresolved markers. Each must be deleted, properly implemented, or declared unimplemented failing explicitly at the call site.
-   - *Status*: **Planned** (Baseline established: missing fixture).
+   - *Status*: **Done** (Certified under SuperviseGate.sh with 26 assertions).
 3. **Task45603**: A verdict for each of the 270 unreachable modules
    - *Rationale*: Non-test modules never imported and never named outside their own file must receive a clear verdict: wired, deleted, or recorded as deliberately dormant with a declared waking condition. Exclude dormant modules from density and coverage metrics.
    - *Status*: **Planned** (Baseline established: missing fixture).
@@ -43,6 +43,7 @@ Execute Phase 456 under ADR-0081 and monorepo verification contracts (D81, D52, 
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task45602`
 - **Owned Files**: `vdom/src`, `asl-arduino/src`, `asl/web/src`, `asl/packages/asl-sql/src`, `harness/src`, `web-api-search/src`, `agent-core/src`
 - **Acceptance Criteria**: Delete dead unreferenced definitions (including make-svg-node in vdom/src/asn_svg.asl); ensure constant-body functions declare explicit intent or fail call sites; reject newly added unreferenced definitions.
+- **Verification Status**: **VERIFIED COMPLETE** (Receipt: `rc-task45602-verified-20260913`, Note: `n153`).
 
 ### Step 4: Task45603 — Verdict for unreachable modules
 - **Fixture**: `tests/acceptance/d81/Task45603.asl`
