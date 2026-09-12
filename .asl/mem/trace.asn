@@ -52,3 +52,4 @@
 (:trace-entry :timestamp 1789252561000 :step 1 :op "handoff" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)
 (:trace-entry :timestamp 1789252561000 :step 2 :op "resume" :target "" :before-digest "" :after-digest "" :status "rejected" :duration-ms 0)
 (:trace-entry :timestamp 1789252561000 :step 3 :op "escalate" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)
+(:trace-entry :timestamp 1789253856000 :step 1 :op "frame" :target "" :before-digest "" :after-digest "" :status "rejected" :duration-ms 0)

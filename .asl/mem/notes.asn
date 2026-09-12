@@ -1601,6 +1601,16 @@
       :fact "task44601-certified-complete"
       :evidence "Authored tests/acceptance/d81/Task44601.asl covering reclassification of relay surfaces from removal candidates to runtime targets: amended Task43807 to explicitly retain agent-bus, browser-plugin, asl-bridge, asl-gateway, and vdom with declared entry points, narrowed removal set to remaining 8 candidates, and declared active components in .asl/mem/components.asn; established baseline failure and passed SuperviseGate.sh with 33 assertions evaluated; receipts indexed in receipts.asn"
       :consequence "Task44601 certified complete; relay surfaces protected as active runtime targets under ADR-0081")
+    (:note
+      :id "n146"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["asl/grammar/wire.asn" "agent-bus/src/wire.asl" "agent-bus/src/transport.asl" "tests/acceptance/d81/Task44602.asl" ".asl/mem/tasks/Phase446MultiRuntimeRelayAndObservability.asn"]
+      :tags [:supervision :phase446 :task44602 :wire-contract :transports :ingress-validation :conformance :approved]
+      :fact "task44602-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task44602.asl covering single wire frame schema with camelCase keys in asl/grammar/wire.asn, four transport codecs (stdio, unixSocket, http, sse) in agent-bus/src/wire.asl, identical frame roundtrip, and ingress validation with typed error rejection; established baseline failure and passed SuperviseGate.sh with 47 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task44602 certified complete; unified wire contract operational across all four transports under ADR-0081")
   ]
 )
 

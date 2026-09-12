@@ -53,11 +53,11 @@
       :title "One wire contract across runtimes: ASN frames over stdio, unix socket, http and sse"
       :kind :protocol
       :lane "transport"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789142392680
-      :updatedAt 1789142392680
+      :updatedAt 1789439100000
       :motivation "The bus declares four transports and the engine speaks a fifth shape on stdout; nothing states that a frame means the same thing on each. Cross-runtime communication whose framing differs per transport reproduces, at the protocol layer, the same class of silent divergence the audits found in the gate layer."
       :purpose "One frame schema in asl/grammar/wire.asn with camelCase keys, carried identically over stdio, unix socket, http and sse: identity, sessionId, causality, payload and digest. Each transport is a codec over that schema and nothing else. A frame that fails schema validation is rejected at ingress with a typed error rather than partially processed."
       :context (:contractRef D81PlanContext)
@@ -78,13 +78,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44602.asl"]
       :verificationCases ["The same frame round-trips identically over all four transports; a frame valid on one and invalid on another fails the conformance vectors." "A malformed frame is rejected at ingress and never partially applied."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44602" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44602" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44602" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44602" :assertCount 47 :at 1789439100000)]
+      :reviewStatus :approved
       :actionDag ["Verifier freezes frame vectors valid and invalid." "Define the schema." "Implement each transport as a codec." "Reject invalid frames at ingress." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :step 1 :status :ok :hash "HEAD")])
     (:task
       :id "Task44603"
       :parentId ""
