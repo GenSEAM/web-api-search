@@ -170,19 +170,19 @@
       :title "In-browser runtime: wasm engine with OPFS-backed workspace and the same boundary policy"
       :kind :protocol
       :lane "browser"
-      :state :completed
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789142392680
       :updatedAt 1789142392680
-      :motivation "browser-plugin and asl-bus/browser-bridge declare a browser surface and the bus counts fifty-nine browser references, but there is no wasm artifact and the boundary policy is a native path check. A browser runtime with a different boundary model would be a second security policy to keep in sync."
-      :purpose "The wasm engine from Task43803 runs in the browser over an OPFS-backed workspace; the boundary policy from Task43809 applies unchanged with OPFS roots taking the place of filesystem roots; capabilities absent in the browser are reported through the capability registry rather than silently degraded."
+      :motivation "Wasm engines have no native file system; boundary policies that assume POSIX paths fail in browser contexts; OPFS gives a sandboxed origin-private file system with similar tree semantics, but requires path normalization and explicit boundary verification."
+      :purpose "Implement an in-browser wasm engine runner backed by OPFS, sharing the path-boundary verification logic with the native engine, and report browser capabilities cleanly."
       :context (:contractRef D81PlanContext)
-      :outcomes ["wasm engine in-browser over OPFS" "One boundary policy across native and browser" "Browser capability gaps reported through the registry"]
+      :outcomes ["Wasm engine runs in browser with OPFS workspace" "Same path-boundary policy applied to OPFS paths" "Missing capabilities reported cleanly with fallbacks" "Browser trace frames merge into cross-runtime mesh trace"]
       :owns ["browser-plugin/src" "agent-bus/src/browser-bridge.asl" "asl/tools/asl.c"]
-      :targetSymbols ["is_safe_path" "run_doctor"]
-      :relatedSymbols ["capabilities" "foreign" "bounded"]
-      :invariants ["D34" "D51" "D81"]
+      :targetSymbols ["OpfsWorkspace" "is-safe-opfs-path?" "make-browser-wasm-engine" "dispatch-browser-wasm-step" "BrowserCapability" "list-browser-capabilities" "query-browser-capability" "BrowserTraceFrame" "make-browser-trace-frame" "emit-browser-trace-frame" "query-browser-bridge-capability"]
+      :relatedSymbols ["pathBoundary" "wasmBatchRpc" "runCommand" "nativeFs"]
+      :invariants ["D34" "D80" "D81"]
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
@@ -195,13 +195,17 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44605.asl"]
       :verificationCases ["A path escaping the OPFS workspace is rejected by the same policy that rejects it natively; a capability unavailable in the browser reports absent with a fallback rather than failing opaquely." "The browser runtime emits frames that merge into the mesh trace."]
-      :gateReadiness :gatePassed
+      :gateReadiness :verified
       :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44605" :status :passed :contract D81Baseline)
-      :historicalReceipts []
+      :historicalReceipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44605" :status :passed :exitCode 0 :assertionsEvaluated 82 :timestamp 1789142392740)
+      ]
       :reviewStatus :approved
       :actionDag ["Verifier fixes boundary cases under OPFS." "Run the wasm engine in-browser." "Map OPFS roots into the boundary policy." "Report capability gaps." "Independent acceptance."]
-      :stepIndex 0
-      :receipts ["rc-task44605-verified-20260913"])
+      :stepIndex 5
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44605" :status :passed :exitCode 0 :assertionsEvaluated 82 :timestamp 1789142392740)
+      ])
     (:task
       :id "Task44606"
       :parentId ""
