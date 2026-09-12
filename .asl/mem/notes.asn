@@ -709,7 +709,7 @@
       :scope ["asl/tools/asl.c" "asl/grammar/rpc.asn" "mem/src/bm25.asl" "tests/acceptance/d81/Task44205.asl" ".asl/mem/tasks/Phase442AgentReliabilityUtilities.asn"]
       :tags [:supervision :phase442 :task44205 :bm25-recall :q-operator :approved]
       :fact "task44205-certified-complete"
-      :evidence "Verified resident BM25 semantic recall (:q) in asl.c with ranked hits (:file :line :score :snippet); verified :id "asl-q" in asl/grammar/rpc.asn; verified reference BM25 functions in mem/src/bm25.asl; passed tests/acceptance/d81/Task44205.asl under SuperviseGate.sh with 15 executed assertions; receipts indexed in receipts.asn"
+      :evidence "Verified resident BM25 semantic recall (:q) in asl.c with ranked hits (:file :line :score :snippet); verified :id 'asl-q' in asl/grammar/rpc.asn; verified reference BM25 functions in mem/src/bm25.asl; passed tests/acceptance/d81/Task44205.asl under SuperviseGate.sh with 17 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task44205 100% verified and certified; resident BM25 search over memory and code active in RPC engine")
   ]
 )
