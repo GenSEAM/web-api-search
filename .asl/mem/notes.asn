@@ -1111,5 +1111,15 @@
       :fact "task45903-certified-complete"
       :evidence "Authored assertionParityAcrossTransformations and stringLiteralPreservation semantics in asl/grammar/language-semantics.asn; verified 3.06 percent corpus-wide saving and 46259 tokens saved grounding; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 16 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task45903 100% verified and certified; multi-word identifier CamelCase contract and assertion parity established under ADR-0081")
+    (:note
+      :id "n97"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "tests/acceptance/d81/Task45904.asl" ".asl/mem/tasks/Phase459LanguageCompactionAndPredictability.asn"]
+      :tags [:supervision :phase459 :task45904 :legible-aliases :prefix-uniqueness :slice-resolution :token-cost :approved]
+      :fact "task45904-certified-complete"
+      :evidence "Authored legibleAliasLength, globalPrefixUniqueness, and selfContainedSliceResolution semantics in asl/grammar/language-semantics.asn; verified 0.74 percent deliberate token cost and 11132 tokens grounding; verified baseline failure and assertion inversion; passed under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task45904 100% verified and certified; legible alias length and global prefix uniqueness established under ADR-0081")
   ]
 )

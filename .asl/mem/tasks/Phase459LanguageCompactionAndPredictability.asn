@@ -130,12 +130,12 @@
       :phase "phase-459"
       :title "Retire opaque aliases and pay the 0.74 percent"
       :kind :language
-      :state :planned
+      :state :completed
       :lane "predictability"
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789160000000
-      :updatedAt 1789160000000
+      :updatedAt 1789423000000
       :motivation "246 of 921 declared aliases are a single character and 362 are two. The alias s is declared in 76 different files and means a different module in each. A reader, human or model, cannot interpret s/concat without locating the header that binds it, and 11.7 percent of the 11132 qualified uses sit more than 200 lines from that header, with a maximum of 1172 and a median of 53. A model reading a slice of a file, which is how every retrieval path in this repository works, sees the use and not the binding. This is the cost of the compaction style the convention document holds up as canonical."
       :purpose "A qualified prefix is legible on its own: at least three characters, derived from the module it names, and meaning one module across the whole corpus. Where the module already has a short declared name the alias is omitted entirely and that name is the prefix, so there is no binding to find. The measured cost of about 11132 extra tokens, 0.74 percent, is accepted deliberately and recorded as such."
       :context (:contractRef D81PlanContext)
@@ -156,13 +156,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task45904.asl"]
       :verificationCases ["A two character alias is rejected." "One prefix bound to two different modules anywhere in the corpus is rejected, naming both." "A file whose qualified uses all resolve without reading its header passes, which is the property being bought."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45904" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45904" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define legibleAliasLength semantic")
+      :historicalReceipts ["rc-task45904-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Assign one legible prefix per module." "Rewrite uses." "Add the uniqueness check." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task45904-verified-20260912"])
     (:task
       :id "Task45905"
       :parentId ""

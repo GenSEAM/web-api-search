@@ -51,10 +51,15 @@ Address corpus fragmentation and establish one name per concept before 40 new bu
   2. Ground 3.06% corpus-wide saving and 46,259 tokens saved in Phase 459 task file.
   3. Verify all 3 stages of `SuperviseGate.sh Task45903` (16 assertions executed cleanly).
 
-### Step 4: Task45904 — Retire Opaque Aliases
+### Step 4: Task45904 — Retire Opaque Aliases [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task45904.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task45904`
-- Implementation: Enforce 3+ character legible prefixes, single global meaning per prefix.
+- Baseline: Failed with `[ASL_ASSERTION_FAILURE]: language-semantics.asn must define legibleAliasLength semantic`.
+- Owned Files: `asl/packages`, `harness/src`, `agent-bus/src`, `intel/src`, `mem/src`, `voice/src`.
+- Implementation:
+  1. Add `legibleAliasLength`, `globalPrefixUniqueness`, and `selfContainedSliceResolution` semantics to `asl/grammar/language-semantics.asn`.
+  2. Ground 0.74% deliberate token cost and 11,132 extra tokens in Phase 459 task file.
+  3. Verify all 3 stages of `SuperviseGate.sh Task45904` (20 assertions executed cleanly).
 
 ### Step 5: Task45905 — Symbol Surface as Tracked Quantity
 - Fixture: `tests/acceptance/d81/Task45905.asl`
