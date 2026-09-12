@@ -20,3 +20,9 @@
      (:sym "asl-mem/research/query-research-memory" :shortcodes ("D0007")))))
 
 (:trace-entry :timestamp 1789238591000 :step 1 :op "where" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)
+(:trace-entry :timestamp 1789239859000 :step 1 :op "sec" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)
+(:trace-entry :timestamp 1789239859000 :step 2 :op "sec" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)
+(:trace-entry :timestamp 1789239859000 :step 3 :op "ls" :target "" :before-digest "" :after-digest "" :status "rejected" :duration-ms 0)
+(:trace-entry :timestamp 1789239865000 :step 1 :op "out" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)
+(:trace-entry :timestamp 1789239865000 :step 2 :op "read" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)
+(:trace-entry :timestamp 1789239981000 :step 1 :op "let" :target "" :before-digest "" :after-digest "" :status "rejected" :duration-ms 0)

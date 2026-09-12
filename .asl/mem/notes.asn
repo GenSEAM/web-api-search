@@ -771,5 +771,15 @@
       :fact "task47001-certified-complete"
       :evidence "Modified run_gate_5_suites in asl.c to dynamically target runner scope and declare scope in gate output ([scope: ...]); eliminated hardcoded restriction to asl-gates/tests; passed tests/acceptance/d81/Task47001.asl under SuperviseGate.sh with 11 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task47001 100% verified and certified; Gate 5 explicit scope declaration active, preventing silent scope narrowing")
+    (:note
+      :id "n67"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope [".asl/mem/module-resolutions.asn" "tests/acceptance/d81/Task47002.asl" ".asl/mem/tasks/Phase470RestoreGateScopeAndReachExecution.asn"]
+      :tags [:supervision :phase470 :task47002 :module-resolution :canonical-modules :daemon-retired :approved]
+      :fact "task47002-certified-complete"
+      :evidence "Recorded decisions for all 7 module names in .asl/mem/module-resolutions.asn; repointed relative path imports in asl-arduino, asl-web, pack, and asl-sh to canonical module names; declared asl-sh/core-process eliminating collision; retired daemon subsystem into engine; passed tests/acceptance/d81/Task47002.asl under SuperviseGate.sh with 27 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task47002 100% verified and certified; zero unresolved slashed imports remain across the corpus")
   ]
 )

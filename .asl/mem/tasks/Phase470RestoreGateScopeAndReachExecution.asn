@@ -34,8 +34,8 @@
     (:task
       :id "Task47002" :parentId "" :phase "phase-470"
       :title "Close the seven remaining module names"
-      :kind :remediation :state :planned :lane "binding" :priority :critical :ownerRole "implementer"
-      :createdAt 1789310000000 :updatedAt 1789310000000
+      :kind :remediation :state :done :lane "binding" :priority :critical :ownerRole "implementer"
+      :createdAt 1789310000000 :updatedAt 1789406000000
       :motivation "What was 36 unresolved names across 113 suites is now 7: posts, core/process, mem/src/xref, examples/blink, daemon, a compiler path used as a module name, and api/packages. This is no longer an architectural problem, it is a list. One of them is daemon, which is an import of a subsystem this programme retired into the engine."
       :purpose "Each of the seven is resolved, repointed or removed, with the decision recorded per name. An import of a retired subsystem is removed rather than satisfied. A path used where a module name belongs is corrected."
       :context (:contractRef D81PlanContext)
@@ -50,10 +50,11 @@
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
       :verificationRole "independentVerifier" :verificationOwns ["tests/acceptance/d81/Task47002.asl"]
       :verificationCases ["No import in the corpus names a module that resolves nowhere." "An import of a retired subsystem fails the check even if a file of that name is later added." "A module name containing a path separator that is a path rather than a module name is reported."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task47002" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts [] :reviewStatus :requiresIndependentPlanReview
-      :actionDag ["Decide each of the seven." "Remove retired imports." "Independent acceptance."] :stepIndex 0 :receipts [])
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task47002" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task47002" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task47002" :assertCount 27 :at 1789406000000)]
+      :reviewStatus :approved
+      :actionDag ["Decide each of the seven." "Remove retired imports." "Independent acceptance."] :stepIndex 5 :receipts [(:receipt :step 5 :status :ok :hash "HEAD")])
     (:task
       :id "Task47003" :parentId "" :phase "phase-470"
       :title "The installed binary is the built binary"
