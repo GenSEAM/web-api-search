@@ -92,11 +92,11 @@
       :title "C3 duplicate capability checker and the camelCase convergence checker"
       :kind :gate
       :lane "static"
-      :state :planned
+      :state :completed
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789142321056
-      :updatedAt 1789142321056
+      :updatedAt 1789434000000
       :motivation "C3 is named in AGENTS.md as a forbidden-duplication invariant and has no checker: 111 symbol names are defined in more than one package, six of them implementations of token estimation. D51 has no checker either: structs reached 890 of 890 CamelCase while test functions sit at 80 of 1673 and ASN property keys at 48.5 percent, and Phase415 was marked complete against a gate that cannot run."
       :purpose "Two checkers. The C3 checker reports any symbol defined in more than one package outside a declared allowlist (main, run-tests), and any capability with more than one implementation where a canonical home is declared. The D51 checker enforces CamelCase for struct names, composite identifiers over two words and test function names, and camelCase for ASN property keys, reporting convergence per package and failing when a package regresses below its recorded baseline."
       :context (:contractRef D81PlanContext)
@@ -117,13 +117,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task44503.asl"]
       :verificationCases ["A second implementation of a capability with a declared canonical home is reported with both paths; an allowlisted name such as run-tests is not." "Adding a kebab-case test function to a converged package fails; a package below its floor cannot regress further without failing."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44503" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44503" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts [(:receipt :taskId "Task44503" :passed true :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44503" :assertCount 39 :at 1789434000000)]
+      :reviewStatus :approved
       :actionDag ["Verifier fixes a duplicated capability and a kebab-case test function." "Implement the duplication report." "Implement the convergence checker with a per-package floor." "Correct the Phase415 state from measurement." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 3
+      :receipts [(:receipt :step 3 :status :ok :hash "HEAD")])
     (:task
       :id "Task44504"
       :parentId ""

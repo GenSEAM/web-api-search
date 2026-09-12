@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase415LargeScaleTypestateRefactorAndCamelCaseConvergence"
   :createdAt 1773440000000
-  :status "settled"
+  :status "in-progress"
   :summary "Large-Scale Typestate Decomposition of Hotspot Modules, Monorepo-Wide CamelCase Convergence, and Memory Hierarchy Refactoring"
   :phase "Phase415LargeScaleTypestateRefactorAndCamelCaseConvergence"
   :gateReadiness :requiresIndependentBaseline
@@ -13,7 +13,7 @@
       :title "Audit Hotspot Modules Exceeding Typestate Cohesion Boundary"
       :kind :audit
       :lane "intel"
-      :state :completed
+      :state :in-progress
       :priority :high
       :ownerRole "auditor"
       :createdAt 1773440000000
@@ -132,8 +132,8 @@
       :purpose "Migrate test functions across 272 test suites to PascalCase format"
       :context "Delivers 40.5% token reduction across the testing plane without breaking test assertions"
       :outcomes [
-        "Migrated dashed test functions to PascalCase"
-        "Captured 8,124 BPE token savings confirmed by verification gates"
+        "Test function PascalCase migration reached 80 of 1673 test functions and ASN keys at 48.5 percent"
+        "Per-package convergence tracked under D51 regression floor"
       ]
       :owns ["asl/packages/asl-codec/grammar.asn"]
       :targetSymbols ["TestFunctionMigration" "PascalCaseConventions"]

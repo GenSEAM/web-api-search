@@ -1431,5 +1431,15 @@
       :fact "task44502-certified-complete"
       :evidence "Implemented pure ASL rule-checkers module in asl-gates auditing grading separation, concepts citations, hidden tests protection, bounded limits, and output receipts; declared explicit runtimeOnlyReason on budget and edge in rules.asn; synchronized all surfaces; established baseline failure and verified 45 non-vacuous assertions; passed SuperviseGate.sh with 45 executed assertions; receipts recorded"
       :consequence "Task44502 certified complete; static confirmation coverage across rules established under ADR-0081")
+    (:note
+      :id "n129"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["asl/packages/asl-gates/src/rule_checkers.asl" "asl/tools/asl.c" ".asl/mem/tasks/Phase415LargeScaleTypestateRefactorAndCamelCaseConvergence.asn" "tests/acceptance/d81/Task44503.asl" ".asl/mem/tasks/Phase445StaticConfirmationCoverage.asn"]
+      :tags [:supervision :phase445 :task44503 :c3-duplicates :d51-convergence :gate6 :phase415 :approved]
+      :fact "task44503-certified-complete"
+      :evidence "Exported audit-c3-duplicates and audit-d51-convergence in asl-gates rule-checkers and registered in grammar.asn; wired check_c3_duplicates and check_d51_convergence in asl.c run_gate_6_grammar; corrected Phase415 state and T415CamelTests to in-progress with empirical test function ratio (80 of 1673); established baseline failure and verified 39 non-vacuous assertions; passed SuperviseGate.sh with 39 executed assertions; receipts recorded"
+      :consequence "Task44503 certified complete; C3 duplication check and D51 convergence floor established under ADR-0081")
   ]
 )
