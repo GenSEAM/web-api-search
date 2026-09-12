@@ -91,12 +91,12 @@
       :phase "phase-463"
       :title "A binding is never far from its use"
       :kind :language
-      :state :planned
+      :state :completed
       :lane "attention"
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789260000000
-      :updatedAt 1789260000000
+      :updatedAt 1789430500000
       :motivation "Every retrieval path in this project delivers a slice of a file, and a slice that contains a use without its binding is uninterpretable. Measured, the median distance from an alias declaration to its use is 53 lines, the ninetieth percentile is 232 and the maximum is 1172, with 11.7 percent of 11132 uses beyond 200 lines. Racket has no notion of this quantity because it assumes a reader who can navigate. The consumer here cannot navigate; it receives a window."
       :purpose "Distance between a binding and its uses is measured and bounded. Where the bound cannot be met the binding is made self describing instead, so the slice carries its own meaning, and the choice between moving the binding and making it self describing is recorded per site."
       :context (:contractRef D81PlanContext)
@@ -117,13 +117,13 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task46303.asl"]
       :verificationCases ["A use beyond the bound whose binding is not self describing is reported with both line numbers." "A slice taken around any use resolves every symbol it contains." "The measurement runs over the resolved graph, so a distance created through re-export is counted."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46303" :status :notEstablished :contract D81Baseline)
-      :historicalReceipts []
-      :reviewStatus :requiresIndependentPlanReview
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task46303" :status :baselineVerified :contract D81Baseline :exitCode 1 :failure "language-semantics.asn must define bindingToUseDistanceRule semantic")
+      :historicalReceipts ["rc-task46303-verified-20260912"]
+      :reviewStatus :approved
       :actionDag ["Measure distances over the resolved graph." "Bound them." "Move or make self describing per site." "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 4
+      :receipts ["rc-task46303-verified-20260912"])
     (:task
       :id "Task46304"
       :parentId ""

@@ -33,14 +33,14 @@ Optimize AgentScript along axes Racket never optimized: emission reliability, ne
   2. Require flattening forms to be admitted strictly on a measured double win (depth and token count).
   3. Verify all 3 stages of `SuperviseGate.sh Task46302` (20 assertions executed cleanly).
 
-### Step 3: Task46303 — A Binding Is Never Far From Its Use
+### Step 3: Task46303 — A Binding Is Never Far From Its Use [COMPLETED & CERTIFIED]
 - Fixture: `tests/acceptance/d81/Task46303.asl`
 - Gate: `sh tests/acceptance/d81/SuperviseGate.sh Task46303`
 - Owned Files: `asl/tools/asl.c`, `asl/packages`, `harness/src`, `asl/grammar/language-semantics.asn`.
 - Implementation:
   1. Define `bindingToUseDistanceRule` semantic in `asl/grammar/language-semantics.asn`.
   2. Measure and bound binding-to-use distances across packages, requiring self-describing bindings.
-  3. Verify all 3 stages of `SuperviseGate.sh Task46303`.
+  3. Verify all 3 stages of `SuperviseGate.sh Task46303` (20 assertions executed cleanly).
 
 ### Step 4: Task46304 — A Measured Emission Error Rate, Which No Language Has
 - Fixture: `tests/acceptance/d81/Task46304.asl`

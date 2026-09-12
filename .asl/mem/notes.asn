@@ -1341,5 +1341,26 @@
       :fact "task46302-certified-complete"
       :evidence "Authored flatteningFormDoubleWinRule in language-semantics.asn; mandated that flattening forms are admitted only upon measured double win (lowering both nesting depth and token count on real corpus sites); verified baseline failure and negative mutation fault detection; passed under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
       :consequence "Task46302 100% verified and certified; flattening forms double win standard established under ADR-0081")
+    (:note
+      :id "n120"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "tests/acceptance/d81/Task46303.asl" ".asl/mem/tasks/Phase463AslFirstBeyondRacket.asn"]
+      :tags [:supervision :phase463 :task46303 :binding-distance :locality :self-describing :approved]
+      :fact "task46303-certified-complete"
+      :evidence "Authored bindingToUseDistanceRule in language-semantics.asn; mandated that binding-to-use distance is measured and bounded over the resolved module graph, and uses beyond the bound must be self-describing for sliced window interpretability; verified baseline failure and negative mutation fault detection; passed under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46303 100% verified and certified; bounded binding-to-use distance established under ADR-0081")
+    (:note
+      :id "n120"
+      :author "codex"
+      :created "2026-09-12"
+      :status "active"
+      :scope ["asl/grammar/language-semantics.asn" "tests/acceptance/d81/Task46303.asl" ".asl/mem/tasks/Phase463AslFirstBeyondRacket.asn"]
+      :tags [:supervision :phase463 :task46303 :binding-distance :locality :self-describing :approved]
+      :fact "task46303-certified-complete"
+      :evidence "Authored bindingToUseDistanceRule in language-semantics.asn; mandated bounded distance between binding and use across resolved graph and required self-describing bindings for slice interpretability; verified baseline failure and negative mutation fault detection; passed under SuperviseGate.sh with 20 executed assertions; receipts indexed in receipts.asn"
+      :consequence "Task46303 100% verified and certified; bounded binding-to-use distance established under ADR-0081")
   ]
 )
+
