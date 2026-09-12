@@ -14,11 +14,11 @@
       :title "Reclassify the relay surfaces from removal candidates to runtime targets"
       :kind :protocol
       :lane "topology"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789142392680
-      :updatedAt 1789142392680
+      :updatedAt 1789438800000
       :motivation "Task43807 lists browser-plugin and asl-bridge among packages to delete because they have zero inbound references, which was the correct read when the goal was pruning. The stated goal is now cross-runtime operation across in-browser, local machine, server and agent relay, and those two packages plus agent-bus are exactly those surfaces: agent-bus alone is 2030 lines across fourteen modules (bus, mesh, cluster, presence, transport, wire, gateway, browser-bridge, tool_plane, mvcc_bus, nd_asn, proc_telemetry) with fourteen test files and declared browser, sse, http and wasm transports. Zero inbound references means unreachable, not worthless."
       :purpose "Amend Task43807 to retain agent-bus, browser-plugin, asl-bridge, asl-gateway and vdom as runtime targets with declared entry points, and record which of the thirteen packages remain removal candidates. A package is retained only when this phase gives it a reachable entry point and a gate; otherwise it returns to the removal list rather than lingering as an exception."
       :context (:contractRef D81PlanContext)
