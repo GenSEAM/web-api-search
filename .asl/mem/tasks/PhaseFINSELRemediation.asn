@@ -1039,7 +1039,7 @@
       :title "Replace Line-Based S-Expression Splitting in AST Merge"
       :kind :memory
       :lane "mem"
-      :state :completed
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789449300000
@@ -1110,9 +1110,50 @@
       :historicalReceipts []
       :reviewStatus :approved
       :actionDag ["Inspect hydration.asl and hydration_test.asl" "Author acceptance fixture Task-F27.asl" "Demonstrate baseline failure on message loss during eviction" "Implement message folding into MemoryChunk in evict-raw-context" "Certify green under SuperviseGate.sh."]
-      :stepIndex 1
+      :stepIndex 5
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F27" :status :passed :exitCode 0 :assertionsEvaluated 11 :timestamp 1789449700000)
+      ])
+    (:task
+      :id "Task-F28"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Resolve Asymmetric Intent Contradiction in MVCC Bus"
+      :kind :bus
+      :lane "agent-bus"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789450000000
+      :updatedAt 1789450100000
+      :motivation "detect-intent-contradiction returns true for (approve, reject) but false for (reject, approve)."
+      :purpose "Implement symmetric comparison ensuring any pairing of opposing verdicts flags contradiction."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Symmetric intent contradiction detection in detect-intent-contradiction" "Conflict detection on opposing verdicts regardless of branch order" "Consistent causal DAG intent arbitration"]
+      :owns ["agent-bus/src/mvcc_bus.asl"]
+      :targetSymbols ["detect-intent-contradiction" "mvcc-bus-merge-intents"]
+      :relatedSymbols ["IntentConflict" "MergedIntent"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F27"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F28"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F28.asl" "agent-bus/tests/mvcc_bus_test.asl"]
+      :verificationCases ["detect-intent-contradiction detects opposing verdicts symmetrically in both branch orderings."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F28" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect mvcc_bus.asl and mvcc_bus_test.asl" "Author acceptance fixture Task-F28.asl" "Demonstrate baseline failure on reverse verdict ordering" "Implement symmetric verdict contradiction checks in detect-intent-contradiction" "Certify green under SuperviseGate.sh."]
+      :stepIndex 1
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F28" :status :passed :exitCode 0 :assertionsEvaluated 11 :timestamp 1789450100000)
       ])
   ]
 )

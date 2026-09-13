@@ -212,11 +212,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F27` (11 assertions verified)
 
 ### Task-F28: Resolve Asymmetric Intent Contradiction in MVCC Bus
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `agent-bus/src/mvcc_bus.asl`
 - **Baseline Failure**: `detect-intent-contradiction` returns `true` for (approve, reject) but `false` for (reject, approve).
 - **Remedy**: Symmetric comparison ensuring any pairing of opposing verdicts flags contradiction.
-- **Gate**: `bin/asl test agent-bus/tests/mvcc_bus_test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F28` (11 assertions verified)
 
 ### Task-F29: Prevent Permanent Deadlock on Intermediate Task States
 - **Status**: planned
