@@ -1,4 +1,4 @@
 #!/bin/sh
 # Agent Sovereign Terminal Coding Agent CLI (Pure AgentScript)
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-exec "$ROOT/asl/asl" "$ROOT/agent/src/tui.asl" "$@"
+exec "$ROOT/bin/asl" eval "$ROOT/agent/src/tui.asl" "$@"

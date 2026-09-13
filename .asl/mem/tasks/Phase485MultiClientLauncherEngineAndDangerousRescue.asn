@@ -112,11 +112,11 @@
       :title "Deterministic Multi-Client Path Resolver"
       :kind :engine
       :lane "launcher-resolver"
-      :state :ready
+      :state :completed
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789459200000
-      :updatedAt 1789459200000
+      :updatedAt 1789461600000
       :motivation "Claude Code, Codex, and other AI clients installed in ~/.local/bin or application directories are not detected when PATH is minimal."
       :purpose "Implement priority-ordered binary resolution in asl/tools/asl.c checking ~/.local/bin, ~/bin, /opt/homebrew/bin, and PATH for claude, codex, cursor, and windsurf."
       :context (:contractRef D81PlanContext)
@@ -138,11 +138,21 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task48503.asl"]
       :verificationCases ["Resolves ~/.local/bin/claude when present." "Returns clean blamed error receipt when requested client binary is not installed."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48503.asl" :status :notEstablished :contract D81Baseline)
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48503.asl" :status :baselineVerified :contract D81Baseline)
+      :reviewStatus :verified
       :stepIndex 1
-      :receipts [])
+      :receipts [
+        (:receipt
+          :id "receipt-task-48503"
+          :taskId "Task48503"
+          :gate "bin/asl test tests/acceptance/d81/Task48503.asl"
+          :exitCode 0
+          :status :passed
+          :timestamp 1789461600000
+          :digest "6f36674"
+          :executedAsserts 10
+          :durationMs 7000)])
 
     (:task
       :id "Task48504"
