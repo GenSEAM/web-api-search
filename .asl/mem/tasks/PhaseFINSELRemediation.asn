@@ -1,0 +1,130 @@
+(:taskCollection
+  :id "PhaseFINSELRemediation"
+  :createdAt 1789441500000
+  :status "in-progress"
+  :priorityOrder 1
+  :summary "Master Multi-Model Monorepo Remediation: 39 falsifiable tasks resolving all defects cataloged during the 8-wave, 3-model monorepo audit."
+  :phase "PhaseFINSELRemediation"
+  :baseline "Audited 2026-09-13: 39 systemic defects across verification, runtime, memory, deduplication, and monorepo invariants were cataloged across 1,950 source files in an 8-wave multi-model audit."
+  :tasks [
+    (:task
+      :id "Task-F01"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Wire Dynamic Verification into C Host RPC Gate"
+      :kind :engine
+      :lane "verification"
+      :state :planned
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789441500000
+      :updatedAt 1789441500000
+      :motivation "asl/tools/asl.c hardcodes gate response :allClean true :passed 7 :active 7 :total 7 without invoking genuine verification."
+      :purpose "Replace the static RPC gate mock with live execution of run_all_seven_gates, reporting authentic status."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Dynamic verification wired into RPC gate" "Genuine gate pass and fail status reported"]
+      :owns ["asl/tools/asl.c"]
+      :targetSymbols ["run_cmd_rpc_batch" "execute_single_step"]
+      :relatedSymbols ["run_cmd_gate"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn []
+      :gate "sh tests/acceptance/d81/Task-F01.asl"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F01.asl"]
+      :verificationCases ["RPC gate execution invokes genuine checks and does not emit hardcoded static status on failing files."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F01" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :planApproved
+      :actionDag ["Identify hardcoded gate branch in execute_single_step" "Invoke genuine gate verification" "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task-F02"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Implement Live Argument Parsing in CLI Gate Command"
+      :kind :tooling
+      :lane "cli"
+      :state :planned
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789441500000
+      :updatedAt 1789441500000
+      :motivation "asl gate command in cli.asl does not check file existence and prints success for non-existent files."
+      :purpose "Implement real file existence checks and error reporting in asl gate CLI command."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["asl gate validates provided file arguments" "Non-existent files return typed error receipts"]
+      :owns ["asl/packages/asl-cli/src/cli.asl"]
+      :targetSymbols ["run-cli"]
+      :relatedSymbols ["gate"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn []
+      :gate "sh tests/acceptance/d81/Task-F02.asl"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F02.asl"]
+      :verificationCases ["Invoking gate with non-existent file path produces explicit error and non-zero exit."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F02" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :planApproved
+      :actionDag ["Inspect cli.asl gate branch" "Verify file existence" "Independent acceptance."]
+      :stepIndex 0
+      :receipts [])
+    (:task
+      :id "Task-F03"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Repair Native Pre-Commit Hook Executable Target"
+      :kind :tooling
+      :lane "tooling"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789441500000
+      :updatedAt 1789441800000
+      :motivation "asl/tools/hooks/pre-commit invokes ROOT_DIR/asl which is a directory rather than the executable."
+      :purpose "Update hook to target ROOT_DIR/bin/asl."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Pre-commit hook invokes canonical bin/asl binary"]
+      :owns ["asl/tools/hooks/pre-commit"]
+      :targetSymbols ["pre-commit"]
+      :relatedSymbols ["bin/asl"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn []
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F03"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F03.asl"]
+      :verificationCases ["pre-commit contains bin/asl gate and successfully executes."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F03" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Edit pre-commit hook" "Verify invocation" "Independent acceptance."]
+      :stepIndex 3
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F03" :status :passed :exitCode 0 :assertionsEvaluated 11 :timestamp 1789441800000)
+      ])
+  ]
+)

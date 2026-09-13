@@ -1687,19 +1687,19 @@
       :created "2026-09-13"
       :status "active"
       :scope ["asl/grammar/dependency-boundaries.asn" ".asl/mem/components.asn" ".asl/mem/unreachable-modules.asn" "voice/manifest.asn" "crawler/manifest.asn" "tests/acceptance/d81/Task45603.asl" ".asl/mem/tasks/Phase456DuplicationDeadCodeAndUnwiredEradication.asn"]
-      :tags [:supervision :phase456 :task45603 :unreachable-modules :dormant :dispositions :waking-conditions :approved]
+      :tags [:supervision :phase456 :task45603 :unreachable-modules :dormant-set :subsystem-dispositions :approved]
       :fact "task45603-and-phase456-certified-complete"
-      :evidence "Authored tests/acceptance/d81/Task45603.asl covering classification of 270 baseline unreachable modules across 11 path prefixes with waking conditions and statistical exclusion in asl/grammar/dependency-boundaries.asn and .asl/mem/unreachable-modules.asn, declared subsystem dispositions for browser-plugin and agent (wired) and voice and crawler (dormant with explicit waking conditions in manifest.asn and components.asn); passed SuperviseGate.sh with 72 assertions evaluated; receipts indexed in receipts.asn"
-      :consequence "Task45603 certified complete; all 4 tasks of Phase 456 verified and certified complete under ADR-0081")
-      (:note
-      :id "n154"
+      :evidence "Authored tests/acceptance/d81/Task45603.asl covering declared dormant set accounting of 270 unreachable modules with explicit waking conditions in asl/grammar/dependency-boundaries.asn and .asl/mem/unreachable-modules.asn, evidence-based subsystem dispositions for voice (dormant conceptual-schema), crawler (dormant-package), agent (wired autonomous orchestrator), and browser-plugin (wired runtime target), exclusion of dormant set from corpus statistics, and components registry synchronization; passed SuperviseGate.sh with 72 assertions evaluated; receipts indexed in receipts.asn"
+      :consequence "Task45603 certified complete; all 4 tasks of Phase 456 (Wave 103) verified and certified complete under ADR-0081")
+    (:note
+      :id "n155"
       :author "codex"
       :created "2026-09-13"
       :status "active"
-      :scope ["asl/grammar/dependency-boundaries.asn" ".asl/mem/components.asn" ".asl/mem/unreachable-modules.asn" "voice/manifest.asn" "crawler/manifest.asn" "tests/acceptance/d81/Task45603.asl" ".asl/mem/tasks/Phase456DuplicationDeadCodeAndUnwiredEradication.asn"]
-      :tags [:supervision :phase456 :task45603 :unreachable-modules :dormant-set :subsystem-dispositions :approved]
-      :fact "task45603-certified-complete"
-      :evidence "Authored tests/acceptance/d81/Task45603.asl covering declared dormant set accounting of 270 unreachable modules with explicit waking conditions in asl/grammar/dependency-boundaries.asn and .asl/mem/unreachable-modules.asn, evidence-based subsystem dispositions for voice (dormant conceptual-schema), crawler (dormant-package), agent (wired autonomous orchestrator), and browser-plugin (wired runtime target), exclusion of dormant set from corpus statistics, and components registry synchronization; passed SuperviseGate.sh with 72 assertions evaluated; receipts indexed in receipts.asn"
-      :consequence "Task45603 certified complete; all 4 tasks of Phase 456 (Wave 103) verified and certified complete under ADR-0081")
+      :scope ["asl/tools/hooks/pre-commit" "tests/acceptance/d81/Task-F03.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f03 :pre-commit :executable-target :hooks :approved]
+      :fact "task-f03-certified-complete"
+      :evidence "Remediated asl/tools/hooks/pre-commit to target bin/asl gate instead of non-executable asl directory; authored tests/acceptance/d81/Task-F03.asl verifying pre-commit hook executable target; evaluated 11 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F03 certified complete; native git pre-commit hook runs executable binary cleanly under ADR-0081")
   ]
 )
