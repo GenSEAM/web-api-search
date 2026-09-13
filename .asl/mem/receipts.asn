@@ -1,7 +1,7 @@
 (:receipts
   :version 1
   :phase "phase-301-real-toolcalls-autonomous-benchmark-loop"
-  :schema (id task-id tool-name exit-code duration-ms tokens timestamp status output-summary)
+  :schema (id taskId toolName exitCode durationMs tokens timestamp status outputSummary)
   :entries [
     (:entry :id "rc-301-001" :taskId "tb-astra-subshell-01" :toolName "exec-cmd" :exitCode 0 :durationMs 42 :tokens 28 :timestamp 1773000000000 :status :verified :outputSummary "Process exited with code 0")
     (:entry :id "rc-301-002" :taskId "tb-astra-cross-01" :toolName "fs-read" :exitCode 0 :durationMs 12 :tokens 22 :timestamp 1773000000042 :status :verified :outputSummary "File content read successfully")

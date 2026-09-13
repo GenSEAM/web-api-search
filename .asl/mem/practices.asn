@@ -1,6 +1,6 @@
 (:practicesLedger
   :version "1.0.0"
-  :package asl-mem
+  :package aslMem
   :updatedAt 1773286000000
   :closure "Contradicted by empirical measurement or superseded by updated practice"
   :practices [

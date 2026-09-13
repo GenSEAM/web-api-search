@@ -1,7 +1,7 @@
 (:spec
   :title "TestDebtAndFutureRefinements"
   :format "asn"
-  :source-file "TEST_DEBT_AND_FUTURE_REFINEMENTS.md"
+  :sourceFile "TEST_DEBT_AND_FUTURE_REFINEMENTS.md"
   :body "# Comprehensive Registry: Future Refinements, Test Debt & Edge-Case Validation
 
 **Document Version**: `1.0.0`  

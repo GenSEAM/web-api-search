@@ -1,6 +1,6 @@
-(module paradigm-system/flow-test
+(module paradigmSystem/flowTest
   :d "Development tests for reference decisions, not measurements of LLM cognition."
-  :x [run-tests]
+  :x [runTests]
   :i [(Flow :a flow)])
 
 (df Review [(taskChanged Bool) (artifactChanged Bool) (evidence I64) (conflicts I64) (unresolved I64) (criteria I64) (covered I64) (attempts I64) (bound Bool)] -> Str
@@ -56,7 +56,7 @@
     (assert (= (.-status (Budget 1000 0 0 0 0 0 1 -1)) "invalid") "Negative optional rejected")
     true))
 
-(df run-tests [] -> Bool
+(df runTests [] -> Bool
   (assert (TestReview) "Review cases execute")
   (assert (TestBudget) "Budget cases execute")
   true)

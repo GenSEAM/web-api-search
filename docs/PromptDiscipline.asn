@@ -1,7 +1,7 @@
 (:spec
   :title "PromptDiscipline"
   :format "asn"
-  :source-file "PROMPT_DISCIPLINE.md"
+  :sourceFile "PROMPT_DISCIPLINE.md"
   :body "# Agent-Centric Prompt Engineering Guide: Functional & Actionable Instructions
 
 > **Target Audience**: AI Agent Developers, Harness Architects, Skill Authors, and Open-Source Contributors  

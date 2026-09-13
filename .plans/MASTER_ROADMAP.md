@@ -37,6 +37,7 @@ graph TD
     P30 --> P31["Phase 31: Pure ASL Stage-2 Bootstrap & Compiler Closure (Phase 487, Planned)"]
     P31 --> P32["Phase 32: Universal WebAssembly Ambient Substrate & SQLite/DuckDB (Phase 488, Planned)"]
     P32 --> P33["Phase 33: Full Monorepo Epistemic Closure & Milestone M09 (Phase 489, Planned)"]
+    P33 --> P34["Phase 501: OS Syscalls API Integration (dirList, execCmd, fileStat, pathCanonicalize) (In Progress)"]
 ```
 
 ---
@@ -90,10 +91,13 @@ graph TD
 | **Phase 39** | [.plans/migration-d81-shortcode/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/migration-d81-shortcode/PLAN.md) | **Done** | Complete Migration from ADR-0081 to Canonical D81 Shortcode Format across decisions, tasks, rules and engine scanner. |
 | **Phase 40** | [.plans/phase-484/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-484/PLAN.md) | **In Progress** | RPC-First Record Store, Attention Separation, Deterministic Serialization, and Event-Driven Memory Architecture (8 tasks under D83). |
 | **Phase 41** | [.plans/phase-485/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-485/PLAN.md) | **Planned** | Multi-Client Autonomous Launcher Engine, Dangerous-Rescue Permissions, and Client Channel Protocol (6 tasks under D84). |
-| **Phase 42** | [.plans/phase-486/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-486/PLAN.md) | **Planned** | Autonomous Multi-Model Mesh Orchestrator, Parallel Model Execution Stand, and Dialectical Gap Synthesis (6 tasks under D85). |
-| **Phase 43** | [.plans/phase-487/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-487/PLAN.md) | **Planned** | Autonomous Pure ASL Stage-2 Bootstrap, Native Mach-O/ELF Emission, and Compiler Closure (6 tasks under D86). |
-| **Phase 44** | [.plans/phase-488/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-488/PLAN.md) | **Planned** | Universal WebAssembly Ambient Substrate, OPFS Boundaries, and Embedded SQLite/DuckDB Storage Engine (6 tasks under D87). |
-| **Phase 45** | [.plans/phase-489/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-489/PLAN.md) | **Planned** | Full Monorepo Epistemic Closure, Holistic 10-Tier Quality Certification, and Milestone M09 Settle (6 tasks under D88). |
+| **Phase 42** | [.plans/phase-486/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-486/PLAN.md) | **Deferred** | [EXPERIMENTAL] Autonomous Multi-Model Mesh Orchestrator, Parallel Model Execution Stand, and Dialectical Gap Synthesis (6 tasks under D85). |
+| **Phase 43** | [.plans/phase-487/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-487/PLAN.md) | **Deferred** | [EXPERIMENTAL] Autonomous Pure ASL Stage-2 Bootstrap, Native Mach-O/ELF Emission, and Compiler Closure (6 tasks under D86). |
+| **Phase 44** | [.plans/phase-488/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-488/PLAN.md) | **Deferred** | [EXPERIMENTAL] Universal WebAssembly Ambient Substrate, OPFS Boundaries, and Embedded SQLite/DuckDB Storage Engine (6 tasks under D87). |
+| **Phase 45** | [.plans/phase-489/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-489/PLAN.md) | **Deferred** | [EXPERIMENTAL] Full Monorepo Epistemic Closure, Holistic 10-Tier Quality Certification, and Milestone M09 Settle (6 tasks under D88). |
+| **Phase 501** | [.plans/phase-501/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-501/PLAN.md) | **Done** | OS Syscalls API Integration: native POSIX bindings in C-host, engine runtime dispatch, conformance test suite, and self-hosted asl-sh/asl-eval integration (6 tasks under D91). |
+| **Phase 506** | [.plans/phase-506/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-506/PLAN.md) | **Done** | WebAssembly v1 Binary Emitter (`wasm.asl`) directly from ASL AST. |
+| **Phase 507** | [.plans/phase-507/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-507/PLAN.md) | **Deferred** | [EXPERIMENTAL] Sovereign WebAssembly/WASI Transition, POSIX Decoupling, and pure ASL Git VFS reader. |
 
 
 ---

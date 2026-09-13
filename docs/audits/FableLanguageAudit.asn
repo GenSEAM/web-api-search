@@ -1,7 +1,7 @@
 (:spec
   :title "FableLanguageAudit"
   :format "asn"
-  :source-file "fable-language-audit.md"
+  :sourceFile "fable-language-audit.md"
   :body "# Two-Pass Consistency and Architecture Audit: AgentScript (ASL) & GenSEAM Monorepo
 
 Conducted by: Autonomous Senior Language & Compiler Architect  

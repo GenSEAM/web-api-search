@@ -1,0 +1,52 @@
+(:adr
+  :id "D92"
+  :shortcode "D92"
+  :title "Sovereign WebAssembly/WASI Runtime Transition, POSIX Decoupling, and Binary Emitter Architecture"
+  :status :active
+  :planStatus :approved
+  :date "2026-09-13"
+  :cluster "architecture/runtime-and-compiler"
+  :deciders ["user" "architect" "planner" "implementer" "auditor"]
+  :problem "The AgentScript runtime depends on an 8500-line C host adapter (asl/tools/asl.c) embedding Apple JavaScriptCore and a 2574-line JavaScript evaluator (asl/tools/engine.js). This creates platform lock-in to macOS, prevents self-hosting sovereignty, and couples the language to POSIX syscalls. Additionally, recent falsification audits cataloged acceptance test vacuity, mock map compiler modules (macho.asl, elf.asl), and simulated triple bootstraps that must be closed."
+  :drivers [
+    "Sovereign Self-Hosting: Eradicate all C and JavaScriptCore runtime dependencies, compiling pure ASL directly to WebAssembly."
+    "POSIX Decoupling: Replace POSIX filesystem, stat, clock, and directory traversal calls with standard capability-based WASI Preview 1 (wasi_snapshot_preview1)."
+    "Subprocess Boundary: Define execCmd as a privileged optional host capability, allowing pure sandboxed Wasm execution in browsers/edge while providing direct .git VFS inspection for audits."
+    "Pure ASL Binary Emitter: Implement wasm.asl to generate valid Wasm MVP binary modules with zero external tooling (wat2wasm)."
+    "Falsification Closure: Eradicate static string-grep tests across Phases 430-490, enforcing dual-polarity verification with first-class refute forms."
+  ]
+  :evidence [
+    "asl/tools/asl.c requires Apple JavaScriptCore.framework, preventing clean cross-compilation."
+    "WASI Preview 1 fd_read, fd_write, path_open, and fd_readdir completely replace POSIX filesystem operations with superior sandbox boundaries."
+    "macho.asl and elf.asl are currently static mock dictionaries that do not emit byte arrays or binary files."
+    "12 acceptance test suites in tests/acceptance/d81/ lack refute forms and 69 instances of assert-not remain in stdlib."
+  ]
+  :decision "Adopt D92 establishing the Sovereign WebAssembly/WASI Runtime Transition and POSIX Decoupling. Replace engine.js and asl.c with pure ASL compiled to wasm32-wasi via a new self-hosted binary emitter wasm.asl. Decouple execCmd into a permission-gated capability, replace git subprocess invocations with direct .git VFS parsing, and remediate all remaining acceptance test gaps."
+  :invariants ["C1" "C2" "C3" "C5" "D34" "D51" "D77" "D81" "D86" "D87" "D89" "D92"]
+  :tasks [
+    "Task50601"
+    "Task50602"
+    "Task50603"
+    "Task50604"
+    "Task50701"
+    "Task50702"
+    "Task50703"
+    "Task50801"
+    "Task50802"
+    "Task50901"
+    "Task51001"
+  ]
+  :settledChoices [
+    (:choice :id targetRuntime :value "Universal wasm32-wasi Preview 1 standard with OPFS browser mapping")
+    (:choice :id binaryEmitter :value "Pure ASL self-hosted wasm.asl generating binary WebAssembly directly")
+    (:choice :id subprocessPolicy :value "execCmd treated as optional host capability; denied with structured receipt in sandboxed WASI; git audits use direct .git VFS inspection")
+    (:choice :id nativeCliPath :value "Stage-2 pure ASL macho.asl/elf.asl binary compilation for host CLI tools")
+    (:choice :id legacyRetirement :value "Complete liquidation of asl/tools/engine.js, gen_engine_header.sh, and asl/tools/asl.c")
+  ]
+  :outcomes [
+    "AgentScript becomes 100% self-hosted in pure ASL with zero foreign C or JavaScript runtimes"
+    "Deterministic execution across macOS, Linux, Windows, web browsers, and edge workers"
+    "Complete closure of legacy acceptance test vacuity and mock compiler stubs"
+    "Rigorous dual-polarity verification enforcing explicit refutations across all test suites"
+  ]
+)

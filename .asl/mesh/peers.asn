@@ -1,14 +1,14 @@
 ;; Mesh Peer Registry Schema & Active Daemon Manifest
-(:mesh-peers
+(:meshPeers
   :version 1
   :peers [
     (:peer
-      :daemon-id "751f1272"
-      :workspace-hash "751f1272"
+      :daemonId "751f1272"
+      :workspaceHash "751f1272"
       :pid 69281
       :socket "/tmp/asl_mem_751f1272.sock"
       :port 0
       :role :master
-      :heartbeat-epoch 1757160000
+      :heartbeatEpoch 1757160000
       :status "active")
   ])

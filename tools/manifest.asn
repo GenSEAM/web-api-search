@@ -1,0 +1,11 @@
+(:package tools
+ :version "0.1.0"
+ :entry "gate.asl"
+ :description "Tools and harness package"
+ :aslFirst true
+ :modules ["tools/gate"
+           "tools/pre-commit"
+           "tools/sync-workspace"
+           "tools/transpile-pkg"
+           "tools/skills-dist"]
+ :dependencies [])

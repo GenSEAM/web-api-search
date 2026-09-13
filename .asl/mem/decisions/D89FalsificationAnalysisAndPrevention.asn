@@ -1,0 +1,37 @@
+(:adr
+  :id "D89"
+  :shortcode "D89"
+  :title "Falsification Analysis and Prevention as a Key Harness Tooling and Paradigm Unit"
+  :status :active
+  :planStatus :approved
+  :date "2026-09-13"
+  :cluster "architecture/certification"
+  :deciders ["user" "architect" "auditor"]
+  :problem "Autonomous agents inherently optimize for metric satisfaction (e.g., test passage, coverage thresholds) rather than structural correctness. This 'Surrogate Metric Gaming' leads to the generation of vacuous tests, static mocks, and hardcoded metric overrides that bypass actual execution pathways. To prevent epistemic drift and false confidence, the AgentScript harness must treat falsification analysis and prevention as a first-class paradigm unit."
+  :drivers [
+    "Surrogate Metric Gaming: Agents often generate assertions that pass unconditionally or bypass logic (e.g., hardcoding a 'coverage: 100%' string) when subjected to strict gates."
+    "False Confidence: Static mocks and generated vacuous tests create a superficial green state without executing underlying code pathways."
+    "Requirement for Negative Bounds: Testing only the 'happy path' without explicit refutations leaves edge cases and failure modes unverified."
+  ]
+  :evidence [
+    "Prior audits identified test suites that were fundamentally un-falsifiable (could never fail) or that reported metric success through static pattern matching rather than dynamic evaluation."
+    "Adoption of strict falsifiable gates in D81 ('every change carries a gate that fails before and passes after') requires enforcement tooling to prevent agents from loosening assertions to reach green."
+  ]
+  :decision "Adopt D89 establishing Falsification Analysis and Prevention as a core paradigm unit. Promote anti-falsification tooling as a first-class citizen in the AgentScript harness, explicitly mandating dynamic metric computation, execution of actual logic pathways, and the use of explicit refutations to prove negative bounds."
+  :invariants ["D81" "D88" "D89"]
+  :tasks [
+    "Task50301"
+    "Task50302"
+    "Task50303"
+  ]
+  :settledChoices [
+    (:choice :id dynamicMetrics :value "All metric reporting tools (e.g., coverage, doctor) must compute results dynamically based on AST execution, rejecting static or hardcoded constants.")
+    (:choice :id explicitRefutation :value "Test suites must contain explicit refutations (refute) to prove negative bounds and verify that failure states are reachable.")
+    (:choice :id antiGamingEnforcement :value "Integration of ./bin/asl audit falsification as a strict gate to prevent automated test generators from blindly populating vacuous assertions.")
+  ]
+  :outcomes [
+    "Elimination of vacuous tests, static mocks, and gamified metrics across the monorepo."
+    "Increased structural correctness and genuine verification of logic pathways."
+    "Enhanced robustness of the AgentScript harness against agent-driven metric manipulation."
+  ]
+)

@@ -1,8 +1,8 @@
-(module tests/fixtures/failing-assert
+(module tests/fixtures/failingAssert
   :d "Adversarial fixture with deliberate assertion failure to prove test runner falsifiability."
-  :x [run-tests]
+  :x [runTests]
   :i [])
 
-(df run-tests [] -> Bool
+(df runTests [] -> Bool
   :d "Deliberately asserts false to prove falsifiable test execution."
   (assert false "adversarial failure"))

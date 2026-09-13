@@ -137,7 +137,7 @@
       :actionDag ["Implement batch RPC op in asl/asl" "Verify with E2E script"]
       :handoffContext ""
       :receipts [
-        "(:receipt :exit 0 :durationMs 210 :rssMb 22 :asserts 11 :passed 11 :failed 0 :mutated ["asl/asl"] :hash "hash-asl-382-03" :invariants ["c1" "c2" "d40"] :evidence "11/11 checks passed in test_task_protocol_e2e.sh")"
+        "(:receipt :exit 0 :durationMs 210 :rssMb 22 :asserts 11 :passed 11 :failed 0 :mutated ["asl/asl"] :hash "hashAsl38203" :invariants ["c1" "c2" "d40"] :evidence "11/11 checks passed in test_task_protocol_e2e.sh")"
       ])
 
     (:task
@@ -225,7 +225,7 @@
       :actionDag ["Execute E2E script" "Run asl gate" "Record receipt"]
       :handoffContext ""
       :receipts [
-        "(:receipt :exit 0 :durationMs 35400 :rssMb 38 :asserts 6602 :passed 255 :failed 0 :mutated [".asl/mem/roadmap.asn" ".asl/mem/receipts.asn"] :hash "hash-gate-382-05" :invariants ["c1" "c2" "d40"] :evidence "all 7 verification gates passed cleanly across 35 manifests and 6602 assertions")"
+        "(:receipt :exit 0 :durationMs 35400 :rssMb 38 :asserts 6602 :passed 255 :failed 0 :mutated [".asl/mem/roadmap.asn" ".asl/mem/receipts.asn"] :hash "hashGate38205" :invariants ["c1" "c2" "d40"] :evidence "all 7 verification gates passed cleanly across 35 manifests and 6602 assertions")"
       ])
   ]
 )

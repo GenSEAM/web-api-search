@@ -105,7 +105,7 @@
   :required ["Normative grammar and schema conformance corpus" "Stable ID/reference resolver and drift check" "Framed token measurement per model profile" "Source-bound result and event replay fixtures" "Paired model evaluation with independent oracle"]
   :boundary "Add these capabilities behind existing package boundaries after confirming their current status. A new daemon, vector database, ontology service or universal abstraction is not assumed necessary."
   :usefulness "A tool is admitted by an end-to-end consumer test, including failure behavior and its declared fallback, not by the existence of a command name.")
- :research (:status :planned :runs 0 :budget :not-allocated
+ :research (:status :planned :runs 0 :budget :notAllocated
   :protocol "Freeze model/version/tokenizer, task distribution, variants, grading, spend/turn limits and adoption criteria before a pilot. Keep all non-target variables fixed. Store raw outcomes and negative results. Reaching the budget without enough evidence yields Inconclusive; it does not authorize a larger run."
   :thresholds "For task-quality pilots, a candidate noninferiority margin is 2 percentage points with a 95 percent paired uncertainty interval; this is a proposed design tolerance, not a scientific constant, and stricter task families may require zero tolerance. Cost benefit must include setup, retrieval, output and repairs. The risk owner selects the applicable tolerance before execution."
   :experiments [

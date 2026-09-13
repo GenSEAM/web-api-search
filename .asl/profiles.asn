@@ -1,6 +1,6 @@
 (:profiles
   :version "1.0.0"
-  :package asl-mem
+  :package aslMem
   :updatedAt 1789414000000
   :isolationContract (:enforcement :hostBoundary :hiddenEvaluationProtection true)
   :profiles [

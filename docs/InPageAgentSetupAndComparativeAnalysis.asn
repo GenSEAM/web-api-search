@@ -1,7 +1,7 @@
 (:spec
   :title "InPageAgentSetupAndComparativeAnalysis"
   :format "asn"
-  :source-file "IN_PAGE_AGENT_SETUP_AND_COMPARATIVE_ANALYSIS.md"
+  :sourceFile "IN_PAGE_AGENT_SETUP_AND_COMPARATIVE_ANALYSIS.md"
   :body "# In-Page Agent Infrastructure: Model Selection, Harness Architecture & Comparative Analysis
 
 > **Subsystem**: `asl/web` • `harness` • `voice` • `vdom`  

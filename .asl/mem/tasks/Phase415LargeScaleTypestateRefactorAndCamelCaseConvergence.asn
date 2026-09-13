@@ -121,7 +121,7 @@
       :title "Execute Monorepo-Wide Test Function PascalCase Migration"
       :kind :refactor
       :lane "codec"
-      :state :in-progress
+      :state :inProgress
       :priority :high
       :ownerRole "implementer"
       :createdAt 1773440000000

@@ -1,7 +1,7 @@
 (:spec
   :title "OptimalDefaultInBrowserModelSpecification"
   :format "asn"
-  :source-file "OPTIMAL_DEFAULT_IN_BROWSER_MODEL_SPECIFICATION.md"
+  :sourceFile "OPTIMAL_DEFAULT_IN_BROWSER_MODEL_SPECIFICATION.md"
   :body "# Optimal Default In-Browser Model Specification: Qwen 2.5 Coder 1.5B (Q4_K_M)
 
 > **Subsystem**: `asl/web` • `harness` • `vdom`  

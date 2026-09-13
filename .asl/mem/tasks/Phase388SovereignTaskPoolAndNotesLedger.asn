@@ -47,7 +47,7 @@
       :actionDag ["Author notes.asl" "Author notes_test.asl" "Register grammar and manifest" "Create notes.asn"]
       :handoffContext ""
       :receipts [
-        "(:receipt :exit 0 :durationMs 28 :rssMb 18 :asserts 25 :passed 25 :failed 0 :mutated ["mem/src/notes.asl" "mem/tests/notes_test.asl" ".asl/mem/notes.asn"] :hash "hash-mem-388-01" :invariants ["c1" "c2" "d45"] :evidence "25 assertions executed and recorded cleanly in notes_test.asl")"
+        "(:receipt :exit 0 :durationMs 28 :rssMb 18 :asserts 25 :passed 25 :failed 0 :mutated ["mem/src/notes.asl" "mem/tests/notes_test.asl" ".asl/mem/notes.asn"] :hash "hashMem38801" :invariants ["c1" "c2" "d45"] :evidence "25 assertions executed and recorded cleanly in notes_test.asl")"
       ])
 
     (:task
@@ -92,7 +92,7 @@
       :actionDag ["Implement lease functions in tasks.asl" "Author unit tests in tasks_test.asl" "Verify 127 assertions"]
       :handoffContext ""
       :receipts [
-        "(:receipt :exit 0 :durationMs 38 :rssMb 20 :asserts 127 :passed 12 :failed 0 :mutated ["mem/src/tasks.asl" "mem/tests/tasks_test.asl"] :hash "hash-mem-388-02" :invariants ["c1" "c2" "d45"] :evidence "127 assertions executed cleanly in tasks_test.asl covering session leases and crash recovery")"
+        "(:receipt :exit 0 :durationMs 38 :rssMb 20 :asserts 127 :passed 12 :failed 0 :mutated ["mem/src/tasks.asl" "mem/tests/tasks_test.asl"] :hash "hashMem38802" :invariants ["c1" "c2" "d45"] :evidence "127 assertions executed cleanly in tasks_test.asl covering session leases and crash recovery")"
       ])
 
     (:task
@@ -136,7 +136,7 @@
       :actionDag ["Run gate" "Record rc-gap-015 receipt in receipts.asn"]
       :handoffContext ""
       :receipts [
-        "(:receipt :exit 0 :durationMs 36000 :rssMb 40 :asserts 6627 :passed 256 :failed 0 :mutated [".asl/mem/roadmap.asn" ".asl/mem/receipts.asn"] :hash "hash-gate-388-03" :invariants ["c1" "c2" "d45"] :evidence "all 7 gates passed cleanly across 35 manifests and 6627 assertions")"
+        "(:receipt :exit 0 :durationMs 36000 :rssMb 40 :asserts 6627 :passed 256 :failed 0 :mutated [".asl/mem/roadmap.asn" ".asl/mem/receipts.asn"] :hash "hashGate38803" :invariants ["c1" "c2" "d45"] :evidence "all 7 gates passed cleanly across 35 manifests and 6627 assertions")"
       ])
   ]
 )

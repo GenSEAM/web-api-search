@@ -1,15 +1,15 @@
-(:eddie-config
+(:eddieConfig
   :model "gemma-4-31b-it"
   :pipeline "full"
   :environment "modal"
-  :entropy-threshold :auto
+  :entropyThreshold :auto
   :airgap true
-  :asl-first true
-  :scout-polyglot true
+  :aslFirst true
+  :scoutPolyglot true
   :stages [
-    (:stage :name :scout :timeout-sec 30)
-    (:stage :name :plan-and-gap-audit :timeout-sec 45)
-    (:stage :name :implement :timeout-sec 90)
-    (:stage :name :test-and-verify :timeout-sec 60)
+    (:stage :name :scout :timeoutSec 30)
+    (:stage :name :planAndGapAudit :timeoutSec 45)
+    (:stage :name :implement :timeoutSec 90)
+    (:stage :name :testAndVerify :timeoutSec 60)
   ]
-  :telemetry-sink "harness/results/terminal-bench-4")
+  :telemetrySink "harness/results/terminal-bench-4")

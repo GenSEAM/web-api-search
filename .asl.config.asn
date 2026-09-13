@@ -1,8 +1,8 @@
-(:asl-config
+(:aslConfig
   :workspace "genseam"
   :version "1.0.0"
-  :pure-asl true
-  :asl-first true
+  :pureAsl true
+  :aslFirst true
   :conventions (
     :taskNaming :camelCase
     :taskPrefix "T"
@@ -40,15 +40,15 @@
     "**/.asl/metrics/**"
   ]
   :gates [1 2 3 4 5 6 7]
-  :binary-whitelist [
+  :binaryWhitelist [
     (:bin :name "asl" :purpose "Sovereign single-binary engine, evaluator, compiler, evolver, and memory substrate" :path "asl/bin/asl")
     (:bin :name "asl-engine" :purpose "Sovereign resident engine alias" :path "asl/bin/asl-engine")
     (:bin :name "git" :purpose "Git-native textual state management and CAS diff generation" :path "git")
     (:bin :name "bash" :purpose "POSIX launch bootstrapping and minimal CLI dispatch" :path "bash")
   ]
-  :token-baseline 2
-  :telemetry (:target-turn-ms 100 :max-token-ceiling 150)
-  :daemon (:resident true :memory-index true :max-files 2000)
+  :tokenBaseline 2
+  :telemetry (:targetTurnMs 100 :maxTokenCeiling 150)
+  :daemon (:resident true :memoryIndex true :maxFiles 2000)
   :processPlane (
     :defaultTimeoutMs 300000
     :idleTimeoutMs 30000
@@ -63,11 +63,11 @@
   )
   :coverage (
     :desired 80.0
-    :min-assertions 2
-    :strict-polarity false
-    :discount-zero-asserts true
-    :core-desired 100.0
-    :core-packages ["agent-core" "asl/packages/asl-compiler" "asl/packages/asl-parser" "crawler" "browser-plugin" "web-api-search"]
+    :minAssertions 2
+    :strictPolarity false
+    :discountZeroAsserts true
+    :coreDesired 100.0
+    :corePackages ["agent-core" "asl/packages/asl-compiler" "asl/packages/asl-parser" "crawler" "browser-plugin" "web-api-search"]
     :exclude ["asl/examples/**" "asl-arduino/**" "asl-quantum/**"]
   )
   :tasks [
@@ -87,28 +87,28 @@
     (:task :name "tbench:full" :cmd "bin/modal-tbench --full --concurrency 4" :doc "Run full Terminal-Bench 4 on Modal microVMs")
     (:task :name "tbench:package" :cmd "python3 scratch/harbor/package_submission.py" :doc "Package latest Harbor job to official submission tarball")
   ]
-  :gateway (:endpoint "http://127.0.0.1:8765/v1" :port 8765 :quarantine-cot true :intercept-esh true)
-  :reflection-stages [
-    (:stage :id "s1-ingest" :enabled true :ablation-group "core")
-    (:stage :id "s2-reformulate" :enabled true :ablation-group "reformulation")
-    (:stage :id "s3-intent-gate" :enabled true :ablation-group "reformulation")
-    (:stage :id "s4-plan" :enabled true :ablation-group "planning")
-    (:stage :id "s5-plan-gate" :enabled true :ablation-group "planning")
-    (:stage :id "s6-implement" :enabled true :ablation-group "execution")
-    (:stage :id "s7-verify" :enabled true :ablation-group "verification")
+  :gateway (:endpoint "http://127.0.0.1:8765/v1" :port 8765 :quarantineCot true :interceptEsh true)
+  :reflectionStages [
+    (:stage :id "s1-ingest" :enabled true :ablationGroup "core")
+    (:stage :id "s2-reformulate" :enabled true :ablationGroup "reformulation")
+    (:stage :id "s3-intent-gate" :enabled true :ablationGroup "reformulation")
+    (:stage :id "s4-plan" :enabled true :ablationGroup "planning")
+    (:stage :id "s5-plan-gate" :enabled true :ablationGroup "planning")
+    (:stage :id "s6-implement" :enabled true :ablationGroup "execution")
+    (:stage :id "s7-verify" :enabled true :ablationGroup "verification")
   ]
-  :pipeline-profiles [
-    (:pipeline-profile
+  :pipelineProfiles [
+    (:pipelineProfile
       :name "balanced-coding"
-      :active-stages ["s1-ingest" "s2-reformulate" "s3-intent-gate" "s4-plan" "s6-implement" "s7-verify"]
-      :skip-stages ["s5-plan-gate"])
-    (:pipeline-profile
+      :activeStages ["s1-ingest" "s2-reformulate" "s3-intent-gate" "s4-plan" "s6-implement" "s7-verify"]
+      :skipStages ["s5-plan-gate"])
+    (:pipelineProfile
       :name "fast-path"
-      :active-stages ["s1-ingest" "s6-implement"]
-      :skip-stages ["s2-reformulate" "s3-intent-gate" "s4-plan" "s5-plan-gate" "s7-verify"])
-    (:pipeline-profile
+      :activeStages ["s1-ingest" "s6-implement"]
+      :skipStages ["s2-reformulate" "s3-intent-gate" "s4-plan" "s5-plan-gate" "s7-verify"])
+    (:pipelineProfile
       :name "deep-reflex"
-      :active-stages ["s1-ingest" "s2-reformulate" "s3-intent-gate" "s4-plan" "s5-plan-gate" "s6-implement" "s7-verify"]
-      :skip-stages [])
+      :activeStages ["s1-ingest" "s2-reformulate" "s3-intent-gate" "s4-plan" "s5-plan-gate" "s6-implement" "s7-verify"]
+      :skipStages [])
   ]
 )

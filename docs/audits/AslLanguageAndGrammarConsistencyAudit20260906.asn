@@ -1,7 +1,7 @@
 (:spec
   :title "AslLanguageAndGrammarConsistencyAudit20260906"
   :format "asn"
-  :source-file "2026-09-06-asl-language-and-grammar-consistency-audit.md"
+  :sourceFile "2026-09-06-asl-language-and-grammar-consistency-audit.md"
   :body "# Two-Pass Consistency and Architecture Audit: AgentScript (ASL) & GenSEAM Monorepo
 
 Conducted by: Autonomous Senior Language & Compiler Architect  

@@ -21,7 +21,7 @@
       :invariants ["C2" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
       :adr "D81" :decision "d81" :dependsOn []
-      :gate "python3 -c 'import re, glob, sys; emoji_pat = re.compile(r"[\U0001F300-\U0001FAFF]"); picto_pat = re.compile(r"[▶▼⠋❯◆✔✓✗⏸]"); files = glob.glob("asl/web/**/*.asl", recursive=True) + ["agent/src/asn_boxart.asl", "agent/src/tui.asl", "agent/tests/tui-test.asl", "mem/tests/vfs_sync_test.asl"]; found = sum(len(emoji_pat.findall(open(f).read())) + len(picto_pat.findall(open(f).read())) for f in files); sys.exit(1 if found > 0 else 0)' && ./bin/asl test agent/tests/tui-test.asl && ./bin/asl test mem/tests/vfs_sync_test.asl"
+      :gate "python3 -c 'import re, glob, sys; emoji_pat = re.compile(r"[\U0001F300-\U0001FAFF]"); picto_pat = re.compile(r"[▶▼⠋❯◆✔✓✗⏸]"); files = glob.glob("asl/web/**/*.asl", recursive=True) + ["agent/src/asn_boxart.asl", "agent/src/tui.asl", "agent/tests/tuiTest.asl", "mem/tests/vfs_sync_test.asl"]; found = sum(len(emoji_pat.findall(open(f).read())) + len(picto_pat.findall(open(f).read())) for f in files); sys.exit(1 if found > 0 else 0)' && ./bin/asl test agent/tests/tui-test.asl && ./bin/asl test mem/tests/vfs_sync_test.asl"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
       :verificationRole "independentVerifier" :verificationOwns ["agent/tests/tui-test.asl"]

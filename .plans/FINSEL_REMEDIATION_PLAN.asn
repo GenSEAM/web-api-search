@@ -2,10 +2,10 @@
   :id "FINSEL-20260913"
   :title "Master Multi-Model Monorepo Remediation Plan"
   :status :planned
-  :monorepo-scope [:wave-1 :wave-2 :wave-3 :wave-4 :wave-5 :wave-6 :wave-7 :wave-8]
+  :monorepoScope [:wave1 :wave2 :wave3 :wave4 :wave5 :wave6 :wave7 :wave8]
   :phases [
     (:phase
-      :id :p0-integrity-and-security
+      :id :p0IntegrityAndSecurity
       :name "P0 Epistemic Integrity & Security Gates"
       :tasks [
         (:task
@@ -81,7 +81,7 @@
           :baseline "Acceptance tests require existing task id"
           :gate "! sh tests/acceptance/d81/SuperviseGate.sh TaskNonExistent")])
     (:phase
-      :id :p1-runtime-and-execution
+      :id :p1RuntimeAndExecution
       :name "P1 Core Runtime & Tool Execution Engines"
       :tasks [
         (:task
@@ -139,7 +139,7 @@
           :baseline "Hardcoded mock true for submodules and 0 0 thresholds"
           :gate "bin/asl test tools/tests/sync-workspace-test.asl")])
     (:phase
-      :id :p1-concurrency-memory-ast
+      :id :p1ConcurrencyMemoryAst
       :name "P1 Concurrency, Memory & Structural AST Soundness"
       :tasks [
         (:task
@@ -203,7 +203,7 @@
           :baseline "Omits key matching when reordering child lists"
           :gate "bin/asl test vdom/tests/vdom_test.asl")])
     (:phase
-      :id :p2-universalism-and-dedup
+      :id :p2UniversalismAndDedup
       :name "P2 Boundary Universalism & Redundancy Consolidation"
       :tasks [
         (:task
@@ -237,7 +237,7 @@
           :baseline "assert (= 1 1) and external module bypasses in tests"
           :gate "bin/asl test mem/tests/mem_test.asl && bin/asl test tests/acceptance/d81/Task45404.asl")])
     (:phase
-      :id :p2-invariants-and-grammar
+      :id :p2InvariantsAndGrammar
       :name "P2 Monorepo Invariants & Grammar Realignment"
       :tasks [
         (:task

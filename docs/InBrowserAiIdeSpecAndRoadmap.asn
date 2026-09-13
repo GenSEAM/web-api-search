@@ -1,7 +1,7 @@
 (:spec
   :title "InBrowserAiIdeSpecAndRoadmap"
   :format "asn"
-  :source-file "IN_BROWSER_AI_IDE_SPEC_AND_ROADMAP.md"
+  :sourceFile "IN_BROWSER_AI_IDE_SPEC_AND_ROADMAP.md"
   :body "# In-Browser AI IDE & Vibe Coder Architecture Specification
 
 > **Subsystem**: `asl/web` • `harness` • `vdom` • `web-api-search`  

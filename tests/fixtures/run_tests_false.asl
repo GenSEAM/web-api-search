@@ -1,7 +1,7 @@
 (module tests/fixtures/run_tests_false
   :d "Fixture verifying loud failure when run-tests returns false (assert validation)."
-  :x [run-tests]
+  :x [runTests]
   :i [])
 
-(df run-tests [] -> Bool
+(df runTests [] -> Bool
   false)

@@ -1,4 +1,4 @@
-(module paradigm-system/flow
+(module paradigmSystem/flow
   :d "Reference policy over adapter-supplied state; neither provenance verification nor certification of semantic understanding."
   :x [ReviewState ContextBudget BudgetDecision NextAction AllocateContext]
   :i [])

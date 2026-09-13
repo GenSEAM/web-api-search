@@ -1,7 +1,7 @@
 (:spec
   :title "LayerStratificationSpec"
   :format "asn"
-  :source-file "LAYER_STRATIFICATION_SPEC.md"
+  :sourceFile "LAYER_STRATIFICATION_SPEC.md"
   :body "# 4-Tier Architectural Stratification Specification
 
 > **Status**: Canonical System Architecture Specification  

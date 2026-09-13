@@ -1,4 +1,4 @@
-(:edgeScenarios :v 1 :src ADR-0081
+(:edgeScenarios :v 1 :src ADR0081
   :scenarios [
     (:scenario :id "uncoveredStep"
       :condition "No plan step in ledger matches current reality"

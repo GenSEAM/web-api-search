@@ -1,1 +1,1 @@
-(def heavy-data [1 2 3 4 5])
+(def heavyData [1 2 3 4 5])

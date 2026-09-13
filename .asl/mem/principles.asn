@@ -1,6 +1,6 @@
 (:principlesLedger
   :version "1.0.0"
-  :package asl-mem
+  :package aslMem
   :updatedAt 1789246000000
   :purpose "The standing principles this project orients by, kept outside the decision ledger because a decision is answerable to a moment and a principle is answerable to evidence. A principle is either normative, adopted deliberately and without measurement, or empirical, and an empirical one carries its measurement, its scope and its date. A principle with a number and no source does not belong here."
   :classes [(:normative "Adopted as a value. Not falsifiable, and not presented as a finding.")

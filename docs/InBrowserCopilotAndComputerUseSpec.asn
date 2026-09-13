@@ -1,7 +1,7 @@
 (:spec
   :title "InBrowserCopilotAndComputerUseSpec"
   :format "asn"
-  :source-file "IN_BROWSER_COPILOT_AND_COMPUTER_USE_SPEC.md"
+  :sourceFile "IN_BROWSER_COPILOT_AND_COMPUTER_USE_SPEC.md"
   :body "# In-Browser Copilot, Page Mutation & Computer Use Specification
 
 > **Subsystem**: `asl/web` • `harness` • `voice` • `vdom`  

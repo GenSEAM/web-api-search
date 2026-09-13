@@ -1,14 +1,14 @@
-(:gaps-audit
+(:gapsAudit
   :meta (:id "GAP-2026-09-12" :target "/Users/purplelephant/projects/asex" :auditor "SovereignEpistemicAuditMesh" :timestamp 1789220400000)
-  :receipt (:verdict :action-required
-            :total-packages 35
-            :total-asl-files 908
-            :total-asn-files 941
-            :total-test-files 313
-            :tests-passed 276
-            :tests-failed 36
-            :zero-assert-suites 1
-            :total-gaps 52
+  :receipt (:verdict :actionRequired
+            :totalPackages 35
+            :totalAslFiles 908
+            :totalAsnFiles 941
+            :totalTestFiles 313
+            :testsPassed 276
+            :testsFailed 36
+            :zeroAssertSuites 1
+            :totalGaps 52
             :critical 24
             :moderate 20
             :minor 8
@@ -851,7 +851,7 @@
       :id "Phase457RegressionAndAssertionIntegrityRestoration"
       :priority :P1
       :status :pending
-      :invariants [:gates :ground-truth]
+      :invariants [:gates :groundTruth]
       :actions [
         "Fix attribute replacement ordering in svg-transpile.asl to restore compaction >= 30%"
         "Fix trailing newline splitting in asl-sh/src/reducer.asl and whitespace splitting in git_search.asl"

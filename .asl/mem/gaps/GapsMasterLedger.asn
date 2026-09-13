@@ -12,7 +12,7 @@
       :defectId "def-mesh-001"
       :path "tests/acceptance/d81/Task46601.asl"
       :lineNumber 1
-      :kind :boundary-violation
+      :kind :boundaryViolation
       :severity :advisory
       :blameSymbol "Task46601"
       :rationale "Hidden evaluation suite immutable boundary verified under D81"
