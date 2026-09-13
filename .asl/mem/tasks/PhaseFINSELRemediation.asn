@@ -745,5 +745,47 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F18" :status :passed :exitCode 0 :assertionsEvaluated 17 :timestamp 1789446900000)
       ])
+    (:task
+      :id "Task-F19"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Hydrate Symbol Graph on Intel Preload"
+      :kind :gate
+      :lane "intel"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789447200000
+      :updatedAt 1789447200000
+      :motivation "intel-preload traverses an empty graph created by (g/graph-create) and returns empty horizons."
+      :purpose "Hydrate symbol graph from workspace files before performing preload horizon traversal in intel-preload."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Workspace files symbol extraction" "SymbolGraph hydration from AST definitions and references" "Populated preload horizon in intel-preload"]
+      :owns ["intel/src/preload.asl"]
+      :targetSymbols ["intel-preload" "hydrate-graph-from-files" "hydrate-graph-from-sources" "hydrate-graph-from-file-symbols" "default-workspace-files"]
+      :relatedSymbols ["SymbolGraph" "GraphNode" "GraphEdge" "PreloadedHorizon" "SymbolStub"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F18"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F19"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F19.asl" "intel/tests/preload-test.asl"]
+      :verificationCases ["intel-preload traverses a populated symbol graph hydrated from workspace AST definitions and references."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F19" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect preload.asl" "Author acceptance fixture Task-F19.asl" "Demonstrate baseline failure" "Implement graph hydration in preload.asl" "Certify green."]
+      :stepIndex 1
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F19" :status :passed :exitCode 0 :assertionsEvaluated 22 :timestamp 1789447200000)
+      ])
   ]
 )
+

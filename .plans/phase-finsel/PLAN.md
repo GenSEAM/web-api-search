@@ -145,11 +145,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F18` (17 assertions verified)
 
 ### Task-F19: Hydrate Symbol Graph on Intel Preload
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `intel/src/preload.asl`
 - **Baseline Failure**: `intel-preload` traverses an empty graph created by `(g/graph-create)`.
 - **Remedy**: Load workspace files, extract symbols, and populate the graph before performing preload traversal.
-- **Gate**: `bin/asl test intel/tests/preload_test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F19` (22 assertions verified)
 
 ### Task-F20: Connect Ablation Study Runner to Genuine Model Inference Harness
 - **Status**: planned

@@ -1849,6 +1849,14 @@
       :tags [:supervision :phase-finsel :task-f18 :intel :graph-traversal :blast-radius :approved]
       :fact "task-f18-certified-complete"
       :evidence "Implemented dynamic AST traversal and blast radius reachability in ASL intel engine; added graph-incoming, graph-outgoing, graph-find to intel/src/graph.asl; implemented query-callers, query-callees, and query-impact in intel/src/query.asl with BFS transitive traversal and visited deduplication; authored query_test.asl (13 assertions); authored tests/acceptance/d81/Task-F18.asl demonstrating baseline failure; evaluated 17 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
-      :consequence "Task-F18 certified complete; code intelligence query engine computes genuine caller, callee, and transitive blast radius graphs under ADR-0081")
+      :consequence "Task-F18 certified complete; code intelligence query engine computes genuine caller, callee, and transitive blast radius graphs under ADR-0081")    (:note
+      :id "n172"
+      :timestamp 1789447200000
+      :author "codex"
+      :scope ["intel/src/preload.asl" "intel/tests/preload-test.asl" "tests/acceptance/d81/Task-F19.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f19 :intel :symbol-graph :preload :approved]
+      :fact "task-f19-certified-complete"
+      :evidence "Hydrated symbol graph on intel preload; implemented hydrate-graph-into, hydrate-graph-from-file-symbols, hydrate-graph-from-sources, hydrate-graph-from-files, default-workspace-files, intel-preload-files, and updated intel-preload in intel/src/preload.asl to parse workspace AST definitions and references into GraphNodes and GraphEdges; updated preload-test.asl (50 assertions); authored tests/acceptance/d81/Task-F19.asl demonstrating baseline failure; evaluated 22 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F19 certified complete; code intelligence horizon preloading operates over genuine workspace symbol graphs under ADR-0081")
   ]
 )
