@@ -1,6 +1,6 @@
 # D81 Programme
 
-Thirty-one phases, 182 tasks, registered in ADR-0081, `.asl/mem/intent.asn`, `.asl/mem/decisions/decisions.asn` and `.asl/mem/roadmap.asn`. Every phase carries a `:baseline` stating what was measured and when; no phase was written from an impression.
+Thirty-one phases, 182 tasks, registered in D81, `.asl/mem/intent.asn`, `.asl/mem/decisions/decisions.asn` and `.asl/mem/roadmap.asn`. Every phase carries a `:baseline` stating what was measured and when; no phase was written from an impression.
 
 ## Phases
 
