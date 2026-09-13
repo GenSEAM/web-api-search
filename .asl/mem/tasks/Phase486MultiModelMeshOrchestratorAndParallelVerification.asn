@@ -14,11 +14,11 @@
       :title "Multi-Model Mesh Protocol and Defect Taxonomy Schema"
       :kind :grammar
       :lane "grammar"
-      :state :ready
+      :state :completed
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789459200000
-      :updatedAt 1789459200000
+      :updatedAt 1789462800000
       :motivation "Parallel model orchestration requires a formal ASN grammar contract defining worker dispatch forms, defect taxonomy, and synthesis schemas."
       :purpose "Author asl/grammar/mesh.asn defining schemas for worker allocation, AST defect records (path, line, kind, severity), and synthesis consensus receipts."
       :context (:contractRef D81PlanContext)
@@ -40,11 +40,21 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task48601.asl"]
       :verificationCases ["mesh.asn declares mesh-worker, defect-record, and consensus-receipt forms." "Delimiters balanced cleanly."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48601.asl" :status :notEstablished :contract D81Baseline)
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48601.asl" :status :baselineVerified :contract D81Baseline)
+      :reviewStatus :verified
       :stepIndex 1
-      :receipts [])
+      :receipts [
+        (:receipt
+          :id "receipt-task-48601"
+          :taskId "Task48601"
+          :gate "bin/asl test tests/acceptance/d81/Task48601.asl"
+          :exitCode 0
+          :status :passed
+          :timestamp 1789462800000
+          :digest "206244a"
+          :executedAsserts 18
+          :durationMs 7000)])
 
     (:task
       :id "Task48602"
