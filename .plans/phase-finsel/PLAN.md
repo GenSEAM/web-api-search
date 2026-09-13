@@ -71,7 +71,7 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `bin/asl test asl/packages/asl-gates/tests/site_claims_test.asl`
 
 ### Task-F09: Sanitize Crawler CLI Arguments & Enforce SSRF Defenses
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `crawler/src/crawler.asl`
 - **Baseline Failure**: `fetch-url` allows arbitrary URL schemes (`file://`, `gopher://`) and accepts flag-like URLs (e.g. `-v`, `--help`) without `--` argument isolation.
 - **Remedy**: Validate URL scheme to allow only `http` and `https`; insert `--` before the target URL in curl argument vector.

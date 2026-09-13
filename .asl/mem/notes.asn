@@ -1769,5 +1769,14 @@
       :fact "task-f08-certified-complete"
       :evidence "Grounded site claims verification against live measurements; implemented load-published-claims in site-claims.asl reading bench/published_claims.asn directly from disk; eliminated tautological (run-claims-audit claims claims); updated grammar.asn and added test-load-published-claims in site-claims-test.asl; authored tests/acceptance/d81/Task-F08.asl with baseline failure demonstration; evaluated 25 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F08 certified complete; site claims verification inspects published registry on disk and rejects missing or fabricated claims under ADR-0081")
+    (:note
+      :id "n163"
+      :timestamp 1789444200000
+      :author "codex"
+      :scope ["crawler/src/crawler.asl" "crawler/grammar.asn" "crawler/tests/crawler_test.asl" "tests/acceptance/d81/Task-F09.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f09 :crawler :ssrf :security :approved]
+      :fact "task-f09-certified-complete"
+      :evidence "Sanitized crawler CLI arguments and enforced SSRF defenses; implemented is-valid-crawl-url? restricting crawl targets to http/https and rejecting flag-like URLs; inserted -- isolation flag before target URL in curl-args; updated grammar.asn and crawler_test.asl (29 assertions); authored tests/acceptance/d81/Task-F09.asl with baseline failure demonstration; evaluated 15 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F09 certified complete; crawler defends against option injection and arbitrary scheme SSRF under ADR-0081")
   ]
 )
