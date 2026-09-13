@@ -1937,6 +1937,15 @@
       :fact "task-f28-certified-complete"
       :evidence "Resolved asymmetric intent contradiction in MVCC bus; updated detect-intent-contradiction in agent-bus/src/mvcc_bus.asl to compare verdict contradictions symmetrically across both (approve, reject) and (reject, approve) pairings; exported detect-intent-contradiction; updated mvcc_bus_test.asl (28 assertions); authored tests/acceptance/d81/Task-F28.asl demonstrating baseline failure on reverse verdict order; evaluated 11 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F28 certified complete; MVCC causal DAG intent arbitration correctly detects opposing agent verdicts symmetrically under ADR-0081")
+    (:note
+      :id "n182"
+      :timestamp 1789450600000
+      :author "codex"
+      :scope ["agent-core/src/scheduler.asl" "agent-core/tests/taskstore_test.asl" "tests/acceptance/d81/Task-F29.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f29 :agent-core :scheduler :reaper :intermediate-states :deadlock-prevention :approved]
+      :fact "task-f29-certified-complete"
+      :evidence "Prevented permanent deadlock on intermediate task states; expanded is-reapable-state? in agent-core/src/scheduler.asl to include all active intermediate states (state-routing, state-clarification, state-ready, state-executing, state-verifying); exported is-reapable-state?; updated agent-core/tests/taskstore_test.asl (72 assertions); authored tests/acceptance/d81/Task-F29.asl demonstrating baseline failure on intermediate task reaping; evaluated 13 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F29 certified complete; FIFO scheduler reaper reliably recovers tasks crashing in clarification, ready, and verification stages, releasing project locks and preventing deadlocks under ADR-0081")
   ]
 )
 

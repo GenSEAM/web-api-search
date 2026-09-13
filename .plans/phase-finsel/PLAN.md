@@ -219,11 +219,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F28` (11 assertions verified)
 
 ### Task-F29: Prevent Permanent Deadlock on Intermediate Task States
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `agent-core/src/scheduler.asl`
 - **Baseline Failure**: Tasks crashing in `state-clarification`, `state-ready`, or `state-verifying` cannot be reaped by the supervisor.
 - **Remedy**: Add all active intermediate states to `is-reapable-state?`.
-- **Gate**: `bin/asl test agent-core/tests/scheduler_test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F29` (13 assertions verified)
 
 ### Task-F30: Correct Field Target in Pub/Sub Event Filtering
 - **Status**: planned
