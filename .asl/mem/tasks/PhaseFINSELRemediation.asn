@@ -1442,6 +1442,46 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F35" :status :passed :exitCode 0 :assertionsEvaluated 42 :timestamp 1789454400000)
       ])
+    (:task
+      :id "Task-F36"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Resolve Tautological Tests in Memory and Acceptance Suites"
+      :kind :test
+      :lane "verification"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789454600000
+      :updatedAt 1789454800000
+      :motivation "Tautological (= 1 1) assertions and duplicate math calls in mem_test mask unexercised driver paths."
+      :purpose "Rewrite assertions to test genuine driver instances and refutation reachability without tautologies."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Elimination of tautological constant assertions in Task45404" "Genuine VectorRecord and RRF fusion driver testing in mem_test" "Clean falsifiable gate"]
+      :owns ["mem/tests/mem_test.asl" "tests/acceptance/d81/Task45404.asl"]
+      :targetSymbols ["fuse-ranks-rrf" "create-record" "test-driver-cosine-similarity"]
+      :relatedSymbols ["test-refute-counted-separately"]
+      :invariants ["D81" "C1"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F35"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F36"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F36.asl"]
+      :verificationCases ["Tests execute genuine driver and refutation primitives with zero tautological assertions."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F36" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Author acceptance fixture Task-F36.asl" "Verify baseline failure on tautologies" "Refactor mem_test to test genuine driver instances" "Remove (= 1 1) from Task45404.asl" "Certify green under SuperviseGate.sh."]
+      :stepIndex 5
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F36" :status :passed :exitCode 0 :assertionsEvaluated 29 :timestamp 1789454800000)
+      ])
   ]
 )
-

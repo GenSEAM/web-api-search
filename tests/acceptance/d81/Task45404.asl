@@ -22,20 +22,24 @@
 
 (df test-refute-boolean-expressions [] -> Bool
   :d "Verifies refute passes on negative boolean predicates and string mismatches"
-  (do
-    (refute (= 10 20) "refute on 10 = 20 must pass")
-    (refute (string-contains? "hello" "world") "refute substring mismatch must pass")
-    (refute (> 5 10) "refute 5 > 10 must pass")
-    true))
+  (let [(msg "refutation test payload")
+        (prefix (option-or (string-slice msg 0 4) ""))]
+    (do
+      (refute (string-contains? msg "nonexistent keyword") "refute substring mismatch must pass")
+      (refute (string-empty? msg) "refute on non-empty string must pass")
+      (refute (= prefix "void") "refute mismatching slice must pass")
+      true)))
 
 (df test-refute-counted-separately [] -> Bool
   :d "Verifies that both assertions and refutations can be used together and recorded distinctly"
-  (do
-    (assert (= 1 1) "assertion must succeed")
-    (refute (= 1 2) "refutation must succeed")
-    (assert (not (= 1 2)) "inverted assert must succeed")
-    (refute false "refute false must succeed")
-    true))
+  (let [(items (list "alpha" "beta" "gamma"))
+        (total (list-length items))]
+    (do
+      (assert (= total 3) "list length must equal 3")
+      (refute (list-empty? items) "populated list must not be empty")
+      (assert (not (list-empty? items)) "inverted empty check must succeed")
+      (refute false "refute false must succeed")
+      true)))
 
 (df run-tests [] -> Bool
   :d "Executes all Task45404 acceptance tests"

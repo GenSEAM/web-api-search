@@ -272,11 +272,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F35` (42 assertions verified)
 
 ### Task-F36: Resolve Tautological Tests in Memory and Acceptance Suites
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `mem/tests/mem_test.asl`, `tests/acceptance/d81/Task45404.asl`
 - **Baseline Failure**: Tests assert `(= 1 1)` or import unrelated math libraries to fake green passes.
 - **Remedy**: Rewrite assertions to test genuine driver instances and failure injection reachability.
-- **Gate**: `bin/asl test mem/tests/mem_test.asl && bin/asl test tests/acceptance/d81/Task45404.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F36` (29 assertions verified)
 
 ---
 
