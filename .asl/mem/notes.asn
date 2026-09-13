@@ -1955,5 +1955,23 @@
       :fact "task-f30-certified-complete"
       :evidence "Corrected field target in pub/sub event filtering; updated query-bus-events in agent-bus/src/bus.asl to filter on (.-target msg) instead of payload, correctly routing messages by recipient address and preventing false positive matches from payload keywords; updated agent-bus/tests/bus_test.asl (34 assertions); authored tests/acceptance/d81/Task-F30.asl demonstrating baseline failure on target routing; evaluated 13 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F30 certified complete; pub/sub swarm bus reliably filters events by target address under ADR-0081")
+    (:note
+      :id "n184"
+      :timestamp 1789451800000
+      :author "codex"
+      :scope ["vdom/src/vdom.asl" "vdom/tests/vdom_test.asl" "tests/acceptance/d81/Task-F31.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f31 :vdom :keyed-reconciliation :list-diffing :approved]
+      :fact "task-f31-certified-complete"
+      :evidence "Added key reconciliation to VDOM list diffing; implemented index-keyed-children, diff-keyed-removals, and diff-keyed-children-pass in vdom/src/vdom.asl using list-indexed and fold; retained key attribute in filter-attributes and is-retained-attr?; dispatched diff-children to diff-children-keyed when keys are present; unit tests in vdom_test.asl (166 assertions); authored tests/acceptance/d81/Task-F31.asl demonstrating baseline failure on key stripping and child destruction; evaluated 12 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F31 certified complete; key reconciliation preserves DOM node identity, focus, and local state across child reordering under ADR-0081")
+    (:note
+      :id "n185"
+      :timestamp 1789452400000
+      :author "codex"
+      :scope ["agent-core/src/types.asl" "agent-bus/src/types.asl" "agent/src/types.asl" "agent-core/manifest.asn" "agent-bus/manifest.asn" "agent/manifest.asn" "tests/acceptance/d81/Task-F32.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f32 :agent-core :agent-bus :agent :boundary-universalism :unified-types :approved]
+      :fact "task-f32-certified-complete"
+      :evidence "Unified core agent structs under Boundary Universalism C3/D34; created canonical types.asl in agent-core, agent-bus, and agent defining unified AgentMessage, ToolParam, ToolDef, ToolCall, and ToolResult structs; updated package manifests; authored tests/acceptance/d81/Task-F32.asl evaluating 28 assertions across all three packages and passing SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F32 certified complete; core agent messages and tool types share unambiguous canonical wire schemas across the monorepo under ADR-0081")
   ]
 )
