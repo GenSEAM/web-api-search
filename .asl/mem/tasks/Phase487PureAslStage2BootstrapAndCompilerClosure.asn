@@ -14,11 +14,11 @@
       :title "Pure ASL Stage-2 Architecture Schema and IR Specification"
       :kind :grammar
       :lane "grammar"
-      :state :ready
+      :state :completed
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789459200000
-      :updatedAt 1789459200000
+      :updatedAt 1789464400000
       :motivation "Stage-2 bootstrap compiler requires a formal ASN specification for its intermediate representation (IR), register allocation, and symbol table."
       :purpose "Author asl/grammar/stage2.asn defining schemas for SSA intermediate representation, target platform ABI definitions (Darwin ARM64, Linux x86_64), and binary section layouts."
       :context (:contractRef D81PlanContext)
@@ -40,11 +40,21 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task48701.asl"]
       :verificationCases ["stage2.asn parses with 100% balanced delimiters." "Declares valid Darwin ARM64 and Linux x86_64 ABI contracts."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48701.asl" :status :notEstablished :contract D81Baseline)
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48701.asl" :status :baselineVerified :contract D81Baseline)
+      :reviewStatus :verified
       :stepIndex 1
-      :receipts [])
+      :receipts [
+        (:receipt
+          :id "receipt-task-48701"
+          :taskId "Task48701"
+          :gate "bin/asl test tests/acceptance/d81/Task48701.asl"
+          :exitCode 0
+          :status :passed
+          :timestamp 1789464400000
+          :digest "5412234"
+          :executedAsserts 14
+          :durationMs 7000)])
 
     (:task
       :id "Task48702"

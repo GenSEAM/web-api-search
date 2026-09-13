@@ -1,15 +1,15 @@
 (:in-flight
   :session-id "57abefd4-689b-44f0-8084-f5b1813fae50"
-  :lane "grammar"
+  :lane "frontend"
   :activePhase "Phase487PureAslStage2BootstrapAndCompilerClosure"
-  :activeTasks ["Task48701"]
-  :dispatchedAt 1789464200000
+  :activeTasks ["Task48702"]
+  :dispatchedAt 1789464500000
   :status "in-progress"
   :handoffId ""
   :handoffCheckpoint 0
-  :sourceDigest "cd42cbd"
-  :authoritativeConstraints ["D86" "D52" "C1" "C2"]
+  :sourceDigest "5412234"
+  :authoritativeConstraints ["D86" "C1" "C4"]
   :unresolvedQuestions []
   :negativeFindings []
-  :receiptReferences ["rc-phase486-certified-20260913"]
-  :leases ["asl/grammar/stage2.asn" "tests/acceptance/d81/Task48701.asl"])
+  :receiptReferences ["rc-phase486-certified-20260913" "rc-task48701-verified-20260913"]
+  :leases ["asl/packages/asl-compiler/src/parser.asl" "tests/acceptance/d81/Task48702.asl"])
