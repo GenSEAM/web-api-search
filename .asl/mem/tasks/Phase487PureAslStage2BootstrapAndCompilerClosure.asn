@@ -161,11 +161,11 @@
       :title "Linux ELF64 Binary Emitter in Pure ASL"
       :kind :compiler
       :lane "backend-elf"
-      :state :ready
+      :state :completed
       :priority :normal
       :ownerRole "implementer"
       :createdAt 1789459200000
-      :updatedAt 1789459200000
+      :updatedAt 1789465000000
       :motivation "Cross-platform sovereignty requires emitting standard Linux ELF64 binaries for x86_64 and ARM64."
       :purpose "Implement Linux ELF64 binary emitter in pure ASL emitting valid ELF headers, program headers, and SysV ABI calling conventions."
       :context (:contractRef D81PlanContext)
@@ -187,11 +187,21 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task48704.asl"]
       :verificationCases ["Emitted ELF64 header passes readelf validation." "Section layout adheres to standard Linux ABI."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48704.asl" :status :notEstablished :contract D81Baseline)
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48704.asl" :status :baselineVerified :contract D81Baseline)
+      :reviewStatus :verified
       :stepIndex 1
-      :receipts [])
+      :receipts [
+        (:receipt
+          :id "receipt-task-48704"
+          :taskId "Task48704"
+          :gate "bin/asl test tests/acceptance/d81/Task48704.asl"
+          :exitCode 0
+          :status :passed
+          :timestamp 1789465000000
+          :digest "d551f4e"
+          :executedAsserts 11
+          :durationMs 7000)])
 
     (:task
       :id "Task48705"
