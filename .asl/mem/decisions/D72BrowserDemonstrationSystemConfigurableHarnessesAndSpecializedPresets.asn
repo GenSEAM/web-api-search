@@ -1,0 +1,32 @@
+(:adr
+  :id "D72"
+  :shortcode "D72"
+  :title "Browser-Based Demonstration System, Configurable Harnesses, and Specialized Presets"
+  :status :active
+  :date "2026-09-10"
+  :cluster "architecture/browser-demonstration"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "Demonstrating and deploying small language models (<3B) in client browser sandboxes requires strict boundary enforcement, dynamic harness specialization, and deterministic preset grounding. Generic monolithic prompts overwhelm sub-billion models with negative attractor tokens and unbounded contexts, inducing catastrophic amnesia or grammar collapse. Unstructured playgrounds fail to expose hard mathematical failure horizons, while client runtimes must seamlessly switch between single-threaded WASM and multi-threaded WebWorker/OffscreenCanvas pipelines without UI stutter or tab eviction."
+  :drivers [
+    "Browser Ceiling & Model Tier Calibration: Enforce strict 3B parameter ceiling, evaluate SmolLM2 (135M, 360M, 1.7B) alongside Qwen2.5 (0.5B, 1.5B, 3B), and calibrate threshold parameters (TTFT < 50ms, RAM < 2.2GB, schema overhead < 150 tokens)"
+    "Specialized Affirmative Harnesses: Implement capability-targeted harnesses for SVG vector graphics, reactive VDOM website generation, interactive toy/physics simulations, and spatial DOM perception with streaming FSM delimiter masks"
+    "Demonstration Presets Library: Codify 12 executable presets in harness/results/browser_demonstration_presets.asn covering Conway Game of Life, Particle Spring Physics, Developer Portfolio, SaaS Pricing Matrix, Flowcharts, and Badges"
+    "Single-Thread vs Multi-Thread Execution Contexts: Provide unified browser execution substrate supporting synchronous main-thread execution and dedicated WebWorker thread execution with SharedArrayBuffer and OffscreenCanvas"
+    "Local Capability & Impossibility Studio: Build an interactive local gallery playground displaying achievable live demonstrations alongside mathematical impossibility boundaries"
+  ]
+  :decision "Adopt ADR-0072 (D72) establishing the Browser-Based Demonstration System, Configurable Harnesses, and Specialized Presets Standard. Codify the 4-tier model calibration matrix under the 3B ceiling, integrate SmolLM2-135M as the primary delimiter guard, provide specialized affirmative harnesses for SVGs, websites, and toys, establish single-thread and multi-thread execution abstractions, and deliver the local interactive demonstration gallery."
+  :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71" "D72"]
+  :tasks [
+    "T426SmolLmResearchAndCalibration"
+    "T426ConfigurableHarnessEngine"
+    "T426DemonstrationPresetsCatalog"
+    "T426LocalGalleryPlayground"
+    "T426Settle"
+  ]
+  :consequences [
+    (:pos "Guarantees zero-crash browser sandbox execution by strictly enforcing the 3B parameter ceiling")
+    (:pos "Achieves 96+ percent schema fidelity on sub-billion models via affirmative prompts and streaming FSM masks")
+    (:pos "Delivers 60fps responsive UI during heavy generation via multi-thread WebWorker and SharedArrayBuffer offloading")
+    (:pos "Provides concrete grounded demonstration presets across toys, websites, and vector SVGs")
+    (:neg "Requires WebGPU and WebWorker support for multi-thread 3B execution")
+  ])

@@ -1,0 +1,38 @@
+(:adr
+  :id "D62"
+  :shortcode "D62"
+  :title "Dynamic Paradigm Specialization, Universal Third-Party Harness, and Composable Chaining Pipelines"
+  :status :active
+  :date "2026-09-10"
+  :cluster "harness/specialization"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "Universal harnesses targeting third-party agent systems must accommodate diverse model capacities ranging from Frontier models (Claude 3.7 Sonnet, GPT-4.5, Gemini 2.0 Pro) with large context windows to edge SLMs (Apple Silicon M1, 8B-32B local weights). While Frontier models can digest all specializations simultaneously, monolithic prompt injection incurs heavy TTFT, operational cost penalties, and attention dispersal. Interactive REPL sessions require open-ended broad specializations, whereas headless CLI invocations offer a single deterministic leverage point (the orchestrator chokepoint) to curate context, enforce modular paradigm projection, and manage pipeline chaining without context spillover."
+  :drivers [
+    "Headless Orchestrator Chokepoint: Leverage the headless CLI entrypoint as the single physical governance gateway for context filtering and paradigm projection"
+    "Frontier vs SLM Tiered Allocation: Support omni-specialization for Frontier models while providing strictly bounded single-paradigm projections for edge SLMs"
+    "REPL vs Headless Functional Partition: Maintain broad ambient exploration in interactive REPL while enforcing task-directed minimal envelopes in headless runs"
+    "Composable Paradigm Chaining: Enable sequential pipeline transitions (train wagons / 'parovoziki') with epistemic clean airgaps to eliminate cognitive bleedover"
+    "Semantic Subword & CamelCase Alignment: Enforce morpheme-aligned CamelCase identifiers and bare alphanumeric markers across all harness schemas"
+  ]
+  :decision "Adopt ADR-0062 (D62) establishing Dynamic Paradigm Specialization (DPS) and the Universal Third-Party Harness Architecture. Partition harness execution into Broad Interactive REPL and Laser Headless Chokepoint modes. Formalize modular paradigm manifests in harness/paradigms/ (DesignSystem, AlgoSearch, TypestateRefactor, AdversarialAudit, SwarmCoordination). Implement dynamic specialization projection in harness context assembly with epistemic airgap truncation between chained pipeline wagons."
+  :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62"]
+  :tasks [
+    "T417HarnessChokepoint"
+    "T417DynamicParadigmRegistry"
+    "T417FrontierOmniAdapter"
+    "T417ComposableChainAirgap"
+    "T417ReplHeadlessPartition"
+    "T417Settle"
+  ]
+  :outcomes [
+    "Unified third-party harness protocol with multi-tier execution modes (Frontier Omni, Dynamic Adaptive, Strict SLM)"
+    "Isolated headless CLI context chokepoint reducing token ballast by 70-85% on task runs"
+    "Codified epistemic clean airgap for composable paradigm chains preventing context spillover"
+    "Preserved unconstrained broad agency in interactive REPL environments"
+  ]
+  :consequences [
+    (:pos "Enables third-party tools and CLI agents to execute high-assurance tasks at minimal token cost")
+    (:pos "Eliminates attention dispersal and instruction drift in multi-paradigm workflows")
+    (:pos "Prevents cognitive bias from leaking across chained agent transitions")
+    (:neg "Requires headless callers to declare task intent or accept default dynamic heuristic projection")
+  ])

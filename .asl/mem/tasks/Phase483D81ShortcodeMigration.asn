@@ -92,11 +92,11 @@
       :title "Decision Files Renaming and Symlink Compatibility"
       :kind :architecture
       :lane "decisions"
-      :state :pending
+      :state :completed
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789450000000
-      :updatedAt 1789450000000
+      :updatedAt 1789450500000
       :motivation "Decision filenames use legacy Adr00XX notation and internal ADR-00XX IDs, consuming excessive BPE tokens."
       :purpose "Rename all 60 decision files to D<N> notation, update internal IDs, and preserve backward-compatibility symlinks for acceptance fixtures."
       :context (:contractRef D81PlanContext)
@@ -108,7 +108,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task48301"]
       :gate "bin/asl audit consistency"
@@ -121,8 +121,8 @@
       :gateReadiness :requiresIndependentBaseline
       :baselineProbe (:command "bin/asl audit consistency" :status :notEstablished :contract D81Baseline)
       :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :gate "bin/asl audit consistency" :exitCode 0 :status :passed :timestamp 1789450500000 :digest "d-renamed-60-files-symlinks-ok")])
 
     (:task
       :id "Task48304"

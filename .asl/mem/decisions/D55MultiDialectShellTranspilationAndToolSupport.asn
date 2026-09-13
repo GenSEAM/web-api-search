@@ -1,0 +1,37 @@
+(:adr
+  :id "D55"
+  :shortcode "D55"
+  :title "Multi-Dialect Shell Transpilation, Dialect-Aware Process Execution and Toolplane Integration"
+  :status :active
+  :date "2026-09-10"
+  :cluster "execution/toolplane"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "Autonomous agents execute tasks across diverse host operating environments and heterogeneous CLI tools requiring specific shell dialects (POSIX sh, Bash, Zsh, Dash, PowerShell). In a pure AgentScript monorepo enforcing zero foreign files (Gate 4), executing raw bash scripts without formal AST abstraction causes unpredictable failures on POSIX-restricted platforms (such as macOS /bin/sh), breaks array or pipefail semantics, and creates non-reproducible subshell execution. Furthermore, existing shell transpilation is limited to linear pipes, lacking compound conditionals, dialect switches, and structured AST pipelines."
+  :drivers [
+    "Dialect Parity Invariant: Deterministic execution across POSIX, Bash, and Zsh without foreign syntax leakage"
+    "Structured Shell AST: Transpilation between pure ASN S-expressions and dialect-specific shell scripts"
+    "Dialect-Aware Process Execution: Supervised process plane support for :dialect flag with isolated environments"
+    "Toolplane Integration: Native CLI commands (asl transpile-sh) and batch RPC operations (:shTranspile)"
+    "Token Efficiency Standard (D51): Zero kebab-case identifiers, 100% CamelCase types and alphanumeric markers (T411-1..T411-6, D55)"
+  ]
+  :decision "Extend the AgentScript codec and execution engine with native multi-dialect shell transpilation and dialect-aware process routing. Codify ShellDialect and DialectFeatures typestates in grammar registries; implement bidirectional transpilation (asn-to-sh-dialect and sh-to-asn-dialect); add :dialect support to :procSpawn and :exec; and expose the native asl transpile-sh command."
+  :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
+  :tasks [
+    "T4111"
+    "T4112"
+    "T4113"
+    "T4114"
+    "T4115"
+    "T4116"
+  ]
+  :outcomes [
+    "Enables safe, supervised execution of Bash and POSIX tools without foreign code contamination"
+    "Provides bidirectional transpilation between compact ASN shell pipelines and shell scripts"
+    "Maintains 100% token efficiency with bare alphanumeric markers and CamelCase composite constructs"
+  ]
+  :consequences [
+    (:pos "Eliminates shell dialect mismatch errors in macOS and Linux container environments")
+    (:pos "Allows agents to generate high-density ASN shell expressions that compile deterministically to target shells")
+    (:pos "Guarantees full alignment with D51 CamelCase and D52 enriched task context standards")
+    (:neg "Requires maintaining dialect syntax matrices across POSIX, Bash, and Zsh grammar rules")
+  ])

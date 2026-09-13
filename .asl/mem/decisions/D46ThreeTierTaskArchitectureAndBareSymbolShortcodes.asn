@@ -1,0 +1,25 @@
+(:adr
+  :id "D46"
+  :shortcode "D46"
+  :title "Three-Tier Task Lifecycle Architecture, Bare-Symbol 2-Token Basis, and Deprecation of Sigil Prefixes"
+  :status :active
+  :date "2026-09-09"
+  :cluster "architecture/task-and-governance"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "Ad-hoc subtasks, active phase milestones, and long-term backlog candidates lack clean lifecycle isolation, polluting agent prompts with irrelevant context. Furthermore, using leading colons (:c1, :d45) for shortcodes causes syntax and conceptual collisions with ASN map property keys (:id, :why), while sigil prefixes (@d45, #d45) incur a 50 percent tokenization penalty in modern BPE tokenizers."
+  :drivers [
+    "Three-Tier Lifecycle Separation: Backlog (backlog.asn) vs Active Wave Roadmap (phase_*.asn) vs In-Flight Agent Memory (InFlight.asn)"
+    "Zero-Token Backlog Overhead: parked tasks consume 0 tokens during active execution waves"
+    "Pure Bare-Symbol 2-Token Basis: shortcodes are atomic bare symbols (c1..c4, d1..d46, n1..n10, t388-1) without colons or quotes"
+    "Property vs Symbol Disambiguation: property keys begin with colon (:prop), reference symbols do not ([c1 c2 d46])"
+    "Sigil Deprecation: @ and # are permanently purged from all references, package names, and identifiers"
+  ]
+  :decision "Formalize the three-tier task storage and lifecycle model; establish bare atomic symbols as the universal 2-token shortcode standard across all registries, S-expressions, and agent communications; and permanently deprecate @ and # sigils for referencing invariants, decisions, notes, and tasks."
+  :invariants ["c1" "c2" "c3" "c4" "d40" "d45"]
+  :consequences [
+    (:pos "Eliminates prompt bloat by isolating dormant backlog items in .asl/mem/tasks/backlog.asn")
+    (:pos "Strictly achieves 2 tokens per identifier across cl100k and o200k tokenizers")
+    (:pos "Eliminates grammar ambiguity between property keys and atomic value references in S-expressions")
+    (:pos "Preserves 100 percent backward compatibility via transparent alias normalization in asl-engine")
+    (:neg "Requires explicit migration of legacy @d-XXXX mentions in documentation and skills")
+  ])

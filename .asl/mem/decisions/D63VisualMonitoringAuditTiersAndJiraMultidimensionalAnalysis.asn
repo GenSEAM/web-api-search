@@ -1,0 +1,38 @@
+(:adr
+  :id "D63"
+  :shortcode "D63"
+  :title "Visual Monitoring Substrate, 4-Tier Audit Framework, Cross-Platform Integration, and Jira-Based Multidimensional Analysis"
+  :status :active
+  :date "2026-09-10"
+  :cluster "telemetry/visualization"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "While the core AgentScript ecosystem excels in sub-5ms AST intelligence, deterministic VFS operations, and pure ASN machine memory, it lacks an integrated visual observability plane. Monitoring agent sessions, task backlogs, active wave DAGs, and physical execution receipts relies on text dumps or fragmented TUI fragments locked within individual packages. Furthermore, cross-platform enterprise engineering requires seamless synchronization with Jira Cloud/Data Center, structured 4-tier audit cadences (sub-second in-memory checks up to global multi-mesh audits), and unified visual projections across terminal, web, and desktop environments without introducing heavy third-party dependencies."
+  :drivers [
+    "Unified Triple-Projection Model: Single canonical in-memory ASN telemetry state projected simultaneously into Terminal TUI (asl top / asl dash), Web Dashboard (localhost SSE + VDOM + OkLCH), and Desktop/Browser Sidepanel"
+    "4-Tier Graduated Audit Framework: Stratifying verification into Tier 1 Quick In-Memory (<3s), Tier 2 Commit-Based (3-8s), Tier 3 Task/Wave Milestone (10-25s), and Tier 4 Global Holistic Multi-Mesh (30-60s)"
+    "Bidirectional Jira Multidimensional Integration: Synchronizing Jira issues with machine-native task ledgers, mapping sprint velocity against epistemic veracity, token density, and architectural boundaries"
+    "Canonical Package Restructuring: Extracting packages/asl-view (TUI, SVG, VDOM, Dash) and packages/asl-jira to eliminate UI duplication across agent, harness, and browser-plugin"
+    "Cross-Platform High-Assurance Runtime: Ensuring deterministic execution across macOS (M1/M2 Metal SLM), Linux (POSIX), and Windows (WSL/PowerShell) with zero foreign dependencies"
+  ]
+  :decision "Adopt ADR-0063 (D63) establishing the Visual Monitoring Substrate, 4-Tier Audit Framework, and Jira-Based Multidimensional Analysis Standard. Author Phase 418 / Wave 70 to formalize the 4-tier audit cadences, specify the unified triple-projection architecture in packages/asl-view, codify the bidirectional Jira synchronization bridge, and execute cross-platform research and package restructuring plans."
+  :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63"]
+  :tasks [
+    "T418AuditTiers"
+    "T418VisualDashboard"
+    "T418JiraIntegration"
+    "T418CrossPlatformResearch"
+    "T418SystemRestructuring"
+    "T418Settle"
+  ]
+  :outcomes [
+    "Formalized 4-tier graduated audit framework delivering sub-second live feedback and rigorous release verification"
+    "Designed triple-projection visual monitoring engine across Terminal (Box-Art), Web (OkLCH + SVG), and Browser Sidepanel"
+    "Established bidirectional Jira synchronization linking enterprise project tracking to empirical verification receipts"
+    "Planned canonical package restructuring extracting packages/asl-view and decoupling UI from agent core"
+  ]
+  :consequences [
+    (:pos "Provides real-time visibility into agent reasoning, wave DAG progress, KV-cache telemetry, and task receipts")
+    (:pos "Bridges enterprise Jira project management with immutable cryptographic execution receipts")
+    (:pos "Eliminates UI and rendering fragmentation across monorepo packages through unified asl-view substrate")
+    (:neg "Requires maintaining bidirectional Jira issue state mapping alongside git-native task ledgers")
+  ])

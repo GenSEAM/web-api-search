@@ -1,0 +1,13 @@
+(:adr
+  :id "D13"
+  :shortcode "D13"
+  :title "Extensionless File Governance, In-Memory Batch Harness and Self-Framing ASN Streams"
+  :status :active
+  :date "2026-09-08"
+  :cluster "system-integrity-and-runtime"
+  :deciders ["architect" "orchestrator" "system-invariant-keeper"]
+  :problem "Verification Gate 4 inspected only explicit file extensions (*.py, *.js, *.sh), allowing unverified extensionless shell scripts and untracked binaries to exist in bin/ without governance."
+  :drivers ["Zero Extensionless Loopholes" "In-Memory Batch Execution" "Self-Framing ASN Streams" "Pure ASL Verification Orchestration" "Process Plane Observability"]
+  :decision "Enforce extensionless file audit in Gate 4, in-memory batch execution harness, and newline-delimited self-framing ASN streams."
+  :invariants ["c1" "c3"]
+  :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])

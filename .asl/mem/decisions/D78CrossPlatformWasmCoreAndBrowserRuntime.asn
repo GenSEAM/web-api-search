@@ -1,0 +1,34 @@
+(:adr
+  :id "D78"
+  :shortcode "D78"
+  :title "Cross-Platform WebAssembly Core Substrate, Browser Autonomous Runtime, and Native Engine Micro-Evaluation"
+  :status :active
+  :date "2026-09-11"
+  :cluster "architecture/runtime"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "While Python eradication was formalized in ADR-0077, the asl-eval binary still depends on Apple macOS-proprietary JavaScriptCore.framework (102 KB Mach-O linking /System/Library/Frameworks/JavaScriptCore.framework), preventing portable execution on Linux, Windows, and WebAssembly. Furthermore, browser execution requires packaging a sovereign WebAssembly module (asl-core.wasm <150 KB) with an in-memory VFS and zero-socket Batch RPC bridge (asl_rpc_dispatch), operating strictly within browser memory (<16 MB) and latency (<3 ms) budgets. Rewriting the C99 implementation of the engine binary into pure AgentScript is deferred to lowest priority, whereas cross-platform evaluation, WebAssembly packaging, and browser runtime capabilities must be systematically planned and formalized."
+  :drivers [
+    "Cross-Platform Portability: Eradicate Apple-proprietary JavaScriptCore framework dependency in asl-eval, supporting universal Linux, Windows, and macOS execution"
+    "WebAssembly First Substrate: Package asl-core.wasm (<150 KB uncompressed, ~48 KB gzip) as sovereign ambient core substrate for browser and embedded runtime environments"
+    "In-Browser Autonomous Runtime: Provide zero-socket direct linear memory RPC bridge (asl_rpc_dispatch) and in-memory VFS with OPFS/IndexedDB persistence within browser bounds (<16 MB RSS, <3 ms dispatch)"
+    "Engine Evaluation Consolidation: Consolidate S-expression evaluation directly into asl-engine or via portable ANSI C99 / WAMR micro-runtime, liquidating asl-eval"
+    "Prioritized Migration Schedule: Treat C99 engine source rewrite into pure ASL as strictly lowest priority, while formalizing all WASM substrate and browser runtime capabilities"
+    "Zero Gate Weakening: Preserve all 7 verification gates, dual-polarity assertion coverage, and 5-dimensional consistency guarantees"
+  ]
+  :decision "Adopt ADR-0078 (D78) establishing the cross-platform WebAssembly core substrate, in-browser autonomous runtime, and consolidated native engine evaluation. Liquidate asl-eval by integrating portable evaluation into asl-engine, package asl-core.wasm with WASI preview 1 exports, provide the zero-socket browser JavaScript bridge (window.asl.rpc), and defer the C99 engine source rewrite to the final implementation wave."
+  :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D75" "D77" "D78"]
+  :tasks [
+    "Task43301"
+    "Task43302"
+    "Task43303"
+    "Task43304"
+    "Task43305"
+    "Task43306"
+  ]
+  :consequences [
+    (:pos "Eliminates Apple-proprietary JavaScriptCore dependency, delivering sovereign cross-platform evaluation on Linux, Windows, and macOS")
+    (:pos "Enables pure in-browser autonomous agent execution via asl-core.wasm (<150 KB) with zero sockets and zero server dependencies")
+    (:pos "Integrates in-memory VFS with dual-tier OPFS/IndexedDB persistence adhering to browser security models")
+    (:pos "Consolidates binary surface area from two executables (asl-engine, asl-eval) into single sovereign asl-engine binary")
+    (:neg "Defers C99-to-ASL engine rewrite to a future post-runtime phase as directed by user priority")
+  ])

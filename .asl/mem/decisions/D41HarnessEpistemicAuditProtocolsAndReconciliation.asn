@@ -1,0 +1,13 @@
+(:adr
+  :id "D41"
+  :shortcode "D41"
+  :title "Harness Epistemic Audit Protocols, Crutch Taxonomy, and Secondary Meta-Audit Reconciliation"
+  :status :active
+  :date "2026-09-09"
+  :cluster "architecture/harness"
+  :deciders ["Architect" "Planner" "Implementer" "Auditor"]
+  :problem "Autonomous agents encounter cognitive pitfalls when epistemic terms like Planning, Reflection, and Audit remain vague metaphors."
+  :drivers ["4 Epistemic Mandates" "6-Class Incongruity Taxonomy" "Crutch Detection" "Secondary Meta-Audit"]
+  :decision "Operationalize epistemic audit protocols, crutch detection (is-crutch-finding?), and secondary meta-audit adequacy."
+  :invariants ["c1" "c2" "c3" "d34"]
+  :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])

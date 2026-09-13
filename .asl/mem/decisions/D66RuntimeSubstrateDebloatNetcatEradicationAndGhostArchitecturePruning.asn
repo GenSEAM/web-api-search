@@ -1,0 +1,29 @@
+(:adr
+  :id "D66"
+  :shortcode "D66"
+  :title "Runtime Substrate De-Bloat, Netcat Eradication, and Ghost Architecture Pruning"
+  :status :active
+  :date "2026-09-10"
+  :cluster "architecture/substrate"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "The runtime substrate accumulated vestigial dependencies across historical system epochs: fragile netcat (nc -U) shell piping, dead Node.js fallbacks, powershell branches, and simulated Watch Dog components inherited from early Jaios and Eddie OS models. These components introduce 2-second CLI stalls, cross-platform breakage (BSD vs GNU netcat), sandbox permission denials, and artificial APM telemetry bloat without providing real-world runtime protection."
+  :drivers [
+    "Elimination of Netcat IPC: Netcat is non-portable, sandbox-restricted, and introduces 2-second stalls; replace with direct in-process dispatch or Python native non-blocking socket probing"
+    "Ghost Architecture Pruning: Decouple Watch Dog from telemetry metrics and eliminate simulated APM alert structures in favor of simple STDIN=/dev/null redirection and process timeouts"
+    "Legacy Runtime Liquidation: Purge dead NODE_BIN, EVAL_RUNNER, and Windows powershell code paths from asl/asl to restore zero-foreign purity"
+    "Deterministic In-Process Execution: Prioritize direct sub-80ms in-memory execution via asl-engine over fragile persistent daemon socket plumbing"
+  ]
+  :decision "Adopt ADR-0066 (D66) establishing the Runtime Substrate De-Bloat, Netcat Eradication, and Ghost Architecture Pruning Standard. Author Phase 421 / Wave 73 to eliminate nc -U from the CLI dispatcher, purge legacy Node.js fallbacks, decouple Watch Dog from telemetry, and enforce direct deterministic in-process execution."
+  :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66"]
+  :tasks [
+    "T421NetcatEradication"
+    "T421WatchdogGhostPruning"
+    "T421LegacyNodeAndPowershellPurge"
+    "T421Settle"
+  ]
+  :consequences [
+    (:pos "Completely eliminates 2-second netcat delays and sandbox socket permission failures")
+    (:pos "Prunes ghost APM metrics and simplifies process supervision across the codebase")
+    (:pos "Eliminates legacy Node.js and shell crutches, restoring true zero-foreign alignment")
+    (:neg "Requires refactoring legacy netcat call sites in asl/asl")
+  ])

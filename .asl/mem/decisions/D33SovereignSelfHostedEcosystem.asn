@@ -1,0 +1,13 @@
+(:adr
+  :id "D33"
+  :shortcode "D33"
+  :title "Sovereign Self-Hosted Ecosystem and Zero Foreign Code Liquidation"
+  :status :active
+  :date "2026-09-08"
+  :cluster "architecture"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "The AgentScript ecosystem previously relied on legacy foreign bridges to run tests, transpile projections, and evaluate benchmarks."
+  :drivers ["Zero Python in Scripts" "Pure ASN Benchmark and Test Datasets" "Sovereign Tooling"]
+  :decision "Liquidate foreign runner scripts, transpile all benchmark runs to .asn, and enforce 100 percent pure self-hosted toolchain."
+  :invariants ["c1" "c3"]
+  :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])

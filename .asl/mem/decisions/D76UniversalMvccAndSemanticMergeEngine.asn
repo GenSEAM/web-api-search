@@ -1,0 +1,34 @@
+(:adr
+  :id "D76"
+  :shortcode "D76"
+  :title "Universal MVCC, Software Transactional Memory, and Homoiconic Semantic 3-Way Merge Engine"
+  :status :active
+  :date "2026-09-11"
+  :cluster "architecture/concurrency"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "In multi-agent collaborative execution, traditional file locks and git worktrees create contention, latency, and merge conflicts. Furthermore, linear message queues cause head-of-line blocking on the agent bus, and concurrent task DAG updates lack atomic transactional guarantees. Without a unified homoiconic concurrency model, parallel agents either step on each others changes or incur severe synchronization overhead."
+  :drivers [
+    "Homoiconicity as Concurrency Substrate: Code, data, message frames, and execution DAGs are all first-class S-expressions, allowing a single structural 3-way merge engine to govern all domains"
+    "Lock-Free Multi-Agent Parallelism: Agents must branch state freely in resident memory without disk writes or mutex stalls, using Optimistic Concurrency Control (OCC)"
+    "Software Transactional Memory: Multi-file changes spanning interfaces, implementations, and tests must commit atomically with all-or-nothing snapshot isolation"
+    "Causal Intent Convergence: The agent message bus and shared task DAGs must resolve concurrent proposals through semantic AST merge rather than linear queue serialization"
+    "Radix Prompt Tree Efficiency: Shared prompt contexts must be deduplicated across subagents via copy-on-write prefix trees, maximizing local SLM KV-cache reuse"
+  ]
+  :decision "Adopt ADR-0076 (D76) establishing a Universal MVCC, Software Transactional Memory (STM), and Homoiconic S-Expression 3-Way Merge Engine across the AgentScript ecosystem. Implement recursive AST merging in mem/src/ast_merge.asl, multi-file STM in mem/src/stm.asl, causal DAG message branching in agent-bus/src/mvcc_bus.asl, lock-free task DAG splicing in agent-core/src/dag_merge.asl, and copy-on-write prompt prefix trees in agent-core/src/prompt_tree.asl."
+  :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D76"]
+  :tasks [
+    "T431UniversalHomoiconicAstMergeEngine"
+    "T431MultiFileSoftwareTransactionalMemory"
+    "T431MvccBranchingAgentBus"
+    "T431ConcurrentTaskDagSplicing"
+    "T431PromptRadixTreeAndSpeculativeFuzzing"
+    "T431Settle"
+  ]
+  :consequences [
+    (:pos "Eliminates file lock contention and allows unlimited parallel agent swarms to edit code safely in resident memory")
+    (:pos "Enables atomic multi-file commits with automatic AST-level conflict reconciliation")
+    (:pos "Transforms agent-bus into a branching causal DAG, eliminating head-of-line blocking and enabling concurrent intent synthesis")
+    (:pos "Reduces subagent prompt token consumption by up to 90% via shared prefix radix trees and KV-cache reuse")
+    (:pos "Provides zero-disk-I/O speculative mutation testing and fuzzing directly in RAM")
+    (:neg "Requires maintaining semantic arbitration policies for domain-specific S-expression conflicts")
+  ])

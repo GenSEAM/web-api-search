@@ -1,0 +1,38 @@
+(:adr
+  :id "D59"
+  :shortcode "D59"
+  :title "Monorepo Memory Hierarchy, Typestate Module Decomposition, and File Organization Standard"
+  :status :active
+  :date "2026-09-10"
+  :cluster "architecture/organization"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "As the monorepo scaled to 35 packages and 793 source files, epistemic memory (.asl/mem/) and core source modules developed cognitive sprawl. Flat task directories mix settled historical phases with active roadmaps, while monolithic source files exceed 500-770 lines, mixing multiple distinct typestates and increasing LLM context consumption. Arbitrary file chopping is an anti-pattern that multiplies header overhead; instead, a formal typestate decomposition and tiered memory hierarchy are required."
+  :drivers [
+    "Typestate Cohesion Principle: Bound modules to 120-280 lines containing a single lifecycle or state machine"
+    "4-Tier Epistemic Memory Hierarchy: Clear separation of Archive (Tier 0), Backlog (Tier 1), Active Waves (Tier 2), and In-Flight Sessions (Tier 3)"
+    "Single Source of Truth for Decisions: Individual ADR files serve as primary truth, with decisions.asn as lightweight projection"
+    "L0-L3 Package Layer Stratification: Strict downward import topology preventing circular package coupling"
+    "Normalized PascalCase Subword Naming: Phase<Number><Topic>.asn and T<Number><Morpheme> task identifiers (D57)"
+  ]
+  :decision "Adopt the Monorepo Memory Hierarchy and Typestate Module Decomposition standard monorepo-wide as ADR-0059 (D59). Author Phase 415 to execute the typestate partitioning of 500+ line hotspots (mem/src/tasks.asl, mem/src/daemon.asl, intel/src/health.asl) into cohesive 150-250 line modules. Organize .asl/mem/ into structured tiers and enforce L0-L3 layer boundaries across all 35 packages."
+  :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59"]
+  :tasks [
+    "T415Audit"
+    "T415TasksSplit"
+    "T415DaemonSplit"
+    "T415CamelTests"
+    "T415AsnToolcall"
+    "T415Settle"
+  ]
+  :outcomes [
+    "Decomposes oversized hotspot modules (>500 lines) into cohesive typestates within the 120-280 line target"
+    "Establishes a 4-tier epistemic memory architecture eliminating context bloat from historical tasks"
+    "Enforces strict downward L0-L3 package layer imports across all 35 packages"
+    "Captures remaining BPE token savings via full CamelCase convergence and semantic subwords"
+  ]
+  :consequences [
+    (:pos "Eliminates attention dispersion when agents read source modules by isolating distinct lifecycles")
+    (:pos "Reduces task memory context by isolating historical archive files from active working waves")
+    (:pos "Prevents circular package dependencies via strict L0-L3 downward import verification")
+    (:neg "Requires updating module exports and imports across affected sub-packages during decomposition")
+  ])

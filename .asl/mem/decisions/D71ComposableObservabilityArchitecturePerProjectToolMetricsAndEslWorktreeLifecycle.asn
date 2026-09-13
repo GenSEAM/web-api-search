@@ -1,0 +1,32 @@
+(:adr
+  :id "D71"
+  :shortcode "D71"
+  :title "Composable Observability Architecture, Per-Project Tool Metrics, and ESL Worktree Lifecycle Telemetry"
+  :status :active
+  :date "2026-09-10"
+  :cluster "architecture/observability"
+  :deciders ["architect" "planner" "implementer" "auditor"]
+  :problem "Monolithic logging and uncoordinated metrics in multi-agent toolchains pollute repository histories, induce context bloat, and blur component boundaries. Web search APIs, ephemeral git worktrees, and toolplane dispatch lack localized metric accounting, while excessive log retention wastes developer and model attention. Without an isolated yet composable observability layer, agents cannot tune tool performance, track rate limits, or trace worktree lifecycles back to sovereign branches."
+  :drivers [
+    "Per-Project WebSearch Telemetry: Track query volume, engine quotas, provider latency, and rate-limit limitations in git-ignored stores (.asl/metrics/webSearch.asn)"
+    "ESL Worktree Lifecycle Integration: Track worktree creation, automated cleanup tombstones, and source-branch annotated metric sync to main (.asl/metrics/worktrees.asn)"
+    "Toolplane Usage & Limitation Tuning: Capture p50 and p95 execution latencies, error frequencies, and boundary ceiling hits to guide runtime tuning"
+    "Adaptive Log Retention Ratios: Enforce 1:10 routine downsampling vs 1:1 lossless failure retention with 256KB compaction caps and 14 to 30 day TTLs"
+    "Composable Isolated Observability: Maintain strict component boundaries where each tool or subsystem manages its own telemetry, composable on demand via asl metrics"
+  ]
+  :decision "Adopt ADR-0071 (D71) establishing the Composable Observability Architecture, Per-Project Tool Metrics, and ESL Worktree Lifecycle Telemetry Standard. Codify isolated metric stores in .asl/metrics/, ignore them from git, integrate worktree lifecycle tracking with source-branch sync, implement adaptive retention ratios, and provide the on-demand asl metrics aggregation engine."
+  :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71"]
+  :tasks [
+    "T425WebSearchPerProjectMetrics"
+    "T425WorktreeLifecycleESL"
+    "T425ToolLimitationTelemetry"
+    "T425ComposableObservabilityAggregator"
+    "T425Settle"
+  ]
+  :consequences [
+    (:pos "Provides crystal-clear per-project visibility into WebSearch quotas, provider health, and query latencies")
+    (:pos "Eliminates git history pollution by isolating metrics to git-ignored compact ASN stores")
+    (:pos "Enables safe, conflict-free multi-worktree execution with source-branch attribution")
+    (:pos "Reduces log volume by over 85 percent via 1:10 downsampling and compact S-expression serialization")
+    (:neg "Requires tool dispatchers to emit metric events on invocation")
+  ])

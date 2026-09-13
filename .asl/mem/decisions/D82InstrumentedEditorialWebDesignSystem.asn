@@ -1,0 +1,51 @@
+(:adr
+  :id "D82"
+  :shortcode "D82"
+  :title "Instrumented Editorial Web Design System for ASL"
+  :status :active
+  :planStatus :approved
+  :date "2026-09-11"
+  :cluster "product/web-design"
+  :deciders ["user" "planner" "independentVerifier"]
+  :review ".asl/mem/reviews/D82DesignPlanReview.asn"
+  :completionAudit ".asl/mem/reviews/D82CompletionAudit.asn"
+  :problem "The ASL web surface serves language engineers, AI practitioners and general readers, but its current visual grammar mixes narrow max-w-6xl shells, purple/indigo gradients, cosmic decoration, pill-heavy controls and repeated equal cards. The result spends attention on theme before product value and gives no explicit width policy for prose versus data tools."
+  :drivers [
+    "Keep a calm technical identity: graphite surfaces, one desaturated ASL signal, strong typographic hierarchy and restrained depth."
+    "Serve two audiences progressively: plain-language outcomes first, inspectable commands, contracts and evidence second."
+    "Use a measured width policy: approximately 72rem for the primary shell and a wider 80rem data canvas only for tables, playgrounds and visualizers; prose has a max 68ch measure and shrinks with the viewport."
+    "Make responsive behavior and keyboard access part of the visual system, not post-hoc fixes."
+    "Derive components from one token source so ASL projections, CSS and Tailwind do not drift."
+    "Present self-hosting, WASM and offline capabilities as source-bound statuses with provenance; never let visual polish turn historical or planned metrics into completion claims."
+  ]
+  :evidence [
+    "asl/web/src/index.css:7-18 defines a purple-heavy palette and shadow hue."
+    "asl/web/src/index.css:100-116 defines dot/blueprint gradients and purple glow helpers."
+    "asl/web/src/components/Hero.asl:8 uses max-w-6xl, purple/indigo gradients, rounded cards and multiple metric claims in one hero."
+    "asl/web/src/components/Navbar.asl:10 uses a fixed rounded-full toolbar with labels hidden until nav breakpoints."
+    "asl/web/src/views/BlogView.asl:8-30 and asl/web/src/views/DocsView.asl:15-31 repeat max-w-6xl shells and pill-like tab groups."
+    "asl/web/src/components/Ecosystem.asl:123-174 and asl/web/src/views/RoadmapView.asl:21-90 expose WASM, native and self-hosting claims that require provenance-aware presentation."
+    ".asl/mem/decisions/Adr0081LanguageGroundTruthAndSovereignPortabilityProgram.asn:13 defines source-bound portability and self-hosting goals."
+    "https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md:26-32 requires visible focus and focus-within treatment."
+    "Web Interface Guidelines command.md:44-60 requires reduced motion, transform/opacity animation and balanced text."
+    "https://www.w3.org/TR/WCAG22/#contrast-minimum defines WCAG 2.2 AA contrast for text (4.5:1 normal, 3:1 large)."
+    "https://www.w3.org/TR/WCAG22/#non-text-contrast covers contrast for visual control/state information; the plan applies this to UI boundaries as a stricter local policy."
+  ]
+  :decision "Adopt the Instrumented Editorial frame: an editorial reading spine for narrative content, an observatory/workbench surface for code and telemetry, one restrained signal accent, explicit rectangular control geometry, and progressive disclosure from public explanation to machine-readable evidence. Do not widen every page; widen only data-dense surfaces after measuring overflow and line length."
+  :invariants ["C2" "C3" "C5" "D34" "D51" "D52" "D56" "D82"]
+  :tasks ["Task44801" "Task44802" "Task44803" "Task44804" "Task44805" "Task44806"]
+  :settledChoices [
+    (:choice :id frame :value "Instrumented Editorial: editorial reading spine plus observatory/workbench surfaces")
+    (:choice :id width :value "Keep 72rem primary shell; permit 80rem data canvas only where tables or tools prove useful")
+    (:choice :id palette :value "Graphite and warm neutral surfaces with one desaturated ASL signal; remove purple/blue gradients")
+    (:choice :id geometry :value "Use 8–12px container radii, 4–8px control radii and reserve full pills for tags/status")
+    (:choice :id audience :value "Progressive disclosure: plain outcome, concrete action, optional protocol/evidence detail")
+    (:choice :id evidence :value "Capability status, source/provenance and planned-versus-verified state are visible before performance numbers")
+  ]
+  :consequences [
+    (:pos "A stable visual language can serve technical and general audiences without duplicating pages.")
+    (:pos "Content width remains readable while data tools gain room deliberately.")
+    (:pos "Design decisions become measurable through token, overflow, contrast, focus and viewport gates.")
+    (:neg "Existing decorative gradients and some rounded component conventions must be removed or reclassified.")
+    (:neg "Visual acceptance needs deterministic screenshots or DOM metrics in addition to static checks.")
+  ])

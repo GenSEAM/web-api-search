@@ -1,0 +1,13 @@
+(:adr
+  :id "D16"
+  :shortcode "D16"
+  :title "Language Backends, Transitive Import Closure and Lowering Invariants"
+  :status :active
+  :date "2026-09-08"
+  :cluster "compiler"
+  :deciders ["Core Compiler Architects"]
+  :problem "Lowering AgentScript AST into native execution targets required balancing compilation speed, target isolation, and module namespaces."
+  :drivers ["Transitive Import Closure Linking" "Lexical Scoping in Emitters" "Deterministic Lowering"]
+  :decision "Lower programs and transitively imported modules into a single target unit prefixed by canonical defining module paths."
+  :invariants ["c1" "c3"]
+  :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
