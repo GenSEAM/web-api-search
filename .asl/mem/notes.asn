@@ -1823,5 +1823,23 @@
       :fact "task-f14-certified-complete"
       :evidence "Connected agent dispatcher to genuine engine tools; eliminated hardcoded mock responses in agent/src/dispatch.asl for ast-patch, deps-resolve, knowledge-load, and knowledge-offload; wired knowledge tools to VMM prompt memory hydration and receipt minting, wired deps-resolve to file module imports inspection, and wired ast-patch to dynamic byte measurement; updated dispatch-test.asl (26 assertions); authored tests/acceptance/d81/Task-F14.asl with baseline failure demonstration; evaluated 20 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F14 certified complete; canonical native tool dispatch operates over genuine engine implementations under ADR-0081")
+    (:note
+      :id "n169"
+      :timestamp 1789446000000
+      :author "codex"
+      :scope ["asl/packages/asl-sh/src/core/process.asl" "asl/packages/asl-sh/src/core/pipe.asl" "asl/packages/asl-sh/tests/process_test.asl" "tests/acceptance/d81/Task-F15.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f15 :asl-sh :process :pipe :approved]
+      :fact "task-f15-certified-complete"
+      :evidence "Implemented subprocess execution and pipe engine in ASL shell; updated exec! in process.asl to execute typed commands with stdin piping and stdout/stderr capture; implemented sequential stream piping in pipe.asl forwarding stdout across stages; authored process_test.asl (28 assertions); authored tests/acceptance/d81/Task-F15.asl with baseline failure demonstration; evaluated 18 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F15 certified complete; shell process execution and multi-stage pipelines operate deterministically under ADR-0081")
+    (:note
+      :id "n170"
+      :timestamp 1789446300000
+      :author "codex"
+      :scope ["asl/packages/asl-compiler/src/compiler.asl" "asl/packages/asl-compiler/tests/compiler-test.asl" "tests/acceptance/d81/Task-F16.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f16 :asl-compiler :codegen :multi-target :approved]
+      :fact "task-f16-certified-complete"
+      :evidence "Replaced multi-target codegen dummy stubs in ASL compiler; updated compile-source-target in compiler.asl to lower AST functions and schemas to genuine Go, WASM/WAT, ANSI C, and Arduino targets with AST expression lowering; eliminated raw comment stubs violating invariant C1; verified compiler-test.asl (27 assertions); authored tests/acceptance/d81/Task-F16.asl demonstrating baseline failure; evaluated 23 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F16 certified complete; self-hosted compiler lowers AST definitions across all supported platforms under ADR-0081")
   ]
 )
