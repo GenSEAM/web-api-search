@@ -1323,4 +1323,19 @@
       :invariants ["C2" "C3" "C5" "D34" "D51" "D52" "D56" "D82"]
       :tasks ["Task44801" "Task44802" "Task44803" "Task44804" "Task44805" "Task44806"]
       :consequences [(:pos "Readable content and useful data density coexist") (:neg "Gradient and pill conventions require deliberate migration")])
+    (:adr
+      :id "D83"
+      :shortcode "D83"
+      :title "RPC-First Record Store, Attention Separation, and Event-Driven Memory Architecture"
+      :status :active
+      :planStatus :approved
+      :date "2026-09-13"
+      :cluster "architecture/memory"
+      :deciders ["user" "architect" "planner" "implementer" "auditor"]
+      :problem "Autonomous agents write directly to filesystem files in .asl/mem/, causing severe cognitive attention dispersal, race conditions, and syntax corruption."
+      :drivers ["Attention separation" "Cognitive typestate hierarchy" "Bounded blamed rejection" "Deterministic persistence" "Event-driven observability" "Step-scoped context delivery"]
+      :decision "Mandate that all monorepo records transition from direct filesystem writes to native RPC operations via asl rpc, with write-time validation, flock locking, and event streaming."
+      :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D58" "D59" "D81" "D83"]
+      :tasks ["Task48401" "Task48402" "Task48403" "Task48404" "Task48405" "Task48406" "Task48407" "Task48408"]
+      :consequences [(:pos "Eliminates syntax and delimiter corruption in memory files") (:pos "Shields agent attention window from filesystem mechanics") (:neg "Requires implementing comprehensive schema validators and storage adapters in asl.c")])
   ])
