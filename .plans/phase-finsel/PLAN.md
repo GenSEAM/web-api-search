@@ -297,8 +297,8 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F38` (8 assertions verified)
 
 ### Task-F39: Restore Invariant C5 (Zero Sigils) and Syntax Alignment
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `agent/src/triage.asl`, `vdom/src/diagram.asl`, `asl-sh/src/core/process.asl`
 - **Baseline Failure**: Raw `@pcp:` sigils and `${...}` template strings present in source code.
 - **Remedy**: Strip `@` sigils from documentation strings; convert template strings to `(string-concat ...)`.
-- **Gate**: `! grep -rn '@pcp:' agent/ src/ && ! grep -rn '\${' vdom/src/diagram.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F39` (5 assertions verified)

@@ -1565,6 +1565,47 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F38" :status :passed :exitCode 0 :assertionsEvaluated 8 :timestamp 1789455400000)
       ])
+    (:task
+      :id "Task-F39"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Restore Invariant C5 (Zero Sigils) and Syntax Alignment"
+      :kind :refactor
+      :lane "invariants"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789455500000
+      :updatedAt 1789455600000
+      :motivation "Raw @pcp: sigils in agent/src/triage.asl and asl-sh and ${...} template strings in vdom/src/diagram.asl violate invariant C5."
+      :purpose "Strip @pcp: sigils from triage docstrings and reasons, and convert JS template literals in diagram.asl to concatenated strings."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Zero @pcp: sigils in agent/src/triage.asl and asl-sh" "Zero ${ template literals in vdom/src/diagram.asl" "Complete adherence to Invariant C5 across monorepo"]
+      :owns ["agent/src/triage.asl" "vdom/src/diagram.asl" "asl/packages/asl-sh/src/core/process.asl"]
+      :targetSymbols ["is-setup-command?" "triage-request" "mermaid-to-html"]
+      :relatedSymbols ["triage" "diagram" "process"]
+      :invariants ["D81" "C5"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F38"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F39"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F39.asl"]
+      :verificationCases ["agent/src/triage.asl contains zero @pcp: sigils and vdom/src/diagram.asl contains zero ${ strings."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F39" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Author acceptance fixture Task-F39.asl" "Verify baseline failure on present @pcp: and ${ sigils" "Strip @pcp: and convert ${ to string concatenation" "Certify green under SuperviseGate.sh."]
+      :stepIndex 5
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F39" :status :passed :exitCode 0 :assertionsEvaluated 5 :timestamp 1789455600000)
+      ])
   ]
 )
 
