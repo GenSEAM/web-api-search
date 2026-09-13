@@ -283,11 +283,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 ## Phase 5: P2 Monorepo Invariants & Grammar Realignment
 
 ### Task-F37: Restore Invariant C1 (Zero Comments) Across Monorepo
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `asl/grammar/*.asn`, `harness/*.asn`, `mem/grammar.asn`, `asl/packages/asl-codegen/src/emit_jsx.asl`
 - **Baseline Failure**: 40+ lines of raw `;;` comments and foreign `// @ts-nocheck` comments present.
 - **Remedy**: Strip all comment tokens from ASN schemas and code generators.
-- **Gate**: `! grep -rn ';;' asl/grammar/ harness/ mem/grammar.asn && ! grep -rn '// @ts' asl/packages/asl-codegen/`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F37` (10 assertions verified)
 
 ### Task-F38: Restore Invariant C2 (Zero Emojis) Across Gate Runners and Tests
 - **Status**: planned
