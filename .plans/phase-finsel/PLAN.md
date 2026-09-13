@@ -85,7 +85,7 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `bin/asl test vdom/tests/vdom_test.asl`
 
 ### Task-F11: Enforce Cryptographic Checksum Verification in Distribution Installer
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `pack/src/dist.asl`
 - **Baseline Failure**: Generated `install.sh` downloads and extracts archives via `tar -xzf` without verifying SHA256 hashes.
 - **Remedy**: Emit `sha256sum -c` or `shasum -a 256` verification before archive extraction in `emit-install-sh`.
