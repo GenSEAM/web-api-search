@@ -376,5 +376,44 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F09" :status :passed :exitCode 0 :assertionsEvaluated 15 :timestamp 1789444200000)
       ])
+    (:task
+      :id "Task-F10"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Defend VDOM Attribute Sanitization Against Stored XSS"
+      :kind :gate
+      :lane "security"
+      :state "planned"
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789441500000
+      :updatedAt 1789441500000
+      :motivation "is-retained-attr? and filter-attributes retain href and src attributes containing javascript:, vbscript:, or data:text/html URIs, enabling stored XSS in downsampled DOM/VDOM representations."
+      :purpose "Implement is-safe-attr-value? in vdom/src/vdom.asl rejecting dangerous URI schemes (javascript:, vbscript:, data:text/html) on href and src attributes."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Stored XSS defense in vdom/src/vdom.asl" "Attribute URI scheme validation in filter-attributes"]
+      :owns ["vdom/src/vdom.asl"]
+      :targetSymbols ["filter-attributes" "is-safe-attr-value?"]
+      :relatedSymbols ["is-retained-attr?" "downsample-node"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F09"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F10"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F10.asl"]
+      :verificationCases ["filter-attributes strips javascript: and data:text/html from href and src attributes."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F10" :status :notEstablished :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :planApproved
+      :actionDag ["Inspect vdom.asl" "Author acceptance fixture" "Demonstrate baseline failure" "Implement is-safe-attr-value? and sanitize filter-attributes" "Certify green."]
+      :stepIndex 0
+      :receipts [])
   ]
 )
