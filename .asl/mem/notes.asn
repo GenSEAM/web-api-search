@@ -2018,5 +2018,14 @@
       :fact "task-f37-certified-complete"
       :evidence "Restored Invariant C1 (zero comments) across monorepo under ADR-0081; stripped all raw ;; comments from asl/grammar/cases.asn, asl/grammar/grammar.asn, asl/grammar/rpc.asn, harness/audit-playbook.asn, harness/audit-protocols.asn, harness/grammar.asn, and mem/grammar.asn; eliminated foreign // @ts-nocheck comment from asl/packages/asl-codegen/src/emit_jsx.asl; authored tests/acceptance/d81/Task-F37.asl demonstrating baseline failure on present comments; evaluated 10 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F37 certified complete; Invariant C1 fully enforced across grammar schemas, audit playbooks, and code generators with zero raw comments monorepo-wide under ADR-0081")
+    (:note
+      :id "n191"
+      :timestamp 1789455600000
+      :author "codex"
+      :scope ["asl/packages/asl-gates/src/gate_runner.asl" "asl/packages/asl-registry/tests/registry_test.asl" "tests/acceptance/d81/Task-F38.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f38 :invariants :c2 :zero-emojis :gate-runners :registry-tests :approved]
+      :fact "task-f38-certified-complete"
+      :evidence "Restored Invariant C2 (zero emojis) across gate runners and tests under ADR-0081; replaced raw Unicode checkmark and cross glyphs with ASCII/ASN-compliant status markers :ok and :fail in asl/packages/asl-gates/src/gate_runner.asl and asl/packages/asl-registry/tests/registry_test.asl; authored tests/acceptance/d81/Task-F38.asl demonstrating baseline failure on Unicode glyphs; evaluated 8 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F38 certified complete; Invariant C2 fully enforced across gate runners and registry tests with zero raw Unicode checkmarks or crosses monorepo-wide under ADR-0081")
   ]
 )
