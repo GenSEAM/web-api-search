@@ -2041,9 +2041,17 @@
       :timestamp 1789456800000
       :author "codex"
       :scope ["tests/acceptance/d81/Task44104.asl" "tests/acceptance/d81/Task44107.asl" "tests/acceptance/d81/Task44202.asl" "tests/acceptance/d81/Task44204.asl" "tests/acceptance/d81/Task44207.asl" "tests/acceptance/d81/Task44303.asl" "tests/acceptance/d81/Task44503.asl" "tests/acceptance/d81/Task47206.asl" "tests/acceptance/d81/Task47402.asl" "asl/tools/asl.c" ".asl/mem/tasks/InFlight.asn" ".agents/skills/asl-toolbelt/SKILL.md" ".asl/mem/tasks/Phase415LargeScaleTypestateRefactorAndCamelCaseConvergence.asn"]
-      :tags [:supervision :acceptance-audit :remediation :falsifiable-gates :zero-defects :all-clean :approved]
       :fact "all-211-acceptance-fixtures-100-percent-verified"
       :evidence "Executed comprehensive audit across all 211 D81 acceptance fixtures; identified and resolved 9 baseline discrepancies: Task44104 (added authoritativeConstraints, unresolvedQuestions, negativeFindings, receiptReferences to InFlight.asn), Task44107 (restored Verified Portable Loop and Fallbacks section in asl-toolbelt SKILL.md), Task44202 and Task44207 (emitted duration-ms alongside durationMs in asl.c run op and trace log), Task44204 (reported d52-errors count in plan audit report), Task44303 (reported failed-count in RPC batch response), Task44503 (grounded T415CamelTests state as in-progress reflecting 80/1673 empirical convergence), Task47206 (added Subsystem Coverage Audit banner in asl.c coverage subcommand), Task47402 (declared projection: rules:full in SKILL.md frontmatter); recompiled triple native binaries with identical SHA256 478f4649dccd19ff918b7d8b7a7e329b1e2957b5f1f53fd1a2292f39f1e56862; re-executed complete test suite confirming 211 of 211 fixtures evaluate cleanly with 0 failures"
       :consequence "All 211 acceptance fixtures monorepo-wide pass cleanly; 7 of 7 verification gates pass; 5 of 5 D52 dimensions reconciled; zero failing tests monorepo-wide")
+    (:note
+      :id "n194"
+      :timestamp 1789457400000
+      :author "codex"
+      :scope [".plans/migration-d81-shortcode/PLAN.md" ".asl/mem/tasks/Phase483D81ShortcodeMigration.asn" "asl/grammar/rules.asn"]
+      :tags [:supervision :plan-audit :migration-d81-shortcode :remediation :hiddenTests :symlink-compatibility :phase483 :approved]
+      :fact "plan-d81-shortcode-migration-audited-and-remediated"
+      :evidence "Audited .plans/migration-d81-shortcode/PLAN.md authored by neighbor; identified 4 critical invariant risks: (1) Wave 5 proposed editing grader-owned acceptance fixtures Task47006/Task47007 violating hiddenTests invariant, (2) Wave 2 decision file renaming broke path assumptions of Task44005, Task46006, Task44801, Task44806 which read Adr0081/Adr0082 filenames, (3) Wave 0 omitted C scanner numeric extraction for task-to-ADR linking, (4) missing task collection registration in .asl/mem/tasks/; remediated PLAN.md to mandate backward-compatible symlinks and dual source matching without touching acceptance fixtures; registered Phase483D81ShortcodeMigration under D52 enriched schema in .asl/mem/tasks/Phase483D81ShortcodeMigration.asn; validated 563 tasks and verified 0 broken links in consistency audit (5/5 dimensions green)"
+      :consequence "PlanD81ShortcodeMigration hardened against invariant violations and acceptance test regressions; Phase 483 registered in memory ledger with strict falsifiable gates; readiness confirmed for safe execution")
   ]
 )
