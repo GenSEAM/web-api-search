@@ -1701,5 +1701,15 @@
       :fact "task-f03-certified-complete"
       :evidence "Remediated asl/tools/hooks/pre-commit to target bin/asl gate instead of non-executable asl directory; authored tests/acceptance/d81/Task-F03.asl verifying pre-commit hook executable target; evaluated 11 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F03 certified complete; native git pre-commit hook runs executable binary cleanly under ADR-0081")
+      (:note
+      :id "n156"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["asl/packages/asl-cli/src/cli.asl" "asl/packages/asl-cli/grammar.asn" "asl/packages/asl-cli/tests/cli-test.asl" "asl/packages/asl-cli/tests/cli_test.asl" "asl/tools/asl.c" "tests/acceptance/d81/Task-F02.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f02 :cli :gate-argument-parsing :target-validation :approved]
+      :fact "task-f02-certified-complete"
+      :evidence "Authored tests/acceptance/d81/Task-F02.asl verifying live file existence checks in asl gate command; verified asl/packages/asl-cli/src/cli.asl check-gate-files and unit tests rejecting missing targets; updated asl/tools/asl.c run_cmd_gate to count and validate non-flag target arguments returning Target file not found error on missing targets; evaluated 23 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F02 certified complete; live argument validation prevents phantom gate success on non-existent targets under ADR-0081")
   ]
 )

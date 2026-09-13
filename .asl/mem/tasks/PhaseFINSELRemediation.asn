@@ -53,17 +53,17 @@
       :title "Implement Live Argument Parsing in CLI Gate Command"
       :kind :tooling
       :lane "cli"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789441500000
-      :updatedAt 1789441500000
+      :updatedAt 1789442100000
       :motivation "asl gate command in cli.asl does not check file existence and prints success for non-existent files."
       :purpose "Implement real file existence checks and error reporting in asl gate CLI command."
       :context (:contractRef D81PlanContext)
       :outcomes ["asl gate validates provided file arguments" "Non-existent files return typed error receipts"]
       :owns ["asl/packages/asl-cli/src/cli.asl"]
-      :targetSymbols ["run-cli"]
+      :targetSymbols ["run-cli" "check-gate-files" "dispatch-cmd"]
       :relatedSymbols ["gate"]
       :invariants ["D81"]
       :variations (:contractRef D81SettledChoices)
@@ -78,13 +78,15 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task-F02.asl"]
       :verificationCases ["Invoking gate with non-existent file path produces explicit error and non-zero exit."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F02" :status :notEstablished :contract D81Baseline)
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F02" :status :baselineVerified :contract D81Baseline)
       :historicalReceipts []
-      :reviewStatus :planApproved
+      :reviewStatus :approved
       :actionDag ["Inspect cli.asl gate branch" "Verify file existence" "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 3
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F02" :status :passed :exitCode 0 :assertionsEvaluated 15 :timestamp 1789442100000)
+      ])
     (:task
       :id "Task-F03"
       :parentId ""
