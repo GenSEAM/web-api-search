@@ -1319,5 +1319,46 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F32" :status :passed :exitCode 0 :assertionsEvaluated 28 :timestamp 1789452400000)
       ])
+    (:task
+      :id "Task-F33"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Deduplicate Token Estimation Helper Across Monorepo"
+      :kind :refactor
+      :lane "text"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789452800000
+      :updatedAt 1789453200000
+      :motivation "Verbatim duplicate implementation of estimate-tokens in multiple files across asl/, agent*, and mem/."
+      :purpose "Delete local duplicates and import canonically from asl-text/text under Boundary Universalism."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Single source of truth for estimate-tokens in asl-text/text" "Elimination of redundant private implementations in agent-core, asl-plugin, and asl-sh" "Clean verification gate"]
+      :owns ["agent-core/src/prompt_tree.asl" "asl/packages/asl-plugin/src/dynamic_tool.asl" "asl/packages/asl-sh/src/core/process.asl" "asl/packages/asl-sh/src/process.asl" "harness/src/stream_demuxer.asl" "harness/src/context_assembler.asl" "harness/src/tool-transpiler.asl" "intel/src/preload.asl"]
+      :targetSymbols ["estimate-tokens"]
+      :relatedSymbols ["calc-savings"]
+      :invariants ["D81" "C3" "D34"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F32"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F33"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F33.asl"]
+      :verificationCases ["Only one canonical definition of estimate-tokens remains in asl/, agent*, and mem/."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F33" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Author acceptance fixture Task-F33.asl" "Verify baseline failure on duplicate definitions" "Remove local duplicates and wire to asl-text/text" "Certify green under SuperviseGate.sh."]
+      :stepIndex 5
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F33" :status :passed :exitCode 0 :assertionsEvaluated 14 :timestamp 1789453200000)
+      ])
   ]
 )

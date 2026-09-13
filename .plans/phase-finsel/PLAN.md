@@ -251,11 +251,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F32` (28 assertions verified)
 
 ### Task-F33: Deduplicate Token Estimation Helper Across Monorepo
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `mem/src/`, `agent/src/`, `agent-core/src/`, `asl-lint/src/`
 - **Baseline Failure**: Verbatim duplicate implementation of `estimate-tokens` in 8 different files.
 - **Remedy**: Delete local duplicates and import canonically from `asl-text/text`.
-- **Gate**: `grep -rn "df estimate-tokens" asl/ agent* mem/ | wc -l | grep '^1$'`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F33` (14 assertions verified)
 
 ### Task-F34: Remove Redundant Shadow Files and Naming Collisions
 - **Status**: planned
