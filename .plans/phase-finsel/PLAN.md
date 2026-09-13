@@ -131,11 +131,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F16` (23 assertions verified)
 
 ### Task-F17: Implement True AST Symbol Extraction in Intel Engine
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `intel/src/extractor.asl`
 - **Baseline Failure**: `extract-asl-symbols` returns empty `(list)`.
 - **Remedy**: Parse ASL forms (`def`, `df`, `defstruct`, `defprotocol`) and extract fully-qualified symbol definitions and references.
-- **Gate**: `bin/asl test intel/tests/intel_test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F17` (13 assertions verified)
 
 ### Task-F18: Implement Dynamic AST Traversal and Blast Radius Reachability
 - **Status**: planned
