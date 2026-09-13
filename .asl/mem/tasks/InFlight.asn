@@ -1,15 +1,15 @@
 (:in-flight
   :session-id "57abefd4-689b-44f0-8084-f5b1813fae50"
-  :lane "verification"
-  :activePhase "Phase485MultiClientLauncherEngineAndDangerousRescue"
-  :activeTasks ["Task48506"]
-  :dispatchedAt 1789462300000
+  :lane "grammar"
+  :activePhase "Phase486MultiModelMeshOrchestratorAndParallelVerification"
+  :activeTasks ["Task48601"]
+  :dispatchedAt 1789462700000
   :status "in-progress"
   :handoffId ""
   :handoffCheckpoint 0
-  :sourceDigest "23fa330"
-  :authoritativeConstraints ["D84" "D81" "C1" "C2"]
+  :sourceDigest "d3e2928"
+  :authoritativeConstraints ["D85" "D52" "C1" "C2"]
   :unresolvedQuestions []
   :negativeFindings []
-  :receiptReferences ["receipt-task-48501" "receipt-task-48502" "receipt-task-48503" "receipt-task-48504" "receipt-task-48505"]
-  :leases ["tests/acceptance/d81/Task48506.asl" "AGENTS.md" "scripts/install.sh"])
+  :receiptReferences ["rc-phase485-certified-20260913"]
+  :leases ["asl/grammar/mesh.asn" "tests/acceptance/d81/Task48601.asl"])

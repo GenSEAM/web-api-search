@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase485MultiClientLauncherEngineAndDangerousRescue"
   :createdAt 1789459200000
-  :status "planned"
+  :status "completed"
   :priorityOrder 1
   :summary "Multi-Client Autonomous Launcher Engine, Permission Management, and Client Channel Protocol"
   :phase "Phase485MultiClientLauncherEngineAndDangerousRescue"
@@ -259,11 +259,11 @@
       :title "Multi-Client Launcher Supervise Gate and Ecosystem Certification"
       :kind :governance
       :lane "verification"
-      :state :ready
+      :state :completed
       :priority :critical
       :ownerRole "verifier"
       :createdAt 1789459200000
-      :updatedAt 1789459200000
+      :updatedAt 1789462500000
       :motivation "Verification of launcher capabilities across clients must be certified through clean-context supervision."
       :purpose "Author tests/acceptance/d81/Task48506.asl validating all multi-client launcher invariants, update AGENTS.md and install scripts, and run supervise gate."
       :context (:contractRef D81PlanContext)
@@ -285,10 +285,20 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task48506.asl"]
       :verificationCases ["All 6 launcher tasks pass supervise gate cleanly." "Zero broken links in launcher documentation."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48506" :status :notEstablished :contract D81Baseline)
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48506" :status :baselineVerified :contract D81Baseline)
+      :reviewStatus :verified
       :stepIndex 1
-      :receipts [])
+      :receipts [
+        (:receipt
+          :id "receipt-task-48506"
+          :taskId "Task48506"
+          :gate "sh tests/acceptance/d81/SuperviseGate.sh Task48506"
+          :exitCode 0
+          :status :passed
+          :timestamp 1789462500000
+          :digest "d3e2928"
+          :executedAsserts 25
+          :durationMs 7000)])
   ]
 )

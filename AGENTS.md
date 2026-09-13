@@ -134,8 +134,9 @@
 
 
 
+
 <!-- ASL_LAUNCH_SESSION_START -->
-(:launch-session :client "agy" :channel "global" :orchestrator-mode true)
+(:launch-session :client "agy" :permission-tier "dangerous-rescue" :channel "global" :orchestrator-mode true)
 <!-- ASL_LAUNCH_SESSION_END -->
 
 
@@ -146,7 +147,18 @@
 
 In this repository, autonomous agents operate under explicit non-anthropomorphic **Teleological Mandates**. Agents are defined not by superficial role titles or emotional personas, but by their fundamental purpose (**"Смысл жизни"**), strict **Zones of Responsibility (Epistemic Boundaries)**, and immutable **Priority Values ("Что первостепенно")**.
 
-Mechanical constraints belong to deterministic tools (`asl rpc '(:batch ...)'`, `asl check`, `asl lint`, `asl test --strict-falsify`, `asl audit`, `asl doctor`, `asl gate`) and command pipelines (`steps`). Agents embody teleological posture and value trade-offs.
+Mechanical constraints belong to deterministic tools (`asl rpc '(:batch ...)'`, `asl check`, `asl lint`, `asl test --strict-falsify`, `asl audit`, `asl doctor`, `asl gate`, `asl launch`) and command pipelines (`steps`). Agents embody teleological posture and value trade-offs.
+
+---
+
+## Multi-Client Launcher & Dangerous-Rescue Elevation (`D84`)
+
+Autonomous agent sessions are launched and orchestrated via canonical single-binary commands:
+- `asl launch agy` - launches Antigravity with auto-elevated permission tier (`dangerous-rescue`) and `--dangerously-skip-permissions`.
+- `asl launch claude` - launches Claude Code with system-guided channel context.
+- `asl launch codex` - launches Codex CLI with workspace-write permissions.
+- `bin/addie` and `bin/eddie` - native wrapper forwarders to `bin/asl` preserving channel and environment context.
+- `asl launch <client> --dry-run` - pre-flight diagnostic inspection returning structured ASN invocation plan without process execution side effects.
 
 ---
 
@@ -307,3 +319,10 @@ All autonomous agents and LLM execution pipelines enforce **high lexical density
      - **Bidirectional Linkage**: Tasks declare `:adr` and `:decision`; ADRs and `.asl/mem/intent.asn` declare `:tasks [...]`.
      - **Execution DAG**: `:dependsOn`, `:gate`, `:actionDag`, `:acceptanceCriteria`, `:stepIndex`.
    - **Automated Consistency Verification**: Periodic and on-demand consistency across ADRs, tasks, and intent is verified deterministically via `asl audit consistency` (or `asl consistency`), checking bidirectional cross-references, context completeness, and roadmap integrity.
+8. **Multi-Client Launcher Engine & Dangerous-Rescue Permission Elevation (`D84`)**:
+   - Autonomous AI clients (Antigravity, Claude Code, Codex) are launched via canonical launcher commands:
+     - `asl launch agy -o` / `asl launch agy`: Auto-injects `--dangerously-skip-permissions` with permission-tier `dangerous-rescue` to eliminate interactive permission prompts during unattended background execution.
+     - `asl launch claude`: Boots Claude Code in system-guided mode with append-system-prompt directives.
+     - `asl launch codex`: Configures Codex approval policy `never` with sandboxed workspace write permissions.
+     - `bin/addie` & `bin/eddie`: Native executable forwarders delegating to `bin/asl` with client channel environment bindings.
+     - Pre-flight diagnostic verification is supported without side effects: `asl launch <client> --dry-run` returns structured ASN invocation plans.
