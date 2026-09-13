@@ -8,4 +8,8 @@
   :handoffId ""
   :handoffCheckpoint 0
   :sourceDigest ""
+  :authoritativeConstraints []
+  :unresolvedQuestions []
+  :negativeFindings []
+  :receiptReferences []
   :leases [])

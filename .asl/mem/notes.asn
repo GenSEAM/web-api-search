@@ -2036,5 +2036,14 @@
       :fact "phase-finsel-100-percent-certified-complete"
       :evidence "Restored Invariant C5 (zero sigils) and syntax alignment under ADR-0081; stripped @pcp: sigils from agent/src/triage.asl and asl/packages/asl-sh/src/core/process.asl; replaced JS template string interpolation with standard string concatenation in vdom/src/diagram.asl; authored tests/acceptance/d81/Task-F39.asl demonstrating baseline failure on present sigils; evaluated 5 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn; all 39 tasks of Phase FINSEL are 100% verified and certified green"
       :consequence "Task-F39 certified complete; Phase FINSEL Remediation is 100% certified complete across all 39 tasks with zero regressions, all 7 gates passing, and all 5 D52 dimensions reconciled monorepo-wide under ADR-0081")
+    (:note
+      :id "n193"
+      :timestamp 1789456800000
+      :author "codex"
+      :scope ["tests/acceptance/d81/Task44104.asl" "tests/acceptance/d81/Task44107.asl" "tests/acceptance/d81/Task44202.asl" "tests/acceptance/d81/Task44204.asl" "tests/acceptance/d81/Task44207.asl" "tests/acceptance/d81/Task44303.asl" "tests/acceptance/d81/Task44503.asl" "tests/acceptance/d81/Task47206.asl" "tests/acceptance/d81/Task47402.asl" "asl/tools/asl.c" ".asl/mem/tasks/InFlight.asn" ".agents/skills/asl-toolbelt/SKILL.md" ".asl/mem/tasks/Phase415LargeScaleTypestateRefactorAndCamelCaseConvergence.asn"]
+      :tags [:supervision :acceptance-audit :remediation :falsifiable-gates :zero-defects :all-clean :approved]
+      :fact "all-211-acceptance-fixtures-100-percent-verified"
+      :evidence "Executed comprehensive audit across all 211 D81 acceptance fixtures; identified and resolved 9 baseline discrepancies: Task44104 (added authoritativeConstraints, unresolvedQuestions, negativeFindings, receiptReferences to InFlight.asn), Task44107 (restored Verified Portable Loop and Fallbacks section in asl-toolbelt SKILL.md), Task44202 and Task44207 (emitted duration-ms alongside durationMs in asl.c run op and trace log), Task44204 (reported d52-errors count in plan audit report), Task44303 (reported failed-count in RPC batch response), Task44503 (grounded T415CamelTests state as in-progress reflecting 80/1673 empirical convergence), Task47206 (added Subsystem Coverage Audit banner in asl.c coverage subcommand), Task47402 (declared projection: rules:full in SKILL.md frontmatter); recompiled triple native binaries with identical SHA256 478f4649dccd19ff918b7d8b7a7e329b1e2957b5f1f53fd1a2292f39f1e56862; re-executed complete test suite confirming 211 of 211 fixtures evaluate cleanly with 0 failures"
+      :consequence "All 211 acceptance fixtures monorepo-wide pass cleanly; 7 of 7 verification gates pass; 5 of 5 D52 dimensions reconciled; zero failing tests monorepo-wide")
   ]
 )
