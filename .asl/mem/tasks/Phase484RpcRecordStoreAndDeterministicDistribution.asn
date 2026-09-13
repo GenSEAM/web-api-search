@@ -161,11 +161,11 @@
       :title "Tier Beta RPC Contract Dispatcher for Decisions, Intents, Principles, Recipes and Components"
       :kind :engine
       :lane "rpc-beta"
-      :state :ready
+      :state :completed
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789452000000
-      :updatedAt 1789452000000
+      :updatedAt 1789459500000
       :motivation "Architectural decisions, intents, principles, recipes, and component manifests are scattered across files without unified write contracts."
       :purpose "Implement RPC handlers in asl/tools/asl.c for :decision, :intent, :principle, :recipe, and :component with schema validation and atomic indexing."
       :context (:contractRef D81PlanContext)
@@ -187,11 +187,21 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task48404.asl"]
       :verificationCases [":decision :record creates canonical D<N> file and updates index." "Missing problem or drivers fields triggers blamed rejection."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48404" :status :notEstablished :contract D81Baseline)
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48404" :status :baselineVerified :contract D81Baseline)
+      :reviewStatus :verified
       :stepIndex 1
-      :receipts [])
+      :receipts [
+        (:receipt
+          :id "receipt-task-48404"
+          :taskId "Task48404"
+          :gate "sh tests/acceptance/d81/SuperviseGate.sh Task48404"
+          :exitCode 0
+          :status :passed
+          :timestamp 1789459500000
+          :digest "98ca993"
+          :executedAsserts 19
+          :durationMs 7000)])
 
     (:task
       :id "Task48405"
