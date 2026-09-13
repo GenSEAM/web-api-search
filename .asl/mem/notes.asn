@@ -2009,5 +2009,14 @@
       :fact "task-f36-certified-complete"
       :evidence "Resolved tautological tests in memory and acceptance suites under ADR-0081; replaced vacuous (= 1 1) and (= 1 2) assertions in tests/acceptance/d81/Task45404.asl with genuine string slice, non-empty list, and negative substring refutations; refactored mem/tests/mem_test.asl to exercise genuine create-record and fuse-ranks-rrf with top candidate verification; authored tests/acceptance/d81/Task-F36.asl demonstrating baseline failure on tautologies; evaluated 29 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F36 certified complete; tautological and vacuous assertions eliminated, genuine driver paths tested, and refutation reachability verified monorepo-wide under ADR-0081")
+    (:note
+      :id "n190"
+      :timestamp 1789455200000
+      :author "codex"
+      :scope ["asl/grammar/cases.asn" "asl/grammar/grammar.asn" "asl/grammar/rpc.asn" "harness/grammar.asn" "harness/audit-playbook.asn" "harness/audit-protocols.asn" "mem/grammar.asn" "asl/packages/asl-codegen/src/emit_jsx.asl" "tests/acceptance/d81/Task-F37.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f37 :invariants :c1 :zero-comments :asn-grammar :codegen :approved]
+      :fact "task-f37-certified-complete"
+      :evidence "Restored Invariant C1 (zero comments) across monorepo under ADR-0081; stripped all raw ;; comments from asl/grammar/cases.asn, asl/grammar/grammar.asn, asl/grammar/rpc.asn, harness/audit-playbook.asn, harness/audit-protocols.asn, harness/grammar.asn, and mem/grammar.asn; eliminated foreign // @ts-nocheck comment from asl/packages/asl-codegen/src/emit_jsx.asl; authored tests/acceptance/d81/Task-F37.asl demonstrating baseline failure on present comments; evaluated 10 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F37 certified complete; Invariant C1 fully enforced across grammar schemas, audit playbooks, and code generators with zero raw comments monorepo-wide under ADR-0081")
   ]
 )
