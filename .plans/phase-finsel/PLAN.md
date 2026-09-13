@@ -110,11 +110,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F13` (17 assertions verified)
 
 ### Task-F14: Connect Agent Dispatcher to Genuine Engine Tools
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `agent/src/dispatch.asl`
 - **Baseline Failure**: Calling tools `ast-patch`, `deps-resolve`, `knowledge-load`, `knowledge-offload` returns hardcoded mock strings.
 - **Remedy**: Wire tools to real AST parser, dependency graph, and memory hydration functions.
-- **Gate**: `bin/asl test agent/tests/dispatch_test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F14` (20 assertions verified)
 
 ### Task-F15: Implement Subprocess Execution and Pipe Engine in ASL Shell
 - **Status**: planned

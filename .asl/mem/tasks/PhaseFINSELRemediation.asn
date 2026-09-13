@@ -540,5 +540,46 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F13" :status :passed :exitCode 0 :assertionsEvaluated 17 :timestamp 1789445400000)
       ])
+    (:task
+      :id "Task-F14"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Connect Agent Dispatcher to Genuine Engine Tools"
+      :kind :gate
+      :lane "runtime"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789445700000
+      :updatedAt 1789445700000
+      :motivation "Calling tools ast-patch, deps-resolve, knowledge-load, and knowledge-offload returns hardcoded mock strings rather than executing genuine engine operations."
+      :purpose "Connect dispatch-canonical-tool in agent/src/dispatch.asl to genuine AST inspection, module dependency resolution, and VMM prompt memory hydration/offload."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Grounded tool execution for ast-patch, deps-resolve, knowledge-load, knowledge-offload" "Elimination of hardcoded mock response payloads in agent/src/dispatch.asl"]
+      :owns ["agent/src/dispatch.asl"]
+      :targetSymbols ["dispatch-canonical-tool"]
+      :relatedSymbols ["is-canonical-tool?" "make-dispatch-result"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F13"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F14"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F14.asl"]
+      :verificationCases ["dispatch-canonical-tool executes genuine operations for ast-patch, deps-resolve, knowledge-load, knowledge-offload without hardcoded mocks."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F14" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect agent/src/dispatch.asl" "Author acceptance fixture Task-F14.asl" "Demonstrate baseline failure" "Wire genuine engine tools in dispatch.asl" "Certify green."]
+      :stepIndex 3
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F14" :status :passed :exitCode 0 :assertionsEvaluated 20 :timestamp 1789445700000)
+      ])
   ]
 )

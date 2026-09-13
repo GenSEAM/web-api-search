@@ -67,7 +67,8 @@ echo "--> [1/3] Executing task fixture (${FIXTURE})..."
 FIXTURE_OUTPUT=$("${ASL_BIN}" test --strict-falsify "${FIXTURE}" 2>&1)
 echo "${FIXTURE_OUTPUT}"
 
-if echo "${FIXTURE_OUTPUT}" | /usr/bin/grep -F -q "0 assertion(s) executed" || echo "${FIXTURE_OUTPUT}" | /usr/bin/grep -F -q "0 assertions found"; then
+ZERO_PATTERN="0 assertion(s) executed"
+if echo "${FIXTURE_OUTPUT}" | /usr/bin/grep -E -q "(^|[^0-9])0 assertion\(s\) executed" || echo "${FIXTURE_OUTPUT}" | /usr/bin/grep -F -q "0 assertions found"; then
   echo "Error: vacuous fixture execution detected (0 assertions evaluated in ${FIXTURE})" >&2
   exit 4
 fi

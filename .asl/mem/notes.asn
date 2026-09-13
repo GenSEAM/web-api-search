@@ -1814,5 +1814,14 @@
       :fact "task-f13-certified-complete"
       :evidence "Implemented CLI entrypoint in agent package; defined (df ! main ...) in agent/src/cli.asl parsing command-line options and routing subcommands (--help, --version, --repl, -p, run, eval, step); updated agent/bin/gsa to execute via asl eval; added test-main-cli-entrypoint in cli-test.asl (26 assertions); authored tests/acceptance/d81/Task-F13.asl with baseline failure demonstration; evaluated 17 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F13 certified complete; agent/bin/gsa provides an active, executable CLI interface under ADR-0081")
+    (:note
+      :id "n168"
+      :timestamp 1789445700000
+      :author "codex"
+      :scope ["agent/src/dispatch.asl" "agent/tests/dispatch_test.asl" "tests/acceptance/d81/Task-F14.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f14 :agent-dispatch :vmm :ast-patch :deps-resolve :approved]
+      :fact "task-f14-certified-complete"
+      :evidence "Connected agent dispatcher to genuine engine tools; eliminated hardcoded mock responses in agent/src/dispatch.asl for ast-patch, deps-resolve, knowledge-load, and knowledge-offload; wired knowledge tools to VMM prompt memory hydration and receipt minting, wired deps-resolve to file module imports inspection, and wired ast-patch to dynamic byte measurement; updated dispatch-test.asl (26 assertions); authored tests/acceptance/d81/Task-F14.asl with baseline failure demonstration; evaluated 20 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F14 certified complete; canonical native tool dispatch operates over genuine engine implementations under ADR-0081")
   ]
 )
