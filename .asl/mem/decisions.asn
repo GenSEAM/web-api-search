@@ -1338,4 +1338,80 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D58" "D59" "D81" "D83"]
       :tasks ["Task48401" "Task48402" "Task48403" "Task48404" "Task48405" "Task48406" "Task48407" "Task48408"]
       :consequences [(:pos "Eliminates syntax and delimiter corruption in memory files") (:pos "Shields agent attention window from filesystem mechanics") (:neg "Requires implementing comprehensive schema validators and storage adapters in asl.c")])
+    (:adr
+      :id "D84"
+      :shortcode "D84"
+      :title "Multi-Client Launcher Engine, Dangerous-Rescue Permissions, and Client Channel Protocol"
+      :status :active
+      :planStatus :approved
+      :date "2026-09-13"
+      :cluster "architecture/launcher"
+      :deciders ["user" "architect" "planner" "implementer" "auditor"]
+      :problem "Autonomous agents running across heterogeneous client environments face fractured startup flags, fragile environment injection, manual permission prompts, and missing native binary aliases."
+      :drivers ["Unified startup interface" "Dangerous-rescue permissions" "Deterministic client discovery" "Native wrapper scaffolding" "Channel protocol handshake"]
+      :decision "Establish canonical Multi-Client Launcher Engine in asl/tools/asl.c and asl/grammar/launch.asn with structured permission tiering, local path discovery, and addie/eddie shims."
+      :invariants ["C1" "C2" "C3" "C4" "D34" "D51" "D52" "D81" "D84"]
+      :tasks ["Task48501" "Task48502" "Task48503" "Task48504" "Task48505" "Task48506"]
+      :consequences [(:pos "Zero interactive permission stalls during autonomous runs") (:pos "First-class addie/eddie native binary shims") (:neg "Requires maintaining client discovery paths across OS distributions")])
+    (:adr
+      :id "D85"
+      :shortcode "D85"
+      :title "Autonomous Multi-Model Mesh Orchestrator, Parallel Verification Stand, and Dialectical Gap Synthesis"
+      :status :active
+      :planStatus :approved
+      :date "2026-09-13"
+      :cluster "architecture/mesh"
+      :deciders ["user" "architect" "planner" "implementer" "auditor"]
+      :problem "Single-model inspection suffers from intrinsic epistemic blind spots, confirmation bias, and vacuous self-verification across large monorepos."
+      :drivers ["Parallel multi-model mesh" "Full codebase traversal" "Dialectical gap synthesis" "Bounded defect taxonomy" "Isolated partition scheduling"]
+      :decision "Establish Autonomous Multi-Model Mesh Orchestrator running Opus, Pro, and Flash in parallel with polyglot AST scanning, dialectical cross-evaluation, and grounded gap ledgers."
+      :invariants ["C1" "C2" "C3" "C4" "D34" "D51" "D52" "D81" "D85"]
+      :tasks ["Task48601" "Task48602" "Task48603" "Task48604" "Task48605" "Task48606"]
+      :consequences [(:pos "100 percent monorepo AST traversal without context degradation") (:pos "Eliminates single-model hallucination through dialectical synthesis") (:neg "High token expenditure requiring strict partition bounds")])
+    (:adr
+      :id "D86"
+      :shortcode "D86"
+      :title "Autonomous Pure ASL Stage-2 Bootstrap, Native Mach-O/ELF Emission, and Compiler Closure"
+      :status :active
+      :planStatus :approved
+      :date "2026-09-13"
+      :cluster "architecture/compiler"
+      :deciders ["user" "architect" "planner" "implementer" "auditor"]
+      :problem "AgentScript currently relies on a hybrid C host bridge and embedded JavaScriptCore evaluator, preventing complete language sovereignty and cross-platform portability."
+      :drivers ["Pure ASL self-hosting" "Direct Mach-O and ELF emission" "Deterministic triple bootstrap" "Substrate isolation"]
+      :decision "Establish Pure ASL Stage-2 Bootstrap compiling directly to Mach-O ARM64 and Linux ELF64, eliminating JavaScriptCore dependency and certifying compiler closure."
+      :invariants ["C1" "C2" "C3" "C4" "D34" "D51" "D52" "D81" "D86"]
+      :tasks ["Task48701" "Task48702" "Task48703" "Task48704" "Task48705" "Task48706"]
+      :consequences [(:pos "Complete language self-hosting with sub-5ms cold startup") (:pos "Cross-platform native binaries for macOS and Linux") (:neg "Requires low-level machine code emission in pure ASL")])
+    (:adr
+      :id "D87"
+      :shortcode "D87"
+      :title "Universal WebAssembly Ambient Substrate, OPFS Boundaries, and Embedded SQLite/DuckDB Storage Engine"
+      :status :active
+      :planStatus :approved
+      :date "2026-09-13"
+      :cluster "architecture/storage"
+      :deciders ["user" "architect" "planner" "implementer" "auditor"]
+      :problem "Executing AgentScript across web browsers and serverless sandboxes is blocked by POSIX filesystem assumptions, and querying large telemetry files lacks relational indexing."
+      :drivers ["Universal WebAssembly substrate" "OPFS browser persistence" "Embedded SQLite transactional engine" "Embedded DuckDB analytical engine" "Dual-representation projection"]
+      :decision "Establish Universal WebAssembly Ambient Substrate with OPFS browser persistence and embedded SQLite/DuckDB engines adhering to the StorageEngine interface."
+      :invariants ["C1" "C2" "C3" "C4" "D34" "D51" "D52" "D81" "D87"]
+      :tasks ["Task48801" "Task48802" "Task48803" "Task48804" "Task48805" "Task48806"]
+      :consequences [(:pos "Full AgentScript execution inside web browsers and edge workers") (:pos "Sub-millisecond query performance on complex monorepo telemetry") (:neg "Requires maintaining WASM memory boundaries and database bindings")])
+    (:adr
+      :id "D88"
+      :shortcode "D88"
+      :title "Full Monorepo Epistemic Closure, Holistic 10-Tier Quality Certification, and Milestone M09 Settle"
+      :status :active
+      :planStatus :approved
+      :date "2026-09-13"
+      :cluster "architecture/certification"
+      :deciders ["user" "architect" "planner" "implementer" "auditor"]
+      :problem "Concluding Wave 136 spanning 38 packages and 600+ tasks risks undetected epistemic drift or ungrounded empirical claims without unified 10-tier gate certification."
+      :drivers ["Holistic 10-tier verification" "100 percent epistemic grounding" "Milestone M09 settlement" "Sovereign release certification"]
+      :decision "Establish Full Monorepo Epistemic Closure, 10-tier verification engine (asl audit closure), zero ungrounded claims enforcement, and Milestone M09 cryptographic settlement."
+      :invariants ["C1" "C2" "C3" "C4" "D34" "D51" "D52" "D81" "D88"]
+      :tasks ["Task48901" "Task48902" "Task48903" "Task48904" "Task48905" "Task48906"]
+      :consequences [(:pos "Definitive epistemic closure with zero ungrounded claims across monorepo") (:pos "Certified Milestone M09 production-ready release") (:neg "Requires comprehensive validation of all 10 verification tiers")])
   ])
+

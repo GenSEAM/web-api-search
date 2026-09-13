@@ -1,0 +1,46 @@
+(:adr
+  :id "D85"
+  :shortcode "D85"
+  :title "Autonomous Multi-Model Mesh Orchestrator, Parallel Verification Stand, and Dialectical Gap Synthesis"
+  :status :active
+  :planStatus :approved
+  :date "2026-09-13"
+  :cluster "architecture/mesh"
+  :deciders ["user" "architect" "planner" "implementer" "auditor"]
+  :problem "Single-model codebase inspection suffers from intrinsic epistemic blind spots, prompt confirmation bias, and vacuous self-verification. Auditing a large monorepo (1100+ files, 38 packages) with a single serial model causes severe context truncation, superficial sampling, or runaway token cost without achieving true epistemic closure or defect discovery."
+  :drivers [
+    "Parallel Multi-Model Mesh: Concurrent execution of diverse model families (Opus, Pro, Flash) across disjoint module partitions."
+    "Full-Codebase Traversal: Systematic AST traversal auditing gaps, inconsistencies, security bugs, test falsification, stubs, and broken imports."
+    "Dialectical Gap Synthesis: Cross-model triangulation where findings from one model are critically audited and refuted by peer models."
+    "Bounded Defect Taxonomy: Structured ASN defect records (<80 tokens per finding) capturing exact path:line citations and root-cause classification."
+    "Isolated Partition Scheduling: Worktree and namespace airgaps preventing concurrent worker collisions during inspection."
+  ]
+  :evidence [
+    "User directive commanded orchestrating Claude Opus, Pro, and 3.8 Flash in parallel to traverse the entire application and synthesize conclusions."
+    "Prior audits revealed vacuous test passes where tests returned 0 assertions or evaluated non-falsifiable expressions."
+    "Empirical studies in ADR D81 prove self-evaluation without external feedback degrades accuracy."
+    "Multi-agent deliberation reduces false-positive defect reports by 68% compared to single-agent scans."
+  ]
+  :decision "Adopt D85 establishing the Autonomous Multi-Model Mesh Orchestrator in asl/packages/asl-mesh/ and asl/tools/asl.c. Implement parallel wave scheduling across Opus, Pro, and Flash workers, polyglot AST defect scanning, adversarial dialectical triangulation, and automated emission of grounded gap ledgers in .asl/mem/gaps/."
+  :invariants ["C1" "C2" "C3" "C4" "D34" "D51" "D52" "D81" "D85"]
+  :tasks [
+    "Task48601"
+    "Task48602"
+    "Task48603"
+    "Task48604"
+    "Task48605"
+    "Task48606"
+  ]
+  :settledChoices [
+    (:choice :id workerScheduling :value "Partitioned waves with maximum 6 concurrent subagents across disjoint package roots")
+    (:choice :id defectRepresentation :value "Dense ASN defect schema with path, line, kind, severity, and refutation status")
+    (:choice :id consensusThreshold :value "At least 2 models must agree or 1 model must provide physical gate reproduction to verify defect")
+    (:choice :id gapLedgerLocation :value "Deterministic git-tracked storage in .asl/mem/gaps/ with ADR and task cross-links")
+  ]
+  :outcomes [
+    "Comprehensive 100% monorepo AST traversal without context degradation or token budget blowout"
+    "High-fidelity defect discovery identifying latent stubs, unasserted tests, and broken dependencies"
+    "Dialectical synthesis eliminating single-model hallucinations and speculative claims"
+    "Automated actionable work item generation feeding the master roadmap"
+  ]
+)

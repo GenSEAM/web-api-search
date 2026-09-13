@@ -1,0 +1,244 @@
+(:taskCollection
+  :id "Phase485MultiClientLauncherEngineAndDangerousRescue"
+  :createdAt 1789459200000
+  :status "planned"
+  :priorityOrder 1
+  :summary "Multi-Client Autonomous Launcher Engine, Permission Management, and Client Channel Protocol"
+  :phase "Phase485MultiClientLauncherEngineAndDangerousRescue"
+  :baseline "Audited 2026-09-13: Autonomous client execution across Antigravity, Claude Code, and Codex suffers from manual permission prompts stalling unattended execution, fragmented discovery paths, and missing native binary wrappers."
+  :tasks [
+    (:task
+      :id "Task48501"
+      :parentId ""
+      :phase "Phase485MultiClientLauncherEngineAndDangerousRescue"
+      :title "Client Channel Protocol and Launch Session Schema"
+      :kind :grammar
+      :lane "grammar"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Multi-client launchers require formal ASN grammar contracts defining launch session parameters, permission tiers, and capability handshakes."
+      :purpose "Author asl/grammar/launch.asn defining formal schemas for launch-session forms, permission tiers (read-only, sandboxed-write, dangerous-rescue), and client capabilities."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Formal launch session schema declared" "Permission tier hierarchy defined" "Client capability handshake contracts specified"]
+      :owns ["asl/grammar/launch.asn" "tests/acceptance/d81/Task48501.asl"]
+      :targetSymbols ["launch_session_schema" "permission_tier"]
+      :relatedSymbols ["launch_flags" "client_channel"]
+      :invariants ["D84" "D52" "C1" "C2"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D84"
+      :decision "d84"
+      :dependsOn []
+      :gate "bin/asl test tests/acceptance/d81/Task48501.asl"
+      :actionDag ["Author asl/grammar/launch.asn schema." "Define permission tiers." "Author acceptance test Task48501.asl." "Run gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48501.asl"]
+      :verificationCases ["launch.asn defines launch-session and permission-tier forms with balanced delimiters." "Rejection returned for unknown permission tier."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48501.asl" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48502"
+      :parentId ""
+      :phase "Phase485MultiClientLauncherEngineAndDangerousRescue"
+      :title "Antigravity Dangerous-Rescue Permission Elevation Engine"
+      :kind :engine
+      :lane "launcher-core"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Antigravity CLI stalls in autonomous background loops when interactive permission prompts appear."
+      :purpose "Implement automatic injection of --dangerously-skip-permissions and permission-tier dangerous-rescue in asl/tools/asl.c for asl launch agy invocations."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["asl launch agy auto-injects dangerous-rescue permission flags" "Channel rules injected into agent environment" "Zero interactive prompt deadlocks during autonomous execution"]
+      :owns ["asl/tools/asl.c" "bin/asl" "asl/asl" "asl/bin/asl" "tests/acceptance/d81/Task48502.asl"]
+      :targetSymbols ["launch_agy" "inject_permission_flags"]
+      :relatedSymbols ["dangerous_rescue" "client_channel"]
+      :invariants ["D84" "D51" "C1" "C3"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D84"
+      :decision "d84"
+      :dependsOn ["Task48501"]
+      :gate "bin/asl test tests/acceptance/d81/Task48502.asl"
+      :actionDag ["Implement agy launch permission elevation in asl.c." "Recompile triple binaries." "Verify permission flags emitted." "Run gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48502.asl"]
+      :verificationCases ["asl launch agy contains --dangerously-skip-permissions in spawned argv." "Permission tier is recorded as dangerous-rescue."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48502.asl" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48503"
+      :parentId ""
+      :phase "Phase485MultiClientLauncherEngineAndDangerousRescue"
+      :title "Deterministic Multi-Client Path Resolver"
+      :kind :engine
+      :lane "launcher-resolver"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Claude Code, Codex, and other AI clients installed in ~/.local/bin or application directories are not detected when PATH is minimal."
+      :purpose "Implement priority-ordered binary resolution in asl/tools/asl.c checking ~/.local/bin, ~/bin, /opt/homebrew/bin, and PATH for claude, codex, cursor, and windsurf."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Deterministic resolution of client binaries across diverse directories" "Graceful error reporting with actionable install instructions when binary is absent" "Zero path hallucination in child process spawning"]
+      :owns ["asl/tools/asl.c" "bin/asl" "asl/asl" "asl/bin/asl" "tests/acceptance/d81/Task48503.asl"]
+      :targetSymbols ["resolve_client_binary" "find_executable_path"]
+      :relatedSymbols ["path_search" "client_manifest"]
+      :invariants ["D84" "C1" "C3"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D84"
+      :decision "d84"
+      :dependsOn ["Task48501"]
+      :gate "bin/asl test tests/acceptance/d81/Task48503.asl"
+      :actionDag ["Implement resolve_client_binary in asl.c." "Add discovery paths for claude, codex, cursor, windsurf." "Recompile triple binaries." "Run gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48503.asl"]
+      :verificationCases ["Resolves ~/.local/bin/claude when present." "Returns clean blamed error receipt when requested client binary is not installed."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48503.asl" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48504"
+      :parentId ""
+      :phase "Phase485MultiClientLauncherEngineAndDangerousRescue"
+      :title "Native Wrapper Scaffolding for bin/addie and bin/eddie"
+      :kind :toolbelt
+      :lane "toolbelt"
+      :state :ready
+      :priority :normal
+      :ownerRole "implementer"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Legacy commands and team habits invoke bin/addie or bin/eddie directly, which fail if the shims are missing."
+      :purpose "Scaffold executable shell shims bin/addie and bin/eddie forwarding arguments to bin/asl with appropriate client channels and environment context."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["bin/addie and bin/eddie shims created and made executable" "Delegation to bin/asl with client context verified" "Zero command breakage across developer workflows"]
+      :owns ["bin/addie" "bin/eddie" "tests/acceptance/d81/Task48504.asl"]
+      :targetSymbols ["addie_shim" "eddie_shim"]
+      :relatedSymbols ["bin_asl" "client_delegation"]
+      :invariants ["D84" "C1"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D84"
+      :decision "d84"
+      :dependsOn ["Task48502" "Task48503"]
+      :gate "bin/asl test tests/acceptance/d81/Task48504.asl"
+      :actionDag ["Author bin/addie and bin/eddie shims." "Make shims executable." "Author acceptance test fixture Task48504.asl." "Run gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48504.asl"]
+      :verificationCases ["bin/addie invokes bin/asl with addie channel context." "bin/eddie invokes bin/asl with eddie channel context."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48504.asl" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48505"
+      :parentId ""
+      :phase "Phase485MultiClientLauncherEngineAndDangerousRescue"
+      :title "Dry-Run Diagnostic and Capability Handshake Verifier"
+      :kind :engine
+      :lane "launcher-cli"
+      :state :ready
+      :priority :normal
+      :ownerRole "implementer"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Agents need to inspect and verify launch arguments and permission tiers without actually executing child processes."
+      :purpose "Implement --dry-run flag for asl launch returning a structured ASN receipt reporting target executable, resolved arguments, permission tier, and channel state."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["asl launch <client> --dry-run reports full invocation plan in ASN" "Zero side-effects during diagnostic inspection" "Sub-80 token receipt representation"]
+      :owns ["asl/tools/asl.c" "bin/asl" "asl/asl" "asl/bin/asl" "tests/acceptance/d81/Task48505.asl"]
+      :targetSymbols ["launch_dry_run" "print_launch_plan"]
+      :relatedSymbols ["dry_run_receipt" "invocation_plan"]
+      :invariants ["D84" "D51" "C1"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D84"
+      :decision "d84"
+      :dependsOn ["Task48502" "Task48503"]
+      :gate "bin/asl launch agy --dry-run && bin/asl launch claude --dry-run"
+      :actionDag ["Add --dry-run handling to run_cmd_launch in asl.c." "Emit structured ASN receipt." "Recompile triple binaries." "Run gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48505.asl"]
+      :verificationCases ["asl launch agy --dry-run returns exit code 0 and valid ASN plan." "Dry run reports --dangerously-skip-permissions in argument list."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "bin/asl launch agy --dry-run && bin/asl launch claude --dry-run" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48506"
+      :parentId ""
+      :phase "Phase485MultiClientLauncherEngineAndDangerousRescue"
+      :title "Multi-Client Launcher Supervise Gate and Ecosystem Certification"
+      :kind :governance
+      :lane "verification"
+      :state :ready
+      :priority :critical
+      :ownerRole "verifier"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Verification of launcher capabilities across clients must be certified through clean-context supervision."
+      :purpose "Author tests/acceptance/d81/Task48506.asl validating all multi-client launcher invariants, update AGENTS.md and install scripts, and run supervise gate."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Acceptance fixture Task48506.asl verifies end-to-end launcher contracts" "AGENTS.md updated with canonical launch commands" "Supervise gate certified green"]
+      :owns ["tests/acceptance/d81/Task48506.asl" "AGENTS.md" "scripts/install.sh"]
+      :targetSymbols ["supervise_launcher_gate" "certify_launcher"]
+      :relatedSymbols ["ecosystem_sync" "acceptance_suite"]
+      :invariants ["D84" "D81" "C1" "C2"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D84"
+      :decision "d84"
+      :dependsOn ["Task48501" "Task48502" "Task48503" "Task48504" "Task48505"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task48506"
+      :actionDag ["Author Task48506.asl fixture." "Update AGENTS.md documentation." "Run supervise gate across Task48501..Task48506."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48506.asl"]
+      :verificationCases ["All 6 launcher tasks pass supervise gate cleanly." "Zero broken links in launcher documentation."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48506" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+  ]
+)

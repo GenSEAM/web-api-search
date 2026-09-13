@@ -1,0 +1,244 @@
+(:taskCollection
+  :id "Phase488UniversalWasmAmbientSubstrateAndPolyglotDatabase"
+  :createdAt 1789459200000
+  :status "planned"
+  :priorityOrder 1
+  :summary "Universal WebAssembly Ambient Substrate, OPFS Boundaries, and Embedded SQLite/DuckDB Storage Engine"
+  :phase "Phase488UniversalWasmAmbientSubstrateAndPolyglotDatabase"
+  :baseline "Audited 2026-09-13: Execution across web browsers is blocked by POSIX filesystem assumptions, and flat-file scans across large telemetry datasets cause severe latency."
+  :tasks [
+    (:task
+      :id "Task48801"
+      :parentId ""
+      :phase "Phase488UniversalWasmAmbientSubstrateAndPolyglotDatabase"
+      :title "WASM Ambient Substrate Specification and OPFS Contract"
+      :kind :grammar
+      :lane "grammar"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Ambient WebAssembly execution and browser persistence require formal ASN contracts defining memory limits, host imports, and OPFS storage."
+      :purpose "Author asl/grammar/wasm.asn defining schemas for WASM runtime imports/exports, linear memory boundaries, and OPFS storage contracts."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["WASM ambient substrate schema declared" "OPFS storage contract specified" "Memory bounds and capabilities defined"]
+      :owns ["asl/grammar/wasm.asn" "tests/acceptance/d81/Task48801.asl"]
+      :targetSymbols ["wasm_substrate_schema" "opfs_storage_contract"]
+      :relatedSymbols ["linear_memory" "host_import"]
+      :invariants ["D87" "D52" "C1" "C2"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D87"
+      :decision "d87"
+      :dependsOn []
+      :gate "bin/asl test tests/acceptance/d81/Task48801.asl"
+      :actionDag ["Author asl/grammar/wasm.asn." "Define OPFS schema." "Author acceptance test fixture Task48801.asl." "Run gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48801.asl"]
+      :verificationCases ["wasm.asn defines wasm-substrate and opfs-contract forms." "Delimiters balanced cleanly."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48801.asl" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48802"
+      :parentId ""
+      :phase "Phase488UniversalWasmAmbientSubstrateAndPolyglotDatabase"
+      :title "Pure ASL WebAssembly Runtime Core and Linear Memory Manager"
+      :kind :engine
+      :lane "wasm-runtime"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Executing AgentScript in web browsers requires a lightweight WebAssembly runtime core with zero external library dependencies."
+      :purpose "Implement WebAssembly runtime core and linear memory manager in mem/ or asl/packages/asl-eval/ compiling to single-binary WASM."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Pure ASL WebAssembly core compiled to single .wasm binary" "Linear memory allocator with strict ceiling guards operational" "Sub-10ms instantiation in browser web workers"]
+      :owns ["mem/src/wasm_runtime.asl" "tests/acceptance/d81/Task48802.asl"]
+      :targetSymbols ["wasm_runtime_init" "allocate_linear_memory"]
+      :relatedSymbols ["memory_guard" "wasm_eval"]
+      :invariants ["D87" "C1"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D87"
+      :decision "d87"
+      :dependsOn ["Task48801"]
+      :gate "bin/asl test tests/acceptance/d81/Task48802.asl"
+      :actionDag ["Implement WASM runtime core in pure ASL." "Wire memory allocator." "Author acceptance test fixture Task48802.asl." "Run gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48802.asl"]
+      :verificationCases ["Runtime instantiates inside standard WASM VM." "Memory allocation respects declared upper ceiling."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48802.asl" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48803"
+      :parentId ""
+      :phase "Phase488UniversalWasmAmbientSubstrateAndPolyglotDatabase"
+      :title "OPFS Deterministic Storage Adapter for Browser Environments"
+      :kind :storage
+      :lane "storage-opfs"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Browser environments cannot use POSIX filesystem calls and require the Origin Private File System for persistent memory."
+      :purpose "Implement OPFS storage adapter adhering to the D83 StorageEngine interface with synchronous access handles and atomic flush."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["OPFS storage adapter implements StorageEngine contract" "Atomic flush and sync without data loss across browser reloads" "Guaranteed comment-free canonical ASN formatting"]
+      :owns ["mem/src/opfs_adapter.asl" "tests/acceptance/d81/Task48803.asl"]
+      :targetSymbols ["opfs_storage_write" "opfs_storage_read"]
+      :relatedSymbols ["sync_access_handle" "opfs_flush"]
+      :invariants ["D87" "D83" "C1"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D87"
+      :decision "d87"
+      :dependsOn ["Task48801" "Task48802"]
+      :gate "bin/asl test tests/acceptance/d81/Task48803.asl"
+      :actionDag ["Author OPFS adapter in pure ASL." "Wire synchronous access handles." "Author acceptance test fixture Task48803.asl." "Run gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48803.asl"]
+      :verificationCases ["Writes to OPFS persist across session simulation." "Data read matches exact binary content written."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48803.asl" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48804"
+      :parentId ""
+      :phase "Phase488UniversalWasmAmbientSubstrateAndPolyglotDatabase"
+      :title "Embedded SQLite Storage Engine Adapter in asl.c and WASM"
+      :kind :engine
+      :lane "storage-sqlite"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "High-speed indexed querying across thousands of tasks and decisions requires a transactional relational engine."
+      :purpose "Implement SQLiteStorageAdapter in asl/tools/asl.c and mem/src/sqlite_adapter.asl mapping ASN record contracts to indexed SQL tables."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["SQLiteStorageAdapter implements StorageEngine interface" "Sub-millisecond indexed lookup by task id, adr shortcode, or tag" "Lossless bidirectional synchronization with ASN files"]
+      :owns ["asl/tools/asl.c" "mem/src/sqlite_adapter.asl" "tests/acceptance/d81/Task48804.asl"]
+      :targetSymbols ["sqlite_storage_write" "sqlite_storage_query"]
+      :relatedSymbols ["record_table_schema" "sqlite_engine"]
+      :invariants ["D87" "D83" "C1"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D87"
+      :decision "d87"
+      :dependsOn ["Task48801"]
+      :gate "bin/asl test tests/acceptance/d81/Task48804.asl"
+      :actionDag ["Author SQLite adapter in asl.c and ASL." "Create relational table schemas." "Author acceptance test fixture Task48804.asl." "Run gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48804.asl"]
+      :verificationCases ["Indexed query returns task record in sub-1ms." "Roundtrip between SQLite row and ASN form preserves 100% field parity."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48804.asl" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48805"
+      :parentId ""
+      :phase "Phase488UniversalWasmAmbientSubstrateAndPolyglotDatabase"
+      :title "DuckDB Analytical Telemetry Query Engine Adapter"
+      :kind :engine
+      :lane "storage-duckdb"
+      :state :ready
+      :priority :normal
+      :ownerRole "implementer"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Aggregating historical test execution telemetry and token profiling requires vectorized columnar query execution."
+      :purpose "Implement DuckDB analytical query adapter in asl/packages/asl-sql/ executing high-speed aggregations over execution receipts and benchmarks."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["DuckDB query engine adapter operational" "Columnar scans over 100,000+ telemetry rows in sub-50ms" "Aggregated telemetry views rendered as ASN receipts"]
+      :owns ["asl/packages/asl-sql/src/duckdb_adapter.asl" "tests/acceptance/d81/Task48805.asl"]
+      :targetSymbols ["query_telemetry_duckdb" "aggregate_benchmark_metrics"]
+      :relatedSymbols ["columnar_scan" "vectorized_query"]
+      :invariants ["D87" "C1"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D87"
+      :decision "d87"
+      :dependsOn ["Task48804"]
+      :gate "bin/asl test tests/acceptance/d81/Task48805.asl"
+      :actionDag ["Author DuckDB telemetry adapter." "Implement aggregations." "Author acceptance test fixture Task48805.asl." "Run gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48805.asl"]
+      :verificationCases ["Columnar query computes percentile latencies across telemetry rows." "Query returns structured ASN receipt."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48805.asl" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48806"
+      :parentId ""
+      :phase "Phase488UniversalWasmAmbientSubstrateAndPolyglotDatabase"
+      :title "Ambient Substrate Supervise Gate and Cross-Runtime Parity Suite"
+      :kind :governance
+      :lane "verification"
+      :state :ready
+      :priority :critical
+      :ownerRole "verifier"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Cross-runtime parity between native POSIX, WASM browser OPFS, and embedded SQL must be certified under clean supervision."
+      :purpose "Author tests/acceptance/d81/Task48806.asl, verify byte-identical record roundtrips across all three substrates, and run supervise gate."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Cross-runtime parity certified across POSIX, WASM, OPFS, and SQLite" "Zero data distortion during roundtrip translation" "Supervise gate certified green"]
+      :owns ["tests/acceptance/d81/Task48806.asl" "mem/tests/sqlite_adapter_test.asl"]
+      :targetSymbols ["supervise_wasm_gate" "verify_substrate_parity"]
+      :relatedSymbols ["parity_test" "roundtrip_verifier"]
+      :invariants ["D87" "D81" "C1" "C2"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D87"
+      :decision "d87"
+      :dependsOn ["Task48801" "Task48802" "Task48803" "Task48804" "Task48805"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task48806"
+      :actionDag ["Author Task48806.asl fixture." "Run sqlite_adapter_test.asl." "Run supervise gate across Task48801..Task48806."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48806.asl"]
+      :verificationCases ["All 6 WASM and database tasks pass supervise gate cleanly." "Zero record loss across storage engine transitions."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48806" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+  ]
+)

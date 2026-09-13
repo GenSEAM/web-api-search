@@ -1061,4 +1061,94 @@
       :closure "When RPC-first record store is superseded by distributed sovereign peer-to-peer memory fabric"
       :status "active"
       :planStatus "approved")
+     (:id "d84"
+      :sym "architecture/multi-client-launcher-engine-and-dangerous-rescue"
+      :title "Multi-Client Launcher Engine, Dangerous-Rescue Permissions, and Client Channel Protocol"
+      :intent "Provide unified asl launch <client> CLI interface with automatic permission elevation (dangerous-rescue) for Antigravity, user-local Claude Code discovery, native addie/eddie shims, and structured launch-session handshakes"
+      :outcome "Zero interactive stalls in autonomous sessions, seamless execution across heterogeneous agent environments, and fully audited launch telemetry"
+      :whyNot ("Manual permission prompts block unattended autonomy and fractured startup scripts cause frequent environment failures")
+      :adr ".asl/mem/decisions/D84MultiClientLauncherEngineAndDangerousRescue.asn"
+      :tasks [
+        "Task48501"
+        "Task48502"
+        "Task48503"
+        "Task48504"
+        "Task48505"
+        "Task48506"
+      ]
+      :closure "When multi-client launcher is superseded by sovereign ambient OS launcher"
+      :status "active"
+      :planStatus "approved")
+     (:id "d85"
+      :sym "architecture/multi-model-mesh-orchestrator-and-parallel-verification"
+      :title "Autonomous Multi-Model Mesh Orchestrator, Parallel Verification Stand, and Dialectical Gap Synthesis"
+      :intent "Orchestrate Claude Opus, Pro, and Flash concurrently across disjoint monorepo partitions, executing deep AST defect inspection and synthesizing consensus gap ledgers in .asl/mem/gaps/"
+      :outcome "Full codebase traversal without token exhaustion, elimination of single-model blind spots, and automated actionable gap reports"
+      :whyNot ("Single-model inspection suffers from confirmation bias, context truncation, and vacuous self-approval")
+      :adr ".asl/mem/decisions/D85MultiModelMeshOrchestratorAndParallelVerification.asn"
+      :tasks [
+        "Task48601"
+        "Task48602"
+        "Task48603"
+        "Task48604"
+        "Task48605"
+        "Task48606"
+      ]
+      :closure "When multi-model mesh is superseded by continuous real-time neural verification runtime"
+      :status "active"
+      :planStatus "approved")
+     (:id "d86"
+      :sym "architecture/pure-asl-stage2-bootstrap-and-compiler-closure"
+      :title "Autonomous Pure ASL Stage-2 Bootstrap, Native Mach-O/ELF Emission, and Compiler Closure"
+      :intent "Deliver pure ASL self-hosting compiler emitting Mach-O ARM64 and Linux ELF64 binaries directly, decoupling from JavaScriptCore and proving determinism via triple bootstrap"
+      :outcome "Complete language self-hosting sovereignty, sub-5ms cold binary startup, and cryptographically verified reproducible builds"
+      :whyNot ("Relying on external C and JavaScript runtimes limits language independence and cross-platform portability")
+      :adr ".asl/mem/decisions/D86PureAslStage2BootstrapAndCompilerClosure.asn"
+      :tasks [
+        "Task48701"
+        "Task48702"
+        "Task48703"
+        "Task48704"
+        "Task48705"
+        "Task48706"
+      ]
+      :closure "When stage-2 compiler is superseded by self-optimizing micro-architectural stage-3 toolchain"
+      :status "active"
+      :planStatus "approved")
+     (:id "d87"
+      :sym "architecture/universal-wasm-ambient-substrate-and-polyglot-database"
+      :title "Universal WebAssembly Ambient Substrate, OPFS Boundaries, and Embedded SQLite/DuckDB Storage Engine"
+      :intent "Provide universal WebAssembly compilation, browser OPFS persistence, and embedded SQLite/DuckDB engines for indexed transactional and analytical record access"
+      :outcome "Full AgentScript execution in web browsers and edge workers, sub-millisecond telemetry queries, and zero data loss in sandboxed runtimes"
+      :whyNot ("POSIX filesystem assumptions block web execution and flat-file scans cause severe latency on large telemetry sets")
+      :adr ".asl/mem/decisions/D87UniversalWasmAmbientSubstrateAndPolyglotDatabase.asn"
+      :tasks [
+        "Task48801"
+        "Task48802"
+        "Task48803"
+        "Task48804"
+        "Task48805"
+        "Task48806"
+      ]
+      :closure "When ambient WASM and embedded databases are superseded by distributed memory fabric"
+      :status "active"
+      :planStatus "approved")
+     (:id "d88"
+      :sym "architecture/full-monorepo-epistemic-closure-and-milestone-m09"
+      :title "Full Monorepo Epistemic Closure, Holistic 10-Tier Quality Certification, and Milestone M09 Settle"
+      :intent "Execute holistic 10-tier verification across all 38 packages, validate 100% claim grounding with exact citations, author cryptographic milestone settlement, and produce sovereign release"
+      :outcome "Definitive monorepo epistemic closure, zero ungrounded claims, and certified Milestone M09 production settlement"
+      :whyNot ("Fragmented quality checks allow undetected epistemic drift, ungrounded empirical assertions, and regressions in release candidates")
+      :adr ".asl/mem/decisions/D88FullMonorepoEpistemicClosureAndMilestoneM09.asn"
+      :tasks [
+        "Task48901"
+        "Task48902"
+        "Task48903"
+        "Task48904"
+        "Task48905"
+        "Task48906"
+      ]
+      :closure "When milestone M09 is settled and superseded by milestone M10 roadmap"
+      :status "active"
+      :planStatus "approved")
 )))

@@ -1,0 +1,244 @@
+(:taskCollection
+  :id "Phase489FullMonorepoEpistemicClosureAndMilestoneM09"
+  :createdAt 1789459200000
+  :status "planned"
+  :priorityOrder 1
+  :summary "Full Monorepo Epistemic Closure, Holistic 10-Tier Quality Certification, and Milestone M09 Settle"
+  :phase "Phase489FullMonorepoEpistemicClosureAndMilestoneM09"
+  :baseline "Audited 2026-09-13: Concluding Wave 136 spanning 38 packages and 600+ tasks requires unified 10-tier gate certification, refutation of ungrounded claims, and formal cryptographic settlement."
+  :tasks [
+    (:task
+      :id "Task48901"
+      :parentId ""
+      :phase "Phase489FullMonorepoEpistemicClosureAndMilestoneM09"
+      :title "Epistemic Closure Registry and 10-Tier Gate Schema"
+      :kind :grammar
+      :lane "grammar"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Expanding from 7 pure ASL verification gates to 10 comprehensive tiers requires formal ASN schema contracts."
+      :purpose "Author asl/grammar/closure.asn defining schemas for 10-tier gate verification receipts, milestone settlement manifests, and cryptographic digest trees."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["10-tier verification schema declared" "Milestone settlement manifest specification defined" "Cryptographic digest contracts specified"]
+      :owns ["asl/grammar/closure.asn" "tests/acceptance/d81/Task48901.asl"]
+      :targetSymbols ["closure_schema" "ten_tier_gate_spec"]
+      :relatedSymbols ["settlement_manifest" "digest_tree"]
+      :invariants ["D88" "D52" "C1" "C2"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D88"
+      :decision "d88"
+      :dependsOn []
+      :gate "bin/asl test tests/acceptance/d81/Task48901.asl"
+      :actionDag ["Author asl/grammar/closure.asn." "Define 10-tier schema." "Author acceptance test fixture Task48901.asl." "Run gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48901.asl"]
+      :verificationCases ["closure.asn declares ten-tier-gate and settlement-manifest forms." "Delimiters balanced cleanly."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48901.asl" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48902"
+      :parentId ""
+      :phase "Phase489FullMonorepoEpistemicClosureAndMilestoneM09"
+      :title "10-Tier Master Verification Engine in asl.c"
+      :kind :engine
+      :lane "verification-engine"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Verification of monorepo readiness must execute 10 tiers (syntax, types, tests, bounds, claims, wasm, stage2, mesh, storage, rules) in a unified command."
+      :purpose "Implement asl audit closure in asl/tools/asl.c executing all 10 verification tiers with bounded error receipts and physical exit codes."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["asl audit closure command operational" "All 10 verification tiers execute deterministically" "Emits structured ASN verification summary"]
+      :owns ["asl/tools/asl.c" "bin/asl" "asl/asl" "asl/bin/asl" "tests/acceptance/d81/Task48902.asl"]
+      :targetSymbols ["audit_ten_tiers" "run_cmd_audit_closure"]
+      :relatedSymbols ["tier_result" "master_audit_receipt"]
+      :invariants ["D88" "D51" "C1"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D88"
+      :decision "d88"
+      :dependsOn ["Task48901"]
+      :gate "bin/asl test tests/acceptance/d81/Task48902.asl"
+      :actionDag ["Implement audit closure in asl.c." "Wire 10 tier runners." "Author acceptance test fixture Task48902.asl." "Run gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48902.asl"]
+      :verificationCases ["asl audit closure executes all 10 tiers and returns exit 0." "Fails immediately if any individual tier fails."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48902.asl" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48903"
+      :parentId ""
+      :phase "Phase489FullMonorepoEpistemicClosureAndMilestoneM09"
+      :title "Automated Ungrounded Claim Refutation and Citation Linker"
+      :kind :governance
+      :lane "claims"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Epistemic honesty requires that every numerical claim across ADRs, rules, and documentation links to an executed test assertion."
+      :purpose "Implement claim grounder in pure ASL cross-referencing all numeric assertions with test receipts, refuting unbacked claims, and annotating exact citations."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["100 percent of numerical claims grounded in physical test receipts" "Zero unbacked assertions or hallucinated benchmarks in codebase" "Strict refutation of vacuous claims"]
+      :owns ["asl/packages/asl-checker/src/claims.asl" "tests/acceptance/d81/Task48903.asl"]
+      :targetSymbols ["verify_claims_grounding" "refute_unbacked_claims"]
+      :relatedSymbols ["claim_citation" "grounded_receipt"]
+      :invariants ["D88" "C1" "C4"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D88"
+      :decision "d88"
+      :dependsOn ["Task48901"]
+      :gate "bin/asl test tests/acceptance/d81/Task48903.asl"
+      :actionDag ["Author claim grounding validator in pure ASL." "Scan rules and ADRs." "Author acceptance test fixture Task48903.asl." "Run gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48903.asl"]
+      :verificationCases ["Flags any numeric claim lacking a corresponding executed assertion." "Confirms 100% citation grounding for rules.asn."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48903.asl" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48904"
+      :parentId ""
+      :phase "Phase489FullMonorepoEpistemicClosureAndMilestoneM09"
+      :title "Milestone M09 Epistemic Settlement Ledger"
+      :kind :storage
+      :lane "settlement"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Formal closure of Milestone M09 requires an immutable settlement ledger cryptographically sealing all 136 waves and package digests."
+      :purpose "Author .asl/mem/reviews/M09Settlement.asn recording cryptographic digests of all 38 package manifests, active ADRs, and verification receipts."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["M09Settlement.asn authored with cryptographic tree digests" "All 136 waves certified and formally settled" "Zero unresolved blocker tasks or missing receipts"]
+      :owns [".asl/mem/reviews/M09Settlement.asn" "tests/acceptance/d81/Task48904.asl"]
+      :targetSymbols ["record_m09_settlement" "seal_milestone"]
+      :relatedSymbols ["settlement_digest" "milestone_receipt"]
+      :invariants ["D88" "C1" "C2"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D88"
+      :decision "d88"
+      :dependsOn ["Task48902" "Task48903"]
+      :gate "bin/asl test tests/acceptance/d81/Task48904.asl"
+      :actionDag ["Author M09Settlement.asn ledger." "Compute cryptographic digests." "Author acceptance test fixture Task48904.asl." "Run gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48904.asl"]
+      :verificationCases ["M09Settlement.asn parses with 100% balanced delimiters." "Cryptographic digests match git tree state."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48904.asl" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48905"
+      :parentId ""
+      :phase "Phase489FullMonorepoEpistemicClosureAndMilestoneM09"
+      :title "Full Monorepo Master Gate Certification Stand"
+      :kind :governance
+      :lane "master-gate"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Releasing Milestone M09 requires running the full monorepo test corpus and verifying zero vacuous test passes."
+      :purpose "Execute full monorepo gate suite across all 313+ test suites, asserting non-vacuity and verifying all 10 verification tiers."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Full test corpus executed across all 38 packages" "100 percent non-vacuous assertion execution verified" "Zero test failures or flaky retries"]
+      :owns ["asl/tools/gate.asl" "tests/acceptance/d81/Task48905.asl"]
+      :targetSymbols ["certify_master_gate" "run_full_corpus"]
+      :relatedSymbols ["master_test_run" "assertion_audit"]
+      :invariants ["D88" "C1"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D88"
+      :decision "d88"
+      :dependsOn ["Task48902" "Task48904"]
+      :gate "bin/asl test tests/acceptance/d81/Task48905.asl"
+      :actionDag ["Run full corpus test stand." "Verify assertion counts." "Author acceptance test fixture Task48905.asl." "Run gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48905.asl"]
+      :verificationCases ["All 313+ test suites pass without skips or mocks." "Total executed assertions exceeds 2500."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48905.asl" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48906"
+      :parentId ""
+      :phase "Phase489FullMonorepoEpistemicClosureAndMilestoneM09"
+      :title "Sovereign Release Package and Milestone Closure Receipt"
+      :kind :governance
+      :lane "verification"
+      :state :ready
+      :priority :critical
+      :ownerRole "verifier"
+      :createdAt 1789459200000
+      :updatedAt 1789459200000
+      :motivation "Verification of full monorepo epistemic closure must be certified through clean-context supervision."
+      :purpose "Author tests/acceptance/d81/Task48906.asl, verify release package bundle, and execute final supervise gate."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Release package built and certified" "Supervise gate passes across all milestone tasks" "Milestone M09 closure receipt recorded"]
+      :owns ["tests/acceptance/d81/Task48906.asl" "scripts/release.sh"]
+      :targetSymbols ["supervise_closure_gate" "build_release_package"]
+      :relatedSymbols ["release_bundle" "milestone_receipt"]
+      :invariants ["D88" "D81" "C1" "C2"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D88"
+      :decision "d88"
+      :dependsOn ["Task48901" "Task48902" "Task48903" "Task48904" "Task48905"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task48906"
+      :actionDag ["Author Task48906.asl fixture." "Run release verification script." "Run supervise gate across Task48901..Task48906."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48906.asl"]
+      :verificationCases ["All 6 closure tasks pass supervise gate cleanly." "Release bundle passes self-test."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48906" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+  ]
+)

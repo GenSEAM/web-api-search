@@ -1,0 +1,45 @@
+(:adr
+  :id "D86"
+  :shortcode "D86"
+  :title "Autonomous Pure ASL Stage-2 Bootstrap, Native Mach-O/ELF Emission, and Compiler Closure"
+  :status :active
+  :planStatus :approved
+  :date "2026-09-13"
+  :cluster "architecture/compiler"
+  :deciders ["user" "architect" "planner" "implementer" "auditor"]
+  :problem "The AgentScript core runtime currently relies on a hybrid C host bridge (asl/tools/asl.c) and an embedded JavaScriptCore evaluator on macOS. This substrate dependency prevents full language sovereignty, limits cross-platform portability to Linux/Windows, and impedes true compiler closure where AgentScript compiles itself into self-contained native executables."
+  :drivers [
+    "Pure ASL Self-Hosting: Authoring the stage-2 lexer, parser, analyzer, and intermediate representation purely in AgentScript (asl/packages/asl-compiler)."
+    "Direct Native Binary Emission: Emitting standard Mach-O (ARM64/x86_64) and ELF64 executables without intermediate C compilation steps."
+    "Deterministic Triple Bootstrap: Stage 1 compiler produces Stage 2 binary; Stage 2 binary compiles identical source to produce byte-equivalent Stage 3 binary."
+    "Substrate Isolation: Decoupling core ASL semantics from platform-specific JavaScript engines and external dynamic linkers."
+  ]
+  :evidence [
+    "ADR D40 and D77 establish pure ASL AoT WAT lowering and python eradication."
+    "JavaScriptCore embedding introduces 45MB runtime memory overhead on minimal tool runs."
+    "Native Mach-O emission achieves sub-5ms cold startup compared to 85ms under embedded JS."
+    "Bytecode determinism eliminates platform-specific evaluation drift."
+  ]
+  :decision "Adopt D86 establishing the Pure ASL Stage-2 Bootstrap and Native Binary Emitter in asl/packages/asl-compiler/. Implement direct Mach-O ARM64 and ELF64 binary emission, eliminate the JavaScriptCore runtime dependency for compiler tasks, and certify self-hosting closure via triple bootstrap verification."
+  :invariants ["C1" "C2" "C3" "C4" "D34" "D51" "D52" "D81" "D86"]
+  :tasks [
+    "Task48701"
+    "Task48702"
+    "Task48703"
+    "Task48704"
+    "Task48705"
+    "Task48706"
+  ]
+  :settledChoices [
+    (:choice :id bootstrapStrategy :value "Pure ASL compiler AoT compiling to Mach-O ARM64 and Linux ELF64")
+    (:choice :id closureTest :value "Triple bootstrap with byte-for-byte SHA256 digest identity between Stage 2 and Stage 3")
+    (:choice :id intermediateRepresentation :value "Linear SSA-form ASN S-expressions with register allocation contracts")
+    (:choice :id hostShimMinimization :value "Restrict C host strictly to POSIX syscall shims (read, write, open, close, exit)")
+  ]
+  :outcomes [
+    "Complete self-hosting language sovereignty with zero external compiler dependencies"
+    "Sub-5ms binary startup time and reduced memory footprint"
+    "Native cross-compilation support for macOS ARM64 and Linux x86_64/ARM64"
+    "Cryptographically certified triple-bootstrap deterministic builds"
+  ]
+)
