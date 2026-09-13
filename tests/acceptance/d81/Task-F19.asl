@@ -67,9 +67,9 @@
     (assert (> (list-length (.-stubs h)) 0) "Preloaded horizon must contain at least 1 stub")
     (assert (> (.-total-tokens h) 0) "Preloaded horizon total tokens must be greater than zero")
     (assert (not (.-truncated h)) "Horizon must not be truncated with 10000 budget")
-    (let [(first-stub (option-or (list-head (.-stubs h)) (pr/stub-create "" (pr/tier-micro-ast) "" "" "" 0)))]
-      (assert (string-contains? (.-symbol first-stub) "intel-version") "First stub must match target symbol")
-      (assert (string-equals? (pr/preload-tier-to-string (.-tier first-stub)) "micro-ast") "Target stub must be micro-ast tier")
+    (let [(FirstStub (option-or (list-head (.-stubs h)) (pr/stub-create "" (pr/tier-micro-ast) "" "" "" 0)))]
+      (assert (string-contains? (.-symbol FirstStub) "intel-version") "First stub must match target symbol")
+      (assert (string-equals? (pr/preload-tier-to-string (.-tier FirstStub)) "micro-ast") "Target stub must be micro-ast tier")
       true)))
 
 (df TestIntelPreloadBudgetTruncation [] -> Bool
@@ -83,10 +83,10 @@
   (let [(res (file-read ".asl/mem/tasks/PhaseFINSELRemediation.asn"))]
     (mt res
       ((ok content)
-       (let [(has-id (string-contains? content ":id \"Task-F19\""))
-             (has-title (string-contains? content ":title \"Hydrate Symbol Graph on Intel Preload\""))]
-         (assert has-id "Task-F19 must be registered in PhaseFINSELRemediation.asn")
-         (assert has-title "Task-F19 title must match PhaseFINSELRemediation.asn")
+       (let [(HasId (string-contains? content ":id \"Task-F19\""))
+             (HasTitle (string-contains? content ":title \"Hydrate Symbol Graph on Intel Preload\""))]
+         (assert HasId "Task-F19 must be registered in PhaseFINSELRemediation.asn")
+         (assert HasTitle "Task-F19 title must match PhaseFINSELRemediation.asn")
          true))
       ((err e)
        (assert false "PhaseFINSELRemediation.asn must be readable")
