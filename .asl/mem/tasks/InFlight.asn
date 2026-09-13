@@ -1,7 +1,7 @@
 (:in-flight
   :session-id "57abefd4-689b-44f0-8084-f5b1813fae50"
   :lane ""
-  :activePhase "Phase483D81ShortcodeMigration"
+  :activePhase ""
   :activeTasks []
   :dispatchedAt 0
   :status "idle"
