@@ -1,8 +1,8 @@
-(module d81-sample/resolution-sample
+(module d81Sample/resolutionSample
   :d "Sample module to verify manifest-driven resolution for Task45401"
-  :x [sample-identity-value]
+  :x [sampleIdentityValue]
   :i [])
 
-(df sample-identity-value [] -> Str
+(df sampleIdentityValue [] -> Str
   :d "Returns sample token confirming resolution"
   "sample-manifest-resolution-success")

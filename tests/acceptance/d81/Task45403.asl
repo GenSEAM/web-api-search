@@ -1,12 +1,12 @@
 (module tests/acceptance/d81/Task45403
   :d "Acceptance fixture for Task45403: builtins, case, and match behavioural verification under ADR-0081."
-  :x [run-tests
-      test-case-branching-and-lazy-evaluation
-      test-match-forms-and-bindings
-      test-pair-and-tuple-builtins
-      test-fold-left-associative
-      test-list-and-map-builtins
-      test-string-builtins]
+  :x [runTests
+      testCaseBranchingAndLazyEvaluation
+      testMatchFormsAndBindings
+      testPairAndTupleBuiltins
+      testFoldLeftAssociative
+      testListAndMapBuiltins
+      testStringBuiltins]
   :i [])
 
 (dfe TestColor
@@ -14,7 +14,7 @@
   (c ColorGreen)
   (c ColorBlue))
 
-(df test-case-branching-and-lazy-evaluation [] -> Bool
+(df testCaseBranchingAndLazyEvaluation [] -> Bool
   :d "Verifies case branching on value and strict lazy evaluation of unselected branches"
   (let [(v1 (case 2
               (1 "one")
@@ -33,7 +33,7 @@
     (assert (= v3 "fallback-ok") "case wildcard must match fallback")
     true))
 
-(df test-match-forms-and-bindings [] -> Bool
+(df testMatchFormsAndBindings [] -> Bool
   :d "Verifies match form on some, none, ok, err, enum variants, wildcard, and lazy evaluation"
   (let [(res1 (match (some 42)
                 ((some v) (+ v 1))
@@ -42,7 +42,7 @@
                 ((some v) (assert false "none branch must not match some"))
                 (none 10)))
         (res3 (match (ok "hello")
-                ((ok s) (string-append s " world"))
+                ((ok s) (stringAppend s " world"))
                 ((err e) (assert false "ok branch must not match err"))))
         (res4 (match (err "disk full")
                 ((ok _) (assert false "err branch must not match ok"))
@@ -66,39 +66,39 @@
     (assert (= res7 200) "match lazy evaluation must not evaluate untaken branch")
     true))
 
-(df test-pair-and-tuple-builtins [] -> Bool
+(df testPairAndTupleBuiltins [] -> Bool
   :d "Verifies fst, snd, second, pair-first, and pair-second builtins"
   (let [(p (pair 10 20))
         (q (pair 100 200))
         (xs (list 1 2 3))]
     (assert (= (fst p) 10) "fst must return first element of pair")
     (assert (= (snd p) 20) "snd must return second element of pair")
-    (assert (= (pair-first q) 100) "pair-first must return first element of pair")
-    (assert (= (pair-second q) 200) "pair-second must return second element of pair")
+    (assert (= (pairFirst q) 100) "pair-first must return first element of pair")
+    (assert (= (pairSecond q) 200) "pair-second must return second element of pair")
     (assert (= (second xs) 2) "second must return second element of list")
     true))
 
-(df test-fold-left-associative [] -> Bool
+(df testFoldLeftAssociative [] -> Bool
   :d "Verifies fold-left left-associative non-commutative reduction on list"
-  (let [(diff-left (fold-left (fn [(acc Int64) (x Int64)] -> Int64 (- acc x))
+  (let [(diffLeft (foldLeft (fn [(acc Int64) (x Int64)] -> Int64 (- acc x))
                               100
                               (list 10 5 2)))]
-    (assert (= diff-left 83) "fold-left must evaluate left-associative ((100 - 10) - 5) - 2 = 83")
+    (assert (= diffLeft 83) "fold-left must evaluate left-associative ((100 - 10) - 5) - 2 = 83")
     true))
 
-(df test-list-and-map-builtins [] -> Bool
+(df testListAndMapBuiltins [] -> Bool
   :d "Verifies list-take past bounds, list-first, list-last, count, nil?, and map-merge"
   (let [(xs (list 1 2 3))
-        (taken-past (list-take xs 10))
-        (taken-two (list-take xs 2))
-        (f (list-first xs))
-        (l (option-or (list-last xs) 0))
+        (takenPast (listTake xs 10))
+        (takenTwo (listTake xs 2))
+        (f (listFirst xs))
+        (l (option-or (listLast xs) 0))
         (cnt (count xs))
         (m1 {:a 1 :b 2})
         (m2 {:b 3 :c 4})
-        (merged (map-merge m1 m2))]
-    (assert (= (list-length taken-past) 3) "list-take past bounds must return full list")
-    (assert (= (list-length taken-two) 2) "list-take within bounds must return requested prefix")
+        (merged (mapMerge m1 m2))]
+    (assert (= (list-length takenPast) 3) "list-take past bounds must return full list")
+    (assert (= (list-length takenTwo) 2) "list-take within bounds must return requested prefix")
     (assert (= f 1) "list-first must return first element")
     (assert (= l 3) "list-last must return last element")
     (assert (= cnt 3) "count must return element count")
@@ -109,21 +109,21 @@
     (assert (= (map-get merged :c) 4) "map-merge must include key :c from leaf")
     true))
 
-(df test-string-builtins [] -> Bool
+(df testStringBuiltins [] -> Bool
   :d "Verifies string-trim and string-append builtins"
   (let [(trimmed (string-trim "  hello world  "))
-        (appended (string-append "agent" "script"))]
+        (appended (stringAppend "agent" "script"))]
     (assert (= trimmed "hello world") "string-trim must strip whitespace")
     (assert (= appended "agentscript") "string-append must concatenate strings")
     true))
 
-(df run-tests [] -> Bool
+(df runTests [] -> Bool
   :d "Executes all Task45403 acceptance test suites"
   (do
-    (assert (test-case-branching-and-lazy-evaluation) "test-case-branching-and-lazy-evaluation must pass")
-    (assert (test-match-forms-and-bindings) "test-match-forms-and-bindings must pass")
-    (assert (test-pair-and-tuple-builtins) "test-pair-and-tuple-builtins must pass")
-    (assert (test-fold-left-associative) "test-fold-left-associative must pass")
-    (assert (test-list-and-map-builtins) "test-list-and-map-builtins must pass")
-    (assert (test-string-builtins) "test-string-builtins must pass")
+    (assert (testCaseBranchingAndLazyEvaluation) "test-case-branching-and-lazy-evaluation must pass")
+    (assert (testMatchFormsAndBindings) "test-match-forms-and-bindings must pass")
+    (assert (testPairAndTupleBuiltins) "test-pair-and-tuple-builtins must pass")
+    (assert (testFoldLeftAssociative) "test-fold-left-associative must pass")
+    (assert (testListAndMapBuiltins) "test-list-and-map-builtins must pass")
+    (assert (testStringBuiltins) "test-string-builtins must pass")
     true))

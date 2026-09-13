@@ -1,26 +1,26 @@
 (module tests/acceptance/d81/Task45404
   :d "Acceptance fixture for Task45404: refute as first-class falsification primitive under ADR-0081."
-  :x [run-tests
-      test-refute-falsy-and-nil
-      test-refute-raising-expression
-      test-refute-boolean-expressions
-      test-refute-counted-separately]
+  :x [runTests
+      testRefuteFalsyAndNil
+      testRefuteRaisingExpression
+      testRefuteBooleanExpressions
+      testRefuteCountedSeparately]
   :i [])
 
-(df test-refute-falsy-and-nil [] -> Bool
+(df testRefuteFalsyAndNil [] -> Bool
   :d "Verifies refute passes when expression is false or nil"
   (do
     (refute false "refute false must pass")
     (refute nil "refute nil must pass")
     true))
 
-(df test-refute-raising-expression [] -> Bool
+(df testRefuteRaisingExpression [] -> Bool
   :d "Verifies refute passes when expression raises an assertion error"
   (do
     (refute (assert false "deliberate inner assertion failure") "refute on raising expression must pass")
     true))
 
-(df test-refute-boolean-expressions [] -> Bool
+(df testRefuteBooleanExpressions [] -> Bool
   :d "Verifies refute passes on negative boolean predicates and string mismatches"
   (let [(msg "refutation test payload")
         (prefix (option-or (string-slice msg 0 4) ""))]
@@ -30,7 +30,7 @@
       (refute (= prefix "void") "refute mismatching slice must pass")
       true)))
 
-(df test-refute-counted-separately [] -> Bool
+(df testRefuteCountedSeparately [] -> Bool
   :d "Verifies that both assertions and refutations can be used together and recorded distinctly"
   (let [(items (list "alpha" "beta" "gamma"))
         (total (list-length items))]
@@ -41,11 +41,11 @@
       (refute false "refute false must succeed")
       true)))
 
-(df run-tests [] -> Bool
+(df runTests [] -> Bool
   :d "Executes all Task45404 acceptance tests"
   (do
-    (assert (test-refute-falsy-and-nil) "test-refute-falsy-and-nil must pass")
-    (assert (test-refute-raising-expression) "test-refute-raising-expression must pass")
-    (assert (test-refute-boolean-expressions) "test-refute-boolean-expressions must pass")
-    (assert (test-refute-counted-separately) "test-refute-counted-separately must pass")
+    (assert (testRefuteFalsyAndNil) "test-refute-falsy-and-nil must pass")
+    (assert (testRefuteRaisingExpression) "test-refute-raising-expression must pass")
+    (assert (testRefuteBooleanExpressions) "test-refute-boolean-expressions must pass")
+    (assert (testRefuteCountedSeparately) "test-refute-counted-separately must pass")
     true))
