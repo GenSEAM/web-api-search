@@ -259,11 +259,11 @@
       :title "Ergonomic CLI Projections and Agent Toolbelt Commands"
       :kind :toolbelt
       :lane "cli"
-      :state :ready
+      :state :completed
       :priority :normal
       :ownerRole "implementer"
       :createdAt 1789452000000
-      :updatedAt 1789452000000
+      :updatedAt 1789459700000
       :motivation "Agents and developers need ergonomic CLI subcommands wrapping RPC operations to eliminate raw file editing from workflows."
       :purpose "Implement native CLI subcommands (asl task, asl adr, asl note, asl receipt, asl plan, asl intent) that translate CLI flags to RPC batch forms and render dense ASN or tabular views."
       :context (:contractRef D81PlanContext)
@@ -285,11 +285,21 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task48406.asl"]
       :verificationCases ["asl task list returns active tasks without reading raw files." "asl note write records an observation with exit code 0."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48406" :status :notEstablished :contract D81Baseline)
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48406" :status :baselineVerified :contract D81Baseline)
+      :reviewStatus :verified
       :stepIndex 1
-      :receipts [])
+      :receipts [
+        (:receipt
+          :id "receipt-task-48406"
+          :taskId "Task48406"
+          :gate "sh tests/acceptance/d81/SuperviseGate.sh Task48406"
+          :exitCode 0
+          :status :passed
+          :timestamp 1789459700000
+          :digest "d950155"
+          :executedAsserts 14
+          :durationMs 7000)])
 
     (:task
       :id "Task48407"
