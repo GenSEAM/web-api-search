@@ -2,8 +2,8 @@
   :version "1.0.0"
   :entries [
     (:adr
-      :id "ADR-0001"
-      :shortcode "d1"
+      :id "D1"
+      :shortcode "D1"
       :title "Git-Native Intent Ledger and Grounded ADR Engine"
       :status :active
       :date "2026-09-07"
@@ -15,8 +15,8 @@
       :invariants ["c1" "c3"]
       :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0010"
-      :shortcode "d10"
+      :id "D10"
+      :shortcode "D10"
       :title "Multi-Tier Recursive Fractal Memory Hierarchy and Holistic Tree Aggregation"
       :status :active
       :date "2026-09-08"
@@ -28,8 +28,8 @@
       :invariants ["c1" "c3"]
       :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0011"
-      :shortcode "d11"
+      :id "D11"
+      :shortcode "D11"
       :title "Sovereign Multi-Agent Task Orchestrator and Memory TaskStore Invariant Port"
       :status :active
       :date "2026-09-08"
@@ -41,8 +41,8 @@
       :invariants ["c1" "c3"]
       :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0012"
-      :shortcode "d12"
+      :id "D12"
+      :shortcode "D12"
       :title "Six Agent Superpowers, Grammar-Constrained Decoding and The SFT/DPO Self-Feeding Flywheel"
       :status :active
       :date "2026-09-08"
@@ -54,8 +54,8 @@
       :invariants ["c1" "c3"]
       :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0013"
-      :shortcode "d13"
+      :id "D13"
+      :shortcode "D13"
       :title "Extensionless File Governance, In-Memory Batch Harness and Self-Framing ASN Streams"
       :status :active
       :date "2026-09-08"
@@ -67,8 +67,8 @@
       :invariants ["c1" "c3"]
       :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0014"
-      :shortcode "d14"
+      :id "D14"
+      :shortcode "D14"
       :title "Canonical Ignore Specification, Scratch Quarantine and Agent Onboarding Flywheel"
       :status :active
       :date "2026-09-08"
@@ -80,8 +80,8 @@
       :invariants ["c1"]
       :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0015"
-      :shortcode "d15"
+      :id "D15"
+      :shortcode "D15"
       :title "Core Engineering Axioms and Intent Substrate"
       :status :active
       :date "2026-09-08"
@@ -93,7 +93,7 @@
       :invariants ["c1" "c2"]
       :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0016"
+      :id "D16"
       :shortcode "D16"
       :title "Language Backends, Transitive Import Closure and Lowering Invariants"
       :status :active
@@ -106,7 +106,7 @@
       :invariants ["c1" "c3"]
       :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0017"
+      :id "D17"
       :shortcode "D17"
       :title "Semantic Checker and Nominal Type System Invariants"
       :status :active
@@ -119,7 +119,7 @@
       :invariants ["c1" "c3"]
       :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0018"
+      :id "D18"
       :shortcode "D18"
       :title "Dual-Projection Architecture and Agent-Centric Ergonomics"
       :status :active
@@ -132,8 +132,8 @@
       :invariants ["C1" "C3"]
       :consequences [(:pos "70 percent token savings across all agent interactions without compromising human inspectability.") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0033"
-      :shortcode "d33"
+      :id "D33"
+      :shortcode "D33"
       :title "Sovereign Self-Hosted Ecosystem and Zero Foreign Code Liquidation"
       :status :active
       :date "2026-09-08"
@@ -145,8 +145,8 @@
       :invariants ["c1" "c3"]
       :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0034"
-      :shortcode "d34"
+      :id "D34"
+      :shortcode "D34"
       :title "Principle of Boundary Universalism and Local Autonomy"
       :status :active
       :date "2026-09-08"
@@ -158,8 +158,8 @@
       :invariants ["c1" "c2" "c3" "d34"]
       :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0035"
-      :shortcode "d35"
+      :id "D35"
+      :shortcode "D35"
       :title "Dual-Mode Sovereign In-Memory Engine and Dynamic IPC Routing"
       :status :active
       :date "2026-09-08"
@@ -171,8 +171,8 @@
       :invariants ["d34"]
       :consequences [(:pos "Zero disk-I/O overhead for cached workspace files in resident mode (<0.5ms roundtrips).") (:pos "High reliability in CI/CD and restricted execution environments with zero daemon leakage.") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0036"
-      :shortcode "d36"
+      :id "D36"
+      :shortcode "D36"
       :title "Forensic Audit, Dead Code and Stub Gate, and Boundary Truth Enforcement"
       :status :active
       :date "2026-09-08"
@@ -184,8 +184,8 @@
       :invariants ["c3"]
       :consequences [(:pos "Total elimination of Execution Simulation Hallucination (ESH).") (:pos "Guaranteed non-vacuous test passes across all 145+ test suites.") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0037"
-      :shortcode "d37"
+      :id "D37"
+      :shortcode "D37"
       :title "Sovereign ASL Gateway, LMK Key Nexus, and ASN Wire Protocol"
       :status :active
       :date "2026-09-09"
@@ -197,8 +197,8 @@
       :invariants ["c1" "c3"]
       :consequences [(:pos "Universal token compaction of 50-72% via ASN tool serialization.") (:pos "Total credential airgapping: agents and tasks never touch raw API keys.") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0038"
-      :shortcode "d38"
+      :id "D38"
+      :shortcode "D38"
       :title "Addie Voice Supervisor, Centralized Team Pool and LLM Gateway Topology"
       :status :active
       :date "2026-09-08"
@@ -210,8 +210,8 @@
       :invariants ["c1" "c3"]
       :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0039"
-      :shortcode "d39"
+      :id "D39"
+      :shortcode "D39"
       :title "Unified Multi-Tier Engine Substrate for Base Harness"
       :status :active
       :date "2026-09-09"
@@ -223,8 +223,8 @@
       :invariants ["c1" "d34"]
       :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0040"
-      :shortcode "d40"
+      :id "D40"
+      :shortcode "D40"
       :title "Holistic Task Protocol, Two-Tier Lifecycle, and Physical Verification Receipts"
       :status :active
       :date "2026-09-09"
@@ -236,8 +236,8 @@
       :invariants ["c1" "c2" "c3" "d34"]
       :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0041"
-      :shortcode "d41"
+      :id "D41"
+      :shortcode "D41"
       :title "Harness Epistemic Audit Protocols, Crutch Taxonomy, and Secondary Meta-Audit Reconciliation"
       :status :active
       :date "2026-09-09"
@@ -249,8 +249,8 @@
       :invariants ["c1" "c2" "c3" "d34"]
       :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0042"
-      :shortcode "d42"
+      :id "D42"
+      :shortcode "D42"
       :title "Unified Engine Global Daemon, Dual-Tier Topology and Process Supervision"
       :status :active
       :date "2026-09-09"
@@ -262,8 +262,8 @@
       :invariants ["c1" "c3" "d34"]
       :consequences [(:pos "Deterministic execution and verified boundary constraints") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0043"
-      :shortcode "d43"
+      :id "D43"
+      :shortcode "D43"
       :title "Harness Epistemic Paradigm, Action Ontology, Judicious Autonomy, and Task Variance Leeway"
       :status :active
       :date "2026-09-09"
@@ -275,8 +275,8 @@
       :invariants ["c1" "c2" "c3" "d34"]
       :consequences [(:pos "Fast-path reduces routine fix overhead to <500 tokens") (:neg "Requires adhering to strict verification gates")])
     (:adr
-      :id "ADR-0044"
-      :shortcode "d44"
+      :id "D44"
+      :shortcode "D44"
       :title "Canonical Machine-Native ASN Decisions and Dual-Projection Governance"
       :status :active
       :date "2026-09-09"
@@ -299,8 +299,8 @@
         (:neg "Requires on-demand projection step when generating human documentation showcases")
       ])
     (:adr
-      :id "ADR-0045"
-      :shortcode "d45"
+      :id "D45"
+      :shortcode "D45"
       :title "Sovereign Task Pool, Session Leases, Crash Recovery and Machine Notes Ledger"
       :status :active
       :date "2026-09-09"
@@ -324,8 +324,8 @@
         (:neg "Requires active renewal of session leases for long-running batch operations")
       ])
     (:adr
-      :id "ADR-0046"
-      :shortcode "d46"
+      :id "D46"
+      :shortcode "D46"
       :title "Three-Tier Task Lifecycle Architecture, Bare-Symbol 2-Token Basis, and Deprecation of Sigil Prefixes"
       :status :active
       :date "2026-09-09"
@@ -349,8 +349,8 @@
         (:neg "Requires explicit migration of legacy @d-XXXX mentions in documentation and skills")
       ])
     (:adr
-      :id "ADR-0047"
-      :shortcode "d47"
+      :id "D47"
+      :shortcode "D47"
       :title "Codebase Lexical Token Profiler, Hotspot Forensic Audit, and Rational Boundary Compaction Paradigm"
       :status :active
       :date "2026-09-09"
@@ -374,8 +374,8 @@
         (:neg "Requires periodic codebase auditing during release cycles to maintain low token debt")
       ])
     (:adr
-      :id "ADR-0048"
-      :shortcode "d48"
+      :id "D48"
+      :shortcode "D48"
       :title "Universal Sigil Eradication, Native Bare Symbol Architecture, and Zero-Sigil Invariant"
       :status :active
       :date "2026-09-09"
@@ -399,8 +399,8 @@
         (:neg "Requires updating legacy documentation and external references that previously cited scoped names")
       ])
     (:adr
-      :id "ADR-0049"
-      :shortcode "d49"
+      :id "D49"
+      :shortcode "D49"
       :title "Ambient Voice and Prompt Transliterator, Context-Primed Homophone Disambiguation, and Canonical ASN Intent Generation"
       :status :active
       :date "2026-09-09"
@@ -422,8 +422,8 @@
         (:neg "Requires maintaining a compact symbol lexicon for homophone matching")
       ])
     (:adr
-      :id "ADR-0050"
-      :shortcode "d50"
+      :id "D50"
+      :shortcode "D50"
       :title "Sovereign Engine Resident Architecture, Daemon Entity Elimination, and Deep In-Memory Search Substrate"
       :status :active
       :date "2026-09-09"
@@ -445,8 +445,8 @@
         (:neg "Requires resident memory to hold inverted term index and token vectors")
       ])
     (:adr
-      :id "ADR-0051"
-      :shortcode "d51"
+      :id "D51"
+      :shortcode "D51"
       :title "Token Efficiency Format, CamelCase Conventions, and Rationality-Flagged Grammar Registries"
       :status :active
       :date "2026-09-09"
@@ -478,8 +478,8 @@
         (:neg "Requires agents to distinguish between 1-2 token atomic primitives and composite CamelCase constructs")
       ])
     (:adr
-      :id "ADR-0052"
-      :shortcode "d52"
+      :id "D52"
+      :shortcode "D52"
       :title "Enriched Task Context Standard, Bidirectional ADR-Task-Intent Linkage, and Holistic Consistency Audit Engine"
       :status :active
       :date "2026-09-09"
@@ -511,7 +511,7 @@
         (:neg "Requires planners to provide richer metadata upfront when formulating work items")
       ])
     (:adr
-      :id "ADR-0053"
+      :id "D53"
       :shortcode "D53"
       :title "Agent Responsibility Paradigm, Operational Epistemic Primitives, Adaptive Action DAG, and Pure ASL Toolchain Migration"
       :status :active
@@ -546,7 +546,7 @@
         (:neg "Requires agents to allocate dedicated DAG steps for pre-mutation grounding and adversarial reflection")
       ])
     (:adr
-      :id "ADR-0054"
+      :id "D54"
       :shortcode "D54"
       :title "Systemic Gap Remediation, Ground Truth Hardening, E2E Reconciliation, and Pure ASL Toolchain Migration"
       :status :active
@@ -594,7 +594,7 @@
         (:neg "Requires maintaining and executing both unit and full E2E test suites during verification")
       ])
     (:adr
-      :id "ADR-0055"
+      :id "D55"
       :shortcode "D55"
       :title "Multi-Dialect Shell Transpilation, Dialect-Aware Process Execution and Toolplane Integration"
       :status :active
@@ -626,7 +626,7 @@
         (:neg "Requires maintaining dialect syntax matrices across POSIX, Bash, and Zsh grammar rules")
       ])
     (:adr
-      :id "ADR-0056"
+      :id "D56"
       :shortcode "D56"
       :title "Holistic Tool & Paradigm Audit, CamelCase Token Optimization, and In-Memory Compensating Sagas"
       :status :active
@@ -658,7 +658,7 @@
         (:neg "Requires systematic renaming of internal symbols and strict registration of saga compensators")
       ])
     (:adr
-      :id "ADR-0057"
+      :id "D57"
       :shortcode "D57"
       :title "Semantic Subword Architecture and Morpheme-Aligned Identifiers"
       :status :active
@@ -688,7 +688,7 @@
         (:neg "Requires planners to select standard morphemes from the canonical 30-word registry")
       ])
     (:adr
-      :id "ADR-0058"
+      :id "D58"
       :shortcode "D58"
       :title "Attention-Based Model Reliability, Deliberation Augmentation, and Intent-Driven Planning"
       :status :active
@@ -720,7 +720,7 @@
         (:neg "Requires all agent interactions to conform to structured ASN intent schemas rather than freeform dialogue")
       ])
     (:adr
-      :id "ADR-0059"
+      :id "D59"
       :shortcode "D59"
       :title "Monorepo Memory Hierarchy, Typestate Module Decomposition, and File Organization Standard"
       :status :active
@@ -752,7 +752,7 @@
         (:neg "Requires updating module exports and imports across affected sub-packages during decomposition")
       ])
     (:adr
-      :id "ADR-0060"
+      :id "D60"
       :shortcode "D60"
       :title "Comprehensive System for Epistemic Meta-Research, Multidimensional Design Systems, and Self-Correcting Algorithmic Optimization"
       :status :active
@@ -784,7 +784,7 @@
         (:neg "Requires all research and design proposals to undergo formal two-pass validation before implementation")
       ])
     (:adr
-      :id "ADR-0061"
+      :id "D61"
       :shortcode "D61"
       :title "Agent Goal Perception, Semantic Validation Primitives, and Epistemic Infrastructure Readiness"
       :status :active
@@ -814,7 +814,7 @@
         (:neg "Requires all work items to declare explicit falsifiable gates and non-vacuous assertions")
       ])
     (:adr
-      :id "ADR-0062"
+      :id "D62"
       :shortcode "D62"
       :title "Dynamic Paradigm Specialization, Universal Third-Party Harness, and Composable Chaining Pipelines"
       :status :active
@@ -844,7 +844,7 @@
         (:neg "Requires headless callers to declare task intent or accept default dynamic heuristic projection")
       ])
     (:adr
-      :id "ADR-0063"
+      :id "D63"
       :shortcode "D63"
       :title "Visual Monitoring Substrate, 4-Tier Audit Framework, Cross-Platform Integration, and Jira-Based Multidimensional Analysis"
       :status :active
@@ -874,7 +874,7 @@
         (:neg "Requires maintaining bidirectional Jira issue state mapping alongside git-native task ledgers")
       ])
     (:adr
-      :id "ADR-0064"
+      :id "D64"
       :shortcode "D64"
       :title "Human Resonance, Reflexive Cognitive Psychology, Sociological Diffusion, Market Utility, and Real-World Business Modeling Paradigms"
       :status :active
@@ -906,7 +906,7 @@
         (:neg "Requires maintaining psychological and market domain ontology alongside low-level AST and VFS primitives")
       ])
     (:adr
-      :id "ADR-0065"
+      :id "D65"
       :shortcode "D65"
       :title "Multi-Project Orchestration, Resident Daemon Launch Strategy, and Distributed Peer Mesh Network Architecture"
       :status :active
@@ -936,7 +936,7 @@
         (:neg "Requires initial one-time user service registration for system-level supervisor activation")
       ])
     (:adr
-      :id "ADR-0066"
+      :id "D66"
       :shortcode "D66"
       :title "Runtime Substrate De-Bloat, Netcat Eradication, and Ghost Architecture Pruning"
       :status :active
@@ -963,7 +963,7 @@
         (:neg "Requires refactoring legacy netcat call sites in asl/asl")
       ])
     (:adr
-      :id "ADR-0067"
+      :id "D67"
       :shortcode "D67"
       :title "Conceptual Milestones, Retrospective Practice, and Pragmatic Observability"
       :status :active
@@ -991,7 +991,7 @@
         (:neg "Requires maintaining milestone entries at major architectural boundaries")
       ])
     (:adr
-      :id "ADR-0068"
+      :id "D68"
       :shortcode "D68"
       :title "Hierarchical Memory Scoping, Package Independence, and Transient Workspace Topology"
       :status :active
@@ -1018,7 +1018,7 @@
         (:neg "Requires consistency audit to traverse both repository and package-level memory directories")
       ])
     (:adr
-      :id "ADR-0069"
+      :id "D69"
       :shortcode "D69"
       :title "Paradigm Institutionalization of Audit Discoveries, Static Binary Anomaly Detection, and Strict Whitelisting"
       :status :active
@@ -1046,7 +1046,7 @@
         (:neg "Requires explicit registration in .asl.config.asn for any new external host tool")
       ])
     (:adr
-      :id "ADR-0070"
+      :id "D70"
       :shortcode "D70"
       :title "Universal Dependency Justification, Interconnected Cluster Mapping, and Periodic Audit Protocol"
       :status :active
@@ -1075,7 +1075,7 @@
         (:neg "Requires maintaining explicit dependency records and scheduled quarterly reassessment dates in .asl/mem/dependencies.asn")
       ])
     (:adr
-      :id "ADR-0071"
+      :id "D71"
       :shortcode "D71"
       :title "Composable Observability Architecture, Per-Project Tool Metrics, and ESL Worktree Lifecycle Telemetry"
       :status :active
@@ -1105,7 +1105,7 @@
         (:neg "Requires tool dispatchers to emit metric events on invocation")
       ])
     (:adr
-      :id "ADR-0072"
+      :id "D72"
       :shortcode "D72"
       :title "Browser-Based Demonstration System, Configurable Harnesses, and Specialized Presets"
       :status :active
@@ -1137,7 +1137,7 @@
         (:neg "Requires WebGPU and WebWorker support for multi-thread 3B execution")
       ])
     (:adr
-      :id "ADR-0073"
+      :id "D73"
       :shortcode "D73"
       :title "Voice-In Action-Out Pipeline, Parakeet-TDT ASR Ingestion, Hanes Model Gallery, and Task Rendering Presets"
       :status :active
@@ -1168,7 +1168,7 @@
         (:neg "Requires WebGPU and local audio capture microphone permissions in client browser")
       ])
     (:adr
-      :id "ADR-0074"
+      :id "D74"
       :shortcode "D74"
       :title "Full Ecosystem Integrity, Redundancy Pruning, Token Efficiency and Untapped Potential Master Audit"
       :status :active
@@ -1212,7 +1212,7 @@
         (:neg "Requires dedicated sequential auditing passes across the entire 825-module monorepo")
       ])
     (:decision
-      :id "ADR-0075"
+      :id "D75"
       :shortcode "D75"
       :title "Universal WebAssembly Ambient Substrate, Self-Contained Micro-Binary Packaging, and Regulated Platform Leaves Standard"
       :status :active
@@ -1239,7 +1239,7 @@
         (:pos "Produces an ultra-compact (<1.5 MB) standalone native CLI binary with sub-2ms cold starts and <15 MB RSS")
       ])
     (:decision
-      :id "ADR-0076"
+      :id "D76"
       :shortcode "D76"
       :title "Universal MVCC, Software Transactional Memory, and Homoiconic Semantic 3-Way Merge Engine"
       :status :active
@@ -1267,7 +1267,7 @@
         (:pos "Enables atomic multi-file commits with automatic AST-level conflict reconciliation")
       ])
     (:decision
-      :id "ADR-0077"
+      :id "D77"
       :shortcode "D77"
       :title "Universal Python Eradication, Pure ASL Self-Hosting, and Sovereign Resident Runtime Engine"
       :status :active
@@ -1297,7 +1297,7 @@
         (:pos "Accelerates consistency audits and CLI invocations from 850ms to <15ms cold start")
       ])
     (:decision
-      :id "ADR-0078"
+      :id "D78"
       :shortcode "D78"
       :title "Cross-Platform WebAssembly Core Substrate, Browser Autonomous Runtime, and Native Engine Micro-Evaluation"
       :status :active
@@ -1329,7 +1329,7 @@
         (:neg "Defers C99-to-ASL engine rewrite to a future post-runtime phase as directed by user priority")
       ])
     (:adr
-      :id "ADR-0079"
+      :id "D79"
       :shortcode "D79"
       :title "Sovereign Single-Binary ASL Consolidation: Unifying Engine, Eval, Compiler, Evolver, and Memory into a Self-Contained Dependency-Free Executable"
       :status :active
@@ -1356,7 +1356,7 @@
         (:neg "Requires maintaining consolidated C99 unified launcher source until pure ASL self-hosting pass")
       ])
     (:adr
-      :id "ADR-0080"
+      :id "D80"
       :shortcode "D80"
       :title "Context-Aware Hierarchical Workspace and Worktree Visibility Topology"
       :status :active
@@ -1380,7 +1380,7 @@
         (:neg "Requires agents to explicitly navigate to the sovereign anchor directory to inspect multi-project health")
       ])
     (:adr
-      :id "ADR-0081"
+      :id "D81"
       :shortcode "D81"
       :title "Owned ASL Semantics, Portable Native/WASM Tooling and Autonomous Self-Hosting"
       :status :active
@@ -1416,7 +1416,7 @@
     (:neg "Read-only conceptual findings do not imply current runtime completion; each verifier must first establish its intended baseline failure.")
   ])
     (:adr
-      :id "ADR-0082"
+      :id "D82"
       :shortcode "D82"
       :title "Instrumented Editorial Web Design System for ASL"
       :status :active

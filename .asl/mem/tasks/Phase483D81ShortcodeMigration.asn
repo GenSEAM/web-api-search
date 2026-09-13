@@ -131,11 +131,11 @@
       :title "Intent and Master Ledger Pointer Rebinding"
       :kind :architecture
       :lane "intent"
-      :state :pending
+      :state :completed
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789450000000
-      :updatedAt 1789450000000
+      :updatedAt 1789450600000
       :motivation "intent.asn and master decision files reference legacy Adr00XX paths."
       :purpose "Rebind intent.asn and unify decisions.asn master ledgers to point to canonical D<N> files."
       :context (:contractRef D81PlanContext)
@@ -147,7 +147,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task48303"]
       :gate "bin/asl audit consistency"
@@ -160,8 +160,8 @@
       :gateReadiness :requiresIndependentBaseline
       :baselineProbe (:command "bin/asl audit consistency" :status :notEstablished :contract D81Baseline)
       :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :gate "bin/asl audit consistency" :exitCode 0 :status :passed :timestamp 1789450600000 :digest "intent-decisions-rebound-canonical-d")])
 
     (:task
       :id "Task48305"
