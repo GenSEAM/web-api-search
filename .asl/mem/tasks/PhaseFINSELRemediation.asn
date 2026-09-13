@@ -864,7 +864,7 @@
       :historicalReceipts []
       :reviewStatus :approved
       :actionDag ["Inspect sync-workspace.asl and pre-commit.asl" "Author acceptance fixture Task-F21.asl" "Demonstrate baseline failure" "Implement inspect-submodule and diff analysis in tools" "Certify green under SuperviseGate.sh."]
-      :stepIndex 1
+      :stepIndex 5
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F21" :status :passed :exitCode 0 :assertionsEvaluated 20 :timestamp 1789447800000)
       ])
@@ -909,6 +909,48 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F22" :status :passed :exitCode 0 :assertionsEvaluated 24 :timestamp 1789448100000)
       ])
+    (:task
+      :id "Task-F23"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Fix Sequential String Unescaping Order of Operations"
+      :kind :codec
+      :lane "text"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789448400000
+      :updatedAt 1789448400000
+      :motivation "unescape-str mutates escaped backslash before n into literal newline due to premature \\n substitution."
+      :purpose "Implement single-pass character scanner or unescape \\\\ before \\n to prevent destructive premature substitution."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Literal \\n preserved across unescaping" "Escaped backslash sequences unescaped without mutating control codes" "Zero destructive sequential substitutions"]
+      :owns ["asl/packages/asl-text/src/escape.asl" "agent-bus/src/nd_asn.asl"]
+      :targetSymbols ["unescape-asn-str" "unescape-json-str" "unescape-nd-asn-str"]
+      :relatedSymbols ["escape-asn-str" "escape-json-str"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F22"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F23"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F23.asl" "asl/packages/asl-text/tests/escape_test.asl"]
+      :verificationCases ["unescape-asn-str and unescape-json-str correctly unescape \\\\n to \\n without generating a literal newline."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F23" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect escape.asl and nd_asn.asl" "Author acceptance fixture Task-F23.asl" "Demonstrate baseline failure on \\\\n" "Fix unescaping logic in escape.asl and nd_asn.asl" "Certify green under SuperviseGate.sh."]
+      :stepIndex 1
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F23" :status :passed :exitCode 0 :assertionsEvaluated 14 :timestamp 1789448400000)
+      ])
   ]
 )
+
 

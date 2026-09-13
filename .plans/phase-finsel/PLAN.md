@@ -177,11 +177,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F22` (24 assertions verified)
 
 ### Task-F23: Fix Sequential String Unescaping Order of Operations
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `asl/packages/asl-text/src/escape.asl`, `agent-bus/src/nd_asn.asl`
 - **Baseline Failure**: `unescape-str` mutates `"\\\\n"` into `"\n"` due to premature `\\n` substitution.
 - **Remedy**: Implement single-pass character scanner or unescape `\\\\` before handling `\\n`.
-- **Gate**: `bin/asl eval '(:call asl-text.escape/unescape-str "\\\\\\\\n")' | grep '\\\\n'`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F23` (14 assertions verified)
 
 ### Task-F24: Prevent Irreversible Context Loss in Memory Pointer Collapse
 - **Status**: planned

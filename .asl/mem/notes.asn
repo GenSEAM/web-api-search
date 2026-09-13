@@ -1883,6 +1883,16 @@
       :fact "task-f22-certified-complete"
       :evidence "Implemented LIFO delimiter stack in pure AgentScript balance checker; refactored check-balance-step in asl/packages/asl-parser/src/balance.asl to maintain a LIFO delimiter stack rather than independent integer counters; correctly rejected interleaved delimiters such as ([)] and {[(])}; updated balance_test.asl (22 assertions); authored tests/acceptance/d81/Task-F22.asl demonstrating baseline failure; evaluated 24 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F22 certified complete; ASL parser rejects structurally invalid interleaved delimiters with zero false positives under ADR-0081")
+    (:note
+      :id "n176"
+      :timestamp 1789448400000
+      :author "codex"
+      :scope ["asl/packages/asl-text/src/escape.asl" "agent-bus/src/nd_asn.asl" "asl/packages/asl-text/tests/escape_test.asl" "tests/acceptance/d81/Task-F23.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f23 :text :escape :order-of-operations :scanner :approved]
+      :fact "task-f23-certified-complete"
+      :evidence "Fixed sequential string unescaping order of operations; implemented single-pass character scanner unescape-string-scanner in asl/packages/asl-text/src/escape.asl using LIFO fold state; unescape-asn-str and unescape-json-str correctly preserve escaped backslash followed by n (\\\\n -> \\n) without mutating into literal newline; updated agent-bus/src/nd_asn.asl to delegate to canonical asl-text/escape; updated escape_test.asl (18 assertions); authored tests/acceptance/d81/Task-F23.asl demonstrating baseline failure; evaluated 14 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F23 certified complete; wire protocol string unescaping preserves escaped backslashes without destructive sequential substitutions under ADR-0081")
   ]
 )
+
 
