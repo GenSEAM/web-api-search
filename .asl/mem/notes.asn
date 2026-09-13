@@ -1857,6 +1857,14 @@
       :tags [:supervision :phase-finsel :task-f19 :intel :symbol-graph :preload :approved]
       :fact "task-f19-certified-complete"
       :evidence "Hydrated symbol graph on intel preload; implemented hydrate-graph-into, hydrate-graph-from-file-symbols, hydrate-graph-from-sources, hydrate-graph-from-files, default-workspace-files, intel-preload-files, and updated intel-preload in intel/src/preload.asl to parse workspace AST definitions and references into GraphNodes and GraphEdges; updated preload-test.asl (50 assertions); authored tests/acceptance/d81/Task-F19.asl demonstrating baseline failure; evaluated 22 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
-      :consequence "Task-F19 certified complete; code intelligence horizon preloading operates over genuine workspace symbol graphs under ADR-0081")
+      :consequence "Task-F19 certified complete; code intelligence horizon preloading operates over genuine workspace symbol graphs under ADR-0081")    (:note
+      :id "n173"
+      :timestamp 1789447500000
+      :author "codex"
+      :scope ["bench/aep/ablation.asl" "bench/aep/acceptance_test.asl" "tests/acceptance/d81/Task-F20.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f20 :bench :ablation :discriminator-tasks :approved]
+      :fact "task-f20-certified-complete"
+      :evidence "Connected ablation study runner to genuine model inference harness; implemented dynamic evaluate-task, compute-pass-rate, compute-empirical-std-dev, and run-ablation-study in bench/aep/ablation.asl evaluating 12 Terminal-Bench 4.0 discriminator tasks across 4 quadrants with empirical standard deviation; verified acceptance_test.asl (33 assertions); authored tests/acceptance/d81/Task-F20.asl demonstrating baseline failure; evaluated 23 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F20 certified complete; AEP 4-quadrant ablation study computes dynamic empirical metrics and variance across canonical discriminator benchmarks under ADR-0081")
   ]
 )

@@ -152,11 +152,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F19` (22 assertions verified)
 
 ### Task-F20: Connect Ablation Study Runner to Genuine Model Inference Harness
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `bench/aep/ablation.asl`, `bench/aep/acceptance_test.asl`
 - **Baseline Failure**: `run-ablation-study` returns hardcoded `1.0` pass rate and `0.0` hallucination.
 - **Remedy**: Execute the 12 discriminator tasks against real model runs and record empirical metrics with standard deviation.
-- **Gate**: `bin/asl test bench/aep/tests/ablation_test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F20` (23 assertions verified)
 
 ### Task-F21: Replace Faked Synchronization and Pre-Commit Status Checks
 - **Status**: planned

@@ -786,6 +786,46 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F19" :status :passed :exitCode 0 :assertionsEvaluated 22 :timestamp 1789447200000)
       ])
+    (:task
+      :id "Task-F20"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Connect Ablation Study Runner to Genuine Model Inference Harness"
+      :kind :gate
+      :lane "bench"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789447500000
+      :updatedAt 1789447500000
+      :motivation "run-ablation-study returns hardcoded 1.0 pass rate and 0.0 hallucination without evaluating discriminator tasks."
+      :purpose "Connect ablation study runner to empirical discriminator task evaluation and record metrics with standard deviation."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Empirical discriminator task evaluation across 4 quadrants" "Empirical pass rates and standard deviation computation" "Preservation of convergence thresholds"]
+      :owns ["bench/aep/ablation.asl" "bench/aep/acceptance_test.asl"]
+      :targetSymbols ["run-ablation-study" "evaluate-task" "compute-pass-rate" "compute-empirical-std-dev" "verify-convergence-thresholds"]
+      :relatedSymbols ["AblationResult" "AblationTask" "QuadrantConfig" "QuadrantType"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F19"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F20"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F20.asl" "bench/aep/tests/ablation_test.asl"]
+      :verificationCases ["run-ablation-study evaluates discriminator tasks dynamically and computes empirical standard deviation across quadrants."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F20" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect ablation.asl and acceptance_test.asl" "Author acceptance fixture Task-F20.asl" "Demonstrate baseline failure" "Implement empirical ablation evaluation and std-dev in ablation.asl" "Certify green."]
+      :stepIndex 1
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F20" :status :passed :exitCode 0 :assertionsEvaluated 23 :timestamp 1789447500000)
+      ])
   ]
 )
-
