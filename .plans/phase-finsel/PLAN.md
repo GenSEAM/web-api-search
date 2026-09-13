@@ -290,11 +290,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F37` (10 assertions verified)
 
 ### Task-F38: Restore Invariant C2 (Zero Emojis) Across Gate Runners and Tests
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `asl/packages/asl-gates/src/gate_runner.asl`, `asl/packages/asl-registry/tests/registry_test.asl`
 - **Baseline Failure**: Raw Unicode checkmark bytes `✓` and `✗` (`\xe2\x9c`) present in runner output.
 - **Remedy**: Replace Unicode glyphs with ASN-compliant status symbols `:ok` and `:fail`.
-- **Gate**: `bin/asl audit gates --only=6`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F38` (8 assertions verified)
 
 ### Task-F39: Restore Invariant C5 (Zero Sigils) and Syntax Alignment
 - **Status**: planned

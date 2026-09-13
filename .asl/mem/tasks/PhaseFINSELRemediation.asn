@@ -1524,6 +1524,47 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F37" :status :passed :exitCode 0 :assertionsEvaluated 10 :timestamp 1789455200000)
       ])
+    (:task
+      :id "Task-F38"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Restore Invariant C2 (Zero Emojis) Across Gate Runners and Tests"
+      :kind :refactor
+      :lane "invariants"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789455300000
+      :updatedAt 1789455400000
+      :motivation "Raw Unicode checkmark glyphs in gate_runner.asl and registry_test.asl violate invariant C2."
+      :purpose "Replace Unicode checkmark and cross glyphs with ASCII/ASN-compliant status markers :ok and :fail."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Zero Unicode checkmark or cross glyphs in gate_runner.asl" "Zero Unicode checkmark glyphs in registry_test.asl" "All gate runners and tests fully compliant with Invariant C2"]
+      :owns ["asl/packages/asl-gates/src/gate_runner.asl" "asl/packages/asl-registry/tests/registry_test.asl"]
+      :targetSymbols ["format-gate-summary" "main"]
+      :relatedSymbols ["gate-runner" "registry-test"]
+      :invariants ["D81" "C2"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F37"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F38"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F38.asl"]
+      :verificationCases ["gate_runner.asl and registry_test.asl contain zero raw Unicode checkmark or cross glyphs."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F38" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Author acceptance fixture Task-F38.asl" "Verify baseline failure on present checkmark glyphs" "Replace Unicode marks with ASCII :ok and :fail" "Certify green under SuperviseGate.sh."]
+      :stepIndex 5
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F38" :status :passed :exitCode 0 :assertionsEvaluated 8 :timestamp 1789455400000)
+      ])
   ]
 )
 
