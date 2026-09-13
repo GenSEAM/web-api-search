@@ -13,7 +13,7 @@ fi
 
 TASK_ID="$1"
 case "${TASK_ID}" in
-  Task[0-9][0-9][0-9][0-9][0-9]) ;;
+  Task[0-9][0-9][0-9][0-9][0-9]|Task-F[0-9][0-9]) ;;
   *)
     echo "Error: unknown task id '${TASK_ID}'" >&2
     exit 2
