@@ -31,6 +31,7 @@ graph TD
     P24 --> P25["Phase 25: Editorial Design & Scope Recovery (Phases 448, 470, Done)"]
     P25 --> P26["Phase 26: FINSEL Monorepo Remediation (Phase FINSEL, Done)"]
     P26 --> P27["Phase 27: D81 Shortcode Migration (migration-d81-shortcode, Done)"]
+    P27 --> P28["Phase 28: RPC Record Store & Attention Separation (Phase 484, Planned)"]
 ```
 
 ---
@@ -82,6 +83,7 @@ graph TD
 | **Phase 37** | [.plans/phase-470/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-470/PLAN.md) | **Done** | Restore Gate Scope and Reach Execution: full monorepo corpus scope for Gate 5, built binary parity, embedded binary launch command (7/7 tasks certified). |
 | **Phase 38** | [.plans/phase-finsel/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-finsel/PLAN.md) | **Done** | FINSEL Master Remediation: 39 falsifiable tasks resolving all defects cataloged during the 8-wave, 3-model monorepo audit. |
 | **Phase 39** | [.plans/migration-d81-shortcode/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/migration-d81-shortcode/PLAN.md) | **Done** | Complete Migration from ADR-0081 to Canonical D81 Shortcode Format across decisions, tasks, rules and engine scanner. |
+| **Phase 40** | [.plans/phase-484/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-484/PLAN.md) | **Planned** | RPC-First Record Store, Attention Separation, Deterministic Serialization, and Event-Driven Memory Architecture (8 tasks under D83). |
 
 ---
 

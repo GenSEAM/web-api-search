@@ -1041,4 +1041,24 @@
       :closure "When editorial web design system is superseded by automated generative component fabric"
       :status "active"
       :planStatus "approved")
+     (:id "d83"
+      :sym "architecture/rpc-first-record-store-and-attention-separation"
+      :title "RPC-First Record Store, Attention Separation, and Event-Driven Memory Architecture"
+      :intent "Transition all monorepo records (tasks, decisions, receipts, plans, phases, telemetry, component docs, intents, notes, principles, recipes) from raw direct file writes to an RPC-first contract engine with attention separation, deterministic VFS serialization, pluggable storage adapters, and agentic observability event streaming"
+      :outcome "Elimination of delimiter corruption, agent context protection via sub-80 token blamed rejection receipts, deterministic C-enforced indentation and comment-free serialization, flock concurrency safety across subagents, and zero-polling event streams for live dashboards and remote integrations"
+      :whyNot ("Direct file writing causes severe cognitive attention dispersal, race conditions on shared files, and context blowout on post-factum syntax errors")
+      :adr ".asl/mem/decisions/D83RpcRecordStoreAndDeterministicDistribution.asn"
+      :tasks [
+        "Task48401"
+        "Task48402"
+        "Task48403"
+        "Task48404"
+        "Task48405"
+        "Task48406"
+        "Task48407"
+        "Task48408"
+      ]
+      :closure "When RPC-first record store is superseded by distributed sovereign peer-to-peer memory fabric"
+      :status "active"
+      :planStatus "approved")
 )))

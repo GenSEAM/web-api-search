@@ -1,0 +1,321 @@
+(:taskCollection
+  :id "Phase484RpcRecordStoreAndDeterministicDistribution"
+  :createdAt 1789452000000
+  :status "planned"
+  :priorityOrder 1
+  :summary "RPC-First Record Store, Attention Separation, Deterministic Serialization, and Event-Driven Memory Architecture"
+  :phase "Phase484RpcRecordStoreAndDeterministicDistribution"
+  :baseline "Audited 2026-09-13: All 11 monorepo record categories (tasks, decisions, receipts, plans, phases, telemetry, component docs, intents, notes, principles, recipes) rely on direct unvalidated filesystem writes to .asl/mem/, causing attention dispersal, race conditions, and syntax corruption."
+  :tasks [
+    (:task
+      :id "Task48401"
+      :parentId ""
+      :phase "Phase484RpcRecordStoreAndDeterministicDistribution"
+      :title "Grammar, Typestate Schemas and Blamed Rejection Taxonomy"
+      :kind :grammar
+      :lane "records"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789452000000
+      :updatedAt 1789452000000
+      :motivation "Direct file writes lack machine-verifiable grammar contracts for monorepo records, permitting syntax errors, broken parentheses, and schema drift."
+      :purpose "Author asl/grammar/records.asn defining formal ASN contracts for all 11 monorepo record types across Tier Alpha, Tier Beta, and Tier Gamma, along with a bounded error taxonomy for blamed rejections."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Formal ASN grammar schemas for all 11 record types" "Bounded error taxonomy defined with sub-80 token blamed rejection schema" "Delimiters balanced and verified"]
+      :owns ["asl/grammar/records.asn" "tests/acceptance/d81/Task48401.asl"]
+      :targetSymbols ["records_grammar" "blamed_rejection"]
+      :relatedSymbols ["asn_schema" "error_code"]
+      :invariants ["D83" "D52" "C1" "C2"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D83"
+      :decision "d83"
+      :dependsOn []
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task48401"
+      :actionDag ["Author asl/grammar/records.asn with Tier Alpha, Beta, Gamma schemas." "Define error code taxonomy." "Author acceptance test fixture Task48401.asl." "Run supervise gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48401.asl"]
+      :verificationCases ["All 11 record schemas parse with balanced delimiters." "Error taxonomy covers missing, malformed, and immutable field rejections."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48401" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48402"
+      :parentId ""
+      :phase "Phase484RpcRecordStoreAndDeterministicDistribution"
+      :title "Pluggable Storage Engine and Deterministic VFS Adapter"
+      :kind :engine
+      :lane "storage"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789452000000
+      :updatedAt 1789452000000
+      :motivation "Concurrent subagent file writes cause line clobbering, race conditions, and unbalanced S-expressions in shared ledgers."
+      :purpose "Implement StorageEngine interface and VfsStorageAdapter in asl/tools/asl.c with native C canonical S-expression formatting, 0 comments (C1), flock() concurrency locking with 2000ms timeout, and atomic temporary-file rename."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["StorageEngine interface implemented in asl.c" "VfsStorageAdapter enforces atomic flock locking and temp-file rename" "Guaranteed balanced parentheses and canonical indentation on all emitted files"]
+      :owns ["asl/tools/asl.c" "bin/asl" "asl/asl" "asl/bin/asl" "tests/acceptance/d81/Task48402.asl"]
+      :targetSymbols ["StorageEngine" "VfsStorageAdapter" "record_write" "record_read"]
+      :relatedSymbols ["flock" "rename" "atomic_write"]
+      :invariants ["D83" "C1" "C2" "C3"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D83"
+      :decision "d83"
+      :dependsOn ["Task48401"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task48402"
+      :actionDag ["Implement StorageEngine abstraction in asl.c." "Implement VfsStorageAdapter with flock and atomic rename." "Verify triple binary parity." "Run supervise gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48402.asl"]
+      :verificationCases ["Concurrent writes do not produce interleaved or corrupt files." "Temporary file write followed by atomic rename preserves target integrity."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48402" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48403"
+      :parentId ""
+      :phase "Phase484RpcRecordStoreAndDeterministicDistribution"
+      :title "Tier Alpha RPC Contract Dispatcher for Notes, Receipts and Telemetry"
+      :kind :engine
+      :lane "rpc-alpha"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789452000000
+      :updatedAt 1789452000000
+      :motivation "Notes, receipts, and telemetry are currently appended directly to 100KB+ files, exhausting token context and risking syntax corruption."
+      :purpose "Implement RPC handlers in asl/tools/asl.c for :note, :receipt, and :telemetry with write-time schema validation and sub-80 token blamed rejection receipts."
+      :context (:contractRef D81PlanContext)
+      :outcomes [":note RPC operations (:action :write, :query, :retire, :list) implemented" ":receipt and :telemetry RPC operations implemented" "Rejections return sub-80 token blamed receipts"]
+      :owns ["asl/tools/asl.c" "bin/asl" "asl/asl" "asl/bin/asl" "tests/acceptance/d81/Task48403.asl"]
+      :targetSymbols ["handle_rpc_note" "handle_rpc_receipt" "handle_rpc_telemetry"]
+      :relatedSymbols ["blamed_receipt" "execute_single_step"]
+      :invariants ["D83" "D58" "C1" "C2"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D83"
+      :decision "d83"
+      :dependsOn ["Task48401" "Task48402"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task48403"
+      :actionDag ["Add :note, :receipt, :telemetry step handlers in execute_single_step." "Wire write-time schema validation." "Recompile triple binaries and refresh capabilities.lock." "Run supervise gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48403.asl"]
+      :verificationCases [":note :write persists observation without corrupting notes.asn." "Invalid receipt form returns blamed receipt with exact missing field."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48403" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48404"
+      :parentId ""
+      :phase "Phase484RpcRecordStoreAndDeterministicDistribution"
+      :title "Tier Beta RPC Contract Dispatcher for Decisions, Intents, Principles, Recipes and Components"
+      :kind :engine
+      :lane "rpc-beta"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789452000000
+      :updatedAt 1789452000000
+      :motivation "Architectural decisions, intents, principles, recipes, and component manifests are scattered across files without unified write contracts."
+      :purpose "Implement RPC handlers in asl/tools/asl.c for :decision, :intent, :principle, :recipe, and :component with schema validation and atomic indexing."
+      :context (:contractRef D81PlanContext)
+      :outcomes [":decision RPC operations with D<N> shortcode validation" ":intent, :principle, :recipe, and :component RPC operations" "Automatic bidirectional ledger cross-indexing"]
+      :owns ["asl/tools/asl.c" "bin/asl" "asl/asl" "asl/bin/asl" "tests/acceptance/d81/Task48404.asl"]
+      :targetSymbols ["handle_rpc_decision" "handle_rpc_intent" "handle_rpc_principle" "handle_rpc_recipe" "handle_rpc_component"]
+      :relatedSymbols ["shortcode_validator" "ledger_index"]
+      :invariants ["D83" "D81" "D59" "C1"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D83"
+      :decision "d83"
+      :dependsOn ["Task48401" "Task48402"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task48404"
+      :actionDag ["Add Tier Beta handlers in execute_single_step." "Enforce D<N> shortcode validation for decisions." "Recompile triple binaries and refresh capabilities.lock." "Run supervise gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48404.asl"]
+      :verificationCases [":decision :record creates canonical D<N> file and updates index." "Missing problem or drivers fields triggers blamed rejection."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48404" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48405"
+      :parentId ""
+      :phase "Phase484RpcRecordStoreAndDeterministicDistribution"
+      :title "Tier Gamma RPC Contract Dispatcher for Tasks D52, Phases and Plans"
+      :kind :engine
+      :lane "rpc-gamma"
+      :state :ready
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789452000000
+      :updatedAt 1789452000000
+      :motivation "Tasks, phases, and plans carry complex bidirectional linkages and verification gates that currently fail late during consistency audits."
+      :purpose "Implement RPC handlers in asl/tools/asl.c for :task, :phase, and :plan enforcing the enriched D52 schema, verification gate presence, and dependency acyclicity."
+      :context (:contractRef D81PlanContext)
+      :outcomes [":task RPC operations enforcing all D52 schema fields at write-time" ":phase and :plan RPC operations managing execution DAGs" "Immediate blamed rejection when :gate or :actionDag is omitted"]
+      :owns ["asl/tools/asl.c" "bin/asl" "asl/asl" "asl/bin/asl" "tests/acceptance/d81/Task48405.asl"]
+      :targetSymbols ["handle_rpc_task" "handle_rpc_phase" "handle_rpc_plan" "validate_d52_schema"]
+      :relatedSymbols ["gate_validator" "acyclic_checker"]
+      :invariants ["D83" "D52" "D58" "C1"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D83"
+      :decision "d83"
+      :dependsOn ["Task48401" "Task48402" "Task48403" "Task48404"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task48405"
+      :actionDag ["Add Tier Gamma handlers in execute_single_step." "Implement validate_d52_schema." "Recompile triple binaries and refresh capabilities.lock." "Run supervise gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48405.asl"]
+      :verificationCases [":task :create persists complete D52 task collection." "Attempting to create task without :gate fails immediately with :ERR_MISSING_FIELD."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48405" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48406"
+      :parentId ""
+      :phase "Phase484RpcRecordStoreAndDeterministicDistribution"
+      :title "Ergonomic CLI Projections and Agent Toolbelt Commands"
+      :kind :toolbelt
+      :lane "cli"
+      :state :ready
+      :priority :normal
+      :ownerRole "implementer"
+      :createdAt 1789452000000
+      :updatedAt 1789452000000
+      :motivation "Agents and developers need ergonomic CLI subcommands wrapping RPC operations to eliminate raw file editing from workflows."
+      :purpose "Implement native CLI subcommands (asl task, asl adr, asl note, asl receipt, asl plan, asl intent) that translate CLI flags to RPC batch forms and render dense ASN or tabular views."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["asl task CLI subcommand operational" "asl adr, asl note, asl receipt subcommands operational" "Reversible ASN and tabular projection options"]
+      :owns ["asl/tools/asl.c" "bin/asl" "asl/asl" "asl/bin/asl" "tests/acceptance/d81/Task48406.asl"]
+      :targetSymbols ["cmd_task" "cmd_adr" "cmd_note" "cmd_receipt" "cmd_plan"]
+      :relatedSymbols ["cli_dispatcher" "asn_projector"]
+      :invariants ["D83" "D51" "C1"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D83"
+      :decision "d83"
+      :dependsOn ["Task48403" "Task48404" "Task48405"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task48406"
+      :actionDag ["Add CLI subcommands in asl.c." "Wire CLI arguments to internal RPC dispatcher." "Recompile triple binaries and refresh capabilities.lock." "Run supervise gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48406.asl"]
+      :verificationCases ["asl task list returns active tasks without reading raw files." "asl note write records an observation with exit code 0."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48406" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48407"
+      :parentId ""
+      :phase "Phase484RpcRecordStoreAndDeterministicDistribution"
+      :title "Reactive Mutation Event Bus and Observability Stream"
+      :kind :observability
+      :lane "events"
+      :state :ready
+      :priority :normal
+      :ownerRole "implementer"
+      :createdAt 1789452000000
+      :updatedAt 1789452000000
+      :motivation "External tools, agentic observability platforms, and live dashboards cannot observe memory mutations without wasteful disk polling."
+      :purpose "Implement structured mutation event emitter in asl/tools/asl.c streaming typed S-expressions to stdout and unix domain sockets for zero-polling listeners."
+      :context (:contractRef D81PlanContext)
+      :outcomes [":event emission on every write mutation" "Socket and FIFO event streaming hooks operational" "Zero-polling live observability verified"]
+      :owns ["asl/tools/asl.c" "asl/grammar/events.asn" "bin/asl" "asl/asl" "asl/bin/asl" "tests/acceptance/d81/Task48407.asl"]
+      :targetSymbols ["emit_mutation_event" "event_stream_init"]
+      :relatedSymbols ["event_bus" "observability_hook"]
+      :invariants ["D83" "D71" "C1"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D83"
+      :decision "d83"
+      :dependsOn ["Task48402" "Task48405"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task48407"
+      :actionDag ["Author asl/grammar/events.asn schema." "Implement emit_mutation_event in asl.c." "Recompile triple binaries and refresh capabilities.lock." "Run supervise gate."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48407.asl"]
+      :verificationCases ["Every task or note mutation emits structured :event form." "Event listener receives mutation in sub-5ms without reading disk."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48407" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+
+    (:task
+      :id "Task48408"
+      :parentId ""
+      :phase "Phase484RpcRecordStoreAndDeterministicDistribution"
+      :title "Direct-Write Quarantine Gate, Forensic Migration and Ecosystem Sync"
+      :kind :governance
+      :lane "verification"
+      :state :ready
+      :priority :critical
+      :ownerRole "verifier"
+      :createdAt 1789452000000
+      :updatedAt 1789452000000
+      :motivation "Without mechanical quarantine enforcement, legacy scripts and agents will revert to predictive direct file writing."
+      :purpose "Add quarantine checks to asl audit gates, implement asl mem migrate batch ingestion utility, synchronize rules.asn, AGENTS.md, and agent skills, and certify 100% monorepo consistency."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Quarantine check in asl audit gates flags uncontracted memory writes" "asl mem migrate successfully parses and contracts existing records" "AGENTS.md, rules.asn, and agent skills updated" "100 percent consistency audit passing"]
+      :owns ["asl/tools/asl.c" "asl/grammar/rules.asn" "AGENTS.md" ".plans/MASTER_ROADMAP.md" "tests/acceptance/d81/Task48408.asl"]
+      :targetSymbols ["audit_records_quarantine" "mem_migrate"]
+      :relatedSymbols ["rules_sync" "consistency_audit"]
+      :invariants ["D83" "D81" "D52" "C1" "C2" "C3"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "D83"
+      :decision "d83"
+      :dependsOn ["Task48401" "Task48402" "Task48403" "Task48404" "Task48405" "Task48406" "Task48407"]
+      :gate "bin/asl audit consistency && bin/asl audit gates"
+      :actionDag ["Implement quarantine audit check." "Implement batch migration command." "Render rules to all surfaces." "Verify consistency audit passes 100 percent."]
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task48408.asl"]
+      :verificationCases ["Direct unvalidated writes to .asl/mem/ fail the quarantine gate." "All 5 dimensions of consistency audit remain 100% passing."]
+      :gateReadiness :requiresIndependentBaseline
+      :baselineProbe (:command "bin/asl audit consistency && bin/asl audit gates" :status :notEstablished :contract D81Baseline)
+      :reviewStatus :planApproved
+      :stepIndex 1
+      :receipts [])
+  ])
