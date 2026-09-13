@@ -171,5 +171,46 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F04" :status :passed :exitCode 0 :assertionsEvaluated 16 :timestamp 1789442700000)
       ])
+    (:task
+      :id "Task-F05"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Eliminate Indiscriminate Quote Stripping in Shell Transpiler"
+      :kind :codec
+      :lane "security"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789441500000
+      :updatedAt 1789443000000
+      :motivation "Indiscriminate quote stripping in asn-to-sh strips embedded quotes from shell arguments, causing word-splitting and injection vulnerabilities."
+      :purpose "Preserve embedded quotes and apply AST-aware shell escaping in asn-to-sh."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Zero indiscriminate quote stripping in sh-transpile.asl" "Quoted shell arguments preserve quotes after transpilation"]
+      :owns ["asl/packages/asl-codec/src/sh-transpile.asl"]
+      :targetSymbols ["asn-to-sh" "sh-to-asn"]
+      :relatedSymbols ["escape-sh-compact" "escape-sh-arg"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn []
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F05"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F05.asl"]
+      :verificationCases ["sh-transpile.asl does not strip quotes indiscriminately and preserves quoted arguments."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F05" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Eliminate naive quote stripping" "Apply AST-aware shell argument escaping" "Independent acceptance."]
+      :stepIndex 3
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F05" :status :passed :exitCode 0 :assertionsEvaluated 19 :timestamp 1789443000000)
+      ])
   ]
 )

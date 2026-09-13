@@ -43,7 +43,7 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `./bin/asl doctor`
 
 ### Task-F05: Eliminate Indiscriminate Quote Stripping in Shell Transpiler
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `asl/packages/asl-codec/src/sh-transpile.asl`
 - **Baseline Failure**: `asn-to-sh` on `(:sh "echo \"hello world\"")` strips all quotes into `echo hello world`, exposing arguments to shell word-splitting and command injection.
 - **Remedy**: Replace naive `(string-replace s6 "\"" "")` at line 88 with an AST-aware shell escaping function `escape-sh-arg` that preserves intended quotes.
