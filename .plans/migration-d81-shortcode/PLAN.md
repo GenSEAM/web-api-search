@@ -3,7 +3,7 @@
 ## Executive Summary & Metadata
 - **Plan ID**: `PlanD81ShortcodeMigration`
 - **Target Invariant**: `D46` (Bare Symbol Shortcodes), `D51` (Token Efficiency Format), `D56` (Universal Zero-Kebab)
-- **Status**: `planned`
+- **Status**: `completed`
 - **Estimated Scope**: 60 decision files, 93 task collections (518 tasks), 1 rules specification, 7 projection surfaces, engine C scanner (`asl.c`), and acceptance test fixtures.
 
 ---

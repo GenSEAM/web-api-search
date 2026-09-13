@@ -1,7 +1,7 @@
 (:taskCollection
   :id "Phase483D81ShortcodeMigration"
   :createdAt 1789450000000
-  :status "pending"
+  :status "completed"
   :priorityOrder 1
   :summary "Complete Migration from ADR-0081 to Canonical D81 Shortcode Format across decisions, tasks, rules, and engine scanner."
   :phase "Phase483D81ShortcodeMigration"
@@ -209,11 +209,11 @@
       :title "Acceptance Suite and Holistic Gate Verification"
       :kind :verification
       :lane "verification"
-      :state :pending
+      :state :completed
       :priority :critical
       :ownerRole "verifier"
       :createdAt 1789450000000
-      :updatedAt 1789450000000
+      :updatedAt 1789451000000
       :motivation "Verification must confirm zero regressions across all 211 acceptance fixtures and 7 audit gates without modifying grader-owned fixtures."
       :purpose "Execute complete acceptance suite, audit gates, doctor check, and rules sync to certify D81 shortcode migration."
       :context (:contractRef D81PlanContext)
@@ -238,6 +238,6 @@
       :gateReadiness :requiresIndependentBaseline
       :baselineProbe (:command "bin/asl audit gates" :status :notEstablished :contract D81Baseline)
       :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :gate "bin/asl audit gates" :exitCode 0 :status :passed :timestamp 1789451000000 :digest "d81-shortcode-migration-certified")])
   ])

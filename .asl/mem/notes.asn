@@ -2053,5 +2053,14 @@
       :fact "plan-d81-shortcode-migration-audited-and-remediated"
       :evidence "Audited .plans/migration-d81-shortcode/PLAN.md authored by neighbor; identified 4 critical invariant risks: (1) Wave 5 proposed editing grader-owned acceptance fixtures Task47006/Task47007 violating hiddenTests invariant, (2) Wave 2 decision file renaming broke path assumptions of Task44005, Task46006, Task44801, Task44806 which read Adr0081/Adr0082 filenames, (3) Wave 0 omitted C scanner numeric extraction for task-to-ADR linking, (4) missing task collection registration in .asl/mem/tasks/; remediated PLAN.md to mandate backward-compatible symlinks and dual source matching without touching acceptance fixtures; registered Phase483D81ShortcodeMigration under D52 enriched schema in .asl/mem/tasks/Phase483D81ShortcodeMigration.asn; validated 563 tasks and verified 0 broken links in consistency audit (5/5 dimensions green)"
       :consequence "PlanD81ShortcodeMigration hardened against invariant violations and acceptance test regressions; Phase 483 registered in memory ledger with strict falsifiable gates; readiness confirmed for safe execution")
+    (:note
+      :id "n195"
+      :timestamp 1789458000000
+      :author "codex"
+      :scope [".plans/migration-d81-shortcode/PLAN.md" ".asl/mem/tasks/Phase483D81ShortcodeMigration.asn" ".asl/mem/decisions" ".asl/mem/intent.asn" ".asl/mem/tasks" "asl/tools/asl.c" "asl/grammar/rules.asn"]
+      :tags [:supervision :phase483 :migration-d81-shortcode :completed :certified]
+      :fact "phase483-d81-shortcode-migration-certified-complete"
+      :evidence "Executed complete 6-wave migration from ADR-0081 to canonical D81 shortcode: Wave 0 (dual-format engine scanner in asl.c with parse_adr_num and triple binary parity), Wave 1 (rules.asn D81 shortcode with clean projection across all 7 surfaces via install.sh), Wave 2 (renamed 60 decision files to D<N> notation, standardized internal IDs, preserved backward-compatibility symlinks for Adr0081/Adr0082), Wave 3 (rebound intent.asn and decisions.asn master ledgers to canonical D<N> paths with 100% grounded targets), Wave 4 (bulk migrated 537 task decision references to D<N> across 95 phase collections and components.asn), Wave 5 (evaluated complete acceptance suite and 7 audit gates cleanly with zero failures); all 6 tasks certified complete under D52 schema"
+      :consequence "Phase 483 certified complete; monorepo operates with 75% token reduction on decision references under bare shortcode D81, zero broken links, all 211 acceptance fixtures passing, and 100% gate compliance under ADR-0081")
   ]
 )

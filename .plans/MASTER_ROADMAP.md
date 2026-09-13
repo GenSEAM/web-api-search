@@ -30,7 +30,7 @@ graph TD
     P23 --> P24["Phase 24: Attention Prosthesis & Lexicon (Phases 441, 442, 445, 447, Certified)"]
     P24 --> P25["Phase 25: Editorial Design & Scope Recovery (Phases 448, 470, Done)"]
     P25 --> P26["Phase 26: FINSEL Monorepo Remediation (Phase FINSEL, Done)"]
-    P26 --> P27["Phase 27: D81 Shortcode Migration (migration-d81-shortcode, Planned)"]
+    P26 --> P27["Phase 27: D81 Shortcode Migration (migration-d81-shortcode, Done)"]
 ```
 
 ---
@@ -81,7 +81,7 @@ graph TD
 | **Phase 36b (Phase 456)** | [.plans/phase-456/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-456/PLAN.md) | **Done** | Duplication, Dead Code and Unwired Eradication: 4 tasks covering single tracked install.sh (Task45604 - certified), deleting redundant copies (Task45601 - certified), retiring dead unreferenced definitions and stubs (Task45602 - certified), and verdict for unreachable modules (Task45603 - certified). |
 | **Phase 37** | [.plans/phase-470/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-470/PLAN.md) | **Done** | Restore Gate Scope and Reach Execution: full monorepo corpus scope for Gate 5, built binary parity, embedded binary launch command (7/7 tasks certified). |
 | **Phase 38** | [.plans/phase-finsel/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-finsel/PLAN.md) | **Done** | FINSEL Master Remediation: 39 falsifiable tasks resolving all defects cataloged during the 8-wave, 3-model monorepo audit. |
-| **Phase 39** | [.plans/migration-d81-shortcode/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/migration-d81-shortcode/PLAN.md) | **Planned** | Complete Migration from ADR-0081 to Canonical D81 Shortcode Format across decisions, tasks, rules and engine scanner. |
+| **Phase 39** | [.plans/migration-d81-shortcode/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/migration-d81-shortcode/PLAN.md) | **Done** | Complete Migration from ADR-0081 to Canonical D81 Shortcode Format across decisions, tasks, rules and engine scanner. |
 
 ---
 
