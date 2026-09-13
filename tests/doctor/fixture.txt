@@ -1,2 +1,0 @@
-fixture-a: 42
-fixture-b: 42

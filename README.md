@@ -1,172 +1,133 @@
-<div align="center">
+# @genseam/asl-web-api-search (Native AgentScript Search Engine API)
 
-# ⚡ GenSEAM Autonomous Agent Ecosystem
+Native AgentScript multi-engine search API aggregator, URL deduplicator, and RAG context compressor for autonomous AI agents.
 
-### *Reference Monorepo for Addie, AgentScript (ASL), and In-Memory Codebase Intelligence.*
-
-[![Language: AgentScript](https://img.shields.io/badge/language-AgentScript%20(ASL)-9333ea.svg)](asl/)
-[![Gates: 7/7 Passing](https://img.shields.io/badge/verification%20gates-7%2F7%20passing-emerald.svg)](asl/packages/asl-gates/)
-[![In-Memory RAM Engine](https://img.shields.io/badge/RAM%20workspace-%3C150ms%20ingest-blue.svg)](asl/bridges/node/asl-mem-daemon.mjs)
-[![Token Savings](https://img.shields.io/badge/token%20economy-72%25%20to%2085%25%20savings-purple.svg)](asl/packages/asl-codec/)
-[![Zero Foreign Code](https://img.shields.io/badge/zero--foreign%20code-100%25%20pure%20ASL-success.svg)](asl/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-gray.svg)](LICENSE)
-
-</div>
-
----
-
-Current work: [architecture and research plan](.asl/mem/tasks/SystemArchitectureReview.asn), with [concept decisions, documentation ownership, and code navigation](.asl/mem/decisions/SystemArchitecture.asn). These are reviewed proposals; implementation readiness and measured capabilities are recorded separately from intended behavior.
-
-## 📜 Manifesto & Architectural Philosophy
-
-> **"Code is for agents. Architecture, intent, and verifiable proofs are for humans."**  
-> Read the complete [**Agent-Native Language & Dual-Projection Manifesto**](MANIFESTO.md) for the foundational philosophy governing agent-native programming languages, token economics, and dual-projection perception.
-
----
-
-## 🧭 Overview
-
-This repository is the central engineering monorepo for **GenSEAM** and **Addie** — the autonomous AI coding agent powered by **AgentScript (ASL)**. It eliminates 80% of agent code bloat, hallucination loops, and multi-second subshell overheads by executing in-memory, deterministic S-expression tools.
-
-```text
-┌─────────────────────────────────────────────────────────────────────────┐
-│                           ADDIE AUTONOMOUS AGENT                        │
-│             (Self-Steering, Multi-Arm Benchmarked, Zero-Foreign)        │
-└────────────────────────────────────┬────────────────────────────────────┘
-                                     │
-     ┌───────────────────────────────┼───────────────────────────────┐
-     ▼                               ▼                               ▼
-┌───────────────┐           ┌─────────────────┐             ┌─────────────────┐
-│    asl-mem    │           │    asl-intel    │             │    agent-bus    │
-│  In-Memory    │           │ Code Intelligence│            │ Inter-Agent Mesh│
-│ Vector Recall │           │ & Symbol Graph  │             │ 0.04ms Wire Bus │
-└───────┬───────┘           └────────┬────────┘             └────────┬────────┘
-        │                            │                               │
-        └────────────────────────────┼───────────────────────────────┘
-                                     ▼
-                      ┌─────────────────────────────┐
-                      │      HARNESS & AST GATES    │
-                      │  Deterministic Tool Router  │
-                      │  All 7 Verification Gates   │
-                      └─────────────────────────────┘
-```
-
----
-
-## ⚡ Core Subsystems
-
-### 1. In-Memory Codebase Intelligence (`asl-mem`)
-- **Whole-Workspace Ingestion**: Ingests 900+ files and 12,000+ symbols into resident RAM in **< 150ms**.
-- **Vector Semantic Search**: Sublinear TF-IDF and cosine similarity query kernel directly over AST docstrings and symbol headers (`asl mem query "<query>"`).
-- **In-RAM Virtual File Buffers**: Inspect documents without touching disk (`asl mem doc section`). Stage code edits (`asl mem edit`) and mass refactor across hundreds of files (`asl mem replace`) in < 15ms.
-- **Atomic Disk Synchronization**: Preview staged memory diffs (`asl mem diff`), atomically persist dirty buffers to disk (`asl mem flush`), or discard instantly (`asl mem discard`).
-
-### 2. Code Intelligence & Symbol Navigation (`asl-intel`)
-- Dense AST skeletons with 0 implementation bloat (`asl intel outline <file>`).
-- Blast-radius and call-graph analysis (`asl intel callers <sym>`, `asl intel impact <sym>`).
-- Graph-Horizon Paging $H(m, k, B)$ adhering to strict token budgets.
-
-### 3. AgentScript (ASL) Language Toolchain (`asl/`)
-- Pure S-expression agent-native programming substrate.
-- Zero delimiter hallucination through balanced parentheses invariants.
-- 72% to 85% token savings over JSON and Python syntax.
-- Self-hosted compiler targeting WebAssembly, Rust, Embedded C, and native binaries.
-
-### 4. Single-Roundtrip ASN Batch RPC Protocol (`asl rpc`)
-- High-performance, low-latency execution pipeline with parallel `Promise.all` reads and sequential mutations.
-- 1-token shortcodes (`:q`, `:out`, `:sec`, `:sym`, `:load`, `:repl`, `:drop`, `:chk`, `:cov`) slashes agent context token consumption.
-- Dual-mode streaming (`--stream`) emitting discrete ND-ASN frames for TUI and WebSocket clients.
-
-### 5. Multi-Agent Ecosystem Skills Installer (`asl-skills`)
-- One-shot setup across all AI coding assistants: **Claude Code, Cursor, Windsurf, Antigravity, and Factory Droid**.
-- Automatically configures local and global rule files (`AGENTS.md`, `CLAUDE.md`, `.cursorrules`, etc.) to prioritize native ASL toolchains.
-
----
-
-## 📦 Package Matrix
-
-| Package | Path | Purpose |
-| :--- | :--- | :--- |
-| **`asl`** | [`asl/`](asl/) | Core AgentScript language, compiler, codec, CLI, and checker |
-| **`agent-bus`** | [`agent-bus/`](agent-bus/) | High-speed binary wire frames and presence mesh |
-| **`agent-core`** | [`agent-core/`](agent-core/) | Task DAG engine, memory buffers, and blackboard |
-| **`addie`** | [`agent/`](agent/) | Autonomous AI engineer executive runtime |
-| **`harness`** | [`harness/`](harness/) | Verification gates, AST protection, and execution router |
-| **`intel`** | [`intel/`](intel/) | Code intelligence graph and blast radius analyzer |
-| **`mem`** | [`mem/`](mem/) | Episodic memory indexing and vector cosine math |
-| **`crawler`** | [`crawler/`](crawler/) | Stealth web scraping and browser impersonator |
-| **`web-api-search`** | [`web-api-search/`](web-api-search/) | Multi-provider web search engine (Tavily, SearXNG, Serper) |
-| **`asl-arduino`** | [`asl-arduino/`](asl-arduino/) | Microcontroller HAL and embedded C transpiler |
-| **`asl-contracts`** | [`asl-contracts/`](asl-contracts/) | EVM smart contracts and formal verification |
-| **`asl-quantum`** | [`asl-quantum/`](asl-quantum/) | Quantum circuit simulation and state vectors |
-
----
-
-## 🚀 Quickstart
-
-### 1. Setup Environment & Global Agent Directives
+## Installation
 ```bash
-# Interactive setup (auto-detects Claude Code, Cursor, Windsurf, Antigravity, Factory)
-npx asl-skills
-
-# Or via local toolchain
-asl skill install --global
-```
-
-### 2. In-Memory Exploration & Search
-```bash
-# Index 900+ workspace files into resident memory in <150ms
-asl mem index .
-
-# Semantic vector search across all symbols
-asl mem query "vector cosine similarity"
-
-# Read markdown documentation from RAM without hitting disk
-asl mem doc section AGENTS.md "Ultra-Compact Native Tool Cheat Sheet"
-```
-
-### 3. In-Memory Mass Replace & Atomic Flush
-```bash
-# Stage codebase-wide rename in RAM in <15ms
-asl mem replace --match="old-symbol" --replace="new-symbol" --ext=.asl
-
-# Review pending memory modifications
-asl mem diff
-
-# Atomically commit dirty buffers to disk (or discard with 'asl mem discard')
-asl mem flush
-```
-
-### 4. Continuous Audit & 7 Verification Gates
-```bash
-# Run 100% pure AgentScript 7-gate audit in ~75ms
-asl gate
-
-# Measure engine capabilities against reality and generate capabilities.lock
-asl doctor
-
-# Output dense ASN summary for LLM context injection
-asl gate --asn
-
-# Inspect native test function coverage across all packages
-asl coverage
+asl get github.com/GenSEAM/web-api-search
 ```
 
 ---
 
-## 🛡️ Verification Invariants & Gates
+## Supported Search Providers & Environment Variables
 
-All code commits must satisfy the 7 core invariants enforced by [`tools/gate.asl`](tools/gate.asl):
-1. **Package Manifests**: All manifests well-formed and valid (`manifest.asn`, `asl.json`).
-2. **Form Balance**: 100% balanced AST delimiters across all `.asl` files.
-3. **Site Claims**: Benchmark claims grounded against published locks (`published_claims.asn`).
-4. **Zero-Foreign Code**: Strictly 0 Python, 0 JavaScript, 0 TypeScript, 0 Rust, 0 C, and 0 Shell in code packages.
-5. **Native Test Suites**: 100% test pass rate across all package test suites.
-6. **Token Density**: Exported symbols $\le$ 2 tokens or documented with explicit `:rationale`.
-7. **Modular Skills**: Valid YAML frontmatters, trigger descriptions, and zero legacy naming drift.
+`asl-web-api-search` supports both open (unauthenticated) endpoints and authenticated commercial AI search APIs. Configure private keys in your shell environment or `.env` file:
+
+| Environment Variable | Provider | Header / Auth Scheme | Default / Endpoint Format |
+|---|---|---|---|
+| `TAVILY_API_KEY` | Tavily Search API | `Authorization: Bearer <key>` | `https://api.tavily.com/search?query={q}&max_results={lim}` |
+| `SERPER_API_KEY` | Google Serper.dev | `X-API-KEY: <key>` | `https://google.serper.dev/search?q={q}&num={lim}` |
+| `BRAVE_API_KEY` | Brave Web Search | `X-Subscription-Token: <key>` | `https://api.search.brave.com/res/v1/web/search?q={q}&count={lim}` |
+| `GITHUB_TOKEN` | GitHub API | `Authorization: token <token>` | `https://api.github.com/search/repositories?q={q}&per_page={lim}` |
+| `SEARXNG_URL` | SearXNG Metasearch | Optional Basic / Bearer | `https://searx.be/search?q={q}&format=json` (or private host) |
+| *(None - Open)* | DuckDuckGo | Unauthenticated | `https://html.duckduckgo.com/html/?q={q}` |
+| *(None - Open)* | Wikipedia | Unauthenticated | `https://en.wikipedia.org/w/api.php?action=opensearch...` |
+| *(None - Open)* | arXiv API | Unauthenticated | `http://export.arxiv.org/api/query?search_query=all:...` |
+| *(None - Open)* | HackerNews Algolia | Unauthenticated | `https://hn.algolia.com/api/v1/search?query=...` |
+
+### Environment Configuration Example
+
+Add the following to your `~/.zshrc`, `~/.bashrc`, or project `.env`:
+
+```bash
+# Tavily AI Search (https://tavily.com)
+export TAVILY_API_KEY="tvly-xxxxxxxxxxxxxxxxxxxxxxxx"
+
+# Google Serper API (https://serper.dev)
+export SERPER_API_KEY="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# Brave Web Search (https://brave.com/search/api/)
+export BRAVE_API_KEY="BSAxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# GitHub Token (for repository and code search limits)
+export GITHUB_TOKEN="ghp_xxxxxxxxxxxxxxxxxxxxxxxx"
+
+# Self-Hosted / Private SearXNG Node (optional)
+export SEARXNG_URL="https://search.internal.corp/search"
+```
 
 ---
 
-## 📄 License
+## Features
 
-Dual-licensed under **MIT** or **Apache-2.0**.
+- **Pure AgentScript Implementation:** Zero foreign runtime dependencies. Compiles to WebAssembly, TypeScript, and Rust.
+- **Multi-Engine API Providers:** Generates target query endpoints for DuckDuckGo, Wikipedia, GitHub, arXiv, HackerNews, Brave, Google Serper, and Tavily.
+- **Typed Curl Vectors:** Generates safe, injection-free `(CurlCommand ...)` argument vectors for sandboxed process execution.
+- **URL Tracking Cleaner:** Strips `utm_*`, `ref`, `fbclid`, and `gclid` tracking parameters natively in ASL without external regex bloat.
+- **Cross-Engine Deduplication:** Merges identical URLs from multiple providers, combines provenance tags (e.g. `brave+tavily`), and computes aggregated relevance scores.
+- **RAG Context Compressor:** Formats search results into clean, numbered Markdown context optimized for LLM prompt injection.
+- **Proxy Pool Health Checks:** Typed proxy node latency and success rate evaluation with cooldown tracking.
+
+---
+
+## AgentScript API & Usage Examples
+
+### 1. Building Search URLs
+```lisp
+(use asl-web-api-search/engine [build-search-url])
+
+;; Generate endpoint URL for arXiv
+(let [(url (build-search-url "arxiv" "deep seek r1 reasoning" 5))]
+  ;; => "http://export.arxiv.org/api/query?search_query=all:deep+seek+r1+reasoning&start=0&max_results=5"
+)
+```
+
+### 2. Building Authenticated Curl Execution Commands
+```lisp
+(use asl-web-api-search/engine [build-provider-curl-cmd])
+
+;; Construct authenticated curl command vector with custom API key and timeout
+(let [(cmd (build-provider-curl-cmd "tavily" "https://api.tavily.com/search?query=asl" "tvly-xxx" 15))]
+  ;; Returns typed (CurlCommand :bin "curl" :args ("-s" "--max-time" "15" "-H" "Accept: application/json" "-H" "Authorization: Bearer tvly-xxx" ...) :url ...)
+)
+```
+
+### 3. URL Deduplication and Tracking Parameter Removal
+```lisp
+(use asl-web-api-search/engine [clean-url merge-search-results])
+
+;; Strips tracking tags
+(let [(clean (clean-url "https://github.com/GenSEAM/asl?utm_source=twitter&ref=newsletter&fbclid=xyz"))]
+  ;; => "https://github.com/GenSEAM/asl"
+)
+```
+
+### 4. Compressing Results into RAG Context
+```lisp
+(use asl-web-api-search/engine [format-rag-context SearchResult])
+
+(let [(items (list
+               (SearchResult :title "ASL Guide" :url "https://asl.dev" :snippet "AgentScript reference..." :engine "ddg" :score 1.0)))]
+  (format-rag-context "AgentScript language" items))
+```
+
+---
+
+## ASL Daemon & RPC Batch Integration
+
+When interacting with the resident `asl-mem-daemon`, search queries can be dispatched via the unified compact RPC S-expression protocol:
+
+```lisp
+(:batch
+  (:step :id 1 :op "web-search" :query "high performance webgl chart" :engine "brave" :limit 5))
+```
+
+Or via the native CLI projection:
+```bash
+asl web "webgl canvas graph visualization" github 5
+```
+
+---
+
+## Module Exports (`asl-web-api-search/engine`)
+- `build-search-url [(engine Str) (query Str) (limit I64)] -> Str`
+- `make-curl-command [(url Str) (timeout-sec I64) (user-agent Str)] -> CurlCommand`
+- `build-provider-curl-cmd [(engine Str) (url Str) (api-key Str) (timeout-sec I64)] -> CurlCommand`
+- `clean-url [(url Str)] -> Str`
+- `merge-search-results [(primary (List SearchResult)) (secondary (List SearchResult))] -> (List SearchResult)`
+- `format-rag-context [(query Str) (items (List SearchResult))] -> Str`
+- `is-proxy-healthy [(proxy ProxyNode)] -> Bool`
+- `select-healthy-proxies [(proxies (List ProxyNode))] -> (List ProxyNode)`
+
+## License
+MIT

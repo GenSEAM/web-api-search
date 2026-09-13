@@ -1,4 +1,0 @@
-#!/bin/sh
-# Agent (CLI Alias) - Pure AgentScript Autonomous Coding Agent
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-exec "$ROOT/bin/asl" eval "$ROOT/agent/src/cli.asl" "$@"
