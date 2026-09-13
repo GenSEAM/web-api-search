@@ -3,7 +3,7 @@
 ## Status
 - **Phase**: Phase470RestoreGateScopeAndReachExecution
 - **Priority**: Gate 5 Monorepo Corpus Scope & Built Binary Parity
-- **Status**: planned
+- **Status**: Completed (7/7 tasks certified complete)
 
 ## Context & Objectives
 Execute Phase 470 under ADR-0081 and monorepo verification contracts:
