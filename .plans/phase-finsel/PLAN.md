@@ -50,7 +50,7 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `bin/asl eval '(:call asl-codec.sh-transpile/asn-to-sh "(:sh \"echo \\\"hello world\\\"\")")' | grep '\"hello world\"'`
 
 ### Task-F06: Eliminate Caller-Supplied Magic Numbers in Gate Runner
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `asl/packages/asl-gates/src/gate_runner.asl`, `asl/packages/asl-gates/src/runner.asl`
 - **Baseline Failure**: `(run-all-seven-gates 0 0 0 0 0 0 0)` vacuously returns green as long as arguments are non-negative.
 - **Remedy**: Refactor `gate_runner.asl` to independently query the filesystem for manifests, ASL files, grammar definitions, and rule compliance. Deprecate caller-supplied counts.

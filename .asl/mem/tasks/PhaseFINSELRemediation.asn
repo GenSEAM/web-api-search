@@ -212,5 +212,46 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F05" :status :passed :exitCode 0 :assertionsEvaluated 19 :timestamp 1789443000000)
       ])
+    (:task
+      :id "Task-F06"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Eliminate Caller-Supplied Magic Numbers in Gate Runner"
+      :kind :gate
+      :lane "verification"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789441500000
+      :updatedAt 1789443300000
+      :motivation "gate_runner.asl and runner.asl accept caller-supplied counts, allowing artificial green gate reports without inspecting disk."
+      :purpose "Refactor gate runner to independently verify filesystem state and deprecate caller-supplied counts."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Live verification query functions in gate_runner.asl" "Deprecation of ungrounded caller-supplied magic counts"]
+      :owns ["asl/packages/asl-gates/src/gate_runner.asl" "asl/packages/asl-gates/src/runner.asl"]
+      :targetSymbols ["run-all-seven-gates" "run-live-gate-audit"]
+      :relatedSymbols ["run-all" "run-all-gates"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn []
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F06"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F06.asl"]
+      :verificationCases ["gate_runner.asl exports live verification functions and runs genuine checks."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F06" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Define live gate discovery" "Wire filesystem inspection" "Deprecate caller counts" "Independent acceptance."]
+      :stepIndex 3
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F06" :status :passed :exitCode 0 :assertionsEvaluated 17 :timestamp 1789443300000)
+      ])
   ]
 )

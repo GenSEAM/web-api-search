@@ -1742,14 +1742,14 @@
       :evidence "Eliminated indiscriminate quote stripping in asl/packages/asl-codec/src/sh-transpile.asl; implemented stateful token extraction extract-cmd-tokens, quote-preserving format-sh-arg, and literal extraction extract-sh-literal; authored tests/acceptance/d81/Task-F05.asl; evaluated 19 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F05 certified complete; shell transpiler preserves quoted arguments and protects spaced arguments under ADR-0081")
     (:note
-      :id "n159"
+      :id "n160"
       :author "codex"
       :created "2026-09-13"
       :status "active"
-      :scope ["asl/packages/asl-codec/src/sh-transpile.asl" "asl/packages/asl-codec/tests/sh-transpile-test.asl" "tests/acceptance/d81/Task-F05.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
-      :tags [:supervision :phase-finsel :task-f05 :codec :shell-transpiler :quote-preservation :approved]
-      :fact "task-f05-certified-complete"
-      :evidence "Eliminated indiscriminate quote stripping in sh-transpile.asl; implemented extract-sh-literal and extract-cmd-tokens preserving embedded quotes in :sh and :cmd forms with AST-aware shell escaping; added unit tests in sh-transpile-test.asl; authored tests/acceptance/d81/Task-F05.asl; evaluated 19 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
-      :consequence "Task-F05 certified complete; shell transpiler preserves intended quotes and eliminates command injection vulnerabilities under ADR-0081")
+      :scope ["asl/packages/asl-gates/src/gate_runner.asl" "asl/packages/asl-gates/src/runner.asl" "tests/acceptance/d81/Task-F06.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f06 :gates :gate-runner :live-verification :approved]
+      :fact "task-f06-certified-complete"
+      :evidence "Eliminated caller-supplied magic numbers in gate runner; implemented run-live-gate-audit in gate_runner.asl and runner.asl querying filesystem truth on disk; updated grammar.asn and gate_runner_test.asl; authored tests/acceptance/d81/Task-F06.asl; evaluated 17 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F06 certified complete; gate runner independently queries filesystem and eliminates vacuous green reports under ADR-0081")
   ]
 )
