@@ -1,0 +1,22 @@
+(:gapsMasterLedger
+  :id "gaps-master-ledger"
+  :createdAt 1789463600000
+  :status :active
+  :version 1
+  :src "D85"
+  :shortcode "D85"
+  :description "Autonomous multi-model mesh consensus gap ledger cross-linked with roadmap and decisions under D85 and D83."
+  :roadmapLink (:link :phase "Phase486MultiModelMeshOrchestratorAndParallelVerification" :task "Task48605" :adr "D85")
+  :gapRecords [
+    (:gapRecord
+      :defectId "def-mesh-001"
+      :path "tests/acceptance/d81/Task46601.asl"
+      :lineNumber 1
+      :kind :boundary-violation
+      :severity :advisory
+      :blameSymbol "Task46601"
+      :rationale "Hidden evaluation suite immutable boundary verified under D81"
+      :suggestedFix "Retain read-only grader ownership"
+      :remediationStep "none")
+  ]
+)

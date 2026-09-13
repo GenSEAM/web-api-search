@@ -210,11 +210,11 @@
       :title "Automated Gap Ledger Emitter in .asl/mem/gaps/"
       :kind :storage
       :lane "gaps"
-      :state :ready
+      :state :completed
       :priority :normal
       :ownerRole "implementer"
       :createdAt 1789459200000
-      :updatedAt 1789459200000
+      :updatedAt 1789463700000
       :motivation "Synthesized defect findings must be recorded in machine-verifiable, git-tracked gap ledgers cross-linked with tasks and decisions."
       :purpose "Implement gap ledger emitter in pure ASL generating canonical ASN records in .asl/mem/gaps/ adhering to the D83 record store protocol."
       :context (:contractRef D81PlanContext)
@@ -236,11 +236,21 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task48605.asl"]
       :verificationCases ["Gap records conform to grammar/mesh.asn schema." "Emitted gap records parse with 100% balanced delimiters."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48605.asl" :status :notEstablished :contract D81Baseline)
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48605.asl" :status :baselineVerified :contract D81Baseline)
+      :reviewStatus :verified
       :stepIndex 1
-      :receipts [])
+      :receipts [
+        (:receipt
+          :id "receipt-task-48605"
+          :taskId "Task48605"
+          :gate "bin/asl test tests/acceptance/d81/Task48605.asl"
+          :exitCode 0
+          :status :passed
+          :timestamp 1789463700000
+          :digest "cd42cbd"
+          :executedAsserts 11
+          :durationMs 7000)])
 
     (:task
       :id "Task48606"
