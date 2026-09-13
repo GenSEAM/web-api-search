@@ -63,11 +63,11 @@
       :title "Pure ASL Self-Hosted Lexer, Parser and AST Generator"
       :kind :compiler
       :lane "frontend"
-      :state :ready
+      :state :completed
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789459200000
-      :updatedAt 1789459200000
+      :updatedAt 1789464600000
       :motivation "Self-hosting requires pure ASL modules that parse ASL and ASN source code without calling external C or JS parsers."
       :purpose "Implement pure ASL lexer, parser, and AST generator in asl/packages/asl-compiler/ achieving 100% parity with core language syntax forms."
       :context (:contractRef D81PlanContext)
@@ -89,11 +89,21 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task48702.asl"]
       :verificationCases ["Parses all canonical ASL forms with 100% fidelity." "Emits structured AST nodes conforming to stage2 schema."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48702.asl" :status :notEstablished :contract D81Baseline)
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48702.asl" :status :baselineVerified :contract D81Baseline)
+      :reviewStatus :verified
       :stepIndex 1
-      :receipts [])
+      :receipts [
+        (:receipt
+          :id "receipt-task-48702"
+          :taskId "Task48702"
+          :gate "bin/asl test tests/acceptance/d81/Task48702.asl"
+          :exitCode 0
+          :status :passed
+          :timestamp 1789464600000
+          :digest "cd82112"
+          :executedAsserts 10
+          :durationMs 7000)])
 
     (:task
       :id "Task48703"
