@@ -23,13 +23,13 @@ graph TD
     P16 --> P17["Phase 17: Capability Corpus Ground Truth (Phase 482, Done)"]
     P17 --> P18["Phase 18: Language Optimization & Staging Runtime (Phase 438, Done)"]
     P18 --> P19["Phase 19: Runtime Boundary & Memory Safety (Phase 472, Done)"]
-    P19 --> P20["Phase 20: Configuration & Distribution Truth (Phase 473, In Progress)"]
-    P20 --> P21["Phase 21: One Projection, Many Surfaces (Phase 474, In Progress)"]
+    P19 --> P20["Phase 20: Configuration & Distribution Truth (Phase 473, Done)"]
+    P20 --> P21["Phase 21: One Projection, Many Surfaces (Phase 474, Done)"]
     P21 --> P22["Phase 22: Scheme & Racket Alignment (Phases 459–463, Done)"]
     P22 --> P23["Phase 23: Language Semantics & Ground Truth (Phases 436, 439, 440, 454, Planned)"]
     P23 --> P24["Phase 24: Attention Prosthesis & Lexicon (Phases 441, 442, 445, 447, Certified)"]
     P24 --> P25["Phase 25: Editorial Design & Scope Recovery (Phases 448, 470, Planned)"]
-    P25 --> P26["Phase 26: FINSEL Monorepo Remediation (Phase FINSEL, Planned)"]
+    P25 --> P26["Phase 26: FINSEL Monorepo Remediation (Phase FINSEL, Done)"]
 ```
 
 ---
@@ -79,7 +79,7 @@ graph TD
 | **Phase 36** | [.plans/phase-454/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-454/PLAN.md) | **Done** | Engine Binding Ground Truth: manifest-driven module resolution, fatal unresolved imports, 40 missing builtins, first-class `refute`. |
 | **Phase 36b (Phase 456)** | [.plans/phase-456/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-456/PLAN.md) | **Done** | Duplication, Dead Code and Unwired Eradication: 4 tasks covering single tracked install.sh (Task45604 - certified), deleting redundant copies (Task45601 - certified), retiring dead unreferenced definitions and stubs (Task45602 - certified), and verdict for unreachable modules (Task45603 - certified). |
 | **Phase 37** | [.plans/phase-470/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-470/PLAN.md) | **Done** | Restore Gate Scope and Reach Execution: full monorepo corpus scope for Gate 5, built binary parity, embedded binary launch command (7/7 tasks certified). |
-| **Phase 38** | [.plans/phase-finsel/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-finsel/PLAN.md) | **In Progress** | FINSEL Master Remediation: 39 falsifiable tasks resolving all defects cataloged during the 8-wave, 3-model monorepo audit. |
+| **Phase 38** | [.plans/phase-finsel/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-finsel/PLAN.md) | **Done** | FINSEL Master Remediation: 39 falsifiable tasks resolving all defects cataloged during the 8-wave, 3-model monorepo audit. |
 
 ---
 
