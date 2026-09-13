@@ -14,17 +14,17 @@
       :title "Wire Dynamic Verification into C Host RPC Gate"
       :kind :engine
       :lane "verification"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789441500000
-      :updatedAt 1789441500000
+      :updatedAt 1789442400000
       :motivation "asl/tools/asl.c hardcodes gate response :allClean true :passed 7 :active 7 :total 7 without invoking genuine verification."
       :purpose "Replace the static RPC gate mock with live execution of run_all_seven_gates, reporting authentic status."
       :context (:contractRef D81PlanContext)
       :outcomes ["Dynamic verification wired into RPC gate" "Genuine gate pass and fail status reported"]
       :owns ["asl/tools/asl.c"]
-      :targetSymbols ["run_cmd_rpc_batch" "execute_single_step"]
+      :targetSymbols ["run_cmd_rpc_batch" "execute_single_step" "op_gate"]
       :relatedSymbols ["run_cmd_gate"]
       :invariants ["D81"]
       :variations (:contractRef D81SettledChoices)
@@ -39,13 +39,15 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task-F01.asl"]
       :verificationCases ["RPC gate execution invokes genuine checks and does not emit hardcoded static status on failing files."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F01" :status :notEstablished :contract D81Baseline)
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F01" :status :baselineVerified :contract D81Baseline)
       :historicalReceipts []
-      :reviewStatus :planApproved
+      :reviewStatus :approved
       :actionDag ["Identify hardcoded gate branch in execute_single_step" "Invoke genuine gate verification" "Independent acceptance."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 3
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F01" :status :passed :exitCode 0 :assertionsEvaluated 20 :timestamp 1789442400000)
+      ])
     (:task
       :id "Task-F02"
       :parentId ""
