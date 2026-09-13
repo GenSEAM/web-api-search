@@ -265,11 +265,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F34` (10 assertions verified)
 
 ### Task-F35: Standardize Agent Package Module Namespaces
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `agent-core/src/*.asl`, `agent-bus/src/*.asl`, `agent/src/*.asl`
 - **Baseline Failure**: Package manifests specify `asl-agent-core/*` while source files declare `asl-core/*`; `agent-bus` has three conflicting prefixes.
 - **Remedy**: Align all module headers with their canonical package manifest names.
-- **Gate**: `bin/asl check agent-core agent-bus agent`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F35` (42 assertions verified)
 
 ### Task-F36: Resolve Tautological Tests in Memory and Acceptance Suites
 - **Status**: planned

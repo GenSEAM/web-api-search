@@ -1401,5 +1401,47 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F34" :status :passed :exitCode 0 :assertionsEvaluated 10 :timestamp 1789453800000)
       ])
+    (:task
+      :id "Task-F35"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Standardize Agent Package Module Namespaces"
+      :kind :refactor
+      :lane "agent-core"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789454000000
+      :updatedAt 1789454400000
+      :motivation "Package manifests specify asl-agent-core/* and asl-agent-bus/* while source files declare divergent prefixes."
+      :purpose "Align all module headers with their canonical package manifest names."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["100% of agent-core modules declare asl-agent-core/*" "100% of agent-bus modules declare asl-agent-bus/*" "100% of agent modules declare asl-agent/*" "Seamless backward compatibility via engine alias indexing"]
+      :owns ["agent-core/src/premise.asl" "agent-core/src/taskstore.asl" "agent-core/src/compose.asl" "agent-core/src/threads.asl" "agent-core/src/dag.asl" "agent-core/src/promptpool.asl" "agent-core/src/statemachine.asl" "agent-core/src/tasktypes.asl" "agent-core/src/scheduler.asl" "agent-core/src/clarify.asl" "agent-bus/src/bridge.asl" "agent-bus/src/browser-bridge.asl" "agent-bus/src/cluster.asl" "agent-bus/src/gateway.asl" "agent-bus/src/wire.asl" "agent-bus/src/transport.asl" "agent-bus/src/proc_telemetry.asl" "agent-bus/src/bus.asl" "agent-bus/src/nd_asn.asl" "agent-bus/src/presence.asl" "asl/tools/engine.js"]
+      :targetSymbols ["module"]
+      :relatedSymbols ["manifest"]
+      :invariants ["D81" "C3" "D34"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F34"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F35"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F35.asl"]
+      :verificationCases ["All source files in agent-core and agent-bus declare canonical module namespaces matching package manifests."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F35" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Author acceptance fixture Task-F35.asl" "Verify baseline failure on non-standard module namespaces" "Standardize module headers across agent-core and agent-bus" "Update engine.js module resolution aliases" "Certify green under SuperviseGate.sh."]
+      :stepIndex 5
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F35" :status :passed :exitCode 0 :assertionsEvaluated 42 :timestamp 1789454400000)
+      ])
   ]
 )
+
