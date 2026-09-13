@@ -31,7 +31,12 @@ graph TD
     P24 --> P25["Phase 25: Editorial Design & Scope Recovery (Phases 448, 470, Done)"]
     P25 --> P26["Phase 26: FINSEL Monorepo Remediation (Phase FINSEL, Done)"]
     P26 --> P27["Phase 27: D81 Shortcode Migration (migration-d81-shortcode, Done)"]
-    P27 --> P28["Phase 28: RPC Record Store & Attention Separation (Phase 484, Planned)"]
+    P27 --> P28["Phase 28: RPC Record Store & Attention Separation (Phase 484, In Progress)"]
+    P28 --> P29["Phase 29: Multi-Client Launcher Engine & Dangerous-Rescue (Phase 485, Planned)"]
+    P29 --> P30["Phase 30: Autonomous Multi-Model Mesh Orchestrator (Phase 486, Planned)"]
+    P30 --> P31["Phase 31: Pure ASL Stage-2 Bootstrap & Compiler Closure (Phase 487, Planned)"]
+    P31 --> P32["Phase 32: Universal WebAssembly Ambient Substrate & SQLite/DuckDB (Phase 488, Planned)"]
+    P32 --> P33["Phase 33: Full Monorepo Epistemic Closure & Milestone M09 (Phase 489, Planned)"]
 ```
 
 ---
@@ -83,7 +88,13 @@ graph TD
 | **Phase 37** | [.plans/phase-470/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-470/PLAN.md) | **Done** | Restore Gate Scope and Reach Execution: full monorepo corpus scope for Gate 5, built binary parity, embedded binary launch command (7/7 tasks certified). |
 | **Phase 38** | [.plans/phase-finsel/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-finsel/PLAN.md) | **Done** | FINSEL Master Remediation: 39 falsifiable tasks resolving all defects cataloged during the 8-wave, 3-model monorepo audit. |
 | **Phase 39** | [.plans/migration-d81-shortcode/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/migration-d81-shortcode/PLAN.md) | **Done** | Complete Migration from ADR-0081 to Canonical D81 Shortcode Format across decisions, tasks, rules and engine scanner. |
-| **Phase 40** | [.plans/phase-484/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-484/PLAN.md) | **Planned** | RPC-First Record Store, Attention Separation, Deterministic Serialization, and Event-Driven Memory Architecture (8 tasks under D83). |
+| **Phase 40** | [.plans/phase-484/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-484/PLAN.md) | **In Progress** | RPC-First Record Store, Attention Separation, Deterministic Serialization, and Event-Driven Memory Architecture (8 tasks under D83). |
+| **Phase 41** | [.plans/phase-485/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-485/PLAN.md) | **Planned** | Multi-Client Autonomous Launcher Engine, Dangerous-Rescue Permissions, and Client Channel Protocol (6 tasks under D84). |
+| **Phase 42** | [.plans/phase-486/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-486/PLAN.md) | **Planned** | Autonomous Multi-Model Mesh Orchestrator, Parallel Model Execution Stand, and Dialectical Gap Synthesis (6 tasks under D85). |
+| **Phase 43** | [.plans/phase-487/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-487/PLAN.md) | **Planned** | Autonomous Pure ASL Stage-2 Bootstrap, Native Mach-O/ELF Emission, and Compiler Closure (6 tasks under D86). |
+| **Phase 44** | [.plans/phase-488/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-488/PLAN.md) | **Planned** | Universal WebAssembly Ambient Substrate, OPFS Boundaries, and Embedded SQLite/DuckDB Storage Engine (6 tasks under D87). |
+| **Phase 45** | [.plans/phase-489/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-489/PLAN.md) | **Planned** | Full Monorepo Epistemic Closure, Holistic 10-Tier Quality Certification, and Milestone M09 Settle (6 tasks under D88). |
+
 
 ---
 
