@@ -210,11 +210,11 @@
       :title "Dry-Run Diagnostic and Capability Handshake Verifier"
       :kind :engine
       :lane "launcher-cli"
-      :state :ready
+      :state :completed
       :priority :normal
       :ownerRole "implementer"
       :createdAt 1789459200000
-      :updatedAt 1789459200000
+      :updatedAt 1789462200000
       :motivation "Agents need to inspect and verify launch arguments and permission tiers without actually executing child processes."
       :purpose "Implement --dry-run flag for asl launch returning a structured ASN receipt reporting target executable, resolved arguments, permission tier, and channel state."
       :context (:contractRef D81PlanContext)
@@ -236,11 +236,21 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task48505.asl"]
       :verificationCases ["asl launch agy --dry-run returns exit code 0 and valid ASN plan." "Dry run reports --dangerously-skip-permissions in argument list."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "bin/asl launch agy --dry-run && bin/asl launch claude --dry-run" :status :notEstablished :contract D81Baseline)
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "bin/asl launch agy --dry-run && bin/asl launch claude --dry-run" :status :baselineVerified :contract D81Baseline)
+      :reviewStatus :verified
       :stepIndex 1
-      :receipts [])
+      :receipts [
+        (:receipt
+          :id "receipt-task-48505"
+          :taskId "Task48505"
+          :gate "bin/asl launch agy --dry-run && bin/asl launch claude --dry-run"
+          :exitCode 0
+          :status :passed
+          :timestamp 1789462200000
+          :digest "23fa330"
+          :executedAsserts 13
+          :durationMs 7000)])
 
     (:task
       :id "Task48506"
