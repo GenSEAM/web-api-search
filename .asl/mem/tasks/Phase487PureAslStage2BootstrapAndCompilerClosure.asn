@@ -112,11 +112,11 @@
       :title "Mach-O ARM64 Binary Emitter in Pure ASL"
       :kind :compiler
       :lane "backend-macho"
-      :state :ready
+      :state :completed
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789459200000
-      :updatedAt 1789459200000
+      :updatedAt 1789464800000
       :motivation "Self-hosting on macOS Apple Silicon requires emitting native Mach-O ARM64 binaries directly from pure ASL."
       :purpose "Implement Mach-O ARM64 binary emitter in pure ASL emitting valid __TEXT, __DATA, and symbol tables conforming to Apple Silicon code signing requirements."
       :context (:contractRef D81PlanContext)
@@ -138,11 +138,21 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task48703.asl"]
       :verificationCases ["Emitted Mach-O binary executes cleanly on macOS ARM64." "Exit code and return value match source semantics."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48703.asl" :status :notEstablished :contract D81Baseline)
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48703.asl" :status :baselineVerified :contract D81Baseline)
+      :reviewStatus :verified
       :stepIndex 1
-      :receipts [])
+      :receipts [
+        (:receipt
+          :id "receipt-task-48703"
+          :taskId "Task48703"
+          :gate "bin/asl test tests/acceptance/d81/Task48703.asl"
+          :exitCode 0
+          :status :passed
+          :timestamp 1789464800000
+          :digest "70b8287"
+          :executedAsserts 11
+          :durationMs 7000)])
 
     (:task
       :id "Task48704"
