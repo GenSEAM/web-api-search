@@ -26,10 +26,11 @@ graph TD
     P19 --> P20["Phase 20: Configuration & Distribution Truth (Phase 473, Done)"]
     P20 --> P21["Phase 21: One Projection, Many Surfaces (Phase 474, Done)"]
     P21 --> P22["Phase 22: Scheme & Racket Alignment (Phases 459–463, Done)"]
-    P22 --> P23["Phase 23: Language Semantics & Ground Truth (Phases 436, 439, 440, 454, Planned)"]
+    P22 --> P23["Phase 23: Language Semantics & Ground Truth (Phases 436, 439, 440, 454, Done)"]
     P23 --> P24["Phase 24: Attention Prosthesis & Lexicon (Phases 441, 442, 445, 447, Certified)"]
-    P24 --> P25["Phase 25: Editorial Design & Scope Recovery (Phases 448, 470, Planned)"]
+    P24 --> P25["Phase 25: Editorial Design & Scope Recovery (Phases 448, 470, Done)"]
     P25 --> P26["Phase 26: FINSEL Monorepo Remediation (Phase FINSEL, Done)"]
+    P26 --> P27["Phase 27: D81 Shortcode Migration (migration-d81-shortcode, Planned)"]
 ```
 
 ---
@@ -66,10 +67,10 @@ graph TD
 | **Phase 26** | [.plans/phase-462/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-462/PLAN.md) | **Done** | LLM-First Lexicon: measured token cost decisions under cl100k, lossless substrate translation, and portable semantic records. |
 | **Phase 27** | [.plans/phase-463/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-463/PLAN.md) | **Done** | ASL-First Beyond Racket: bounded nesting depth tracking, bounded binding-to-use distance, and empirical emission error rates. |
 | **Phase 28** | [.plans/phase-477/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-477/PLAN.md) | **Done** | Invariant Normalization and Boundary Deduplication: Unicode emoji normalization to SVG/ASCII (C2). |
-| **Phase 29** | [.plans/phase-436/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-436/PLAN.md) | **Planned** | Language Semantics Ground Truth: import binding, loud evaluator failures, boolean test contracts, honest RPC capability declarations. |
-| **Phase 30** | [.plans/phase-439/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-439/PLAN.md) | **Planned** | Efficiency Final Review: fault detection mutation vs assertion falsification, cache use telemetry, quantitative claim reproduction. |
-| **Phase 31** | [.plans/phase-440/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-440/PLAN.md) | **Planned** | Full ASL Self-Hosting: self-hosted AST evaluator in pure ASL, dual native/WASM bootstrap compiler generation, tooling routing. |
-| **Phase 32** | [.plans/phase-441/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-441/PLAN.md) | **Planned** | Attention Prosthesis: session runner receipts, byte-stable prompt prefixes, hidden test protection, and rule tier budgets. |
+| **Phase 29** | [.plans/phase-436/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-436/PLAN.md) | **Done** | Language Semantics Ground Truth: import binding, loud evaluator failures, boolean test contracts, honest RPC capability declarations. |
+| **Phase 30** | [.plans/phase-439/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-439/PLAN.md) | **Done** | Efficiency Final Review: fault detection mutation vs assertion falsification, cache use telemetry, quantitative claim reproduction. |
+| **Phase 31** | [.plans/phase-440/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-440/PLAN.md) | **Done** | Full ASL Self-Hosting: self-hosted AST evaluator in pure ASL, dual native/WASM bootstrap compiler generation, tooling routing. |
+| **Phase 32** | [.plans/phase-441/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-441/PLAN.md) | **Done** | Attention Prosthesis: session runner receipts, byte-stable prompt prefixes, hidden test protection, and rule tier budgets. |
 | **Phase 32b (Phase 443)** | [.plans/phase-443/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-443/PLAN.md) | **Done** | Test Coverage Campaign: 7 tasks covering boundary (Task44301), evaluator (Task44302), RPC dispatcher (Task44303), VFS staging and leases (Task44304), gates non-vacuity (Task44305), text codec/escaping (Task44306), and session ledger attention ops (Task44307). |
 | **Phase 32c (Phase 444)** | [.plans/phase-444/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-444/PLAN.md) | **Done** | Test Telemetry and Coverage Guarantees: 6 tasks covering test telemetry records (Task44401), three decidable coverage guarantees and 12-kind catalog (Task44402), evaluator deficit closure (Task44403), mutation strategy with equivalence triage and digest caching (Task44404), flakiness and bottleneck detection (Task44405), and LLM case proposal feedback loop (Task44406). |
 | **Phase 33** | [.plans/phase-445/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-445/PLAN.md) | **Done** | Static Confirmation Coverage: native parser for `rules.asn`, static checkers for all unconfirmed rules, and concept-to-checker coverage. |
@@ -80,6 +81,7 @@ graph TD
 | **Phase 36b (Phase 456)** | [.plans/phase-456/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-456/PLAN.md) | **Done** | Duplication, Dead Code and Unwired Eradication: 4 tasks covering single tracked install.sh (Task45604 - certified), deleting redundant copies (Task45601 - certified), retiring dead unreferenced definitions and stubs (Task45602 - certified), and verdict for unreachable modules (Task45603 - certified). |
 | **Phase 37** | [.plans/phase-470/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-470/PLAN.md) | **Done** | Restore Gate Scope and Reach Execution: full monorepo corpus scope for Gate 5, built binary parity, embedded binary launch command (7/7 tasks certified). |
 | **Phase 38** | [.plans/phase-finsel/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/phase-finsel/PLAN.md) | **Done** | FINSEL Master Remediation: 39 falsifiable tasks resolving all defects cataloged during the 8-wave, 3-model monorepo audit. |
+| **Phase 39** | [.plans/migration-d81-shortcode/PLAN.md](file:///Users/purplelephant/projects/asex/.plans/migration-d81-shortcode/PLAN.md) | **Planned** | Complete Migration from ADR-0081 to Canonical D81 Shortcode Format across decisions, tasks, rules and engine scanner. |
 
 ---
 
