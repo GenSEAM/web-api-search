@@ -58,3 +58,4 @@
 (:trace-entry :timestamp 1789254633000 :step 1 :op "claim" :target ".asl/mem/test-lease.txt" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)
 (:trace-entry :timestamp 1789254633000 :step 2 :op "write" :target ".asl/mem/test-lease.txt" :before-digest "absent" :after-digest "a430d84680aabd0b-5" :status "ok" :duration-ms 0)
 (:trace-entry :timestamp 1789254633000 :step 3 :op "release" :target "" :before-digest "" :after-digest "" :status "ok" :duration-ms 0)
+(:trace-entry :timestamp 1789257679000 :step 1 :op "gate" :target "" :before-digest "" :after-digest "" :status "ok" :durationMs 0)
