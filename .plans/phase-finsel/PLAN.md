@@ -138,11 +138,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F17` (13 assertions verified)
 
 ### Task-F18: Implement Dynamic AST Traversal and Blast Radius Reachability
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `intel/src/graph.asl`, `intel/src/query.asl`
 - **Baseline Failure**: `q-impact` fails or returns empty lists for symbols with known callers.
 - **Remedy**: Build adjacency list representation of callers/callees and implement depth-bounded BFS/DFS traversal.
-- **Gate**: `bin/asl test intel/tests/query_test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F18` (17 assertions verified)
 
 ### Task-F19: Hydrate Symbol Graph on Intel Preload
 - **Status**: planned

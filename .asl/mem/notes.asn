@@ -1841,5 +1841,14 @@
       :fact "task-f16-certified-complete"
       :evidence "Replaced multi-target codegen dummy stubs in ASL compiler; updated compile-source-target in compiler.asl to lower AST functions and schemas to genuine Go, WASM/WAT, ANSI C, and Arduino targets with AST expression lowering; eliminated raw comment stubs violating invariant C1; verified compiler-test.asl (27 assertions); authored tests/acceptance/d81/Task-F16.asl demonstrating baseline failure; evaluated 23 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F16 certified complete; self-hosted compiler lowers AST definitions across all supported platforms under ADR-0081")
+    (:note
+      :id "n171"
+      :timestamp 1789446900000
+      :author "codex"
+      :scope ["intel/src/graph.asl" "intel/src/query.asl" "intel/tests/query_test.asl" "tests/acceptance/d81/Task-F18.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f18 :intel :graph-traversal :blast-radius :approved]
+      :fact "task-f18-certified-complete"
+      :evidence "Implemented dynamic AST traversal and blast radius reachability in ASL intel engine; added graph-incoming, graph-outgoing, graph-find to intel/src/graph.asl; implemented query-callers, query-callees, and query-impact in intel/src/query.asl with BFS transitive traversal and visited deduplication; authored query_test.asl (13 assertions); authored tests/acceptance/d81/Task-F18.asl demonstrating baseline failure; evaluated 17 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F18 certified complete; code intelligence query engine computes genuine caller, callee, and transitive blast radius graphs under ADR-0081")
   ]
 )

@@ -704,5 +704,46 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F17" :status :passed :exitCode 0 :assertionsEvaluated 13 :timestamp 1789446600000)
       ])
+    (:task
+      :id "Task-F18"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Implement Dynamic AST Traversal and Blast Radius Reachability"
+      :kind :gate
+      :lane "intel"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789446900000
+      :updatedAt 1789446900000
+      :motivation "q-impact in asl-intel lacks BFS/DFS graph traversal and returns empty query items."
+      :purpose "Implement depth-bounded graph traversal in query-impact, query-callers, and query-callees to compute transitive blast radius."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Graph adjacency search for callers and callees" "Depth-bounded transitive reachability in query-impact"]
+      :owns ["intel/src/graph.asl" "intel/src/query.asl"]
+      :targetSymbols ["query-impact" "query-callers" "query-callees"]
+      :relatedSymbols ["ImpactItem" "QueryResult" "graph-incoming" "graph-outgoing"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F17"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F18"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F18.asl" "intel/tests/query_test.asl"]
+      :verificationCases ["query-impact calculates transitive callers and callers of callers up to specified depth ceiling."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F18" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect graph.asl and query.asl" "Author acceptance fixture Task-F18.asl" "Demonstrate baseline failure" "Implement graph traversal in query.asl" "Certify green."]
+      :stepIndex 1
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F18" :status :passed :exitCode 0 :assertionsEvaluated 17 :timestamp 1789446900000)
+      ])
   ]
 )
