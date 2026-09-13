@@ -103,11 +103,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 ## Phase 2: P1 Core Runtime & Tool Execution Engines
 
 ### Task-F13: Implement CLI Entrypoint in Agent Package
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `agent/src/cli.asl`, `agent/bin/gsa`
 - **Baseline Failure**: Running `agent/bin/gsa` exits 0 immediately without taking action.
 - **Remedy**: Define `(df ! main ...)` in `agent/src/cli.asl` that parses command-line arguments, routes subcommands (`run`, `step`, `eval`), and connects to `agent-runner`.
-- **Gate**: `agent/bin/gsa --help | grep "Usage:"`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F13` (17 assertions verified)
 
 ### Task-F14: Connect Agent Dispatcher to Genuine Engine Tools
 - **Status**: planned

@@ -366,7 +366,7 @@
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task-F09.asl"]
-      :verificationCases ["curl-args isolates URL with -- and rejects file:// or flag-like URLs."]`
+      :verificationCases ["curl-args isolates URL with -- and rejects file:// or flag-like URLs."]
       :gateReadiness :verified
       :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F09" :status :baselineVerified :contract D81Baseline)
       :historicalReceipts []
@@ -498,6 +498,47 @@
       :stepIndex 3
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F12" :status :passed :exitCode 0 :assertionsEvaluated 12 :timestamp 1789445100000)
+      ])
+    (:task
+      :id "Task-F13"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Implement CLI Entrypoint in Agent Package"
+      :kind :gate
+      :lane "runtime"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789445400000
+      :updatedAt 1789445400000
+      :motivation "Running agent/bin/gsa exits 0 immediately without taking action because agent/src/cli.asl lacks an executable main entrypoint and subcommand router."
+      :purpose "Define (df ! main ...) in agent/src/cli.asl parsing command-line arguments, routing subcommands (run, step, eval, repl, help, version), and update agent/bin/gsa to invoke asl eval."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Executable main CLI entrypoint in agent/src/cli.asl" "Usage and subcommand routing in agent/bin/gsa"]
+      :owns ["agent/src/cli.asl" "agent/bin/gsa"]
+      :targetSymbols ["main" "execute-cli" "format-cli-help"]
+      :relatedSymbols ["make-cli-options" "format-cli-help"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F12"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F13"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F13.asl"]
+      :verificationCases ["agent/bin/gsa --help prints Usage: and routes CLI directives."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F13" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect agent/src/cli.asl and agent/bin/gsa" "Author acceptance fixture Task-F13.asl" "Demonstrate baseline failure" "Implement main entrypoint in agent/src/cli.asl and update agent/bin/gsa" "Certify green."]
+      :stepIndex 3
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F13" :status :passed :exitCode 0 :assertionsEvaluated 17 :timestamp 1789445400000)
       ])
   ]
 )

@@ -1805,5 +1805,14 @@
       :fact "task-f12-certified-complete"
       :evidence "Enforced non-vacuous assertion execution in supervisor acceptance gate; updated SuperviseGate.sh to capture test fixture execution output, parse evaluated assertion count, reject fixtures yielding 0 executed assertions with exit code 4; authored tests/acceptance/d81/Task-F12.asl demonstrating baseline failure; evaluated 12 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F12 certified complete; SuperviseGate.sh prevents vacuous verification passes under ADR-0081")
+    (:note
+      :id "n167"
+      :timestamp 1789445400000
+      :author "codex"
+      :scope ["agent/src/cli.asl" "agent/bin/gsa" "agent/tests/cli-test.asl" "tests/acceptance/d81/Task-F13.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f13 :agent-cli :gsa :entrypoint :approved]
+      :fact "task-f13-certified-complete"
+      :evidence "Implemented CLI entrypoint in agent package; defined (df ! main ...) in agent/src/cli.asl parsing command-line options and routing subcommands (--help, --version, --repl, -p, run, eval, step); updated agent/bin/gsa to execute via asl eval; added test-main-cli-entrypoint in cli-test.asl (26 assertions); authored tests/acceptance/d81/Task-F13.asl with baseline failure demonstration; evaluated 17 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F13 certified complete; agent/bin/gsa provides an active, executable CLI interface under ADR-0081")
   ]
 )
