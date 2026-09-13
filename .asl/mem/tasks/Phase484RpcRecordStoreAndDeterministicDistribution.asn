@@ -210,11 +210,11 @@
       :title "Tier Gamma RPC Contract Dispatcher for Tasks D52, Phases and Plans"
       :kind :engine
       :lane "rpc-gamma"
-      :state :ready
+      :state :completed
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789452000000
-      :updatedAt 1789452000000
+      :updatedAt 1789459600000
       :motivation "Tasks, phases, and plans carry complex bidirectional linkages and verification gates that currently fail late during consistency audits."
       :purpose "Implement RPC handlers in asl/tools/asl.c for :task, :phase, and :plan enforcing the enriched D52 schema, verification gate presence, and dependency acyclicity."
       :context (:contractRef D81PlanContext)
@@ -236,11 +236,21 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task48405.asl"]
       :verificationCases [":task :create persists complete D52 task collection." "Attempting to create task without :gate fails immediately with :ERR_MISSING_FIELD."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48405" :status :notEstablished :contract D81Baseline)
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48405" :status :baselineVerified :contract D81Baseline)
+      :reviewStatus :verified
       :stepIndex 1
-      :receipts [])
+      :receipts [
+        (:receipt
+          :id "receipt-task-48405"
+          :taskId "Task48405"
+          :gate "sh tests/acceptance/d81/SuperviseGate.sh Task48405"
+          :exitCode 0
+          :status :passed
+          :timestamp 1789459600000
+          :digest "6adfda9"
+          :executedAsserts 13
+          :durationMs 7000)])
 
     (:task
       :id "Task48406"
