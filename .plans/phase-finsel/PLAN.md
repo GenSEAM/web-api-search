@@ -124,11 +124,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F15` (18 assertions verified)
 
 ### Task-F16: Replace Multi-Target Codegen Dummy Stubs in ASL Compiler
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `asl/packages/asl-compiler/src/compiler.asl`
 - **Baseline Failure**: `compile-source-target` returns constant dummy strings for wasm, wat, go, c, arduino.
 - **Remedy**: Wire `compile-source-target` to real code generators in `asl-codegen`.
-- **Gate**: `bin/asl test asl/packages/asl-compiler/tests/compiler_test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F16` (23 assertions verified)
 
 ### Task-F17: Implement True AST Symbol Extraction in Intel Engine
 - **Status**: planned

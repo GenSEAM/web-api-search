@@ -620,8 +620,48 @@
       :actionDag ["Inspect process.asl and pipe.asl" "Author acceptance fixture Task-F15.asl" "Demonstrate baseline failure" "Implement exec! and pipe! engine" "Certify green."]
       :stepIndex 3
       :receipts [
-        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F15" :status :passed :exitCode 0 :assertionsEvaluated 22 :timestamp 1789446000000)
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F15" :status :passed :exitCode 0 :assertionsEvaluated 18 :timestamp 1789446000000)
+      ])
+    (:task
+      :id "Task-F16"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Replace Multi-Target Codegen Dummy Stubs in ASL Compiler"
+      :kind :gate
+      :lane "compiler"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789446300000
+      :updatedAt 1789446300000
+      :motivation "compile-source-target in asl-compiler returns constant dummy stubs for wasm, wat, go, c, and arduino without lowering AST forms."
+      :purpose "Wire compile-source-target to genuine code generators in asl-codegen lowering parsed AST functions and schemas across WASM, Go, C, and Arduino targets."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Multi-target AST form lowering for Go, WASM/WAT, C, and Arduino" "Elimination of dummy return stubs and raw C comments in compiler.asl"]
+      :owns ["asl/packages/asl-compiler/src/compiler.asl"]
+      :targetSymbols ["compile-source-target"]
+      :relatedSymbols ["compile-standalone-target" "CompileResult"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F15"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F16"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F16.asl"]
+      :verificationCases ["compile-source-target lowers AST forms to genuine Go, WASM, C, and Arduino code without dummy stubs."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F16" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect compiler.asl and codegen generators" "Author acceptance fixture Task-F16.asl" "Demonstrate baseline failure" "Implement multi-target codegen lowering in compiler.asl" "Certify green."]
+      :stepIndex 1
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F16" :status :passed :exitCode 0 :assertionsEvaluated 23 :timestamp 1789446300000)
       ])
   ]
 )
-
