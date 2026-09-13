@@ -78,7 +78,7 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `bin/asl test crawler/tests/crawler_test.asl`
 
 ### Task-F10: Defend VDOM Attribute Sanitization Against Stored XSS
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `vdom/src/vdom.asl`
 - **Baseline Failure**: `is-retained-attr?` retains `href` and `src` attributes containing `javascript:` or `data:text/html`.
 - **Remedy**: Add scheme validation regex/filter rejecting `javascript:`, `vbscript:`, and insecure `data:` URIs.

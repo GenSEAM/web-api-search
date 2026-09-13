@@ -383,11 +383,11 @@
       :title "Defend VDOM Attribute Sanitization Against Stored XSS"
       :kind :gate
       :lane "security"
-      :state "planned"
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789441500000
-      :updatedAt 1789441500000
+      :updatedAt 1789444500000
       :motivation "is-retained-attr? and filter-attributes retain href and src attributes containing javascript:, vbscript:, or data:text/html URIs, enabling stored XSS in downsampled DOM/VDOM representations."
       :purpose "Implement is-safe-attr-value? in vdom/src/vdom.asl rejecting dangerous URI schemes (javascript:, vbscript:, data:text/html) on href and src attributes."
       :context (:contractRef D81PlanContext)
@@ -408,12 +408,14 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task-F10.asl"]
       :verificationCases ["filter-attributes strips javascript: and data:text/html from href and src attributes."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F10" :status :notEstablished :contract D81Baseline)
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F10" :status :baselineVerified :contract D81Baseline)
       :historicalReceipts []
-      :reviewStatus :planApproved
+      :reviewStatus :approved
       :actionDag ["Inspect vdom.asl" "Author acceptance fixture" "Demonstrate baseline failure" "Implement is-safe-attr-value? and sanitize filter-attributes" "Certify green."]
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 3
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F10" :status :passed :exitCode 0 :assertionsEvaluated 21 :timestamp 1789444500000)
+      ])
   ]
 )
