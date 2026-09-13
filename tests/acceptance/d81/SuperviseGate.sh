@@ -63,6 +63,12 @@ echo "==========================================================================
 echo "          D81 Acceptance Gate: Supervisor Verification & Ground Truth           "
 echo "================================================================================"
 
+DYNAMIC_SUITE="${ROOT_DIR}/tests/acceptance/d81/${TASK_ID}.sh"
+if [ -f "${DYNAMIC_SUITE}" ]; then
+  echo "--> [0/3] Executing dynamic integration suite (${DYNAMIC_SUITE})..."
+  bash "${DYNAMIC_SUITE}"
+fi
+
 echo "--> [1/3] Executing task fixture (${FIXTURE})..."
 FIXTURE_OUTPUT=$("${ASL_BIN}" test --strict-falsify "${FIXTURE}" 2>&1)
 echo "${FIXTURE_OUTPUT}"
