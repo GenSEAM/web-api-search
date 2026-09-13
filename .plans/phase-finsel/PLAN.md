@@ -92,11 +92,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `bin/asl test pack/tests/dist_test.asl`
 
 ### Task-F12: Enforce Non-Vacuous Execution in Supervisor Acceptance Gate
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `tests/acceptance/d81/SuperviseGate.sh`
 - **Baseline Failure**: Fixtures with 0 assertions pass with exit code 0 under `SuperviseGate.sh`.
 - **Remedy**: Parse test execution receipt in `SuperviseGate.sh` and ensure `executed_asserts > 0`; exit non-zero if no assertions were executed.
-- **Gate**: `! sh tests/acceptance/d81/SuperviseGate.sh TaskNonExistent`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F12` (12 assertions verified)
 
 ---
 

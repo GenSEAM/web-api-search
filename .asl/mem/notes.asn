@@ -1787,5 +1787,23 @@
       :fact "task-f10-certified-complete"
       :evidence "Defended VDOM attribute sanitization against stored XSS; implemented is-safe-attr-value? with case-insensitive key and value normalization rejecting javascript:, vbscript:, and data:text/html URIs; updated filter-attributes using map-keys and map-get; updated grammar.asn and added XSS test cases in vdom_test.asl (156 assertions); authored tests/acceptance/d81/Task-F10.asl with baseline failure demonstration; evaluated 21 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F10 certified complete; downsampled VDOM representations eliminate stored XSS vectors under ADR-0081")
+    (:note
+      :id "n165"
+      :timestamp 1789444800000
+      :author "codex"
+      :scope ["pack/src/dist.asl" "pack/tests/dist_test.asl" "tests/acceptance/d81/Task-F11.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f11 :dist :sha256 :checksum :security :approved]
+      :fact "task-f11-certified-complete"
+      :evidence "Enforced cryptographic checksum verification in distribution installer; updated emit-install-sh in pack/src/dist.asl downloading and validating sha256 checksums with sha256sum and shasum fallback prior to archive extraction, gating tar -xzf with VERIFIED status; updated dist_test.asl (19 assertions); authored tests/acceptance/d81/Task-F11.asl with baseline failure demonstration; evaluated 13 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F11 certified complete; distribution installer verifies cryptographic SHA256 checksums before archive extraction under ADR-0081")
+    (:note
+      :id "n166"
+      :timestamp 1789445100000
+      :author "codex"
+      :scope ["tests/acceptance/d81/SuperviseGate.sh" "tests/acceptance/d81/Task-F12.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f12 :supervisegate :non-vacuous :verification :approved]
+      :fact "task-f12-certified-complete"
+      :evidence "Enforced non-vacuous assertion execution in supervisor acceptance gate; updated SuperviseGate.sh to capture test fixture execution output, parse evaluated assertion count, reject fixtures yielding 0 executed assertions with exit code 4; authored tests/acceptance/d81/Task-F12.asl demonstrating baseline failure; evaluated 12 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F12 certified complete; SuperviseGate.sh prevents vacuous verification passes under ADR-0081")
   ]
 )

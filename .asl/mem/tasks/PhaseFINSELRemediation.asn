@@ -458,5 +458,46 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F11" :status :passed :exitCode 0 :assertionsEvaluated 13 :timestamp 1789444800000)
       ])
+    (:task
+      :id "Task-F12"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Enforce Non-Vacuous Execution in Supervisor Acceptance Gate"
+      :kind :gate
+      :lane "verification"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789445100000
+      :updatedAt 1789445100000
+      :motivation "Fixtures with 0 assertions pass with exit code 0 under SuperviseGate.sh, allowing vacuous verification passes."
+      :purpose "Parse test execution output in SuperviseGate.sh and enforce executed assertions > 0, failing if 0 assertions were evaluated."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Non-vacuous assertion enforcement in SuperviseGate.sh" "Rejection of zero-assertion fixtures with non-zero exit"]
+      :owns ["tests/acceptance/d81/SuperviseGate.sh"]
+      :targetSymbols ["SuperviseGate.sh"]
+      :relatedSymbols ["EXECUTED_ASSERTS"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F11"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F12"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F12.asl"]
+      :verificationCases ["SuperviseGate.sh rejects 0-assertion fixtures and verifies evaluated assertion count > 0."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F12" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect SuperviseGate.sh" "Author acceptance fixture Task-F12.asl" "Demonstrate baseline failure" "Implement non-vacuous assertion check in SuperviseGate.sh" "Certify green."]
+      :stepIndex 3
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F12" :status :passed :exitCode 0 :assertionsEvaluated 12 :timestamp 1789445100000)
+      ])
   ]
 )

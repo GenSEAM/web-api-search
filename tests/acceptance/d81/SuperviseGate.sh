@@ -64,7 +64,19 @@ echo "          D81 Acceptance Gate: Supervisor Verification & Ground Truth     
 echo "================================================================================"
 
 echo "--> [1/3] Executing task fixture (${FIXTURE})..."
-"${ASL_BIN}" test --strict-falsify "${FIXTURE}"
+FIXTURE_OUTPUT=$("${ASL_BIN}" test --strict-falsify "${FIXTURE}" 2>&1)
+echo "${FIXTURE_OUTPUT}"
+
+if echo "${FIXTURE_OUTPUT}" | /usr/bin/grep -F -q "0 assertion(s) executed" || echo "${FIXTURE_OUTPUT}" | /usr/bin/grep -F -q "0 assertions found"; then
+  echo "Error: vacuous fixture execution detected (0 assertions evaluated in ${FIXTURE})" >&2
+  exit 4
+fi
+
+EXECUTED_ASSERTS=$(echo "${FIXTURE_OUTPUT}" | /usr/bin/grep -oE "[0-9]+ assertion\(s\) executed" | /usr/bin/grep -oE "[0-9]+" | head -n 1 || true)
+if [ -z "${EXECUTED_ASSERTS}" ] || [ "${EXECUTED_ASSERTS}" -eq 0 ]; then
+  echo "Error: vacuous fixture execution detected (0 assertions evaluated in ${FIXTURE})" >&2
+  exit 4
+fi
 
 echo "--> [2/3] Executing pure ASL verification gates (bin/asl audit gates)..."
 "${ASL_BIN}" audit gates
