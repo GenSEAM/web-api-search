@@ -161,11 +161,11 @@
       :title "Native Wrapper Scaffolding for bin/addie and bin/eddie"
       :kind :toolbelt
       :lane "toolbelt"
-      :state :ready
+      :state :completed
       :priority :normal
       :ownerRole "implementer"
       :createdAt 1789459200000
-      :updatedAt 1789459200000
+      :updatedAt 1789461900000
       :motivation "Legacy commands and team habits invoke bin/addie or bin/eddie directly, which fail if the shims are missing."
       :purpose "Scaffold executable shell shims bin/addie and bin/eddie forwarding arguments to bin/asl with appropriate client channels and environment context."
       :context (:contractRef D81PlanContext)
@@ -187,11 +187,21 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task48504.asl"]
       :verificationCases ["bin/addie invokes bin/asl with addie channel context." "bin/eddie invokes bin/asl with eddie channel context."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48504.asl" :status :notEstablished :contract D81Baseline)
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48504.asl" :status :baselineVerified :contract D81Baseline)
+      :reviewStatus :verified
       :stepIndex 1
-      :receipts [])
+      :receipts [
+        (:receipt
+          :id "receipt-task-48504"
+          :taskId "Task48504"
+          :gate "bin/asl test tests/acceptance/d81/Task48504.asl"
+          :exitCode 0
+          :status :passed
+          :timestamp 1789461900000
+          :digest "15d485a"
+          :executedAsserts 13
+          :durationMs 7000)])
 
     (:task
       :id "Task48505"
