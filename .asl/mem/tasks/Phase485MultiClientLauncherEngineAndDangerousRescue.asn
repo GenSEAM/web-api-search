@@ -14,11 +14,11 @@
       :title "Client Channel Protocol and Launch Session Schema"
       :kind :grammar
       :lane "grammar"
-      :state :ready
+      :state :completed
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789459200000
-      :updatedAt 1789459200000
+      :updatedAt 1789461100000
       :motivation "Multi-client launchers require formal ASN grammar contracts defining launch session parameters, permission tiers, and capability handshakes."
       :purpose "Author asl/grammar/launch.asn defining formal schemas for launch-session forms, permission tiers (read-only, sandboxed-write, dangerous-rescue), and client capabilities."
       :context (:contractRef D81PlanContext)
@@ -40,11 +40,21 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task48501.asl"]
       :verificationCases ["launch.asn defines launch-session and permission-tier forms with balanced delimiters." "Rejection returned for unknown permission tier."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48501.asl" :status :notEstablished :contract D81Baseline)
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "bin/asl test tests/acceptance/d81/Task48501.asl" :status :baselineVerified :contract D81Baseline)
+      :reviewStatus :verified
       :stepIndex 1
-      :receipts [])
+      :receipts [
+        (:receipt
+          :id "receipt-task-48501"
+          :taskId "Task48501"
+          :gate "sh tests/acceptance/d81/SuperviseGate.sh Task48501"
+          :exitCode 0
+          :status :passed
+          :timestamp 1789461100000
+          :digest "e969e89"
+          :executedAsserts 13
+          :durationMs 7000)])
 
     (:task
       :id "Task48502"

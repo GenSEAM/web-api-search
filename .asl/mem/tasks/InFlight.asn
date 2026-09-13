@@ -1,17 +1,18 @@
 (:in-flight
   :session-id "57abefd4-689b-44f0-8084-f5b1813fae50"
-  :lane "grammar"
+  :lane "launcher-core"
   :activePhase "Phase485MultiClientLauncherEngineAndDangerousRescue"
-  :activeTasks ["Task48501"]
-  :dispatchedAt 1789460800000
+  :activeTasks ["Task48502"]
+  :dispatchedAt 1789461200000
   :status "in-progress"
   :handoffId ""
   :handoffCheckpoint 0
   :sourceDigest "e969e89"
-  :authoritativeConstraints ["D84" "D52" "C1" "C2"]
+  :authoritativeConstraints ["D84" "D51" "C1" "C3"]
   :unresolvedQuestions []
   :negativeFindings []
-  :receiptReferences ["receipt-task-48401" "receipt-task-48402" "receipt-task-48403" "receipt-task-48404" "receipt-task-48405" "receipt-task-48406" "receipt-task-48407" "receipt-task-48408" "rc-phase484-certified-20260913"]
-  :leases ["asl/grammar/launch.asn" "tests/acceptance/d81/Task48501.asl"])
+  :receiptReferences ["receipt-task-48501"]
+  :leases ["asl/tools/asl.c" "bin/asl" "asl/asl" "asl/bin/asl" "tests/acceptance/d81/Task48502.asl"])
+
 
 
