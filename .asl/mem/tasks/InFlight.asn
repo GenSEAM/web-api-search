@@ -1,10 +1,10 @@
 (:in-flight
   :session-id "57abefd4-689b-44f0-8084-f5b1813fae50"
-  :lane ""
-  :activePhase "Phase444TestTelemetryAndCoverageGuarantees"
-  :activeTasks []
-  :dispatchedAt 0
-  :status "idle"
+  :lane "consistency"
+  :activePhase "Phase483D81ShortcodeMigration"
+  :activeTasks ["Task48301"]
+  :dispatchedAt 1789450000000
+  :status "in-progress"
   :handoffId ""
   :handoffCheckpoint 0
   :sourceDigest ""
@@ -12,4 +12,4 @@
   :unresolvedQuestions []
   :negativeFindings []
   :receiptReferences []
-  :leases [])
+  :leases [(:task "Task48301" :owner "implementer" :acquiredAt 1789450000000 :expiresAt 1789460000000)])

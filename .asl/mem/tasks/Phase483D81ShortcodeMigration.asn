@@ -14,11 +14,11 @@
       :title "Dual-Format Engine Scanner in asl.c"
       :kind :engine
       :lane "consistency"
-      :state :pending
+      :state :completed
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789450000000
-      :updatedAt 1789450000000
+      :updatedAt 1789450100000
       :motivation "asl/tools/asl.c consistency auditor only scans Adr and ADR- filenames, and string-matching fails for D<N> shortcodes."
       :purpose "Implement numeric identifier extraction in asl.c supporting D<N>, d<N>, and legacy Adr00<N> files simultaneously with identical binary digests."
       :context (:contractRef D81PlanContext)
@@ -30,7 +30,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn []
       :gate "bin/asl audit consistency"
@@ -43,8 +43,8 @@
       :gateReadiness :requiresIndependentBaseline
       :baselineProbe (:command "bin/asl audit consistency" :status :notEstablished :contract D81Baseline)
       :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :gate "bin/asl audit consistency" :exitCode 0 :status :passed :timestamp 1789450100000 :digest "67da010fbd91deb143c579950e341b00ed3760463e6b9c075cfcc5beea29beab")])
 
     (:task
       :id "Task48302"
