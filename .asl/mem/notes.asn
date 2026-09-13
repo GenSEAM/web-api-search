@@ -1910,6 +1910,15 @@
       :fact "task-f25-certified-complete"
       :evidence "Eliminated phantom dirty overwrites in STM; updated stm-write in mem/src/stm.asl on unread paths to query disk content via file-read and compute true CAS base-hash via vfs-cas-hash rather than hardcoding \"0\"; authored tests/acceptance/d81/Task-F25.asl demonstrating baseline failure on base-hash \"0\"; evaluated 11 assertions and passed SuperviseGate.sh cleanly; verified mem test suite (102 assertions); receipts indexed in receipts.asn"
       :consequence "Task-F25 certified complete; STM write-set snapshots retain genuine baseline hash and reliably detect concurrent trunk collisions under ADR-0081")
+    (:note
+      :id "n179"
+      :timestamp 1789449400000
+      :author "codex"
+      :scope ["mem/src/ast_merge.asl" "mem/tests/ast_merge_test.asl" "tests/acceptance/d81/Task-F26.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f26 :mem :ast-merge :delimiter-depth :homoiconic :approved]
+      :fact "task-f26-certified-complete"
+      :evidence "Replaced line-based S-expression splitting in AST merge; implemented depth-aware delimiter tracking in parse-homoiconic-forms via FormScanState and FormLineAcc in mem/src/ast_merge.asl; preserved multi-line forms with nested subforms starting with ( as single top-level forms without AST shredding; authored tests/acceptance/d81/Task-F26.asl demonstrating baseline failure; evaluated 13 assertions and passed SuperviseGate.sh cleanly; verified mem test suite (135 assertions); receipts indexed in receipts.asn"
+      :consequence "Task-F26 certified complete; universal 3-way AST merge preserves structural integrity of multi-line functions and complex nested expressions under ADR-0081")
   ]
 )
 

@@ -987,7 +987,7 @@
       :historicalReceipts []
       :reviewStatus :approved
       :actionDag ["Inspect pointer_orchestrator.asl and pointer_orchestrator_test.asl" "Author acceptance fixture Task-F24.asl" "Demonstrate baseline failure on vfs-ref and rehydration" "Implement vfs-ref retention and rehydrate-pointer in pointer_orchestrator.asl" "Certify green under SuperviseGate.sh."]
-      :stepIndex 1
+      :stepIndex 5
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F24" :status :passed :exitCode 0 :assertionsEvaluated 12 :timestamp 1789448800000)
       ])
@@ -998,7 +998,7 @@
       :title "Eliminate Phantom Dirty Overwrites in Software Transactional Memory"
       :kind :memory
       :lane "mem"
-      :state :completed
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789449000000
@@ -1031,6 +1031,47 @@
       :stepIndex 5
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F25" :status :passed :exitCode 0 :assertionsEvaluated 11 :timestamp 1789449200000)
+      ])
+    (:task
+      :id "Task-F26"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Replace Line-Based S-Expression Splitting in AST Merge"
+      :kind :memory
+      :lane "mem"
+      :state :completed
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789449300000
+      :updatedAt 1789449300000
+      :motivation "Lines starting with ( inside multi-line forms (such as let bindings) are treated as top-level forms, shredding the AST."
+      :purpose "Parse forms using depth-aware delimiter tracking rather than line-based splitting to preserve structural integrity of multi-line forms."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Depth-aware delimiter tracking in parse-homoiconic-forms" "Preservation of multi-line nested subforms without shredding" "Clean 3-way AST merge across complex multi-line functions"]
+      :owns ["mem/src/ast_merge.asl"]
+      :targetSymbols ["parse-homoiconic-forms" "compute-form-delimiter-depth" "universal-ast-3way-merge"]
+      :relatedSymbols ["HomoiconicForm" "AstMergeResult"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F25"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F26"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F26.asl" "mem/tests/ast_merge_test.asl"]
+      :verificationCases ["parse-homoiconic-forms treats multi-line forms with nested subforms starting with ( as single top-level forms."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F26" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect ast_merge.asl and ast_merge_test.asl" "Author acceptance fixture Task-F26.asl" "Demonstrate baseline failure on multi-line subforms" "Implement depth-aware delimiter tracking in parse-homoiconic-forms" "Certify green under SuperviseGate.sh."]
+      :stepIndex 5
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F26" :status :passed :exitCode 0 :assertionsEvaluated 13 :timestamp 1789449400000)
       ])
   ]
 )

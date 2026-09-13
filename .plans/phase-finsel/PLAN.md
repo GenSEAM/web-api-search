@@ -198,11 +198,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F25` (11 assertions verified)
 
 ### Task-F26: Replace Line-Based S-Expression Splitting in AST Merge
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `mem/src/ast_merge.asl`
 - **Baseline Failure**: Lines starting with `(` inside multi-line forms (such as `let` bindings) are treated as top-level forms, shredding the AST.
 - **Remedy**: Parse forms using depth-aware delimiter tracking rather than newline splitting.
-- **Gate**: `bin/asl test mem/tests/ast_merge_test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F26` (13 assertions verified)
 
 ### Task-F27: Hydrate Memory Chunk Before Context Eviction
 - **Status**: planned
