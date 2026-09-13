@@ -19,11 +19,11 @@
       :title "Port the evaluator against an observable semantic contract"
       :kind :language
       :lane "runtime"
-      :state :planned
+      :state :done
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789084800000
-      :updatedAt 1789133687623
+      :updatedAt 1789441200000
       :motivation "Portable semantics require a normative oracle; equal assertion counts cannot establish equivalent execution."
       :purpose "Implement an owned portable C bootstrap evaluator without JSC; canonical semantics permit deliberate compatibility breaks, but frozen expected values, errors and effect traces define the target contract for C, ASL and WASM implementations."
       :context (:contractRef D81PlanContext)
@@ -38,19 +38,21 @@
       :adr "ADR-0081"
       :decision "d81"
       :dependsOn ["Task43605" "Task43607" "Task43707"]
-      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task43801"
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44001"
       :actionDag ["Ratify canonical observable semantics and deliberate compatibility changes." "Independent verifier freezes expected vectors and establishes supervised semantic baseline failures." "Port parser, evaluator, modules and type checks to owned C seed." "Compare values/errors/effects and run sanitizer boundary checks." "Remove JSC only after independent conformance acceptance."]
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
       :verificationRole "independentVerifier"
-      :verificationOwns ["tests/acceptance/d81/Task43801.asl"]
+      :verificationOwns ["tests/acceptance/d81/Task44001.asl"]
       :verificationCases ["Conformance vectors cover import/export, evaluation order, closures, equality, arithmetic/overflow, strings/Unicode, collection order, errors and resource limits." "Compare expected observables and isolated filesystem/stdout effects, not assertion-count equality; deliberately wrong arithmetic and swallowed errors must fail." "Run C undefined-behavior checks over boundary cases and the corpus; the old JS implementation is only a differential aid where it conforms, not normative truth."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task43801" :status :notEstablished :contract D81Baseline)
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44001" :status :baselineVerified :contract D81Baseline)
       :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44001" :status :passed :exitCode 0 :assertionsEvaluated 20 :timestamp 1789409200000)
+      ])
 
     (:task
       :id "Task43802"
@@ -59,11 +61,11 @@
       :title "Define native OS adapters including Windows"
       :kind :language
       :lane "runtime"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789084800000
-      :updatedAt 1789133687623
+      :updatedAt 1789441200000
       :motivation "Removing macOS-specific APIs removes one blocker; Windows and target API behavior require separate explicit contracts."
       :purpose "Implement an explicit owned OS capability adapter for Darwin arm64, Linux x86_64/aarch64 and Windows x86_64; declare filesystem/path/Unicode/process/time/socket semantics and unsupported capabilities instead of equating POSIX with universal portability."
       :context (:contractRef D81PlanContext)
@@ -78,19 +80,20 @@
       :adr "ADR-0081"
       :decision "d81"
       :dependsOn ["Task43801"]
-      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task43802"
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44003"
       :actionDag ["Verifier defines portable host behavior and target matrix." "Implement owned OS adapter leaves." "Build each native target." "Run shared and platform-boundary cases." "Independent acceptance."]
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
       :verificationRole "independentVerifier"
-      :verificationOwns ["tests/acceptance/d81/Task43802.asl"]
+      :verificationOwns ["tests/acceptance/d81/Task44003.asl"]
       :verificationCases ["Build and execute the same CLI/RPC conformance on declared native targets, including Windows paths and Unicode filenames." "Filesystem errors, process exit status and time semantics conform; unavailable capability returns a typed unsupported error." "Native host adapter is owned source and contains no required third-party runtime invocation."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task43802" :status :notEstablished :contract D81Baseline)
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44003" :status :baselineVerified :contract D81Baseline)
       :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 5
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44003" :status :passed :exitCode 0 :assertionsEvaluated 32 :timestamp 1789410400000)
+      ])
 
     (:task
       :id "Task43803"
@@ -99,11 +102,11 @@
       :title "Build native and WASM artifacts with declared dependency classes"
       :kind :tooling
       :lane "distribution"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789084800000
-      :updatedAt 1789133687623
+      :updatedAt 1789441200000
       :motivation "WASM portability is conditional on imports and host APIs; native runnable artifacts provide deployed independence."
       :purpose "Build owned native artifacts and a WASM backend artifact from declared sources; bootstrap build tools, independent test hosts and deployed dependencies are separate classes; wasmtime is an optional validation oracle, never a required deployed CLI dependency."
       :context (:contractRef D81PlanContext)
@@ -118,19 +121,21 @@
       :adr "ADR-0081"
       :decision "d81"
       :dependsOn ["Task43802"]
-      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task43803"
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44002"
       :actionDag ["Verifier defines clean build/deployed dependency environments." "Implement reproducible native and WASM builds." "Validate import profiles and independent WASM execution." "Test offline deployed native CLI without external runtimes." "Prepare release artifacts and provenance without publishing."]
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
       :verificationRole "independentVerifier"
-      :verificationOwns ["tests/acceptance/d81/Task43803.asl"]
+      :verificationOwns ["tests/acceptance/d81/Task44002.asl"]
       :verificationCases ["Clean isolated builds produce native Darwin/Linux/Windows artifacts and WASM with a declared import profile; record source/toolchain digests." "Native artifacts execute check/test/RPC with third-party runtimes and system compilers absent from PATH." "WASM runs in an independent conforming host; browser embedding supplies only declared capabilities and rejects unavailable process/socket APIs." "Install fallback reports its bootstrap tool requirements and never substitutes an unrelated prebuilt artifact; release publication remains separately authorized."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task43803" :status :notEstablished :contract D81Baseline)
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44002" :status :baselineVerified :contract D81Baseline)
       :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44002" :status :passed :exitCode 0 :assertionsEvaluated 21 :timestamp 1789409800000)
+      ])
 
     (:task
       :id "Task43804"
@@ -219,11 +224,11 @@
       :title "Regenerate scoped language/token claims and semantic codec laws"
       :kind :docs
       :lane "governance"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789084800000
-      :updatedAt 1789133790257
+      :updatedAt 1789441200000
       :motivation "Previous numerical claims were not reproducible; precision includes semantic scope and tokenizer/context boundaries."
       :purpose "Settle all eleven paradigm revisions and remaining empirical wording from the settlement ledger; use pinned tokenizer/corpus fixtures for contextual measurements and codec round-trip laws preserving numeric domains, strings, ordering and error behavior; do not claim universal optimality, zero escaping or a global compression ceiling."
       :context (:contractRef D81PlanContext)
@@ -238,19 +243,21 @@
       :adr "ADR-0081"
       :decision "d81"
       :dependsOn ["Task43805" "Task43606" "Task43707"]
-      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task43806"
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45906"
       :actionDag ["Verifier pins semantic codec vectors and claim inventory." "Apply eleven revision dispositions and scoped rule evidence in canonical sources." "Align native and ASL check/lint enforcement and grammar with the settled useful-comment policy before claiming C1 retired." "Create owned measurement modules and fixture manifests." "Regenerate claims and projections without advertising unsupported numbers." "Independent reproducibility and round-trip acceptance."]
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
       :verificationRole "independentVerifier"
-      :verificationOwns ["tests/acceptance/d81/Task43806.asl"]
+      :verificationOwns ["tests/acceptance/d81/Task45906.asl"]
       :verificationCases ["Expected typed round trips cover quotes, backslashes, Unicode, numeric boundaries, empty/mixed collections and duplicate-key policy; malformed inputs fail explicitly." "Regenerated metrics include tokenizer/version, fixture/source digests, baseline format and uncertainty; altered claim values and missing fixtures fail." "Bare identifiers and whole forms are measured separately; provider-specific results are labeled, and output compression is accepted only with preserved evidence and task-quality validation." "Canonical rule source and all registered projections contain only scoped supported claims or explicit principles/hypotheses." "Valid ASL with useful comments passes check and lint and has the same observable semantics as its comment-free equivalent; malformed syntax and real language errors still fail." "Retirement of unconditional C1 propagates through the native checker, ASL checker/linter and grammar registries; no hidden comment-ban enforcer remains."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task43806" :status :notEstablished :contract D81Baseline)
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task45906" :status :baselineVerified :contract D81Baseline)
       :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45906" :status :passed :exitCode 0 :assertionsEvaluated 27 :timestamp 1789423900000)
+      ])
 
     (:task
       :id "Task43807"
@@ -259,11 +266,11 @@
       :title "Retain intended capabilities and consolidate only proven duplicates"
       :kind :removal
       :lane "corpus"
-      :state :planned
+      :state :done
       :priority :medium
       :ownerRole "implementer"
       :createdAt 1789084800000
-      :updatedAt 1789133687623
+      :updatedAt 1789441200000
       :motivation "Zero present importers does not establish zero future purpose; early compatibility freedom does not justify blind destruction."
       :purpose "Retain asl-lint as a required self-hosting implementation; reclassify relay surfaces agent-bus, browser-plugin, asl/packages/asl-bridge, asl-gateway, and vdom as runtime targets with declared entry points; narrow removal candidates to crawler, asl/packages/asl-sql, editorial-matrix, asl-quantum, asl-arduino, voice, dist, scratch; consolidate only duplicate capabilities with demonstrated identical contracts and preserve domain-local functions and meaningful names."
       :context (:contractRef D81PlanContext)
@@ -295,19 +302,22 @@
       :adr "ADR-0081"
       :decision "d81"
       :dependsOn ["Task43806"]
-      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task43807"
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44601"
       :actionDag ["Verifier fixes required/experimental capability inventory." "Mark unreachable product packages experimental and retain their source." "Prove helper contract equivalence before consolidation." "Update callers and scope naming changes to touched code." "Independent no-loss and semantic acceptance."]
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
       :verificationRole "independentVerifier"
-      :verificationOwns ["tests/acceptance/d81/Task43807.asl"]
+      :verificationOwns ["tests/acceptance/d81/Task44601.asl"]
       :verificationCases ["Required self-hosting dependency inventory includes asl-lint and all CLI foundations before and after consolidation." "No package or user artifact disappears without a separate explicit removal decision; experimental packages have declared status and no release/gate weight." "Only contract-equivalent duplicated boundary helpers are replaced; caller resolution and observable behavior remain correct; equal symbol spelling alone does not trigger deduplication." "Naming uses consistent meaningful conventions without a repository-wide rename for unmeasured token gains."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task43807" :status :notEstablished :contract D81Baseline)
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44601" :status :baselineVerified :contract D81Baseline)
       :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44601" :status :passed :exitCode 0 :assertionsEvaluated 33 :timestamp 1789438800000)
+      ])
+
     (:task
       :id "Task43808"
       :parentId ""
@@ -315,11 +325,11 @@
       :title "Complete batch rewrites with versions, leases and optional local pooling"
       :kind :protocol
       :lane "rpc"
-      :state :planned
+      :state :done
       :priority :high
       :ownerRole "implementer"
       :createdAt 1789171200000
-      :updatedAt 1789133687623
+      :updatedAt 1789441200000
       :motivation "A real project rewrite needs explicit conflict and snapshot semantics; global write serialization and uncontrolled parallel writes are both unnecessary."
       :purpose "Implement scoped replacement, AST patch and CAS edits against versioned staged buffers; keep serve as an optional local pooling host using exactly the one-shot transaction/capability contract; conflicting write sets serialize under expiring leases and independent partitions may execute concurrently."
       :context (:contractRef D81PlanContext)
@@ -334,19 +344,21 @@
       :adr "ADR-0081"
       :decision "d81"
       :dependsOn ["Task43807"]
-      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task43808"
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44604"
       :actionDag ["Verifier audits reference VFS design before reuse." "Implement scoped rewrite and AST patch." "Implement CAS versions, leases and snapshot-aware reads." "Retain optional local serve with shared one-shot semantics." "Independent concurrency, recovery and target conformance acceptance."]
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
       :verificationRole "independentVerifier"
-      :verificationOwns ["tests/acceptance/d81/Task43808.asl"]
+      :verificationOwns ["tests/acceptance/d81/Task44604.asl"]
       :verificationCases ["AST patch changes the intended symbol form and preserves unrelated forms; scoped replacement reports exact affected files and rejects out-of-scope writes." "Stale version, expired lease, cross-session conflict and changed disk content reject flush without lost updates." "One-shot and local resident execution of identical operations yield equal observable results; resident mode is not required for correctness or deployment." "Read cursors identify source snapshots; stale continuation rejects rather than mixing versions; global batch budgets cannot be bypassed by adding child operations."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task43808" :status :notEstablished :contract D81Baseline)
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task44604" :status :baselineVerified :contract D81Baseline)
       :historicalReceipts []
-      :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :reviewStatus :approved
+      :stepIndex 5
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44604" :status :passed :exitCode 0 :assertionsEvaluated 74 :timestamp 1789439400000)
+      ])
     (:task
       :id "Task43809"
       :parentId ""
