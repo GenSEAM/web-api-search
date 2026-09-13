@@ -3,7 +3,7 @@
 ## Status
 - **Phase**: Phase440FullAslSelfHosting
 - **Priority**: Full ASL Self-Hosting & Native Tooling Independence
-- **Status**: planned
+- **Status**: completed
 
 ## Context & Objectives
 Execute Phase 440 under ADR-0081 and monorepo verification contracts:
