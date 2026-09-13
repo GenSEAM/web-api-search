@@ -581,5 +581,47 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F14" :status :passed :exitCode 0 :assertionsEvaluated 20 :timestamp 1789445700000)
       ])
+    (:task
+      :id "Task-F15"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Implement Subprocess Execution and Pipe Engine in ASL Shell"
+      :kind :gate
+      :lane "runtime"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789446000000
+      :updatedAt 1789446000000
+      :motivation "exec! in asl-sh returns ERR_UNSUPPORTED for all binaries other than echo, and pipe! is a no-op returning empty string."
+      :purpose "Implement deterministic subprocess execution in exec! and recursive stage piping in pipe!, connecting commands through stdin/stdout."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Subprocess command execution in exec!" "Sequential pipeline streaming in pipe!"]
+      :owns ["asl/packages/asl-sh/src/core/process.asl" "asl/packages/asl-sh/src/core/pipe.asl"]
+      :targetSymbols ["exec!" "pipe!"]
+      :relatedSymbols ["ProcessCmd" "ProcessOutput" "Pipeline" "make-pipeline"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F14"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F15"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F15.asl" "asl/packages/asl-sh/tests/process_test.asl"]
+      :verificationCases ["exec! executes typed commands with stdin/stdout and pipe! feeds stdout of stage N to stdin of stage N+1."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F15" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect process.asl and pipe.asl" "Author acceptance fixture Task-F15.asl" "Demonstrate baseline failure" "Implement exec! and pipe! engine" "Certify green."]
+      :stepIndex 3
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F15" :status :passed :exitCode 0 :assertionsEvaluated 22 :timestamp 1789446000000)
+      ])
   ]
 )
+

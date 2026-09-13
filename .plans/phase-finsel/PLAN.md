@@ -117,11 +117,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F14` (20 assertions verified)
 
 ### Task-F15: Implement Subprocess Execution and Pipe Engine in ASL Shell
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `asl/packages/asl-sh/src/core/process.asl`, `asl/packages/asl-sh/src/core/pipe.asl`
 - **Baseline Failure**: `exec!` returns `ERR_UNSUPPORTED` for all binaries other than `"echo"`; `pipe!` is an empty no-op.
 - **Remedy**: Integrate `exec!` and `pipe!` with C host subprocess execution adapter.
-- **Gate**: `bin/asl test asl/packages/asl-sh/tests/process_test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F15` (18 assertions verified)
 
 ### Task-F16: Replace Multi-Target Codegen Dummy Stubs in ASL Compiler
 - **Status**: planned
