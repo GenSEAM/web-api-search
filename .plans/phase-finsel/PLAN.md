@@ -230,7 +230,7 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Owns**: `agent-bus/src/bus.asl`
 - **Baseline Failure**: `query-bus-events` searches inside `payload` instead of `target`.
 - **Remedy**: Inspect `(.-target msg)` to route messages by address.
-- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F30` (6 assertions verified)
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F30` (13 assertions verified)
 
 ### Task-F31: Add Key Reconciliation to VDOM List Diffing
 - **Status**: planned

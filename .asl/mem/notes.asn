@@ -1953,7 +1953,7 @@
       :scope ["agent-bus/src/bus.asl" "agent-bus/tests/bus_test.asl" "tests/acceptance/d81/Task-F30.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
       :tags [:supervision :phase-finsel :task-f30 :agent-bus :pubsub :query-bus-events :target-address :approved]
       :fact "task-f30-certified-complete"
-      :evidence "Corrected field target in pub/sub event filtering; updated query-bus-events in agent-bus/src/bus.asl to filter on (.-target msg) instead of payload, correctly routing messages by recipient address and preventing false positive matches from payload keywords; updated agent-bus/tests/bus_test.asl (34 assertions); authored tests/acceptance/d81/Task-F30.asl demonstrating baseline failure on target routing; evaluated 6 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :evidence "Corrected field target in pub/sub event filtering; updated query-bus-events in agent-bus/src/bus.asl to filter on (.-target msg) instead of payload, correctly routing messages by recipient address and preventing false positive matches from payload keywords; updated agent-bus/tests/bus_test.asl (34 assertions); authored tests/acceptance/d81/Task-F30.asl demonstrating baseline failure on target routing; evaluated 13 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F30 certified complete; pub/sub swarm bus reliably filters events by target address under ADR-0081")
   ]
 )
