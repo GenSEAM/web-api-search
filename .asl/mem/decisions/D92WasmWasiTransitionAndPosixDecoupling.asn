@@ -28,13 +28,14 @@
     "Task50602"
     "Task50603"
     "Task50604"
+    "Task50605"
+    "Task50606"
     "Task50701"
     "Task50702"
     "Task50703"
-    "Task50801"
-    "Task50802"
-    "Task50901"
-    "Task51001"
+    "Task50704"
+    "Task50705"
+    "Task50706"
   ]
   :settledChoices [
     (:choice :id targetRuntime :value "Universal wasm32-wasi Preview 1 standard with OPFS browser mapping")
