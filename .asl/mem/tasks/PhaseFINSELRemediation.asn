@@ -1360,5 +1360,46 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F33" :status :passed :exitCode 0 :assertionsEvaluated 14 :timestamp 1789453200000)
       ])
+    (:task
+      :id "Task-F34"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Remove Redundant Shadow Files and Naming Collisions"
+      :kind :refactor
+      :lane "deduplication"
+      :state :done
+      :priority :high
+      :ownerRole "implementer"
+      :createdAt 1789453500000
+      :updatedAt 1789453800000
+      :motivation "Duplicate shadow files cause build confusion and drifted logic."
+      :purpose "Consolidate and delete redundant shadow files across packages."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Elimination of redundant shadow files asl-gates/runner.asl, agent_test.asl, and asl-bridge/schema_bridge.asl" "Manifest updated with clean module list" "Preserved test assertions merged into canonical test suites"]
+      :owns ["asl/packages/asl-gates/src/runner.asl" "agent/tests/agent_test.asl" "asl/packages/asl-bridge/src/schema_bridge.asl" "asl/packages/asl-gates/manifest.asn" "agent/tests/agent-test.asl"]
+      :targetSymbols ["run-all-seven-gates" "run-tests"]
+      :relatedSymbols ["gate-runner" "schema-bridge"]
+      :invariants ["D81" "C3" "D34"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F33"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F34"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F34.asl"]
+      :verificationCases ["Redundant shadow files deleted and canonical modules retained without regressions."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F34" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Author acceptance fixture Task-F34.asl" "Verify baseline failure on existence of shadow files" "Consolidate agent tests into agent-test.asl" "Delete shadow files and update manifest" "Certify green under SuperviseGate.sh."]
+      :stepIndex 5
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F34" :status :passed :exitCode 0 :assertionsEvaluated 10 :timestamp 1789453800000)
+      ])
   ]
 )

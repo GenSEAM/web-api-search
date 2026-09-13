@@ -1982,5 +1982,14 @@
       :fact "task-f33-certified-complete"
       :evidence "Deduplicated token estimation helper across monorepo under Boundary Universalism C3/D34; verified single source of truth in asl-text/text and eliminated redundant private implementations in harness, agent-core, intel, asl-plugin, and asl-sh; package manifests updated with asl-text dependencies; authored tests/acceptance/d81/Task-F33.asl demonstrating baseline failure on duplicate definitions; evaluated 14 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F33 certified complete; token estimation is canonically unified under asl-text/text with zero private duplicates across the monorepo under ADR-0081")
+    (:note
+      :id "n187"
+      :timestamp 1789453800000
+      :author "codex"
+      :scope ["asl/packages/asl-gates/src/runner.asl" "asl/packages/asl-gates/manifest.asn" "asl/packages/asl-gates/tests/gates_test.asl" "agent/tests/agent_test.asl" "agent/tests/agent-test.asl" "asl/packages/asl-bridge/src/schema_bridge.asl" "tests/acceptance/d81/Task-F34.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f34 :shadow-files :naming-collisions :deduplication :manifest :approved]
+      :fact "task-f34-certified-complete"
+      :evidence "Removed redundant shadow files and naming collisions across packages under ADR-0081; deleted asl/packages/asl-gates/src/runner.asl and updated gates_test.asl to import canonical gate-runner; removed runner from manifest.asn; merged unit test assertions from agent/tests/agent_test.asl into agent-test.asl (total 37 assertions passing); deleted unused facade asl/packages/asl-bridge/src/schema_bridge.asl; authored tests/acceptance/d81/Task-F34.asl demonstrating baseline failure on existence of shadow files; evaluated 10 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F34 certified complete; shadow files and naming collisions eliminated, module manifests sanitized, and test coverage preserved monorepo-wide under ADR-0081")
   ]
 )

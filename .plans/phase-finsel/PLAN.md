@@ -258,11 +258,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F33` (14 assertions verified)
 
 ### Task-F34: Remove Redundant Shadow Files and Naming Collisions
-- **Status**: planned
-- **Owns**: `asl-gates/src/runner.asl`, `agent/tests/agent_test.asl`, `asl-registry/src/schema_bridge.asl`
+- **Status**: completed
+- **Owns**: `asl-gates/src/runner.asl`, `agent/tests/agent_test.asl`, `asl-bridge/src/schema_bridge.asl`
 - **Baseline Failure**: Duplicate shadow files cause build confusion and drifted logic.
 - **Remedy**: Consolidate and delete redundant shadow files.
-- **Gate**: `! test -f asl/packages/asl-gates/src/runner.asl && ! test -f agent/tests/agent_test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F34` (10 assertions verified)
 
 ### Task-F35: Standardize Agent Package Module Namespaces
 - **Status**: planned
