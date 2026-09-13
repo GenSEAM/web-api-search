@@ -233,11 +233,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F30` (13 assertions verified)
 
 ### Task-F31: Add Key Reconciliation to VDOM List Diffing
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `vdom/src/vdom.asl`
 - **Baseline Failure**: Reordering children in a keyed list destroys and re-mounts DOM state.
 - **Remedy**: Implement key-based indexing during list reconciliation.
-- **Gate**: `bin/asl test vdom/tests/vdom_test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F31` (12 assertions verified)
 
 ---
 
