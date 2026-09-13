@@ -191,11 +191,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F24` (12 assertions verified)
 
 ### Task-F25: Eliminate Phantom Dirty Overwrites in Software Transactional Memory
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `mem/src/stm.asl`
 - **Baseline Failure**: Calling `stm-write` on an unread file sets base-hash to `"0"`, silently overwriting trunk changes on commit.
 - **Remedy**: Query trunk state and compute true base-hash before accepting an unread write.
-- **Gate**: `bin/asl test mem/tests/stm_test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F25` (11 assertions verified)
 
 ### Task-F26: Replace Line-Based S-Expression Splitting in AST Merge
 - **Status**: planned

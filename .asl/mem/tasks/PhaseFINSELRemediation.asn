@@ -991,6 +991,47 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F24" :status :passed :exitCode 0 :assertionsEvaluated 12 :timestamp 1789448800000)
       ])
+    (:task
+      :id "Task-F25"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Eliminate Phantom Dirty Overwrites in Software Transactional Memory"
+      :kind :memory
+      :lane "mem"
+      :state :completed
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789449000000
+      :updatedAt 1789449000000
+      :motivation "Calling stm-write on an unread file sets base-hash to \"0\", silently overwriting trunk changes on commit."
+      :purpose "Query trunk state and compute true base-hash before accepting an unread write to eliminate phantom dirty overwrites."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["True base-hash computation for unread stm-write" "Elimination of phantom dirty overwrites on trunk commit" "OCC conflict detection against genuine baseline state"]
+      :owns ["mem/src/stm.asl"]
+      :targetSymbols ["stm-write" "stm-validate-and-merge" "STMFileSnapshot"]
+      :relatedSymbols ["STMTransaction" "STMCommitResult" "vfs-cas-hash"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F24"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F25"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F25.asl" "mem/tests/stm_test.asl"]
+      :verificationCases ["stm-write on unread file computes true base-hash and detects trunk conflicts on commit."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F25" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect stm.asl and stm_test.asl" "Author acceptance fixture Task-F25.asl" "Demonstrate baseline failure on base-hash 0" "Implement true trunk/filesystem query in stm-write" "Certify green under SuperviseGate.sh."]
+      :stepIndex 5
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F25" :status :passed :exitCode 0 :assertionsEvaluated 11 :timestamp 1789449200000)
+      ])
   ]
 )
 

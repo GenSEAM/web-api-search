@@ -1901,6 +1901,15 @@
       :fact "task-f24-certified-complete"
       :evidence "Prevented irreversible context loss in memory pointer collapse; added vfs-ref field to PointerSpec schema in mem/grammar.asn and mem/src/pointer_orchestrator.asl; updated collapse-pointer and orchestrate-context-pointers to preserve VFS target reference; implemented rehydrate-pointer to restore complete original payload from preserved VFS reference or memory store; updated pointer_orchestrator_test.asl with test-lossless-collapse-and-rehydrate (36 assertions); authored tests/acceptance/d81/Task-F24.asl demonstrating baseline failure; evaluated 12 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F24 certified complete; context pointer orchestration preserves lossless VFS references and enables complete roundtrip rehydration under ADR-0081")
+    (:note
+      :id "n178"
+      :timestamp 1789449200000
+      :author "codex"
+      :scope ["mem/src/stm.asl" "mem/tests/stm_test.asl" "tests/acceptance/d81/Task-F25.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f25 :mem :stm :cas :phantom-overwrites :approved]
+      :fact "task-f25-certified-complete"
+      :evidence "Eliminated phantom dirty overwrites in STM; updated stm-write in mem/src/stm.asl on unread paths to query disk content via file-read and compute true CAS base-hash via vfs-cas-hash rather than hardcoding \"0\"; authored tests/acceptance/d81/Task-F25.asl demonstrating baseline failure on base-hash \"0\"; evaluated 11 assertions and passed SuperviseGate.sh cleanly; verified mem test suite (102 assertions); receipts indexed in receipts.asn"
+      :consequence "Task-F25 certified complete; STM write-set snapshots retain genuine baseline hash and reliably detect concurrent trunk collisions under ADR-0081")
   ]
 )
 
