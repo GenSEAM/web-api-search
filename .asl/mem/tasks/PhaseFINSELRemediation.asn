@@ -130,5 +130,46 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F03" :status :passed :exitCode 0 :assertionsEvaluated 11 :timestamp 1789441800000)
       ])
+    (:task
+      :id "Task-F04"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Defend C Host Buffer Overruns and Command Injections"
+      :kind :engine
+      :lane "security"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789441500000
+      :updatedAt 1789442700000
+      :motivation "Unbounded strcpy calls and unquoted popen arguments risk buffer overflows and shell command injection."
+      :purpose "Replace strcpy with bounded snprintf and escape popen shell arguments using single quotes."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Zero strcpy calls in C host" "Shell arguments safely escaped in popen invocations"]
+      :owns ["asl/tools/asl.c"]
+      :targetSymbols ["escape_sh_arg" "run_cmd_rpc_batch" "execute_single_step"]
+      :relatedSymbols ["popen"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn []
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F04"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F04.asl"]
+      :verificationCases ["asl/tools/asl.c contains zero strcpy calls and defines escape_sh_arg for popen sanitization."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F04" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Define escape_sh_arg" "Sanitize popen commands" "Replace strcpy with snprintf" "Independent acceptance."]
+      :stepIndex 4
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F04" :status :passed :exitCode 0 :assertionsEvaluated 16 :timestamp 1789442700000)
+      ])
   ]
 )

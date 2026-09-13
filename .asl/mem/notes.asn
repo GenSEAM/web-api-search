@@ -1721,5 +1721,15 @@
       :fact "task-f01-certified-complete"
       :evidence "Replaced static hardcoded mock in asl/tools/asl.c op_gate with live dynamic execution of the 7 verification gates; serialized genuine pass/fail statuses, active/passed tallies, and structured verdicts; authored tests/acceptance/d81/Task-F01.asl; evaluated 18 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F01 certified complete; C host RPC gate dynamically verifies monorepo invariants without static mocks under ADR-0081")
+    (:note
+      :id "n158"
+      :author "codex"
+      :created "2026-09-13"
+      :status "active"
+      :scope ["asl/tools/asl.c" "tests/acceptance/d81/Task-F04.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f04 :security :buffer-overflow :command-injection :approved]
+      :fact "task-f04-certified-complete"
+      :evidence "Replaced all unbounded strcpy calls in asl/tools/asl.c with bounded snprintf; implemented escape_sh_arg and sanitized popen shell arguments; authored tests/acceptance/d81/Task-F04.asl; evaluated 16 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F04 certified complete; C host runtime is defended against buffer overflows and shell injection under ADR-0081")
   ]
 )

@@ -15,28 +15,28 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 ## Phase 1: P0 Epistemic Integrity & Security Gates
 
 ### Task-F01: Wire Dynamic Verification into C Host RPC Gate
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `asl/tools/asl.c`
 - **Baseline Failure**: `bin/asl rpc '(:op "gate")'` returns `:all-clean true :passed 7 :active 7 :total 7` on a repository with deliberate gate failures.
 - **Remedy**: In `asl/tools/asl.c:3058` (`run_cmd_rpc_batch`), replace the hardcoded response with a live execution call to `run_all_seven_gates()`, serializing genuine pass/fail statuses and error tallies.
 - **Gate**: `bin/asl rpc '(:batch (:gate))' | grep -v 'passed 7 :active 7 :total 7'`
 
 ### Task-F02: Implement Live Argument Parsing in CLI Gate Command
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `asl/packages/asl-cli/src/cli.asl`
 - **Baseline Failure**: `bin/asl gate non_existent_file.asl` returns `:status :ok` with exit code 0.
 - **Remedy**: In `cli.asl:110`, parse provided file arguments, check existence via VFS or filesystem, and invoke `asl-gates.gate-runner/run-gate-audit` reporting typed error receipts.
 - **Gate**: `! bin/asl gate /tmp/non_existent_file.asl`
 
 ### Task-F03: Repair Native Pre-Commit Hook Executable Target
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `asl/tools/hooks/pre-commit`
 - **Baseline Failure**: Running `grep -q 'bin/asl gate' asl/tools/hooks/pre-commit` prints `asl: Is a directory` and fails.
 - **Remedy**: Fix line 5 to target `"$ROOT_DIR/bin/asl"` instead of `"$ROOT_DIR/asl"`.
 - **Gate**: `grep -q 'bin/asl gate' asl/tools/hooks/pre-commit`
 
 ### Task-F04: Defend C Host Buffer Overruns and Command Injections
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `asl/tools/asl.c`
 - **Baseline Failure**: Path lengths exceeding 1024 bytes or containing shell metacharacters trigger buffer corruptions in `strcpy` and unquoted `popen` calls at lines 2287, 2709, 2852.
 - **Remedy**: Replace `strcpy` with `snprintf(..., sizeof(...), ...)` bounds checking; sanitize shell arguments with single-quote escaping before invoking `popen`.
