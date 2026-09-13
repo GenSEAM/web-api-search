@@ -47,7 +47,7 @@ When autonomous agents generate AgentScript (`.asl`) or ASN (`.asn`), the prompt
 Markers reference immutable invariants, architectural decisions, deferred tracks, and tasks. They MUST use bare capital alphanumeric symbols without colons, hyphens, or zero-padding.
 
 - **Invariants**: `C1`, `C2`, `C3`, `C4`, `C5`
-- **Decisions**: `D1`, `D2`, ..., `D50`, `D51`, `D56`, `D57`
+- **Decisions**: `D1`, `D2`, ..., `D50`, `D51`, `D56`, `D57`, ..., `D81`, `D82`
 - **Backlog Tracks**: `L1`, `L2`, ..., `L10`
 - **Requirements**: `R1`, `R2`, ..., `R10`
 - **Tasks**: `T1`, `T2`, ..., `T412Audit`
@@ -169,7 +169,7 @@ To prevent context bloat, agents encounter token efficiency guidance across stan
 
 ---
 
-## 6. The Four Forces & Grammatical Authority (`ADR-0081`)
+## 6. The Four Forces & Grammatical Authority (`D81`)
 
 To prevent defeasible heuristics from being treated with the same perceived authority as non-negotiable correctness conditions, rules in `asl/grammar/rules.asn` declare an explicit grammatical force (`:force`):
 
