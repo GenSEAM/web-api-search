@@ -1760,5 +1760,14 @@
       :fact "task-f07-certified-complete"
       :evidence "Replaced hardcoded magic numbers (35 793 12 0 272 3737 22) in tools/gate.asl; imported asl-gates/gate-runner and wired run-gate-suite to invoke gr/run-live-gate-audit; forwarded run-all-seven-gates to gr/run-all-seven-gates eliminating duplicate logic; authored tests/acceptance/d81/Task-F07.asl with baseline failure demonstration; evaluated 25 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F07 certified complete; tools/gate.asl executes live gate audit and eliminates synthetic green reports under ADR-0081")
+    (:note
+      :id "n162"
+      :timestamp 1789443900000
+      :author "codex"
+      :scope ["asl/packages/asl-gates/src/site-claims.asl" "asl/packages/asl-gates/tests/site-claims-test.asl" "tests/acceptance/d81/Task-F08.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f08 :site-claims :benchmarks :live-verification :approved]
+      :fact "task-f08-certified-complete"
+      :evidence "Grounded site claims verification against live measurements; implemented load-published-claims in site-claims.asl reading bench/published_claims.asn directly from disk; eliminated tautological (run-claims-audit claims claims); updated grammar.asn and added test-load-published-claims in site-claims-test.asl; authored tests/acceptance/d81/Task-F08.asl with baseline failure demonstration; evaluated 25 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F08 certified complete; site claims verification inspects published registry on disk and rejects missing or fabricated claims under ADR-0081")
   ]
 )

@@ -64,7 +64,7 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `bin/asl check tools/gate.asl`
 
 ### Task-F08: Ground Site Claims Verification Against Live Measurements
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `asl/packages/asl-gates/src/site-claims.asl`
 - **Baseline Failure**: `verify-claims-grounding` runs `(run-claims-audit claims claims)` tautologically checking claims against itself.
 - **Remedy**: In `site-claims.asl:67`, compare published claims against live measurements computed by `asl audit` or test suites.

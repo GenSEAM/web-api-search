@@ -294,5 +294,46 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F07" :status :passed :exitCode 0 :assertionsEvaluated 25 :timestamp 1789443600000)
       ])
+    (:task
+      :id "Task-F08"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Ground Site Claims Verification Against Live Measurements"
+      :kind :gate
+      :lane "verification"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789441500000
+      :updatedAt 1789443900000
+      :motivation "verify-claims-grounding runs (run-claims-audit claims claims) tautologically verifying claims against itself without reading published_claims.asn from disk or inspecting live benchmark truth."
+      :purpose "Refactor site-claims.asl to read and verify published claims directly against the benchmark registry on disk, failing if claims are missing or ungrounded."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Live filesystem grounding in site-claims.asl" "Elimination of tautological self-comparison in verify-claims-grounding"]
+      :owns ["asl/packages/asl-gates/src/site-claims.asl"]
+      :targetSymbols ["verify-claims-grounding" "run-claims-audit"]
+      :relatedSymbols ["standard-claims" "audit-claim"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F07"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F08"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F08.asl"]
+      :verificationCases ["verify-claims-grounding reads bench/published_claims.asn from disk and rejects missing registry."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F08" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect site-claims.asl" "Author acceptance fixture" "Demonstrate baseline failure" "Implement live claims inspection" "Certify green."]
+      :stepIndex 3
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F08" :status :passed :exitCode 0 :assertionsEvaluated 25 :timestamp 1789443900000)
+      ])
   ]
 )
