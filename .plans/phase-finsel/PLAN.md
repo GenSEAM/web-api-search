@@ -170,11 +170,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 ## Phase 3: P1 Concurrency, Memory & Structural AST Soundness
 
 ### Task-F22: Implement Delimiter Stack in Parser Balance Checker
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `asl/packages/asl-parser/src/balance.asl`
 - **Baseline Failure**: `check-balance` reports `true` on interleaved delimiters `([)]`.
 - **Remedy**: Replace independent integer counters with a LIFO delimiter stack.
-- **Gate**: `bin/asl test asl/packages/asl-parser/tests/balance_test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F22` (24 assertions verified)
 
 ### Task-F23: Fix Sequential String Unescaping Order of Operations
 - **Status**: planned

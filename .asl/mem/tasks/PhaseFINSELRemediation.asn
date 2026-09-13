@@ -868,5 +868,47 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F21" :status :passed :exitCode 0 :assertionsEvaluated 20 :timestamp 1789447800000)
       ])
+    (:task
+      :id "Task-F22"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Implement Delimiter Stack in Parser Balance Checker"
+      :kind :compiler
+      :lane "parser"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789448100000
+      :updatedAt 1789448100000
+      :motivation "check-balance reports true on interleaved delimiters ([)] due to independent integer counters."
+      :purpose "Replace independent integer counters with a LIFO delimiter stack to enforce strict delimiter nesting."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Interleaved delimiters flagged as unbalanced" "LIFO delimiter stack tracking" "Preservation of string literal quote and escape awareness"]
+      :owns ["asl/packages/asl-parser/src/balance.asl"]
+      :targetSymbols ["check-balance-step" "check-delimiter-balance" "is-delimiter-balanced?" "count-unclosed-parens" "balance-delimiters"]
+      :relatedSymbols ["BalanceResult"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F21"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F22"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F22.asl" "asl/packages/asl-parser/tests/balance_test.asl"]
+      :verificationCases ["check-delimiter-balance rejects interleaved delimiters ([)] and maintains LIFO stack."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F22" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect balance.asl and balance_test.asl" "Author acceptance fixture Task-F22.asl" "Demonstrate baseline failure on interleaved delimiters" "Implement LIFO delimiter stack in balance.asl" "Certify green under SuperviseGate.sh."]
+      :stepIndex 1
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F22" :status :passed :exitCode 0 :assertionsEvaluated 24 :timestamp 1789448100000)
+      ])
   ]
 )
+

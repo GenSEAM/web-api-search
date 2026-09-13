@@ -1874,5 +1874,15 @@
       :fact "task-f21-certified-complete"
       :evidence "Replaced faked synchronization and pre-commit status checks; implemented inspect-submodule and inspect-workspace-all in tools/sync-workspace.asl to inspect real on-disk submodule directories and HEAD branches; implemented count-dashed-identifiers, count-uncompensated-sagas, and evaluate-commit-diff in tools/pre-commit.asl to enforce token and saga invariants over actual diff additions; updated sync-workspace-test.asl (24 assertions); authored tests/acceptance/d81/Task-F21.asl demonstrating baseline failure; evaluated 20 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F21 certified complete; workspace synchronization and pre-commit gates evaluate genuine filesystem and commit diff state under ADR-0081")
+    (:note
+      :id "n175"
+      :timestamp 1789448100000
+      :author "codex"
+      :scope ["asl/packages/asl-parser/src/balance.asl" "asl/packages/asl-parser/tests/balance_test.asl" "tests/acceptance/d81/Task-F22.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f22 :parser :delimiter-stack :balance-checker :approved]
+      :fact "task-f22-certified-complete"
+      :evidence "Implemented LIFO delimiter stack in pure AgentScript balance checker; refactored check-balance-step in asl/packages/asl-parser/src/balance.asl to maintain a LIFO delimiter stack rather than independent integer counters; correctly rejected interleaved delimiters such as ([)] and {[(])}; updated balance_test.asl (22 assertions); authored tests/acceptance/d81/Task-F22.asl demonstrating baseline failure; evaluated 24 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F22 certified complete; ASL parser rejects structurally invalid interleaved delimiters with zero false positives under ADR-0081")
   ]
 )
+
