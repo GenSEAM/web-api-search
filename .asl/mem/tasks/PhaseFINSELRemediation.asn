@@ -169,7 +169,7 @@
       :actionDag ["Define escape_sh_arg" "Sanitize popen commands" "Replace strcpy with snprintf" "Independent acceptance."]
       :stepIndex 4
       :receipts [
-        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F04" :status :passed :exitCode 0 :assertionsEvaluated 16 :timestamp 1789442700000)
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F04" :status :passed :exitCode 0 :assertionsEvaluated 25 :timestamp 1789442700000)
       ])
     (:task
       :id "Task-F05"
@@ -292,7 +292,7 @@
       :actionDag ["Inspect tools/gate.asl" "Author acceptance fixture" "Prove baseline failure" "Replace magic numbers" "Verify green."]
       :stepIndex 3
       :receipts [
-        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F07" :status :passed :exitCode 0 :assertionsEvaluated 16 :timestamp 1789443600000)
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F07" :status :passed :exitCode 0 :assertionsEvaluated 25 :timestamp 1789443600000)
       ])
   ]
 )

@@ -1729,7 +1729,7 @@
       :scope ["asl/tools/asl.c" "tests/acceptance/d81/Task-F04.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
       :tags [:supervision :phase-finsel :task-f04 :security :buffer-overflow :command-injection :approved]
       :fact "task-f04-certified-complete"
-      :evidence "Replaced all unbounded strcpy calls in asl/tools/asl.c with bounded snprintf; implemented escape_sh_arg and sanitized popen shell arguments; authored tests/acceptance/d81/Task-F04.asl; evaluated 16 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :evidence "Replaced all unbounded strcpy calls in asl/tools/asl.c with bounded snprintf; implemented escape_sh_arg and sanitized popen shell arguments; authored tests/acceptance/d81/Task-F04.asl; evaluated 25 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F04 certified complete; C host runtime is defended against buffer overflows and shell injection under ADR-0081")
     (:note
       :id "n159"
@@ -1758,7 +1758,7 @@
       :scope ["tools/gate.asl" "tests/acceptance/d81/Task-F07.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
       :tags [:supervision :phase-finsel :task-f07 :gates :tools-gate :live-verification :approved]
       :fact "task-f07-certified-complete"
-      :evidence "Replaced hardcoded magic numbers (35 793 12 0 272 3737 22) in tools/gate.asl; imported asl-gates/gate-runner and wired run-gate-suite to invoke gr/run-live-gate-audit; forwarded run-all-seven-gates to gr/run-all-seven-gates eliminating duplicate logic; authored tests/acceptance/d81/Task-F07.asl with baseline failure demonstration; evaluated 16 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :evidence "Replaced hardcoded magic numbers (35 793 12 0 272 3737 22) in tools/gate.asl; imported asl-gates/gate-runner and wired run-gate-suite to invoke gr/run-live-gate-audit; forwarded run-all-seven-gates to gr/run-all-seven-gates eliminating duplicate logic; authored tests/acceptance/d81/Task-F07.asl with baseline failure demonstration; evaluated 25 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F07 certified complete; tools/gate.asl executes live gate audit and eliminates synthetic green reports under ADR-0081")
   ]
 )
