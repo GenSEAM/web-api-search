@@ -9,6 +9,8 @@
       verify-pnpm-package
       verify-manifest-head
       expected-submodules
+      inspect-submodule
+      inspect-workspace-all
       run-sync-audit
       verify-real-fs
       main]
@@ -80,6 +82,38 @@
         "editorial-matrix" "pack" "intel"
         "crawler" "asl-arduino" "asl-contracts" "asl-quantum"))
 
+(df inspect-submodule [(name Str)] -> RepoSyncStatus
+  :d "Inspects a genuine submodule or workspace package on disk for existence, branch, and status"
+  (let [(target-name (if (and (string-equals? name "gsa") (file-exists? "agent")) "agent" name))
+        (git-dir (str target-name "/.git"))
+        (manifest-path (str target-name "/manifest.asn"))
+        (pkg-path (str target-name "/package.json"))
+        (dir-exists (or (file-exists? git-dir)
+                        (or (file-exists? manifest-path)
+                            (file-exists? pkg-path))))]
+    (if (not dir-exists)
+      (make-repo-sync-status name false "" false)
+      (let [(head-path (str target-name "/.git/HEAD"))
+            (head-read (file-read head-path))
+            (branch (mt head-read
+                      ((ok content)
+                       (let [(trimmed (string-trim content))]
+                         (if (string-starts-with? trimmed "ref: refs/heads/")
+                           (string-trim (option-or (string-slice trimmed 16 (string-length trimmed)) "main"))
+                           "main")))
+                      ((err e) "main")))
+            (is-conflict (or (file-exists? (str target-name "/.git/MERGE_HEAD"))
+                             (or (file-exists? (str target-name "/.git/REBASE_HEAD"))
+                                 (file-exists? (str target-name "/.git/CHERRY_PICK_HEAD")))))
+            (is-clean (not is-conflict))]
+        (make-repo-sync-status name is-clean branch true)))))
+
+(df inspect-workspace-all [] -> WorkspaceReport
+  :d "Scans all registered workspace submodules on the real filesystem and builds an aggregated report"
+  (let [(subs (expected-submodules))
+        (statuses (map (fn [(name Str)] -> RepoSyncStatus (inspect-submodule name)) subs))]
+    (audit-workspace-repos statuses)))
+
 (df run-sync-audit [] -> Bool
   :d "Validates that all core and ecosystem modules are registered across .gitmodules and pnpm-workspace.yaml."
   (let [(expected (expected-submodules))]
@@ -103,12 +137,8 @@
          (list-contains? expected "asl-quantum"))))
 
 (df verify-real-fs [] -> Bool
-  :d "Active verifier for real filesystem workspace sync across all 17 submodules"
-  (let [(subs (expected-submodules))
-        (statuses (map (fn [(name Str)] -> RepoSyncStatus
-                         (make-repo-sync-status name true "main" true))
-                       subs))
-        (report (audit-workspace-repos statuses))]
+  :d "Active verifier for real filesystem workspace sync across submodules"
+  (let [(report (inspect-workspace-all))]
     (and (run-sync-audit)
          (.-is-all-clean report)
          (== (.-total-repos report) 17))))

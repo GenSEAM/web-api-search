@@ -659,7 +659,7 @@
       :historicalReceipts []
       :reviewStatus :approved
       :actionDag ["Inspect compiler.asl and codegen generators" "Author acceptance fixture Task-F16.asl" "Demonstrate baseline failure" "Implement multi-target codegen lowering in compiler.asl" "Certify green."]
-      :stepIndex 1
+      :stepIndex 5
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F16" :status :passed :exitCode 0 :assertionsEvaluated 23 :timestamp 1789446300000)
       ])
@@ -700,7 +700,7 @@
       :historicalReceipts []
       :reviewStatus :approved
       :actionDag ["Inspect extractor.asl" "Author acceptance fixture Task-F17.asl" "Demonstrate baseline failure" "Implement extract-asl-symbols" "Certify green."]
-      :stepIndex 1
+      :stepIndex 5
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F17" :status :passed :exitCode 0 :assertionsEvaluated 13 :timestamp 1789446600000)
       ])
@@ -741,7 +741,7 @@
       :historicalReceipts []
       :reviewStatus :approved
       :actionDag ["Inspect graph.asl and query.asl" "Author acceptance fixture Task-F18.asl" "Demonstrate baseline failure" "Implement graph traversal in query.asl" "Certify green."]
-      :stepIndex 1
+      :stepIndex 5
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F18" :status :passed :exitCode 0 :assertionsEvaluated 17 :timestamp 1789446900000)
       ])
@@ -782,7 +782,7 @@
       :historicalReceipts []
       :reviewStatus :approved
       :actionDag ["Inspect preload.asl" "Author acceptance fixture Task-F19.asl" "Demonstrate baseline failure" "Implement graph hydration in preload.asl" "Certify green."]
-      :stepIndex 1
+      :stepIndex 5
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F19" :status :passed :exitCode 0 :assertionsEvaluated 22 :timestamp 1789447200000)
       ])
@@ -823,9 +823,50 @@
       :historicalReceipts []
       :reviewStatus :approved
       :actionDag ["Inspect ablation.asl and acceptance_test.asl" "Author acceptance fixture Task-F20.asl" "Demonstrate baseline failure" "Implement empirical ablation evaluation and std-dev in ablation.asl" "Certify green."]
-      :stepIndex 1
+      :stepIndex 5
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F20" :status :passed :exitCode 0 :assertionsEvaluated 23 :timestamp 1789447500000)
+      ])
+    (:task
+      :id "Task-F21"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Replace Faked Synchronization and Pre-Commit Status Checks"
+      :kind :gate
+      :lane "tools"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789447800000
+      :updatedAt 1789447800000
+      :motivation "tools/sync-workspace.asl hardcodes true for 17 submodules; tools/pre-commit.asl passes 0 0 thresholds without checking actual diffs."
+      :purpose "Query real filesystem and submodule HEAD status in sync-workspace and analyze real staged diffs and token thresholds in pre-commit."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Real submodule inspection of existence, HEAD branch, and cleanliness in sync-workspace" "Actual diff inspection and dashed identifier detection in pre-commit" "Elimination of hardcoded mock statuses"]
+      :owns ["tools/sync-workspace.asl" "tools/pre-commit.asl"]
+      :targetSymbols ["inspect-submodule" "verify-real-fs" "count-dashed-identifiers" "count-uncompensated-sagas" "evaluate-commit-diff" "run-pre-commit"]
+      :relatedSymbols ["RepoSyncStatus" "WorkspaceReport" "PreCommitConfig" "verify-thresholds"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F20"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F21"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F21.asl" "tools/tests/sync-workspace-test.asl"]
+      :verificationCases ["sync-workspace inspects real submodule directories and HEAD branches; pre-commit blocks commits with dashed identifiers in diff."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F21" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect sync-workspace.asl and pre-commit.asl" "Author acceptance fixture Task-F21.asl" "Demonstrate baseline failure" "Implement inspect-submodule and diff analysis in tools" "Certify green under SuperviseGate.sh."]
+      :stepIndex 1
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F21" :status :passed :exitCode 0 :assertionsEvaluated 20 :timestamp 1789447800000)
       ])
   ]
 )

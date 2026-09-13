@@ -4,6 +4,8 @@
       test-audit-workspace-all-clean
       test-audit-workspace-dirty
       test-format-workspace-report
+      test-inspect-submodule-real-fs
+      test-inspect-submodule-missing
       run-tests]
   :i [(asl-tools/sync-workspace :a sw)])
 
@@ -42,10 +44,25 @@
     (assert (string-contains? text "ALL REPOSITORIES CLEAN") "Report must contain ALL REPOSITORIES CLEAN")
     true))
 
+(df test-inspect-submodule-real-fs [] -> Bool
+  (let [(st (sw/inspect-submodule "asl"))]
+    (assert (.-exists st) "asl must exist")
+    (assert (.-is-clean st) "asl must be clean")
+    (assert (string-equals? (.-branch st) "main") "asl branch must be main")
+    true))
+
+(df test-inspect-submodule-missing [] -> Bool
+  (let [(st (sw/inspect-submodule "nonexistent-missing-submodule"))]
+    (assert (not (.-exists st)) "Missing module must not exist")
+    (assert (not (.-is-clean st)) "Missing module must not be clean")
+    true))
+
 (df run-tests [] -> Bool
   (do
     (assert (test-make-repo-sync-status) "test-make-repo-sync-status must pass")
     (assert (test-audit-workspace-all-clean) "test-audit-workspace-all-clean must pass")
     (assert (test-audit-workspace-dirty) "test-audit-workspace-dirty must pass")
     (assert (test-format-workspace-report) "test-format-workspace-report must pass")
+    (assert (test-inspect-submodule-real-fs) "test-inspect-submodule-real-fs must pass")
+    (assert (test-inspect-submodule-missing) "test-inspect-submodule-missing must pass")
     true))

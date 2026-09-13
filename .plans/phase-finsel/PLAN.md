@@ -159,11 +159,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F20` (23 assertions verified)
 
 ### Task-F21: Replace Faked Synchronization and Pre-Commit Status Checks
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `tools/sync-workspace.asl`, `tools/pre-commit.asl`
 - **Baseline Failure**: `tools/sync-workspace.asl` hardcodes `true` for 17 submodules; `tools/pre-commit.asl` passes `0 0` thresholds.
 - **Remedy**: Query git status and check actual staged diff counts.
-- **Gate**: `bin/asl test tools/tests/sync-workspace-test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F21` (20 assertions verified)
 
 ---
 

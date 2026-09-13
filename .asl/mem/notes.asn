@@ -1865,6 +1865,14 @@
       :tags [:supervision :phase-finsel :task-f20 :bench :ablation :discriminator-tasks :approved]
       :fact "task-f20-certified-complete"
       :evidence "Connected ablation study runner to genuine model inference harness; implemented dynamic evaluate-task, compute-pass-rate, compute-empirical-std-dev, and run-ablation-study in bench/aep/ablation.asl evaluating 12 Terminal-Bench 4.0 discriminator tasks across 4 quadrants with empirical standard deviation; verified acceptance_test.asl (33 assertions); authored tests/acceptance/d81/Task-F20.asl demonstrating baseline failure; evaluated 23 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
-      :consequence "Task-F20 certified complete; AEP 4-quadrant ablation study computes dynamic empirical metrics and variance across canonical discriminator benchmarks under ADR-0081")
+      :consequence "Task-F20 certified complete; AEP 4-quadrant ablation study computes dynamic empirical metrics and variance across canonical discriminator benchmarks under ADR-0081")    (:note
+      :id "n174"
+      :timestamp 1789447800000
+      :author "codex"
+      :scope ["tools/sync-workspace.asl" "tools/pre-commit.asl" "tools/tests/sync-workspace-test.asl" "tests/acceptance/d81/Task-F21.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f21 :tools :workspace-sync :pre-commit :approved]
+      :fact "task-f21-certified-complete"
+      :evidence "Replaced faked synchronization and pre-commit status checks; implemented inspect-submodule and inspect-workspace-all in tools/sync-workspace.asl to inspect real on-disk submodule directories and HEAD branches; implemented count-dashed-identifiers, count-uncompensated-sagas, and evaluate-commit-diff in tools/pre-commit.asl to enforce token and saga invariants over actual diff additions; updated sync-workspace-test.asl (24 assertions); authored tests/acceptance/d81/Task-F21.asl demonstrating baseline failure; evaluated 20 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F21 certified complete; workspace synchronization and pre-commit gates evaluate genuine filesystem and commit diff state under ADR-0081")
   ]
 )
