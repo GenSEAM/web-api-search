@@ -184,11 +184,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F23` (14 assertions verified)
 
 ### Task-F24: Prevent Irreversible Context Loss in Memory Pointer Collapse
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `mem/src/pointer_orchestrator.asl`
 - **Baseline Failure**: Collapsing a pointer clears payload to `""` with no mechanism to re-expand from VFS.
 - **Remedy**: Store compressed chunk representation or VFS path reference in the collapsed pointer to allow complete roundtrip re-hydration.
-- **Gate**: `bin/asl test mem/tests/pointer_orchestrator_test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F24` (12 assertions verified)
 
 ### Task-F25: Eliminate Phantom Dirty Overwrites in Software Transactional Memory
 - **Status**: planned

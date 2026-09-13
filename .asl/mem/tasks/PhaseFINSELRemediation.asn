@@ -905,7 +905,7 @@
       :historicalReceipts []
       :reviewStatus :approved
       :actionDag ["Inspect balance.asl and balance_test.asl" "Author acceptance fixture Task-F22.asl" "Demonstrate baseline failure on interleaved delimiters" "Implement LIFO delimiter stack in balance.asl" "Certify green under SuperviseGate.sh."]
-      :stepIndex 1
+      :stepIndex 5
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F22" :status :passed :exitCode 0 :assertionsEvaluated 24 :timestamp 1789448100000)
       ])
@@ -946,11 +946,53 @@
       :historicalReceipts []
       :reviewStatus :approved
       :actionDag ["Inspect escape.asl and nd_asn.asl" "Author acceptance fixture Task-F23.asl" "Demonstrate baseline failure on \\\\n" "Fix unescaping logic in escape.asl and nd_asn.asl" "Certify green under SuperviseGate.sh."]
-      :stepIndex 1
+      :stepIndex 5
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F23" :status :passed :exitCode 0 :assertionsEvaluated 14 :timestamp 1789448400000)
       ])
+    (:task
+      :id "Task-F24"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Prevent Irreversible Context Loss in Memory Pointer Collapse"
+      :kind :memory
+      :lane "mem"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789448700000
+      :updatedAt 1789448800000
+      :motivation "Collapsing a pointer clears payload to empty string with no mechanism to re-expand from VFS."
+      :purpose "Store preserved VFS reference or compressed chunk representation in collapsed pointer and implement rehydration."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Lossless pointer collapse preserving vfs-ref" "Lossless rehydrate-pointer restoring original payload" "Zero irreversible context loss under tight budget orchestration"]
+      :owns ["mem/src/pointer_orchestrator.asl"]
+      :targetSymbols ["collapse-pointer" "rehydrate-pointer" "deref-pointer" "orchestrate-context-pointers"]
+      :relatedSymbols ["PointerSpec"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F23"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F24"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F24.asl" "mem/tests/pointer_orchestrator_test.asl"]
+      :verificationCases ["collapse-pointer retains vfs-ref; rehydrate-pointer restores full content without context loss."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F24" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect pointer_orchestrator.asl and pointer_orchestrator_test.asl" "Author acceptance fixture Task-F24.asl" "Demonstrate baseline failure on vfs-ref and rehydration" "Implement vfs-ref retention and rehydrate-pointer in pointer_orchestrator.asl" "Certify green under SuperviseGate.sh."]
+      :stepIndex 1
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F24" :status :passed :exitCode 0 :assertionsEvaluated 12 :timestamp 1789448800000)
+      ])
   ]
 )
+
 
 

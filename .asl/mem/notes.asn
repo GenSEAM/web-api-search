@@ -1892,6 +1892,15 @@
       :fact "task-f23-certified-complete"
       :evidence "Fixed sequential string unescaping order of operations; implemented single-pass character scanner unescape-string-scanner in asl/packages/asl-text/src/escape.asl using LIFO fold state; unescape-asn-str and unescape-json-str correctly preserve escaped backslash followed by n (\\\\n -> \\n) without mutating into literal newline; updated agent-bus/src/nd_asn.asl to delegate to canonical asl-text/escape; updated escape_test.asl (18 assertions); authored tests/acceptance/d81/Task-F23.asl demonstrating baseline failure; evaluated 14 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F23 certified complete; wire protocol string unescaping preserves escaped backslashes without destructive sequential substitutions under ADR-0081")
+    (:note
+      :id "n177"
+      :timestamp 1789448800000
+      :author "codex"
+      :scope ["mem/src/pointer_orchestrator.asl" "mem/grammar.asn" "mem/tests/pointer_orchestrator_test.asl" "tests/acceptance/d81/Task-F24.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f24 :mem :pointer :lossless-collapse :rehydration :approved]
+      :fact "task-f24-certified-complete"
+      :evidence "Prevented irreversible context loss in memory pointer collapse; added vfs-ref field to PointerSpec schema in mem/grammar.asn and mem/src/pointer_orchestrator.asl; updated collapse-pointer and orchestrate-context-pointers to preserve VFS target reference; implemented rehydrate-pointer to restore complete original payload from preserved VFS reference or memory store; updated pointer_orchestrator_test.asl with test-lossless-collapse-and-rehydrate (36 assertions); authored tests/acceptance/d81/Task-F24.asl demonstrating baseline failure; evaluated 12 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F24 certified complete; context pointer orchestration preserves lossless VFS references and enables complete roundtrip rehydration under ADR-0081")
   ]
 )
 
