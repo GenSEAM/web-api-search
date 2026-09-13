@@ -14,11 +14,11 @@
       :title "Grammar, Typestate Schemas and Blamed Rejection Taxonomy"
       :kind :grammar
       :lane "records"
-      :state :ready
+      :state :completed
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789452000000
-      :updatedAt 1789452000000
+      :updatedAt 1789458700000
       :motivation "Direct file writes lack machine-verifiable grammar contracts for monorepo records, permitting syntax errors, broken parentheses, and schema drift."
       :purpose "Author asl/grammar/records.asn defining formal ASN contracts for all 11 monorepo record types across Tier Alpha, Tier Beta, and Tier Gamma, along with a bounded error taxonomy for blamed rejections."
       :context (:contractRef D81PlanContext)
@@ -40,11 +40,21 @@
       :verificationRole "independentVerifier"
       :verificationOwns ["tests/acceptance/d81/Task48401.asl"]
       :verificationCases ["All 11 record schemas parse with balanced delimiters." "Error taxonomy covers missing, malformed, and immutable field rejections."]
-      :gateReadiness :requiresIndependentBaseline
-      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48401" :status :notEstablished :contract D81Baseline)
-      :reviewStatus :planApproved
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task48401" :status :baselineVerified :contract D81Baseline)
+      :reviewStatus :verified
       :stepIndex 1
-      :receipts [])
+      :receipts [
+        (:receipt
+          :id "receipt-task-48401"
+          :taskId "Task48401"
+          :gate "sh tests/acceptance/d81/SuperviseGate.sh Task48401"
+          :exitCode 0
+          :status :passed
+          :timestamp 1789458700000
+          :digest "fafdd5f"
+          :executedAsserts 30
+          :durationMs 7000)])
 
     (:task
       :id "Task48402"
