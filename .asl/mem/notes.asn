@@ -1991,5 +1991,14 @@
       :fact "task-f34-certified-complete"
       :evidence "Removed redundant shadow files and naming collisions across packages under ADR-0081; deleted asl/packages/asl-gates/src/runner.asl and updated gates_test.asl to import canonical gate-runner; removed runner from manifest.asn; merged unit test assertions from agent/tests/agent_test.asl into agent-test.asl (total 37 assertions passing); deleted unused facade asl/packages/asl-bridge/src/schema_bridge.asl; authored tests/acceptance/d81/Task-F34.asl demonstrating baseline failure on existence of shadow files; evaluated 10 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F34 certified complete; shadow files and naming collisions eliminated, module manifests sanitized, and test coverage preserved monorepo-wide under ADR-0081")
+    (:note
+      :id "n188"
+      :timestamp 1789454400000
+      :author "codex"
+      :scope ["agent-core/src/premise.asl" "agent-core/src/taskstore.asl" "agent-core/src/compose.asl" "agent-core/src/threads.asl" "agent-core/src/dag.asl" "agent-core/src/promptpool.asl" "agent-core/src/statemachine.asl" "agent-core/src/tasktypes.asl" "agent-core/src/scheduler.asl" "agent-core/src/clarify.asl" "agent-bus/src/bridge.asl" "agent-bus/src/browser-bridge.asl" "agent-bus/src/cluster.asl" "agent-bus/src/gateway.asl" "agent-bus/src/wire.asl" "agent-bus/src/transport.asl" "agent-bus/src/proc_telemetry.asl" "agent-bus/src/bus.asl" "agent-bus/src/nd_asn.asl" "agent-bus/src/presence.asl" "asl/tools/engine.js" "tests/acceptance/d81/Task-F35.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f35 :namespaces :agent-core :agent-bus :module-headers :manifest-parity :approved]
+      :fact "task-f35-certified-complete"
+      :evidence "Standardized agent package module namespaces under ADR-0081; aligned all 10 agent-core modules to declare canonical (module asl-agent-core/* and all 10 agent-bus modules to declare (module asl-agent-bus/* in 100% parity with package manifests; updated engine.js module indexer and resolver with seamless legacy alias resolution ensuring full backward compatibility; authored tests/acceptance/d81/Task-F35.asl demonstrating baseline failure on divergent namespaces; evaluated 42 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F35 certified complete; all agent package module headers are canonically standardized with zero namespace divergence and zero backward compatibility regressions monorepo-wide under ADR-0081")
   ]
 )
