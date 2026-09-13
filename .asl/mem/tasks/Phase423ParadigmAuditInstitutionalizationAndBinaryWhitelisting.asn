@@ -34,7 +34,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69"]
       :variations ["Informal skill advice vs formal paradigm axioms (chosen: formal paradigm axioms)"]
       :failureModes ["Delimiter syntax errors in paradigm.asn (mitigated: verified with asl check)"]
-      :adr "ADR-0069"
+      :adr "D69"
       :decision "D69"
       :why "Transform ephemeral audit findings into permanent structural invariants"
       :spec "Update harness/paradigm.asn with audit-institutionalization and strict-binary-whitelist axioms."
@@ -70,7 +70,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69"]
       :variations ["Manual audit review vs standardized taxonomy class (chosen: standardized taxonomy class)"]
       :failureModes ["Classification drift across reviewers (mitigated: strict detection rule grounded in whitelist)"]
-      :adr "ADR-0069"
+      :adr "D69"
       :decision "D69"
       :why "Equip auditors with clear taxonomy to catch and eliminate foreign binary crutches"
       :spec "Add unregistered-binary-anomaly to harness/audit-protocols.asn."
@@ -106,7 +106,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69"]
       :variations ["Implicit host assumptions vs explicit whitelist registry (chosen: explicit whitelist registry)"]
       :failureModes ["Blocking necessary developer utilities (mitigated: explicit whitelist extension process via ADR)"]
-      :adr "ADR-0069"
+      :adr "D69"
       :decision "D69"
       :why "Guarantee 100 percent dependency provenance across all toolplane layers"
       :spec "Add :binaryWhitelist block to .asl.config.asn."
@@ -142,7 +142,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69"]
       :variations ["Runtime error interception vs static pre-commit linting (chosen: static pre-commit linting)"]
       :failureModes ["False positives on string literals (mitigated: regex targeting command execution contexts)"]
-      :adr "ADR-0069"
+      :adr "D69"
       :decision "D69"
       :why "Prevent accidental introduction of unregistered dependencies at build time"
       :spec "Add static binary whitelist check to gate tooling."
@@ -184,7 +184,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69"]
       :variations ["Manual signoff vs automated 5-dimensional bidirectional audit (chosen: automated 5-dimensional audit)"]
       :failureModes ["Broken cross-references or desynchronized intent records (mitigated: strict D52 audit)"]
-      :adr "ADR-0069"
+      :adr "D69"
       :decision "D69"
       :why "Guarantee uncompromised architectural integrity and reproducible physical receipts"
       :spec "Run asl audit consistency and asl gate to verify zero errors and complete reconciliation."

@@ -33,7 +33,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0051"
+      :adr "D51"
       :decision "d51"
 :owns [
         ".asl/mem/decisions/Adr0051TokenEfficiencyFormatAndCamelcaseConventions.asn"
@@ -81,7 +81,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0051"
+      :adr "D51"
       :decision "d51"
 :owns ["TOKEN_CONVENTIONS.md"]
       :targetSymbols ["TOKEN_CONVENTIONS"]
@@ -124,7 +124,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0051"
+      :adr "D51"
       :decision "d51"
 :owns ["AGENTS.md" "CLAUDE.md"]
       :targetSymbols ["LexicalDensity" "D51" "C1" "C2" "C5"]
@@ -167,7 +167,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0051"
+      :adr "D51"
       :decision "d51"
 :owns [
         "asl/.agents/skills/asl-toolbelt/skill.asn"
@@ -219,7 +219,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0051"
+      :adr "D51"
       :decision "d51"
 :owns ["tests/test_token_efficiency_format_e2e.sh"]
       :targetSymbols ["test_token_efficiency_format_e2e"]

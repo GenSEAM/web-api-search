@@ -35,7 +35,7 @@
       :variations ["Monolithic text rules vs structured ASN axiom records"]
       :failureModes ["Grammar mismatch in paradigm.asn breaking agent boot sequence"]
       :additionalRequirements ["Zero comments invariant C1" "Strict schema validation"]
-      :adr "ADR-0043"
+      :adr "D43"
       :decision "D43"
       :actionDag [
         (:act :id "p1" :op :audit :target "harness/paradigm.asn")
@@ -73,7 +73,7 @@
       :variations ["Host-side regex validation vs Web Worker streaming FSM"]
       :failureModes ["Premature truncation of valid nested S-expressions by delimiter mask"]
       :additionalRequirements ["Zero foreign code" "Sub-millisecond token checking"]
-      :adr "ADR-0043"
+      :adr "D43"
       :decision "D43"
       :actionDag [
         (:act :id "s1" :op :write :target "harness/src/slm_browser_profile.asl")
@@ -111,7 +111,7 @@
       :variations ["Post-hoc regex extraction vs streaming chunk demuxer"]
       :failureModes ["Leakage of raw thought tokens into agent action ledger"]
       :additionalRequirements ["Under 1ms demux latency per chunk"]
-      :adr "ADR-0037"
+      :adr "D37"
       :decision "D37"
       :actionDag [
         (:act :id "g1" :op :write :target "harness/src/stream_demuxer.asl")
@@ -149,7 +149,7 @@
       :variations ["Single-task serial runner vs batched parallel wave execution"]
       :failureModes ["Runaway loops burning tokens past budget ceiling"]
       :additionalRequirements ["Strict 35,000 token circuit breaker"]
-      :adr "ADR-0040"
+      :adr "D40"
       :decision "D40"
       :actionDag [
         (:act :id "b1" :op :write :target "harness/src/sotparty_runner.asl")
@@ -187,7 +187,7 @@
       :variations ["External shell wrapper vs internal ASL process supervision"]
       :failureModes ["Orphan background processes leaking system file handles"]
       :additionalRequirements ["Automatic SIGTERM with 5s SIGKILL escalation"]
-      :adr "ADR-0042"
+      :adr "D42"
       :decision "D42"
       :actionDag [
         (:act :id "t1" :op :write :target "harness/src/tbench4_hardener.asl")
@@ -225,7 +225,7 @@
       :variations ["Full XML DOM tree vs direct Canvas 2D path streaming"]
       :failureModes ["Coordinate mismatch between spatial bounding boxes and actual rendered vectors"]
       :additionalRequirements ["Under 2ms transpilation benchmark guarantee"]
-      :adr "ADR-0034"
+      :adr "D34"
       :decision "D34"
       :actionDag [
         (:act :id "v1" :op :write :target "harness/src/browser_vector_engine.asl")
@@ -263,7 +263,7 @@
       :variations ["Static threshold analysis vs runtime fuel profiling"]
       :failureModes ["False tier selection causing compilation overhead on trivial expressions"]
       :additionalRequirements ["Under 0.2ms tier decision latency"]
-      :adr "ADR-0050"
+      :adr "D50"
       :decision "D50"
       :actionDag [
         (:act :id "e1" :op :write :target "harness/src/tiered_evaluator.asl")
@@ -302,7 +302,7 @@
       :variations ["Single task audit vs holistic phase gate"]
       :failureModes ["Missing bidirectional reference between task and ADR"]
       :additionalRequirements ["Physical exit 0 receipts required"]
-      :adr "ADR-0052"
+      :adr "D52"
       :decision "D52"
       :actionDag [
         (:act :id "a1" :op :audit :target "phase-406")

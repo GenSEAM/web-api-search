@@ -20,7 +20,7 @@
       :targetSymbols ["capabilities"] :relatedSymbols ["capabilities" "tools" "ssot"]
       :invariants ["D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn ["Task46403" "Task46602"]
+      :adr "D81" :decision "d81" :dependsOn ["Task46403" "Task46602"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46701"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -43,7 +43,7 @@
       :targetSymbols [] :relatedSymbols ["gates" "capabilities" "bounded"]
       :invariants ["D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn ["Task46406"]
+      :adr "D81" :decision "d81" :dependsOn ["Task46406"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46702"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -66,7 +66,7 @@
       :targetSymbols ["rpc"] :relatedSymbols ["tools" "bounded" "capabilities"]
       :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn ["Task46402" "Task46702"]
+      :adr "D81" :decision "d81" :dependsOn ["Task46402" "Task46702"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46703"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -89,7 +89,7 @@
       :targetSymbols ["callers" "impact" "resolveModulePath"] :relatedSymbols ["tools" "context" "bounded"]
       :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn ["Task45701" "Task46701"]
+      :adr "D81" :decision "d81" :dependsOn ["Task45701" "Task46701"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46704"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -112,7 +112,7 @@
       :targetSymbols ["discovered_ws" "run_evaluator"] :relatedSymbols ["foreign" "capabilities"]
       :invariants ["C3" "D34" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn ["Task46103"]
+      :adr "D81" :decision "d81" :dependsOn ["Task46103"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46705"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -135,7 +135,7 @@
       :targetSymbols [] :relatedSymbols ["capabilities" "foreign"]
       :invariants ["D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn ["Task46702" "Task46704"]
+      :adr "D81" :decision "d81" :dependsOn ["Task46702" "Task46704"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46706"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]

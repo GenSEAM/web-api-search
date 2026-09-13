@@ -27,7 +27,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0036"
+      :adr "D36"
       :decision "d36"
       :actionDag [
         "Execute task work items"
@@ -59,7 +59,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0036"
+      :adr "D36"
       :decision "d36"
       :actionDag [
         "Execute task work items"
@@ -91,7 +91,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0036"
+      :adr "D36"
       :decision "d36"
       :actionDag [
         "Execute task work items"
@@ -123,7 +123,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0036"
+      :adr "D36"
       :decision "d36"
       :actionDag [
         "Execute task work items"
@@ -155,7 +155,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0036"
+      :adr "D36"
       :decision "d36"
       :actionDag [
         "Execute task work items"

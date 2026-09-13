@@ -38,7 +38,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D68" "D71" "D80"]
       :variations ["Flat unrestricted workspace discovery vs 3-tier context-aware hierarchical isolation (chosen: 3-tier context-aware hierarchical isolation)"]
       :failureModes ["Dangling ADR references if shortcodes mismatch; verified by asl audit consistency"]
-      :adr "ADR-0080"
+      :adr "D80"
       :decision "D80"
       :why "Physical location gating and workspace lineage isolation prevent prompt bloat and cross-repo confusion"
       :spec "Author ADR-0080, register D80 in decision registries, and verify bidirectional linkages."
@@ -80,7 +80,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D80"]
       :variations ["Ad-hoc checks in shell scripts vs pure ASL foundational module in mem (chosen: pure ASL module in mem)"]
       :failureModes ["Incorrect anchor path matching if trailing slashes differ; normalized via string-ends-with?"]
-      :adr "ADR-0080"
+      :adr "D80"
       :decision "D80"
       :why "Mathematical determinism in core memory package prevents divergence across runtime tools"
       :spec "Codify VisibilityTier and filter functions in pure AgentScript conforming to C1-C5."
@@ -120,7 +120,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D80"]
       :variations ["Testing only positive cases vs testing boundary exclusions (chosen: dual-polarity assertion testing)"]
       :failureModes ["Vacuous assertions if test returns true unconditionally; audited by strict-falsify"]
-      :adr "ADR-0080"
+      :adr "D80"
       :decision "D80"
       :why "Falsifiable tests ensure regression prevention across future CLI and Orca bridge iterations"
       :spec "Author comprehensive test suite covering all 3 tiers and edge cases."
@@ -160,7 +160,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D68" "D71" "D80"]
       :variations ["Leaving phase informal vs formalizing as Wave 87 sovereign milestone (chosen: Wave 87 sovereign milestone)"]
       :failureModes ["Roadmap gate syntax errors; audited by asl check and asl audit consistency"]
-      :adr "ADR-0080"
+      :adr "D80"
       :decision "D80"
       :why "Roadmap ledger settlement ensures continuous traceability and unblocks subsequent waves"
       :spec "Update roadmap.asn, verify consistency, and execute asl gate."

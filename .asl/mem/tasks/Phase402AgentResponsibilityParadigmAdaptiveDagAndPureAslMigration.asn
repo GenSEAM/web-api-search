@@ -35,7 +35,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D46" "D51" "D52"]
       :variations ["Informal markdown document without ledger binding (rejected: induces documentation drift)"]
       :failureModes ["Broken link references between ADR-0053 and phase tasks (mitigated: verified via asl check)"]
-      :adr "ADR-0053"
+      :adr "D53"
       :decision "d53"
       :why "Codify Agent Responsibility Paradigm, Adaptive Action DAG, and Pure ASL Toolchain Migration"
       :spec "Draft ADR-0053, register in decisions.asn and intent.asn with bidirectional task linkage."

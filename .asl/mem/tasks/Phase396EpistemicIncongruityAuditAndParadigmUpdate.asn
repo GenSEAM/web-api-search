@@ -34,7 +34,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0041"
+      :adr "D41"
       :decision "d41"
 :owns ["asl/packages/asl-lint/src/incongruity.asl" "asl/packages/asl-lint/tests/incongruity_test.asl"]
       :targetSymbols ["scan-monorepo-incongruities" "detect-crutches" "detect-lingering-sigils"]
@@ -84,7 +84,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0041"
+      :adr "D41"
       :decision "d41"
 :owns ["harness/paradigm.asn" "harness/tests/paradigm_spec_test.asl"]
       :targetSymbols ["validate-paradigm-spec" "verify-action-ontology"]
@@ -133,7 +133,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0041"
+      :adr "D41"
       :decision "d41"
 :owns ["asl/mem/decisions/GAPS.asn" "tests/test_incongruity_scanner_e2e.sh"]
       :targetSymbols ["reconcile-gaps-ledger" "verify-meta-audit-completeness"]

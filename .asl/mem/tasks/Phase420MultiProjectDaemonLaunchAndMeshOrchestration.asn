@@ -34,7 +34,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65"]
       :variations ["Fragile shell-spawning vs persistent OS user service (chosen: persistent OS user service)"]
       :failureModes ["User permissions blocking service registration (mitigated: zero-config fallback to user-local socket)"]
-      :adr "ADR-0065"
+      :adr "D65"
       :decision "D65"
       :why "Provide instantaneous sub-millisecond RPC response without daemon startup lag"
       :spec "Specify persistent service configuration and lifecycle management in daemon architecture."
@@ -70,7 +70,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65"]
       :variations ["Multiple separate engine instances vs single unified hub with VFS partitioning (chosen: unified hub with partitioning)"]
       :failureModes ["Cross-project path leakage (mitigated: canonical workspace root path sandboxing)"]
-      :adr "ADR-0065"
+      :adr "D65"
       :decision "D65"
       :why "Maximize RAM efficiency and AST reuse across multi-repo workspaces"
       :spec "Specify multi-project partition routing based on workspace hash."
@@ -106,7 +106,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65"]
       :variations ["Advisory file locking vs in-memory TTL buffer leases (chosen: in-memory TTL buffer leases)"]
       :failureModes ["Deadlocks from abandoned leases (mitigated: automatic TTL expiry and dead peer eviction)"]
-      :adr "ADR-0065"
+      :adr "D65"
       :decision "D65"
       :why "Guarantee concurrency safety across parallel multi-agent swarms"
       :spec "Implement buffer lease acquisition and mutex verification in agent-bus."
@@ -142,7 +142,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65"]
       :variations ["Centralized cloud coordinator vs decentralized self-healing peer mesh (chosen: self-healing peer mesh)"]
       :failureModes ["Network partition stranding active tasks (mitigated: dropout stealing after 15s heartbeat loss)"]
-      :adr "ADR-0065"
+      :adr "D65"
       :decision "D65"
       :why "Enable elastic compute federation across heterogeneous local and remote machines"
       :spec "Specify peer registration, remote transport framing, and dropout recovery rules."
@@ -178,7 +178,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65"]
       :variations ["Fixed 2s netcat wait vs non-blocking immediate polling (chosen: non-blocking immediate polling)"]
       :failureModes ["Premature timeout on busy socket (mitigated: 100ms timeout with retry)"]
-      :adr "ADR-0065"
+      :adr "D65"
       :decision "D65"
       :why "Eliminate execution freezes and restore crisp interactive responsiveness"
       :spec "Refactor asl/asl line 5026 to use non-blocking socket connect."
@@ -220,7 +220,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65"]
       :variations ["Manual signoff vs automated 5-dimensional bidirectional audit (chosen: automated 5-dimensional audit)"]
       :failureModes ["Broken cross-references or desynchronized intent records (mitigated: strict D52 audit)"]
-      :adr "ADR-0065"
+      :adr "D65"
       :decision "D65"
       :why "Guarantee uncompromised architectural integrity and reproducible physical receipts"
       :spec "Run asl audit consistency and asl gate to verify zero errors and complete reconciliation."

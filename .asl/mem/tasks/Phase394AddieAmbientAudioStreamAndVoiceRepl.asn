@@ -34,7 +34,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0038"
+      :adr "D38"
       :decision "d38"
 :owns ["voice/src/audio_stream.asl" "voice/tests/audio_stream_test.asl"]
       :targetSymbols ["make-audio-stream" "stream-write-pcm" "stream-read-window"]
@@ -80,7 +80,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0038"
+      :adr "D38"
       :decision "d38"
 :owns ["voice/src/vad.asl" "voice/tests/vad_test.asl"]
       :targetSymbols ["detect-voice-activity" "slice-utterance-frames" "is-speech-frame?"]
@@ -126,7 +126,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0038"
+      :adr "D38"
       :decision "d38"
 :owns ["voice/src/voice_intent.asl" "voice/tests/voice_intent_test.asl"]
       :targetSymbols ["dispatch-speech-utterance" "bind-intent-to-inflight"]
@@ -171,7 +171,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0038"
+      :adr "D38"
       :decision "d38"
 :owns ["asl/asl" "tests/test_voice_repl_e2e.sh"]
       :targetSymbols ["asl-voice-listen" "asl-voice-repl"]

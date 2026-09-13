@@ -34,7 +34,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62"]
       :variations ["Monolithic system prompt vs dynamic task-projected context block envelope (chosen: dynamic envelope)"]
       :failureModes ["Context truncation of vital task invariants (mitigated: mandatory Core block protection)"]
-      :adr "ADR-0062"
+      :adr "D62"
       :decision "D62"
       :why "Prevent prompt ballast and attention dispersion during automated headless CLI execution"
       :spec "Provide headless context synthesis function filtering irrelevant specializations by task affinity."
@@ -70,7 +70,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62"]
       :variations ["Ad-hoc markdown instructions vs canonical typed ASN paradigm blocks (chosen: typed ASN)"]
       :failureModes ["Schema drift between paradigm definitions and harness execution (mitigated: grammar and spec tests)"]
-      :adr "ADR-0062"
+      :adr "D62"
       :decision "D62"
       :why "Establish uniform specification format for swappable engineering paradigms"
       :spec "Update paradigm schema with engagement archetype definitions and tool affinities."
@@ -106,7 +106,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62"]
       :variations ["One-size-fits-all prompt template vs model-capacity tiered dispatch (chosen: tiered dispatch)"]
       :failureModes ["Model out-of-memory or context truncation on SLM targets (mitigated: GBNF grammar compaction)"]
-      :adr "ADR-0062"
+      :adr "D62"
       :decision "D62"
       :why "Guarantee maximal reasoning for Frontier models while guaranteeing safety and speed for local models"
       :spec "Extend LLM client with tiered execution profile configuration."
@@ -142,7 +142,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62"]
       :variations ["Cumulative full-history passing vs airgapped artifact-and-receipt handoff (chosen: airgapped handoff)"]
       :failureModes ["Reviewer rubber-stamping prior agent conclusions due to context priming (mitigated: epistemic airgap)"]
-      :adr "ADR-0062"
+      :adr "D62"
       :decision "D62"
       :why "Ensure independent adversarial rigor across chained multi-agent workflows"
       :spec "Implement airgap receipt and delta extraction filtering historical conversational bloat."
@@ -178,7 +178,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62"]
       :variations ["Shared prompt template across all modes vs decoupled REPL and headless pipelines (chosen: decoupled pipelines)"]
       :failureModes ["REPL tool availability regressions (mitigated: comprehensive REPL test suite)"]
-      :adr "ADR-0062"
+      :adr "D62"
       :decision "D62"
       :why "Optimize interactive UX and automated CI performance simultaneously without compromise"
       :spec "Ensure REPL initializes broad resident environment while headless invocations leverage dynamic chokepoint."
@@ -220,7 +220,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62"]
       :variations ["Informal discussion signoff vs physical execution receipt in ledger (chosen: physical receipt)"]
       :failureModes ["Desynchronized roadmap or broken intent links (mitigated: automated consistency engine)"]
-      :adr "ADR-0062"
+      :adr "D62"
       :decision "D62"
       :why "Lock in physical ground truth and preserve permanent audit trail across waves"
       :spec "Reconcile ADR-0062, update intent.asn, roadmap.asn, and receipts.asn, then run full verification gate."

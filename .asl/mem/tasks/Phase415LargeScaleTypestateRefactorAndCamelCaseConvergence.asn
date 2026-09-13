@@ -35,7 +35,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59"]
       :variations ["Arbitrary splitting vs typestate lifecycle partitioning (chosen: typestate partitioning)"]
       :failureModes ["Broken imports during file decomposition (mitigated: CAS branch testing)"]
-      :adr "ADR-0059"
+      :adr "D59"
       :decision "D59"
       :why "Establish deterministic empirical roadmap for hotspot decomposition"
       :spec "Audit monorepo hotspot modules and record baseline metrics."
@@ -71,7 +71,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59"]
       :variations ["Monolithic file preservation vs modular typestate separation"]
       :failureModes ["Cyclic import between store and DAG (mitigated: DAG imports store records only)"]
-      :adr "ADR-0059"
+      :adr "D59"
       :decision "D59"
       :why "Restore typestate cohesion and reduce cognitive load for task management"
       :spec "Refactor tasks subsystem into cohesive typestate modules."
@@ -107,7 +107,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59"]
       :variations ["In-place monolithic file vs partitioned sub-modules"]
       :failureModes ["Zombie child processes on split error (mitigated: saga compensators)"]
-      :adr "ADR-0059"
+      :adr "D59"
       :decision "D59"
       :why "Isolate process lifecycle from memory spooling and socket IPC"
       :spec "Refactor daemon subsystem into modular typestates."
@@ -143,7 +143,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59"]
       :variations ["Partial migration vs comprehensive monorepo pass"]
       :failureModes ["Test runner discovery failure (mitigated: pure ASL suite runner handles PascalCase)"]
-      :adr "ADR-0059"
+      :adr "D59"
       :decision "D59"
       :why "Achieve full token optimization across test suites monorepo-wide"
       :spec "Convert dashed test functions to PascalCase."
@@ -179,7 +179,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59"]
       :variations ["Dual-mode Markdown+ASN vs Pure ASN S-expression standard"]
       :failureModes ["External client tool incompatibility (mitigated: asl-codec transpilation)"]
-      :adr "ADR-0059"
+      :adr "D59"
       :decision "D59"
       :why "Maximize instruction compactness and protocol alignment across agent harnesses"
       :spec "Upgrade agent prompt templates to pure ASN."
@@ -217,7 +217,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59"]
       :variations ["Manual status update vs deterministic settlement audit"]
       :failureModes ["Roadmap desynchronization (mitigated: consistency audit validation)"]
-      :adr "ADR-0059"
+      :adr "D59"
       :decision "D59"
       :why "Settle Phase 415 and confirm complete ecosystem health"
       :spec "Reconcile roadmap, decisions, intent, and run 7 gates."

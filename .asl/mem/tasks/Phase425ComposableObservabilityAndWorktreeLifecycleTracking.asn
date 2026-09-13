@@ -35,7 +35,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71"]
       :variations ["Central database vs decentralized git-ignored file stores (chosen: git-ignored file stores)"]
       :failureModes ["Git history pollution with transient metric files (mitigated: added to .aslignore and .asl.config.asn)"]
-      :adr "ADR-0071"
+      :adr "D71"
       :decision "D71"
       :why "Provide actionable search telemetry without repository churn"
       :spec "Create .asl/metrics/webSearch.asn with complete provider metrics schema."
@@ -72,7 +72,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71"]
       :variations ["Ephemeral untracked worktrees vs ledgered lifecycle records (chosen: ledgered lifecycle records)"]
       :failureModes ["Dangling worktree tombstones (mitigated: 30-day tombstone TTL)"]
-      :adr "ADR-0071"
+      :adr "D71"
       :decision "D71"
       :why "Maintain strict branch lineage and worktree hygiene across multi-agent sessions"
       :spec "Create .asl/metrics/worktrees.asn with active roster and lifecycle history."
@@ -109,7 +109,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71"]
       :variations ["Lossless infinite logging vs adaptive retention downsampling (chosen: adaptive retention downsampling)"]
       :failureModes ["Log bloat exhausting disk space (mitigated: 256KB compaction ceiling)"]
-      :adr "ADR-0071"
+      :adr "D71"
       :decision "D71"
       :why "Keep telemetry high-SNR and actionable for tool tuning without token waste"
       :spec "Create .asl/metrics/tools.asn with tool profiles and limitation records."
@@ -150,7 +150,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71"]
       :variations ["Tightly coupled daemon state vs on-demand composition from isolated stores (chosen: on-demand composition)"]
       :failureModes ["Missing component metric files (mitigated: graceful fallback per component)"]
-      :adr "ADR-0071"
+      :adr "D71"
       :decision "D71"
       :why "Provide holistic multi-dimensional visibility while maintaining strict architectural boundaries"
       :spec "Implement run_composable_metrics in asl/asl and connect to CLI dispatcher."
@@ -193,7 +193,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71"]
       :variations ["Manual settlement vs automated consistency gate (chosen: automated consistency gate)"]
       :failureModes ["Broken bidirectional links (mitigated: verified with asl audit consistency)"]
-      :adr "ADR-0071"
+      :adr "D71"
       :decision "D71"
       :why "Guarantee full epistemic consistency and unbreakable truth across memory files"
       :spec "Update all memory ledgers, verify with asl audit consistency and asl gate."

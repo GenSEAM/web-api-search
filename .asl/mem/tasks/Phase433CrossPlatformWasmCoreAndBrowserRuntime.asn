@@ -38,7 +38,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D75" "D77" "D78"]
       :variations ["Monolithic runtime rewrite immediately vs phased substrate packaging with deferred C source rewrite (chosen: phased substrate packaging)"]
       :failureModes ["Dangling ADR references if shortcodes mismatch; verified by asl audit consistency"]
-      :adr "ADR-0078"
+      :adr "D78"
       :decision "D78"
       :why "Establish architectural clarity, browser bounds, and cross-platform portability guarantees"
       :spec "Author ADR-0078, register D78 in decision registries, and verify bidirectional linkages."
@@ -78,7 +78,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D78"]
       :variations ["Retaining separate asl-eval executable vs consolidating into unified asl-engine (chosen: consolidation)"]
       :failureModes ["Loss of S-expression evaluation speed during micro-runtime transition"]
-      :adr "ADR-0078"
+      :adr "D78"
       :decision "D78"
       :why "Eliminating proprietary frameworks is required for true cross-platform sovereignty"
       :spec "Consolidate S-expression evaluation into asl-engine and remove JavaScriptCore dependency."
@@ -118,7 +118,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D78"]
       :variations ["Heavy Emscripten runtime (2+ MB) vs standalone freestanding WASM with WASI preview 1 (<150 KB) (chosen: freestanding WASM)"]
       :failureModes ["Memory leaks in WebAssembly linear memory during long-lived browser sessions"]
-      :adr "ADR-0078"
+      :adr "D78"
       :decision "D78"
       :why "Compact WASM binary fits browser constraints and eliminates host OS coupling"
       :spec "Emit freestanding WebAssembly module and verify size under 150 KB."
@@ -158,7 +158,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D78"]
       :variations ["WebSocket proxy to localhost daemon vs in-memory WASM direct dispatch (chosen: in-memory direct dispatch)"]
       :failureModes ["Browser main thread freezing on intensive AST parsing (mitigated: Web Worker isolation)"]
-      :adr "ADR-0078"
+      :adr "D78"
       :decision "D78"
       :why "Direct in-memory RPC enables sovereign agent execution inside browser tabs with zero server dependency"
       :spec "Implement browser runtime bridge and verify with strict-falsify tests."
@@ -198,7 +198,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D78"]
       :variations ["LocalStorage (5 MB limit) vs OPFS/IndexedDB (>1 GB quota) (chosen: OPFS/IndexedDB)"]
       :failureModes ["Quota exhaustion or private browsing mode blocking persistence (mitigated: graceful RAM fallback)"]
-      :adr "ADR-0078"
+      :adr "D78"
       :decision "D78"
       :why "Sovereign agents in browser need local persistent state for roadmaps, memory chunks, and source files"
       :spec "Design and verify browser VFS storage abstraction with OPFS integration."
@@ -238,7 +238,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D78"]
       :variations ["Immediate risky rewrite of working C99 engine vs stable phased deferral following user priority (chosen: phased deferral)"]
       :failureModes ["Premature engine breakage stalling monorepo development tools"]
-      :adr "ADR-0078"
+      :adr "D78"
       :decision "D78"
       :why "Respects user priority directive while cementing immutable architecture roadmap"
       :spec "Catalog engine rewrite deferral and formalize bootstrap pathway."

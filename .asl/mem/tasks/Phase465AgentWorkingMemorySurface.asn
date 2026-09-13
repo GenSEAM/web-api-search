@@ -30,7 +30,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task46402"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46501"
@@ -69,7 +69,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task46501"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46502"
@@ -108,7 +108,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task46501"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46503"
@@ -147,7 +147,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task46501" "Task46401"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46504"
@@ -186,7 +186,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task45405"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46505"
@@ -225,7 +225,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task46504" "Task46304"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46506"

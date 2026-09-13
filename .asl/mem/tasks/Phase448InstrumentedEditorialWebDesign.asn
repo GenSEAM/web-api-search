@@ -67,7 +67,7 @@
       :variations ["Keep brand violet as a single signal versus replace it with cyan or green" "72rem shell versus global 80rem shell"]
       :failureModes ["Token projection drifts from CSS" "A second accent reappears" "Wide canvas leaks into prose"]
       :additionalRequirements ["No new dependency" "Preserve light and dark themes" "Every numeric claim stays evidence-bound"]
-      :adr "ADR-0082"
+      :adr "D82"
       :decision "d82"
       :dependsOn ["Task44606"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44801"
@@ -106,7 +106,7 @@
       :variations ["CSS grid versus nested flex percentages" "Widen all pages versus data-only opt-in"]
       :failureModes ["Long code or tabs create page overflow" "Prose line length becomes unreadable" "Fixed navbar covers anchor focus"]
       :additionalRequirements ["Use relative units" "Keep semantic main/section landmarks" "Preserve deep links"]
-      :adr "ADR-0082"
+      :adr "D82"
       :decision "d82"
       :dependsOn ["Task44801"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44802"
@@ -145,7 +145,7 @@
       :variations ["Keep cosmic illustration as low-contrast optional texture versus remove it entirely" "Border-led hierarchy versus shadow-led hierarchy"]
       :failureModes ["Brand signal loses contrast" "Decorative layer obscures content" "All sections become visually flat"]
       :additionalRequirements ["Decorative SVG has aria-hidden" "Keep mascot and logo assets" "No new image dependency"]
-      :adr "ADR-0082"
+      :adr "D82"
       :decision "d82"
       :dependsOn ["Task44801" "Task44802"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44803"
@@ -184,7 +184,7 @@
       :variations ["Compact top nav versus collapsible command bar" "Inline feedback versus toast with aria-live"]
       :failureModes ["Focus is hidden under sticky UI" "Mobile controls are unreachable" "Animation causes motion discomfort"]
       :additionalRequirements ["Do not disable zoom" "Buttons for actions and anchors for navigation" "Icon-only controls carry labels"]
-      :adr "ADR-0082"
+      :adr "D82"
       :decision "d82"
       :dependsOn ["Task44802"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44804"
@@ -223,7 +223,7 @@
       :variations ["Inline progressive disclosure versus side panel" "Editorial index versus masonry cards" "Top nav versus command palette entry"]
       :failureModes ["Component abstraction hides semantic landmarks" "Evidence overwhelms first-time readers" "Pattern duplication survives under new names"]
       :additionalRequirements ["Preserve routes and deep links" "No fabricated metrics" "Use sentence-case user copy"]
-      :adr "ADR-0082"
+      :adr "D82"
       :decision "d82"
       :dependsOn ["Task44803" "Task44804"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44805"
@@ -263,7 +263,7 @@
       :variations ["Playwright screenshot evidence versus browser DOM metric harness" "CSS byte delta versus rendered token delta"]
       :failureModes ["Screenshot passes while keyboard path fails" "A compressed stylesheet drops semantics" "Visual claim lacks a reproducible artifact"]
       :additionalRequirements ["Independent reviewer owns acceptance and the outer supervisor/runner configuration" "Before any Task448 gate is trusted, dispatch the task argument to its verifier-owned oracle and prove positive and forced-failing sentinel controls" "No runtime baseline claim before fixtures exist" "Report exit and executed assertions"]
-      :adr "ADR-0082"
+      :adr "D82"
       :decision "d82"
       :dependsOn ["Task44805"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44806"

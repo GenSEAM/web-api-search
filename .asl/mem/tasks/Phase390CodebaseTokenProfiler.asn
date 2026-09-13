@@ -33,7 +33,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0047"
+      :adr "D47"
       :decision "d47"
 :owns ["harness/src/token_profiler.asl" "harness/tests/token_profiler_test.asl" "asl/bin/asl-engine"]
       :targetSymbols ["TokenMetrics" "make-token-metrics" "profile-file-tokens" "profile-codebase-tokens" "find-token-monsters" "find-file-hotspots" "find-collocations"]
@@ -77,7 +77,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0047"
+      :adr "D47"
       :decision "d47"
 :owns ["asl/asl" "asl/bin/asl-engine" "tests/test_codebase_tokens_e2e.sh"]
       :targetSymbols ["run_token_profiler" "tokens-dispatch"]
@@ -121,7 +121,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0047"
+      :adr "D47"
       :decision "d47"
 :owns [".asl/mem/roadmap.asn" ".asl/mem/receipts.asn" ".asl/mem/decisions/GAPS.asn"]
       :targetSymbols []

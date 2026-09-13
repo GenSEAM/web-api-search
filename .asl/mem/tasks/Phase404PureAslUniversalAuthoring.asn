@@ -34,7 +34,7 @@
       :invariants ["C1" "C2" "C3" "C4" "D44" "D51"]
       :variations ["Raw CSS with build script (rejected: violates pure ASL-first policy)"]
       :failureModes ["Delimiter imbalance in nested style maps (mitigated: verified via asl check)"]
-      :adr "ADR-0044"
+      :adr "D44"
       :decision "d44"
       :why "Maintain homoiconic S-expression purity across all visual design tokens"
       :spec "Create asl/web/styles.asn containing :tailwind, :layers, :themes, :rules, and :media declarations."
@@ -70,7 +70,7 @@
       :invariants ["C3" "D34" "D44"]
       :variations ["External css preprocessor (rejected: introduces foreign runtime dependencies)"]
       :failureModes ["Malformed CSS generation from unquoted selectors (mitigated: automated string escaping)"]
-      :adr "ADR-0044"
+      :adr "D44"
       :decision "d44"
       :why "Enable deterministic compilation from pure ASN to host CSS artifacts"
       :spec "Add toCss generator to scripts/project.sh with @layer and variable emitter."
@@ -106,7 +106,7 @@
       :invariants ["C1" "C2" "D44" "D52"]
       :variations ["Manual file copy (rejected: causes silent drift)"]
       :failureModes ["Drift detection failure on whitespace differences (mitigated: exact normalized formatting)"]
-      :adr "ADR-0044"
+      :adr "D44"
       :decision "d44"
       :why "Automate continuous synchronization between ASN source and host CSS artifact"
       :spec "Update .asl.config.asn with CSS projection definition and execute asl project."
@@ -142,7 +142,7 @@
       :invariants ["C1" "C2" "D46"]
       :variations ["Ad-hoc shell hook (rejected: preserves foreign shell logic)"]
       :failureModes ["Type inference failure on untyped imports (mitigated: self-contained runner module)"]
-      :adr "ADR-0046"
+      :adr "D46"
       :decision "d46"
       :why "Unify developer ergonomics under pure AgentScript toolchain execution"
       :spec "Author tools/pre-commit.asl and verify delimiter balance with asl check."
@@ -179,7 +179,7 @@
       :invariants ["C4" "D46" "D51"]
       :variations ["Universal mass CamelCase on atomic primitives (rejected: ruins hd/tl brevity)"]
       :failureModes ["Breaking existing test suite names during refactor (mitigated: staged CAS replacement)"]
-      :adr "ADR-0051"
+      :adr "D51"
       :decision "d51"
       :why "Recapture 1,600+ BPE tokens monorepo-wide while maintaining 100% test pass"
       :spec "Run asl tokens --camel, catalog high-yield conversions, and codify transformation rules."
@@ -217,7 +217,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D44" "D46" "D51" "D52"]
       :variations ["Skip gates on generated files (rejected: violates anti-weakening policy)"]
       :failureModes ["Gate failure on uncommitted projection drift (mitigated: pre-gate sync check)"]
-      :adr "ADR-0052"
+      :adr "D52"
       :decision "d52"
       :why "Guarantee mathematical and physical integrity of the entire monorepo state"
       :spec "Execute acceptance gate command and verify exit code 0 under strict falsifiability."

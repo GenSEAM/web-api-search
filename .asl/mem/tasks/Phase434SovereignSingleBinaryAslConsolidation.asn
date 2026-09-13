@@ -38,7 +38,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D75" "D77" "D78" "D79"]
       :variations ["Maintaining separate engine/eval/CLI split vs single unified sovereign binary (chosen: single unified sovereign binary)"]
       :failureModes ["Dangling ADR references if shortcodes mismatch; verified by asl audit consistency"]
-      :adr "ADR-0079"
+      :adr "D79"
       :decision "D79"
       :why "Single dependency-free binary eliminates architectural fragmentation and external runtime friction"
       :spec "Author ADR-0079, register D79 in decision registries, and verify bidirectional linkages."
@@ -78,7 +78,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D79"]
       :variations ["Retaining multi-binary distribution vs single self-contained executable (chosen: single executable)"]
       :failureModes ["Socket collision between legacy engine daemon and unified daemon"]
-      :adr "ADR-0079"
+      :adr "D79"
       :decision "D79"
       :why "A single binary simplifies deployment and provides zero-friction agent tooling"
       :spec "Unify engine and eval into single executable and verify batch RPC."
@@ -118,7 +118,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D79"]
       :variations ["External runtime evaluation vs embedded S-expression evaluator (chosen: embedded evaluator)"]
       :failureModes ["Incomplete evaluation semantics on complex lexical closures"]
-      :adr "ADR-0079"
+      :adr "D79"
       :decision "D79"
       :why "Native evaluation guarantees cross-platform determinism and eliminates external VM overhead"
       :spec "Integrate S-expression evaluation and test runner into unified binary."
@@ -158,7 +158,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D79"]
       :variations ["Shell-based gate orchestration vs compiled native pipeline (chosen: compiled pipeline)"]
       :failureModes ["Gate weakening during shell-to-compiled migration (prevented by strict receipt assertion)"]
-      :adr "ADR-0079"
+      :adr "D79"
       :decision "D79"
       :why "Fast compiled verification gates provide immediate feedback loops for autonomous agents"
       :spec "Embed 7-tier verification pipeline in unified binary and verify all gates pass."
@@ -198,7 +198,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D79"]
       :variations ["Python-based consistency script vs native compiled auditor (chosen: native auditor)"]
       :failureModes ["Desynchronized ledger counts across memory files"]
-      :adr "ADR-0079"
+      :adr "D79"
       :decision "D79"
       :why "Self-hosted consistency auditing guarantees absolute epistemic integrity across monorepo ledgers"
       :spec "Embed 5D consistency auditor into unified binary and verify all dimensions pass."
@@ -239,7 +239,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D79"]
       :variations ["Maintaining legacy 7389-line script vs pruning transliterator and delegating to native binary (chosen: prune and delegate)"]
       :failureModes ["Broken CLI options or environment variables during launcher pruning"]
-      :adr "ADR-0079"
+      :adr "D79"
       :decision "D79"
       :why "Eliminates 7000+ lines of unreadable script bloat and guarantees single-binary sovereignty"
       :spec "Prune asl/asl, wire to unified binary, and verify complete toolchain."

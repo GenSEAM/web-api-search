@@ -34,7 +34,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D55"]
       :variations ["Hardcoded string literals vs strongly-typed S-expression enums"]
       :failureModes ["Grammar symbol collision with existing sh operations (mitigated: distinct namespace)"]
-      :adr "ADR-0055"
+      :adr "D55"
       :decision "D55"
       :why "Establish deterministic AST contract for shell dialect variation"
       :spec "Define ShellDialect enum and DialectFeatures struct with complete rationales."
@@ -70,7 +70,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D55"]
       :variations ["External regex parser vs native recursive-descent ASL token scanner"]
       :failureModes ["Incomplete shell escaping causing injection vulnerabilities (mitigated: escape-sh-compact)"]
-      :adr "ADR-0055"
+      :adr "D55"
       :decision "D55"
       :why "Enable safe, deterministic transpilation between shell scripts and compact ASN"
       :spec "Implement dialect-aware pipeline generation and parsing."
@@ -106,7 +106,7 @@
       :invariants ["C1" "C2" "C3" "C5" "D35" "D51" "D52" "D55"]
       :variations ["Spawning subshell inside command string vs direct binary execution"]
       :failureModes ["Missing bash binary on minimal container images (mitigated: automatic fallback to POSIX sh)"]
-      :adr "ADR-0055"
+      :adr "D55"
       :decision "D55"
       :why "Guarantee reliable execution of shell tools across Linux and macOS substrates"
       :spec "Add dialect argument to spawn and exec operations in engine."
@@ -142,7 +142,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D51" "D52" "D55"]
       :variations ["Separate transpile binary vs integrated asl subcommand"]
       :failureModes ["CLI argument parsing discrepancies between short and long flags"]
-      :adr "ADR-0055"
+      :adr "D55"
       :decision "D55"
       :why "Provide uniform access to shell transpilation across all agent execution channels"
       :spec "Add command handler to CLI and op handler to engine."
@@ -178,7 +178,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D51" "D52" "D55"]
       :variations ["Unit tests alone vs integration testing against actual system shells"]
       :failureModes ["Platform-specific differences in local /bin/sh during test runs"]
-      :adr "ADR-0055"
+      :adr "D55"
       :decision "D55"
       :why "Fulfill Gate 5 multi-case qualification and anti-weakening invariants"
       :spec "Author asserting tests for all supported dialects and error conditions."
@@ -215,7 +215,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D55"]
       :variations ["Manual receipt signing vs automated physical gate verification"]
       :failureModes ["Gate regression in unrelated packages during monorepo verification"]
-      :adr "ADR-0055"
+      :adr "D55"
       :decision "D55"
       :why "Guarantee monorepo integrity and close epistemic loop"
       :spec "Run full gate suite and consistency audit, then record settlement receipt."

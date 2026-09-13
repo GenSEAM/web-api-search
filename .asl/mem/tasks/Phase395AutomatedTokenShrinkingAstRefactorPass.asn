@@ -34,7 +34,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0047"
+      :adr "D47"
       :decision "d47"
 :owns ["asl/packages/asl-compiler/src/compact_rewrite.asl" "asl/packages/asl-compiler/tests/compact_rewrite_test.asl"]
       :targetSymbols ["rewrite-ast-tokens" "is-compaction-target?" "make-compaction-rule"]
@@ -84,7 +84,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0047"
+      :adr "D47"
       :decision "d47"
 :owns ["mem/src/refactor_vfs.asl" "mem/tests/refactor_vfs_test.asl"]
       :targetSymbols ["stage-refactor-diff" "preview-token-savings" "commit-staged-refactor"]
@@ -133,7 +133,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0047"
+      :adr "D47"
       :decision "d47"
 :owns ["asl/asl" "tests/test_ast_compactor_e2e.sh"]
       :targetSymbols ["asl-refactor-compact"]

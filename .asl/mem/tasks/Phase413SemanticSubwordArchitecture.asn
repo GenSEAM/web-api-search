@@ -34,7 +34,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57"]
       :variations ["Single-letter suffixes vs semantic functional morphemes (chosen: semantic morphemes)"]
       :failureModes ["Ambiguous morphemes with multiple BPE token splits (mitigated: verified in cl100k)"]
-      :adr "ADR-0057"
+      :adr "D57"
       :decision "D57"
       :why "Eliminate punctuation penalties and embed domain semantics into task identifiers"
       :spec "Codify ADR-0057 and Pillar V standard."
@@ -70,7 +70,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57"]
       :variations ["Strict dictionary lookup vs heuristic uppercase transition scanner"]
       :failureModes ["False alarms on foreign external protocol identifiers (mitigated: boundary isolation)"]
-      :adr "ADR-0057"
+      :adr "D57"
       :decision "D57"
       :why "Mechanically enforce subword token efficiency across codebases"
       :spec "Implement subword efficiency analyzer in health matrix."
@@ -107,7 +107,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57"]
       :variations ["In-place file update vs new collection generation"]
       :failureModes ["Broken reverse references in intent or receipts (mitigated: audit consistency validation)"]
-      :adr "ADR-0057"
+      :adr "D57"
       :decision "D57"
       :why "Align active task collections with subword token efficiency"
       :spec "Refactor Phase 412 task IDs to semantic subwords."
@@ -144,7 +144,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57"]
       :variations ["Static grep vs grammar token scanner"]
       :failureModes ["Token inflation from unmerged compound suffixes (mitigated: tokens audit)"]
-      :adr "ADR-0057"
+      :adr "D57"
       :decision "D57"
       :why "Guarantee optimal token compaction across monorepo symbol exports"
       :spec "Run grammar tokens audit across all packages."
@@ -183,7 +183,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57"]
       :variations ["Manual status update vs deterministic settlement audit"]
       :failureModes ["Roadmap desynchronization (mitigated: consistency audit validation)"]
-      :adr "ADR-0057"
+      :adr "D57"
       :decision "D57"
       :why "Settle Phase 413 and confirm complete ecosystem health"
       :spec "Reconcile roadmap, decisions, intent, and run 7 gates."

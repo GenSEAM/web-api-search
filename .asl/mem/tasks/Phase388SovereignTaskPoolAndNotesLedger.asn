@@ -33,7 +33,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0045"
+      :adr "D45"
       :decision "d45"
 :owns ["mem/src/notes.asl" "mem/tests/notes_test.asl" ".asl/mem/notes.asn" "mem/grammar.asn" "mem/manifest.asn"]
       :targetSymbols ["NoteRecord" "make-note" "note-is-active?" "note-has-tag?" "note-scope-matches?" "note-matches-query?" "format-note-asn" "project-note-md" "note-promote-to-task" "note-promote-to-adr"]
@@ -78,7 +78,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0045"
+      :adr "D45"
       :decision "d45"
 :owns ["mem/src/tasks.asl" "mem/tests/tasks_test.asl" "mem/grammar.asn"]
       :targetSymbols ["task-claim-session" "task-is-claimed-by?" "task-is-lease-expired?" "task-recover-session" "task-spawn-subtask"]
@@ -122,7 +122,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0045"
+      :adr "D45"
       :decision "d45"
 :owns [".asl/mem/roadmap.asn" ".asl/mem/receipts.asn"]
       :targetSymbols []

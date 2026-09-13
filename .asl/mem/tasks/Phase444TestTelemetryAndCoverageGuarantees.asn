@@ -33,7 +33,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task43601" "Task43605" "Task44207"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44401"
@@ -72,7 +72,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task44208" "Task44401" "Task43901"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44402"
@@ -111,7 +111,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task44401" "Task43601"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44403"
@@ -150,7 +150,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task43901" "Task44401"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44404"
@@ -189,7 +189,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task44401" "Task44202"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44405"
@@ -228,7 +228,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task44404" "Task44402" "Task44105"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44406"

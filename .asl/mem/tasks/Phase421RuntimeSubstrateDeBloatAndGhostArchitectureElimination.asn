@@ -35,7 +35,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66"]
       :variations ["Shell netcat vs Python in-process socket probe vs direct CLI engine execution (chosen: direct CLI engine execution with 50ms socket probe)"]
       :failureModes ["Premature socket connection abort (mitigated: automatic fallback to direct engine execution)"]
-      :adr "ADR-0066"
+      :adr "D66"
       :decision "D66"
       :why "Eliminate execution freezes and restore crisp interactive responsiveness without external networking binaries"
       :spec "Refactor asl/asl to remove all nc dependencies."
@@ -75,7 +75,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66"]
       :variations ["Complex sliding idle window with OS inspection vs simple hard timeout ceiling with STDIN firewall (chosen: simple hard timeout ceiling with STDIN firewall)"]
       :failureModes ["Test suite failures expecting legacy DeadlockVerdict structures (mitigated: preserve constructor interface while simplifying internals)"]
-      :adr "ADR-0066"
+      :adr "D66"
       :decision "D66"
       :why "Eliminate cognitive bloat and simplify process lifecycle management to true physical invariants"
       :spec "Update watchdog and supervisor modules to eliminate simulated telemetry alerts."
@@ -112,7 +112,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66"]
       :variations ["Retain Node.js as tertiary fallback vs absolute eradication (chosen: absolute eradication)"]
       :failureModes ["Missing runtime error if Python3 is not found (mitigated: clear diagnostic message on missing Python3)"]
-      :adr "ADR-0066"
+      :adr "D66"
       :decision "D66"
       :why "Enforce strict Zero-Foreign compliance and remove obsolete execution paths"
       :spec "Remove NODE_BIN and powershell logic from asl/asl."
@@ -154,7 +154,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66"]
       :variations ["Manual signoff vs automated 5-dimensional bidirectional audit (chosen: automated 5-dimensional audit)"]
       :failureModes ["Broken cross-references or desynchronized intent records (mitigated: strict D52 audit)"]
-      :adr "ADR-0066"
+      :adr "D66"
       :decision "D66"
       :why "Guarantee uncompromised architectural integrity and reproducible physical receipts"
       :spec "Run asl audit consistency and asl gate to verify zero errors and complete reconciliation."

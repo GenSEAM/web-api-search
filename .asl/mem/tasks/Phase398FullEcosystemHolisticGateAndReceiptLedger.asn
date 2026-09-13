@@ -33,7 +33,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0041"
+      :adr "D41"
       :decision "d41"
 :owns ["asl/packages/asl-gates/tests/gate_runner_test.asl"]
       :targetSymbols ["run-all-gates"]
@@ -76,7 +76,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0041"
+      :adr "D41"
       :decision "d41"
 :owns ["asl/asl"]
       :targetSymbols ["audit-multimesh"]
@@ -119,7 +119,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0041"
+      :adr "D41"
       :decision "d41"
 :owns [".asl/mem/receipts.asn"]
       :targetSymbols ["settle-task-receipt" "append-physical-receipt"]

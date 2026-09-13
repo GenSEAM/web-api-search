@@ -36,7 +36,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["LLM-based turn completion classifier vs pure lexical rule table (chosen: pure lexical rule table)"]
       :failureModes ["Misclassified trailing word stalling pipeline (mitigated: fails open with 3000ms ceiling)"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Sub-microsecond local lexical analysis avoids paying LLM inference latency for simple turn completion decisions"
       :spec "Implement endturn.asl with bilingual grammatical markers and verify test suite."
@@ -73,7 +73,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Volatile memory timer vs durable state machine (chosen: pure functional state machine)"]
       :failureModes ["Timer drift causing delayed dispatch (mitigated: monotonic timestamps and step-settle-timer)"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Ensures multi-part speech fragments are assembled into unified task payloads before execution"
       :spec "Author voice_settle.asl and verify through comprehensive state transitions in test suite."
@@ -111,7 +111,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Complex regex parser vs fast multi-pass string replace (chosen: fast multi-pass string replace)"]
       :failureModes ["Excessive truncation losing meaning (mitigated: high-density chip summary upfront)"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Synthesized voice must be concise, pleasant, and free of visual terminal syntax"
       :spec "Author aloud.asl and verify chrome stripping and duration expansions."
@@ -148,7 +148,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Kokoro-only vs hybrid Silero/Kokoro/Cloud engine hierarchy (chosen: hybrid hierarchy)"]
       :failureModes ["Missing local ONNX model (mitigated: fallback to Cloud streaming or terminal silent)"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Resolves the critical language barrier in voice synthesis without heavy runtime dependencies"
       :spec "Author tts_engine.asl and verify language compatibility in tests."
@@ -186,7 +186,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Immediate stop on ambiguity vs assumed claims with background lookup (chosen: assumed claims)"]
       :failureModes ["Pool explosion (mitigated: strict caps of 6 questions and 4 assumptions)"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Allows assistant to proceed immediately on working assumptions while background scouts resolve unknowns"
       :spec "Author compose.asl and verify question lifecycle in test suite."
@@ -223,7 +223,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Global prompt buffer vs per-chat keyed pool (chosen: per-chat keyed pool)"]
       :failureModes ["Token budget bloat (mitigated: capacity capped at K=3 prompts)"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Provides essential context for follow-up detection without exploding context window"
       :spec "Author prompt_pool.asl and test capacity limits and TTL eviction."
@@ -261,7 +261,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["LLM re-prompting vs pure deterministic token transforms (chosen: pure deterministic transforms)"]
       :failureModes ["Over-stripping domain terms (mitigated: preserved technical nouns and arguments)"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Ensures clean high-SNR prompt ingress for downstream agents without paying LLM latency"
       :spec "Author intent_cleaner.asl and verify through unit tests."
@@ -298,7 +298,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Homogeneous UI alerts vs multi-tier focus policies (chosen: multi-tier focus policies)"]
       :failureModes ["Focus stealing during typing (mitigated: strict focus-hold-until-idle guard)"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Provides delightful human-agent user experience tailored to cognitive modality"
       :spec "Author intent_ux.asl and verify intent classification in test suite."
@@ -335,7 +335,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Continuous alerts vs debounced proactive nudges (chosen: debounced proactive nudges)"]
       :failureModes ["Nudge spamming (mitigated: 60,000ms cooldown floor)"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Ensures proactive suggestions feel helpful rather than intrusive"
       :spec "Author nudge_guard.asl and test streak counting and cooldown timing."
@@ -373,7 +373,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Direct git branch switching vs isolated worktrees (chosen: isolated worktrees)"]
       :failureModes ["Worktree contention across parallel agents (mitigated: strict collision check)"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Provides reliable multi-workspace multi-IDE execution without git branch thrashing"
       :spec "Author ide_mesh.asl and verify through comprehensive unit test suite."

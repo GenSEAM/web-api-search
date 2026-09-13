@@ -36,7 +36,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Simulated sandbox exit codes (rejected: masks physical system breakages)"]
       :failureModes ["Subshell hanging during test runs (mitigated: process timeout wrapper)"]
-      :adr "ADR-0053"
+      :adr "D53"
       :decision "d53"
       :why "Restore absolute physical falsifiability to the inner agent execution loop"
       :spec "Modify harness/src/agent.asl to invoke the physical test-command via process execution, passing genuine exit status into macro-reflect-audit."
@@ -78,7 +78,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Soft warnings on 0 assertions (rejected: breaks strict-falsify invariant)"]
       :failureModes ["Valid suites with alternative assertion markers failing (mitigated: canonical form-asserts AST extractor)"]
-      :adr "ADR-0053"
+      :adr "D53"
       :decision "d53"
       :why "Prevent empty or tautological tests from passing verification gates"
       :spec "Update cli.asl to return err on empty assertions, rewrite gates_hardening_test.asl to reject zero-assert modules, and harden cli_test.asl."
@@ -118,7 +118,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Converting now_ts to milliseconds (rejected: rest of taskstore expects second-level timestamps)"]
       :failureModes ["Premature lease expiration under slow network (mitigated: default 1800s lease window)"]
-      :adr "ADR-0045"
+      :adr "D45"
       :decision "d45"
       :why "Restore proper lease eviction and recovery timings for distributed agent sessions"
       :spec "Update asl/bin/asl-engine:1901 to divide lease_ms by 1000 before computing expiration timestamp."
@@ -159,7 +159,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Maintaining separate lightweight renderer (rejected: violates C3 boundary universalism)"]
       :failureModes ["Attribute parsing differences across namespaces (mitigated: standard SVG XML serializer)"]
-      :adr "ADR-0034"
+      :adr "D34"
       :decision "d34"
       :why "Eliminate vector graphics stub and unify on canonical asl-codec SVG engine"
       :spec "Refactor vdom/src/asn_svg.asl to import and delegate to asl-codec/svg-transpile, updating test assertions."
@@ -207,7 +207,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Deleting legacy tests (rejected: destroys valuable integration verification coverage)"]
       :failureModes ["Masking real regressions under path fixes (mitigated: preserve all functional assertions)"]
-      :adr "ADR-0044"
+      :adr "D44"
       :decision "d44"
       :why "Restore truth and reliability to the monorepo integration test suite"
       :spec "Update all test scripts in tests/ to reference .asn files and modern shortcodes, resolving all 8 failures."
@@ -248,7 +248,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Manual gate flags (rejected: agents will skip non-mandatory checks)"]
       :failureModes ["Slow gate runs (mitigated: parallel test execution)"]
-      :adr "ADR-0053"
+      :adr "D53"
       :decision "d53"
       :why "Permanently close the gap between unit test gates and integration reality"
       :spec "Update Gate 5 to include tests/ scripts and update Gate 7 to verify SHA256 hashes of projected skills."
@@ -289,7 +289,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Storing enriched attributes in auxiliary map (rejected: loses strong typing and AST checking)"]
       :failureModes ["Backwards-compatibility breaks with legacy task blocks (mitigated: optional field defaults)"]
-      :adr "ADR-0052"
+      :adr "D52"
       :decision "d52"
       :why "Implement machine-native task context standard across the in-memory taskstore"
       :spec "Add D52 and effort/risk fields to TaskRecord in mem/src/tasks.asl, update constructor, parsers, formatters, and unit tests."
@@ -329,7 +329,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Auditing only the latest phase (rejected: allows historical drift)"]
       :failureModes ["False failures on legacy archival phases (mitigated: scope to phases >= 401 and active backlog)"]
-      :adr "ADR-0052"
+      :adr "D52"
       :decision "d52"
       :why "Ensure holistic, uncompromised consistency auditing across the entire task lifecycle"
       :spec "Modify run_consistency_audit in asl/asl to dynamically audit all tasks from Phase 401 onwards and backlog.asn."
@@ -370,7 +370,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Ignoring warnings (rejected: undermines deterministic ledger validation)"]
       :failureModes ["Broken external references (mitigated: verify through test_asn_decisions_e2e.sh)"]
-      :adr "ADR-0048"
+      :adr "D48"
       :decision "d48"
       :why "Eliminate ledger warnings and achieve seamless decision synchronization"
       :spec "Synchronize shortcode identifiers in decisions.asn and intent.asn to uniform dXX format."
@@ -411,7 +411,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Manual status edits in files (rejected: prone to merge conflicts and race conditions)"]
       :failureModes ["Race conditions on simultaneous claim (mitigated: file lock / CAS update)"]
-      :adr "ADR-0045"
+      :adr "D45"
       :decision "d45"
       :why "Empower autonomous agents with CLI primitives for task acquisition and settlement proof"
       :spec "Implement claim and settle in asl/asl under asl task, outputting TaskReceipt upon settlement."
@@ -452,7 +452,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Optimistic concurrency with rollback on conflict (rejected: wastes compute and tokens)"]
       :failureModes ["Overly broad :owns boundaries blocking parallel work (mitigated: encourage fine-grained :owns paths)"]
-      :adr "ADR-0045"
+      :adr "D45"
       :decision "d45"
       :why "Enforce cybernetic anti-collision guarantees across parallel agent execution swarms"
       :spec "Wire task-owns-intersect? into task claim validation in asl-engine and mem/src/tasks.asl."
@@ -493,7 +493,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Prompt-only instructions (rejected: models consistently violate non-enforced negative rules)"]
       :failureModes ["Pre-mortem rejecting valid edits (mitigated: calibrated blast-radius threshold)"]
-      :adr "ADR-0043"
+      :adr "D43"
       :decision "d43"
       :why "Operationalize epistemic anti-hallucination middleware in the core coding loop"
       :spec "Import and invoke anti_hallucination in llm_client.asl and pre-mortem in coding.asl."
@@ -534,7 +534,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Infinite refixing until success (rejected: risks infinite loops and token blowup)"]
       :failureModes ["Refixing loop loops endlessly (mitigated: strict ceiling <= 3 iterations)"]
-      :adr "ADR-0053"
+      :adr "D53"
       :decision "d53"
       :why "Establish homeostatic self-healing in the autonomous agent execution pipeline"
       :spec "Implement refix state machine in steps-pipeline.asl with VFS discard and bounded retry loop."
@@ -575,7 +575,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Manual copy-paste by developers (rejected: leads to continuous divergence)"]
       :failureModes ["Syntax differences across target agent configs (mitigated: test in sandbox environments)"]
-      :adr "ADR-0053"
+      :adr "D53"
       :decision "d53"
       :why "Ensure external coding agents conform to strict epistemic and anti-weakening disciplines"
       :spec "Update scripts/install.sh to compile skills from canonical specifications and embed anti-weakening rules."
@@ -616,7 +616,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Relying on DevTools console inspection (rejected: agents cannot read raw browser console without MCP bridge)"]
       :failureModes ["Overly restrictive CSP breaking legitimate playground DOM APIs (mitigated: allow-scripts without allow-same-origin)"]
-      :adr "ADR-0033"
+      :adr "D33"
       :decision "d33"
       :why "Provide secure, self-healing in-browser execution for canvas and playground agents"
       :spec "Enhance action firewall in InBrowserEddie.asl and add error bridge in PlaygroundView.asl."
@@ -658,7 +658,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Leaving bash permanently as host wrapper (rejected: violates pure ASL self-hosting manifesto)"]
       :failureModes ["Performance slowdown during whole-repo scans (mitigated: in-memory AST cache and Wasm execution)"]
-      :adr "ADR-0053"
+      :adr "D53"
       :decision "d53"
       :why "Fulfill the self-hosting pure AgentScript toolchain mandate"
       :spec "Implement real scanning in asl-gates/src/gate_runner.asl, connect to asl-cli, and forward bash asl gate to pure runner."
@@ -701,7 +701,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Permitting emojis in user-facing CLI output (rejected: breaks machine parsing and token efficiency)"]
       :failureModes ["Breaking string literals containing hashes (mitigated: inspect code AST tokens rather than raw text)"]
-      :adr "ADR-0048"
+      :adr "D48"
       :decision "d48"
       :why "Achieve total forensic purity across C1-C5 monorepo invariants"
       :spec "Clean emojis in registry.asl, deduplicate expr.asl to asl-text/escape, remove @pcp from asl-sh, remove hash formatting from notes.asl."
@@ -754,7 +754,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Bulk auto-tagging without inspection (rejected: compromises classification accuracy)"]
       :failureModes ["Syntax errors in grammar files (mitigated: asl check validation on each file)"]
-      :adr "ADR-0051"
+      :adr "D51"
       :decision "d51"
       :why "Fulfill D51 token efficiency standard across all compiler grammar registries"
       :spec "Add :rationality and :contextDependent attributes to symbols >2 tokens across all 14 package grammars."
@@ -795,7 +795,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Direct OS ALSA/CoreAudio bindings (rejected: violates portable AgentScript substrate)"]
       :failureModes ["Buffer overrun on slow consumer (mitigated: overwrite oldest sample policy in ring)"]
-      :adr "ADR-0049"
+      :adr "D49"
       :decision "d49"
       :why "Deliver high-performance, real-time PCM audio streaming without GC memory thrashing"
       :spec "Refactor AudioStream struct to use ring-buffer representation and update streaming tests."
@@ -836,7 +836,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52"]
       :variations ["Manual sign-off (rejected: violates empirical verification mandate)"]
       :failureModes ["Residual regression in peripheral package (mitigated: full ecosystem scan)"]
-      :adr "ADR-0053"
+      :adr "D53"
       :decision "d53"
       :why "Deliver complete, empirical closure of the systemic gap remediation program"
       :spec "Execute asl gate, asl audit, full E2E test sweep, record physical TaskReceipt, and update roadmap.asn."

@@ -33,7 +33,7 @@
       :failureModes [
         "Assertion failure or syntax imbalance in owned files"
       ]
-      :adr "ADR-0040"
+      :adr "D40"
       :decision "d40"
 :owns ["mem/src/tasks.asl" "mem/tests/tasks_test.asl" "mem/grammar.asn"]
       :targetSymbols ["TaskReceipt" "make-task-receipt" "receipt-is-verified?" "format-receipt-asn" "make-holistic-task" "task-overlap-blast-radius?" "task-advance-step" "task-capture-handoff" "task-attach-receipt" "task-format-holistic-asn"]
@@ -78,7 +78,7 @@
       :failureModes [
         "Assertion failure or syntax imbalance in owned files"
       ]
-      :adr "ADR-0040"
+      :adr "D40"
       :decision "d40"
 :owns ["agent-core/src/tasktypes.asl" "agent-core/src/taskstore.asl" "agent-core/grammar.asn" "agent-core/tests/taskstore_test.asl"]
       :targetSymbols ["TaskKind" "TaskOutcome" "make-task-outcome" "task-state-in-flight?" "taskstore-list-in-flight" "taskstore-count-by-state" "taskstore-spawn-children"]
@@ -123,7 +123,7 @@
       :failureModes [
         "E2E script failure or broken RPC dispatcher"
       ]
-      :adr "ADR-0040"
+      :adr "D40"
       :decision "d40"
 :owns ["asl/asl"]
       :targetSymbols []
@@ -168,7 +168,7 @@
       :failureModes [
         "Delimiter imbalance or missing handoff documentation"
       ]
-      :adr "ADR-0040"
+      :adr "D40"
       :decision "d40"
 :owns [".asl/mem/tasks/InFlight.asn" ".asl/mem/decisions/Adr0040HolisticTaskProtocolAndLifecycle.asn"]
       :targetSymbols []
@@ -211,7 +211,7 @@
       :failureModes [
         "Gate failure or missing physical receipt"
       ]
-      :adr "ADR-0040"
+      :adr "D40"
       :decision "d40"
 :owns [".asl/mem/roadmap.asn" ".asl/mem/receipts.asn"]
       :targetSymbols []

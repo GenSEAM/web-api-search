@@ -20,7 +20,7 @@
       :targetSymbols ["register_enum" "js_evaluate_expression"] :relatedSymbols ["tools" "gates"]
       :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :adr "D81" :decision "d81" :dependsOn []
       :gate "./bin/asl test browser-plugin/tests/browser_agent_test.asl && ./bin/asl test web-api-search/tests/quota_test.asl"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -44,7 +44,7 @@
       :targetSymbols ["import" "string-join"] :relatedSymbols ["ssot" "boundaries"]
       :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :adr "D81" :decision "d81" :dependsOn []
       :gate "./bin/asl test asl/packages/asl-sql/tests/sql_test.asl && ./bin/asl test asl/packages/asl-sql/tests/ddl_test.asl && ./bin/asl test agent-bus/tests/browser-bridge-test.asl && ./bin/asl test mem/tests/migration-test.asl && ./bin/asl test editorial-matrix/tests/syndication-cadence-test.asl && ./bin/asl test editorial-matrix/tests/article-projector-test.asl && ./bin/asl test harness/tests/bench-runners-test.asl && ./bin/asl test harness/tests/browser-harness-test.asl"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -68,7 +68,7 @@
       :targetSymbols ["module" ":x"] :relatedSymbols ["syntax" "invariants"]
       :invariants ["C4" "D46" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :adr "D81" :decision "d81" :dependsOn []
       :gate "! grep -rn :exports agent-core/src/ agent-bus/src/ mem/src/ && ./bin/asl test asl/web/src/views/playground_test.asl && ./bin/asl test asl/web/src/views/test_card.asl"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -92,7 +92,7 @@
       :targetSymbols ["steps-pipeline" "eddie" "state-clarification"] :relatedSymbols ["gates" "semantics"]
       :invariants ["C1" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :adr "D81" :decision "d81" :dependsOn []
       :gate "./bin/asl test agent/tests/agent-test.asl && ./bin/asl test agent-core/tests/promptpool_test.asl && ./bin/asl test harness/tests/steps-pipeline-test.asl && ./bin/asl test harness/tests/teleology_test.asl && ./bin/asl test harness/tests/plugin_host_test.asl && ./bin/asl test harness/tests/resident_layer_test.asl"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]

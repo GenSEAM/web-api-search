@@ -33,7 +33,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0050"
+      :adr "D50"
       :decision "d50"
 :owns [
         ".asl/mem/decisions/Adr0050SovereignEngineResidentArchitectureAndDeepMemoryIntegration.asn"
@@ -81,7 +81,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0050"
+      :adr "D50"
       :decision "d50"
 :owns [
         "asl/bin/asl-engine"
@@ -127,7 +127,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0050"
+      :adr "D50"
       :decision "d50"
 :owns [
         "asl/bin/asl-engine"
@@ -173,7 +173,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0050"
+      :adr "D50"
       :decision "d50"
 :owns [
         "asl/asl"

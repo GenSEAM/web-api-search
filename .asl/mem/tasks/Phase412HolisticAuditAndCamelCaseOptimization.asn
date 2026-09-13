@@ -34,7 +34,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56"]
       :variations ["Manual log inspection vs automated receipt generation"]
       :failureModes ["Unrecorded baseline metrics (mitigated: write receipt before advancing)"]
-      :adr "ADR-0056"
+      :adr "D56"
       :decision "D56"
       :why "Establish deterministic empirical baseline for Phase 412"
       :spec "Execute multi-dimensional audit and record receipt in receipts.asn."
@@ -70,7 +70,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56"]
       :variations ["Mass sed replacement vs AST-guided symbol renaming"]
       :failureModes ["Broken symbol references in downstream imports (mitigated: asl check validation)"]
-      :adr "ADR-0056"
+      :adr "D56"
       :decision "D56"
       :why "Achieve optimal token efficiency across internal identifiers"
       :spec "Refactor grammar registries and task properties to camelCase/PascalCase."
@@ -108,7 +108,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56"]
       :variations ["Single global destructor vs per-branch ordered saga chain"]
       :failureModes ["Cleanup handler exception swallowing (mitigated: explicit error reporting)"]
-      :adr "ADR-0056"
+      :adr "D56"
       :decision "D56"
       :why "Guarantee zero irreversible mutations and zero orphan processes on aborted branches"
       :spec "Implement compensating action registration and execution on branch abort."
@@ -145,7 +145,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56"]
       :variations ["Static AST scanner vs dynamic runtime profiling"]
       :failureModes ["False positive anomaly alerts on legitimate 2-token primitives (mitigated: rationale whitelist)"]
-      :adr "ADR-0056"
+      :adr "D56"
       :decision "D56"
       :why "Enable automated multi-dimensional health monitoring across the entire codebase"
       :spec "Implement 5D health matrix reporting and anomaly detection functions."
@@ -181,7 +181,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56"]
       :variations ["Warning mode vs blocking rejection (chosen: strict blocking rejection)"]
       :failureModes ["Overly strict barriers blocking rapid prototyping (mitigated: scratch/ quarantine bypass)"]
-      :adr "ADR-0056"
+      :adr "D56"
       :decision "D56"
       :why "Mechanically prevent token bloat and architectural regressions at the commit boundary"
       :spec "Add strict threshold verification to pre-commit hook."
@@ -219,7 +219,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56"]
       :variations ["Manual status update vs deterministic settlement audit"]
       :failureModes ["Desynchronized ADR-task links (mitigated: asl audit consistency verification)"]
-      :adr "ADR-0056"
+      :adr "D56"
       :decision "D56"
       :why "Achieve complete closure of Phase 412 with verified evidence and clean governance"
       :spec "Update decision registry, intent ledger, and roadmap, verifying all gates."

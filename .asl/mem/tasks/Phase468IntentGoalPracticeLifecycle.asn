@@ -20,7 +20,7 @@
       :targetSymbols [] :relatedSymbols ["anchor" "concepts" "ssot"]
       :invariants ["D46" "D52" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :adr "D81" :decision "d81" :dependsOn []
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46801"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -43,7 +43,7 @@
       :targetSymbols [] :relatedSymbols ["anchor" "budget" "concepts"]
       :invariants ["D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn ["Task46801" "Task46504"]
+      :adr "D81" :decision "d81" :dependsOn ["Task46801" "Task46504"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46802"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -66,7 +66,7 @@
       :targetSymbols ["evict-below-threshold" "penalize-unreferenced-matches"] :relatedSymbols ["budget" "capabilities"]
       :invariants ["D46" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn ["Task46801" "Task46503"]
+      :adr "D81" :decision "d81" :dependsOn ["Task46801" "Task46503"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46803"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -89,7 +89,7 @@
       :targetSymbols ["run_audit_consistency" "phase_count"] :relatedSymbols ["output" "anchor" "gates"]
       :invariants ["D52" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn ["Task45504" "Task46801"]
+      :adr "D81" :decision "d81" :dependsOn ["Task45504" "Task46801"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46804"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -112,7 +112,7 @@
       :targetSymbols ["note-promote-to-task" "note-promote-to-adr" "spool-query-bm25"] :relatedSymbols ["anchor" "capabilities" "tools"]
       :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn ["Task46501" "Task46801"]
+      :adr "D81" :decision "d81" :dependsOn ["Task46501" "Task46801"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task46805"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]

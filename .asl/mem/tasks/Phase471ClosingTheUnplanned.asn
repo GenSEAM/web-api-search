@@ -20,7 +20,7 @@
       :targetSymbols ["run_audit_consistency"] :relatedSymbols ["parallel" "anchor" "gates"]
       :invariants ["D52" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn ["Task45803"]
+      :adr "D81" :decision "d81" :dependsOn ["Task45803"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task47101"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -43,7 +43,7 @@
       :targetSymbols ["structural_editor" "ast_merge"] :relatedSymbols ["tools" "oneStep" "gates"]
       :invariants ["C1" "C3" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn ["Task46501" "Task46102"]
+      :adr "D81" :decision "d81" :dependsOn ["Task46501" "Task46102"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task47102"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -66,7 +66,7 @@
       :targetSymbols [] :relatedSymbols ["foreign" "concepts"]
       :invariants ["D34" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn ["Task46404"]
+      :adr "D81" :decision "d81" :dependsOn ["Task46404"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task47103"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]

@@ -35,7 +35,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D76"]
       :variations ["Line-based Myers diff vs recursive S-expression tree merge (chosen: recursive S-expression tree merge)"]
       :failureModes ["Unbalanced S-expression delimiters (mitigated: verified with pure ASL parser)"]
-      :adr "ADR-0076"
+      :adr "D76"
       :decision "D76"
       :why "Homoiconic AST merging eliminates false textual conflicts and enables lock-free parallel execution"
       :spec "Implement generalized AST 3-way merge with structural collision detection."
@@ -72,7 +72,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D76"]
       :variations ["Pessimistic file mutex locks vs Optimistic Concurrency Control (chosen: OCC)"]
       :failureModes ["Phantom reads on dirty buffers (mitigated: isolated transaction snapshot maps)"]
-      :adr "ADR-0076"
+      :adr "D76"
       :decision "D76"
       :why "Enables concurrent agent swarms to edit dependent files without deadlocks or partial writes"
       :spec "Implement in-memory STM coordinator with snapshot isolation."
@@ -109,7 +109,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D76"]
       :variations ["Centralized Redis/Raft pubsub vs in-memory causal vector DAG (chosen: in-memory causal DAG)"]
       :failureModes ["Causal delivery order violation (mitigated: vector clock causal validation)"]
-      :adr "ADR-0076"
+      :adr "D76"
       :decision "D76"
       :why "Eliminates queue blocking and allows swarm agents to debate and synthesize actions concurrently"
       :spec "Implement causal message tree and intent merge in agent-bus."
@@ -146,7 +146,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D76"]
       :variations ["Global mutex locking of TaskDag vs monotonic lattice branch merging (chosen: monotonic lattice)"]
       :failureModes ["Cycles introduced by concurrent edge additions (mitigated: topological sort cycle detection)"]
-      :adr "ADR-0076"
+      :adr "D76"
       :decision "D76"
       :why "Allows multiple planning and executing agents to refine task graphs concurrently without lock stalls"
       :spec "Implement lock-free DAG branch merging with topological cycle validation."
@@ -183,7 +183,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D76"]
       :variations ["Disk worktree mutation vs pure RAM VFS mutation (chosen: RAM VFS mutation)"]
       :failureModes ["Memory leak from dangling speculative branches (mitigated: explicit branch disposal)"]
-      :adr "ADR-0076"
+      :adr "D76"
       :decision "D76"
       :why "Maximizes KV-cache reuse for local SLM and enables 1000x faster mutation testing without disk thrashing"
       :spec "Implement prompt radix tree and in-memory speculative fuzzing."
@@ -220,7 +220,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D76"]
       :variations ["Skip milestone ledger vs formal M08 registration (chosen: formal M08 registration)"]
       :failureModes ["Broken task-ADR cross links (mitigated: verified with asl audit consistency)"]
-      :adr "ADR-0076"
+      :adr "D76"
       :decision "D76"
       :why "Guarantees zero architectural drift and complete physical audit trail"
       :spec "Execute comprehensive verification and settle Phase 431."

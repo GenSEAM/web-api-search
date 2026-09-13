@@ -35,7 +35,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task43605" "Task43607" "Task43707"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44001"
@@ -77,7 +77,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task43801"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44003"
@@ -118,7 +118,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task43802"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44002"
@@ -160,7 +160,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task43803"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task43804"
@@ -200,7 +200,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task43804" "Task43604"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task43805"
@@ -240,7 +240,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task43805" "Task43606" "Task43707"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task45906"
@@ -299,7 +299,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task43806"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44601"
@@ -341,7 +341,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task43807"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task44604"
@@ -382,7 +382,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task43603"]
       :gate "sh tests/acceptance/d81/SuperviseGate.sh Task43809"

@@ -34,7 +34,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63"]
       :variations ["Flat single-tier audit vs frequency-stratified graduated audit tiers (chosen: graduated 4-tier)"]
       :failureModes ["Gate latency throttling interactive agent flow (mitigated: Tier 1 sub-3s fast-path)"]
-      :adr "ADR-0063"
+      :adr "D63"
       :decision "D63"
       :why "Eliminate cognitive stalls while guaranteeing zero-compromise physical release truth"
       :spec "Specify the 4 audit tiers in harness audit protocols with explicit time and assertion bounds."
@@ -70,7 +70,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63"]
       :variations ["Separate UI implementations per platform vs single ASN visual state tree with triple projection (chosen: triple projection)"]
       :failureModes ["Platform UI divergence and duplicated state management (mitigated: single canonical ASN state tree)"]
-      :adr "ADR-0063"
+      :adr "D63"
       :decision "D63"
       :why "Provide zero-overhead, real-time visual perception of autonomous agent operations"
       :spec "Specify triple-projection visual state schema and component hierarchy."
@@ -106,7 +106,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63"]
       :variations ["One-way status push vs bidirectional webhook/socket event synchronization (chosen: bidirectional bridge)"]
       :failureModes ["State desynchronization between Jira and local git branches (mitigated: cryptographic receipt binding)"]
-      :adr "ADR-0063"
+      :adr "D63"
       :decision "D63"
       :why "Ground Jira project tracking in verifiable code execution evidence"
       :spec "Define Jira mapping metadata in task schema and multidimensional analysis rubric."
@@ -142,7 +142,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63"]
       :variations ["Platform-specific bespoke IPC vs unified ND-ASN streaming over POSIX sockets and Windows pipes"]
       :failureModes ["Windows WSL/PowerShell path and socket divergence (mitigated: normalized vfs pathing)"]
-      :adr "ADR-0063"
+      :adr "D63"
       :decision "D63"
       :why "Guarantee universal portability of agent monitoring infrastructure"
       :spec "Document cross-platform telemetry constraints and IPC benchmarks in intel health."
@@ -178,7 +178,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63"]
       :variations ["In-place incremental patching vs dedicated package extraction (chosen: dedicated asl-view package)"]
       :failureModes ["Circular dependencies between view and agent-core (mitigated: strict unidirectional L1 dependency)"]
-      :adr "ADR-0063"
+      :adr "D63"
       :decision "D63"
       :why "Eliminate code duplication and establish clean architectural stratification"
       :spec "Define package topology and export contracts for asl-view and asl-jira."
@@ -215,7 +215,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63"]
       :variations ["Verbal signoff vs physical task receipt recording (chosen: immutable TaskReceipt)"]
       :failureModes ["Desynchronized roadmap or orphaned tasks (mitigated: asl audit consistency enforcement)"]
-      :adr "ADR-0063"
+      :adr "D63"
       :decision "D63"
       :why "Fulfill physical ground-truth invariant for Phase 418"
       :spec "Execute comprehensive gates and record receipt rc-gap-042."

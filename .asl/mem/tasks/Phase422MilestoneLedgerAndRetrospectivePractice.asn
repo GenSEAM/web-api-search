@@ -34,7 +34,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67"]
       :variations ["Markdown changelog vs pure homoiconic ASN ledger (chosen: pure ASN ledger with on-demand projection)"]
       :failureModes ["Syntax errors in ASN delimiter nesting (mitigated: verified with asl check)"]
-      :adr "ADR-0067"
+      :adr "D67"
       :decision "D67"
       :why "Provide durable machine memory for macro architectural evolution and retrospective insights"
       :spec "Create and populate .asl/mem/retrospectives.asn."
@@ -70,7 +70,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67"]
       :variations ["External script runner vs resident engine handler (chosen: resident engine handler)"]
       :failureModes ["Missing milestone file returning uncaught exception (mitigated: graceful empty list fallback)"]
-      :adr "ADR-0067"
+      :adr "D67"
       :decision "D67"
       :why "Provide high-SNR programmatic queryability of architectural milestones"
       :spec "Implement milestone handler in asl-engine."
@@ -109,7 +109,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67"]
       :variations ["Separate external audit script vs unified asl audit consistency pass (chosen: unified consistency pass)"]
       :failureModes ["Desynchronized milestone ADR references (mitigated: strict bidirectional linkage check)"]
-      :adr "ADR-0067"
+      :adr "D67"
       :decision "D67"
       :why "Ensure all milestone claims are grounded in physical execution receipts"
       :spec "Wire retrospectives.asn into consistency audit."
@@ -151,7 +151,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67"]
       :variations ["Manual signoff vs automated 5-dimensional bidirectional audit (chosen: automated 5-dimensional audit)"]
       :failureModes ["Broken cross-references or desynchronized intent records (mitigated: strict D52 audit)"]
-      :adr "ADR-0067"
+      :adr "D67"
       :decision "D67"
       :why "Guarantee uncompromised architectural integrity and reproducible physical receipts"
       :spec "Run asl audit consistency and asl gate to verify zero errors and complete reconciliation."

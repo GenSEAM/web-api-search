@@ -291,7 +291,7 @@
       :dependencies []
       :invariants [C1 C2 C3 D34 D81]
       :owner "architect"
-      :adr "ADR-0081"
+      :adr "D81"
       :tasks ["Task43707" "Task44109"]
       :status :active)
 
@@ -314,7 +314,7 @@
       :dependencies ["comp-rpc-grammar-contract" "comp-rules-ssot-renderer"]
       :invariants [C2 D46 D51 D81]
       :owner "implementer"
-      :adr "ADR-0081"
+      :adr "D81"
       :tasks ["Task44101" "Task44102" "Task44103" "Task44104" "Task44108"]
       :status :planned)
 
@@ -335,7 +335,7 @@
       :dependencies ["comp-conformance-suite"]
       :invariants [C1 C3 D34 D51 D81]
       :owner "implementer"
-      :adr "ADR-0081"
+      :adr "D81"
       :tasks ["Task43801" "Task44001" "Task44002" "Task44003"]
       :status :planned)
 
@@ -353,7 +353,7 @@
       :dependencies []
       :invariants [D81]
       :owner "auditor"
-      :adr "ADR-0081"
+      :adr "D81"
       :tasks ["Task43605" "Task43801" "Task43901" "Task44001"]
       :status :planned)
 
@@ -373,7 +373,7 @@
       :dependencies []
       :invariants [C1 C2 D34 D51 D81]
       :owner "implementer"
-      :adr "ADR-0081"
+      :adr "D81"
       :tasks ["Task44601" "Task44602" "Task44603"]
       :status :active)
 
@@ -392,7 +392,7 @@
       :dependencies ["comp-agent-bus-relay"]
       :invariants [C1 C2 D34 D51 D81]
       :owner "implementer"
-      :adr "ADR-0081"
+      :adr "D81"
       :tasks ["Task44601" "Task44604"]
       :status :active)
 
@@ -411,7 +411,7 @@
       :dependencies ["comp-agent-bus-relay"]
       :invariants [C1 C2 D34 D51 D81]
       :owner "implementer"
-      :adr "ADR-0081"
+      :adr "D81"
       :tasks ["Task44601"]
       :status :active)
 
@@ -430,7 +430,7 @@
       :dependencies ["comp-agent-bus-relay"]
       :invariants [C1 C2 D34 D51 D81]
       :owner "implementer"
-      :adr "ADR-0081"
+      :adr "D81"
       :tasks ["Task44601"]
       :status :active)
 
@@ -449,7 +449,7 @@
       :dependencies []
       :invariants [C1 C2 D34 D51 D81]
       :owner "implementer"
-      :adr "ADR-0081"
+      :adr "D81"
       :tasks ["Task44601"]
       :status :active)
 
@@ -467,7 +467,7 @@
       :dependencies []
       :invariants [C1 C2 D34 D81]
       :owner "architect"
-      :adr "ADR-0081"
+      :adr "D81"
       :tasks ["Task45603"]
       :status :dormant)
 
@@ -485,7 +485,7 @@
       :dependencies []
       :invariants [C1 C2 D34 D81]
       :owner "architect"
-      :adr "ADR-0081"
+      :adr "D81"
       :tasks ["Task45603"]
       :status :dormant)
 
@@ -502,7 +502,7 @@
       :dependencies []
       :invariants [C1 C2 D34 D81]
       :owner "architect"
-      :adr "ADR-0081"
+      :adr "D81"
       :tasks ["Task45603"]
       :status :dormant)
 
@@ -519,7 +519,7 @@
       :dependencies []
       :invariants [C1 C2 D34 D81]
       :owner "architect"
-      :adr "ADR-0081"
+      :adr "D81"
       :tasks ["Task45603"]
       :status :dormant)]
 

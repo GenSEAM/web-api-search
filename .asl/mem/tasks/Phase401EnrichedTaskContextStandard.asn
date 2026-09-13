@@ -39,7 +39,7 @@
       :variations ["Unidirectional link rejected as insufficient to prevent documentation drift"]
       :failureModes ["Dangling ADR references if tasks or shortcodes are mistyped; mitigated by asl audit consistency"]
       :additionalRequirements ["0 emojis" "0 comments" "Bare capital shortcode D52"]
-      :adr "ADR-0052"
+      :adr "D52"
       :decision "d52"
       :dependsOn []
       :gate "test -f .asl/mem/decisions/Adr0052EnrichedTaskContextAndHolisticConsistencyAudit.asn && asl check .asl/mem/decisions/Adr0052EnrichedTaskContextAndHolisticConsistencyAudit.asn .asl/mem/decisions/decisions.asn .asl/mem/decisions.asn .asl/mem/intent.asn"
@@ -87,7 +87,7 @@
       :variations ["Markdown-only vs dual ASN/Markdown skills; retained dual projection for agent versatility"]
       :failureModes ["Agents using stale skill caches; mitigated by updating both local repo and global config skills"]
       :additionalRequirements ["Token density preservation"]
-      :adr "ADR-0052"
+      :adr "D52"
       :decision "d52"
       :dependsOn ["Task40101"]
       :gate "grep -q 'ENRICHED TASK CONTEXT SCHEMA' asl/.agents/skills/asl-plan/skill.asn && grep -q 'HOLISTIC CONSISTENCY AUDIT' asl/.agents/skills/asl-toolbelt/skill.asn"
@@ -133,7 +133,7 @@
       :variations ["Standalone document vs AGENTS.md; integrated directly to ensure immediate enforcement without context bloat"]
       :failureModes ["Symlink break between CLAUDE.md and AGENTS.md; verified symlink integrity"]
       :additionalRequirements ["High lexical density SNR >= 0.75"]
-      :adr "ADR-0052"
+      :adr "D52"
       :decision "d52"
       :dependsOn ["Task40101"]
       :gate "grep -q 'Enriched Task Context Standard & Bidirectional ADR Linkage' AGENTS.md && grep -q 'D52' CLAUDE.md"
@@ -175,7 +175,7 @@
       :variations ["External script rejected to maintain single extensionless binary invariant"]
       :failureModes ["Slow filesystem traversal on large monorepos; optimized with targeted glob and regex scanning (<100ms)"]
       :additionalRequirements ["Zero dependencies beyond python3" "Exit code 0 on pass, 1 on failure"]
-      :adr "ADR-0052"
+      :adr "D52"
       :decision "d52"
       :dependsOn ["Task40101"]
       :gate "asl audit consistency && asl consistency"
@@ -220,7 +220,7 @@
       :variations ["Backlog vs Phase file; created as active phase file per 3-tier task architecture"]
       :failureModes ["Roadmap wave count mismatch; verified sequential wave numbering"]
       :additionalRequirements ["Delimiters balanced" "Valid gate command"]
-      :adr "ADR-0052"
+      :adr "D52"
       :decision "d52"
       :dependsOn ["Task40101" "Task40102" "Task40103" "Task40104"]
       :gate "asl check .asl/mem/tasks/Phase401EnrichedTaskContextStandard.asn .asl/mem/roadmap.asn && grep -q 'Wave 53' .asl/mem/roadmap.asn"
@@ -262,7 +262,7 @@
       :variations ["Unit test vs End-to-End script; implemented comprehensive e2e test script validating negative and positive cases"]
       :failureModes ["Silent passing or vacuous assertions; verified strict non-zero assertions and failure rejection"]
       :additionalRequirements ["Exit code 0" "Executable bit set"]
-      :adr "ADR-0052"
+      :adr "D52"
       :decision "d52"
       :dependsOn ["Task40105"]
       :gate "bash tests/test_enriched_task_context_e2e.sh && asl audit consistency && asl gate"

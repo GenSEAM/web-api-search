@@ -20,7 +20,7 @@
       :targetSymbols ["parse-all-children" "extract-forms-by-tag"] :relatedSymbols ["vdom" "svg"]
       :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :adr "D81" :decision "d81" :dependsOn []
       :gate "./bin/asl test vdom/tests/asn-svg-test.asl && ./bin/asl test vdom/tests/diagram_test.asl"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -44,7 +44,7 @@
       :targetSymbols ["hooke-spring-force" "emit-openqasm"] :relatedSymbols ["physics" "quantum"]
       :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :adr "D81" :decision "d81" :dependsOn []
       :gate "./bin/asl test vdom/tests/physics_test.asl && ./bin/asl test asl-quantum/tests/quantum-test.asl"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]

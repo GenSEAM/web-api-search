@@ -38,7 +38,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D74" "D75" "D77"]
       :variations ["Preserving Python as optional fallback vs absolute eradication (chosen: absolute eradication)"]
       :failureModes ["Dangling ADR references if shortcodes mismatch; verified by asl audit consistency"]
-      :adr "ADR-0077"
+      :adr "D77"
       :decision "D77"
       :why "Eradicate the last foreign language dependency and achieve true language sovereignty"
       :spec "Author ADR-0077, register D77 in decision registries, and verify bidirectional linkages."
@@ -76,7 +76,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D77"]
       :variations ["Subprocess python script vs pure compiled AgentScript module (chosen: pure ASL)"]
       :failureModes ["Incomplete regex or parsing missing subtle link mismatches"]
-      :adr "ADR-0077"
+      :adr "D77"
       :decision "D77"
       :why "Self-hosted audit engine guarantees mathematical consistency verification without python3"
       :spec "Implement 5D consistency checks in pure ASL and verify with dual-polarity unit tests."
@@ -114,7 +114,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D77"]
       :variations ["Shell awk script vs pure ASL module (chosen: pure ASL)"]
       :failureModes ["False positive dual-case qualifications on single-case tests"]
-      :adr "ADR-0077"
+      :adr "D77"
       :decision "D77"
       :why "Self-hosted gate verification guarantees test rigor without host Python"
       :spec "Author polarity.asl, test with polarity_test.asl, and wire into gate runner."
@@ -152,7 +152,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D77"]
       :variations ["POSIX awk vs pure ASL byte scanner (chosen: pure ASL)"]
       :failureModes ["Missed emoji in surrogate pair or UTF-8 multibyte sequence"]
-      :adr "ADR-0077"
+      :adr "D77"
       :decision "D77"
       :why "Eradicate python3 invocation from Gate 6 and asl check"
       :spec "Author emoji_guard.asl, test with positive and negative cases, verify against ASN files."
@@ -190,7 +190,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D77"]
       :variations ["Python engine vs separate daemon vs consolidated native asl-engine (chosen: consolidated native asl-engine)"]
       :failureModes ["Socket timeout or unhandled RPC operation causing daemon crash"]
-      :adr "ADR-0077"
+      :adr "D77"
       :decision "D77"
       :why "Consolidate resident daemon into native asl-engine and eliminate Python entirely"
       :spec "Verify native asl-engine socket lifecycle, validate batch RPC dispatch, and benchmark latency."
@@ -228,7 +228,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D77"]
       :variations ["Gradual deprecation vs immediate eradication (chosen: immediate eradication)"]
       :failureModes ["Regressions in CLI subcommands during python removal"]
-      :adr "ADR-0077"
+      :adr "D77"
       :decision "D77"
       :why "Achieve 100% Python-free CLI execution"
       :spec "Sweep asl/asl, replace python3 blocks with ASL calls, verify all CLI commands."
@@ -268,7 +268,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74" "D75" "D76" "D77"]
       :variations ["Partial settlement vs full monorepo settlement (chosen: full settlement)"]
       :failureModes ["Lingering python invocation discovered in peripheral scripts"]
-      :adr "ADR-0077"
+      :adr "D77"
       :decision "D77"
       :why "Epistemic proof of complete language self-hosting and zero foreign tax"
       :spec "Run all gates without python in PATH, record receipt, and update roadmap."

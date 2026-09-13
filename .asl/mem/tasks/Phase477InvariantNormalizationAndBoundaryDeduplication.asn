@@ -20,7 +20,7 @@
       :targetSymbols ["boxart" "tui" "sparkline"] :relatedSymbols ["hygiene" "invariants"]
       :invariants ["C2" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :adr "D81" :decision "d81" :dependsOn []
       :gate "python3 -c 'import re, glob, sys; emoji_pat = re.compile(r"[\U0001F300-\U0001FAFF]"); picto_pat = re.compile(r"[▶▼⠋❯◆✔✓✗⏸]"); files = glob.glob("asl/web/**/*.asl", recursive=True) + ["agent/src/asn_boxart.asl", "agent/src/tui.asl", "agent/tests/tui-test.asl", "mem/tests/vfs_sync_test.asl"]; found = sum(len(emoji_pat.findall(open(f).read())) + len(picto_pat.findall(open(f).read())) for f in files); sys.exit(1 if found > 0 else 0)' && ./bin/asl test agent/tests/tui-test.asl && ./bin/asl test mem/tests/vfs_sync_test.asl"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -44,7 +44,7 @@
       :targetSymbols ["import" "dependencies"] :relatedSymbols ["boundaries" "ssot"]
       :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :adr "D81" :decision "d81" :dependsOn []
       :gate "! grep -rn "\.\./\.\./" intel/ mem/ agent-bus/"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -68,7 +68,7 @@
       :targetSymbols ["TaskState" "TaskRecord" "DagNodeState"] :relatedSymbols ["architecture" "types"]
       :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :adr "D81" :decision "d81" :dependsOn []
       :gate "python3 -c 'import re, glob, sys; files = glob.glob("agent-core/src/*.asl"); states = [f for f in files if re.search(r'\(dfe\s+TaskState\b', open(f).read())]; records = [f for f in files if re.search(r'\(dfs\s+TaskRecord\b', open(f).read())]; sys.exit(0 if len(states) == 1 and len(records) == 1 else 1)' && ./bin/asl test agent-core/tests/*"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -92,7 +92,7 @@
       :targetSymbols ["math" "fast-ln" "char-to-code"] :relatedSymbols ["mem" "dedup"]
       :invariants ["C3" "D34" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn ["Task47703"]
+      :adr "D81" :decision "d81" :dependsOn ["Task47703"]
       :gate "python3 -c 'import re, glob, sys; from collections import defaultdict; func_defs = defaultdict(list); pattern = re.compile(r'\(df\s+([a-zA-Z0-9_-]+)'); [func_defs[m.group(1)].append((f, idx)) for f in sorted(glob.glob("mem/src/*.asl")) for idx, line in enumerate(open(f), 1) for m in [pattern.search(line)] if m]; duplicates = {k: v for k, v in func_defs.items() if len(v) > 1}; sys.exit(1 if len(duplicates) > 0 or glob.glob("pack/tests/standalone.test.asl") else 0)' && ./bin/asl test mem/tests/*"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]

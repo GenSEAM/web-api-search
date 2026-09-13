@@ -34,7 +34,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D69" "D75"]
       :variations ["Cargo/rustc build vs micro-runtime C wrapper (chosen: micro-runtime C wrapper)"]
       :failureModes ["WASI syscall divergence (mitigated: verified with emit_wat_test)"]
-      :adr "ADR-0075"
+      :adr "D75"
       :decision "D75"
       :why "Eliminates heavy foreign toolchain tax while maximizing cross-platform portability"
       :spec "Establish WebAssembly as the primary execution and packaging standard."
@@ -70,7 +70,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D69" "D75"]
       :variations ["Complex generic emission vs monomorphic Go structs (chosen: idiomatic struct emission)"]
       :failureModes ["Type mapping mismatch (mitigated: verified with test-go-type)"]
-      :adr "ADR-0075"
+      :adr "D75"
       :decision "D75"
       :why "Provides cloud-native export leaf without polluting core language dependencies"
       :spec "Implement Go code generator and dual-polarity test suite."
@@ -107,7 +107,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D69" "D75"]
       :variations ["Default to Rust vs default to WASM (chosen: default to WASM)"]
       :failureModes ["Import resolution mismatch (mitigated: verified with asl check)"]
-      :adr "ADR-0075"
+      :adr "D75"
       :decision "D75"
       :why "Positions WebAssembly as the universal execution plane while supporting specialized leaves"
       :spec "Wire multi-target dispatch and extend compiler test suite."
@@ -144,7 +144,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D69" "D75"]
       :variations ["Manual audit vs automated gate (chosen: automated gate verification)"]
       :failureModes ["Broken ADR links (mitigated: verified with asl audit consistency)"]
-      :adr "ADR-0075"
+      :adr "D75"
       :decision "D75"
       :why "Guarantees zero-defect settlement of the architectural transition"
       :spec "Execute consistency audit and full gate verification."

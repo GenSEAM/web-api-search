@@ -35,7 +35,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71" "D72"]
       :variations ["WASM single-thread vs WebWorker SharedArrayBuffer (both supported)"]
       :failureModes ["Memory exhaustion above 3B ceiling (mitigated: runtime ceiling guard)"]
-      :adr "ADR-0072"
+      :adr "D72"
       :decision "D72"
       :why "Provide empirical justification for browser model tier selections and threshold bounds"
       :spec "Calibrate models, record telemetry in browser_models_gallery.asn, and verify syntax."
@@ -72,7 +72,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71" "D72"]
       :variations ["Static schema binding vs dynamic task-driven routing (chosen: dynamic routing)"]
       :failureModes ["Delimiter collapse on nested forms (mitigated: FSM delimiter mask)"]
-      :adr "ADR-0072"
+      :adr "D72"
       :decision "D72"
       :why "Maximize generation fidelity on sub-billion models via affirmative priming"
       :spec "Implement affirmative schemas, FSM delimiter masks, and verify with tests."
@@ -109,7 +109,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71" "D72"]
       :variations ["Inline JSON presets vs typed ASN S-expressions (chosen: pure ASN S-expressions)"]
       :failureModes ["Unclosed tags in SVG XML (mitigated: pure ASN vector transpilation)"]
-      :adr "ADR-0072"
+      :adr "D72"
       :decision "D72"
       :why "Provide canonical repeatable demonstrations across diverse browser modalities"
       :spec "Write presets catalog, verify syntax balance with asl check."
@@ -146,7 +146,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71" "D72"]
       :variations ["Static markdown gallery vs live WebGPU canvas (both documented)"]
       :failureModes ["Conflating model capabilities (mitigated: strict 4-tier calibration matrix)"]
-      :adr "ADR-0072"
+      :adr "D72"
       :decision "D72"
       :why "Enable rigorous capability and impossibility reviews without external servers"
       :spec "Verify gallery assets, check consistency with memory stores."
@@ -189,7 +189,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70" "D71" "D72"]
       :variations ["Manual settlement vs automated consistency gate (chosen: automated consistency gate)"]
       :failureModes ["Broken bidirectional links (mitigated: verified with asl audit consistency)"]
-      :adr "ADR-0072"
+      :adr "D72"
       :decision "D72"
       :why "Guarantee full epistemic consistency and unbreakable truth across memory files"
       :spec "Update all memory ledgers, verify with asl audit consistency and asl gate."

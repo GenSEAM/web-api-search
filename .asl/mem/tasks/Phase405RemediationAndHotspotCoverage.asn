@@ -35,7 +35,7 @@
       :variations ["Simple list matching vs full DAG graph representation"]
       :failureModes ["Uncaught drift in traversal leading to inaccurate coverage score"]
       :additionalRequirements ["Zero comments invariant C1" "Adjacency DSL structured output"]
-      :adr "ADR-0052"
+      :adr "D52"
       :decision "D52"
       :actionDag [
         "author intel/src/hotspot-coverage.asl"
@@ -80,7 +80,7 @@
       :variations ["In-process python evaluator vs direct VFS index lookup"]
       :failureModes ["Regex truncation in patch corrupting production source files"]
       :additionalRequirements ["Zero static mock stubs in engine dispatcher"]
-      :adr "ADR-0050"
+      :adr "D50"
       :decision "D50"
       :actionDag [
         "redirect op q to self.bm25.score with snippet extraction"
@@ -126,7 +126,7 @@
       :variations ["Pre-computed call graph index vs on-demand AST walk"]
       :failureModes ["Slow symbol resolution on cold cache"]
       :additionalRequirements ["Sub-50ms execution on warm cache"]
-      :adr "ADR-0034"
+      :adr "D34"
       :decision "D34"
       :actionDag [
         "implement distinct AST definition lookup for sym"
@@ -169,7 +169,7 @@
       :variations ["Deprecate agent/ package entirely vs migrate to intel imports"]
       :failureModes ["Broken legacy test suites expecting mock return values"]
       :additionalRequirements ["Zero foreign code, zero placeholder stubs"]
-      :adr "ADR-0052"
+      :adr "D52"
       :decision "D52"
       :actionDag [
         "refactor agent/src/horizon.asl to import intel/src/health.asl"
@@ -212,7 +212,7 @@
       :variations ["Compile-time AST pass vs JIT runtime pass"]
       :failureModes ["E-graph saturation timeout on large expressions"]
       :additionalRequirements ["Strict node iteration ceiling on equality saturation"]
-      :adr "ADR-0051"
+      :adr "D51"
       :decision "D51"
       :actionDag [
         "wire egraph equality saturation into AST optimizer"
@@ -257,7 +257,7 @@
       :variations ["Manual audit vs automated gate script"]
       :failureModes ["Unsettled tasks or desynchronized wave status in roadmap"]
       :additionalRequirements ["Deterministic zero-compromise receipts"]
-      :adr "ADR-0052"
+      :adr "D52"
       :decision "D52"
       :actionDag [
         "run full 7-gate verification suite"

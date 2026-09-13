@@ -36,7 +36,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D71" "D72" "D73"]
       :variations ["In-browser client calibration vs host-side external stand (chosen: host-side external stand)"]
       :failureModes ["VRAM allocation crash during model warm-up (mitigated: pre-flight hardware calibration probe)"]
-      :adr "ADR-0073"
+      :adr "D73"
       :decision "D73"
       :why "Provide empirical justification for browser model tier selections and threshold bounds prior to UI integration"
       :spec "Execute calibration sweep, record telemetry in browser_models_gallery.asn, and verify syntax."
@@ -73,7 +73,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D71" "D72" "D73"]
       :variations ["Main thread audio capture vs AudioWorklet PCM streaming (chosen: AudioWorklet PCM 16kHz)"]
       :failureModes ["Missed abort event during streaming tool execution (mitigated: synchronous AbortController signal dispatch)"]
-      :adr "ADR-0073"
+      :adr "D73"
       :decision "D73"
       :why "Provide zero-friction voice capture and instant interruptibility of autonomous browser actions"
       :spec "Specify audio state machine, timing bounds, abort dispatch, and verify syntax balance."
@@ -110,7 +110,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D71" "D72" "D73"]
       :variations ["Client-side regex cleanup vs raw transcript ingestion into SLM (chosen: raw transcript ingestion)"]
       :failureModes ["Hallucination induced by phonetically noisy transcript (mitigated: SLM semantic normalization in Hanes)"]
-      :adr "ADR-0073"
+      :adr "D73"
       :decision "D73"
       :why "Deliver sub-second voice-to-action latency without VRAM waste on voice synthesis"
       :spec "Implement voice gateway module, route raw ASR, verify with asl check."
@@ -147,7 +147,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D71" "D72" "D73"]
       :variations ["Two-stage LLM intent classifier vs 1-pass router (chosen: 1-pass router for minimal latency)"]
       :failureModes ["Ambiguous intent routing between chat and action (mitigated: deterministic fallback to chat with clarifying option)"]
-      :adr "ADR-0073"
+      :adr "D73"
       :decision "D73"
       :why "Ensure instant, tailored UI representation for both conversational queries and autonomous browser actions"
       :spec "Draft task rendering presets ASN file, verify delimiter balance and schema."
@@ -190,7 +190,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D71" "D72" "D73"]
       :variations ["Manual settlement vs automated consistency gate (chosen: automated consistency gate)"]
       :failureModes ["Broken bidirectional links (mitigated: verified with asl audit consistency)"]
-      :adr "ADR-0073"
+      :adr "D73"
       :decision "D73"
       :why "Guarantee full epistemic consistency and unbreakable truth across memory files"
       :spec "Update all memory ledgers, verify with asl audit consistency and asl gate."

@@ -35,7 +35,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70"]
       :variations ["Flat package list vs clustered topology (chosen: clustered topology)"]
       :failureModes ["Missing rationale fields (mitigated: schema requires non-empty rationale)"]
-      :adr "ADR-0070"
+      :adr "D70"
       :decision "D70"
       :why "Every dependency must justify its presence and functional overhead"
       :spec "Create .asl/mem/dependencies.asn with full metadata coverage."
@@ -72,7 +72,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70"]
       :variations ["Atomic single-library removal vs cluster compensating sagas (chosen: cluster compensating sagas)"]
       :failureModes ["Broken package build scripts on partial edits (mitigated: cluster-level governance)"]
-      :adr "ADR-0070"
+      :adr "D70"
       :decision "D70"
       :why "Interconnected libraries must be refactored as unified clusters to prevent broken pipelines"
       :spec "Map cluster dependencies in .asl/mem/dependencies.asn."
@@ -109,7 +109,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70"]
       :variations ["Permissive binary invocation vs strict whitelist alignment (chosen: strict whitelist alignment)"]
       :failureModes ["Sandbox execution failures on undeclared binaries (mitigated: registered in whitelist)"]
-      :adr "ADR-0070"
+      :adr "D70"
       :decision "D70"
       :why "Eliminate untracked foreign binaries from dev and build lifecycles"
       :spec "Verify package manifests and config syntax."
@@ -147,7 +147,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70"]
       :variations ["Manual checklist vs automated static CLI audit (chosen: automated static CLI audit)"]
       :failureModes ["False positives on internal ASL packages (mitigated: separate internal-package tier)"]
-      :adr "ADR-0070"
+      :adr "D70"
       :decision "D70"
       :why "Automated tooling prevents dependency sprawl and enforces justification continuously"
       :spec "Implement run_dependency_audit function in asl/asl."
@@ -190,7 +190,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64" "D65" "D66" "D67" "D68" "D69" "D70"]
       :variations ["Manual settlement vs automated consistency gate (chosen: automated consistency gate)"]
       :failureModes ["Broken bidirectional links (mitigated: verified with asl audit consistency)"]
-      :adr "ADR-0070"
+      :adr "D70"
       :decision "D70"
       :why "Guarantee full epistemic consistency and unbreakable truth across memory files"
       :spec "Update all memory ledgers, verify with asl audit consistency and asl gate."

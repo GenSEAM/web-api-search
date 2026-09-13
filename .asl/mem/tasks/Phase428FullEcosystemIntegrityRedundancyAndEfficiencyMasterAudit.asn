@@ -36,7 +36,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["Streaming FSM vs Recursive Descent (chosen: streaming FSM)"]
       :failureModes ["Delimiter imbalance breaking AST evaluation"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Enforce foundational language invariants C1, C2, and token density D51"
       :spec "Execute parser tests, audit grammar symbols against code AST, and catalog redundant forms."
@@ -74,7 +74,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["Direct WAT text emission vs binary WASM encoding (chosen: WAT emission)"]
       :failureModes ["Type unification unsoundness or invalid WASI imports"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Verify formal type soundess and assess path to standalone WASM sovereignty"
       :spec "Execute emit_wat test suite, audit type errors, and measure generated binary compactness."
@@ -112,7 +112,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["Two-tier spool vs direct file logging (chosen: two-tier spool)"]
       :failureModes ["Watchdog deadlock or circular spool buffer overflow"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Safeguard agent execution loop from subprocess deadlocks and context-flooding terminal dumps"
       :spec "Execute git diff and topology tests, audit spool ring limits, and verify sub-80 token receipts."
@@ -150,7 +150,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["Text S-expressions vs binary compact serialization"]
       :failureModes ["Unescaped string literals breaking ASN delimiter balance"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Enforce boundary universalism C3 and maximize token compaction across data boundaries"
       :spec "Execute compact notation tests, audit string escaping across packages, and measure token compression."
@@ -188,7 +188,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["Single compound RPC roundtrip vs individual CLI toolcalls (chosen: Batch RPC)"]
       :failureModes ["Ungrounded RPC operation returning mock or failing silently"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Guarantee 100% operational fidelity for AI agents executing Batch RPC"
       :spec "Execute completeness audit, verify all 37 RPC handlers, and profile gate execution time."
@@ -226,7 +226,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["Negative constraint prompting vs affirmative schema priming (chosen: affirmative)"]
       :failureModes ["VRAM allocation exhaustion causing WebGPU worker crash"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Verify attention reliability, model calibration bounds, and human-agent resonance"
       :spec "Execute LLM protocol and human resonance tests, audit calibration gallery, and measure prompt compactness."
@@ -264,7 +264,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["Centralized swarm orchestrator vs stigmergic environmental coordination"]
       :failureModes ["Dangling session lease preventing task re-claim after agent crash"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Ensure multi-agent resilience, zero state corruption, and lean prompt pools"
       :spec "Execute taskstore and promptpool tests, audit handoff serialization, and eliminate struct duplication."
@@ -302,7 +302,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["Central broker vs distributed peer-to-peer mesh (chosen: peer mesh)"]
       :failureModes ["Split-brain buffer overwrite during simultaneous agent writes"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Guarantee conflict-free multi-agent execution across shared workspaces"
       :spec "Execute mesh orchestration tests, add negative test assertions, and verify BufferLease timeouts."
@@ -340,7 +340,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["Disk files vs resident VFS memory buffer (chosen: resident VFS)"]
       :failureModes ["CAS version stale conflict or E-graph rule infinite loops"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Preserve absolute memory integrity, CAS diff safety, and semantic recall precision"
       :spec "Execute VFS, E-Graph, and BM25 test suites, audit memory footprint, and catalog redundant search modules."
@@ -378,7 +378,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["Whole file reading vs progressive outline disclosure (chosen: progressive)"]
       :failureModes ["Outdated AST cache causing missed callers in blast-radius analysis"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Maintain sub-50ms code intelligence queries and prevent context bloat"
       :spec "Execute hotspot coverage tests, verify polyglot parser accuracy, and audit circular import checks."
@@ -416,7 +416,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["Single positive queries vs dialectical bipolar queries (chosen: bipolar)"]
       :failureModes ["Network timeouts or unhandled HTML parse failures"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Counteract confirmation bias in AI research and enforce token-frugal RAG"
       :spec "Execute search test suite, audit dialectical query balance, and measure RAG snippet SNR."
@@ -454,7 +454,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["JSX/HTML markup vs homoiconic ASN VDOM forms (chosen: ASN VDOM)"]
       :failureModes ["Non-deterministic node key sorting causing thrashing diffs"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Enforce dual-projection UI principles and verify VDOM reconciliation soundness"
       :spec "Execute VDOM test suite, audit diffing precision, and benchmark token savings against JSX."
@@ -492,7 +492,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["Voice-In Voice-Out (TTS) vs Voice-In Action-Out (Zero-TTS, chosen: Zero-TTS)"]
       :failureModes ["Microphone stream stall or delayed abort token propagation"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Validate zero-TTS architecture and ensure sub-second voice-to-action dispatch"
       :spec "Execute voice intel test suite, verify abort controller state machine, and prune unused audio stubs."
@@ -530,7 +530,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D70" "D74"]
       :variations ["Monolithic peripheral maintenance vs tiered core/peripheral classification"]
       :failureModes ["Forgotten peripheral package breaking during monorepo-wide upgrades"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Eliminate ghost architecture and identify cross-subsystem leverage"
       :spec "Check grammar validity across all 8 packages, run test suites, and produce peripheral disposition matrix."
@@ -568,7 +568,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["Manual markdown editing vs automated build-time projection (chosen: automated projection)"]
       :failureModes ["Documentation drift causing external agents to use non-existent or deprecated commands"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Guarantee zero documentation drift and enforce token efficiency for external agent tool usage"
       :spec "Execute full 7-tier verification gate, inspect all 29 projected skills, and verify tool trigger accuracy."
@@ -606,7 +606,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["Kebab-case identifiers vs CamelCase compound names (chosen: CamelCase for composite constructs)"]
       :failureModes ["Broken ADR reference or desynchronized roadmap entry"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Safeguard epistemic ground truth, prevent documentation rot, and enforce token economics"
       :spec "Execute consistency and token audits, measure CamelCase yield, and verify backlog hygiene."
@@ -661,7 +661,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["Ad-hoc disconnected reviews vs unified holistic architectural synthesis (chosen: unified synthesis)"]
       :failureModes ["Superficial or speculative synthesis lacking empirical evidence from audit tasks"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Fulfill the teleological purpose of the Auditor mandate by delivering actionable ground truth"
       :spec "Synthesize all 16 audit findings, formulate exact deletion/addition/optimization lists, and record in retrospective ledger."
@@ -699,7 +699,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D74"]
       :variations ["Unsettled work vs verified physical receipt settlement (chosen: verified settlement)"]
       :failureModes ["Failing gate or ungrounded receipt on final settlement"]
-      :adr "ADR-0074"
+      :adr "D74"
       :decision "D74"
       :why "Conclude Phase 428 with tamper-evident physical proof and update master roadmap"
       :spec "Run asl gate and asl audit consistency, record receipt entry in receipts.asn, and transition phase to settled."

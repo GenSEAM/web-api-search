@@ -34,7 +34,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0049"
+      :adr "D49"
       :decision "d49"
 :owns ["voice/src/fast_path.asl" "voice/tests/fast_path_test.asl"]
       :targetSymbols ["transpile-fast-path" "is-valid-asn-input?" "build-symbol-lexicon"]
@@ -80,7 +80,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0049"
+      :adr "D49"
       :decision "d49"
 :owns ["voice/src/transliterator.asl" "voice/tests/transliterator_test.asl"]
       :targetSymbols ["transliterate-voice-prompt" "disambiguate-homophones" "emit-asn-intent"]
@@ -125,7 +125,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0049"
+      :adr "D49"
       :decision "d49"
 :owns ["asl/asl" "tests/test_transliterator_e2e.sh"]
       :targetSymbols ["asl-transpile-prompt" "asl-voice-transliterate"]

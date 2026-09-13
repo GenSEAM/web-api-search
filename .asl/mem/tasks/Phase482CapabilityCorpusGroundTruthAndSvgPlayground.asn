@@ -30,7 +30,7 @@
       :variations ["W3C-only sources" "W3C plus GOV.UK guidance (chosen)"]
       :failureModes ["Normative and advisory guidance conflated" "Citation omitted" "Threshold copied without scope"]
       :additionalRequirements ["Use primary sources" "Preserve source URL and claim scope" "Do not treat design preference as WCAG requirement"]
-      :adr "ADR-0072"
+      :adr "D72"
       :decision "D72"
       :dependsOn []
       :gate "test -f harness/results/capability-ground-truth.asn && asl check harness/results/capability-ground-truth.asn"
@@ -58,7 +58,7 @@
       :variations ["Unified SkillPack schema" "Separate Capability schema with shared loader (chosen)"]
       :failureModes ["Design principles leak into utility selection" "Legacy callers break" "kebab-case public API expands"]
       :additionalRequirements ["Do not redesign the language" "Keep legacy design markers explicitly marked" "Use CamelCase for new composite identifiers"]
-      :adr "ADR-0072"
+      :adr "D72"
       :decision "D72"
       :dependsOn ["Task48201"]
       :gate "asl check harness/src/capabilities.asl && asl check harness/src/skill_packs.asl && asl test harness/tests/capabilities_test.asl && asl test harness/tests/skill_packs_test.asl"
@@ -86,7 +86,7 @@
       :variations ["Five-item seed" "Ten-item grounded starter corpus (chosen)"]
       :failureModes ["Aesthetic preference presented as law" "Missing exclusions" "Payload too verbose for retrieval"]
       :additionalRequirements ["Use only CamelCase markers" "Keep payload compact" "Include accessibility and non-applicability"]
-      :adr "ADR-0072"
+      :adr "D72"
       :decision "D72"
       :dependsOn ["Task48202"]
       :gate "asl test harness/tests/capabilities_test.asl && asl check harness/results/capability-ground-truth.asn"
@@ -114,7 +114,7 @@
       :variations ["Always-on capability layer" "Explicit optional conditional layer (chosen)"]
       :failureModes ["Budget overrun" "Irrelevant capability leakage" "Selection without provenance"]
       :additionalRequirements ["Do not alter SkillPack ranking" "Do not add background jobs" "Retain deterministic ordering"]
-      :adr "ADR-0072"
+      :adr "D72"
       :decision "D72"
       :dependsOn ["Task48203"]
       :gate "asl test harness/tests/capabilities_test.asl && asl test harness/tests/skill_packs_test.asl"
@@ -142,7 +142,7 @@
       :variations ["Raw SVG XML" "ASN vector primitives (chosen)"]
       :failureModes ["Missing viewBox" "Empty title/desc" "Low contrast" "Unbounded text geometry"]
       :additionalRequirements ["Use :v on root svg" "Use non-empty title/desc for informative graphics" "Keep decorative elements distinguishable"]
-      :adr "ADR-0072"
+      :adr "D72"
       :decision "D72"
       :dependsOn ["Task48204"]
       :gate "asl test harness/tests/capabilities_test.asl && asl test harness/tests/svg-bench-test.asl"
@@ -170,7 +170,7 @@
       :variations ["Token-only comparison" "End-to-end quality and cost comparison (chosen)"]
       :failureModes ["Token savings hide lower relevance" "Benchmark lacks baseline" "Assertions execute vacuously"]
       :additionalRequirements ["Report executed assertion count" "Keep source and query fixtures stable" "Do not claim improvement without baseline"]
-      :adr "ADR-0072"
+      :adr "D72"
       :decision "D72"
       :dependsOn ["Task48205"]
       :gate "asl test --strict-falsify harness/tests/capabilities_test.asl && asl test --strict-falsify harness/tests/skill_packs_test.asl && asl check harness/results/capability-benchmark.asn"

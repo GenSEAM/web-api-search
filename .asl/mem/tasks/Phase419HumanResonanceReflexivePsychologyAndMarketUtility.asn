@@ -34,7 +34,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64"]
       :variations ["Flat prompt instructions vs formal recursive reflexive state modeling (chosen: formal reflexive state modeling)"]
       :failureModes ["User feeling disempowered or patronized by over-eager agent autonomy (mitigated: explicit agency preservation invariant)"]
-      :adr "ADR-0064"
+      :adr "D64"
       :decision "D64"
       :why "Eliminate human-agent friction by modeling recursive counter-perceptions"
       :spec "Specify the ReflexiveTheoryOfMind schema with R0, R1, R2 cognitive tiers and anti-reactance rules."
@@ -70,7 +70,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64"]
       :variations ["Generic conversational generation vs structured semantic resonance matrices (chosen: structured resonance matrices)"]
       :failureModes ["Verbose token bloat that fatigues reader attention (mitigated: strict SNR >= 0.75 constraint)"]
-      :adr "ADR-0064"
+      :adr "D64"
       :decision "D64"
       :why "Ensure agent communications attract, captivate, and maintain human audience attention"
       :spec "Specify SemanticResonance ontology with narrative alignment and aesthetic signal density."
@@ -106,7 +106,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64"]
       :variations ["Intuitive problem assumption vs empirical JTBD severity evaluation (chosen: empirical JTBD severity)"]
       :failureModes ["Solving phantom problems or delivering solutions that violate user habit loops (mitigated: switching cost audit)"]
-      :adr "ADR-0064"
+      :adr "D64"
       :decision "D64"
       :why "Guarantee every engineered feature addresses a severe, validated human need"
       :spec "Specify JTBD tri-job decomposition, pain severity calculation, and acceptable solution bounds."
@@ -142,7 +142,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64"]
       :variations ["Overwhelming user with raw choices vs calibrated choice architectures (chosen: calibrated choice architecture)"]
       :failureModes ["Choice paralysis or manipulative dark patterns (mitigated: ethical transparency invariant)"]
-      :adr "ADR-0064"
+      :adr "D64"
       :decision "D64"
       :why "Structure human-agent interaction to maximize clarity and minimize cognitive exhaustion"
       :spec "Specify behavioral choice rules, cognitive pacing budgets, and trust calibration vectors."
@@ -178,7 +178,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64"]
       :variations ["Atomized individual user model vs holistic sociological network model (chosen: holistic sociological network model)"]
       :failureModes ["Ignoring organizational veto-holders or cultural counter-currents (mitigated: stakeholder alignment audit)"]
-      :adr "ADR-0064"
+      :adr "D64"
       :decision "D64"
       :why "Account for social graph dynamics and collective cultural adoption"
       :spec "Specify memetic transmission equations and multi-stakeholder incentive matrices."
@@ -214,7 +214,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64"]
       :variations ["Traditional legacy SaaS subscription vs modern agentic outcome-escrow and dynamic micro-apps (chosen: modern agentic formats)"]
       :failureModes ["Inverting unit economics where inference cost exceeds customer lifetime value (mitigated: automated marginal cost bounds)"]
-      :adr "ADR-0064"
+      :adr "D64"
       :decision "D64"
       :why "Ensure agent applications achieve commercial viability and sustainable unit economics"
       :spec "Specify business model canvas, unit economic formulas, and app format taxonomy."
@@ -256,7 +256,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60" "D61" "D62" "D63" "D64"]
       :variations ["Manual task signoff vs automated 5-dimensional bidirectional audit (chosen: automated 5-dimensional audit)"]
       :failureModes ["Broken task-ADR cross references or ungrounded intent claims (mitigated: strict D52 audit)"]
-      :adr "ADR-0064"
+      :adr "D64"
       :decision "D64"
       :why "Guarantee uncompromised architectural integrity and reproducible physical receipts"
       :spec "Run asl audit consistency and asl gate to verify zero errors and complete reconciliation."

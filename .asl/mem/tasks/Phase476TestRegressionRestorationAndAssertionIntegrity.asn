@@ -20,7 +20,7 @@
       :targetSymbols ["svg-transpile"] :relatedSymbols ["codec" "compaction"]
       :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :adr "D81" :decision "d81" :dependsOn []
       :gate "./bin/asl test asl/packages/asl-codec/tests/svg-transpile-test.asl && ./bin/asl test harness/tests/svg-bench-test.asl"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -44,7 +44,7 @@
       :targetSymbols ["extract-output-skeleton" "parse-single-branch-line"] :relatedSymbols ["sh" "gates"]
       :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :adr "D81" :decision "d81" :dependsOn []
       :gate "./bin/asl test asl/packages/asl-sh/tests/rpc_proc_test.asl && ./bin/asl test asl/packages/asl-sh/tests/git_search_test.asl"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -68,7 +68,7 @@
       :targetSymbols ["StepResult" "step-agent" "make-vmm-state"] :relatedSymbols ["agent" "vmm"]
       :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :adr "D81" :decision "d81" :dependsOn []
       :gate "./bin/asl test agent/tests/agent_test.asl && ./bin/asl test agent/tests/vmm-test.asl"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -92,7 +92,7 @@
       :targetSymbols ["filter-visible-sessions" "tokenize-terms" "reconcile-incremental-diff"] :relatedSymbols ["mem" "search"]
       :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :adr "D81" :decision "d81" :dependsOn []
       :gate "./bin/asl test mem/tests/bm25_test.asl && ./bin/asl test mem/tests/hybrid_search_test.asl && ./bin/asl test mem/tests/visibility_scope_test.asl"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -116,7 +116,7 @@
       :targetSymbols ["dispatch-batch-rpc" "execute-builtin-tool"] :relatedSymbols ["runtime" "harness"]
       :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :adr "D81" :decision "d81" :dependsOn []
       :gate "./bin/asl test browser-plugin/tests/runtime_test.asl && ./bin/asl test harness/tests/coding-test.asl && ./bin/asl test harness/tests/e2e_toolcalls_test.asl"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
@@ -140,7 +140,7 @@
       :targetSymbols ["build-search-url" "model-calibration" "compact-history"] :relatedSymbols ["tests" "assertions"]
       :invariants ["C3" "D81"] :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes) :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081" :decision "d81" :dependsOn []
+      :adr "D81" :decision "d81" :dependsOn []
       :gate "./bin/asl test web-api-search/tests/search_test.asl && ./bin/asl test harness/tests/toolcall-test.asl && ./bin/asl test harness/tests/model_calibration_test.asl && ./bin/asl test harness/tests/compactor_test.asl && ./bin/asl test harness/tests/polyglot-ast-test.asl && ./bin/asl test harness/tests/knowledge_mount_test.asl && ./bin/asl test test_parse_tags_test.asl"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]

@@ -170,11 +170,11 @@
       :title "Task Collections Bulk Shortcode Migration"
       :kind :governance
       :lane "tasks"
-      :state :pending
+      :state :completed
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789450000000
-      :updatedAt 1789450000000
+      :updatedAt 1789450800000
       :motivation "557 tasks across 94 phase collections carry verbose ADR-00XX references."
       :purpose "Batch migrate task decision references to canonical D<N> shortcode, reducing token consumption while preserving 100 percent bidirectional linkage."
       :context (:contractRef D81PlanContext)
@@ -186,7 +186,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task48301" "Task48304"]
       :gate "bin/asl audit consistency"
@@ -199,8 +199,8 @@
       :gateReadiness :requiresIndependentBaseline
       :baselineProbe (:command "bin/asl audit consistency" :status :notEstablished :contract D81Baseline)
       :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :gate "bin/asl audit consistency" :exitCode 0 :status :passed :timestamp 1789450800000 :digest "tasks-migrated-537-refs-canonical-d")])
 
     (:task
       :id "Task48306"
@@ -225,7 +225,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task48302" "Task48303" "Task48304" "Task48305"]
       :gate "bin/asl audit gates"

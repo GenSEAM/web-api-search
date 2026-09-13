@@ -34,7 +34,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0046"
+      :adr "D46"
       :decision "d46"
 :owns ["asl/packages/asl-text/src/string.asl" "mem/src/vfs.asl" "asl/packages/asl-text/tests/modular_aliases_test.asl"]
       :targetSymbols ["txt/starts?" "txt/ends?" "txt/has?" "txt/split" "v/norm" "v/resolve" "v/read" "v/write"]
@@ -78,7 +78,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0046"
+      :adr "D46"
       :decision "d46"
 :owns ["mem/src/tasks.asl" "asl/packages/asl-sh/src/process.asl" "mem/tests/task_modular_test.asl"]
       :targetSymbols ["task/claim" "task/state" "task/settle" "proc/status" "proc/list"]
@@ -121,7 +121,7 @@
       :failureModes [
         "Assertion failure or syntax delimiter imbalance in owned files"
       ]
-      :adr "ADR-0046"
+      :adr "D46"
       :decision "d46"
 :owns ["tests/test_modular_aliases_e2e.sh"]
       :targetSymbols ["verify-token-compaction-ratio"]

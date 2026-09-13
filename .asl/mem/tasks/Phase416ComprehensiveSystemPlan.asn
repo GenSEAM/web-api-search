@@ -34,7 +34,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60"]
       :variations ["Single-pass heuristic search vs two-pass empirical triangulation (chosen: two-pass triangulation)"]
       :failureModes ["Confirmation bias in research synthesis (mitigated: adversarial falsification lens)"]
-      :adr "ADR-0060"
+      :adr "D60"
       :decision "D60"
       :why "Eliminate ungrounded speculation by grounding research in physical verification"
       :spec "Implement meta-research validation engine in intelligence plane."
@@ -70,7 +70,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60"]
       :variations ["Verbose CSS/SVG XML vs compact ASN S-expression dual-projection"]
       :failureModes ["Contrast failure in dark mode (mitigated: OkLCH perceptual luminance calculations)"]
-      :adr "ADR-0060"
+      :adr "D60"
       :decision "D60"
       :why "Establish deterministic, token-efficient design systems for UI and vector graphics"
       :spec "Verify design token grammar and vector transpiler."
@@ -106,7 +106,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60"]
       :variations ["Manual peephole optimization vs automated E-graph rewrite saturation"]
       :failureModes ["Rule explosion in equality saturation (mitigated: iteration ceiling and cost model)"]
-      :adr "ADR-0060"
+      :adr "D60"
       :decision "D60"
       :why "Guarantee rigorous algorithmic efficiency on mission-critical paths"
       :spec "Execute E-graph equality saturation verification suite."
@@ -142,7 +142,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60"]
       :variations ["Platform-specific manual setup vs automated unified installer"]
       :failureModes ["Directive corruption in external rules (mitigated: idempotent delimiter markers)"]
-      :adr "ADR-0060"
+      :adr "D60"
       :decision "D60"
       :why "Enable external coding agents to leverage native ASL toolchain effortlessly"
       :spec "Execute multi-agent installer verification suite."
@@ -178,7 +178,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60"]
       :variations ["Open-loop linear plans vs closed-loop self-correcting DAGs (chosen: closed-loop)"]
       :failureModes ["Unreconciled drift between research and implementation (mitigated: physical receipts)"]
-      :adr "ADR-0060"
+      :adr "D60"
       :decision "D60"
       :why "Guarantee continuous error correction and alignment across all project phases"
       :spec "Author and verify ADR-0060 specification."
@@ -216,7 +216,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58" "D59" "D60"]
       :variations ["Manual status update vs deterministic settlement audit"]
       :failureModes ["Roadmap desynchronization (mitigated: consistency audit validation)"]
-      :adr "ADR-0060"
+      :adr "D60"
       :decision "D60"
       :why "Settle Phase 416 and confirm complete ecosystem health"
       :spec "Reconcile roadmap, decisions, intent, and run 7 gates."

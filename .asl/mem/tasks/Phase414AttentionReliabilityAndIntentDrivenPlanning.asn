@@ -34,7 +34,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58"]
       :variations ["Prompt-only instruction tuning vs external deterministic harness"]
       :failureModes ["Attention degradation over long contexts (mitigated: perceptual pointers)"]
-      :adr "ADR-0058"
+      :adr "D58"
       :decision "D58"
       :why "Establish formal theoretical and empirical basis for attention model reliability"
       :spec "Audit attention-based model failure modes and deliberation gaps."
@@ -70,7 +70,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58"]
       :variations ["Regex heuristics vs streaming finite-state balancer"]
       :failureModes ["Incomplete reasoning extraction (mitigated: dual-tag search)"]
-      :adr "ADR-0058"
+      :adr "D58"
       :decision "D58"
       :why "Ensure models never corrupt the execution environment with unbalanced delimiters"
       :spec "Execute anti-hallucination verification suite."
@@ -106,7 +106,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58"]
       :variations ["Direct instruction execution vs planned DAG expansion"]
       :failureModes ["Unbounded scope creep on abstract intent (mitigated: strict :owns bounds)"]
-      :adr "ADR-0058"
+      :adr "D58"
       :decision "D58"
       :why "Prevent monolithic leap failures by requiring DAG expansion for abstract intent"
       :spec "Author and verify ADR-0058."
@@ -142,7 +142,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58"]
       :variations ["Estimated token count vs exact tiktoken BPE tokenizer"]
       :failureModes ["Syntax parse discrepancy between formats (mitigated: closed ASN grammar)"]
-      :adr "ADR-0058"
+      :adr "D58"
       :decision "D58"
       :why "Validate instruction compactness and protocol alignment with empirical test suites"
       :spec "Execute protocol comparator test suite."
@@ -178,7 +178,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58"]
       :variations ["Per-package ad-hoc serializers vs canonical foundation packages"]
       :failureModes ["Leaked internal typestates across wire boundary (mitigated: ASN schema registry)"]
-      :adr "ADR-0058"
+      :adr "D58"
       :decision "D58"
       :why "Maintain rigid wire boundaries and prevent protocol drifts"
       :spec "Audit boundary universalism across memory packages."
@@ -216,7 +216,7 @@
       :invariants ["C1" "C2" "C3" "C4" "C5" "D34" "D51" "D52" "D56" "D57" "D58"]
       :variations ["Manual status update vs deterministic settlement audit"]
       :failureModes ["Roadmap desynchronization (mitigated: consistency audit validation)"]
-      :adr "ADR-0058"
+      :adr "D58"
       :decision "D58"
       :why "Settle Phase 414 and confirm complete ecosystem health"
       :spec "Reconcile roadmap, decisions, intent, receipts, and run 7 gates."
