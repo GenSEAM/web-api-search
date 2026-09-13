@@ -33,7 +33,7 @@
       :adr "ADR-0081"
       :decision "d81"
       :dependsOn []
-      :gate "sh tests/acceptance/d81/Task-F01.asl"
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F01"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
       :verificationRole "independentVerifier"
@@ -72,7 +72,7 @@
       :adr "ADR-0081"
       :decision "d81"
       :dependsOn []
-      :gate "sh tests/acceptance/d81/Task-F02.asl"
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F02"
       :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
       :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
       :verificationRole "independentVerifier"
