@@ -1278,5 +1278,46 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F31" :status :passed :exitCode 0 :assertionsEvaluated 12 :timestamp 1789451800000)
       ])
+    (:task
+      :id "Task-F32"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Unify Core Agent Structs Under Boundary Universalism"
+      :kind :core
+      :lane "agent-core"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789452000000
+      :updatedAt 1789452400000
+      :motivation "Three conflicting, incompatible definitions of AgentMessage, ToolDef, and ToolResult across packages."
+      :purpose "Establish canonical definitions in agent-core/src/types.asl and re-export or import across agent-bus and agent packages."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Unified AgentMessage struct supporting both chat and bus routing fields" "Unified ToolDef and ToolResult structs" "Canonical types.asl in agent-core, agent-bus, and agent"]
+      :owns ["agent-core/src/types.asl" "agent-bus/src/types.asl" "agent/src/types.asl" "agent-core/manifest.asn" "agent-bus/manifest.asn" "agent/manifest.asn"]
+      :targetSymbols ["AgentMessage" "ToolDef" "ToolResult" "ToolCall" "ToolParam" "ToolArg" "ToolInvocation"]
+      :relatedSymbols ["AgentContext" "ToolRouter" "ToolDispatchResult"]
+      :invariants ["D81" "C3" "D34"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F31"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F32"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F32.asl"]
+      :verificationCases ["Canonical AgentMessage, ToolDef, ToolResult accessible across agent-core, agent-bus, and agent."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F32" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Author acceptance fixture Task-F32.asl" "Verify baseline failure on missing types modules" "Create agent-core/src/types.asl" "Create agent-bus/src/types.asl and agent/src/types.asl" "Update manifests" "Certify green under SuperviseGate.sh."]
+      :stepIndex 6
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F32" :status :passed :exitCode 0 :assertionsEvaluated 28 :timestamp 1789452400000)
+      ])
   ]
 )

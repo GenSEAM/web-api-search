@@ -244,11 +244,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 ## Phase 4: P2 Boundary Universalism & Redundancy Consolidation
 
 ### Task-F32: Unify Core Agent Structs Under Boundary Universalism (C3/D34)
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `agent-core/src/types.asl`, `agent-bus/src/types.asl`, `agent/src/types.asl`
 - **Baseline Failure**: Three conflicting, incompatible definitions of `AgentMessage`, `ToolDef`, and `ToolResult` across packages.
 - **Remedy**: Establish canonical definitions in `agent-core/src/types.asl` and re-export or import across packages.
-- **Gate**: `bin/asl check agent-core && bin/asl check agent-bus && bin/asl check agent`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F32` (28 assertions verified)
 
 ### Task-F33: Deduplicate Token Estimation Helper Across Monorepo
 - **Status**: planned
