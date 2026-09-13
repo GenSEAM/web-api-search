@@ -2027,5 +2027,14 @@
       :fact "task-f38-certified-complete"
       :evidence "Restored Invariant C2 (zero emojis) across gate runners and tests under ADR-0081; replaced raw Unicode checkmark and cross glyphs with ASCII/ASN-compliant status markers :ok and :fail in asl/packages/asl-gates/src/gate_runner.asl and asl/packages/asl-registry/tests/registry_test.asl; authored tests/acceptance/d81/Task-F38.asl demonstrating baseline failure on Unicode glyphs; evaluated 8 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F38 certified complete; Invariant C2 fully enforced across gate runners and registry tests with zero raw Unicode checkmarks or crosses monorepo-wide under ADR-0081")
+    (:note
+      :id "n192"
+      :timestamp 1789456000000
+      :author "codex"
+      :scope ["agent/src/triage.asl" "vdom/src/diagram.asl" "asl/packages/asl-sh/src/core/process.asl" "tests/acceptance/d81/Task-F39.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn" ".plans/phase-finsel/PLAN.md"]
+      :tags [:supervision :phase-finsel :task-f39 :invariants :c5 :zero-sigils :syntax-alignment :phase-complete :approved]
+      :fact "phase-finsel-100-percent-certified-complete"
+      :evidence "Restored Invariant C5 (zero sigils) and syntax alignment under ADR-0081; stripped @pcp: sigils from agent/src/triage.asl and asl/packages/asl-sh/src/core/process.asl; replaced JS template string interpolation with standard string concatenation in vdom/src/diagram.asl; authored tests/acceptance/d81/Task-F39.asl demonstrating baseline failure on present sigils; evaluated 5 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn; all 39 tasks of Phase FINSEL are 100% verified and certified green"
+      :consequence "Task-F39 certified complete; Phase FINSEL Remediation is 100% certified complete across all 39 tasks with zero regressions, all 7 gates passing, and all 5 D52 dimensions reconciled monorepo-wide under ADR-0081")
   ]
 )
