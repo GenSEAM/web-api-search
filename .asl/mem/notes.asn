@@ -1751,5 +1751,14 @@
       :fact "task-f06-certified-complete"
       :evidence "Eliminated caller-supplied magic numbers in gate runner; implemented run-live-gate-audit in gate_runner.asl and runner.asl querying filesystem truth on disk; updated grammar.asn and gate_runner_test.asl; authored tests/acceptance/d81/Task-F06.asl; evaluated 17 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
       :consequence "Task-F06 certified complete; gate runner independently queries filesystem and eliminates vacuous green reports under ADR-0081")
+    (:note
+      :id "n161"
+      :timestamp 1789443600000
+      :author "codex"
+      :scope ["tools/gate.asl" "tests/acceptance/d81/Task-F07.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f07 :gates :tools-gate :live-verification :approved]
+      :fact "task-f07-certified-complete"
+      :evidence "Replaced hardcoded magic numbers (35 793 12 0 272 3737 22) in tools/gate.asl; imported asl-gates/gate-runner and wired run-gate-suite to invoke gr/run-live-gate-audit; forwarded run-all-seven-gates to gr/run-all-seven-gates eliminating duplicate logic; authored tests/acceptance/d81/Task-F07.asl with baseline failure demonstration; evaluated 16 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F07 certified complete; tools/gate.asl executes live gate audit and eliminates synthetic green reports under ADR-0081")
   ]
 )

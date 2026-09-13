@@ -10,7 +10,7 @@
       run-gate-suite
       format-gate-summary
       format-audit-report]
-  :i [])
+  :i [(asl-gates/gate-runner :a gr)])
 
 (dfs GateConfig
   :d "Configuration parameters for pure ASL gate verification."
@@ -63,44 +63,35 @@
                          (total-grammar-syms I64)
                          (total-skills I64)] -> GateSummary
   :d "Executes pure ASL verification matrix evaluating all 7 core gates."
-  (let [(v1 (make-verdict 1 "Package Manifests & Structure"
-                          (> total-manifests 0)
-                          (str "Verified " (string-from-int64 total-manifests) " package manifests cleanly.")))
-        (v2 (make-verdict 2 "Pure ASL Syntax & Form Balance"
-                          (> total-asl-files 0)
-                          (str "All " (string-from-int64 total-asl-files) " ASL source files are well-formed and structurally balanced.")))
-        (v3 (make-verdict 3 "Site Claims Grounding Audit"
-                          (>= grounded-claims 12)
-                          (str "Grounded " (string-from-int64 grounded-claims) " benchmark claims across published registry.")))
-        (v4 (make-verdict 4 "Zero-Foreign File Policy"
-                          (= foreign-files 0)
-                          "Zero foreign files across monorepo (100% pure AgentScript conforming to ASL-first invariant)."))
-        (v5 (make-verdict 5 "Pure ASL Gate Test Suite"
-                          (> total-tests 0)
-                          (str "Audited " (string-from-int64 total-tests) " native test suites with evaluated assertion integrity.")))
-        (v6 (make-verdict 6 "ASN Grammar & Token Density Audit"
-                          (> total-grammar-syms 1000)
-                          (str "Audited " (string-from-int64 total-grammar-syms) " exported symbols across grammar registries.")))
-        (v7 (make-verdict 7 "Modular Skills Consistency & Freshness"
-                          (> total-skills 0)
-                          (str "Audited " (string-from-int64 total-skills) " modular skills in skills repository.")))]
-    (let [(pass-count (+ (if (.-passed v1) 1 0)
-                         (if (.-passed v2) 1 0)
-                         (if (.-passed v3) 1 0)
-                         (if (.-passed v4) 1 0)
-                         (if (.-passed v5) 1 0)
-                         (if (.-passed v6) 1 0)
-                         (if (.-passed v7) 1 0)))
-          (clean (= pass-count 7))]
-      (GateSummary
-        :total-gates 7
-        :passed-gates pass-count
-        :all-clean clean
-        :verdicts (list v1 v2 v3 v4 v5 v6 v7)))))
+  (let [(s (gr/run-all-seven-gates total-manifests total-asl-files grounded-claims foreign-files total-tests total-grammar-syms total-skills))
+        (verdicts (map (fn [(v gr/GateVerdict)] -> GateVerdict
+                         (GateVerdict
+                           :gate-num (.-gate-num v)
+                           :gate-name (.-gate-name v)
+                           :passed (.-passed v)
+                           :message (.-message v)))
+                       (.-verdicts s)))]
+    (GateSummary
+      :total-gates (.-total-gates s)
+      :passed-gates (.-passed-gates s)
+      :all-clean (.-all-clean s)
+      :verdicts verdicts)))
 
-(df run-gate-suite [(cfg GateConfig)] -> AuditReport
+(df ! run-gate-suite [(cfg GateConfig)] -> AuditReport
   :d "Executes the 7-gate verification pipeline under pure ASL runner."
-  (let [(summary (run-all-seven-gates 35 793 12 0 272 3737 22))]
+  (let [(s (gr/run-live-gate-audit))
+        (verdicts (map (fn [(v gr/GateVerdict)] -> GateVerdict
+                         (GateVerdict
+                           :gate-num (.-gate-num v)
+                           :gate-name (.-gate-name v)
+                           :passed (.-passed v)
+                           :message (.-message v)))
+                       (.-verdicts s)))
+        (summary (GateSummary
+                   :total-gates (.-total-gates s)
+                   :passed-gates (.-passed-gates s)
+                   :all-clean (.-all-clean s)
+                   :verdicts verdicts))]
     (AuditReport
       :summary summary
       :execution-ms 74

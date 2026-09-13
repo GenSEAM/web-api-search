@@ -253,5 +253,46 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F06" :status :passed :exitCode 0 :assertionsEvaluated 17 :timestamp 1789443300000)
       ])
+    (:task
+      :id "Task-F07"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Replace Hardcoded Magic Numbers in Tools Gate Suite"
+      :kind :gate
+      :lane "verification"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789441500000
+      :updatedAt 1789443600000
+      :motivation "tools/gate.asl calls run-all-seven-gates with hardcoded magic counts (35 793 12 0 272 3737 22), synthesizing artificial green status without live inspection."
+      :purpose "Replace static magic numbers in tools/gate.asl with live dynamic filesystem inspection via gr/run-live-gate-audit."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Live gate execution in tools/gate.asl" "Elimination of hardcoded magic counts 35 793 12 0 272 3737 22"]
+      :owns ["tools/gate.asl"]
+      :targetSymbols ["run-gate-suite" "run-all-seven-gates"]
+      :relatedSymbols ["format-gate-summary" "format-audit-report"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F06"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F07"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F07.asl"]
+      :verificationCases ["tools/gate.asl executes live audit without hardcoded counts 35 793 12 0 272 3737 22."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F07" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect tools/gate.asl" "Author acceptance fixture" "Prove baseline failure" "Replace magic numbers" "Verify green."]
+      :stepIndex 3
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F07" :status :passed :exitCode 0 :assertionsEvaluated 16 :timestamp 1789443600000)
+      ])
   ]
 )

@@ -57,7 +57,7 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `bin/asl test asl/packages/asl-gates/tests/gate_runner_test.asl`
 
 ### Task-F07: Replace Hardcoded Magic Numbers in Tools Gate Suite
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `tools/gate.asl`
 - **Baseline Failure**: `tools/gate.asl:101-107` executes `(run-all-seven-gates 35 793 12 0 272 3737 22)` faking complete suite passage.
 - **Remedy**: Compute actual file counts and manifest tallies by traversing the workspace before calling `run-all-seven-gates`.
