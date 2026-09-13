@@ -37,8 +37,7 @@
     (let [(frame-res (option-or (list-head deserialized-list) (err "missing")))
           (f (result-or frame-res frame))]
       (assert (is-ok? frame-res) "Frame deserialization must succeed")
-      (assert false (str "DEBUG: contains newline=" (string-contains? (.-payload f) "
-") " contains escaped backslash-n=" (string-contains? (.-payload f) "\\n")))
+      (assert (not (string-contains? (.-payload f) "\n")) "Payload must not contain literal newline")
       (assert (= (.-payload f) payload) "Payload must match original \\n")
       true)))
 
