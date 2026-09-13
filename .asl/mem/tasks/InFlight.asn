@@ -1,15 +1,15 @@
 (:in-flight
   :session-id "57abefd4-689b-44f0-8084-f5b1813fae50"
-  :lane "rpc-alpha"
+  :lane "rpc-beta"
   :activePhase "Phase484RpcRecordStoreAndDeterministicDistribution"
-  :activeTasks ["Task48403"]
-  :dispatchedAt 1789459000000
+  :activeTasks ["Task48404"]
+  :dispatchedAt 1789459400000
   :status "in-progress"
   :handoffId ""
   :handoffCheckpoint 0
-  :sourceDigest "ceca261"
+  :sourceDigest "50d1e60"
   :authoritativeConstraints ["D83" "D52" "C1" "C2" "C5"]
   :unresolvedQuestions []
   :negativeFindings []
-  :receiptReferences ["receipt-task-48401" "receipt-task-48402"]
-  :leases ["asl/tools/asl.c" "bin/asl" "asl/asl" "asl/bin/asl" "tests/acceptance/d81/Task48403.asl"])
+  :receiptReferences ["receipt-task-48401" "receipt-task-48402" "receipt-task-48403"]
+  :leases ["asl/tools/asl.c" "bin/asl" "asl/asl" "asl/bin/asl" "tests/acceptance/d81/Task48404.asl"])
