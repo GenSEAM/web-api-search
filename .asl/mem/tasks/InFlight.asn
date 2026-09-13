@@ -1,9 +1,9 @@
 (:in-flight
   :session-id "57abefd4-689b-44f0-8084-f5b1813fae50"
-  :lane "consistency"
+  :lane "rules"
   :activePhase "Phase483D81ShortcodeMigration"
-  :activeTasks ["Task48301"]
-  :dispatchedAt 1789450000000
+  :activeTasks ["Task48302"]
+  :dispatchedAt 1789450200000
   :status "in-progress"
   :handoffId ""
   :handoffCheckpoint 0
@@ -12,4 +12,4 @@
   :unresolvedQuestions []
   :negativeFindings []
   :receiptReferences []
-  :leases [(:task "Task48301" :owner "implementer" :acquiredAt 1789450000000 :expiresAt 1789460000000)])
+  :leases [(:task "Task48302" :owner "implementer" :acquiredAt 1789450200000 :expiresAt 1789460200000)])

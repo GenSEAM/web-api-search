@@ -53,11 +53,11 @@
       :title "Rules Source and Multi-Surface Projections"
       :kind :governance
       :lane "rules"
-      :state :pending
+      :state :completed
       :priority :critical
       :ownerRole "implementer"
       :createdAt 1789450000000
-      :updatedAt 1789450000000
+      :updatedAt 1789450300000
       :motivation "rules.asn is the single source of truth for monorepo constraints across 7 rendered surfaces."
       :purpose "Render rules with shortcode D81 compatibility, commit in asl submodule first, and verify byte-identical projection across all 7 surfaces."
       :context (:contractRef D81PlanContext)
@@ -69,7 +69,7 @@
       :variations (:contractRef D81SettledChoices)
       :failureModes (:contractRef D81TaskFailureModes)
       :additionalRequirements (:contractRef D81Ownership)
-      :adr "ADR-0081"
+      :adr "D81"
       :decision "d81"
       :dependsOn ["Task48301"]
       :gate "./scripts/install.sh --check-rules"
@@ -82,8 +82,8 @@
       :gateReadiness :requiresIndependentBaseline
       :baselineProbe (:command "./scripts/install.sh --check-rules" :status :notEstablished :contract D81Baseline)
       :reviewStatus :planApproved
-      :stepIndex 0
-      :receipts [])
+      :stepIndex 1
+      :receipts [(:receipt :gate "./scripts/install.sh --check-rules" :exitCode 0 :status :passed :timestamp 1789450300000 :digest "rules-v7-d81-synced")])
 
     (:task
       :id "Task48303"
