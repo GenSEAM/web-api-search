@@ -205,11 +205,11 @@ Following an exhaustive, 8-wave, parallel multi-model audit conducted by the tri
 - **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F26` (13 assertions verified)
 
 ### Task-F27: Hydrate Memory Chunk Before Context Eviction
-- **Status**: planned
+- **Status**: completed
 - **Owns**: `mem/src/hydration.asl`
 - **Baseline Failure**: `evict-raw-context` clears messages without persisting them into `MemoryChunk`.
 - **Remedy**: Save uncompressed messages into cold storage before resetting the active list.
-- **Gate**: `bin/asl test mem/tests/hydration_test.asl`
+- **Gate**: `sh tests/acceptance/d81/SuperviseGate.sh Task-F27` (11 assertions verified)
 
 ### Task-F28: Resolve Asymmetric Intent Contradiction in MVCC Bus
 - **Status**: planned

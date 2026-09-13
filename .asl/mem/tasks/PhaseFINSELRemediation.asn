@@ -1073,6 +1073,47 @@
       :receipts [
         (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F26" :status :passed :exitCode 0 :assertionsEvaluated 13 :timestamp 1789449400000)
       ])
+    (:task
+      :id "Task-F27"
+      :parentId ""
+      :phase "phase-finsel"
+      :title "Hydrate Memory Chunk Before Context Eviction"
+      :kind :memory
+      :lane "mem"
+      :state :done
+      :priority :critical
+      :ownerRole "implementer"
+      :createdAt 1789449600000
+      :updatedAt 1789449700000
+      :motivation "evict-raw-context clears messages without persisting them into MemoryChunk."
+      :purpose "Save uncompressed operational messages into a MemoryChunk before resetting active context buffer list."
+      :context (:contractRef D81PlanContext)
+      :outcomes ["Persistent memory chunk preservation during context eviction" "Zero message loss on buffer eviction" "Complete roundtrip context hydration"]
+      :owns ["mem/src/hydration.asl"]
+      :targetSymbols ["evict-raw-context" "cascade-compress" "ContextBuffer"]
+      :relatedSymbols ["MemoryChunk"]
+      :invariants ["D81"]
+      :variations (:contractRef D81SettledChoices)
+      :failureModes (:contractRef D81TaskFailureModes)
+      :additionalRequirements (:contractRef D81Ownership)
+      :adr "ADR-0081"
+      :decision "d81"
+      :dependsOn ["Task-F26"]
+      :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F27"
+      :acceptanceCriteria (:contractRef D81BehavioralAcceptance)
+      :contractRefs [D81PlanContext D81SettledChoices D81TaskFailureModes D81BehavioralAcceptance D81Baseline D81Ownership D81Receipts]
+      :verificationRole "independentVerifier"
+      :verificationOwns ["tests/acceptance/d81/Task-F27.asl" "mem/tests/hydration_test.asl"]
+      :verificationCases ["evict-raw-context folds active uncompressed messages into MemoryChunk rather than discarding them."]
+      :gateReadiness :verified
+      :baselineProbe (:command "sh tests/acceptance/d81/SuperviseGate.sh Task-F27" :status :baselineVerified :contract D81Baseline)
+      :historicalReceipts []
+      :reviewStatus :approved
+      :actionDag ["Inspect hydration.asl and hydration_test.asl" "Author acceptance fixture Task-F27.asl" "Demonstrate baseline failure on message loss during eviction" "Implement message folding into MemoryChunk in evict-raw-context" "Certify green under SuperviseGate.sh."]
+      :stepIndex 1
+      :receipts [
+        (:receipt :gate "sh tests/acceptance/d81/SuperviseGate.sh Task-F27" :status :passed :exitCode 0 :assertionsEvaluated 11 :timestamp 1789449700000)
+      ])
   ]
 )
 

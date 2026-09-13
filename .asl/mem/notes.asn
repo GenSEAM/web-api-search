@@ -1919,6 +1919,15 @@
       :fact "task-f26-certified-complete"
       :evidence "Replaced line-based S-expression splitting in AST merge; implemented depth-aware delimiter tracking in parse-homoiconic-forms via FormScanState and FormLineAcc in mem/src/ast_merge.asl; preserved multi-line forms with nested subforms starting with ( as single top-level forms without AST shredding; authored tests/acceptance/d81/Task-F26.asl demonstrating baseline failure; evaluated 13 assertions and passed SuperviseGate.sh cleanly; verified mem test suite (135 assertions); receipts indexed in receipts.asn"
       :consequence "Task-F26 certified complete; universal 3-way AST merge preserves structural integrity of multi-line functions and complex nested expressions under ADR-0081")
+    (:note
+      :id "n180"
+      :timestamp 1789449700000
+      :author "codex"
+      :scope ["mem/src/hydration.asl" "mem/tests/hydration_test.asl" "tests/acceptance/d81/Task-F27.asl" ".asl/mem/tasks/PhaseFINSELRemediation.asn"]
+      :tags [:supervision :phase-finsel :task-f27 :mem :hydration :context-eviction :cold-storage :approved]
+      :fact "task-f27-certified-complete"
+      :evidence "Hydrated MemoryChunk before context eviction; updated evict-raw-context in mem/src/hydration.asl to fold uncompressed operational messages into a MemoryChunk before clearing working memory, preserving scalar facts, directives, and content summary rather than discarding messages; updated hydration_test.asl (72 assertions); authored tests/acceptance/d81/Task-F27.asl demonstrating baseline failure; evaluated 11 assertions and passed SuperviseGate.sh cleanly; receipts indexed in receipts.asn"
+      :consequence "Task-F27 certified complete; working RAM eviction preserves uncompressed messages into cold storage chunks without context loss under ADR-0081")
   ]
 )
 
