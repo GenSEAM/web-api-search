@@ -1,6 +1,6 @@
-(module asl-web-api-search/engine
+(module aslWebApiSearch/engine
   :d "Decentralized multi-engine API search aggregator, URL deduplicator, and RAG context compressor in ASL."
-  :x [ProxyState ProxyNode SearchEngine SearchQuery SearchResult CurlCommand BipolarQuery is-proxy-healthy select-healthy-proxies build-search-url make-curl-command build-provider-curl-cmd clean-url merge-search-results format-result-markdown format-rag-context generate-bipolar-query])
+  :x [ProxyState ProxyNode SearchEngine SearchQuery SearchResult CurlCommand BipolarQuery isProxyHealthy selectHealthyProxies buildSearchUrl makeCurlCommand buildProviderCurlCmd cleanUrl mergeSearchResults formatResultMarkdown formatRagContext generateBipolarQuery])
 
 (dfe ProxyState
   (:c active [] "active proxy")
@@ -10,8 +10,8 @@
 (dfs ProxyNode
   (:f endpoint Str "endpoint url")
   (:f state ProxyState "state")
-  (:f latency-ms F64 "latency in ms")
-  (:f success-rate F64 "success rate"))
+  (:f latencyMs F64 "latency in ms")
+  (:f successRate F64 "success rate"))
 
 (dfe SearchEngine
   (:c ddg [] "DuckDuckGo web search")
@@ -25,7 +25,7 @@
 
 (dfs SearchQuery
   (:f text Str "query string")
-  (:f max-results I64 "max results count")
+  (:f maxResults I64 "max results count")
   (:f engines (List Str) "selected search engines"))
 
 (dfs SearchResult
@@ -40,15 +40,15 @@
   (:f args (List Str) "command argument vector")
   (:f url Str "target URL"))
 
-(df is-proxy-healthy [(proxy ProxyNode)] -> Bool
+(df isProxyHealthy [(proxy ProxyNode)] -> Bool
   :d "Checks if proxy is healthy based on latency and success rate."
-  (and (< (.-latency-ms proxy) 500.0) (> (.-success-rate proxy) 0.9)))
+  (and (< (.-latencyMs proxy) 500.0) (> (.-successRate proxy) 0.9)))
 
-(df select-healthy-proxies [(proxies (List ProxyNode))] -> (List ProxyNode)
+(df selectHealthyProxies [(proxies (List ProxyNode))] -> (List ProxyNode)
   :d "Filters proxy pool for active healthy nodes."
-  (filter is-proxy-healthy proxies))
+  (filter isProxyHealthy proxies))
 
-(df url-encode-query [(q Str)] -> Str
+(df urlEncodeQuery [(q Str)] -> Str
   (let [(q1 (string-replace q "%" "%25"))
         (q2 (string-replace q1 "+" "%2B"))
         (q3 (string-replace q2 " " "%20"))
@@ -59,87 +59,94 @@
         (q8 (string-replace q7 "'" "%27"))]
     q8))
 
-(df build-search-url [(engine Str) (query Str) (limit I64)] -> Str
+(df buildSearchUrl [(engine Str) (query Str) (limit I64)] -> Str
   :d "Generates target query endpoint for the selected search provider."
-  (let [(clean-q (url-encode-query query))
-        (lim-str (string-from-int64 limit))]
+  (let [(cleanQ (urlEncodeQuery query))
+        (limStr (string-from-int64 limit))]
     (cond
       ((= engine "wikipedia")
-       (str "https://en.wikipedia.org/w/api.php?action=opensearch&search=" clean-q "&limit=" lim-str "&namespace=0&format=json"))
+       (str "https://en.wikipedia.org/w/api.php?action=opensearch&search=" cleanQ "&limit=" limStr "&namespace=0&format=json"))
       ((= engine "github")
-       (str "https://api.github.com/search/repositories?q=" clean-q "&per_page=" lim-str))
+       (str "https://api.github.com/search/repositories?q=" cleanQ "&per_page=" limStr))
       ((= engine "arxiv")
-       (str "http://export.arxiv.org/api/query?search_query=all:" clean-q "&start=0&max_results=" lim-str))
+       (str "https://export.arxiv.org/api/query?search_query=all:" cleanQ "&start=0&max_results=" limStr))
       ((= engine "hackernews")
-       (str "https://hn.algolia.com/api/v1/search?query=" clean-q "&tags=story&hitsPerPage=" lim-str))
+       (str "https://hn.algolia.com/api/v1/search?query=" cleanQ "&tags=story&hitsPerPage=" limStr))
       ((= engine "hn")
-       (str "https://hn.algolia.com/api/v1/search?query=" clean-q "&tags=story&hitsPerPage=" lim-str))
+       (str "https://hn.algolia.com/api/v1/search?query=" cleanQ "&tags=story&hitsPerPage=" limStr))
       ((= engine "tavily")
-       (str "https://api.tavily.com/search?query=" clean-q "&max_results=" lim-str))
+       (str "https://api.tavily.com/search?query=" cleanQ "&max_results=" limStr))
       ((= engine "searxng")
-       (str "https://searx.be/search?q=" clean-q "&format=json"))
+       (str "https://searx.be/search?q=" cleanQ "&format=json"))
       ((= engine "serper")
-       (str "https://google.serper.dev/search?q=" clean-q "&num=" lim-str))
+       (str "https://google.serper.dev/search?q=" cleanQ "&num=" limStr))
       ((= engine "brave")
-       (str "https://api.search.brave.com/res/v1/web/search?q=" clean-q "&count=" lim-str))
+       (str "https://api.search.brave.com/res/v1/web/search?q=" cleanQ "&count=" limStr))
       (:else
-       (str "https://html.duckduckgo.com/html/?q=" clean-q)))))
+       (str "https://html.duckduckgo.com/html/?q=" cleanQ)))))
 
-(df make-curl-command [(url Str) (timeout-sec I64) (user-agent Str)] -> CurlCommand
+(df makeCurlCommand [(url Str) (timeoutSec I64) (userAgent Str)] -> CurlCommand
   :d "Builds a safe, typed curl execution vector."
-  (CurlCommand
-    :bin "curl"
-    :args (list "-s" "--max-time" (string-from-int64 timeout-sec) "-H" (str "User-Agent: " user-agent) url)
-    :url url))
+  (let [(safeUrl (if (or (string-starts-with? url "http://") (string-starts-with? url "https://")) url "https://invalid.local"))]
+    (CurlCommand
+      :bin "curl"
+      :args (list "-s" "--max-time" (string-from-int64 timeoutSec) "-H" (str "User-Agent: " userAgent) "--" safeUrl)
+      :url safeUrl)))
 
-(df build-provider-curl-cmd [(engine Str) (url Str) (api-key Str) (timeout-sec I64)] -> CurlCommand
+(df buildProviderCurlCmd [(engine Str) (url Str) (apiKey Str) (timeoutSec I64)] -> CurlCommand
   :d "Builds authenticated curl command for target search API provider."
-  (let [(auth-header (cond
-                       ((= engine "tavily") (str "Authorization: Bearer " api-key))
-                       ((= engine "serper") (str "X-API-KEY: " api-key))
-                       ((= engine "brave") (str "X-Subscription-Token: " api-key))
-                       ((= engine "github") (str "Authorization: token " api-key))
-                       (:else (str "X-API-Key: " api-key))))
-        (args (list "-s" "--max-time" (string-from-int64 timeout-sec)
+  (let [(safeUrl (if (or (string-starts-with? url "http://") (string-starts-with? url "https://")) url "https://invalid.local"))
+        (authHeader (cond
+                       ((= engine "tavily") (str "Authorization: Bearer " apiKey))
+                       ((= engine "serper") (str "X-API-KEY: " apiKey))
+                       ((= engine "brave") (str "X-Subscription-Token: " apiKey))
+                       ((= engine "github") (str "Authorization: token " apiKey))
+                       (:else (str "X-API-Key: " apiKey))))
+        (args (list "-s" "--max-time" (string-from-int64 timeoutSec)
                     "-H" "Accept: application/json"
-                    "-H" auth-header
-                    url))]
+                    "-H" authHeader
+                    "--"
+                    safeUrl))]
     (CurlCommand
       :bin "curl"
       :args args
-      :url url)))
+      :url safeUrl)))
 
-(df is-tracking-param? [(param Str)] -> Bool
+(df isTrackingParam? [(param Str)] -> Bool
   :d "Checks if query parameter is a tracking tag."
   (or (string-starts-with? param "utm_")
       (or (string-starts-with? param "fbclid=")
           (or (string-starts-with? param "gclid=")
               (string-starts-with? param "ref=")))))
 
-(df filter-query-params [(query-str Str)] -> Str
+(df filterQueryParams [(queryStr Str)] -> Str
   :d "Filters tracking parameters from query string."
-  (let [(parts (string-split query-str "&"))
-        (clean-parts (filter (fn [(p Str)] -> Bool (not (is-tracking-param? p))) parts))]
-    (string-join clean-parts "&")))
+  (let [(parts (string-split queryStr "&"))
+        (cleanParts (filter (fn [(p Str)] -> Bool (not (isTrackingParam? p))) parts))]
+    (string-join cleanParts "&")))
 
-(df clean-url [(url Str)] -> Str
+(df cleanUrl [(url Str)] -> Str
   :d "Strips tracking parameters (utm_*, ref, fbclid) from a URL."
-  (let [(url-parts (string-split url "?"))]
-    (mt (list-head url-parts)
+  (let [(urlParts (string-split url "?"))]
+    (mt (list-head urlParts)
       ((none) url)
       ((some base)
-       (mt (list-tail url-parts)
+       (mt (list-tail urlParts)
          ((none) base)
          ((some tail)
           (mt (list-head tail)
             ((none) base)
-            ((some raw-qs)
-             (let [(clean-qs (filter-query-params raw-qs))]
-               (if (string-empty? clean-qs)
-                   base
-                   (str base "?" clean-qs)))))))))))
+            ((some rawQs)
+             (let [(hashParts (string-split rawQs "#"))
+                   (pureQs (option-or (list-head hashParts) rawQs))
+                   (fragTail (option-or (list-tail hashParts) (list)))
+                   (fragment (if (list-empty? fragTail) "" (str "#" (string-join fragTail "#"))))
+                   (cleanQs (filterQueryParams pureQs))]
+               (if (string-empty? cleanQs)
+                   (str base fragment)
+                   (str base "?" cleanQs fragment)))))))))))
 
-(df update-item-or-add [(acc (List SearchResult)) (item SearchResult)] -> (List SearchResult)
+(df updateItemOrAdd [(acc (List SearchResult)) (item SearchResult)] -> (List SearchResult)
   :d "Appends item or boosts score and combines engine tags if URL already exists."
   (let [(url (.-url item))
         (found (filter (fn [(r SearchResult)] -> Bool (= (.-url r) url)) acc))]
@@ -158,50 +165,56 @@
                    r))
              acc))))
 
-(df merge-search-results [(primary (List SearchResult)) (secondary (List SearchResult))] -> (List SearchResult)
+(df mergeSearchResults [(primary (List SearchResult)) (secondary (List SearchResult))] -> (List SearchResult)
   :d "Merges two result sets with cross-engine deduplication and score boosting."
   (fold (fn [(acc (List SearchResult)) (item SearchResult)] -> (List SearchResult)
-          (update-item-or-add acc item))
+          (updateItemOrAdd acc item))
         primary
         secondary))
 
-(df format-result-markdown [(index I64) (res SearchResult)] -> Str
-  :d "Formats a single search result as markdown for LLM injection."
-  (str (string-from-int64 index) ". **[" (.-title res) "](" (.-url res) ")**  `[" (.-engine res) "]`\n   " (.-snippet res) "\n"))
+(df escapeMarkdown [(s Str)] -> Str
+  :d "Escapes markdown special characters."
+  (let [(s1 (string-replace s "[" "\\["))
+        (s2 (string-replace s1 "]" "\\]"))]
+    s2))
 
-(df format-results-rag-helper [(items (List SearchResult)) (idx I64)] -> (List Str)
+(df formatResultMarkdown [(index I64) (res SearchResult)] -> Str
+  :d "Formats a single search result as markdown for LLM injection."
+  (str (string-from-int64 index) ". **[" (escapeMarkdown (.-title res)) "](" (.-url res) ")**  `[" (escapeMarkdown (.-engine res)) "]`\n   " (.-snippet res) "\n"))
+
+(df formatResultsRagHelper [(items (List SearchResult)) (idx I64)] -> (List Str)
   (if (list-empty? items)
       (list)
       (let [(h (option-or (list-head items) (SearchResult :title "" :url "" :snippet "" :engine "" :score 0.0)))
             (rest (option-or (list-tail items) (list)))]
-        (list-cons (format-result-markdown idx h) (format-results-rag-helper rest (+ idx 1))))))
+        (list-cons (formatResultMarkdown idx h) (formatResultsRagHelper rest (+ idx 1))))))
 
-(df format-rag-context [(query Str) (items (List SearchResult))] -> Str
+(df formatRagContext [(query Str) (items (List SearchResult))] -> Str
   :d "Formats full search results as token-efficient markdown context for LLM prompt injection."
   (let [(header (str "## Search Results for: '" query "' (" (string-from-int64 (list-length items)) " items)\n\n"))
-        (formatted-items (format-results-rag-helper items 1))]
-    (str header (string-join formatted-items "\n"))))
+        (formattedItems (formatResultsRagHelper items 1))]
+    (str header (string-join formattedItems "\n"))))
 
 (dfs BipolarQuery
-  (:f positive-query Str "Confirmation query seeking supporting evidence")
-  (:f negative-query Str "Falsification query seeking counter-evidence, failure modes, or criticisms")
+  (:f positiveQuery Str "Confirmation query seeking supporting evidence")
+  (:f negativeQuery Str "Falsification query seeking counter-evidence, failure modes, or criticisms")
   (:f domain Str "Domain category e.g. architecture, legal, security"))
 
-(df generate-bipolar-query [(claim Str) (domain Str)] -> BipolarQuery
+(df generateBipolarQuery [(claim Str) (domain Str)] -> BipolarQuery
   :d "Generates dialectical confirmation and falsification queries to counteract confirmation bias."
   (let [(d (string-lower domain))
         (c (string-trim claim))
-        (pos-suffix (cond
+        (posSuffix (cond
                       ((= d "architecture") "architecture design advantages performance verified")
                       ((= d "legal") "statute authority ruling precedent compliant")
                       ((= d "security") "audit security certified hardened protection")
                       (:else "evidence proof benefits advantages verified")))
-        (neg-suffix (cond
+        (negSuffix (cond
                       ((= d "architecture") "bottleneck failure overhead drawbacks anti-pattern -hype")
                       ((= d "legal") "violation exception liability penalty repealed -opinion")
                       ((= d "security") "exploit cve vulnerability bypass flaw -marketing")
                       (:else "failure flaws criticism disadvantages limitations -promo")))]
     (BipolarQuery
-      :positive-query (str c " " pos-suffix)
-      :negative-query (str c " " neg-suffix)
+      :positiveQuery (str c " " posSuffix)
+      :negativeQuery (str c " " negSuffix)
       :domain domain)))

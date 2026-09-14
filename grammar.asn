@@ -1,9 +1,9 @@
 ;; Package Grammar & Exported Symbol Registry (ASN)
 ;; asl-web-api-search
 (:grammar
-  :package asl-web-api-search
+  :package aslWebApiSearch
   :version "0.1.0"
-  :tokens-baseline 1
+  :tokensBaseline 1
   :symbols [
     ;; 1-Token Symbols (Baseline)
     (:sym :name "ProxyState" :kind :type :tokens 1)
@@ -26,78 +26,78 @@
 
 
     ;; 2-Token Symbols (with :rationale)
-    (:sym :name "clean-url" :kind :fn :tokens 2
+    (:sym :name "cleanUrl" :kind :fn :tokens 2
           :rationale "Strips tracking parameters (utm, ref, gclid) from target URL")
-    (:sym :name "track-request" :kind :fn :tokens 2
+    (:sym :name "trackRequest" :kind :fn :tokens 3
           :rationale "Updates engine quota telemetry and records request consumption")
-    (:sym :name "run-tests" :kind :fn :tokens 2
+    (:sym :name "runTests" :kind :fn :tokens 2
           :rationale "Standard test suite runner entrypoint")
 
     ;; >2 Token Symbols (with :rationale)
-    (:sym :name "is-proxy-healthy" :kind :fn :tokens 3
+    (:sym :name "isProxyHealthy" :kind :fn :tokens 3
           :rationale "Evaluates proxy node health based on latency and success rate thresholds")
-    (:sym :name "select-healthy-proxies" :kind :fn :tokens 3
+    (:sym :name "selectHealthyProxies" :kind :fn :tokens 3
           :rationale "Filters active proxy pool returning only nodes meeting SLA criteria")
-    (:sym :name "build-search-url" :kind :fn :tokens 3
+    (:sym :name "buildSearchUrl" :kind :fn :tokens 3
           :rationale "Generates provider-specific target query URL endpoint")
-    (:sym :name "make-curl-command" :kind :fn :tokens 3
+    (:sym :name "makeCurlCommand" :kind :fn :tokens 3
           :rationale "Constructs typed CurlCommand structure with executable path and flags")
-    (:sym :name "build-provider-curl-cmd" :kind :fn :tokens 4
+    (:sym :name "buildProviderCurlCmd" :kind :fn :tokens 4
           :rationale "Constructs curl command with provider authentication headers for API search")
-    (:sym :name "merge-search-results" :kind :fn :tokens 3
+    (:sym :name "mergeSearchResults" :kind :fn :tokens 3
           :rationale "Deduplicates and merges search results across multiple provider queries")
-    (:sym :name "format-result-markdown" :kind :fn :tokens 3
+    (:sym :name "formatResultMarkdown" :kind :fn :tokens 3
           :rationale "Formats single search result item as markdown link with snippet")
-    (:sym :name "format-rag-context" :kind :fn :tokens 3
+    (:sym :name "formatRagContext" :kind :fn :tokens 3
           :rationale "Serializes merged search results into dense prompt context block")
-    (:sym :name "build-ecosystem-url" :kind :fn :tokens 3
+    (:sym :name "buildEcosystemUrl" :kind :fn :tokens 3
           :rationale "Generates package registry search URL for target language ecosystem")
-    (:sym :name "create-deep-targets" :kind :fn :tokens 3
+    (:sym :name "createDeepTargets" :kind :fn :tokens 3
           :rationale "Generates deep link crawling targets from search result URLs")
-    (:sym :name "build-package-curl-cmd" :kind :fn :tokens 4
+    (:sym :name "buildPackageCurlCmd" :kind :fn :tokens 4
           :rationale "Constructs curl command for package registry manifest discovery")
-    (:sym :name "format-package-markdown" :kind :fn :tokens 3
+    (:sym :name "formatPackageMarkdown" :kind :fn :tokens 3
           :rationale "Formats discovered package metadata into compact markdown summary")
-    (:sym :name "format-ecosystem-rag" :kind :fn :tokens 3
+    (:sym :name "formatEcosystemRag" :kind :fn :tokens 3
           :rationale "Compiles ecosystem package search results into prompt context")
-    (:sym :name "generate-bipolar-query" :kind :fn :tokens 3
+    (:sym :name "generateBipolarQuery" :kind :fn :tokens 3
           :rationale "Generates dialectical confirmation and falsification queries to counteract confirmation bias")
-    (:sym :name "resolve-search-config" :kind :fn :tokens 3
+    (:sym :name "resolveSearchConfig" :kind :fn :tokens 3
           :rationale "Resolves search engine credentials from environment variables and config")
-    (:sym :name "get-engine-key" :kind :fn :tokens 3
+    (:sym :name "getEngineKey" :kind :fn :tokens 3
           :rationale "Extracts API key for specified engine from SearchConfig record")
-    (:sym :name "make-default-search-config" :kind :fn :tokens 4
+    (:sym :name "makeDefaultSearchConfig" :kind :fn :tokens 4
           :rationale "Constructs baseline search configuration with open-first default policy")
-    (:sym :name "is-engine-configured?" :kind :fn :tokens 3
+    (:sym :name "isEngineConfigured?" :kind :fn :tokens 3
           :rationale "Evaluates whether target search engine has valid active credentials configured")
-    (:sym :name "resolve-runtime-strategy" :kind :fn :tokens 3
+    (:sym :name "resolveRuntimeStrategy" :kind :fn :tokens 3
           :rationale "Selects network transport strategy matching host or browser runtime context")
-    (:sym :name "build-transport-fetch-cmd" :kind :fn :tokens 4
+    (:sym :name "buildTransportFetchCmd" :kind :fn :tokens 4
           :rationale "Builds executable fetch command vector for selected network transport strategy")
-    (:sym :name "is-cors-restricted?" :kind :fn :tokens 3
+    (:sym :name "isCorsRestricted?" :kind :fn :tokens 3
           :rationale "Evaluates whether target runtime is subject to browser CORS origin limitations")
-    (:sym :name "is-offline-transport?" :kind :fn :tokens 3
+    (:sym :name "isOfflineTransport?" :kind :fn :tokens 3
           :rationale "Evaluates whether network transport strategy is restricted to offline local memory cache")
-    (:sym :name "inspect-engine-quota" :kind :fn :tokens 3
+    (:sym :name "inspectEngineQuota" :kind :fn :tokens 3
           :rationale "Evaluates remaining search engine quota and tier availability status")
-    (:sym :name "parse-quota-headers" :kind :fn :tokens 3
+    (:sym :name "parseQuotaHeaders" :kind :fn :tokens 3
           :rationale "Extracts rate limit remaining count from HTTP response header strings")
-    (:sym :name "is-quota-available?" :kind :fn :tokens 3
+    (:sym :name "isQuotaAvailable?" :kind :fn :tokens 3
           :rationale "Checks if target search engine quota has not been exhausted")
-    (:sym :name "make-quota-tracker" :kind :fn :tokens 3
+    (:sym :name "makeQuotaTracker" :kind :fn :tokens 3
           :rationale "Constructs baseline quota tracker initialized with engine quotas")
-    (:sym :name "is-open-engine?" :kind :fn :tokens 3
+    (:sym :name "isOpenEngine?" :kind :fn :tokens 3
           :rationale "Checks if search engine belongs to free public open access tier")
-    (:sym :name "select-engine-cascade" :kind :fn :tokens 3
+    (:sym :name "selectEngineCascade" :kind :fn :tokens 3
           :rationale "Builds prioritized failover list of search engines according to policy")
-    (:sym :name "route-search-query" :kind :fn :tokens 3
+    (:sym :name "routeSearchQuery" :kind :fn :tokens 3
           :rationale "Computes deterministic search engine and transport routing decision")
-    (:sym :name "calculate-rrf-score" :kind :fn :tokens 3
+    (:sym :name "calculateRrfScore" :kind :fn :tokens 3
           :rationale "Computes Reciprocal Rank Fusion component score for SERP item")
-    (:sym :name "deduplicate-serp-results" :kind :fn :tokens 3
+    (:sym :name "deduplicateSerpResults" :kind :fn :tokens 3
           :rationale "Removes duplicate search results across multiple engines based on cleaned URL")
-    (:sym :name "merge-serp-streams" :kind :fn :tokens 3
+    (:sym :name "mergeSerpStreams" :kind :fn :tokens 3
           :rationale "Blends multiple SERP result streams using reciprocal rank fusion")
-    (:sym :name "rank-serp-results" :kind :fn :tokens 3
+    (:sym :name "rankSerpResults" :kind :fn :tokens 3
           :rationale "Orders merged SERP results descending by relevance or fused RRF score")
   ])

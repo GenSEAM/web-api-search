@@ -1,99 +1,99 @@
-(module asl-web-api-search/quota
+(module aslWebApiSearch/quota
   :d "Search engine API quota inspection, rate limit telemetry, and credential status"
-  :x [EngineQuota QuotaTier QuotaTracker inspect-engine-quota parse-quota-headers is-quota-available? track-request make-quota-tracker]
+  :x [EngineQuota QuotaTier QuotaTracker inspectEngineQuota parseQuotaHeaders isQuotaAvailable? trackRequest makeQuotaTracker]
   :i [])
 
 (dfe QuotaTier
-  (:c always-available [] "Free, keyless, public rate limit tier")
-  (:c keyed-free [] "Free tier with API key and quota ceiling")
-  (:c keyed-metered [] "Metered paid API tier"))
+  (:c alwaysAvailable [] "Free, keyless, public rate limit tier")
+  (:c keyedFree [] "Free tier with API key and quota ceiling")
+  (:c keyedMetered [] "Metered paid API tier"))
 
 (dfs EngineQuota
-  (:f engine-name Str "Provider: ddg | wiki | github | arxiv | hn | brave | tavily | serper")
+  (:f engineName Str "Provider: ddg | wiki | github | arxiv | hn | brave | tavily | serper")
   (:f tier QuotaTier "Quota tier")
-  (:f has-key Bool "True if valid API key is present")
-  (:f remaining-quota I64 "Remaining requests in current cycle (-1 if unlimited/unknown)")
-  (:f reset-time-sec I64 "Seconds until rate limit reset")
-  (:f is-exhausted Bool "True if quota is depleted"))
+  (:f hasKey Bool "True if valid API key is present")
+  (:f remainingQuota I64 "Remaining requests in current cycle (-1 if unlimited/unknown)")
+  (:f resetTimeSec I64 "Seconds until rate limit reset")
+  (:f isExhausted Bool "True if quota is depleted"))
 
 (dfs QuotaTracker
   (:f quotas (List EngineQuota) "Registered engine quotas")
-  (:f default-tier QuotaTier "Fallback quota tier")
-  (:f total-requests I64 "Total requests processed")
-  (:f last-updated I64 "Timestamp of most recent quota update"))
+  (:f defaultTier QuotaTier "Fallback quota tier")
+  (:f totalRequests I64 "Total requests processed")
+  (:f lastUpdated I64 "Timestamp of most recent quota update"))
 
-(df make-quota-tracker [(quotas (List EngineQuota))] -> QuotaTracker
+(df makeQuotaTracker [(quotas (List EngineQuota))] -> QuotaTracker
   :d "Constructs baseline QuotaTracker initialized with engine quotas"
   (QuotaTracker
     :quotas quotas
-    :default-tier (QuotaTier:always-available)
-    :total-requests 0
-    :last-updated 0))
+    :defaultTier (QuotaTier:alwaysAvailable)
+    :totalRequests 0
+    :lastUpdated 0))
 
-(df inspect-engine-quota [(engine Str) (has-key Bool) (remaining I64)] -> EngineQuota
+(df inspectEngineQuota [(engine Str) (hasKey Bool) (remaining I64)] -> EngineQuota
   :d "Constructs EngineQuota telemetry record for specified engine"
   (let [(e (string-lower engine))
-        (is-open (or (= e "ddg")
+        (isOpen (or (= e "ddg")
                      (or (= e "wikipedia")
                          (or (= e "github")
                              (or (= e "arxiv")
                                  (or (= e "hackernews")
                                      (= e "searxng")))))))]
-    (if is-open
+    (if isOpen
         (EngineQuota
-          :engine-name engine
-          :tier (QuotaTier:always-available)
-          :has-key true
-          :remaining-quota -1
-          :reset-time-sec 0
-          :is-exhausted false)
+          :engineName engine
+          :tier (QuotaTier:alwaysAvailable)
+          :hasKey true
+          :remainingQuota -1
+          :resetTimeSec 0
+          :isExhausted false)
         (EngineQuota
-          :engine-name engine
-          :tier (QuotaTier:keyed-free)
-          :has-key has-key
-          :remaining-quota remaining
-          :reset-time-sec 0
-          :is-exhausted (or (not has-key) (= remaining 0))))))
+          :engineName engine
+          :tier (QuotaTier:keyedFree)
+          :hasKey hasKey
+          :remainingQuota remaining
+          :resetTimeSec 0
+          :isExhausted (or (not hasKey) (= remaining 0))))))
 
-(df parse-quota-headers [(headers (List Str))] -> I64
+(df parseQuotaHeaders [(headers (List Str))] -> I64
   :d "Parses rate limit remaining requests from response header lines"
   (if (list-empty? headers)
       -1
       (let [(h (option-or (list-head headers) ""))
             (rest (option-or (list-tail headers) (list)))
-            (lower-h (string-lower h))]
-        (if (or (string-starts-with? lower-h "x-ratelimit-remaining:")
-                (string-starts-with? lower-h "ratelimit-remaining:"))
+            (lowerH (string-lower h))]
+        (if (or (string-starts-with? lowerH "x-ratelimit-remaining:")
+                (string-starts-with? lowerH "ratelimit-remaining:"))
             (let [(parts (string-split h ":"))
-                  (val-part (if (> (list-length parts) 1)
-                                (string-trim (option-or (list-head (list-drop parts 1)) ""))
+                  (valPart (if (> (list-length parts) 1)
+                                (string-trim (option-or (list-head (listDrop parts 1)) ""))
                                 ""))]
-              (option-or (string-to-int64 val-part) -1))
-            (parse-quota-headers rest)))))
+              (option-or (string-to-int64 valPart) -1))
+            (parseQuotaHeaders rest)))))
 
-(df is-quota-available? [(quota EngineQuota)] -> Bool
+(df isQuotaAvailable? [(quota EngineQuota)] -> Bool
   :d "Evaluates whether target engine has available request capacity"
-  (and (.-has-key quota) (not (.-is-exhausted quota))))
+  (and (.-hasKey quota) (not (.-isExhausted quota))))
 
-(df track-request [(tracker QuotaTracker) (engine Str)] -> QuotaTracker
+(df trackRequest [(tracker QuotaTracker) (engine Str) (timestamp I64)] -> QuotaTracker
   :d "Updates quota usage counters and flags exhausted search engine capacity"
-  (let [(updated-quotas (map (fn [(q EngineQuota)] -> EngineQuota
-                               (if (= (.-engine-name q) engine)
-                                   (let [(rem (.-remaining-quota q))
-                                         (new-rem (if (> rem 0) (- rem 1) rem))
-                                         (exhausted (or (.-is-exhausted q) (and (> rem 0) (= new-rem 0))))]
+  (let [(updatedQuotas (map (fn [(q EngineQuota)] -> EngineQuota
+                               (if (= (.-engineName q) engine)
+                                   (let [(rem (.-remainingQuota q))
+                                         (newRem (if (> rem 0) (- rem 1) rem))
+                                         (exhausted (or (.-isExhausted q) (and (> rem 0) (= newRem 0))))]
                                      (EngineQuota
-                                       :engine-name (.-engine-name q)
+                                       :engineName (.-engineName q)
                                        :tier (.-tier q)
-                                       :has-key (.-has-key q)
-                                       :remaining-quota new-rem
-                                       :reset-time-sec (.-reset-time-sec q)
-                                       :is-exhausted exhausted))
+                                       :hasKey (.-hasKey q)
+                                       :remainingQuota newRem
+                                       :resetTimeSec (.-resetTimeSec q)
+                                       :isExhausted exhausted))
                                    q))
                              (.-quotas tracker)))]
     (QuotaTracker
-      :quotas updated-quotas
-      :default-tier (.-default-tier tracker)
-      :total-requests (+ (.-total-requests tracker) 1)
-      :last-updated (.-last-updated tracker))))
+      :quotas updatedQuotas
+      :defaultTier (.-defaultTier tracker)
+      :totalRequests (+ (.-totalRequests tracker) 1)
+      :lastUpdated timestamp)))
 

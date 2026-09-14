@@ -1,15 +1,15 @@
-(:package asl-web-api-search
+(:package aslWebApiSearch
  :version "0.1.0"
  :entry "src/engine.asl"
  :description "Agentic web search APIs discovery and multi-engine metasearch aggregator"
- :asl-first true
+ :aslFirst true
  :modules [
-   "asl-web-api-search/config"
-   "asl-web-api-search/ecosystems"
-   "asl-web-api-search/engine"
-   "asl-web-api-search/hybrid"
-   "asl-web-api-search/quota"
-   "asl-web-api-search/router"
-   "asl-web-api-search/transport"
+   "aslWebApiSearch/config"
+   "aslWebApiSearch/ecosystems"
+   "aslWebApiSearch/engine"
+   "aslWebApiSearch/hybrid"
+   "aslWebApiSearch/quota"
+   "aslWebApiSearch/router"
+   "aslWebApiSearch/transport"
  ]
  :dependencies [])

@@ -1,6 +1,6 @@
-(module asl-web-api-search/ecosystems
+(module aslWebApiSearch/ecosystems
   :d "Package ecosystem search, code library intelligence, and deep link traversal in ASL Nano."
-  :x [PackageInfo PackageEcosystem DeepLinkTarget build-ecosystem-url build-package-curl-cmd format-package-markdown format-ecosystem-rag create-deep-targets]
+  :x [PackageInfo PackageEcosystem DeepLinkTarget buildEcosystemUrl buildPackageCurlCmd formatPackageMarkdown formatEcosystemRag createDeepTargets]
   :i [(engine :a eng)])
 
 (dfs PackageInfo
@@ -8,7 +8,7 @@
   (:f ecosystem Str "Ecosystem identifier (npm, pypi, crates, go, github, c)")
   (:f version Str "Latest or specified version string")
   (:f description Str "Package summary description")
-  (:f repo-url Str "Repository or package URL")
+  (:f repoUrl Str "Repository or package URL")
   (:f popularity I64 "Stars, downloads, or score metric"))
 
 (dfe PackageEcosystem
@@ -21,30 +21,36 @@
 
 (dfs DeepLinkTarget
   (:f url Str "Target web page URL")
-  (:f parent-query Str "Source search query")
+  (:f parentQuery Str "Source search query")
   (:f depth I64 "Crawl depth level"))
 
-(df build-ecosystem-url [(eco Str) (query Str) (limit I64)] -> Str
+(df buildEcosystemUrl [(eco Str) (query Str) (limit I64)] -> Str
   :d "Constructs search API endpoint for the target package registry."
-  (let [(clean-q (string-replace query " " "+"))
-        (lim-str (string-from-int64 limit))]
+  (let [(q1 (string-replace query "%" "%25"))
+        (q2 (string-replace q1 " " "+"))
+        (q3 (string-replace q2 "&" "%26"))
+        (q4 (string-replace q3 "?" "%3F"))
+        (q5 (string-replace q4 "#" "%23"))
+        (q6 (string-replace q5 "/" "%2F"))
+        (cleanQ q6)
+        (limStr (string-from-int64 limit))]
     (cond
       ((= eco "npm")
-       (str "https://registry.npmjs.org/-/v1/search?text=" clean-q "&size=" lim-str))
+       (str "https://registry.npmjs.org/-/v1/search?text=" cleanQ "&size=" limStr))
       ((= eco "crates")
-       (str "https://crates.io/api/v1/crates?q=" clean-q "&per_page=" lim-str))
+       (str "https://crates.io/api/v1/crates?q=" cleanQ "&per_page=" limStr))
       ((= eco "pypi")
-       (str "https://pypi.org/search/?q=" clean-q))
+       (str "https://pypi.org/search/?q=" cleanQ))
       ((= eco "go")
-       (str "https://pkg.go.dev/search?q=" clean-q))
+       (str "https://pkg.go.dev/search?q=" cleanQ))
       ((= eco "c")
-       (str "https://api.github.com/search/repositories?q=" clean-q "+language:C&per_page=" lim-str))
+       (str "https://api.github.com/search/repositories?q=" cleanQ "+language:C&per_page=" limStr))
       (:else
-       (str "https://api.github.com/search/repositories?q=" clean-q "&per_page=" lim-str)))))
+       (str "https://api.github.com/search/repositories?q=" cleanQ "&per_page=" limStr)))))
 
-(df build-package-curl-cmd [(eco Str) (query Str) (limit I64)] -> eng/CurlCommand
+(df buildPackageCurlCmd [(eco Str) (query Str) (limit I64)] -> eng/CurlCommand
   :d "Constructs typed curl command vector with registry-specific headers."
-  (let [(url (build-ecosystem-url eco query limit))
+  (let [(url (buildEcosystemUrl eco query limit))
         (ua (cond
               ((= eco "crates") "ASL-AgentSearch/1.0 (https://aslang.dev)")
               ((= eco "github") "ASL-AgentSearch/1.0")
@@ -56,25 +62,25 @@
     (eng/CurlCommand
       :bin "curl"
       :args (list-append (list "-s" "--max-time" "5")
-                         (list-append headers (list url)))
+                         (list-append headers (list "--" url)))
       :url url)))
 
-(df format-package-markdown [(pkg PackageInfo)] -> Str
+(df formatPackageMarkdown [(pkg PackageInfo)] -> Str
   :d "Formats single package record as markdown citation."
-  (str "**[" (.-name pkg) "](" (.-repo-url pkg) ")**  `[" (.-ecosystem pkg) " - v" (.-version pkg) "]` (stars/dl: " (string-from-int64 (.-popularity pkg)) ")\n   "
+  (str "**[" (.-name pkg) "](" (.-repoUrl pkg) ")**  `[" (.-ecosystem pkg) " - v" (.-version pkg) "]` (stars/dl: " (string-from-int64 (.-popularity pkg)) ")\n   "
        (.-description pkg) "\n"))
 
-(df format-ecosystem-rag [(query Str) (packages (List PackageInfo))] -> Str
+(df formatEcosystemRag [(query Str) (packages (List PackageInfo))] -> Str
   :d "Formats list of ecosystem packages into RAG prompt context."
   (let [(header (str "## Ecosystem Packages for: '" query "' (" (string-from-int64 (list-length packages)) " packages)\n\n"))
-        (rows (map format-package-markdown packages))]
+        (rows (map formatPackageMarkdown packages))]
     (str header (string-join rows "\n"))))
 
-(df create-deep-targets [(results (List eng/SearchResult)) (max-depth I64)] -> (List DeepLinkTarget)
+(df createDeepTargets [(results (List eng/SearchResult)) (maxDepth I64)] -> (List DeepLinkTarget)
   :d "Extracts target URLs from top search results for deep crawling."
   (map (fn [(r eng/SearchResult)] -> DeepLinkTarget
          (DeepLinkTarget
            :url (.-url r)
-           :parent-query (.-title r)
-           :depth max-depth))
+           :parentQuery (.-title r)
+           :depth maxDepth))
        results))
